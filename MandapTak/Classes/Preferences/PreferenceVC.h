@@ -46,6 +46,9 @@
     
     //height
     BOOL heightFlag;
+    
+    //work status
+    int roundValue;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)setPreferences:(id)sender;

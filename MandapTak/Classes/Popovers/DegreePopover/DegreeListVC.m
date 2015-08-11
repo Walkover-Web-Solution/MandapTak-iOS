@@ -24,12 +24,47 @@
     arrTableData = [[NSMutableArray alloc]init];
     arrSelDegreeId = [[NSMutableArray alloc] init];
     arrNewSelection = [[NSMutableArray alloc] init];
-    arrDegreeName = [[NSArray alloc] initWithObjects:@"BE",@"B Tech",@"BBA",@"BCA",@"ME",@"M Tech",@"MBA",@"MCA", nil];
-    arrDegreeId = [[NSArray alloc] initWithObjects:@"001",@"002",@"003",@"004",@"005",@"006",@"007",@"008", nil];
+    arrDegreeId = [[NSMutableArray alloc] init];
+    arrDegreeName = [[NSMutableArray alloc] init];
+    
+    //fetch all degrees
+    PFQuery *query = [PFQuery queryWithClassName:@"Degree"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        [query includeKey:@"DegreeType"];
+        if (!error)
+        {
+            // The find succeeded.
+            for (NSDictionary *dict in objects)
+            {
+                [arrDegreeName addObject:[dict valueForKey:@"name"]];
+                [arrDegreeId addObject:[dict valueForKey:@"objectId"]];
+                NSLog(@"Degree Type = %@",[dict valueForKey:@"DegreeTypeId"]);
+                NSString *strDegreeType = dict[@"DegreeTypeId"];
+                PFObject *post = dict[@"DegreeTypeId"];
+                [post fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    NSString *title = post[@"typeOfDegree"];
+                    NSLog(@"title = %@",title);
+                }];
+            }
+            //PFObject *obj = objects[0];
+            //self.currentProfile = obj;
+            [self updateData];
+        }
+    }];
+    
+    //arrDegreeName = [[NSMutableArray alloc] initWithObjects:@"BE",@"B Tech",@"BBA",@"BCA",@"ME",@"M Tech",@"MBA",@"MCA", nil];
+    //arrDegreeId = [[NSMutableArray alloc] initWithObjects:@"001",@"002",@"003",@"004",@"005",@"006",@"007",@"008", nil];
     //arrSelDegree = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view.
     
     //insert degree array data into object
+
+}
+
+-(void) updateData
+{
     
     for (int i=0; i<arrDegreeId.count; i++)
     {
@@ -57,6 +92,8 @@
     {
         NSLog(@"All arr id = %@ and name = %@ and degree = %@",d.degreeId,d.degreeName,d);
     }
+    
+    [tableViewDegree reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,7 +135,7 @@
     else
         globalDegreeObj = [arrTableData objectAtIndex:indexPath.row];
     cell.textLabel.text =globalDegreeObj.degreeName;
-    cell.detailTextLabel.text = globalDegreeObj.degreeId;
+    //cell.detailTextLabel.text = globalDegreeObj.degreeId;
     
     if ([arrSelDegreeId containsObject:globalDegreeObj.degreeId])
     {

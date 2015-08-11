@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Degree.h"
+#import <Parse/Parse.h>
 
 @protocol DegreeListVCDelegate
 - (void)showSelDegree: (NSArray *)arrSelDegree;
@@ -15,7 +16,7 @@
 @interface DegreeListVC : UIViewController<UISearchBarDelegate,UITextFieldDelegate>
 {
     IBOutlet UITableView *tableViewDegree;
-    NSArray *arrDegreeId,*arrDegreeName;
+    NSMutableArray *arrDegreeId,*arrDegreeName;
     NSMutableArray *arrTableData,*arrSelDegreeId,*arrNewSelection;
     Degree *globalDegreeObj;
 }

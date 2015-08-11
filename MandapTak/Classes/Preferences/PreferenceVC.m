@@ -26,6 +26,34 @@
     
     lblLocation.layer.borderWidth = 1.0f;
     lblDegree.layer.borderWidth = 1.0f;
+    btnMinHeight.layer.borderWidth = 1.0f;
+    btnMaxHeight.layer.borderWidth = 1.0f;
+    //height
+    heightFlag = false;
+    
+    btnMinHeight.layer.cornerRadius = 5;
+    btnMinHeight.layer.borderWidth = 1.0;
+    btnMinHeight.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
+    btnMinHeight.layer.shadowColor = [UIColor blackColor].CGColor;
+    btnMinHeight.layer.shadowRadius = 1;
+    
+    btnMaxHeight.layer.cornerRadius = 5;
+    btnMaxHeight.layer.borderWidth = 1.0;
+    btnMaxHeight.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
+    btnMaxHeight.layer.shadowColor = [UIColor blackColor].CGColor;
+    btnMaxHeight.layer.shadowRadius = 1;
+    
+    lblLocation.layer.cornerRadius = 5;
+    lblLocation.layer.borderWidth = 1.0;
+    lblLocation.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
+    lblLocation.layer.shadowColor = [UIColor blackColor].CGColor;
+    lblLocation.layer.shadowRadius = 1;
+    
+    lblDegree.layer.cornerRadius = 5;
+    lblDegree.layer.borderWidth = 1.0;
+    lblDegree.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
+    lblDegree.layer.shadowColor = [UIColor blackColor].CGColor;
+    lblDegree.layer.shadowRadius = 1;
     
 //    [[btnLocation layer] setBorderWidth:1.0f];
 //    [[btnLocation layer] setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -72,7 +100,7 @@
 {
     //hide autocomplete table view before saving
    // autocompleteTableView.hidden = YES;
-    NSLog(@"min age = %@ , max age = %@ , min budget = %@,max budget = %@, income = %@",txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text);
+    NSLog(@"min age = %@ , max age = %@ , min budget = %@,max budget = %@, income = %@ and workStatus = %d",txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue);
 }
 
 - (IBAction)goAction:(id)sender {
@@ -125,7 +153,7 @@
     NSString *strStatus;
     CGFloat value = [sliderWork value];
     
-    int roundValue = roundf(value);
+    roundValue = roundf(value);
     
     if (value != roundValue) {
         // Almost 100% of the time - Adjust:
@@ -199,7 +227,17 @@
 #pragma mark Height Preference
 -(void)selectedHeight:(NSString*)height
 {
-    
+    [popoverController dismissPopoverAnimated:YES];
+    if (heightFlag)
+    {
+        //set minimum height
+        [btnMaxHeight setTitle:height forState:UIControlStateNormal];
+    }
+    else
+    {
+        //set max height
+        [btnMinHeight setTitle:height forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Navigation
@@ -260,7 +298,7 @@
     //Min height View
     else if ([segue.identifier isEqualToString:@"minHeightIdentifier"])
     {
-        //isSelectingCurrentLocation = YES;
+        heightFlag = false;
         HeightPopoverViewController *controller = segue.destinationViewController;
         //controller.arrSelDegree = arrSelDegree;
         controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
@@ -277,7 +315,7 @@
     //Max height View
     else if ([segue.identifier isEqualToString:@"maxHeightIdentifier"])
     {
-        //isSelectingCurrentLocation = YES;
+        heightFlag = true;
         HeightPopoverViewController *controller = segue.destinationViewController;
         //controller.arrSelDegree = arrSelDegree;
         controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
