@@ -1,0 +1,126 @@
+//
+//  UserProfileViewController.m
+//  MandapTak
+//
+//  Created by Hussain Chhatriwala on 27/07/15.
+//  Copyright (c) 2015 Walkover. All rights reserved.
+//
+
+#import "UserProfileViewController.h"
+#import "SWRevealViewController.h"
+#import <Parse/Parse.h>
+@interface UserProfileViewController (){
+    
+    __weak IBOutlet UILabel *lblTraits;
+    __weak IBOutlet UILabel *lblHeight;
+    __weak IBOutlet UILabel *lblProfession;
+    __weak IBOutlet UILabel *lblName;
+    __weak IBOutlet UILabel *lblReligion;
+    NSUInteger currentIndex;
+}
+@property (weak, nonatomic) IBOutlet UIImageView *imgProfileView;
+@property (weak, nonatomic) IBOutlet UIButton *btnMenu;
+@property (weak, nonatomic) IBOutlet UIButton *btnMatches;
+@property (weak, nonatomic) IBOutlet UIButton *btnShare;
+- (IBAction)menuButtonAction:(id)sender;
+- (IBAction)shareButtonAction:(id)sender;
+- (IBAction)matchesButtonAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+
+@end
+
+@implementation UserProfileViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    currentIndex = 0;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.3f];
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    //UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    // Setting the swipe direction.
+
+    [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
+
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+   // [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    //[self.view addGestureRecognizer:swipeRight];
+        // Set the side bar button action. When it's tapped, it'll show up the sidebar.
+    _sidebarButton.target = self.revealViewController;
+    _sidebarButton.action = @selector(revealToggle:);
+    //_sidebarButton.tintColor = [UIColor colorWithRed:235/255 green:84/255 blue:80/255 alpha:1];
+    // Set the gesture
+    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeUp];
+
+    [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
+    [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeUp];
+    PFUser *user = [PFUser user];
+    user.username = @"Hussain";
+    user.password = @"hussainPass";
+    
+//    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (!error) {
+//            //The registration was succesful, go to the wall
+//            [self performSegueWithIdentifier:@"SignupSuccesful" sender:self];
+//            
+//        } else {
+//            //Something bad has ocurred
+//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [errorAlertView show];
+//        }
+//    }];
+
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    NSArray *detailLbl = @[@"Profile_1.png",@"Profile_2.png",@"Profile_3.png"];
+
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        currentIndex++;    
+
+    }
+
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"Right Swipe");
+        if(currentIndex!=0)
+            currentIndex--;
+    }
+    if (swipe.direction == UISwipeGestureRecognizerDirectionUp) {
+        NSLog(@"Swipe Up");
+        
+    }
+
+    [self.imgProfileView setImage:[UIImage imageNamed:detailLbl[currentIndex]]];
+}
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (IBAction)menuButtonAction:(id)sender {
+}
+- (IBAction)shareButtonAction:(id)sender {
+}
+
+- (IBAction)matchesButtonAction:(id)sender {
+}
+@end
