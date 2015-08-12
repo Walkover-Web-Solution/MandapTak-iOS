@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Location.h"
+#import <Parse/Parse.h>
+
 @protocol PopOverListViewControllerDelegate
 -(void)selectedLocation:(Location*)location;
 @end

@@ -20,23 +20,15 @@
                                 <rect key="frame" x="0.0" y="8" width="320" height="496"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPc-gr-Wcn">
-                                        <rect key="frame" x="9" y="397" width="106" height="30"/>
+                                        <rect key="frame" x="12" y="397" width="136" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="Akd-nY-hOq" id="5ed-ip-Gt7"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JQK-l0-hm8">
-                                        <rect key="frame" x="179" y="397" width="104" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="Akd-nY-hOq" id="QZ3-BJ-vfM"/>
-                                        </connections>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Income (More than)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SWE-aJ-Wr4">
-                                        <rect key="frame" x="12" y="209" width="271" height="30"/>
+                                        <rect key="frame" x="12" y="209" width="256" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -178,6 +170,14 @@
                                             <segue destination="bTP-HB-WEj" kind="custom" identifier="DegreeListIdentifier" customClass="WYStoryboardPopoverSegue" id="Jg3-PN-lL9"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JQK-l0-hm8">
+                                        <rect key="frame" x="158" y="397" width="125" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Akd-nY-hOq" id="QZ3-BJ-vfM"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="Akd-nY-hOq" id="k3X-QT-bpi"/>
