@@ -45,11 +45,14 @@
     IBOutlet UILabel *lblLocation;
     IBOutlet UILabel *lblDegree;
     
-    //height
-    BOOL heightFlag;
+    //flag values
+    BOOL heightFlag,insertFlag;
     
     //work status
     int roundValue;
+    int minHeight,maxHeight;
+    
+    NSString *strObj;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)setPreferences:(id)sender;

@@ -83,21 +83,74 @@
 
 -(void) getUserPreference
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"User"];
-    [query whereKey:@"objectId" equalTo:@"m2vi20vsi4"];
+    NSString *profileId = @"nASUvS6R7Z";    //gDlvVzftXF
+    PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
+    [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
+    //PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    //[query whereKey:@"objectId" equalTo:@"gDlvVzftXF"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
+        if (!error)
+        {
+            if (objects.count > 0)
+            {
+                insertFlag = false;
+                for (PFObject *object in objects) {
+                    NSLog(@"%@", object.objectId);
+                    strObj = object.objectId;
+                    txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
+                    txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
+                    txtIncome.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minIncome"]];   //[object valueForKey:@"minIncome"];
+                    txtminBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minBudget"]];    //[object valueForKey:@"minBudget"];
+                    txtMaxBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"maxBudget"]];    //[object valueForKey:@"maxBudget"];
+                    
+                    [btnMinHeight setTitle:[NSString stringWithFormat:@"%@",[object valueForKey:@"minHeight"]] forState:UIControlStateNormal];
+                    [btnMaxHeight setTitle:[NSString stringWithFormat:@"%@",[object valueForKey:@"maxHeight"]] forState:UIControlStateNormal];
+                    roundValue = [[object valueForKey:@"working"] intValue];
+                    [sliderWork setValue:roundValue animated:YES];
+                    [self sliderChanged:nil];
+                    
+                    //NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
+                }
+                //PFObject *objUser = objects[0];
+                
+                //[self showUserPreference:objects];
+            }
+            else
+            {
+                insertFlag = true;
+            }
             // The find succeeded.
             NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
             // Do something with the found objects
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-            }
+            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+
+-(void) showUserPreference : (PFObject *)object
+{
+    NSLog(@"object = %@",object);
+    for (NSDictionary *dict in object)
+    {
+        //set min age
+        
+        txtMinAge.text = [dict valueForKey:@"ageFrom"];
+        txtMaxAge.text = [dict valueForKey:@"ageTo"];
+        txtIncome.text = [dict valueForKey:@"minIncome"];
+        txtminBudget.text = [dict valueForKey:@"minBudget"];
+        txtMaxBudget.text = [dict valueForKey:@"maxBudget"];
+        
+        [btnMinHeight setTitle:[NSString stringWithFormat:@"%@ cm",[dict valueForKey:@"minHeight"]] forState:UIControlStateNormal];
+        [btnMaxHeight setTitle:[NSString stringWithFormat:@"%@ cm",[dict valueForKey:@"maxHeight"]] forState:UIControlStateNormal];
+        [sliderWork setValue:[[dict valueForKey:@"working"] floatValue] animated:YES];
+        [self sliderChanged:nil];
+        
+        NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,12 +171,71 @@
      */
 }
 
+-(NSString *)extractNumberFromText:(NSString *)text
+{
+    NSCharacterSet *nonDigitCharacterSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    return [[text componentsSeparatedByCharactersInSet:nonDigitCharacterSet] componentsJoinedByString:@""];
+}
+
 - (IBAction)setPreferences:(id)sender
 {
-    //hide autocomplete table view before saving
-   // autocompleteTableView.hidden = YES;
-    NSLog(@"min age = %@ , max age = %@ , min budget = %@,max budget = %@, income = %@ and workStatus = %d",txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue);
+    if (insertFlag)
+    {
+        //insert preferences
+        PFObject *pref = [PFObject objectWithClassName:@"Preference"];
+        pref[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
+        pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
+        pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
+        pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
+        pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
+        pref[@"working"] = [NSNumber numberWithInt:roundValue];
+        pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
+        pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
+        pref[@"minGunMatch"] = @0;
+        pref[@"manglik"] = @0;
+        
+        [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                // The object has been saved.
+            } else {
+                // There was a problem, check error.description
+            }
+        }];
+        
+    }
+    else
+    {
+        //update preferences
+        PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
+        
+        // Retrieve the object by id
+        [query getObjectInBackgroundWithId:strObj
+                                     block:^(PFObject *pref, NSError *error) {
+                                         // Now let's update it with some new data. In this case, only cheatMode and score
+                                         // will get sent to the cloud. playerName hasn't changed.
+                        NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
+                                         
+                                         pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
+                                         pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
+                                         pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
+                                         pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
+                                         pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
+                                         pref[@"working"] = [NSNumber numberWithInt:roundValue];
+                                         pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
+                                         pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
+                                         pref[@"minGunMatch"] = @0;
+                                         pref[@"manglik"] = @0;
+                                         [pref saveInBackground];
+                                     }];
+       
+    }
+    
+    (BOOL)saveAll:(PF_NULLABLE NSArray *)objects error:(NSError **)error
+    [];
+   
 }
+
 
 - (IBAction)goAction:(id)sender {
 }
@@ -252,13 +364,17 @@
     [popoverController dismissPopoverAnimated:YES];
     if (heightFlag)
     {
-        //set minimum height
+        //set max height
         [btnMaxHeight setTitle:height forState:UIControlStateNormal];
+        NSString *strHeight = [[height componentsSeparatedByString:@" "]  lastObject];
+        maxHeight = [[self extractNumberFromText:strHeight] intValue];
     }
     else
     {
-        //set max height
+        //set minimum height
         [btnMinHeight setTitle:height forState:UIControlStateNormal];
+        NSString *strHeight = [[height componentsSeparatedByString:@" "]  lastObject];
+        minHeight = [[self extractNumberFromText:strHeight] intValue];
     }
 }
 
