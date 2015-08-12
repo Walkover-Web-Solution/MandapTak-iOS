@@ -34,37 +34,24 @@
     }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    //    MBProgressHUD * hud;
-    //    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //    [[ServiceManager sharedManager]getLocationFromCityInput:searchBar.text withCompletionBlock:^(NSArray *arrLocation, NSError *error) {
-    //        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    //                NSLog(@"%@",arrLocation);
-    //        self.arrTableData = arrLocation;
-    //        [self.tableView reloadData];
-    //
-    //}];
-    //  NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name BEGINSWITH \'Ind\'"];
-    //    NSPredicate *predicate =[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"name BEGINSWITH 'ind'"]];
-    //
-    //    PFQuery *query = [PFQuery queryWithClassName:@"City" predicate:predicate];
-    //    [query includeKey:@"Parent.Parent"];
-    //   NSPredicate *predicate =[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"name BEGINSWITH[cd] '%@'",searchBar.text]];
-    
-    
-    
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
     
-    [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchBar.text]];
-    
+    [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
+  //  [query whereKey:@"name" hasPrefix:searchBar.text];
     [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         NSMutableArray *arrLocData = [NSMutableArray array];
         for(PFObject *obj in comments){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
             Location *location = [[Location alloc]init];
             NSLog(@"cityName %@",[obj valueForKey:@"name"]);
             PFObject *parent = [obj valueForKey:@"Parent"];
             location.city = [obj valueForKey:@"name"];
-            
+            location.placeId = [obj valueForKey:@"objectId"];
+            NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
             NSLog(@"StateName %@",[parent valueForKey:@"name"]);
             location.state = [parent valueForKey:@"name"];
             

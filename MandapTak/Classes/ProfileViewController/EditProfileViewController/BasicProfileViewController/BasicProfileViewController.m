@@ -26,6 +26,8 @@
     NSDate *selectedBirthTime;
     NSString *selectedHeight;
     BOOL isSelectingCurrentLocation;
+    Location * currentLocation;
+    Location * placeOfBirthLocation;
 
 }
 
@@ -181,7 +183,7 @@
         
     }
        if ([segue.identifier isEqualToString:@"BirthTimePopover"])
-    {isSelectingCurrentLocation = NO;
+    {
         BirthTimePopoverViewController *controller = segue.destinationViewController;
         controller.contentSizeForViewInPopover = CGSizeMake(310, 222);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
@@ -230,13 +232,13 @@
 }
 -(void)selectedLocation:(Location *)location{
     if(isSelectingCurrentLocation){
-       // currentLocation = location;
+        currentLocation = location;
         [btnCurrentLocation setTitle:location.descriptions forState:UIControlStateNormal];
         [btnCurrentLocation setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [popoverController dismissPopoverAnimated:YES];
     }
     else{
-       // placeOfBirthLocation = location;
+        placeOfBirthLocation = location;
         [btnPlaceOfBirth setTitle:location.descriptions forState:UIControlStateNormal];
         [btnPlaceOfBirth setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [popoverController dismissPopoverAnimated:YES];
@@ -248,6 +250,7 @@
     [self.currentProfile setObject:selectedDate forKey:@"dob"];
     [self.currentProfile setObject:selectedGender forKey:@"gender"];
     [self.currentProfile setObject:selectedBirthTime forKey:@"tob"];
+    [self.currentProfile setObject:currentLocation.placeId forKey:@"tob"];
 
     [self.delegate updatedPfObject:self.currentProfile];
 }
