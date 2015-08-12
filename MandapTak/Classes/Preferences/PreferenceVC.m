@@ -24,6 +24,9 @@
     arrSelLocations = [[NSMutableArray alloc]init];
     arrSelDegree = [[NSMutableArray alloc]init];
     
+    //get current user preferences
+    [self getUserPreference];
+    
     lblLocation.layer.borderWidth = 1.0f;
     lblDegree.layer.borderWidth = 1.0f;
     btnMinHeight.layer.borderWidth = 1.0f;
@@ -76,6 +79,25 @@
     
     [self.view addSubview:autocompleteTableView];
      */
+}
+
+-(void) getUserPreference
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    [query whereKey:@"objectId" equalTo:@"m2vi20vsi4"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                NSLog(@"%@", object.objectId);
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

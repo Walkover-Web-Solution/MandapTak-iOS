@@ -16,6 +16,7 @@
 #import "DegreeListVC.h"
 #import "Degree.h"
 #import "HeightPopoverViewController.h"
+#import <Parse/Parse.h>
 
 @interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,PopOverListViewControllerDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate>
 {
