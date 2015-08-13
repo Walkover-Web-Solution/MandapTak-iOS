@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -425,27 +425,17 @@
                         <viewControllerLayoutGuide type="bottom" id="zvZ-Cd-Fiy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="H9W-13-T2b">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="222"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="205"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eFC-y5-Tuj">
-                                <rect key="frame" x="0.0" y="27" width="300" height="160"/>
+                                <rect key="frame" x="0.0" y="27" width="300" height="136"/>
                                 <date key="date" timeIntervalSinceReferenceDate="460532305.48474801">
                                     <!--2015-08-06 05:38:25 +0000-->
                                 </date>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlM-ex-dhu">
-                                <rect key="frame" x="5" y="188" width="291" height="34"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneButtonAction:" destination="Dqz-dc-ehr" eventType="touchUpInside" id="0A4-c9-pAD"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEP-ea-jQM">
-                                <rect key="frame" x="5" y="188" width="291" height="1"/>
+                                <rect key="frame" x="5" y="167" width="291" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Date of birth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pi-kU-l5v">
@@ -456,16 +446,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="VOX-kt-bdv">
-                                <rect key="frame" x="0.0" y="27" width="300" height="160"/>
+                                <rect key="frame" x="0.0" y="27" width="300" height="136"/>
                                 <date key="date" timeIntervalSinceReferenceDate="460532305.48474801">
                                     <!--2015-08-06 05:38:25 +0000-->
                                 </date>
                             </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlM-ex-dhu">
+                                <rect key="frame" x="5" y="171" width="291" height="34"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonAction:" destination="Dqz-dc-ehr" eventType="touchUpInside" id="0A4-c9-pAD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="222"/>
+                    <size key="freeformSize" width="300" height="205"/>
                     <connections>
                         <outlet property="datePicker" destination="eFC-y5-Tuj" id="Hmp-vX-4gn"/>
                         <outlet property="lblSelect" destination="2pi-kU-l5v" id="Eux-4d-vg0"/>
@@ -474,7 +474,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fj1-j5-iut" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="1631"/>
+            <point key="canvasLocation" x="700" y="1630.5"/>
         </scene>
         <!--Pop Over List View Controller-->
         <scene sceneID="QbK-yx-e1r">
@@ -754,25 +754,63 @@
             </objects>
             <point key="canvasLocation" x="1027" y="732"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="4Y3-me-V1Z">
+        <!--Detail Profile View Controller-->
+        <scene sceneID="4Uf-jE-CGx">
             <objects>
-                <viewController id="G3N-bW-pNS" sceneMemberID="viewController">
+                <viewController id="EAY-UV-mJF" customClass="DetailProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OO7-Uw-Tpg"/>
-                        <viewControllerLayoutGuide type="bottom" id="T3d-db-4W9"/>
+                        <viewControllerLayoutGuide type="top" id="qfV-tY-ZDT"/>
+                        <viewControllerLayoutGuide type="bottom" id="cqh-gM-MQh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="r2y-Bu-LZs">
+                    <view key="view" contentMode="scaleToFill" id="GEF-T8-4X5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="51" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iac-XA-AmD">
+                                <rect key="frame" x="22" y="15" width="277" height="281"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="8mg-ke-a3T">
+                                        <rect key="frame" x="0.0" y="0.0" width="277" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8mg-ke-a3T" id="Kd2-hl-FfO">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3T-HI-3Gb">
+                                                    <rect key="frame" x="227" y="14" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="0CI-RB-PDi">
+                                        <rect key="frame" x="0.0" y="0.0" width="277" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0CI-RB-PDi" id="gD6-KH-0ae">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Cp-dM-6su">
+                                                    <rect key="frame" x="227" y="14" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="400"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Fv-rN-t6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vdd-LR-lc2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1458" y="1031"/>
+            <point key="canvasLocation" x="1369" y="732"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8He-9R-uSP">

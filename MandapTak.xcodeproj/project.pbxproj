@@ -29,6 +29,7 @@
 		897EF97D1B70928E00F88CEC /* userProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 897EF9751B70928E00F88CEC /* userProfile@2x.png */; };
 		897EF9841B70958F00F88CEC /* measures.png in Resources */ = {isa = PBXBuildFile; fileRef = 897EF9821B70958F00F88CEC /* measures.png */; };
 		897EF9851B70958F00F88CEC /* measures@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 897EF9831B70958F00F88CEC /* measures@2x.png */; };
+		898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */; };
 		8984304A1B788C040071A423 /* EditProfileTab1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898430491B788C040071A423 /* EditProfileTab1ViewController.m */; };
 		899170461B70B5D0000CF872 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170441B70B5D0000CF872 /* next.png */; };
 		899170471B70B5D0000CF872 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170451B70B5D0000CF872 /* next@2x.png */; };
@@ -144,6 +145,8 @@
 		897EF9751B70928E00F88CEC /* userProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userProfile@2x.png"; sourceTree = "<group>"; };
 		897EF9821B70958F00F88CEC /* measures.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = measures.png; sourceTree = "<group>"; };
 		897EF9831B70958F00F88CEC /* measures@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "measures@2x.png"; sourceTree = "<group>"; };
+		898146331B7C6E5900DF30AB /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
+		898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		898430481B788C040071A423 /* EditProfileTab1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileTab1ViewController.h; sourceTree = "<group>"; };
 		898430491B788C040071A423 /* EditProfileTab1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileTab1ViewController.m; sourceTree = "<group>"; };
 		899170441B70B5D0000CF872 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
@@ -380,6 +383,7 @@
 		897EF9671B708FE000F88CEC /* EditProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
+				898146321B7C6E1A00DF30AB /* CustomCells */,
 				89E8D9351B78AF29008A8E2F /* BasicProfileViewController */,
 				89E8D9361B78AF29008A8E2F /* DetailProfileViewController */,
 				897EF96B1B70901400F88CEC /* EditProfileViewController.h */,
@@ -388,6 +392,15 @@
 				898430491B788C040071A423 /* EditProfileTab1ViewController.m */,
 			);
 			path = EditProfileViewController;
+			sourceTree = "<group>";
+		};
+		898146321B7C6E1A00DF30AB /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				898146331B7C6E5900DF30AB /* TextFieldTableViewCell.h */,
+				898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		899170571B70D458000CF872 /* WYPopoverController */ = {
@@ -867,6 +880,7 @@
 				89D9F7341B6B579E004CBE3D /* StartMainViewController.m in Sources */,
 				89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */,
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,
+				898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

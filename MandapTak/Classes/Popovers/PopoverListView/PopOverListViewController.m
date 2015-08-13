@@ -20,10 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.arrTableData = [NSArray array];
     // Do any additional setup after loading the view.
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [self.searchBar becomeFirstResponder];
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -42,14 +46,15 @@
   //  [query whereKey:@"name" hasPrefix:searchBar.text];
     [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
         NSMutableArray *arrLocData = [NSMutableArray array];
         for(PFObject *obj in comments){
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-
             Location *location = [[Location alloc]init];
             NSLog(@"cityName %@",[obj valueForKey:@"name"]);
             PFObject *parent = [obj valueForKey:@"Parent"];
             location.city = [obj valueForKey:@"name"];
+            location.cityPointer = obj;
             location.placeId = [obj valueForKey:@"objectId"];
             NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
             NSLog(@"StateName %@",[parent valueForKey:@"name"]);

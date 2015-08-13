@@ -42,6 +42,9 @@
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         
         [query whereKey:@"userId" equalTo:userId];
+        [query includeKey:@"currentLocation.Parent.Parent"];
+        [query includeKey:@"placeOfBirth.Parent.Parent"];
+
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 // The find succeeded.
@@ -52,55 +55,19 @@
         }];
 
     }
-    
-//    PFObject *city = [PFObject objectWithClassName:@"City"];
-//    [city setObject:@"indore" forKey:@"name"];
-//    [city save];
-//    PFObject *city2 = [PFObject objectWithClassName:@"City"];
-//    [city2 setObject:@"bhopal" forKey:@"name"];
-//    [city2 save];
-//
-//    // now we create a book object
-//    PFObject *state= [PFObject objectWithClassName:@"State"];
-//    [state setObject:@"Madhay Pradesh" forKey:@"name"];
-//    PFObject *counrty = [PFObject objectWithClassName:@"Country"];
-//    [counrty setObject:@"India" forKey:@"name"];
-//    [counrty save];
-//    // now let’s associate the authors with the book
-//    // remember, we created a "authors" relation on Book
-//    PFRelation *relation = [state relationForKey:@"City"];
-//    
-//    [relation addObject:city];
-//    [relation addObject:city2];
-//    [state save];
-//
-//    PFRelation *countryStateRel = [counrty relationForKey:@"State"];
-//    PFRelation *countryCityRel = [counrty relationForKey:@"City"];
-//    [countryCityRel addObject:city];
-//    [countryCityRel addObject:city2];
-//
-//    [countryStateRel addObject:state];
-//    [counrty saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                if (!error) {
-//                    //The registration was succesful, go to the wall
-//                    [self performSegueWithIdentifier:@"SignupSuccesful" sender:self];
-//        
-//                } else {
-//                    //Something bad has ocurred
-//                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
-//                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//                    [errorAlertView show];
-//                }
-//            }];
-//
+    else{
+        [self updateUserInfo];
 
-       // Do any additional setup after loading the view.
+    }
+    
 }
 -(void)updateUserInfo{
     NSDate *dob  =[self.currentProfile valueForKey:@"dob"];
     if(dob){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         dateFormatter.dateFormat = @"dd/MM/yyyy";
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+
         selectedDate =[self.currentProfile valueForKey:@"dob"];
         NSString *dateString = [dateFormatter stringFromDate: [self.currentProfile valueForKey:@"dob"]];
         [btnDateOfBirth setTitle:[NSString stringWithFormat:@"%@",dateString] forState:UIControlStateNormal];
@@ -110,7 +77,8 @@
         selectedBirthTime =[self.currentProfile valueForKey:@"tob"];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         dateFormatter.dateFormat = @"HH:mm";
-        
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+
         NSString *dateString = [dateFormatter stringFromDate: [self.currentProfile valueForKey:@"tob"]];
         [btnBirthTime setTitle:[NSString stringWithFormat:@"%@",dateString] forState:UIControlStateNormal];
         [btnBirthTime setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -123,7 +91,46 @@
     if([self.currentProfile valueForKey:@"name"]){
         txtFullName.text = [self.currentProfile valueForKey:@"name"];
     }
-    
+    if([self.currentProfile valueForKey:@"currentLocation"]){
+        PFObject *obj  = [self.currentProfile valueForKey:@"currentLocation"];
+            Location *location = [[Location alloc]init];
+            NSLog(@"cityName %@",[obj valueForKey:@"name"]);
+            PFObject *parent = [obj valueForKey:@"Parent"];
+            location.city = [obj valueForKey:@"name"];
+            location.cityPointer  = obj;
+            location.placeId = [obj valueForKey:@"objectId"];
+            NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
+            NSLog(@"StateName %@",[parent valueForKey:@"name"]);
+            location.state = [parent valueForKey:@"name"];
+            PFObject *subParent = [parent valueForKey:@"Parent"];
+            NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
+            location.country = [subParent valueForKey:@"name"];
+            location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+            currentLocation = location;
+        [btnCurrentLocation setTitle:[NSString stringWithFormat:@"%@",location.descriptions] forState:UIControlStateNormal];
+        [btnCurrentLocation setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+    }
+    if([self.currentProfile valueForKey:@"placeOfBirth"]){
+        PFObject *obj  = [self.currentProfile valueForKey:@"placeOfBirth"];
+        Location *location = [[Location alloc]init];
+        NSLog(@"cityName %@",[obj valueForKey:@"name"]);
+        PFObject *parent = [obj valueForKey:@"Parent"];
+        location.city = [obj valueForKey:@"name"];
+        location.cityPointer  = obj;
+        location.placeId = [obj valueForKey:@"objectId"];
+        NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
+        NSLog(@"StateName %@",[parent valueForKey:@"name"]);
+        location.state = [parent valueForKey:@"name"];
+        PFObject *subParent = [parent valueForKey:@"Parent"];
+        NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
+        location.country = [subParent valueForKey:@"name"];
+        location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+        placeOfBirthLocation = location;
+        [btnPlaceOfBirth setTitle:[NSString stringWithFormat:@"%@",location.descriptions] forState:UIControlStateNormal];
+        [btnPlaceOfBirth setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+
 
 }
 - (void)didReceiveMemoryWarning {
@@ -132,12 +139,10 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [self.view endEditing:YES];
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"LocationIdentifier"])
+if ([segue.identifier isEqualToString:@"LocationIdentifier"])
     {isSelectingCurrentLocation = YES;
         PopOverListViewController *controller = segue.destinationViewController;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 400);
+        controller.preferredContentSize = CGSizeMake(310, 400);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -149,7 +154,7 @@
     }
     if ([segue.identifier isEqualToString:@"GenderIdentifier"]){
         GenderViewController *controller = segue.destinationViewController;
-        controller.contentSizeForViewInPopover = CGSizeMake(200 , 100);
+        controller.preferredContentSize = CGSizeMake(200 , 100);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -160,7 +165,7 @@
     }
     if ([segue.identifier isEqualToString:@"DateOfBirthPickerIdentifier"]){
         DateOfBirthPopoverViewController *controller = segue.destinationViewController;
-        controller.contentSizeForViewInPopover = CGSizeMake(300 , 220);
+        controller.preferredContentSize = CGSizeMake(310 , 206);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -172,7 +177,7 @@
     if ([segue.identifier isEqualToString:@"PlaceOfBirthLocationIdentifier"])
     {isSelectingCurrentLocation = NO;
         DateOfBirthPopoverViewController *controller = segue.destinationViewController;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 400);
+        controller.preferredContentSize = CGSizeMake(310, 400);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -185,7 +190,7 @@
        if ([segue.identifier isEqualToString:@"BirthTimePopover"])
     {
         BirthTimePopoverViewController *controller = segue.destinationViewController;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 222);
+        controller.preferredContentSize = CGSizeMake(310, 222);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -204,7 +209,6 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     dateFormatter.dateFormat = @"MM/dd/yy";
-    
     NSString *dateString = [dateFormatter stringFromDate: date];
     selectedDate = date;
     [btnDateOfBirth setTitle:[NSString stringWithFormat:@"%@",dateString] forState:UIControlStateNormal];
@@ -214,16 +218,30 @@
 }
 -(void)selectedBirthTime:(NSDate *)time{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+
     dateFormatter.dateFormat = @"HH:mm";
-    
-    NSString *dateString = [dateFormatter stringFromDate: time];
+
+    NSString *dateString = [dateFormatter stringFromDate:time];
     selectedBirthTime = time;
     [btnBirthTime setTitle:[NSString stringWithFormat:@"%@",dateString] forState:UIControlStateNormal];
-    
     [btnBirthTime setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [popoverController dismissPopoverAnimated:YES];
     
 }
+
+-(NSDate*)getLocaldateForDate:(NSDate*)date{
+    NSDate *gmtDate  = [NSDate date];
+    NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:gmtDate];
+    return [gmtDate dateByAddingTimeInterval:-timeZoneOffset];
+
+}
+-(NSDate*)getGMTdateForDate:(NSDate*)date{
+    NSDate *localDate = [NSDate date];
+    NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:localDate];
+    return [localDate dateByAddingTimeInterval:+timeZoneOffset]; // NOTE the "-" sign!
+}
+
 -(void)selectedGender:(NSString *)gender{
     selectedGender = gender;
     [btnGender setTitle:gender forState:UIControlStateNormal];
@@ -243,16 +261,36 @@
         [btnPlaceOfBirth setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [popoverController dismissPopoverAnimated:YES];
     }
-    
 }
 -(void)viewWillDisappear:(BOOL)animated{
+    
     [self.currentProfile setObject:txtFullName.text forKey:@"name"];
-    [self.currentProfile setObject:selectedDate forKey:@"dob"];
-    [self.currentProfile setObject:selectedGender forKey:@"gender"];
-    [self.currentProfile setObject:selectedBirthTime forKey:@"tob"];
-    [self.currentProfile setObject:currentLocation.placeId forKey:@"tob"];
+    if(selectedDate)
+        [self.currentProfile setObject:selectedDate forKey:@"dob"];
+    if(selectedGender)
+        [self.currentProfile setObject:selectedGender forKey:@"gender"];
+    if(selectedBirthTime)
+        [self.currentProfile setObject:selectedBirthTime forKey:@"tob"];
+    if(currentLocation)
+        [self.currentProfile setObject:currentLocation.cityPointer forKey:@"currentLocation"];
+    if(placeOfBirthLocation)
+        [self.currentProfile setObject:placeOfBirthLocation.cityPointer forKey:@"placeOfBirth"];
+    NSLog(@"placeOfBirthLocation%@",placeOfBirthLocation.descriptions);
+    NSLog(@"currentLocation%@",currentLocation.descriptions);
 
     [self.delegate updatedPfObject:self.currentProfile];
+}
+
+#pragma mark UITextFeildDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [txtFullName resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 /*
 #pragma mark - Navigation

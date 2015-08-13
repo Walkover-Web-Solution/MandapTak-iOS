@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timePicker.datePickerMode = UIDatePickerModeTime;
+    self.timePicker.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    
 
     // Do any additional setup after loading the view.
 }

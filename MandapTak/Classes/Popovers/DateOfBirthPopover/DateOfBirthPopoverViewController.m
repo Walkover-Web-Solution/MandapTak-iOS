@@ -31,6 +31,7 @@
     isDateSelected = NO;
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     self.timePickerView.datePickerMode = UIDatePickerModeTime;
+    self.datePicker.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
 
     // Do any additional setup after loading the view.
 }
