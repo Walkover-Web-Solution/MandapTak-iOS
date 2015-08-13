@@ -23,6 +23,10 @@
     
     arrSelLocations = [[NSMutableArray alloc]init];
     arrSelDegree = [[NSMutableArray alloc]init];
+    arrSelectedDegreeId = [[NSMutableArray alloc]init];
+    arrDegreePref = [[NSMutableArray alloc]init];
+    
+    arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
     //get current user preferences
     [self getUserPreference];
@@ -57,28 +61,6 @@
     lblDegree.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
     lblDegree.layer.shadowColor = [UIColor blackColor].CGColor;
     lblDegree.layer.shadowRadius = 1;
-    
-//    [[btnLocation layer] setBorderWidth:1.0f];
-//    [[btnLocation layer] setBorderColor:[UIColor lightGrayColor].CGColor];
-    /*
-    //autocomplete view conditions
-    autocompleteTableView = [[UITableView alloc] init];
-    autocompleteTableView.hidden = YES;
-    arrAutoComplete = [[NSMutableArray alloc]init];
-    arrDegree = [[NSMutableArray alloc] initWithObjects:@"B.E.",@"B Tech",@"M Tech",@"CA",@"CS",@"BBA",@"MBA",@"BCA",@"MCA", nil];
-    
-    [txtDegree addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-    //set autocomplete tableview properties for sender ID
-    arrAutoComplete = [[NSMutableArray alloc]init];
-    autocompleteTableView.frame = CGRectMake(5, 210, 310, 120);
-    autocompleteTableView.delegate = self;
-    autocompleteTableView.dataSource = self;
-    autocompleteTableView.scrollEnabled = YES;
-    autocompleteTableView.hidden = YES;
-    
-    [self.view addSubview:autocompleteTableView];
-     */
 }
 
 -(void) getUserPreference
@@ -86,16 +68,23 @@
     NSString *profileId = @"nASUvS6R7Z";    //gDlvVzftXF
     PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
-    //PFQuery *query = [PFQuery queryWithClassName:@"User"];
-    //[query whereKey:@"objectId" equalTo:@"gDlvVzftXF"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//
+//    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+//    [query whereKey:@"objectId" equalTo:@"nASUvS6R7Z"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
         if (!error)
         {
             if (objects.count > 0)
             {
                 insertFlag = false;
-                for (PFObject *object in objects) {
+                for (PFObject *object in objects)
+                {
                     NSLog(@"%@", object.objectId);
+                    
+                    //get Degree Preference
+                    [self getDegreePrefFromPreferenceId:object.objectId];
+                    
                     strObj = object.objectId;
                     txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
                     txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
@@ -103,13 +92,17 @@
                     txtminBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minBudget"]];    //[object valueForKey:@"minBudget"];
                     txtMaxBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"maxBudget"]];    //[object valueForKey:@"maxBudget"];
                     
-                    [btnMinHeight setTitle:[NSString stringWithFormat:@"%@",[object valueForKey:@"minHeight"]] forState:UIControlStateNormal];
-                    [btnMaxHeight setTitle:[NSString stringWithFormat:@"%@",[object valueForKey:@"maxHeight"]] forState:UIControlStateNormal];
+                    //find height value from array
+                    NSString *strMinHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"minHeight"]]];
+                    NSString *strMaxHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"maxHeight"]]];
+                    
+                    [btnMinHeight setTitle:strMinHeight forState:UIControlStateNormal];
+                    [btnMaxHeight setTitle:strMaxHeight forState:UIControlStateNormal];
                     roundValue = [[object valueForKey:@"working"] intValue];
                     [sliderWork setValue:roundValue animated:YES];
                     [self sliderChanged:nil];
                     
-                    //NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
+                    NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
                 }
                 //PFObject *objUser = objects[0];
                 
@@ -130,27 +123,57 @@
     }];
 }
 
-
--(void) showUserPreference : (PFObject *)object
+- (void) getDegreePrefFromPreferenceId : (NSString *)prefId
 {
-    NSLog(@"object = %@",object);
-    for (NSDictionary *dict in object)
-    {
-        //set min age
-        
-        txtMinAge.text = [dict valueForKey:@"ageFrom"];
-        txtMaxAge.text = [dict valueForKey:@"ageTo"];
-        txtIncome.text = [dict valueForKey:@"minIncome"];
-        txtminBudget.text = [dict valueForKey:@"minBudget"];
-        txtMaxBudget.text = [dict valueForKey:@"maxBudget"];
-        
-        [btnMinHeight setTitle:[NSString stringWithFormat:@"%@ cm",[dict valueForKey:@"minHeight"]] forState:UIControlStateNormal];
-        [btnMaxHeight setTitle:[NSString stringWithFormat:@"%@ cm",[dict valueForKey:@"maxHeight"]] forState:UIControlStateNormal];
-        [sliderWork setValue:[[dict valueForKey:@"working"] floatValue] animated:YES];
-        [self sliderChanged:nil];
-        
-        NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
-    }
+//    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+//    [query whereKey:@"objectId" equalTo:@"nASUvS6R7Z"];
+    PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
+    [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
+    [query includeKey:@"degreeId"];
+    //PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    //[query whereKey:@"objectId" equalTo:@"gDlvVzftXF"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             if (objects.count > 0)
+             {
+                 NSMutableArray *arrTempDegree = [[NSMutableArray alloc] init];
+                 for (PFObject *object in objects)
+                 {
+                     PFObject *degree = [object valueForKey:@"degreeId"];
+                     NSLog(@"Degree ID => %@", degree.objectId);
+                     NSLog(@"\n Degree Name %@",[degree valueForKey:@"name"]);
+                     Degree *obj = [[Degree alloc] init];
+                     obj.degreeId = degree.objectId;
+                     obj.degreeName = [degree valueForKey:@"name"];
+                     //obj.degreeType = [degree valueForKey:@"name"];
+                     [arrTempDegree addObject:obj];
+                 }
+                 [self showSelDegree:arrTempDegree];
+             }
+             else
+             {
+                 //insertFlag = true;
+             }
+             // The find succeeded.
+             NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+             // Do something with the found objects
+             
+         }
+         else {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+     }];
+}
+
+
+- (NSString *)getFormattedHeightFromValue:(NSString *)value
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
+    NSString *strFiltered = [[arrHeight filteredArrayUsingPredicate:predicate] firstObject];
+    return strFiltered;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -195,14 +218,16 @@
         pref[@"minGunMatch"] = @0;
         pref[@"manglik"] = @0;
         
-        [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
             if (succeeded) {
                 // The object has been saved.
+                
             } else {
                 // There was a problem, check error.description
             }
         }];
-        
+
     }
     else
     {
@@ -227,15 +252,69 @@
                                          pref[@"minGunMatch"] = @0;
                                          pref[@"manglik"] = @0;
                                          [pref saveInBackground];
+                                         
+                                         //execute further query of degree and location preference
+                                         [self saveDegreePreference];
                                      }];
        
     }
     
-    (BOOL)saveAll:(PF_NULLABLE NSArray *)objects error:(NSError **)error
-    [];
+//    (BOOL)saveAll:(PF_NULLABLE NSArray *)objects error:(NSError **)error
    
 }
 
+
+-(void) saveDegreePreference
+{
+    //delete previously set degree preferences
+    //[arrSelectedDegreeId removeAllObjects];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
+    [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %lu degree preferences.", objects.count);
+            // Do something with the found objects
+            [PFObject deleteAllInBackground:objects];
+            
+            //[self addNewDegreePreference];
+            [self performSelector:@selector(addNewDegreePreference) withObject:nil afterDelay:1.0];
+            
+        }
+        else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    //then add new objects
+   
+}
+
+- (void) addNewDegreePreference
+{
+    //insert fresh data
+    for (int i=0; i< [arrSelectedDegreeId count]; i++)
+    {
+        //save data in
+        PFObject *object = [PFObject objectWithClassName:@"DegreePreferences"];
+        object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:arrSelectedDegreeId[i]];
+        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+        [arrDegreePref addObject:object];
+    }
+    
+    [PFObject saveAllInBackground:arrDegreePref block:^(BOOL succeeded, NSError *error)
+     {
+         if(!error)
+         {
+             NSLog(@"save complete");
+             [arrSelectedDegreeId removeAllObjects];
+         }else{
+             NSLog(@"SaveAll error %@", error);
+         }
+     }];
+}
 
 - (IBAction)goAction:(id)sender {
 }
@@ -344,6 +423,7 @@
 #pragma mark Degree Preference
 -(void)showSelDegree:(NSArray *)arrDegree
 {
+    [arrSelectedDegreeId removeAllObjects];
     arrSelDegree = arrDegree;
     lblDegree.text = @"";
     NSMutableArray *arrDeg = [[NSMutableArray alloc] init];
@@ -351,6 +431,7 @@
     {
         NSString *strDeg = obj.degreeName;
         [arrDeg addObject:strDeg];
+        [arrSelectedDegreeId addObject:obj.degreeId];
     }
     
     NSString *strDegree = [arrDeg componentsJoinedByString:@","];

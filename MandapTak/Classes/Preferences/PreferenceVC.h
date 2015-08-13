@@ -17,6 +17,7 @@
 #import "Degree.h"
 #import "HeightPopoverViewController.h"
 #import <Parse/Parse.h>
+#import <Parse/PFObject.h>
 
 @interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,PopOverListViewControllerDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate>
 {
@@ -35,7 +36,7 @@
     NSMutableArray *arrAutoComplete;
      
      */
-    NSMutableArray *arrSelLocations,*arrSelDegree;
+    NSMutableArray *arrSelLocations,*arrSelDegree,*arrSelectedDegreeId,*arrDegreePref;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UISlider *sliderWork;
     IBOutlet UILabel *lblWorkStatus;
@@ -51,6 +52,7 @@
     //work status
     int roundValue;
     int minHeight,maxHeight;
+    NSArray *arrHeight;;
     
     NSString *strObj;
 }
