@@ -25,6 +25,8 @@
     arrSelDegree = [[NSMutableArray alloc]init];
     arrSelectedDegreeId = [[NSMutableArray alloc]init];
     arrDegreePref = [[NSMutableArray alloc]init];
+    arrSelectedLocationId = [[NSMutableArray alloc]init];
+    arrLocationPref = [[NSMutableArray alloc]init];
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
@@ -85,6 +87,9 @@
                     //get Degree Preference
                     [self getDegreePrefFromPreferenceId:object.objectId];
                     
+                    //get Location Preference
+                    [self getLocationPrefFromPreferenceId:object.objectId];
+                    
                     strObj = object.objectId;
                     txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
                     txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
@@ -125,13 +130,9 @@
 
 - (void) getDegreePrefFromPreferenceId : (NSString *)prefId
 {
-//    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-//    [query whereKey:@"objectId" equalTo:@"nASUvS6R7Z"];
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"degreeId"];
-    //PFQuery *query = [PFQuery queryWithClassName:@"User"];
-    //[query whereKey:@"objectId" equalTo:@"gDlvVzftXF"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          if (!error)
@@ -168,6 +169,49 @@
      }];
 }
 
+
+- (void) getLocationPrefFromPreferenceId : (NSString *)prefId
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"LocationPreferences"];
+    [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
+    [query includeKey:@"cityId"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             if (objects.count > 0)
+             {
+                 NSMutableArray *arrTempLocation = [[NSMutableArray alloc] init];
+                 for (PFObject *object in objects)
+                 {
+                     PFObject *location = [object valueForKey:@"cityId"];
+                     NSLog(@"Location ID => %@", location.objectId);
+                     NSLog(@"\n Location Name %@",[location valueForKey:@"name"]);
+                     Location *obj = [[Location alloc] init];
+                     obj.placeId = location.objectId;
+                     obj.city = [location valueForKey:@"name"];
+                     //obj.degreeType = [degree valueForKey:@"name"];
+                     [arrTempLocation addObject:obj];
+                 }
+                 //[self showSelDegree:arrTempLocation];
+                 [self showSelectedLocation:arrTempLocation];
+                 
+             }
+             else
+             {
+                 //insertFlag = true;
+             }
+             // The find succeeded.
+             NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+             // Do something with the found objects
+             
+         }
+         else {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+     }];
+}
 
 - (NSString *)getFormattedHeightFromValue:(NSString *)value
 {
@@ -255,6 +299,7 @@
                                          
                                          //execute further query of degree and location preference
                                          [self saveDegreePreference];
+                                         [self saveLocationPreference];
                                      }];
        
     }
@@ -274,7 +319,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully retrieved %lu degree preferences.", objects.count);
+            NSLog(@"Successfully retrieved %lu degre preferences.", objects.count);
             // Do something with the found objects
             [PFObject deleteAllInBackground:objects];
             
@@ -309,7 +354,60 @@
          if(!error)
          {
              NSLog(@"save complete");
-             [arrSelectedDegreeId removeAllObjects];
+             //[arrSelectedDegreeId removeAllObjects];
+         }else{
+             NSLog(@"SaveAll error %@", error);
+         }
+     }];
+}
+
+#pragma mark Parse Location Preference
+-(void) saveLocationPreference
+{
+    //delete previously set degree preferences
+    //[arrSelectedDegreeId removeAllObjects];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"LocationPreferences"];
+    [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %lu location preferences.", objects.count);
+            // Do something with the found objects
+            [PFObject deleteAllInBackground:objects];
+            
+            //[self addNewDegreePreference];
+            [self performSelector:@selector(addNewLocationPreference) withObject:nil afterDelay:1.0];
+            
+        }
+        else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    //then add new objects
+    
+}
+
+- (void) addNewLocationPreference
+{
+    //insert fresh data
+    for (int i=0; i< [arrSelectedLocationId count]; i++)
+    {
+        //save data in
+        PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
+        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
+        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+        [arrLocationPref addObject:object];
+    }
+    
+    [PFObject saveAllInBackground:arrLocationPref block:^(BOOL succeeded, NSError *error)
+     {
+         if(!error)
+         {
+             NSLog(@"save complete");
+             //[arrSelectedLocationId removeAllObjects];
          }else{
              NSLog(@"SaveAll error %@", error);
          }
@@ -405,10 +503,12 @@
 #pragma mark Location Preference
 -(void)selectedLocation:(Location *)location
 {
+    //[arrSelectedLocationId removeAllObjects];
     lblLocation.text = @"";
     if (location)
     {
         [arrSelLocations addObject:location.city];
+        [arrSelectedLocationId addObject:location.placeId];
     }
     NSString *strLocations = [arrSelLocations componentsJoinedByString:@","];
     [popoverController dismissPopoverAnimated:YES];
@@ -418,6 +518,36 @@
 - (void)showSelLocations : (NSArray *)arrLocation
 {
     [self selectedLocation:nil];
+}
+
+//set Locations From Parse
+-(void)showSelectedLocation:(NSArray *)arrLocation
+{
+    [arrSelectedLocationId removeAllObjects];
+    lblLocation.text = @"";
+//    if (location)
+//    {
+//        [arrSelLocations addObject:location.city];
+//        [arrSelectedLocationId addObject:location.placeId];
+//    }
+//    NSString *strLocations = [arrSelLocations componentsJoinedByString:@","];
+//    [popoverController dismissPopoverAnimated:YES];
+//    lblLocation.text = strLocations;
+    
+    //new code
+    NSMutableArray *arrLoc = [[NSMutableArray alloc] init];
+    for (Location *obj in arrLocation)
+    {
+        [self selectedLocation:obj];
+//        NSString *strLoc = obj.city;
+//        [arrLoc addObject:strLoc];
+//        [arrSelLocations addObject:obj.city];
+//        [arrSelectedLocationId addObject:obj.placeId];
+    }
+    
+//    NSString *strLoc = [arrLoc componentsJoinedByString:@","];
+//    [popoverController dismissPopoverAnimated:YES];
+//    lblLocation.text = strLoc;
 }
 
 #pragma mark Degree Preference

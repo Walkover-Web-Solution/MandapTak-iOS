@@ -55,6 +55,8 @@
             PFObject *parent = [obj valueForKey:@"Parent"];
             location.city = [obj valueForKey:@"name"];
             location.cityPointer = obj;
+            NSString *strClass =  obj.parseClassName;
+            NSLog(@"class name = %@",strClass);
             location.placeId = [obj valueForKey:@"objectId"];
             NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
             NSLog(@"StateName %@",[parent valueForKey:@"name"]);
