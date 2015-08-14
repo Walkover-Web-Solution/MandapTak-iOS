@@ -42,7 +42,9 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
-    cell.textLabel.text = arrTableData[indexPath.row];
+    Location *obj = [[Location alloc ] init];
+    obj = arrTableData[indexPath.row];
+    cell.textLabel.text = obj.city;
     
     //set font family
     return cell;
@@ -85,6 +87,7 @@
 
 - (IBAction)saveAction:(id)sender
 {
-    [self.delegate showSelLocations:arrTableData];
+    //[self.delegate showSelLocations:arrTableData];
+    [self.delegate showSelectedLocation:arrTableData];
 }
 @end

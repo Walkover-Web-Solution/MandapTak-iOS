@@ -17,7 +17,7 @@
 @end
 
 @implementation PopOverListViewController
-
+@synthesize arrSelectedData;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -79,8 +79,8 @@
 
 #pragma mark UITableView Data Source
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.arrTableData.count;
 }
 
@@ -96,7 +96,17 @@
     }
     Location *location = self.arrTableData[indexPath.row];
     cell.textLabel.text = location.descriptions;
-    //set font family
+    //disable already selected location
+    if ([arrSelectedData containsObject:location.placeId])
+    {
+        cell.userInteractionEnabled = NO;
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.userInteractionEnabled = YES;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
 }
 

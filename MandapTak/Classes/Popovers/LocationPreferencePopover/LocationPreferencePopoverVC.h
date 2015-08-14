@@ -1,8 +1,8 @@
 //
-//  PopOverListViewController.h
+//  LocationPreferencePopoverVC.h
 //  MandapTak
 //
-//  Created by Hussain Chhatriwala on 04/08/15.
+//  Created by Anuj Jain on 8/14/15.
 //  Copyright (c) 2015 Walkover. All rights reserved.
 //
 
@@ -10,10 +10,10 @@
 #import "Location.h"
 #import <Parse/Parse.h>
 
-@protocol PopOverListViewControllerDelegate
+@protocol LocationPreferencePopoverVCDelegate
 -(void)selectedLocation:(Location*)location;
 @end
-@interface PopOverListViewController : UIViewController
-@property (weak, nonatomic) id <PopOverListViewControllerDelegate> delegate;
+@interface LocationPreferencePopoverVC : UIViewController
+@property (weak, nonatomic) id <LocationPreferencePopoverVCDelegate> delegate;
 @property (strong, nonatomic) NSArray *arrSelectedData;
 @end

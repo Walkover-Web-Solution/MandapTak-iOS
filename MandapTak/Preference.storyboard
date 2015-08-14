@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BlX-rR-9so">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BlX-rR-9so">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
@@ -249,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="913" y="220"/>
         </scene>
-        <!--Pop Over List View Controller-->
+        <!--Location Preference PopoverVC-->
         <scene sceneID="qzY-Za-zEG">
             <objects>
-                <viewController storyboardIdentifier="PopOverListViewController" id="daO-eR-y0n" customClass="PopOverListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PopOverListViewController" id="daO-eR-y0n" customClass="LocationPreferencePopoverVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FQY-aF-e0q"/>
                         <viewControllerLayoutGuide type="bottom" id="JiY-k4-n5u"/>

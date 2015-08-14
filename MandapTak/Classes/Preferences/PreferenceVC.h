@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "UserProfileViewController.h"
-#import "PopOverListViewController.h"
+//#import "PopOverListViewController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "WYPopoverController.h"
 #import "SelectedLocationVC.h"
@@ -18,8 +18,10 @@
 #import "HeightPopoverViewController.h"
 #import <Parse/Parse.h>
 #import <Parse/PFObject.h>
+#import "MBProgressHUD.h"
+#import "LocationPreferencePopoverVC.h"
 
-@interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,PopOverListViewControllerDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate>
+@interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate>
 {
     
     IBOutlet UITextField *txtMinAge;
@@ -36,7 +38,7 @@
     NSMutableArray *arrAutoComplete;
      
      */
-    NSMutableArray *arrSelLocations,*arrSelDegree,*arrSelectedDegreeId,*arrDegreePref,*arrSelectedLocationId,*arrLocationPref;
+    NSMutableArray *arrSelLocations,*arrSelDegree,*arrSelectedDegreeId,*arrDegreePref,*arrSelectedLocationId,*arrLocationPref,*arrLocationObj;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UISlider *sliderWork;
     IBOutlet UILabel *lblWorkStatus;
