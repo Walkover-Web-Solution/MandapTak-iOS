@@ -1,33 +1,31 @@
 //
-//  PopOverListViewController.m
+//  ReligionPopoverViewController.m
 //  MandapTak
 //
-//  Created by Hussain Chhatriwala on 04/08/15.
+//  Created by Hussain Chhatriwala on 13/08/15.
 //  Copyright (c) 2015 Walkover. All rights reserved.
 //
 
-#import "PopOverListViewController.h"
-#import "ServiceManager.h"
+#import "ReligionPopoverViewController.h"
+#import <Parse/Parse.h>
 #import "MBProgressHUD.h"
-#import "Location.h"
-@interface PopOverListViewController ()
+@interface ReligionPopoverViewController (){
+    NSArray *arrTableData;
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *arrTableData;
+
 @end
 
-@implementation PopOverListViewController
+@implementation ReligionPopoverViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.arrTableData = [NSArray array];
+    arrTableData = [NSArray array];
+    NSLog(@"%@",self.type);
     // Do any additional setup after loading the view.
 }
--(void)viewDidAppear:(BOOL)animated{
-    [self.searchBar becomeFirstResponder];
 
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -35,40 +33,17 @@
 
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    }
+}
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFQuery *query = [PFQuery queryWithClassName:@"City" ];
-    
+    PFQuery *query = [PFQuery queryWithClassName:@"Religion"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
-  //  [query whereKey:@"name" hasPrefix:searchBar.text];
-    [query includeKey:@"Parent.Parent"];
+   [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-        NSMutableArray *arrLocData = [NSMutableArray array];
-        for(PFObject *obj in comments){
-            Location *location = [[Location alloc]init];
-            NSLog(@"cityName %@",[obj valueForKey:@"name"]);
-            PFObject *parent = [obj valueForKey:@"Parent"];
-            location.city = [obj valueForKey:@"name"];
-            location.cityPointer = obj;
-            NSString *strClass =  obj.parseClassName;
-            NSLog(@"class name = %@",strClass);
-            location.placeId = [obj valueForKey:@"objectId"];
-            NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
-            NSLog(@"StateName %@",[parent valueForKey:@"name"]);
-            location.state = [parent valueForKey:@"name"];
-            
-            PFObject *subParent = [parent valueForKey:@"Parent"];
-            NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
-            location.country = [subParent valueForKey:@"name"];
-            location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
-            [arrLocData addObject:location];
-        }
-        self.arrTableData = arrLocData;
+        arrTableData = comments;
         [self.tableView reloadData];
         
     }];
@@ -81,7 +56,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.arrTableData.count;
+    return arrTableData.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,15 +69,18 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
-    Location *location = self.arrTableData[indexPath.row];
-    cell.textLabel.text = location.descriptions;
+    //Location *location = self.arrTableData[indexPath.row];
+    PFObject *obj = arrTableData[indexPath.row];
+    cell.textLabel.text = [obj valueForKey:@"name"];
     //set font family
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate selectedLocation:self.arrTableData[indexPath.row]];
+       [self.delegate selectedReligion:arrTableData[indexPath.row]];
+
+    
 }
 
 /*

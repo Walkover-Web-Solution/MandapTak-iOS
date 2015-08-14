@@ -17,9 +17,11 @@
 #import "EditProfileTab1ViewController.h"
 #import "BirthTimePopoverViewController.h"
 #import "BasicProfileViewController.h"
+#import "DetailProfileViewController.h"
+#import "ProfileWorkAndExperienceViewController.h"
 #import <Parse/Parse.h>
 
-@interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate>
+@interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate>
 {
     __weak IBOutlet UIButton *btnHeight;
     WYPopoverController* popoverController;
@@ -35,6 +37,8 @@
 NSString *selectedHeight;
     UIStoryboard *sb2;
     BasicProfileViewController *vc1;
+    DetailProfileViewController *vc2;
+    ProfileWorkAndExperienceViewController *vc3;
     BOOL isSelectingCurrentLocation;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnTab1;
@@ -58,6 +62,8 @@ NSString *selectedHeight;
     [super viewDidLoad];
     sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
+    vc2 = [sb2 instantiateViewControllerWithIdentifier:@"DetailProfileViewController"];
+    vc3 = [sb2 instantiateViewControllerWithIdentifier:@"ProfileWorkAndExperienceViewController"];
 
     // [self hideAllView];
     UIColor* whyerColor = [UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1];
@@ -67,6 +73,11 @@ NSString *selectedHeight;
     
     [query whereKey:@"userId" equalTo:userId];
     [query includeKey:@"Parent.Parent"];
+    [query includeKey:@"currentLocation.Parent.Parent"];
+    [query includeKey:@"placeOfBirth.Parent.Parent"];
+    [query includeKey:@"casteId.Parent.Parent"];
+    [query includeKey:@"religionId.Parent.Parent"];
+    [query includeKey:@"gotraId.Parent.Parent"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -125,20 +136,7 @@ NSString *selectedHeight;
     [self.view endEditing:YES];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"HeightIdentifier"])
-    {
-        isSelectingCurrentLocation = NO;
-        HeightPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(300, 190);
-        WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
-        popoverController = [popoverSegue popoverControllerWithSender:sender
-                                             permittedArrowDirections:WYPopoverArrowDirectionAny
-                                                             animated:YES];
-        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
-        popoverController.delegate = self;
-        controller.delegate = self;
-    }
-    
+      
 }
 
 -(void)hideAllView{
@@ -196,6 +194,49 @@ NSString *selectedHeight;
 
 
 }
+-(void)updatedPfObjectForSecondTab:(PFObject *)updatedUserProfile{
+    if([updatedUserProfile valueForKey:@"weight"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"weight"]forKey:@"weight"];
+    if([updatedUserProfile valueForKey:@"height"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"height"]forKey:@"height"];
+
+    if([updatedUserProfile valueForKey:@"casteId"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"casteId"]forKey:@"casteId"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"casteId"];
+        
+    }
+
+    if([updatedUserProfile valueForKey:@"religionId"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"religionId"]forKey:@"religionId"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"religionId"];
+        
+    }
+    if([updatedUserProfile valueForKey:@"gotraId"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"gotraId"]forKey:@"gotraId"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"gotraId"];
+
+    }
+    if([updatedUserProfile valueForKey:@"weight"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"weight"]forKey:@"weight"];
+    [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // succesful
+            
+        } else {
+            //Something bad has ocurred
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
+        }
+    }];
+    
+
+
+
+}
 -(void)selectedHeight:(NSString *)height{
     selectedHeight = height;
     [btnHeight setTitle:height forState:UIControlStateNormal];
@@ -211,15 +252,15 @@ NSString *selectedHeight;
 
 }
 -(void)removeSubview{
-//    if([self.view.subviews containsObject:vc3.view]) {
-//        [vc3 removeFromParentViewController];
-//        [vc3.view removeFromSuperview];
-//    }
-//    if([self.view.subviews containsObject:vc2.view]) {
-//        [vc2 removeFromParentViewController];
-//        [vc2.view removeFromSuperview];
-//        
-//    }
+    if([self.tab3View.subviews containsObject:vc3.view]) {
+        [vc3 removeFromParentViewController];
+        [vc3.view removeFromSuperview];
+    }
+    if([self.tab2View.subviews containsObject:vc2.view]) {
+        [vc2 removeFromParentViewController];
+        [vc2.view removeFromSuperview];
+        
+    }
     if([self.tab1View.subviews containsObject:vc1.view]) {
         [vc1 removeFromParentViewController];
         [vc1.view removeFromSuperview];
@@ -243,11 +284,19 @@ NSString *selectedHeight;
             break;
         case 2:
             self.tab2View.hidden = NO;
-            
+            vc2.delegate = self;
+            vc2.currentProfile = currentProfile;
+            [self.tab2View addSubview:vc2.view];
+            [self addChildViewController:vc2];
             self.btnTab2.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
         case 3:
             self.tab3View.hidden = NO;
+            self.tab3View.hidden = NO;
+            vc3.delegate = self;
+            vc3.currentProfile = currentProfile;
+            [self.tab3View addSubview:vc3.view];
+            [self addChildViewController:vc3];
             self.btnTab3.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
         case 4:

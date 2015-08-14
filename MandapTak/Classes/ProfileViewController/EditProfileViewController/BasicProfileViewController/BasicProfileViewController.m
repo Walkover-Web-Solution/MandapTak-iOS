@@ -28,6 +28,7 @@
     BOOL isSelectingCurrentLocation;
     Location * currentLocation;
     Location * placeOfBirthLocation;
+    __weak IBOutlet UILabel *lblBornInPlace;
 
 }
 
@@ -37,6 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    lblBornInPlace.hidden= YES;
     if(self.currentProfile ==nil){
         NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
@@ -93,20 +95,16 @@
     }
     if([self.currentProfile valueForKey:@"currentLocation"]){
         PFObject *obj  = [self.currentProfile valueForKey:@"currentLocation"];
-            Location *location = [[Location alloc]init];
-            NSLog(@"cityName %@",[obj valueForKey:@"name"]);
-            PFObject *parent = [obj valueForKey:@"Parent"];
-            location.city = [obj valueForKey:@"name"];
-            location.cityPointer  = obj;
-            location.placeId = [obj valueForKey:@"objectId"];
-            NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
-            NSLog(@"StateName %@",[parent valueForKey:@"name"]);
-            location.state = [parent valueForKey:@"name"];
-            PFObject *subParent = [parent valueForKey:@"Parent"];
-            NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
-            location.country = [subParent valueForKey:@"name"];
-            location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
-            currentLocation = location;
+        Location *location = [[Location alloc]init];
+        PFObject *parent = [obj valueForKey:@"Parent"];
+        location.city = [obj valueForKey:@"name"];
+        location.cityPointer  = obj;
+        location.placeId = [obj valueForKey:@"objectId"];
+        location.state = [parent valueForKey:@"name"];
+        PFObject *subParent = [parent valueForKey:@"Parent"];
+        location.country = [subParent valueForKey:@"name"];
+        location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+        currentLocation = location;
         [btnCurrentLocation setTitle:[NSString stringWithFormat:@"%@",location.descriptions] forState:UIControlStateNormal];
         [btnCurrentLocation setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
@@ -114,16 +112,12 @@
     if([self.currentProfile valueForKey:@"placeOfBirth"]){
         PFObject *obj  = [self.currentProfile valueForKey:@"placeOfBirth"];
         Location *location = [[Location alloc]init];
-        NSLog(@"cityName %@",[obj valueForKey:@"name"]);
         PFObject *parent = [obj valueForKey:@"Parent"];
         location.city = [obj valueForKey:@"name"];
         location.cityPointer  = obj;
         location.placeId = [obj valueForKey:@"objectId"];
-        NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
-        NSLog(@"StateName %@",[parent valueForKey:@"name"]);
         location.state = [parent valueForKey:@"name"];
         PFObject *subParent = [parent valueForKey:@"Parent"];
-        NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
         location.country = [subParent valueForKey:@"name"];
         location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
         placeOfBirthLocation = location;
@@ -198,7 +192,6 @@ if ([segue.identifier isEqualToString:@"LocationIdentifier"])
         popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
         controller.delegate = self;
-        
     }
     
     

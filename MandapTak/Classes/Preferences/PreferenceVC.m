@@ -303,9 +303,6 @@
                                      }];
        
     }
-    
-//    (BOOL)saveAll:(PF_NULLABLE NSArray *)objects error:(NSError **)error
-   
 }
 
 
