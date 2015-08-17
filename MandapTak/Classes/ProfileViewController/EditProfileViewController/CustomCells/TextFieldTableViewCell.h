@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TextFieldTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIView *txtWeight;
 
+@property (weak, nonatomic) IBOutlet UITextField *txtField;
 @end

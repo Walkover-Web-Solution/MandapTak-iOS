@@ -14,8 +14,12 @@
 		75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F851B79EC2C0082D7EC /* DegreeListVC.m */; };
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
 		8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8954803C1B7DB49900AB37BF /* Profile.xcassets */; };
-		895480411B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480401B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.m */; };
-		895480441B7DE1A700AB37BF /* CollageToAndFromTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480431B7DE1A700AB37BF /* CollageToAndFromTableViewCell.m */; };
+		895480471B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */; };
+		8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480491B7E1C0B00AB37BF /* DegreeTableViewCell.m */; };
+		895CD7751B81C47600816FDE /* DegreePopoverForProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7741B81C47600816FDE /* DegreePopoverForProfileViewController.m */; };
+		895CD7781B81CFB500816FDE /* Education.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7771B81CFB500816FDE /* Education.m */; };
+		895CD77E1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD77D1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m */; };
+		895CD7811B81E37D00816FDE /* IndustryPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */; };
 		897C239C1B6B562C00FC32E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C239B1B6B562C00FC32E9 /* main.m */; };
 		897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 897C23A01B6B562C00FC32E9 /* MandapTak.xcdatamodeld */; };
 		897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897C23A91B6B562C00FC32E9 /* Images.xcassets */; };
@@ -29,7 +33,6 @@
 		8981464C1B7C9F0000DF30AB /* Religion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8981464B1B7C9F0000DF30AB /* Religion.m */; };
 		898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8981464F1B7CB5F600DF30AB /* CastePopoverViewController.m */; };
 		898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146531B7CB6AE00DF30AB /* GotraPopoverViewController.m */; };
-		8984304A1B788C040071A423 /* EditProfileTab1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898430491B788C040071A423 /* EditProfileTab1ViewController.m */; };
 		899170461B70B5D0000CF872 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170441B70B5D0000CF872 /* next.png */; };
 		899170471B70B5D0000CF872 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170451B70B5D0000CF872 /* next@2x.png */; };
 		8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899170591B70D458000CF872 /* WYPopoverController.m */; };
@@ -115,10 +118,18 @@
 		75918F871B79ECBD0082D7EC /* Degree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Degree.h; sourceTree = "<group>"; };
 		75918F881B79ECBD0082D7EC /* Degree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Degree.m; sourceTree = "<group>"; };
 		8954803C1B7DB49900AB37BF /* Profile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Profile.xcassets; sourceTree = "<group>"; };
-		8954803F1B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileWorkAndExperienceViewController.h; sourceTree = "<group>"; };
-		895480401B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileWorkAndExperienceViewController.m; sourceTree = "<group>"; };
-		895480421B7DE1A700AB37BF /* CollageToAndFromTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollageToAndFromTableViewCell.h; sourceTree = "<group>"; };
-		895480431B7DE1A700AB37BF /* CollageToAndFromTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollageToAndFromTableViewCell.m; sourceTree = "<group>"; };
+		895480451B7E172200AB37BF /* ProfileWorkAndExperienceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileWorkAndExperienceViewController.h; sourceTree = "<group>"; };
+		895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileWorkAndExperienceViewController.m; sourceTree = "<group>"; };
+		895480481B7E1C0B00AB37BF /* DegreeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DegreeTableViewCell.h; sourceTree = "<group>"; };
+		895480491B7E1C0B00AB37BF /* DegreeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DegreeTableViewCell.m; sourceTree = "<group>"; };
+		895CD7731B81C47600816FDE /* DegreePopoverForProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DegreePopoverForProfileViewController.h; sourceTree = "<group>"; };
+		895CD7741B81C47600816FDE /* DegreePopoverForProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DegreePopoverForProfileViewController.m; sourceTree = "<group>"; };
+		895CD7761B81CFB500816FDE /* Education.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Education.h; sourceTree = "<group>"; };
+		895CD7771B81CFB500816FDE /* Education.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Education.m; sourceTree = "<group>"; };
+		895CD77C1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkAfterMarriagePopoverViewController.h; sourceTree = "<group>"; };
+		895CD77D1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkAfterMarriagePopoverViewController.m; sourceTree = "<group>"; };
+		895CD77F1B81E37D00816FDE /* IndustryPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndustryPopoverViewController.h; sourceTree = "<group>"; };
+		895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryPopoverViewController.m; sourceTree = "<group>"; };
 		897C23961B6B562C00FC32E9 /* MandapTak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MandapTak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		897C239A1B6B562C00FC32E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897C239B1B6B562C00FC32E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -143,8 +154,6 @@
 		8981464F1B7CB5F600DF30AB /* CastePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastePopoverViewController.m; sourceTree = "<group>"; };
 		898146521B7CB6AE00DF30AB /* GotraPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotraPopoverViewController.h; sourceTree = "<group>"; };
 		898146531B7CB6AE00DF30AB /* GotraPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotraPopoverViewController.m; sourceTree = "<group>"; };
-		898430481B788C040071A423 /* EditProfileTab1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileTab1ViewController.h; sourceTree = "<group>"; };
-		898430491B788C040071A423 /* EditProfileTab1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileTab1ViewController.m; sourceTree = "<group>"; };
 		899170441B70B5D0000CF872 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		899170451B70B5D0000CF872 /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
 		899170581B70D458000CF872 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
@@ -296,10 +305,37 @@
 		8954803E1B7DCF9900AB37BF /* ProfileWorkAndExperienceViewController  */ = {
 			isa = PBXGroup;
 			children = (
-				8954803F1B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.h */,
-				895480401B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.m */,
+				895480451B7E172200AB37BF /* ProfileWorkAndExperienceViewController.h */,
+				895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */,
 			);
 			path = "ProfileWorkAndExperienceViewController ";
+			sourceTree = "<group>";
+		};
+		895CD7721B81C41800816FDE /* DegreeListPopover */ = {
+			isa = PBXGroup;
+			children = (
+				895CD7731B81C47600816FDE /* DegreePopoverForProfileViewController.h */,
+				895CD7741B81C47600816FDE /* DegreePopoverForProfileViewController.m */,
+			);
+			path = DegreeListPopover;
+			sourceTree = "<group>";
+		};
+		895CD7791B81D92E00816FDE /* WorkAfterMarriagePopover */ = {
+			isa = PBXGroup;
+			children = (
+				895CD77C1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.h */,
+				895CD77D1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m */,
+			);
+			path = WorkAfterMarriagePopover;
+			sourceTree = "<group>";
+		};
+		895CD77B1B81D93E00816FDE /* IndustryPopover */ = {
+			isa = PBXGroup;
+			children = (
+				895CD77F1B81E37D00816FDE /* IndustryPopoverViewController.h */,
+				895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */,
+			);
+			path = IndustryPopover;
 			sourceTree = "<group>";
 		};
 		897C238D1B6B562C00FC32E9 = {
@@ -380,14 +416,12 @@
 		897EF9671B708FE000F88CEC /* EditProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
+				897EF96B1B70901400F88CEC /* EditProfileViewController.h */,
+				897EF96C1B70901400F88CEC /* EditProfileViewController.m */,
 				8954803E1B7DCF9900AB37BF /* ProfileWorkAndExperienceViewController  */,
 				898146321B7C6E1A00DF30AB /* CustomCells */,
 				89E8D9351B78AF29008A8E2F /* BasicProfileViewController */,
 				89E8D9361B78AF29008A8E2F /* DetailProfileViewController */,
-				897EF96B1B70901400F88CEC /* EditProfileViewController.h */,
-				897EF96C1B70901400F88CEC /* EditProfileViewController.m */,
-				898430481B788C040071A423 /* EditProfileTab1ViewController.h */,
-				898430491B788C040071A423 /* EditProfileTab1ViewController.m */,
 			);
 			path = EditProfileViewController;
 			sourceTree = "<group>";
@@ -397,8 +431,8 @@
 			children = (
 				898146331B7C6E5900DF30AB /* TextFieldTableViewCell.h */,
 				898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */,
-				895480421B7DE1A700AB37BF /* CollageToAndFromTableViewCell.h */,
-				895480431B7DE1A700AB37BF /* CollageToAndFromTableViewCell.m */,
+				895480481B7E1C0B00AB37BF /* DegreeTableViewCell.h */,
+				895480491B7E1C0B00AB37BF /* DegreeTableViewCell.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -458,6 +492,9 @@
 		899C53681B732B6500C24DA8 /* Popovers */ = {
 			isa = PBXGroup;
 			children = (
+				895CD77B1B81D93E00816FDE /* IndustryPopover */,
+				895CD7791B81D92E00816FDE /* WorkAfterMarriagePopover */,
+				895CD7721B81C41800816FDE /* DegreeListPopover */,
 				898146511B7CB69B00DF30AB /* GotraPopover */,
 				8981464D1B7CB5E100DF30AB /* CastePopover */,
 				898146441B7C961800DF30AB /* ReligionPopover */,
@@ -565,6 +602,8 @@
 				899C537E1B73447B00C24DA8 /* Location.m */,
 				8981464A1B7C9F0000DF30AB /* Religion.h */,
 				8981464B1B7C9F0000DF30AB /* Religion.m */,
+				895CD7761B81CFB500816FDE /* Education.h */,
+				895CD7771B81CFB500816FDE /* Education.m */,
 				75918F871B79ECBD0082D7EC /* Degree.h */,
 				75918F881B79ECBD0082D7EC /* Degree.m */,
 			);
@@ -853,7 +892,9 @@
 			files = (
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				899C537F1B73447B00C24DA8 /* Location.m in Sources */,
+				895CD77E1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m in Sources */,
 				898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */,
+				8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */,
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
@@ -861,15 +902,15 @@
 				899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */,
 				897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */,
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
-				8984304A1B788C040071A423 /* EditProfileTab1ViewController.m in Sources */,
 				89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */,
 				8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */,
 				899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */,
+				895CD7751B81C47600816FDE /* DegreePopoverForProfileViewController.m in Sources */,
 				899C537C1B7339EB00C24DA8 /* MBProgressHUD.m in Sources */,
 				899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */,
 				897C239C1B6B562C00FC32E9 /* main.m in Sources */,
 				8981464C1B7C9F0000DF30AB /* Religion.m in Sources */,
-				895480411B7DCFAE00AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */,
+				895480471B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */,
 				75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */,
 				898146491B7C9CCC00DF30AB /* ReligionPopoverViewController.m in Sources */,
 				899C53781B73363300C24DA8 /* ServiceManager.m in Sources */,
@@ -877,7 +918,6 @@
 				89D9F73B1B6B57A8004CBE3D /* SWRevealViewController.m in Sources */,
 				8991706A1B70E0BF000CF872 /* FPPopoverView.m in Sources */,
 				899170691B70E0BF000CF872 /* FPPopoverController.m in Sources */,
-				895480441B7DE1A700AB37BF /* CollageToAndFromTableViewCell.m in Sources */,
 				89D9F7331B6B579E004CBE3D /* SideBarViewController.m in Sources */,
 				89E8D93C1B78CFF1008A8E2F /* DetailProfileViewController.m in Sources */,
 				8991706B1B70E0BF000CF872 /* FPTouchView.m in Sources */,
@@ -885,6 +925,8 @@
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
+				895CD7811B81E37D00816FDE /* IndustryPopoverViewController.m in Sources */,
+				895CD7781B81CFB500816FDE /* Education.m in Sources */,
 				89D9F7341B6B579E004CBE3D /* StartMainViewController.m in Sources */,
 				89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */,
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,

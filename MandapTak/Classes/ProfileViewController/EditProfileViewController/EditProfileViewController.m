@@ -14,7 +14,6 @@
 #import "GenderViewController.h"
 #import "DateOfBirthPopoverViewController.h"
 #import "HeightPopoverViewController.h"
-#import "EditProfileTab1ViewController.h"
 #import "BirthTimePopoverViewController.h"
 #import "BasicProfileViewController.h"
 #import "DetailProfileViewController.h"
@@ -76,7 +75,7 @@ NSString *selectedHeight;
     [query includeKey:@"currentLocation.Parent.Parent"];
     [query includeKey:@"placeOfBirth.Parent.Parent"];
     [query includeKey:@"casteId.Parent.Parent"];
-    [query includeKey:@"religionId.Parent.Parent"];
+    [query includeKey:@"religionId.Pare nt.Parent"];
     [query includeKey:@"gotraId.Parent.Parent"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
