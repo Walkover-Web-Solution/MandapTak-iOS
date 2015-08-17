@@ -13,6 +13,7 @@
 		75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F7D1B79EBD70082D7EC /* SelectedLocationVC.m */; };
 		75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F851B79EC2C0082D7EC /* DegreeListVC.m */; };
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
+		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8954803C1B7DB49900AB37BF /* Profile.xcassets */; };
 		895480471B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */; };
 		8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480491B7E1C0B00AB37BF /* DegreeTableViewCell.m */; };
@@ -117,6 +118,8 @@
 		75918F851B79EC2C0082D7EC /* DegreeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DegreeListVC.m; sourceTree = "<group>"; };
 		75918F871B79ECBD0082D7EC /* Degree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Degree.h; sourceTree = "<group>"; };
 		75918F881B79ECBD0082D7EC /* Degree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Degree.m; sourceTree = "<group>"; };
+		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
+		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
 		8954803C1B7DB49900AB37BF /* Profile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Profile.xcassets; sourceTree = "<group>"; };
 		895480451B7E172200AB37BF /* ProfileWorkAndExperienceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileWorkAndExperienceViewController.h; sourceTree = "<group>"; };
 		895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileWorkAndExperienceViewController.m; sourceTree = "<group>"; };
@@ -300,6 +303,15 @@
 				75918F851B79EC2C0082D7EC /* DegreeListVC.m */,
 			);
 			path = DegreePopover;
+			sourceTree = "<group>";
+		};
+		75E6028B1B7E288E0061BA39 /* LocationPreferencePopover */ = {
+			isa = PBXGroup;
+			children = (
+				75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */,
+				75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */,
+			);
+			path = LocationPreferencePopover;
 			sourceTree = "<group>";
 		};
 		8954803E1B7DCF9900AB37BF /* ProfileWorkAndExperienceViewController  */ = {
@@ -495,6 +507,7 @@
 				895CD77B1B81D93E00816FDE /* IndustryPopover */,
 				895CD7791B81D92E00816FDE /* WorkAfterMarriagePopover */,
 				895CD7721B81C41800816FDE /* DegreeListPopover */,
+				75E6028B1B7E288E0061BA39 /* LocationPreferencePopover */,
 				898146511B7CB69B00DF30AB /* GotraPopover */,
 				8981464D1B7CB5E100DF30AB /* CastePopover */,
 				898146441B7C961800DF30AB /* ReligionPopover */,
@@ -891,6 +904,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
+				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				899C537F1B73447B00C24DA8 /* Location.m in Sources */,
 				895CD77E1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m in Sources */,
 				898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */,
@@ -1056,6 +1070,7 @@
 					"$(PROJECT_DIR)/MandapTak",
 				);
 				INFOPLIST_FILE = MandapTak/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1071,6 +1086,7 @@
 					"$(PROJECT_DIR)/MandapTak",
 				);
 				INFOPLIST_FILE = MandapTak/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

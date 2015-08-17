@@ -27,6 +27,7 @@
     arrDegreePref = [[NSMutableArray alloc]init];
     arrSelectedLocationId = [[NSMutableArray alloc]init];
     arrLocationPref = [[NSMutableArray alloc]init];
+    arrLocationObj = [[NSMutableArray alloc]init];
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
@@ -67,6 +68,9 @@
 
 -(void) getUserPreference
 {
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     NSString *profileId = @"nASUvS6R7Z";    //gDlvVzftXF
     PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
@@ -75,6 +79,7 @@
 //    [query whereKey:@"objectId" equalTo:@"nASUvS6R7Z"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (!error)
         {
             if (objects.count > 0)
@@ -130,11 +135,15 @@
 
 - (void) getDegreePrefFromPreferenceId : (NSString *)prefId
 {
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"degreeId"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
          if (!error)
          {
              if (objects.count > 0)
@@ -172,30 +181,48 @@
 
 - (void) getLocationPrefFromPreferenceId : (NSString *)prefId
 {
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"LocationPreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"cityId"];
+    [query includeKey:@"stateId"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          if (!error)
          {
              if (objects.count > 0)
              {
-                 NSMutableArray *arrTempLocation = [[NSMutableArray alloc] init];
+                 //NSMutableArray *arrTempLocation = [[NSMutableArray alloc] init];
                  for (PFObject *object in objects)
                  {
                      PFObject *location = [object valueForKey:@"cityId"];
+                     if (!location)
+                     {
+                         location = [object valueForKey:@"stateId"];
+                     }
                      NSLog(@"Location ID => %@", location.objectId);
                      NSLog(@"\n Location Name %@",[location valueForKey:@"name"]);
                      Location *obj = [[Location alloc] init];
                      obj.placeId = location.objectId;
-                     obj.city = [location valueForKey:@"name"];
+                     obj.cityPointer = location;
+                     
+                     if ([location.parseClassName isEqualToString:@"City"])
+                     {
+                        obj.city = [location valueForKey:@"name"];
+                     }
+                     else if ([location.parseClassName isEqualToString:@"State"])
+                     {
+                         obj.state = [location valueForKey:@"name"];
+                     }
+                     
                      //obj.degreeType = [degree valueForKey:@"name"];
-                     [arrTempLocation addObject:obj];
+                     [arrLocationObj addObject:obj];
                  }
                  //[self showSelDegree:arrTempLocation];
-                 [self showSelectedLocation:arrTempLocation];
-                 
+                 [self showSelectedLocation:arrLocationObj];
              }
              else
              {
@@ -246,6 +273,7 @@
 
 - (IBAction)setPreferences:(id)sender
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (insertFlag)
     {
         //insert preferences
@@ -264,10 +292,16 @@
         
         [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {
-            if (succeeded) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if (succeeded)
+            {
                 // The object has been saved.
-                
-            } else {
+                //execute further query of degree and location preference
+                [self saveDegreePreference];
+                [self saveLocationPreference];
+            }
+            else
+            {
                 // There was a problem, check error.description
             }
         }];
@@ -280,7 +314,8 @@
         
         // Retrieve the object by id
         [query getObjectInBackgroundWithId:strObj
-                                     block:^(PFObject *pref, NSError *error) {
+                                     block:^(PFObject *pref, NSError *error)
+        {
                                          // Now let's update it with some new data. In this case, only cheatMode and score
                                          // will get sent to the cloud. playerName hasn't changed.
                         NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
@@ -300,7 +335,7 @@
                                          //execute further query of degree and location preference
                                          [self saveDegreePreference];
                                          [self saveLocationPreference];
-                                     }];
+        }];
        
     }
 }
@@ -310,10 +345,12 @@
 {
     //delete previously set degree preferences
     //[arrSelectedDegreeId removeAllObjects];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
         if (!error) {
             // The find succeeded.
             NSLog(@"Successfully retrieved %lu degre preferences.", objects.count);
@@ -348,6 +385,7 @@
     
     [PFObject saveAllInBackground:arrDegreePref block:^(BOOL succeeded, NSError *error)
      {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
          if(!error)
          {
              NSLog(@"save complete");
@@ -361,6 +399,7 @@
 #pragma mark Parse Location Preference
 -(void) saveLocationPreference
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     //delete previously set degree preferences
     //[arrSelectedDegreeId removeAllObjects];
     
@@ -390,17 +429,44 @@
 - (void) addNewLocationPreference
 {
     //insert fresh data
-    for (int i=0; i< [arrSelectedLocationId count]; i++)
+    
+    
+    for (int i=0; i< [arrLocationObj count]; i++)
     {
-        //save data in
+        Location *objLoc = arrLocationObj[i];
+        PFObject *currentObj = objLoc.cityPointer;
+        NSString *strClassName = currentObj.parseClassName;
+        
         PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
-        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
         object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+        
+        //check object class from object id
+        if ([strClassName isEqualToString:@"City"])
+        {
+            object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:currentObj.objectId];
+        }
+        else if ([strClassName isEqualToString:@"State"])
+        {
+            object[@"stateId"] = [PFObject objectWithoutDataWithClassName:@"State" objectId:currentObj.objectId];
+        }
+        //save data in
+        
         [arrLocationPref addObject:object];
     }
     
+//    for (int i=0; i< [arrSelectedLocationId count]; i++)
+//    {
+//        //save data in
+//        PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
+//        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
+//        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+//        [arrLocationPref addObject:object];
+//    }
+    
     [PFObject saveAllInBackground:arrLocationPref block:^(BOOL succeeded, NSError *error)
      {
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         [self back:nil];
          if(!error)
          {
              NSLog(@"save complete");
@@ -411,7 +477,7 @@
      }];
 }
 
-- (IBAction)goAction:(id)sender {
+- (IBAction)goAction:(id)sender{
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -498,13 +564,26 @@
 
 #pragma mark PopOver Controller Methods
 #pragma mark Location Preference
--(void)selectedLocation:(Location *)location
+-(void)selectedLocation:(Location *)location andUpdateFlag:(BOOL)flag
 {
     //[arrSelectedLocationId removeAllObjects];
     lblLocation.text = @"";
     if (location)
     {
-        [arrSelLocations addObject:location.city];
+        if(flag)
+        {
+            [arrLocationObj addObject:location];
+        }
+        PFObject *objLoc  = location.cityPointer;
+        if ([objLoc.parseClassName isEqualToString:@"City"])
+        {
+            [arrSelLocations addObject:location.city];
+        }
+        else
+        {
+            [arrSelLocations addObject:location.state];
+        }
+        
         [arrSelectedLocationId addObject:location.placeId];
     }
     NSString *strLocations = [arrSelLocations componentsJoinedByString:@","];
@@ -514,13 +593,15 @@
 
 - (void)showSelLocations : (NSArray *)arrLocation
 {
-    [self selectedLocation:nil];
+    [self selectedLocation:nil andUpdateFlag:NO];
 }
 
 //set Locations From Parse
 -(void)showSelectedLocation:(NSArray *)arrLocation
 {
+    //[arrLocationObj removeAllObjects];
     [arrSelectedLocationId removeAllObjects];
+    [arrSelLocations removeAllObjects];
     lblLocation.text = @"";
 //    if (location)
 //    {
@@ -532,16 +613,16 @@
 //    lblLocation.text = strLocations;
     
     //new code
-    NSMutableArray *arrLoc = [[NSMutableArray alloc] init];
+    //NSMutableArray *arrLoc = [[NSMutableArray alloc] init];
     for (Location *obj in arrLocation)
     {
-        [self selectedLocation:obj];
+        [self selectedLocation:obj andUpdateFlag:NO];
 //        NSString *strLoc = obj.city;
 //        [arrLoc addObject:strLoc];
 //        [arrSelLocations addObject:obj.city];
 //        [arrSelectedLocationId addObject:obj.placeId];
     }
-    
+    //[arrLocationObj removeAllObjects];
 //    NSString *strLoc = [arrLoc componentsJoinedByString:@","];
 //    [popoverController dismissPopoverAnimated:YES];
 //    lblLocation.text = strLoc;
@@ -596,7 +677,8 @@
     if ([segue.identifier isEqualToString:@"LocationIdentifier"])
     {
         //isSelectingCurrentLocation = YES;
-        PopOverListViewController *controller = segue.destinationViewController;
+        LocationPreferencePopoverVC *controller = segue.destinationViewController;
+        controller.arrSelectedData = arrSelectedLocationId;
         controller.contentSizeForViewInPopover = CGSizeMake(310, 400);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
@@ -612,7 +694,7 @@
     {
         //isSelectingCurrentLocation = YES;
         SelectedLocationVC *controller = segue.destinationViewController;
-        controller.arrTableData = arrSelLocations;
+        controller.arrTableData = arrLocationObj;
         controller.contentSizeForViewInPopover = CGSizeMake(310, 400);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender

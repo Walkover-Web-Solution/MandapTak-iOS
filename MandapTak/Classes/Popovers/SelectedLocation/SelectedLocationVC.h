@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Location.h"
+
 @protocol SelectedLocationVCDelegate
-- (void)showSelLocations: (NSArray *)arrLocation;
+//- (void)showSelLocations: (NSArray *)arrLocation;
+-(void)showSelectedLocation:(NSArray *)arrLocation;
 @end
 @interface SelectedLocationVC : UIViewController <UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) id <SelectedLocationVCDelegate> delegate;

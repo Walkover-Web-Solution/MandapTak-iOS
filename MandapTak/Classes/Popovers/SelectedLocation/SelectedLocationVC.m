@@ -42,7 +42,18 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
-    cell.textLabel.text = arrTableData[indexPath.row];
+    Location *obj = [[Location alloc ] init];
+    obj = arrTableData[indexPath.row];
+    PFObject *objName = obj.cityPointer;
+    if ([objName.parseClassName isEqualToString:@"City"])
+    {
+        cell.textLabel.text = obj.city;
+    }
+    else if ([objName.parseClassName isEqualToString:@"State"])
+    {
+        cell.textLabel.text = obj.state;
+    }
+    
     
     //set font family
     return cell;
@@ -85,6 +96,7 @@
 
 - (IBAction)saveAction:(id)sender
 {
-    [self.delegate showSelLocations:arrTableData];
+    //[self.delegate showSelLocations:arrTableData];
+    [self.delegate showSelectedLocation:arrTableData];
 }
 @end

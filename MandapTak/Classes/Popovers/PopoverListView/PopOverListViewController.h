@@ -15,5 +15,5 @@
 @end
 @interface PopOverListViewController : UIViewController
 @property (weak, nonatomic) id <PopOverListViewControllerDelegate> delegate;
-
+@property (strong, nonatomic) NSArray *arrSelectedData;
 @end
