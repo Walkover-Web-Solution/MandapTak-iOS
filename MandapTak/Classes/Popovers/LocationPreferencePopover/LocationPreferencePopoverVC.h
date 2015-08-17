@@ -11,9 +11,12 @@
 #import <Parse/Parse.h>
 
 @protocol LocationPreferencePopoverVCDelegate
--(void)selectedLocation:(Location*)location;
+-(void)selectedLocation:(Location*)location andUpdateFlag:(BOOL)flag;
 @end
-@interface LocationPreferencePopoverVC : UIViewController
+@interface LocationPreferencePopoverVC : UIViewController<UISearchBarDelegate>
+{
+    NSMutableArray *arrLocData;
+}
 @property (weak, nonatomic) id <LocationPreferencePopoverVCDelegate> delegate;
 @property (strong, nonatomic) NSArray *arrSelectedData;
 @end

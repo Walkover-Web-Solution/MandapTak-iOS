@@ -44,7 +44,16 @@
     }
     Location *obj = [[Location alloc ] init];
     obj = arrTableData[indexPath.row];
-    cell.textLabel.text = obj.city;
+    PFObject *objName = obj.cityPointer;
+    if ([objName.parseClassName isEqualToString:@"City"])
+    {
+        cell.textLabel.text = obj.city;
+    }
+    else if ([objName.parseClassName isEqualToString:@"State"])
+    {
+        cell.textLabel.text = obj.state;
+    }
+    
     
     //set font family
     return cell;

@@ -187,6 +187,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"LocationPreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"cityId"];
+    [query includeKey:@"stateId"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -198,17 +199,30 @@
                  for (PFObject *object in objects)
                  {
                      PFObject *location = [object valueForKey:@"cityId"];
+                     if (!location)
+                     {
+                         location = [object valueForKey:@"stateId"];
+                     }
                      NSLog(@"Location ID => %@", location.objectId);
                      NSLog(@"\n Location Name %@",[location valueForKey:@"name"]);
                      Location *obj = [[Location alloc] init];
                      obj.placeId = location.objectId;
-                     obj.city = [location valueForKey:@"name"];
+                     obj.cityPointer = location;
+                     
+                     if ([location.parseClassName isEqualToString:@"City"])
+                     {
+                        obj.city = [location valueForKey:@"name"];
+                     }
+                     else if ([location.parseClassName isEqualToString:@"State"])
+                     {
+                         obj.state = [location valueForKey:@"name"];
+                     }
+                     
                      //obj.degreeType = [degree valueForKey:@"name"];
                      [arrLocationObj addObject:obj];
                  }
                  //[self showSelDegree:arrTempLocation];
                  [self showSelectedLocation:arrLocationObj];
-                 
              }
              else
              {
@@ -415,14 +429,39 @@
 - (void) addNewLocationPreference
 {
     //insert fresh data
-    for (int i=0; i< [arrSelectedLocationId count]; i++)
+    
+    
+    for (int i=0; i< [arrLocationObj count]; i++)
     {
-        //save data in
+        Location *objLoc = arrLocationObj[i];
+        PFObject *currentObj = objLoc.cityPointer;
+        NSString *strClassName = currentObj.parseClassName;
+        
         PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
-        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
         object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+        
+        //check object class from object id
+        if ([strClassName isEqualToString:@"City"])
+        {
+            object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:currentObj.objectId];
+        }
+        else if ([strClassName isEqualToString:@"State"])
+        {
+            object[@"stateId"] = [PFObject objectWithoutDataWithClassName:@"State" objectId:currentObj.objectId];
+        }
+        //save data in
+        
         [arrLocationPref addObject:object];
     }
+    
+//    for (int i=0; i< [arrSelectedLocationId count]; i++)
+//    {
+//        //save data in
+//        PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
+//        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
+//        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+//        [arrLocationPref addObject:object];
+//    }
     
     [PFObject saveAllInBackground:arrLocationPref block:^(BOOL succeeded, NSError *error)
      {
@@ -438,7 +477,7 @@
      }];
 }
 
-- (IBAction)goAction:(id)sender {
+- (IBAction)goAction:(id)sender{
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -525,13 +564,16 @@
 
 #pragma mark PopOver Controller Methods
 #pragma mark Location Preference
--(void)selectedLocation:(Location *)location
+-(void)selectedLocation:(Location *)location andUpdateFlag:(BOOL)flag
 {
     //[arrSelectedLocationId removeAllObjects];
     lblLocation.text = @"";
     if (location)
     {
-        //[arrLocationObj addObject:location];
+        if(flag)
+        {
+            [arrLocationObj addObject:location];
+        }
         PFObject *objLoc  = location.cityPointer;
         if ([objLoc.parseClassName isEqualToString:@"City"])
         {
@@ -551,12 +593,13 @@
 
 - (void)showSelLocations : (NSArray *)arrLocation
 {
-    [self selectedLocation:nil];
+    [self selectedLocation:nil andUpdateFlag:NO];
 }
 
 //set Locations From Parse
 -(void)showSelectedLocation:(NSArray *)arrLocation
 {
+    //[arrLocationObj removeAllObjects];
     [arrSelectedLocationId removeAllObjects];
     [arrSelLocations removeAllObjects];
     lblLocation.text = @"";
@@ -573,13 +616,13 @@
     //NSMutableArray *arrLoc = [[NSMutableArray alloc] init];
     for (Location *obj in arrLocation)
     {
-        [self selectedLocation:obj];
+        [self selectedLocation:obj andUpdateFlag:NO];
 //        NSString *strLoc = obj.city;
 //        [arrLoc addObject:strLoc];
 //        [arrSelLocations addObject:obj.city];
 //        [arrSelectedLocationId addObject:obj.placeId];
     }
-    
+    //[arrLocationObj removeAllObjects];
 //    NSString *strLoc = [arrLoc componentsJoinedByString:@","];
 //    [popoverController dismissPopoverAnimated:YES];
 //    lblLocation.text = strLoc;

@@ -49,7 +49,7 @@
     IBOutlet UILabel *lblDegree;
     
     //flag values
-    BOOL heightFlag,insertFlag;
+    BOOL heightFlag,insertFlag,addFlag;
     
     //work status
     int roundValue;

@@ -23,6 +23,8 @@
     [super viewDidLoad];
     
     self.arrTableData = [NSArray array];
+    arrLocData = [[NSMutableArray alloc] init];
+    self.searchBar.delegate = self;
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -39,14 +41,13 @@
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [arrLocData removeAllObjects];
+    [self.tableView reloadData];
+    
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    
     [self getCityList:searchBar.text];
-    [self getStateList:searchBar.text];
-    
-    
     
     [searchBar resignFirstResponder];
     // Do the search...
@@ -63,7 +64,7 @@
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          
-         NSMutableArray *arrLocData = [NSMutableArray array];
+         //NSMutableArray *arrLocData = [NSMutableArray array];
          for(PFObject *obj in comments){
              Location *location = [[Location alloc]init];
              NSLog(@"cityName %@",[obj valueForKey:@"name"]);
@@ -82,7 +83,9 @@
              location.country = [subParent valueForKey:@"name"];
              location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
              [arrLocData addObject:location];
+             
          }
+         [self getStateList:searchText];
          self.arrTableData = arrLocData;
          //[self.tableView reloadData];
          
@@ -101,7 +104,7 @@
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          
-         NSMutableArray *arrLocData = [NSMutableArray array];
+         //NSMutableArray *arrLocData = [NSMutableArray array];
          for(PFObject *obj in stateObjects){
              Location *location = [[Location alloc]init];
              NSLog(@"2 state name %@",[obj valueForKey:@"name"]);
@@ -163,7 +166,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate selectedLocation:self.arrTableData[indexPath.row]];
+    [self.delegate selectedLocation:self.arrTableData[indexPath.row] andUpdateFlag:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 
 /*
