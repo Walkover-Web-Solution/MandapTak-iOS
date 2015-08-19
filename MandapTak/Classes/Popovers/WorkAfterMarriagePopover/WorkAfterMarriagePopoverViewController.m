@@ -53,6 +53,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//{int type;
+//    if([self.arrTableData isEqual:@"No"])
+//        type=0;
+//    else if ([self.arrTableData isEqual:@"Yes"])
+//        type=1;
+//    else if ([self.arrTableData isEqual:@"May be"])
+//        type = 2;
+
     [self.delegate selectedMarraigeType:self.arrTableData[indexPath.row]];
 }
 

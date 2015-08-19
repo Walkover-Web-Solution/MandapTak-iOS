@@ -26,6 +26,7 @@
 		897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897C23A91B6B562C00FC32E9 /* Images.xcassets */; };
 		897C23AD1B6B562C00FC32E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897C23AB1B6B562C00FC32E9 /* LaunchScreen.xib */; };
 		897C23B91B6B562C00FC32E9 /* MandapTakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C23B81B6B562C00FC32E9 /* MandapTakTests.m */; };
+		897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */; };
 		897EF9651B708F2E00F88CEC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897EF9641B708F2E00F88CEC /* Profile.storyboard */; };
 		897EF96A1B708FE000F88CEC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897EF9691B708FE000F88CEC /* ProfileViewController.m */; };
 		897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897EF96C1B70901400F88CEC /* EditProfileViewController.m */; };
@@ -34,6 +35,7 @@
 		8981464C1B7C9F0000DF30AB /* Religion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8981464B1B7C9F0000DF30AB /* Religion.m */; };
 		898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8981464F1B7CB5F600DF30AB /* CastePopoverViewController.m */; };
 		898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146531B7CB6AE00DF30AB /* GotraPopoverViewController.m */; };
+		898330E81B84AACA00847B31 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 898330E71B84AACA00847B31 /* Info.plist */; };
 		899170461B70B5D0000CF872 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170441B70B5D0000CF872 /* next.png */; };
 		899170471B70B5D0000CF872 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170451B70B5D0000CF872 /* next@2x.png */; };
 		8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899170591B70D458000CF872 /* WYPopoverController.m */; };
@@ -134,7 +136,6 @@
 		895CD77F1B81E37D00816FDE /* IndustryPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndustryPopoverViewController.h; sourceTree = "<group>"; };
 		895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryPopoverViewController.m; sourceTree = "<group>"; };
 		897C23961B6B562C00FC32E9 /* MandapTak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MandapTak.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		897C239A1B6B562C00FC32E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897C239B1B6B562C00FC32E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		897C23A11B6B562C00FC32E9 /* MandapTak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MandapTak.xcdatamodel; sourceTree = "<group>"; };
 		897C23A91B6B562C00FC32E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -142,6 +143,8 @@
 		897C23B21B6B562C00FC32E9 /* MandapTakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MandapTakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		897C23B71B6B562C00FC32E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897C23B81B6B562C00FC32E9 /* MandapTakTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MandapTakTests.m; sourceTree = "<group>"; };
+		897D038B1B83566C008E0274 /* SpecialisationPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialisationPopoverViewController.h; sourceTree = "<group>"; };
+		897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialisationPopoverViewController.m; sourceTree = "<group>"; };
 		897EF9641B708F2E00F88CEC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		897EF9681B708FE000F88CEC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		897EF9691B708FE000F88CEC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		8981464F1B7CB5F600DF30AB /* CastePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastePopoverViewController.m; sourceTree = "<group>"; };
 		898146521B7CB6AE00DF30AB /* GotraPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotraPopoverViewController.h; sourceTree = "<group>"; };
 		898146531B7CB6AE00DF30AB /* GotraPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotraPopoverViewController.m; sourceTree = "<group>"; };
+		898330E71B84AACA00847B31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		899170441B70B5D0000CF872 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		899170451B70B5D0000CF872 /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
 		899170581B70D458000CF872 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
@@ -392,7 +396,7 @@
 		897C23991B6B562C00FC32E9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				897C239A1B6B562C00FC32E9 /* Info.plist */,
+				898330E71B84AACA00847B31 /* Info.plist */,
 				897C239B1B6B562C00FC32E9 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -413,6 +417,15 @@
 				897C23B71B6B562C00FC32E9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		897D038A1B835654008E0274 /* SpecialisationPopover */ = {
+			isa = PBXGroup;
+			children = (
+				897D038B1B83566C008E0274 /* SpecialisationPopoverViewController.h */,
+				897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */,
+			);
+			path = SpecialisationPopover;
 			sourceTree = "<group>";
 		};
 		897EF9661B708FE000F88CEC /* ProfileViewController */ = {
@@ -504,6 +517,7 @@
 		899C53681B732B6500C24DA8 /* Popovers */ = {
 			isa = PBXGroup;
 			children = (
+				897D038A1B835654008E0274 /* SpecialisationPopover */,
 				895CD77B1B81D93E00816FDE /* IndustryPopover */,
 				895CD7791B81D92E00816FDE /* WorkAfterMarriagePopover */,
 				895CD7721B81C41800816FDE /* DegreeListPopover */,
@@ -865,6 +879,7 @@
 				89D9F7841B6B5DB4004CBE3D /* call_icon.png in Resources */,
 				89D9F78F1B6B5DB4004CBE3D /* setting@2x.png in Resources */,
 				89D9F77D1B6B5DB4004CBE3D /* menu_icon.png in Resources */,
+				898330E81B84AACA00847B31 /* Info.plist in Resources */,
 				89D9F77E1B6B5DB4004CBE3D /* Profile-3.png in Resources */,
 				89D9F7861B6B5DB4004CBE3D /* Kundli_icon.png in Resources */,
 				89D9F7801B6B5DB4004CBE3D /* Profile_2.png in Resources */,
@@ -932,6 +947,7 @@
 				89D9F73B1B6B57A8004CBE3D /* SWRevealViewController.m in Sources */,
 				8991706A1B70E0BF000CF872 /* FPPopoverView.m in Sources */,
 				899170691B70E0BF000CF872 /* FPPopoverController.m in Sources */,
+				897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */,
 				89D9F7331B6B579E004CBE3D /* SideBarViewController.m in Sources */,
 				89E8D93C1B78CFF1008A8E2F /* DetailProfileViewController.m in Sources */,
 				8991706B1B70E0BF000CF872 /* FPTouchView.m in Sources */,

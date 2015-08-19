@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <Parse/Parse.h>
 @interface Education : NSObject
-@property (strong, nonatomic) NSString *degree;
-@property (strong, nonatomic) NSString *specialisation;
+@property (strong, nonatomic) PFObject *degree;
+@property (strong, nonatomic) PFObject *specialisation;
 @end

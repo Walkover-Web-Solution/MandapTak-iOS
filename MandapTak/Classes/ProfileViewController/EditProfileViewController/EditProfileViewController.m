@@ -77,6 +77,10 @@ NSString *selectedHeight;
     [query includeKey:@"casteId.Parent.Parent"];
     [query includeKey:@"religionId.Pare nt.Parent"];
     [query includeKey:@"gotraId.Parent.Parent"];
+    [query includeKey:@"education1.degreeId"];
+    [query includeKey:@"education2.degreeId"];
+    [query includeKey:@"education3.degreeId"];
+    [query includeKey:@"industryId"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -232,8 +236,70 @@ NSString *selectedHeight;
         }
     }];
     
+}
 
+-(void)updatedPfObjectForThirdTab:(PFObject *)updatedUserProfile{
+    
+    if([updatedUserProfile valueForKey:@"industryId"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"industryId"]forKey:@"industryId"];
+    if([updatedUserProfile valueForKey:@"package"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"package"]forKey:@"package"];
+    
+    if([updatedUserProfile valueForKey:@"designation"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"designation"]forKey:@"designation"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"designation"];
+        
+    }
+    
+    if([updatedUserProfile valueForKey:@"placeOfWork"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"placeOfWork"]forKey:@"placeOfWork"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"company"];
+        
+    }
+    if([updatedUserProfile valueForKey:@"specialization"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"specialization"]forKey:@"specialization"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"specialization"];
+        
+    }
+    if([updatedUserProfile valueForKey:@"workAfterMarriage"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"workAfterMarriage"]forKey:@"workAfterMarriage"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"workAfterMarriage"];
+        
+    }
+    if([updatedUserProfile valueForKey:@"education1"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"education1"]forKey:@"education1"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"education1"];
+        
+    }
+    if([updatedUserProfile valueForKey:@"education2"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"education2"]forKey:@"education2"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"education2"];
+        
+    }
+    if([updatedUserProfile valueForKey:@"education3"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"education3"]forKey:@"education3"];
+    else{
+        [currentProfile setObject:[NSNull null] forKey:@"education3"];
+        
+    }
 
+    [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // succesful
+            
+        } else {
+            //Something bad has ocurred
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
+        }
+    }];
 
 }
 -(void)selectedHeight:(NSString *)height{
@@ -277,8 +343,8 @@ NSString *selectedHeight;
             self.tab1View.hidden = NO;
             vc1.delegate = self;
             vc1.currentProfile = currentProfile;
-            [self.tab1View addSubview:vc1.view];
             [self addChildViewController:vc1];
+            [self.tab1View addSubview:vc1.view];
             self.btnTab1.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
         case 2:

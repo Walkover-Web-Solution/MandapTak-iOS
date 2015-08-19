@@ -9,8 +9,11 @@
 #import "DegreePopoverForProfileViewController.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
-@interface DegreePopoverForProfileViewController ()
-@property (strong, nonatomic) NSArray *arrTableData;
+#import "Education.h"
+@interface DegreePopoverForProfileViewController (){
+    BOOL isDegreeSelected;
+}
+@property (strong, nonatomic) NSMutableArray *arrTableData;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -20,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
    // self.arrTableData = [NSArray arrayWithObjects:@"B.E",@"B.Com",@"BCA",@"MCA",@"LLB",@"BBA", nil];
     // Do any additional setup after loading the view.
 }
@@ -40,7 +44,15 @@
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        self.arrTableData = comments;
+        self.arrTableData = comments.mutableCopy;
+        for(Education *education in self.arrEducation){
+            for(PFObject *deg in self.arrTableData){
+                if([[deg valueForKey:@"objectId"] isEqual:[education.degree valueForKey:@"objectId"]]){
+                    [self.arrTableData removeObject:deg];
+                    break;
+                }
+            }
+        }
         [self.tableView reloadData];
         
     }];
@@ -76,10 +88,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    PFObject *obj = self.arrTableData[indexPath.row];
-
-    [self.delegate selectedDegree:[obj valueForKey:@"name"] forTag:self.btnTag];
-    
+{    
+    [self.delegate selectedDegree:self.arrTableData[indexPath.row] forTag:self.btnTag];
     
 }
 

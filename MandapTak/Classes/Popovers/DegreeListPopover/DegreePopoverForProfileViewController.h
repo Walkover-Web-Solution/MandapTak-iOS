@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 @protocol DegreePopoverForProfileViewControllerDelegate
--(void)selectedDegree:(NSString*)degree forTag:(NSInteger)tag;
+-(void)selectedDegree:(PFObject*)degree forTag:(NSInteger)tag;
 @end
 
 @interface DegreePopoverForProfileViewController : UIViewController
 @property (assign, nonatomic) NSInteger btnTag;
 @property (weak, nonatomic) id <DegreePopoverForProfileViewControllerDelegate> delegate;
-
+@property (strong, nonatomic) NSArray *arrEducation;
 @end

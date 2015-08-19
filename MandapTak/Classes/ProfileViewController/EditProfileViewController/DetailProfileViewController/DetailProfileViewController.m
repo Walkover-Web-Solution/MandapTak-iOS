@@ -107,6 +107,7 @@
         [btnReligion setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

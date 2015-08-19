@@ -1,35 +1,34 @@
 //
-//  IndustryPopoverViewController.m
+//  SpecialisationPopoverViewController.m
 //  MandapTak
 //
-//  Created by Hussain Chhatriwala on 17/08/15.
+//  Created by Hussain Chhatriwala on 18/08/15.
 //  Copyright (c) 2015 Walkover. All rights reserved.
 //
 
-#import "IndustryPopoverViewController.h"
-#import <Parse/Parse.h>
+#import "SpecialisationPopoverViewController.h"
 #import "MBProgressHUD.h"
-@interface IndustryPopoverViewController ()
+
+@interface SpecialisationPopoverViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *arrTableData;
 
 @end
 
-@implementation IndustryPopoverViewController
+@implementation SpecialisationPopoverViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
-    //  [query whereKey:@"casteId" equalTo:self.casteObj];
-   // [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
+    PFQuery *query = [PFQuery queryWithClassName:@"Specialization"];
+    [query whereKey:@"degreeId" equalTo:self.selectedDegree];
+    //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.arrTableData = comments;
         [self.tableView reloadData];
-        
     }];
 
     // Do any additional setup after loading the view.
@@ -46,14 +45,13 @@
 {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
-    //  [query whereKey:@"casteId" equalTo:self.casteObj];
+    PFQuery *query = [PFQuery queryWithClassName:@"Specialization"];
+    [query whereKey:@"degreeId" equalTo:self.selectedDegree];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.arrTableData = comments;
         [self.tableView reloadData];
-        
     }];
     
     [searchBar resignFirstResponder];
@@ -88,7 +86,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate selectedIndustry:self.arrTableData[indexPath.row]];
+    [self.delegate selectedSpecialization:self.arrTableData[indexPath.row] forTag:self.btnTag];
     
     
 }
@@ -108,6 +106,7 @@
 -(void)loadMore{
     NSLog(@"Load More");
 }
+
 /*
 #pragma mark - Navigation
 

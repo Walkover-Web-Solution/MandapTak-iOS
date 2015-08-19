@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 @protocol IndustryPopoverViewControllerDelegate
--(void)selectedIndustry:(NSString*)industry ;
+-(void)selectedIndustry:(PFObject*)industry ;
 @end
 @interface IndustryPopoverViewController : UIViewController
 @property (weak, nonatomic) id <IndustryPopoverViewControllerDelegate> delegate;
