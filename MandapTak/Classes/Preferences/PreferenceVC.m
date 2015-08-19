@@ -28,42 +28,67 @@
     arrSelectedLocationId = [[NSMutableArray alloc]init];
     arrLocationPref = [[NSMutableArray alloc]init];
     arrLocationObj = [[NSMutableArray alloc]init];
+    arrDegreeObject = [[NSMutableArray alloc]init];
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
     //get current user preferences
     [self getUserPreference];
     
-    lblLocation.layer.borderWidth = 1.0f;
-    lblDegree.layer.borderWidth = 1.0f;
-    btnMinHeight.layer.borderWidth = 1.0f;
-    btnMaxHeight.layer.borderWidth = 1.0f;
+//    lblLocation.layer.borderWidth = 1.0f;
+//    lblDegree.layer.borderWidth = 1.0f;
+//    btnMinHeight.layer.borderWidth = 1.0f;
+//    btnMaxHeight.layer.borderWidth = 1.0f;
     //height
     heightFlag = false;
     
     btnMinHeight.layer.cornerRadius = 5;
-    btnMinHeight.layer.borderWidth = 1.0;
+    btnMinHeight.layer.borderWidth = 0.5;
     btnMinHeight.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
     btnMinHeight.layer.shadowColor = [UIColor blackColor].CGColor;
     btnMinHeight.layer.shadowRadius = 1;
     
     btnMaxHeight.layer.cornerRadius = 5;
-    btnMaxHeight.layer.borderWidth = 1.0;
+    btnMaxHeight.layer.borderWidth = 0.5;
     btnMaxHeight.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
     btnMaxHeight.layer.shadowColor = [UIColor blackColor].CGColor;
     btnMaxHeight.layer.shadowRadius = 1;
     
     lblLocation.layer.cornerRadius = 5;
-    lblLocation.layer.borderWidth = 1.0;
+    lblLocation.layer.borderWidth = 0.5;
     lblLocation.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
     lblLocation.layer.shadowColor = [UIColor blackColor].CGColor;
     lblLocation.layer.shadowRadius = 1;
     
     lblDegree.layer.cornerRadius = 5;
-    lblDegree.layer.borderWidth = 1.0;
+    lblDegree.layer.borderWidth = 0.5;
     lblDegree.layer.borderColor = [UIColor colorWithRed:167.0/255.0 green:140.0/255.0 blue:98.0/255.0 alpha:0.25].CGColor;
     lblDegree.layer.shadowColor = [UIColor blackColor].CGColor;
     lblDegree.layer.shadowRadius = 1;
+    
+    //set toolbar for numberpad
+    UIToolbar *numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           nil];
+    [numberToolbar sizeToFit];
+    txtIncome.inputAccessoryView = numberToolbar;
+    txtMaxAge.inputAccessoryView = numberToolbar;
+    txtMinAge.inputAccessoryView = numberToolbar;
+    txtminBudget.inputAccessoryView = numberToolbar;
+    txtMaxBudget.inputAccessoryView = numberToolbar;
+    
+}
+
+-(void)cancelNumberPad{
+    [txtMinAge resignFirstResponder];
+    [txtMaxAge resignFirstResponder];
+    [txtIncome resignFirstResponder];
+    [txtminBudget resignFirstResponder];
+    [txtMaxBudget resignFirstResponder];
+    //  numberTextField.text = @"";
 }
 
 -(void) getUserPreference
@@ -141,6 +166,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"degreeId"];
+    [query includeKey:@"degreeTypeId"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -151,14 +177,54 @@
                  NSMutableArray *arrTempDegree = [[NSMutableArray alloc] init];
                  for (PFObject *object in objects)
                  {
+                     
                      PFObject *degree = [object valueForKey:@"degreeId"];
+                      if (!degree)
+                      {
+                      degree = [object valueForKey:@"degreeTypeId"];
+                      }
                      NSLog(@"Degree ID => %@", degree.objectId);
                      NSLog(@"\n Degree Name %@",[degree valueForKey:@"name"]);
                      Degree *obj = [[Degree alloc] init];
-                     obj.degreeId = degree.objectId;
-                     obj.degreeName = [degree valueForKey:@"name"];
-                     //obj.degreeType = [degree valueForKey:@"name"];
+                     obj.objectId = degree.objectId;
+                     obj.objectPointer = degree;
+                     
+                     if ([degree.parseClassName isEqualToString:@"Degree"])
+                     {
+                         obj.objectName = [degree valueForKey:@"name"];
+                     }
+                     else if ([degree.parseClassName isEqualToString:@"DegreeType"])
+                     {
+                         obj.objectType = [degree valueForKey:@"typeOfDegree"];
+                     }
+                     
                      [arrTempDegree addObject:obj];
+                     
+                     /*
+                     //new code
+                     PFObject *degree = [object valueForKey:@"degreeId"];
+                     if (!degree)
+                     {
+                         degree = [object valueForKey:@"degreeTypeId"];
+                     }
+                     NSLog(@"Location ID => %@", location.objectId);
+                     NSLog(@"\n Location Name %@",[location valueForKey:@"name"]);
+                     Location *obj = [[Location alloc] init];
+                     obj.placeId = location.objectId;
+                     obj.cityPointer = location;
+                     
+                     if ([location.parseClassName isEqualToString:@"City"])
+                     {
+                         obj.city = [location valueForKey:@"name"];
+                     }
+                     else if ([location.parseClassName isEqualToString:@"State"])
+                     {
+                         obj.state = [location valueForKey:@"name"];
+                     }
+                     
+                     //obj.degreeType = [degree valueForKey:@"name"];
+                     [arrLocationObj addObject:obj];
+                      */
                  }
                  [self showSelDegree:arrTempDegree];
              }
@@ -274,6 +340,12 @@
 - (IBAction)setPreferences:(id)sender
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSString *strMinHeight = [[btnMinHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
+    minHeight = [[self extractNumberFromText:strMinHeight] intValue];
+    NSString *strMaxHeight = [[btnMaxHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
+    maxHeight = [[self extractNumberFromText:strMaxHeight] intValue];
+    
     if (insertFlag)
     {
         //insert preferences
@@ -373,6 +445,7 @@
 
 - (void) addNewDegreePreference
 {
+    /*
     //insert fresh data
     for (int i=0; i< [arrSelectedDegreeId count]; i++)
     {
@@ -382,6 +455,31 @@
         object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
         [arrDegreePref addObject:object];
     }
+    */
+    
+    for (int i=0; i< [arrDegreeObject count]; i++)
+    {
+        //save data in
+        PFObject *object = [PFObject objectWithClassName:@"DegreePreferences"];
+        //object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:arrSelectedDegreeId[i]];
+        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+        Degree *objDegree = arrDegreeObject[i];
+        PFObject *currentObj = objDegree.objectPointer;
+        NSString *strClassName = currentObj.parseClassName;
+        
+        //check object class from object id
+        if ([strClassName isEqualToString:@"Degree"])
+        {
+            object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:currentObj.objectId];
+        }
+        else if ([strClassName isEqualToString:@"DegreeType"])
+        {
+            object[@"degreeTypeId"] = [PFObject objectWithoutDataWithClassName:@"DegreeType" objectId:currentObj.objectId];
+        }
+        [arrDegreePref addObject:object];
+    }
+    
+    
     
     [PFObject saveAllInBackground:arrDegreePref block:^(BOOL succeeded, NSError *error)
      {
@@ -632,14 +730,26 @@
 -(void)showSelDegree:(NSArray *)arrDegree
 {
     [arrSelectedDegreeId removeAllObjects];
+    [arrDegreeObject removeAllObjects];
     arrSelDegree = arrDegree;
     lblDegree.text = @"";
     NSMutableArray *arrDeg = [[NSMutableArray alloc] init];
     for (Degree *obj in arrDegree)
     {
-        NSString *strDeg = obj.degreeName;
+        NSString *strDeg;
+        PFObject *degreeObject = obj.objectPointer;
+        if ([degreeObject.parseClassName isEqualToString:@"Degree"])
+        {
+            strDeg = obj.objectName;
+        }
+        else if ([degreeObject.parseClassName isEqualToString:@"DegreeType"])
+        {
+            strDeg = obj.objectType;
+        }
+        
         [arrDeg addObject:strDeg];
-        [arrSelectedDegreeId addObject:obj.degreeId];
+        [arrSelectedDegreeId addObject:obj.objectId];
+        [arrDegreeObject addObject:obj];
     }
     
     NSString *strDegree = [arrDeg componentsJoinedByString:@","];
@@ -728,8 +838,7 @@
     {
         heightFlag = false;
         HeightPopoverViewController *controller = segue.destinationViewController;
-        //controller.arrSelDegree = arrSelDegree;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
+        controller.contentSizeForViewInPopover = CGSizeMake(300, 190);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -745,8 +854,7 @@
     {
         heightFlag = true;
         HeightPopoverViewController *controller = segue.destinationViewController;
-        //controller.arrSelDegree = arrSelDegree;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
+        controller.contentSizeForViewInPopover = CGSizeMake(300, 190);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny

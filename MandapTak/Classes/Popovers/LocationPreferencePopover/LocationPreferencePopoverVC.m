@@ -65,7 +65,8 @@
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          
          //NSMutableArray *arrLocData = [NSMutableArray array];
-         for(PFObject *obj in comments){
+         for(PFObject *obj in comments)
+         {
              Location *location = [[Location alloc]init];
              NSLog(@"cityName %@",[obj valueForKey:@"name"]);
              PFObject *parent = [obj valueForKey:@"Parent"];

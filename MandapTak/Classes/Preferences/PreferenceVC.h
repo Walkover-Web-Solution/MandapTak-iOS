@@ -38,7 +38,7 @@
     NSMutableArray *arrAutoComplete;
      
      */
-    NSMutableArray *arrSelLocations,*arrSelDegree,*arrSelectedDegreeId,*arrDegreePref,*arrSelectedLocationId,*arrLocationPref,*arrLocationObj;
+    NSMutableArray *arrSelLocations,*arrSelDegree,*arrSelectedDegreeId,*arrDegreePref,*arrSelectedLocationId,*arrLocationPref,*arrLocationObj,*arrDegreeObject;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UISlider *sliderWork;
     IBOutlet UILabel *lblWorkStatus;

@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Degree.h"
 #import <Parse/Parse.h>
+#import "MBProgressHUD.h"
 
 @protocol DegreeListVCDelegate
 - (void)showSelDegree: (NSArray *)arrSelDegree;
 @end
-@interface DegreeListVC : UIViewController<UISearchBarDelegate,UITextFieldDelegate>
+@interface DegreeListVC : UIViewController<UISearchBarDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITableView *tableViewDegree;
-    NSMutableArray *arrDegreeId,*arrDegreeName;
+    NSMutableArray *arrDegreeId,*arrDegreeName,*arrDegreeTypeId,*arrDegreeTypeName;
     NSMutableArray *arrTableData,*arrSelDegreeId,*arrNewSelection;
     Degree *globalDegreeObj;
 }

@@ -88,7 +88,6 @@
         
         UIStoryboard *sbPref = [UIStoryboard storyboardWithName:@"Preference" bundle:nil];
         PreferenceVC *prefVC = [sbPref instantiateViewControllerWithIdentifier:@"PreferenceVC"];
-        //[[NSUserDefaults standardUserDefaults]setValue:@"summary" forKey:@"firstPageType"];
         
         //vc.globalCompanyId = [self.companies.companyId intValue];
         
@@ -96,7 +95,7 @@
         self.navigationController.navigationBarHidden = NO;
         //navController.navigationBarHidden =YES;
         [self presentViewController:navController animated:YES completion:nil];
-        
+        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
     }
 }
 

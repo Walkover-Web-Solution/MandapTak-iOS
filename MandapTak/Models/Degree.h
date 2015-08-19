@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface Degree : NSObject
 
-@property (strong, nonatomic) NSString *degreeId;
-@property (strong, nonatomic) NSString *degreeName;
-@property (strong, nonatomic) NSString *degreeType;
+@property (strong, nonatomic) NSString *objectId;
+@property (strong, nonatomic) NSString *objectName;
+@property (strong, nonatomic) NSString *objectType;
+@property (strong, nonatomic) PFObject *objectPointer;
 
 @end
