@@ -19,6 +19,7 @@
 #import "SpecialisationPopoverViewController.h"
 @interface ProfileWorkAndExperienceViewController ()<WYPopoverControllerDelegate,UITableViewDelegate,DegreePopoverForProfileViewControllerDelegate,UITextFieldDelegate,WorkAfterMarriagePopoverViewControllerDelegate,IndustryPopoverViewControllerDelegate,SpecialisationPopoverViewControllerDelegate>{
     WYPopoverController *settingsPopoverController;
+    
     NSInteger numberOfRowsInEducationSection;
     NSMutableArray *arrEducationData;
     NSString *selectedDesignation;
@@ -46,19 +47,19 @@
     numberOfRowsInEducationSection = 1;
 
     if(IS_IPHONE_5){
-        self.heightConstraint.constant = 400;
+        self.heightConstraint.constant = 369;
 
     }
     else if(IS_IPHONE_6){
-        self.heightConstraint.constant = 499;
+        self.heightConstraint.constant = 468;
 
     }
     else if(IS_IPHONE_6PLUS){
-        self.heightConstraint.constant = 568;
+        self.heightConstraint.constant = 537;
 
     }
     else if(IS_IPHONE){
-        self.heightConstraint.constant = 312;
+        self.heightConstraint.constant = 281;
         
     }
     if(self.currentProfile ==nil){
@@ -707,9 +708,9 @@
     if(selectedIncome)
          self.currentProfile[@"package"] = @([selectedIncome integerValue]);
      if(selectedDesignation)
-        [self.currentProfile setObject:selectedDesignation forKey:@"placeOfWork"];
+        [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
      if(selectedCompany)
-        [self.currentProfile setObject:selectedCompany forKey:@"company"];
+        [self.currentProfile setObject:selectedCompany forKey:@"placeOfWork"];
         for(Education *education in arrEducationData){
         if(education.specialisation!=nil){
             

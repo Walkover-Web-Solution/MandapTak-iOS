@@ -19,8 +19,8 @@
 #import "DetailProfileViewController.h"
 #import "ProfileWorkAndExperienceViewController.h"
 #import <Parse/Parse.h>
-
-@interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate>
+#import "UploadPhotosProfileViewController.h"
+@interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UploadPhotosProfileViewControllerDelegate>
 {
     __weak IBOutlet UIButton *btnHeight;
     WYPopoverController* popoverController;
@@ -38,6 +38,7 @@ NSString *selectedHeight;
     BasicProfileViewController *vc1;
     DetailProfileViewController *vc2;
     ProfileWorkAndExperienceViewController *vc3;
+    UploadPhotosProfileViewController *vc4;
     BOOL isSelectingCurrentLocation;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnTab1;
@@ -63,6 +64,7 @@ NSString *selectedHeight;
     vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
     vc2 = [sb2 instantiateViewControllerWithIdentifier:@"DetailProfileViewController"];
     vc3 = [sb2 instantiateViewControllerWithIdentifier:@"ProfileWorkAndExperienceViewController"];
+    vc4 = [sb2 instantiateViewControllerWithIdentifier:@"UploadPhotosProfileViewController"];
 
     // [self hideAllView];
     UIColor* whyerColor = [UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1];
@@ -331,7 +333,11 @@ NSString *selectedHeight;
         [vc1.view removeFromSuperview];
         
     }
-    
+    if([self.tab4View.subviews containsObject:vc4.view]) {
+        [vc4 removeFromParentViewController];
+        [vc4.view removeFromSuperview];
+        
+    }
 }
 
 #pragma mark SwitchTCurrentTab
@@ -357,7 +363,6 @@ NSString *selectedHeight;
             break;
         case 3:
             self.tab3View.hidden = NO;
-            self.tab3View.hidden = NO;
             vc3.delegate = self;
             vc3.currentProfile = currentProfile;
             [self.tab3View addSubview:vc3.view];
@@ -366,6 +371,10 @@ NSString *selectedHeight;
             break;
         case 4:
             self.tab4View.hidden = NO;
+            vc4.delegate = self;
+            vc4.currentProfile = currentProfile;
+            [self.tab4View addSubview:vc4.view];
+            [self addChildViewController:vc4];
             self.btnTab4.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
 

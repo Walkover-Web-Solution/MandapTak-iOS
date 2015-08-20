@@ -101,6 +101,7 @@
 		89D9F78F1B6B5DB4004CBE3D /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D9F77B1B6B5DB4004CBE3D /* setting@2x.png */; };
 		89D9F7901B6B5DE1004CBE3D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D9F7601B6B5D78004CBE3D /* Bolts.framework */; };
 		89D9F7911B6B5DE1004CBE3D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D9F75E1B6B5C7B004CBE3D /* Parse.framework */; };
+		89E0FA101B85916C000BD65A /* UploadPhotosProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E0FA0F1B85916C000BD65A /* UploadPhotosProfileViewController.m */; };
 		89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E8D9381B78AF3F008A8E2F /* BasicProfileViewController.m */; };
 		89E8D93C1B78CFF1008A8E2F /* DetailProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E8D93B1B78CFF1008A8E2F /* DetailProfileViewController.m */; };
 /* End PBXBuildFile section */
@@ -255,6 +256,8 @@
 		89D9F7791B6B5DB4004CBE3D /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
 		89D9F77A1B6B5DB4004CBE3D /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		89D9F77B1B6B5DB4004CBE3D /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		89E0FA0E1B85916C000BD65A /* UploadPhotosProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotosProfileViewController.h; sourceTree = "<group>"; };
+		89E0FA0F1B85916C000BD65A /* UploadPhotosProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotosProfileViewController.m; sourceTree = "<group>"; };
 		89E8D9371B78AF3F008A8E2F /* BasicProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicProfileViewController.h; sourceTree = "<group>"; };
 		89E8D9381B78AF3F008A8E2F /* BasicProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicProfileViewController.m; sourceTree = "<group>"; };
 		89E8D93A1B78CFF1008A8E2F /* DetailProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailProfileViewController.h; sourceTree = "<group>"; };
@@ -469,6 +472,7 @@
 		897EF9671B708FE000F88CEC /* EditProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
+				89E0FA0D1B85914E000BD65A /* UploadDetailsProfileViewController */,
 				897EF96B1B70901400F88CEC /* EditProfileViewController.h */,
 				897EF96C1B70901400F88CEC /* EditProfileViewController.m */,
 				8954803E1B7DCF9900AB37BF /* ProfileWorkAndExperienceViewController  */,
@@ -802,6 +806,15 @@
 			path = Sidebar;
 			sourceTree = "<group>";
 		};
+		89E0FA0D1B85914E000BD65A /* UploadDetailsProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89E0FA0E1B85916C000BD65A /* UploadPhotosProfileViewController.h */,
+				89E0FA0F1B85916C000BD65A /* UploadPhotosProfileViewController.m */,
+			);
+			path = UploadDetailsProfileViewController;
+			sourceTree = "<group>";
+		};
 		89E8D9351B78AF29008A8E2F /* BasicProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,6 +967,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89E0FA101B85916C000BD65A /* UploadPhotosProfileViewController.m in Sources */,
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				899C537F1B73447B00C24DA8 /* Location.m in Sources */,
