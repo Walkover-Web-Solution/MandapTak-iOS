@@ -99,26 +99,44 @@
         if(currentIndex!=0)
             currentIndex--;
     }
-    if (swipe.direction == UISwipeGestureRecognizerDirectionUp) {
-        NSLog(@"Swipe Up");
-        
-    }
     if (swipe.direction == UISwipeGestureRecognizerDirectionUp)
     {
+        /*
+        NSLog(@"Swipe Up");
+        UIStoryboard *sbProfile = [UIStoryboard storyboardWithName:@"CandidateProfile" bundle:nil];
+        CandidateProfileDetailScreenVC *detailVC = [sbProfile instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
         
+        //vc.globalCompanyId = [self.companies.companyId intValue];
+        
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:detailVC];
+        self.navigationController.navigationBarHidden = NO;
+        //navController.navigationBarHidden =YES;
+        [self presentViewController:navController animated:YES completion:nil];
+         */
+        
+        //[self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+        //[self prepareForSegue:@"swipeUpIdentifier" sender:nil];
+        [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     }
 
     [self.imgProfileView setImage:[UIImage imageNamed:detailLbl[currentIndex]]];
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    /*
+    if ([segue.identifier isEqualToString:@"swipeUpIdentifier"])
+    {
+        CandidateProfileDetailScreenVC *profileVC = [segue destinationViewController];
+        [self.navigationController pushViewController:profileVC animated:YES];
+    }
+    */
 }
-*/
 
 - (IBAction)menuButtonAction:(id)sender {
 }
