@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UserProfileViewController : UIViewController
+- (IBAction)showCandidateProfile:(id)sender;
 
 @end

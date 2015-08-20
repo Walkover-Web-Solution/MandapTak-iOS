@@ -103,6 +103,10 @@
         NSLog(@"Swipe Up");
         
     }
+    if (swipe.direction == UISwipeGestureRecognizerDirectionUp)
+    {
+        
+    }
 
     [self.imgProfileView setImage:[UIImage imageNamed:detailLbl[currentIndex]]];
 }
@@ -122,5 +126,9 @@
 }
 
 - (IBAction)matchesButtonAction:(id)sender {
+}
+- (IBAction)showCandidateProfile:(id)sender
+{
+    
 }
 @end
