@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FullyHorizontalFlowLayout.h"
+#import <Parse/Parse.h>
+#import "MBProgressHUD.h"
 
 @interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -20,7 +22,12 @@
     IBOutlet UILabel *lblTraitMatch;
     IBOutlet UICollectionView *ImagesCollectionView;
     
-    NSArray *collectionImages;
+    IBOutlet UILabel *lblCurrentLocation;
+    IBOutlet UILabel *lblWeight;
+    IBOutlet UILabel *lblDesignation;
+    IBOutlet UILabel *lblIndustry;
+    IBOutlet UILabel *lblEducation;
+    NSArray *collectionImages,*arrHeight;
 }
 - (IBAction)back:(id)sender;
 @end

@@ -54,7 +54,7 @@
     //work status
     int roundValue;
     int minHeight,maxHeight;
-    NSArray *arrHeight;;
+    NSArray *arrHeight;
     
     NSString *strObj;
 }

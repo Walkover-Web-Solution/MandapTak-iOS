@@ -147,6 +147,6 @@
 }
 - (IBAction)showCandidateProfile:(id)sender
 {
-    
+    [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
 }
 @end
