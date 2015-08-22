@@ -10,8 +10,10 @@
 #import "FullyHorizontalFlowLayout.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
+#import "CandidateProfileGalleryVC.h"
 
-@interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+
+@interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     
     IBOutlet UIImageView *profileImageView;
@@ -28,6 +30,9 @@
     IBOutlet UILabel *lblIndustry;
     IBOutlet UILabel *lblEducation;
     NSArray *collectionImages,*arrHeight;
+    
+    NSMutableArray *loadimagesarray,*arrImages;
 }
 - (IBAction)back:(id)sender;
+- (IBAction)viewFullProfile:(id)sender;
 @end

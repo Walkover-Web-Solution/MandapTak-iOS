@@ -39,7 +39,7 @@
     // return them to collection view
     return attributes;
 }
-
+/*
 -(NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
 {
     CGFloat newX = MIN(0, rect.origin.x - rect.size.width/2);
@@ -60,7 +60,7 @@
     }
     return allAttributesInRect;
 }
-
+*/
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds{
     return YES;
 }
@@ -74,6 +74,23 @@
     CGSize newSize = CGSizeMake((nbOfScreens) * collectionViewWidth, size.height);
     
     return newSize;
+}
+
+- (NSArray *) layoutAttributesForElementsInRect:(CGRect)rect {
+    NSArray *answer = [super layoutAttributesForElementsInRect:rect];
+    
+    for(int i = 1; i < [answer count]; ++i) {
+        UICollectionViewLayoutAttributes *currentLayoutAttributes = answer[i];
+        UICollectionViewLayoutAttributes *prevLayoutAttributes = answer[i - 1];
+        NSInteger maximumSpacing = 20;
+        NSInteger origin = CGRectGetMaxX(prevLayoutAttributes.frame);
+        if(origin + maximumSpacing + currentLayoutAttributes.frame.size.width < self.collectionViewContentSize.width) {
+            CGRect frame = currentLayoutAttributes.frame;
+            frame.origin.x = origin + maximumSpacing;
+            currentLayoutAttributes.frame = frame;
+        }
+    }
+    return answer;
 }
 
 @end

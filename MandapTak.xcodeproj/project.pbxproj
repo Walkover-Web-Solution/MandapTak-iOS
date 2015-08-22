@@ -14,6 +14,12 @@
 		7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A91B84AF0A00B83EFD /* show@2x.png */; };
 		7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6AA1B84AF0A00B83EFD /* show@3x.png */; };
 		757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */; };
+		758C71601B88588000D7423F /* sampleImage01.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715A1B88588000D7423F /* sampleImage01.JPG */; };
+		758C71611B88588000D7423F /* sampleImage02.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715B1B88588000D7423F /* sampleImage02.JPG */; };
+		758C71621B88588000D7423F /* sampleImage03.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715C1B88588000D7423F /* sampleImage03.JPG */; };
+		758C71631B88588000D7423F /* sampleImage04.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715D1B88588000D7423F /* sampleImage04.JPG */; };
+		758C71641B88588000D7423F /* sampleImage05.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715E1B88588000D7423F /* sampleImage05.JPG */; };
+		758C71651B88588000D7423F /* sampleImage06.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715F1B88588000D7423F /* sampleImage06.JPG */; };
 		758C8E6D1B87404B00FF634E /* option.png in Resources */ = {isa = PBXBuildFile; fileRef = 758C8E671B87404B00FF634E /* option.png */; };
 		758C8E6E1B87404B00FF634E /* option@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 758C8E681B87404B00FF634E /* option@2x.png */; };
 		758C8E6F1B87404B00FF634E /* option@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 758C8E691B87404B00FF634E /* option@3x.png */; };
@@ -147,6 +153,12 @@
 		7533F6AA1B84AF0A00B83EFD /* show@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@3x.png"; sourceTree = "<group>"; };
 		757BDC761B85AA49003B71BD /* CandidateProfileDetailScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateProfileDetailScreenVC.h; sourceTree = "<group>"; };
 		757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateProfileDetailScreenVC.m; sourceTree = "<group>"; };
+		758C715A1B88588000D7423F /* sampleImage01.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage01.JPG; sourceTree = "<group>"; };
+		758C715B1B88588000D7423F /* sampleImage02.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage02.JPG; sourceTree = "<group>"; };
+		758C715C1B88588000D7423F /* sampleImage03.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage03.JPG; sourceTree = "<group>"; };
+		758C715D1B88588000D7423F /* sampleImage04.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage04.JPG; sourceTree = "<group>"; };
+		758C715E1B88588000D7423F /* sampleImage05.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage05.JPG; sourceTree = "<group>"; };
+		758C715F1B88588000D7423F /* sampleImage06.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage06.JPG; sourceTree = "<group>"; };
 		758C8E671B87404B00FF634E /* option.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = option.png; sourceTree = "<group>"; };
 		758C8E681B87404B00FF634E /* option@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "option@2x.png"; sourceTree = "<group>"; };
 		758C8E691B87404B00FF634E /* option@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "option@3x.png"; sourceTree = "<group>"; };
@@ -367,6 +379,19 @@
 				7533F6AA1B84AF0A00B83EFD /* show@3x.png */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		758C71591B88588000D7423F /* SampleImages */ = {
+			isa = PBXGroup;
+			children = (
+				758C715A1B88588000D7423F /* sampleImage01.JPG */,
+				758C715B1B88588000D7423F /* sampleImage02.JPG */,
+				758C715C1B88588000D7423F /* sampleImage03.JPG */,
+				758C715D1B88588000D7423F /* sampleImage04.JPG */,
+				758C715E1B88588000D7423F /* sampleImage05.JPG */,
+				758C715F1B88588000D7423F /* sampleImage06.JPG */,
+			);
+			path = SampleImages;
 			sourceTree = "<group>";
 		};
 		758C8E841B87537500FF634E /* HorizontalCollectionView */ = {
@@ -839,6 +864,7 @@
 		89D9F7621B6B5DB4004CBE3D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				758C71591B88588000D7423F /* SampleImages */,
 				7582B7131B844E79003215FE /* Preferences */,
 				89D9F7631B6B5DB4004CBE3D /* Chat */,
 				89D9F7641B6B5DB4004CBE3D /* HomeScreen */,
@@ -1041,6 +1067,7 @@
 				758C8EC51B8771D300FF634E /* 5.jpg in Resources */,
 				7533F6AE1B84AF0A00B83EFD /* show.png in Resources */,
 				89D9F78C1B6B5DB4004CBE3D /* profile.png in Resources */,
+				758C71601B88588000D7423F /* sampleImage01.JPG in Resources */,
 				89D9F7841B6B5DB4004CBE3D /* call_icon.png in Resources */,
 				7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */,
 				89D9F78F1B6B5DB4004CBE3D /* setting@2x.png in Resources */,
@@ -1075,12 +1102,17 @@
 				758C8EC01B8771D300FF634E /* 03.jpg in Resources */,
 				899170471B70B5D0000CF872 /* next@2x.png in Resources */,
 				89D9F7831B6B5DB4004CBE3D /* backgroundImages.png in Resources */,
+				758C71611B88588000D7423F /* sampleImage02.JPG in Resources */,
 				89D9F77F1B6B5DB4004CBE3D /* Profile_1.png in Resources */,
+				758C71651B88588000D7423F /* sampleImage06.JPG in Resources */,
 				75918F6D1B79E9A10082D7EC /* Preference.storyboard in Resources */,
 				758C8E701B87404B00FF634E /* slide.png in Resources */,
 				758C8E7D1B87412800FF634E /* unlike@2x.png in Resources */,
+				758C71631B88588000D7423F /* sampleImage04.JPG in Resources */,
+				758C71621B88588000D7423F /* sampleImage03.JPG in Resources */,
 				758C8E7A1B87412800FF634E /* like@2x.png in Resources */,
 				897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */,
+				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
 				8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

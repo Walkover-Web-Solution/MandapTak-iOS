@@ -17,7 +17,8 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code
         NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"CMFGalleryCell" owner:self options:nil];
         
@@ -37,10 +38,10 @@
 
 -(void)updateCell {
     
-    NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Assets"];
-    NSString *filename = [NSString stringWithFormat:@"%@/%@", sourcePath, self.imageName];
-    
-    UIImage *image = [UIImage imageNamed:@"Profile_2.png"];
+    //NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Assets"];
+    //NSString *filename = [NSString stringWithFormat:@"%@/%@", sourcePath, self.imageName];
+    NSString *filename = [NSString stringWithFormat:@"%@", self.imageName];
+    UIImage *image = [UIImage imageNamed:filename];//[UIImage imageNamed:@"Profile_2.png"]; //[UIImage imageWithContentsOfFile:filename];
     
     [self.imageView1 setImage:image];
     [self.imageView1 setContentMode:UIViewContentModeScaleAspectFit];

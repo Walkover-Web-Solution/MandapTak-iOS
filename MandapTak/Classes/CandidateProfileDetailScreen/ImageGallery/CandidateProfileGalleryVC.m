@@ -72,10 +72,10 @@
 #pragma mark Data methods
 -(void)loadImages {
     
-    NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Assets"];
+    //NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Asstes"];
     //dataArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
-    NSLog(@"arr = %@",dataArray);
-    dataArray = [NSArray arrayWithObjects:@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_1.png",@"Profile_1.png",@"Profile_1.png",@"Profile_1.png", nil];
+    //NSLog(@"arr = %@",dataArray);
+    dataArray = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_1.png",@"Profile_2.png ",@"Profile-3.png", nil];
     pageControl.numberOfPages = [dataArray count];
 }
 /*
@@ -90,8 +90,10 @@
 
 - (IBAction)backAction:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 - (IBAction)back:(id)sender
 {

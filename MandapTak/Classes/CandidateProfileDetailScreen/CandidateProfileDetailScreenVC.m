@@ -17,15 +17,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    loadimagesarray = [[NSMutableArray alloc]init];
+    arrImages = [[NSMutableArray alloc]init];
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
     lblTraitMatch.hidden = YES;
-    collectionImages = [NSArray arrayWithObjects:@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_2.png",@"Profile_1.png",@"Profile_1.png",@"Profile_1.png",@"Profile_1.png", nil];
+    [self getUserImages];
+    
+    collectionImages = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_2.png",@"Profile_1.png", nil];
  
     //adding blur effect to image
     self.navigationController.navigationBarHidden = YES;
-    UIImage *theImage = [UIImage imageNamed:@"Profile_2.png"];
+    UIImage *theImage = [UIImage imageNamed:@"sampleImage01.jpg"];
     
     //create our blurred image
     CIContext *context = [CIContext contextWithOptions:nil];
@@ -129,6 +133,71 @@
     return strFiltered;
 }
 
+
+#pragma mark get User Images
+-(void) getUserImages
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    __block int totalNumberOfEntries = 0;
+    [query whereKey:@"profileId" equalTo:@"EYKXEM27cu"];
+    [query orderByDescending:@"createdAt"];
+    [query countObjectsInBackgroundWithBlock:^(int number1, NSError *error) {
+        if (!error) {
+            // The count request succeeded. Log the count
+            
+            totalNumberOfEntries = number1;
+            
+//            if (totalNumberOfEntries > [loadimagesarray count])
+//            {
+                NSLog(@"Retrieving data");
+                //query.skip=[NSNumber numberWithInt:2300];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (!error)
+                    {
+                        // The find succeeded.
+                        [loadimagesarray addObjectsFromArray:objects];
+                    }
+                    else
+                    {
+                        // Log details of the failure
+                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    }
+                    //[self retrieveImagesFromArray:loadimagesarray];
+                    [self performSelector:@selector(retrieveImagesFromArray) withObject:nil afterDelay:1.0];
+                }];
+            }
+            
+//        }
+//        else
+//        {
+//            // The request failed, we'll keep the chatData count?
+//            number1 = [loadimagesarray count];
+//        }
+    }];
+    
+}
+
+-(void) retrieveImagesFromArray
+{
+    for (PFObject *obj in loadimagesarray)
+    {
+        PFFile *userImageFile = obj[@"file"];
+        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+         {
+             if (!error) {
+                 UIImage *image = [UIImage imageWithData:imageData];
+                 [arrImages addObject:image];
+             }
+             else
+             {
+                 NSLog(@"Error = > %@",error);
+             }
+             [ImagesCollectionView reloadData];
+         }];
+    }
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -137,42 +206,63 @@
 #pragma mark Collection View Methods
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return collectionImages.count;
+    //return collectionImages.count;
+    return arrImages.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *identifier = @"Cell";
     UICollectionViewCell *cell = [ImagesCollectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    cell.layer.cornerRadius = 25.0;
+    cell.layer.cornerRadius = 30.0;
     UIImageView *collectionImageView = (UIImageView *)[cell viewWithTag:100];
     
-     collectionImageView.image = [UIImage imageNamed:[collectionImages objectAtIndex:indexPath.row]];
+     collectionImageView.image = [UIImage imageNamed:[arrImages objectAtIndex:indexPath.row]];
     
      return cell;
     
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     //NSLog(@"SETTING SIZE FOR ITEM AT INDEX %d", indexPath.row);
-    return CGSizeMake(50, 50);
+    return CGSizeMake(60, 60);
 }
-/*
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 20.0;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"galleryIdentifier" sender:self];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"galleryIdentifier"])
+    {
+        CandidateProfileGalleryVC *vc = [segue destinationViewController];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+     
 }
-*/
+
 
 - (IBAction)back:(id)sender
 {
     //[self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)viewFullProfile:(id)sender
+{
+    
+    
 }
 @end

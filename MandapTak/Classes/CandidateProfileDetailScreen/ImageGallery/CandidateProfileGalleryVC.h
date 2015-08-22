@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CMFGalleryCell.h"
+#import <Parse/Parse.h>
 
 @interface CandidateProfileGalleryVC : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate>
 {
