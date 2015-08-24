@@ -13,13 +13,21 @@
 @end
 
 @implementation CandidateProfileGalleryVC
-
+@synthesize arrImages,selectedIndex;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self loadImages];
     [self setupCollectionView];
+    //[GalleryCollectionView scrollToItemAtIndexPath:selectedIndex atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    //[GalleryCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+    //[self.view layoutIfNeeded];
+    [GalleryCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +48,7 @@
     [flowLayout setMinimumLineSpacing:0.0f];
     [GalleryCollectionView setPagingEnabled:YES];
     [GalleryCollectionView setCollectionViewLayout:flowLayout];
+    
 }
 
 
@@ -51,22 +60,20 @@
     return [dataArray count];
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     CMFGalleryCell *cell = (CMFGalleryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    
     NSString *imageName = [dataArray objectAtIndex:indexPath.row];
+    [cell setUserImage:[dataArray objectAtIndex:indexPath.row]];
     [cell setImageName:imageName];
     [cell updateCell];
-    
     return cell;
-    
 }
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     return GalleryCollectionView.frame.size;
 }
-
 
 #pragma mark -
 #pragma mark Data methods
@@ -75,7 +82,8 @@
     //NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Asstes"];
     //dataArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
     //NSLog(@"arr = %@",dataArray);
-    dataArray = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_1.png",@"Profile_2.png ",@"Profile-3.png", nil];
+    //dataArray = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_1.png",@"Profile_2.png ",@"Profile-3.png", nil];
+    dataArray = arrImages;
     pageControl.numberOfPages = [dataArray count];
 }
 /*

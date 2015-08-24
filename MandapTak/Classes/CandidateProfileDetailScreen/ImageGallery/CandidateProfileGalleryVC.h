@@ -18,4 +18,6 @@
 }
 - (IBAction)backAction:(id)sender;
 - (IBAction)back:(id)sender;
+@property (strong,nonatomic) NSMutableArray *arrImages;
+@property (nonatomic) int selectedIndex;
 @end

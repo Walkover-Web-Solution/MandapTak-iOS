@@ -10,6 +10,7 @@
 
 @interface CMFGalleryCell : UICollectionViewCell
 @property (nonatomic, strong) NSString *imageName;
+@property (nonatomic, strong) UIImage *userImage;
 
 -(void)updateCell;
 @end

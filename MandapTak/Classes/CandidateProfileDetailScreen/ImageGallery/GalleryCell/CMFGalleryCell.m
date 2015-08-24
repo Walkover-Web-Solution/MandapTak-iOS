@@ -43,7 +43,8 @@
     NSString *filename = [NSString stringWithFormat:@"%@", self.imageName];
     UIImage *image = [UIImage imageNamed:filename];//[UIImage imageNamed:@"Profile_2.png"]; //[UIImage imageWithContentsOfFile:filename];
     
-    [self.imageView1 setImage:image];
+    //[self.imageView1 setImage:image];
+    [self.imageView1 setImage:self.userImage];
     [self.imageView1 setContentMode:UIViewContentModeScaleAspectFit];
     
 }

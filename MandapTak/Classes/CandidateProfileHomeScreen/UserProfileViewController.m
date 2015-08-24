@@ -119,7 +119,7 @@
         [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     }
 
-    [self.imgProfileView setImage:[UIImage imageNamed:detailLbl[currentIndex]]];
+    //[self.imgProfileView setImage:[UIImage imageNamed:detailLbl[currentIndex]]];
 }
 
 #pragma mark - Navigation

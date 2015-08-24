@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    selectedIndex = 0;
     loadimagesarray = [[NSMutableArray alloc]init];
     arrImages = [[NSMutableArray alloc]init];
     
@@ -27,6 +28,20 @@
     
     collectionImages = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_2.png",@"Profile_1.png", nil];
  
+    [self showBlurredImage];
+    
+    //collection view
+    FullyHorizontalFlowLayout *collectionViewLayout = [FullyHorizontalFlowLayout new];
+    collectionViewLayout.itemSize = CGSizeMake(320, 85);
+    [ImagesCollectionView setCollectionViewLayout:collectionViewLayout];
+    ImagesCollectionView.pagingEnabled = YES;
+    
+    //get user profile
+    [self getUserProfileForId:@"nASUvS6R7Z"];
+}
+
+-(void) showBlurredImage
+{
     //adding blur effect to image
     self.navigationController.navigationBarHidden = YES;
     UIImage *theImage = [UIImage imageNamed:@"sampleImage01.jpg"];
@@ -45,15 +60,28 @@
     
     //add our blurred image to the scrollview
     profileImageView.image = [UIImage imageWithCGImage:cgImage];
+}
+
+
+-(void) showPrimaryImageFromObject:(UIImage *)img
+{
+    //adding blur effect to image
+    //UIImage *theImage = [UIImage imageNamed:@"sampleImage01.jpg"];
     
-    //collection view
-    FullyHorizontalFlowLayout *collectionViewLayout = [FullyHorizontalFlowLayout new];
-    collectionViewLayout.itemSize = CGSizeMake(320, 85);
-    [ImagesCollectionView setCollectionViewLayout:collectionViewLayout];
-    ImagesCollectionView.pagingEnabled = YES;
+    //create our blurred image
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIImage *inputImage = [CIImage imageWithCGImage:img.CGImage];
     
-    //get user profile
-    [self getUserProfileForId:@"nASUvS6R7Z"];
+    //setting up Gaussian Blur (we could use one of many filters offered by Core Image)
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    [filter setValue:inputImage forKey:kCIInputImageKey];
+    [filter setValue:[NSNumber numberWithFloat:10.0f] forKey:@"inputRadius"];
+    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+    //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
+    CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+    
+    //add our blurred image to the scrollview
+    profileImageView.image = [UIImage imageWithCGImage:cgImage];
 }
 
 -(void) getUserProfileForId : (NSString *)profileId
@@ -139,40 +167,28 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     __block int totalNumberOfEntries = 0;
-    [query whereKey:@"profileId" equalTo:@"EYKXEM27cu"];
+    [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"EYKXEM27cu"]];
     [query orderByDescending:@"createdAt"];
     [query countObjectsInBackgroundWithBlock:^(int number1, NSError *error) {
-        if (!error) {
-            // The count request succeeded. Log the count
-            
-            totalNumberOfEntries = number1;
-            
-//            if (totalNumberOfEntries > [loadimagesarray count])
-//            {
-                NSLog(@"Retrieving data");
-                //query.skip=[NSNumber numberWithInt:2300];
-                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if (!error)
-                    {
-                        // The find succeeded.
-                        [loadimagesarray addObjectsFromArray:objects];
-                    }
-                    else
-                    {
-                        // Log details of the failure
-                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    }
-                    //[self retrieveImagesFromArray:loadimagesarray];
-                    [self performSelector:@selector(retrieveImagesFromArray) withObject:nil afterDelay:1.0];
-                }];
+    if (!error)
+    {
+        totalNumberOfEntries = number1;
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+        {
+            if (!error)
+            {
+                // The find succeeded.
+                [loadimagesarray addObjectsFromArray:objects];
             }
-            
-//        }
-//        else
-//        {
-//            // The request failed, we'll keep the chatData count?
-//            number1 = [loadimagesarray count];
-//        }
+            else
+            {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+            //[self retrieveImagesFromArray:loadimagesarray];
+            [self performSelector:@selector(retrieveImagesFromArray) withObject:nil afterDelay:0.5];
+        }];
+    }
     }];
     
 }
@@ -181,10 +197,33 @@
 {
     for (PFObject *obj in loadimagesarray)
     {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         PFFile *userImageFile = obj[@"file"];
+        
+        int highScore = [obj[@"isPrimary"] intValue];
+        if (highScore == 1)
+        {
+            primaryFlag = true;
+            PFFile *userImageFile = obj[@"file"];
+            [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+             {
+                 if (!error)
+                 {
+                     UIImage *image = [UIImage imageWithData:imageData];
+                     if (primaryFlag)
+                     {
+                         [self showPrimaryImageFromObject:image];
+                     }
+                 }
+             }];
+        }
+        
+        
         [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
          {
-             if (!error) {
+             if (!error)
+             {
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                  UIImage *image = [UIImage imageWithData:imageData];
                  [arrImages addObject:image];
              }
@@ -193,9 +232,10 @@
                  NSLog(@"Error = > %@",error);
              }
              [ImagesCollectionView reloadData];
+             //add our blurred image to the scrollview
+             //profileImageView.image = arrImages[0];
          }];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -217,7 +257,8 @@
     cell.layer.cornerRadius = 30.0;
     UIImageView *collectionImageView = (UIImageView *)[cell viewWithTag:100];
     
-     collectionImageView.image = [UIImage imageNamed:[arrImages objectAtIndex:indexPath.row]];
+     //collectionImageView.image = [UIImage imageNamed:[arrImages objectAtIndex:indexPath.row]];
+    collectionImageView.image = [arrImages objectAtIndex:indexPath.row];
     
      return cell;
     
@@ -235,6 +276,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    selectedIndex = indexPath.row;
     [self performSegueWithIdentifier:@"galleryIdentifier" sender:self];
 }
 
@@ -248,9 +290,19 @@
     if ([segue.identifier isEqualToString:@"galleryIdentifier"])
     {
         CandidateProfileGalleryVC *vc = [segue destinationViewController];
+        vc.arrImages = arrImages;
+        vc.selectedIndex = selectedIndex;
         [self.navigationController pushViewController:vc animated:YES];
     }
-     
+    /*
+    else if ([segue.identifier isEqualToString:@"fullProfileIdentifier"])
+    {
+        CandidateProfileGalleryVC *vc = [segue destinationViewController];
+        vc.arrImages = arrImages;
+        vc.selectedIndex = selectedIndex;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+     */
 }
 
 

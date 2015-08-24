@@ -32,6 +32,8 @@
     NSArray *collectionImages,*arrHeight;
     
     NSMutableArray *loadimagesarray,*arrImages;
+    int *selectedIndex;
+    BOOL primaryFlag;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;
