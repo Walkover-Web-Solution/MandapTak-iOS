@@ -13,4 +13,5 @@
 @property (nonatomic, strong) UIImage *userImage;
 
 -(void)updateCell;
+-(void)updateImageCell;
 @end

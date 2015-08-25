@@ -9,7 +9,7 @@
 #import "CMFGalleryCell.h"
 @interface CMFGalleryCell()
 @property (strong, nonatomic) IBOutlet UIImageView *imageView1;
-//@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView2;
 @end
 
 @implementation CMFGalleryCell
@@ -42,10 +42,24 @@
     //NSString *filename = [NSString stringWithFormat:@"%@/%@", sourcePath, self.imageName];
     NSString *filename = [NSString stringWithFormat:@"%@", self.imageName];
     UIImage *image = [UIImage imageNamed:filename];//[UIImage imageNamed:@"Profile_2.png"]; //[UIImage imageWithContentsOfFile:filename];
-    
+    self.imageView2.hidden = YES;
     //[self.imageView1 setImage:image];
     [self.imageView1 setImage:self.userImage];
     [self.imageView1 setContentMode:UIViewContentModeScaleAspectFit];
+    
+}
+
+-(void)updateImageCell
+{
+    
+    //NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Assets"];
+    //NSString *filename = [NSString stringWithFormat:@"%@/%@", sourcePath, self.imageName];
+    NSString *filename = [NSString stringWithFormat:@"%@", self.imageName];
+    UIImage *image = [UIImage imageNamed:filename];//[UIImage imageNamed:@"Profile_2.png"]; //[UIImage imageWithContentsOfFile:filename];
+    self.imageView1.hidden = YES;
+    //[self.imageView1 setImage:image];
+    [self.imageView2 setImage:self.userImage];
+    [self.imageView2 setContentMode:UIViewContentModeScaleAspectFit];
     
 }
 

@@ -20,6 +20,7 @@
     selectedIndex = 0;
     loadimagesarray = [[NSMutableArray alloc]init];
     arrImages = [[NSMutableArray alloc]init];
+    profileObject = [[Profile alloc] init];
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
@@ -93,6 +94,7 @@
     
     [query whereKey:@"objectId" equalTo:profileId];
     [query includeKey:@"currentLocation.Parent.Parent"];
+    [query includeKey:@"placeOfBirth.Parent.Parent"];
     [query includeKey:@"casteId"];
     [query includeKey:@"religionId"];
     [query includeKey:@"education1.degreeId"];
@@ -104,7 +106,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (!error) {
             PFObject *obj = objects[0];
-            
+            profileObject.profilePointer = obj;
             lblName.text = [NSString stringWithFormat:@"%@",[obj valueForKey:@"name"]];
             //Age
             NSDate *birthday = [obj valueForKey:@"dob"];
@@ -133,6 +135,33 @@
             PFObject *currentLoc = [obj valueForKey:@"currentLocation"];
             PFObject *currentState = [currentLoc valueForKey:@"Parent"];
             lblCurrentLocation.text = [NSString stringWithFormat:@"Current Location : %@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
+            
+            //birth location label
+            PFObject *birthLoc = [obj valueForKey:@"placeOfBirth"];
+            PFObject *birthState = [birthLoc valueForKey:@"Parent"];
+            
+            
+            //save data in model object
+            profileObject.height = strHeight;
+            profileObject.weight = [obj valueForKey:@"weight"];
+            profileObject.income = [obj valueForKey:@"package"];
+            profileObject.religion = [NSString stringWithFormat:@"%@,%@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]];
+            profileObject.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
+            profileObject.budget = [NSString stringWithFormat:@"Marriage Budget:%@",[obj valueForKey:@"maxMarriageBudget"]];
+            
+            //DOB
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd"];
+            NSString *strDate = [formatter stringFromDate:birthday];
+            profileObject.dob = strDate;
+            
+            //TOB
+            NSDate *dateTOB = [obj valueForKey:@"tob"];
+            NSDateFormatter *formatterTime = [[NSDateFormatter alloc] init];
+            [formatterTime setDateFormat:@"hh:mm:ss"];
+            [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+            NSString *strTOB = [formatterTime stringFromDate:dateTOB];
+            profileObject.tob = strTOB;
             //education label
             
             NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
@@ -294,15 +323,15 @@
         vc.selectedIndex = selectedIndex;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    /*
+    
     else if ([segue.identifier isEqualToString:@"fullProfileIdentifier"])
     {
-        CandidateProfileGalleryVC *vc = [segue destinationViewController];
+        ViewFullProfileVC *vc = [segue destinationViewController];
         vc.arrImages = arrImages;
-        vc.selectedIndex = selectedIndex;
+        vc.profileObject = profileObject;
         [self.navigationController pushViewController:vc animated:YES];
     }
-     */
+    
 }
 
 

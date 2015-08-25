@@ -11,7 +11,8 @@
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
 #import "CandidateProfileGalleryVC.h"
-
+#import "ViewFullProfileVC.h"
+#import "Profile.h"
 
 @interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
@@ -34,6 +35,7 @@
     NSMutableArray *loadimagesarray,*arrImages;
     int *selectedIndex;
     BOOL primaryFlag;
+    Profile *profileObject;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;

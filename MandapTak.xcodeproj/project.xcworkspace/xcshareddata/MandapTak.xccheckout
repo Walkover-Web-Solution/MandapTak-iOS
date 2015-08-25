@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>73A2C020-21DB-4736-A4C7-5990FEA40F8E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>MandapTak</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>4F3F46D7D407095CC8C7AEDEEC54CEECD8DA63AF</key>
 		<string>walkover.git.beanstalkapp.com:/walkover/mandaptak-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MandapTak.xcodeproj</string>
+	<string>MandapTak.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>4F3F46D7D407095CC8C7AEDEEC54CEECD8DA63AF</key>

@@ -16,13 +16,17 @@
                     <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfY-sc-MBr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                     </imageView>
+                    <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-K3-5a1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <connections>
                 <outlet property="imageView1" destination="dfY-sc-MBr" id="am0-Iq-5JT"/>
+                <outlet property="imageView2" destination="o9n-K3-5a1" id="uoi-Fh-YwS"/>
             </connections>
-            <point key="canvasLocation" x="209" y="416"/>
+            <point key="canvasLocation" x="-122" y="365"/>
         </collectionViewCell>
     </objects>
 </document>
