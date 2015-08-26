@@ -13,6 +13,9 @@
 		7533F6AE1B84AF0A00B83EFD /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A81B84AF0A00B83EFD /* show.png */; };
 		7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A91B84AF0A00B83EFD /* show@2x.png */; };
 		7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6AA1B84AF0A00B83EFD /* show@3x.png */; };
+		75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75382F081B8CA522005E03FE /* WorkEducationCell.m */; };
+		7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */; };
+		7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */; };
 		757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */; };
 		758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */; };
 		75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75886EBE1B8C50CD008B7F94 /* Profile.m */; };
@@ -153,6 +156,10 @@
 		7533F6A81B84AF0A00B83EFD /* show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show.png; sourceTree = "<group>"; };
 		7533F6A91B84AF0A00B83EFD /* show@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@2x.png"; sourceTree = "<group>"; };
 		7533F6AA1B84AF0A00B83EFD /* show@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@3x.png"; sourceTree = "<group>"; };
+		75382F071B8CA522005E03FE /* WorkEducationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkEducationCell.h; sourceTree = "<group>"; };
+		75382F081B8CA522005E03FE /* WorkEducationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkEducationCell.m; sourceTree = "<group>"; };
+		7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
+		7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
 		757BDC761B85AA49003B71BD /* CandidateProfileDetailScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateProfileDetailScreenVC.h; sourceTree = "<group>"; };
 		757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateProfileDetailScreenVC.m; sourceTree = "<group>"; };
 		758535A91B8B1E34000B480A /* ViewFullProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFullProfileVC.h; sourceTree = "<group>"; };
@@ -363,6 +370,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75382F061B8CA50D005E03FE /* CustomTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				75382F071B8CA522005E03FE /* WorkEducationCell.h */,
+				75382F081B8CA522005E03FE /* WorkEducationCell.m */,
+			);
+			path = CustomTableCell;
+			sourceTree = "<group>";
+		};
+		7565F7861B8DDA52003FE061 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */,
+				7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		757BDC751B85AA2D003B71BD /* CandidateProfileDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +415,7 @@
 		758535A81B8B1E19000B480A /* ViewFullProfile */ = {
 			isa = PBXGroup;
 			children = (
+				75382F061B8CA50D005E03FE /* CustomTableCell */,
 				758535A91B8B1E34000B480A /* ViewFullProfileVC.h */,
 				758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */,
 			);
@@ -546,6 +572,7 @@
 		897C23981B6B562C00FC32E9 /* MandapTak */ = {
 			isa = PBXGroup;
 			children = (
+				7565F7861B8DDA52003FE061 /* Resources */,
 				758C8EB91B8771D300FF634E /* Assets */,
 				899C53751B73361600C24DA8 /* ServiceManager */,
 				89D9F7621B6B5DB4004CBE3D /* Images */,
@@ -1087,6 +1114,7 @@
 				89D9F78C1B6B5DB4004CBE3D /* profile.png in Resources */,
 				758C71601B88588000D7423F /* sampleImage01.JPG in Resources */,
 				89D9F7841B6B5DB4004CBE3D /* call_icon.png in Resources */,
+				7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */,
 				7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */,
 				89D9F78F1B6B5DB4004CBE3D /* setting@2x.png in Resources */,
 				758C8E7B1B87412800FF634E /* like@3x.png in Resources */,
@@ -1126,6 +1154,7 @@
 				75918F6D1B79E9A10082D7EC /* Preference.storyboard in Resources */,
 				758C8E701B87404B00FF634E /* slide.png in Resources */,
 				758C8E7D1B87412800FF634E /* unlike@2x.png in Resources */,
+				7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */,
 				758C71631B88588000D7423F /* sampleImage04.JPG in Resources */,
 				758C71621B88588000D7423F /* sampleImage03.JPG in Resources */,
 				758C8E7A1B87412800FF634E /* like@2x.png in Resources */,
@@ -1192,6 +1221,7 @@
 				898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
+				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
 				895CD7811B81E37D00816FDE /* IndustryPopoverViewController.m in Sources */,
 				895CD7781B81CFB500816FDE /* Education.m in Sources */,

@@ -137,6 +137,10 @@
                     [sliderWork setValue:roundValue animated:YES];
                     [self sliderChanged:nil];
                     
+                    roundValueManglik = [[object valueForKey:@"manglik"] intValue];
+                    [sliderManglik setValue:roundValueManglik animated:YES];
+                    [self manglikSliderChanged:nil];
+                    
                     NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
                 }
                 //PFObject *objUser = objects[0];
@@ -360,7 +364,7 @@
         pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
         pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
         pref[@"minGunMatch"] = @0;
-        pref[@"manglik"] = @0;
+        pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];
         
         [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {
@@ -369,6 +373,8 @@
             {
                 // The object has been saved.
                 //execute further query of degree and location preference
+                NSLog(@"new object Id = %@",pref.objectId);
+                strObj = pref.objectId;
                 [self saveDegreePreference];
                 [self saveLocationPreference];
             }
@@ -401,7 +407,7 @@
                                          pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
                                          pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
                                          pref[@"minGunMatch"] = @0;
-                                         pref[@"manglik"] = @0;
+                                         pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];;
                                          [pref saveInBackground];
                                          
                                          //execute further query of degree and location preference
@@ -423,17 +429,24 @@
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        if (!error) {
+        if (!error)
+        {
             // The find succeeded.
             NSLog(@"Successfully retrieved %lu degre preferences.", objects.count);
             // Do something with the found objects
-            [PFObject deleteAllInBackground:objects];
+            if (objects.count > 0)
+            {
+                [PFObject deleteAllInBackground:objects];
+            }
             
             //[self addNewDegreePreference];
             [self performSelector:@selector(addNewDegreePreference) withObject:nil afterDelay:1.0];
             
         }
-        else {
+        else
+        {
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [av show];
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
@@ -508,7 +521,10 @@
             // The find succeeded.
             NSLog(@"Successfully retrieved %lu location preferences.", objects.count);
             // Do something with the found objects
-            [PFObject deleteAllInBackground:objects];
+            if (objects.count >0)
+            {
+                [PFObject deleteAllInBackground:objects];
+            }
             
             //[self addNewDegreePreference];
             [self performSelector:@selector(addNewLocationPreference) withObject:nil afterDelay:1.0];
@@ -646,6 +662,35 @@
             break;
     }
     [lblWorkStatus setText:[NSString stringWithFormat:@" %@ ",strStatus]];
+}
+
+- (IBAction)manglikSliderChanged:(id)sender
+{
+    // Adjust knob (to rounded value)
+    NSString *strStatus;
+    CGFloat value = [sliderManglik value];
+    
+    roundValueManglik = roundf(value);
+    
+    if (value != roundValueManglik) {
+        // Almost 100% of the time - Adjust:
+        
+        [sliderManglik setValue:roundValueManglik];
+    }
+    switch (roundValueManglik) {
+        case 0:
+            strStatus = @"NO";
+            break;
+        case 1:
+            strStatus = @"YES";
+            break;
+        case 2:
+            strStatus = @"May Be";
+            break;
+        default:
+            break;
+    }
+    [lblManglik setText:[NSString stringWithFormat:@" %@ ",strStatus]];
 }
 
 - (IBAction)sliderValueChanged:(id)sender

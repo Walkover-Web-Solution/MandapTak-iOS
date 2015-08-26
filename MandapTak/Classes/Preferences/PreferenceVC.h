@@ -41,7 +41,9 @@
     NSMutableArray *arrSelLocations,*arrSelDegree,*arrSelectedDegreeId,*arrDegreePref,*arrSelectedLocationId,*arrLocationPref,*arrLocationObj,*arrDegreeObject;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UISlider *sliderWork;
+    IBOutlet UISlider *sliderManglik;
     IBOutlet UILabel *lblWorkStatus;
+    IBOutlet UILabel *lblManglik;
     
     WYPopoverController* popoverController,*popOver2;
     IBOutlet UIButton *btnLocation;
@@ -52,7 +54,7 @@
     BOOL heightFlag,insertFlag,addFlag;
     
     //work status
-    int roundValue;
+    int roundValue,roundValueManglik;
     int minHeight,maxHeight;
     NSArray *arrHeight;
     

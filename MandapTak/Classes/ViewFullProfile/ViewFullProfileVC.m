@@ -13,7 +13,7 @@
 @end
 
 @implementation ViewFullProfileVC
-@synthesize arrImages,profileObject;
+@synthesize arrImages,profileObject,arrEducation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +31,7 @@
     lblPlaceOfBirth.text = profileObject.placeOfBirth;
     lblReligion.text = profileObject.religion;
     lblBudget.text = profileObject.budget;
-    
+    tableViewEducation.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self showBasicDetails:nil];
 }
 
@@ -138,6 +138,99 @@
     view3.hidden = true;
 }
 
-- (IBAction)downloadBiodata:(id)sender {
+- (IBAction)downloadBiodata:(id)sender
+{
+}
+
+
+#pragma mark UITableView Data Source
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"WORK", @"mySectionName");
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"EDUCATION", @"myOtherSectionName");
+            break;
+        default:
+            sectionName = @"";
+            break;
+    }
+    return sectionName;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numberOfRows;
+    switch (section)
+    {
+        case 0:
+            numberOfRows = 1;
+            break;
+        case 1:
+            numberOfRows = arrEducation.count;
+            break;
+        default:
+            numberOfRows = 1;
+            break;
+    }
+    return numberOfRows;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height;
+    switch (indexPath.section)
+    {
+        case 0:
+            height = 70.0;
+            break;
+        case 1:
+            height = 50.0;
+            break;
+        default:
+            height = 70.0;
+            break;
+    }
+    return height;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"PinLogsCell";
+    WorkEducationCell *cell = [tableViewEducation dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (!cell) {
+        cell=[[WorkEducationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    if (indexPath.section == 0)
+    {
+        cell.lblTitle.text = profileObject.designation;
+        cell.lblDetail.text = profileObject.company;
+        cell.lblDescription.text = [NSString stringWithFormat:@"%@ /annum",profileObject.income];
+    }
+    else
+    {
+        Education *obj = [[Education alloc]init];
+        obj = arrEducation[indexPath.row];
+        PFObject *specialization = obj.specialisation;
+        PFObject *degreeName = [specialization valueForKey:@"degreeId"];
+        NSString *specializationName = [specialization valueForKey:@"name"];
+        cell.lblTitle.text = [NSString stringWithFormat:@"%@",[degreeName valueForKey:@"name"]];
+        cell.lblDetail.text = specializationName;
+        cell.lblDescription.hidden = YES;
+        //cell.lblDescription.text = @"Education Description";
+    }
+
+    return cell;
 }
 @end

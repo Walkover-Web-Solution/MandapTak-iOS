@@ -13,6 +13,7 @@
 #import "CandidateProfileGalleryVC.h"
 #import "ViewFullProfileVC.h"
 #import "Profile.h"
+#import "Education.h"
 
 @interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
@@ -32,7 +33,7 @@
     IBOutlet UILabel *lblEducation;
     NSArray *collectionImages,*arrHeight;
     
-    NSMutableArray *loadimagesarray,*arrImages;
+    NSMutableArray *loadimagesarray,*arrImages,*arrEducation;
     int *selectedIndex;
     BOOL primaryFlag;
     Profile *profileObject;

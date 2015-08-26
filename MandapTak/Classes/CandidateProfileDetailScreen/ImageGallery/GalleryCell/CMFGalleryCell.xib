@@ -13,15 +13,27 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                 <subviews>
-                    <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfY-sc-MBr">
+                    <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dfY-sc-MBr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                     </imageView>
-                    <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-K3-5a1">
+                    <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-K3-5a1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="taI-7j-Ov1"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="dfY-sc-MBr" secondAttribute="bottom" id="6Og-Pr-6Tw"/>
+                <constraint firstItem="o9n-K3-5a1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7nA-yt-mUf"/>
+                <constraint firstAttribute="trailing" secondItem="o9n-K3-5a1" secondAttribute="trailing" id="Bi8-3Q-Cxv"/>
+                <constraint firstItem="dfY-sc-MBr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Pvj-hG-Qzy"/>
+                <constraint firstAttribute="trailing" secondItem="dfY-sc-MBr" secondAttribute="trailing" id="Swh-Yc-P2h"/>
+                <constraint firstItem="dfY-sc-MBr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Zwx-7S-1X6"/>
+                <constraint firstItem="o9n-K3-5a1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nzF-sZ-1u0"/>
+            </constraints>
             <connections>
                 <outlet property="imageView1" destination="dfY-sc-MBr" id="am0-Iq-5JT"/>
                 <outlet property="imageView2" destination="o9n-K3-5a1" id="uoi-Fh-YwS"/>

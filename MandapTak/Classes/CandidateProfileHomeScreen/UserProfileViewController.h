@@ -7,6 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import "CandidateProfileDetailScreenVC.h"
+#import <Parse/Parse.h>
 
 @interface UserProfileViewController : UIViewController
 - (IBAction)showCandidateProfile:(id)sender;

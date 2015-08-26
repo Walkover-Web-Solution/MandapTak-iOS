@@ -72,7 +72,10 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return GalleryCollectionView.frame.size;
+    //return GalleryCollectionView.frame.size;
+    //CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    //return CGSizeMake(350, 450);
+    return [UIScreen mainScreen].bounds.size;
 }
 
 #pragma mark -

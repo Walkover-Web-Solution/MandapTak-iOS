@@ -32,7 +32,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Income (More than)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SWE-aJ-Wr4">
-                                                <rect key="frame" x="12" y="229" width="271" height="30"/>
+                                                <rect key="frame" x="12" y="206" width="271" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <connections>
@@ -40,7 +40,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max Age" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgv-kA-pAm">
-                                                <rect key="frame" x="158" y="62" width="125" height="30"/>
+                                                <rect key="frame" x="158" y="58" width="125" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <connections>
@@ -48,7 +48,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min Age" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVF-dj-REU">
-                                                <rect key="frame" x="12" y="62" width="136" height="30"/>
+                                                <rect key="frame" x="12" y="58" width="136" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <connections>
@@ -56,7 +56,7 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HEIGHT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-2W-gJS">
-                                                <rect key="frame" x="14" y="107" width="83" height="21"/>
+                                                <rect key="frame" x="14" y="99" width="83" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -97,13 +97,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AGE LIMIT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNq-cb-LQc">
-                                                <rect key="frame" x="14" y="41" width="83" height="21"/>
+                                                <rect key="frame" x="14" y="37" width="83" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hcc-lU-vR8">
-                                                <rect key="frame" x="285" y="284" width="30" height="30"/>
+                                                <rect key="frame" x="285" y="256" width="30" height="30"/>
                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" image="show.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,13 +113,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORe-T8-BHS" customClass="CustomLabel">
-                                                <rect key="frame" x="12" y="283" width="271" height="32"/>
+                                                <rect key="frame" x="12" y="255" width="271" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wof-Sf-Gpo">
-                                                <rect key="frame" x="248" y="284" width="30" height="30"/>
+                                                <rect key="frame" x="248" y="256" width="30" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" image="add.png">
@@ -131,7 +131,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86g-nb-SrX">
-                                                <rect key="frame" x="12" y="133" width="136" height="30"/>
+                                                <rect key="frame" x="12" y="123" width="136" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <state key="normal" title="Min Height">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -142,7 +142,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vww-4q-QrM">
-                                                <rect key="frame" x="158" y="133" width="125" height="30"/>
+                                                <rect key="frame" x="158" y="123" width="125" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <state key="normal" title="Max Height">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -153,13 +153,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Degree" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJo-IO-vIk" customClass="CustomLabel">
-                                                <rect key="frame" x="12" y="175" width="271" height="30"/>
+                                                <rect key="frame" x="12" y="163" width="271" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                 <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaY-oQ-Xv8">
-                                                <rect key="frame" x="285" y="175" width="30" height="30"/>
+                                                <rect key="frame" x="285" y="163" width="30" height="30"/>
                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" image="add.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -181,6 +181,24 @@
                                                 <connections>
                                                     <action selector="sliderChanged:" destination="Akd-nY-hOq" eventType="touchUpInside" id="u4n-QK-Uzw"/>
                                                     <action selector="sliderValueChanged:" destination="Akd-nY-hOq" eventType="valueChanged" id="qDL-91-mcx"/>
+                                                </connections>
+                                            </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manglik?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgP-Z3-nlB">
+                                                <rect key="frame" x="14" y="307" width="155" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkt-WX-FgA">
+                                                <rect key="frame" x="260" y="307" width="60" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="d58-JK-I0H">
+                                                <rect key="frame" x="168" y="304" width="86" height="31"/>
+                                                <connections>
+                                                    <action selector="manglikSliderChanged:" destination="Akd-nY-hOq" eventType="touchUpInside" id="NRL-qq-5jl"/>
                                                 </connections>
                                             </slider>
                                         </subviews>
@@ -235,8 +253,10 @@
                         <outlet property="btnMinHeight" destination="86g-nb-SrX" id="9QP-Ba-Hez"/>
                         <outlet property="lblDegree" destination="EJo-IO-vIk" id="7ft-2k-mPb"/>
                         <outlet property="lblLocation" destination="ORe-T8-BHS" id="5fs-6o-jQl"/>
+                        <outlet property="lblManglik" destination="gkt-WX-FgA" id="lzs-qB-Dim"/>
                         <outlet property="lblWorkStatus" destination="EH8-nG-2Pk" id="FRd-eq-nj1"/>
                         <outlet property="scrollView" destination="Skk-OQ-6Yu" id="wya-FH-m9x"/>
+                        <outlet property="sliderManglik" destination="d58-JK-I0H" id="ErT-tB-iDT"/>
                         <outlet property="sliderWork" destination="4K3-K3-pLt" id="Byd-hA-tdF"/>
                         <outlet property="txtIncome" destination="SWE-aJ-Wr4" id="3yb-R4-ziW"/>
                         <outlet property="txtMaxAge" destination="Wgv-kA-pAm" id="nRP-aJ-aR2"/>
