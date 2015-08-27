@@ -8,8 +8,12 @@
 #import <UIKit/UIKit.h>
 #import "CandidateProfileDetailScreenVC.h"
 #import <Parse/Parse.h>
+#import "Profile.h"
 
 @interface UserProfileViewController : UIViewController
+{
+    NSMutableArray *arrCandidateProfiles;
+}
 - (IBAction)showCandidateProfile:(id)sender;
 
 @end

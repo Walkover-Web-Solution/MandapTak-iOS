@@ -30,6 +30,8 @@
 		757F87671B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = 757F87571B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari.m */; };
 		757F87681B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757F87581B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari@2x.png */; };
 		757F87691B8EF1DC00C083A4 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 757F875A1B8EF1DC00C083A4 /* SVWebViewControllerActivity.m */; };
+		757F876D1B8F0DDB00C083A4 /* backNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757F876B1B8F0DDB00C083A4 /* backNew.png */; };
+		757F876E1B8F0DDB00C083A4 /* backNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757F876C1B8F0DDB00C083A4 /* backNew@2x.png */; };
 		758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */; };
 		75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75886EBE1B8C50CD008B7F94 /* Profile.m */; };
 		758C71601B88588000D7423F /* sampleImage01.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715A1B88588000D7423F /* sampleImage01.JPG */; };
@@ -202,6 +204,8 @@
 		757F875A1B8EF1DC00C083A4 /* SVWebViewControllerActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewControllerActivity.m; sourceTree = "<group>"; };
 		757F875B1B8EF1DC00C083A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
 		757F875C1B8EF1DC00C083A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
+		757F876B1B8F0DDB00C083A4 /* backNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backNew.png; sourceTree = "<group>"; };
+		757F876C1B8F0DDB00C083A4 /* backNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backNew@2x.png"; sourceTree = "<group>"; };
 		758535A91B8B1E34000B480A /* ViewFullProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFullProfileVC.h; sourceTree = "<group>"; };
 		758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFullProfileVC.m; sourceTree = "<group>"; };
 		75886EBD1B8C50CD008B7F94 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
@@ -486,6 +490,15 @@
 				757F87581B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari@2x.png */,
 			);
 			path = Safari;
+			sourceTree = "<group>";
+		};
+		757F876A1B8F0DDB00C083A4 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				757F876B1B8F0DDB00C083A4 /* backNew.png */,
+				757F876C1B8F0DDB00C083A4 /* backNew@2x.png */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		7582B7131B844E79003215FE /* Preferences */ = {
@@ -999,6 +1012,7 @@
 		89D9F7621B6B5DB4004CBE3D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				757F876A1B8F0DDB00C083A4 /* General */,
 				758C71591B88588000D7423F /* SampleImages */,
 				7582B7131B844E79003215FE /* Preferences */,
 				89D9F7631B6B5DB4004CBE3D /* Chat */,
@@ -1246,10 +1260,12 @@
 				899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */,
 				897C23AD1B6B562C00FC32E9 /* LaunchScreen.xib in Resources */,
 				757F87681B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari@2x.png in Resources */,
+				757F876D1B8F0DDB00C083A4 /* backNew.png in Resources */,
 				758C8E721B87404B00FF634E /* slide@3x.png in Resources */,
 				89D9F7811B6B5DB4004CBE3D /* share_icon.png in Resources */,
 				757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */,
 				757F87651B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
+				757F876E1B8F0DDB00C083A4 /* backNew@2x.png in Resources */,
 				758C8EC01B8771D300FF634E /* 03.jpg in Resources */,
 				899170471B70B5D0000CF872 /* next@2x.png in Resources */,
 				757F87611B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,

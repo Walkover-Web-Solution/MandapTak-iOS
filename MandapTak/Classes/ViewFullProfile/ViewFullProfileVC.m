@@ -25,7 +25,7 @@
     lblGender.text = [profileObject.profilePointer valueForKey:@"gender"];
     lblDOB.text = profileObject.dob;
     lblHeight.text = [NSString stringWithFormat:@"%@",profileObject.height];
-    lblWeight.text = [NSString stringWithFormat:@"%@",profileObject.weight];
+    lblWeight.text = [NSString stringWithFormat:@"%@ Kg",profileObject.weight];
     lblTOB.text = profileObject.tob;
     lblPlaceOfBirth.text = profileObject.placeOfBirth;
     lblReligion.text = profileObject.religion;
@@ -161,7 +161,20 @@
 {
     return 2;
 }
-
+/*
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UILabel *myLabel = [[UILabel alloc] init];
+    myLabel.frame = CGRectMake(20, 8, 320, 20);
+    myLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17];
+    myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+    
+    UIView *headerView = [[UIView alloc] init];
+    [headerView addSubview:myLabel];
+    
+    return headerView;
+}
+*/
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *sectionName;

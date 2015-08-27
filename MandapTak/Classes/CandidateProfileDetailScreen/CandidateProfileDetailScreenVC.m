@@ -18,6 +18,11 @@
 {
     [super viewDidLoad];
     selectedIndex = 0;
+
+    //set user default for pop case
+    NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
+    [userDefaults setValue:@"no" forKey:@"reloadCandidateList"];
+    
     loadimagesarray = [[NSMutableArray alloc]init];
     arrImages = [[NSMutableArray alloc]init];
     arrEducation = [[NSMutableArray alloc]init];

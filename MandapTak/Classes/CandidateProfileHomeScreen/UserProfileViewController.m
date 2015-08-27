@@ -8,7 +8,7 @@
 
 #import "UserProfileViewController.h"
 #import "SWRevealViewController.h"
-#import <Parse/Parse.h>
+
 @interface UserProfileViewController (){
     
     __weak IBOutlet UILabel *lblTraits;
@@ -31,9 +31,13 @@
 
 @implementation UserProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     currentIndex = 0;
+    
+    arrCandidateProfiles = [[NSMutableArray alloc] init];
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -66,6 +70,7 @@
     user.username = @"Hussain";
     user.password = @"hussainPass";
     
+    
 //    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 //        if (!error) {
 //            //The registration was succesful, go to the wall
@@ -80,6 +85,46 @@
 //    }];
 
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
+    if (![[userDefaults valueForKey:@"reloadCandidateList"]isEqualToString:@"no"])
+    {
+        [PFCloud callFunctionInBackground:@"filterProfileLive"
+                           withParameters:@{@"oid":@"nASUvS6R7Z"}
+                                    block:^(NSArray *results, NSError *error)
+         {
+             if (!error)
+             {
+                 // this is where you handle the results and change the UI.
+                 
+                 for (PFObject *profileObj in results)
+                 {
+                     Profile *profileModel = [[Profile alloc]init];
+                     profileModel.profilePointer = profileObj;
+                     [arrCandidateProfiles addObject:profileModel];
+                 }
+                 [self showFirstProfile];
+             }
+         }];
+    }
+    else
+    {
+        [userDefaults setValue:@"yes" forKey:@"reloadCandidateList"];
+    }
+    
+}
+
+
+-(void) showFirstProfile
+{
+    Profile *firstProfile = arrCandidateProfiles[0];
+    PFObject *obj = firstProfile.profilePointer;
+    NSLog(@"candidate name and age = %@",obj[@"name"]);
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
