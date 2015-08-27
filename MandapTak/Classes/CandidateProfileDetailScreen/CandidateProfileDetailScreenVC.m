@@ -148,7 +148,8 @@
             profileObject.income = [obj valueForKey:@"package"];
             profileObject.religion = [NSString stringWithFormat:@"%@,%@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]];
             profileObject.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
-            profileObject.budget = [NSString stringWithFormat:@"Marriage Budget:%@",[obj valueForKey:@"maxMarriageBudget"]];
+            profileObject.minBudget = [NSString stringWithFormat:@"%@",[obj valueForKey:@"minMarriageBudget"]];
+            profileObject.maxBudget = [NSString stringWithFormat:@"%@",[obj valueForKey:@"maxMarriageBudget"]];
             profileObject.designation = [NSString stringWithFormat:@"%@",[obj valueForKey:@"designation"]];
             profileObject.company = [NSString stringWithFormat:@"%@",[obj valueForKey:@"placeOfWork"]];
             

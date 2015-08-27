@@ -21,7 +21,6 @@
     [self loadImages];
     [self setupCollectionView];
     
-    //NSLog(@"profile name = %@",[profileObject.profilePointer valueForKey:@"name"]);
     lblName.text = [profileObject.profilePointer valueForKey:@"name"];
     lblGender.text = [profileObject.profilePointer valueForKey:@"gender"];
     lblDOB.text = profileObject.dob;
@@ -30,7 +29,8 @@
     lblTOB.text = profileObject.tob;
     lblPlaceOfBirth.text = profileObject.placeOfBirth;
     lblReligion.text = profileObject.religion;
-    lblBudget.text = profileObject.budget;
+    lblMinBudget.text = [NSString stringWithFormat:@"Min:%@",profileObject.minBudget];
+    lblMaxBudget.text = [NSString stringWithFormat:@"Max:%@",profileObject.maxBudget];
     tableViewEducation.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self showBasicDetails:nil];
 }
@@ -42,12 +42,8 @@
 
 #pragma mark -
 #pragma mark Image Collection View methods
--(void)loadImages {
-    
-    //NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Asstes"];
-    //dataArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
-    //NSLog(@"arr = %@",dataArray);
-    //dataArray = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_1.png",@"Profile_2.png ",@"Profile-3.png", nil];
+-(void)loadImages
+{
     dataArray = arrImages;
     //pageControl.numberOfPages = [dataArray count];
 }
@@ -140,8 +136,25 @@
 
 - (IBAction)downloadBiodata:(id)sender
 {
-}
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"objectId" equalTo:@"rvkzhpnLKr"];//rvkzhpnLKr //EYKXEM27cu
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        
+    if (!error)
+    {
+        PFFile *userImageFile = [object objectForKey:@"bioData"]; //profileCropedPhoto
+        
+        NSString *fileName = [userImageFile url];
+        NSURL *URL = [NSURL URLWithString:fileName];
+        SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+        webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        [self presentViewController:webViewController animated:YES completion:NULL];
 
+    }
+    }];
+    
+}
 
 #pragma mark UITableView Data Source
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -228,7 +241,6 @@
         cell.lblTitle.text = [NSString stringWithFormat:@"%@",[degreeName valueForKey:@"name"]];
         cell.lblDetail.text = specializationName;
         cell.lblDescription.hidden = YES;
-        //cell.lblDescription.text = @"Education Description";
     }
 
     return cell;

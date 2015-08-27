@@ -24,7 +24,8 @@
 @property (strong, nonatomic) NSString *caste;
 @property (strong, nonatomic) NSString *gotra;
 @property (strong, nonatomic) NSString *income;
-@property (strong, nonatomic) NSString *budget;
+@property (strong, nonatomic) NSString *minBudget;
+@property (strong, nonatomic) NSString *maxBudget;
 @property (strong, nonatomic) NSString *designation;
 @property (strong, nonatomic) NSString *company;
 @end

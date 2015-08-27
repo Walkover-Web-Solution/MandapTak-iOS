@@ -11,6 +11,9 @@
 #import "Profile.h"
 #import "WorkEducationCell.h"
 #import "Education.h"
+#import "SVWebViewController.h"
+#import "SVModalWebViewController.h"
+
 
 @interface ViewFullProfileVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -32,6 +35,9 @@
     IBOutlet UILabel *lblReligion;
     IBOutlet UILabel *lblBudget;
     IBOutlet UITableView *tableViewEducation;
+
+    IBOutlet UILabel *lblMinBudget;
+    IBOutlet UILabel *lblMaxBudget;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)showBasicDetails:(id)sender;

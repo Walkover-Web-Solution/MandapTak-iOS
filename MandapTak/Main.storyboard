@@ -31,6 +31,8 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1044,16 +1046,28 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJw-aw-jUO">
                                         <rect key="frame" x="20" y="8" width="156" height="30"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
-                                        <state key="normal" title="Download Biodata">
+                                        <state key="normal" title="View Biodata">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="downloadBiodata:" destination="fQz-qd-Znf" eventType="touchUpInside" id="xyc-JG-ASB"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Budget for Marriage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lse-8Q-JEj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Estimated Budget for Marriage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lse-8Q-JEj">
                                         <rect key="frame" x="20" y="46" width="292" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Min:154575000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihm-GW-uTV">
+                                        <rect key="frame" x="20" y="75" width="131" height="21"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max:154575000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kz-ch-2IP">
+                                        <rect key="frame" x="171" y="75" width="131" height="21"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1096,6 +1110,8 @@
                         <outlet property="lblDOB" destination="B8A-hx-OTK" id="ee6-OM-FfV"/>
                         <outlet property="lblGender" destination="lHG-fe-uBq" id="PbE-cq-bh8"/>
                         <outlet property="lblHeight" destination="Gmi-2r-RDH" id="VXW-Xb-UfT"/>
+                        <outlet property="lblMaxBudget" destination="7Kz-ch-2IP" id="SjD-1G-Rgt"/>
+                        <outlet property="lblMinBudget" destination="ihm-GW-uTV" id="FLE-FL-AS3"/>
                         <outlet property="lblName" destination="583-aY-8MS" id="eFf-Wp-GYN"/>
                         <outlet property="lblPlaceOfBirth" destination="LIf-Ly-unu" id="yOG-54-l5x"/>
                         <outlet property="lblReligion" destination="Nte-Gi-1pK" id="kwd-IX-CEg"/>
