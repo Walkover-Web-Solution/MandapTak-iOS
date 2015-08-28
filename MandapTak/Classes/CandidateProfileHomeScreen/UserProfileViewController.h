@@ -16,7 +16,12 @@
 {
     NSMutableArray *arrCandidateProfiles,*arrEducation;
     IBOutlet UIImageView *imgViewProfilePic;
+    NSArray *arrHeight;
+    int profileNumber;
 }
 - (IBAction)showCandidateProfile:(id)sender;
+- (IBAction)pinAction:(id)sender;
+- (IBAction)likeAction:(id)sender;
+- (IBAction)dislikeAction:(id)sender;
 
 @end

@@ -37,11 +37,16 @@
     currentIndex = 0;
     
     arrCandidateProfiles = [[NSMutableArray alloc] init];
+    profileNumber = 0;
+    //store height data in array
+    arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
     //hide trait label initially
     lblTraits.hidden = YES;
     
     imgViewProfilePic.layer.cornerRadius = 80.0f;
+    imgViewProfilePic.layer.borderWidth = 2.0f;
+    imgViewProfilePic.layer.borderColor = [[UIColor whiteColor] CGColor];
     imgViewProfilePic.clipsToBounds = YES;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -115,7 +120,7 @@
                      profileModel.profilePointer = profileObj;
                      profileModel.name = profileObj[@"name"];
                      profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
-                     profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
+                     //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
                      profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
                      //caste label
                      PFObject *caste = [profileObj valueForKey:@"casteId"];
@@ -124,6 +129,9 @@
                      profileModel.religion = [religion valueForKey:@"name"];
                      profileModel.caste = [caste valueForKey:@"name"];
                      profileModel.designation = profileObj[@"designation"];
+                     
+                     //Height
+                     profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
                      /*
                      //education
                      NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
@@ -151,7 +159,7 @@
                      */
                      [arrCandidateProfiles addObject:profileModel];
                  }
-                 [self showFirstProfile];
+                 [self showProfileOfCandidateNumber:profileNumber];
              }
          }];
     }
@@ -162,12 +170,19 @@
 }
 
 
--(void) showFirstProfile
+- (NSString *)getFormattedHeightFromValue:(NSString *)value
 {
-    Profile *firstProfile = arrCandidateProfiles[0];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
+    NSString *strFiltered = [[arrHeight filteredArrayUsingPredicate:predicate] firstObject];
+    return strFiltered;
+}
+
+-(void) showProfileOfCandidateNumber:(int)number
+{
+    Profile *firstProfile = arrCandidateProfiles[profileNumber];
     PFObject *obj = firstProfile.profilePointer;
     lblName.text = firstProfile.name;
-    lblHeight.text = firstProfile.height;
+    lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
     lblProfession.text = firstProfile.designation;
     lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
     [self showBlurredImage];
@@ -220,11 +235,11 @@
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
 {
-    NSArray *detailLbl = @[@"Profile_1.png",@"Profile_2.png",@"Profile_3.png"];
-
+    /*
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         currentIndex++;
+        [self dislikeAction:nil];
     }
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
     {
@@ -234,25 +249,45 @@
     }
     if (swipe.direction == UISwipeGestureRecognizerDirectionUp)
     {
-        /*
-        NSLog(@"Swipe Up");
-        UIStoryboard *sbProfile = [UIStoryboard storyboardWithName:@"CandidateProfile" bundle:nil];
-        CandidateProfileDetailScreenVC *detailVC = [sbProfile instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
-        
-        //vc.globalCompanyId = [self.companies.companyId intValue];
-        
-        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:detailVC];
-        self.navigationController.navigationBarHidden = NO;
-        //navController.navigationBarHidden =YES;
-        [self presentViewController:navController animated:YES completion:nil];
-         */
-        
-        //[self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-        //[self prepareForSegue:@"swipeUpIdentifier" sender:nil];
         [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     }
-
-    //[self.imgProfileView setImage:[UIImage imageNamed:detailLbl[currentIndex]]];
+     */
+    CATransition *transition = [CATransition animation];
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        //if(self.currentIndex!=self.arrImages.count-1){
+            //self.currentIndex++;
+            transition.duration = .3f;
+            [transition setType:kCATransitionPush];
+            [transition setSubtype:kCATransitionFromRight];
+        [self dislikeAction:nil];
+        /*}
+        else{
+            [transition setType:kCATransition];
+            transition.duration = 0.0f;
+        }
+         */
+    }
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+      //  if(self.currentIndex!=0){
+        //    self.currentIndex--;
+            transition.duration = .3f;
+            [transition setType:kCATransitionPush];
+            [transition setSubtype:kCATransitionFromLeft];
+        /*}
+        else{
+            [transition setType:kCATransition];
+            transition.duration = 0.0f;
+        }
+         */
+    }
+    
+    
+    [self.imgProfileView.layer addAnimation:transition forKey:nil];
+    
+    //Photos *photo = self.arrImages[self.currentIndex];
+    //[imageView setImage:photo.image];
 }
 
 #pragma mark - Navigation
@@ -281,5 +316,17 @@
 - (IBAction)showCandidateProfile:(id)sender
 {
     [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
+}
+
+- (IBAction)pinAction:(id)sender {
+}
+
+- (IBAction)likeAction:(id)sender {
+}
+
+- (IBAction)dislikeAction:(id)sender
+{
+    profileNumber++;
+    [self showProfileOfCandidateNumber:profileNumber];
 }
 @end
