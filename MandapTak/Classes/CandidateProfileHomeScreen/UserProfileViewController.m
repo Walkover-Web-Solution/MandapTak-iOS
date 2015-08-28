@@ -45,7 +45,7 @@
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.3f];
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    //UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     // Setting the swipe direction.
@@ -99,11 +99,46 @@
              if (!error)
              {
                  // this is where you handle the results and change the UI.
-                 
                  for (PFObject *profileObj in results)
                  {
                      Profile *profileModel = [[Profile alloc]init];
                      profileModel.profilePointer = profileObj;
+                     profileModel.name = profileObj[@"name"];
+                     profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
+                     profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
+                     profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
+                     //caste label
+                     PFObject *caste = [profileObj valueForKey:@"casteId"];
+                     PFObject *religion = [profileObj valueForKey:@"religionId"];
+                     NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
+                     profileModel.religion = [religion valueForKey:@"name"];
+                     profileModel.caste = [caste valueForKey:@"name"];
+                     profileModel.designation = profileObj[@"designation"];
+                     
+                     //education
+                     NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
+                     NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
+                     
+                     for (int i=1; i<4; i++)
+                     {
+                         Education *educationObject = [[Education alloc]init];
+                         NSString *eduLevel = [NSString stringWithFormat:@"education%d",i];
+                         PFObject *specialization = [profileObj valueForKey:eduLevel];
+                         PFObject *degreeName = [specialization valueForKey:@"degreeId"];
+                         //NSString *specializationName = [specialization valueForKey:@"name"];
+                         NSString *strDegrees = [degreeName valueForKey:@"name"];
+                         if (strDegrees.length > 0)
+                         {
+                             [arrDegrees addObject:strDegrees];
+                             //save data for full profile screen
+                             educationObject.degree = degreeName;
+                             educationObject.specialisation = specialization;
+                             [arrEducation addObject:educationObject];
+                         }
+                     }
+                     //NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
+                     //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
+                     
                      [arrCandidateProfiles addObject:profileModel];
                  }
                  [self showFirstProfile];
@@ -114,7 +149,6 @@
     {
         [userDefaults setValue:@"yes" forKey:@"reloadCandidateList"];
     }
-    
 }
 
 
@@ -122,8 +156,11 @@
 {
     Profile *firstProfile = arrCandidateProfiles[0];
     PFObject *obj = firstProfile.profilePointer;
+    lblName.text = firstProfile.name;
+    lblHeight.text = firstProfile.height;
+    lblProfession.text = firstProfile.designation;
+    lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
     NSLog(@"candidate name and age = %@",obj[@"name"]);
-    
     
 }
 
@@ -131,15 +168,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+
+
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
+{
     NSArray *detailLbl = @[@"Profile_1.png",@"Profile_2.png",@"Profile_3.png"];
 
-    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
         currentIndex++;    
-
     }
 
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
+    {
         NSLog(@"Right Swipe");
         if(currentIndex!=0)
             currentIndex--;

@@ -12,7 +12,7 @@
 
 @interface UserProfileViewController : UIViewController
 {
-    NSMutableArray *arrCandidateProfiles;
+    NSMutableArray *arrCandidateProfiles,*arrEducation;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 

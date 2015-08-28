@@ -187,7 +187,6 @@
                 if (strDegrees.length > 0)
                 {
                     [arrDegrees addObject:strDegrees];
-                    
                     //save data for full profile screen
                     educationObject.degree = degreeName;
                     educationObject.specialisation = specialization;
