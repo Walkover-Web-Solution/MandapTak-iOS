@@ -271,6 +271,7 @@
     }
     normalCell.selectionStyle = UITableViewCellSelectionStyleNone;
     txtFldCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [txtFldCell.txtField setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
 
     degCell.selectionStyle = UITableViewCellSelectionStyleNone;
     Education * education;

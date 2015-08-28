@@ -69,9 +69,6 @@
 		75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F851B79EC2C0082D7EC /* DegreeListVC.m */; };
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
-		893E76E01B884FF50009F512 /* PhotoTweaksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76DB1B884FF50009F512 /* PhotoTweaksViewController.m */; };
-		893E76E11B884FF50009F512 /* PhotoTweakView.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76DD1B884FF50009F512 /* PhotoTweakView.m */; };
-		893E76E21B884FF50009F512 /* UIColor+Tweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76DF1B884FF50009F512 /* UIColor+Tweak.m */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
 		8947186D1B8EF49600473EEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8947186C1B8EF49600473EEF /* AssetsLibrary.framework */; };
 		894BBA681B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 894BBA671B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m */; };
@@ -88,6 +85,9 @@
 		895CD7781B81CFB500816FDE /* Education.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7771B81CFB500816FDE /* Education.m */; };
 		895CD77E1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD77D1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m */; };
 		895CD7811B81E37D00816FDE /* IndustryPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */; };
+		8960062C1B9075870007B7AB /* PhotoTweaksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896006271B9075870007B7AB /* PhotoTweaksViewController.m */; };
+		8960062D1B9075870007B7AB /* PhotoTweakView.m in Sources */ = {isa = PBXBuildFile; fileRef = 896006291B9075870007B7AB /* PhotoTweakView.m */; };
+		8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 8960062B1B9075870007B7AB /* UIColor+Tweak.m */; };
 		8967FAC51B8D797700AAC41E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8967FAC41B8D797700AAC41E /* Bolts.framework */; };
 		8967FAD21B8D838500AAC41E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8967FAD01B8D838500AAC41E /* FacebookSDK.framework */; };
 		8967FAD31B8D838500AAC41E /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8967FAD11B8D838500AAC41E /* ParseFacebookUtils.framework */; };
@@ -285,12 +285,6 @@
 		75918F881B79ECBD0082D7EC /* Degree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Degree.m; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
-		893E76DA1B884FF50009F512 /* PhotoTweaksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweaksViewController.h; sourceTree = "<group>"; };
-		893E76DB1B884FF50009F512 /* PhotoTweaksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTweaksViewController.m; sourceTree = "<group>"; };
-		893E76DC1B884FF50009F512 /* PhotoTweakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweakView.h; sourceTree = "<group>"; };
-		893E76DD1B884FF50009F512 /* PhotoTweakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTweakView.m; sourceTree = "<group>"; };
-		893E76DE1B884FF50009F512 /* UIColor+Tweak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Tweak.h"; sourceTree = "<group>"; };
-		893E76DF1B884FF50009F512 /* UIColor+Tweak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Tweak.m"; sourceTree = "<group>"; };
 		893E76E31B8871130009F512 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		893E76E41B8871130009F512 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
 		8947186C1B8EF49600473EEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -318,6 +312,12 @@
 		895CD77D1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkAfterMarriagePopoverViewController.m; sourceTree = "<group>"; };
 		895CD77F1B81E37D00816FDE /* IndustryPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndustryPopoverViewController.h; sourceTree = "<group>"; };
 		895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryPopoverViewController.m; sourceTree = "<group>"; };
+		896006261B9075870007B7AB /* PhotoTweaksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweaksViewController.h; sourceTree = "<group>"; };
+		896006271B9075870007B7AB /* PhotoTweaksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTweaksViewController.m; sourceTree = "<group>"; };
+		896006281B9075870007B7AB /* PhotoTweakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweakView.h; sourceTree = "<group>"; };
+		896006291B9075870007B7AB /* PhotoTweakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTweakView.m; sourceTree = "<group>"; };
+		8960062A1B9075870007B7AB /* UIColor+Tweak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Tweak.h"; sourceTree = "<group>"; };
+		8960062B1B9075870007B7AB /* UIColor+Tweak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Tweak.m"; sourceTree = "<group>"; };
 		8967FAC41B8D797700AAC41E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../Downloads/parse-library-1.8.1 (3)/Bolts.framework"; sourceTree = "<group>"; };
 		8967FAD01B8D838500AAC41E /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		8967FAD11B8D838500AAC41E /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -706,19 +706,6 @@
 			path = LocationPreferencePopover;
 			sourceTree = "<group>";
 		};
-		893E76D91B884FF50009F512 /* PhotoTweaks */ = {
-			isa = PBXGroup;
-			children = (
-				893E76DA1B884FF50009F512 /* PhotoTweaksViewController.h */,
-				893E76DB1B884FF50009F512 /* PhotoTweaksViewController.m */,
-				893E76DC1B884FF50009F512 /* PhotoTweakView.h */,
-				893E76DD1B884FF50009F512 /* PhotoTweakView.m */,
-				893E76DE1B884FF50009F512 /* UIColor+Tweak.h */,
-				893E76DF1B884FF50009F512 /* UIColor+Tweak.m */,
-			);
-			path = PhotoTweaks;
-			sourceTree = "<group>";
-		};
 		894BBA651B86ED15006C9D22 /* PhotosOptionPopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,6 +749,19 @@
 				895CD7801B81E37D00816FDE /* IndustryPopoverViewController.m */,
 			);
 			path = IndustryPopover;
+			sourceTree = "<group>";
+		};
+		896006251B9075870007B7AB /* PhotoTweak */ = {
+			isa = PBXGroup;
+			children = (
+				896006261B9075870007B7AB /* PhotoTweaksViewController.h */,
+				896006271B9075870007B7AB /* PhotoTweaksViewController.m */,
+				896006281B9075870007B7AB /* PhotoTweakView.h */,
+				896006291B9075870007B7AB /* PhotoTweakView.m */,
+				8960062A1B9075870007B7AB /* UIColor+Tweak.h */,
+				8960062B1B9075870007B7AB /* UIColor+Tweak.m */,
+			);
+			path = PhotoTweak;
 			sourceTree = "<group>";
 		};
 		8967FADC1B8DCC1400AAC41E /* FacebookProfilePictureViewController */ = {
@@ -1122,13 +1122,13 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				896006251B9075870007B7AB /* PhotoTweak */,
 				895B72371B902FC2006AA638 /* NSNotificationAdditions.h */,
 				895B72381B902FC2006AA638 /* NSNotificationAdditions.m */,
 				895B72341B9020A2006AA638 /* Reachability.h */,
 				895B72351B9020A2006AA638 /* Reachability.m */,
 				895B72311B902087006AA638 /* AppData.h */,
 				895B72321B902087006AA638 /* AppData.m */,
-				893E76D91B884FF50009F512 /* PhotoTweaks */,
 				89E0FA361B85C92A000BD65A /* ZCImagePicker */,
 				899C537A1B7339EB00C24DA8 /* MBProgressHUD.h */,
 				899C537B1B7339EB00C24DA8 /* MBProgressHUD.m */,
@@ -1477,7 +1477,6 @@
 				897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */,
 				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
 				89E0FA541B85C92A000BD65A /* VideoOverlay@2x.png in Resources */,
-				757BDC741B859F13003B71BD /* CandidateProfile.storyboard in Resources */,
 				8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1511,17 +1510,16 @@
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */,
-				893E76E21B884FF50009F512 /* UIColor+Tweak.m in Sources */,
 				893E76E51B8871130009F512 /* Photos.m in Sources */,
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
-				893E76E11B884FF50009F512 /* PhotoTweakView.m in Sources */,
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
 				899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */,
-				893E76E01B884FF50009F512 /* PhotoTweaksViewController.m in Sources */,
 				897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */,
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
 				89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */,
+				8960062C1B9075870007B7AB /* PhotoTweaksViewController.m in Sources */,
 				8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */,
+				8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */,
 				758C8E8B1B87546E00FF634E /* CandidateProfileGalleryVC.m in Sources */,
 				899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */,
 				758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */,
@@ -1570,6 +1568,7 @@
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
 				898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */,
 				757F87631B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome.m in Sources */,
+				8960062D1B9075870007B7AB /* PhotoTweakView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

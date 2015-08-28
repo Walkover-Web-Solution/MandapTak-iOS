@@ -207,6 +207,12 @@ NSString *selectedHeight;
     [numberToolbar sizeToFit];
     txtMaxBudget.inputAccessoryView = numberToolbar;
     txtMinBudget.inputAccessoryView = numberToolbar;
+   // [UIFont fontNamesForFamilyName:@"AmericanTypewriter"]
+    [txtMaxBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
+    [txtMinBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
+
+
+
 }
 -(void)cancelNumberPad{
     [self.view endEditing:YES];
@@ -687,10 +693,10 @@ NSString *selectedHeight;
         NSString *designation =[currentProfile valueForKey:@"designation"];
         NSString *company =[currentProfile valueForKey:@"placeOfWork"];
         NSString *package =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"package"]];
-        
-        if(name.length==0 || ![name containsString:@" "] ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||package.length==0|| [[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"minMarriageBudget"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"maxMarriageBudget"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
+
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||package.length==0|| [[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"minMarriageBudget"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"maxMarriageBudget"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
             NSMutableArray *arrMsg = [NSMutableArray array];
-            if(name.length==0 ||  ![name containsString:@" "]){
+            if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
                 [arrMsg addObject:@"valid Full Name"];
             }
             if([currentProfile valueForKey:@"currentLocation"] ==nil){

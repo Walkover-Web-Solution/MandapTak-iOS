@@ -41,6 +41,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateFirstTabObjects" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserProfile:) name:@"UpdateFirstTabWithCurrentInfo" object:nil ];
+    [txtFullName setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
 
     lblBornInPlace.hidden= YES;
     if(self.currentProfile ==nil){

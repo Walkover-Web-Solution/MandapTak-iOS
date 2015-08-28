@@ -68,8 +68,26 @@
         [self updateUserInfo];
         
     }
-
+    [txtWeight setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    //    numberToolbar.items = [NSArray arrayWithObjects:
+    //                           [[UIBarButtonItem alloc]initWithTitle:@"Hide" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+    //                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+    //                           nil];
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(cancelNumberPad)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           nil];
+    
+    
+    [numberToolbar sizeToFit];
+    txtWeight.inputAccessoryView = numberToolbar;
     // Do any additional setup after loading the view.
+}
+-(void)cancelNumberPad{
+    [self.view endEditing:YES];
+    [txtWeight resignFirstResponder];
 }
 -(void)updateCurrentProfile{
     int height  = [selectedHeightInCms intValue];
@@ -92,17 +110,21 @@
         [self.currentProfile setObject:[NSNull null] forKey:@"religionId"];
     
     [self.delegate updatedPfObjectForSecondTab:self.currentProfile];
-
 }
+
+
 -(void)updateUserInfo{
     if([self.currentProfile valueForKey:@"height"]){
         selectedHeightInCms =[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"height"]];
         NSArray *arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
         for(NSString *height in arrHeight){
-            if([height containsString:selectedHeightInCms]){
+            if ([height rangeOfString:selectedHeightInCms].location != NSNotFound) {
                 selectedHeight = height;
-                break;
             }
+//            if([height containsString:selectedHeightInCms]){
+//                selectedHeight = height;
+//                break;
+//            }
         }
         [btnHeight setTitle:selectedHeight forState:UIControlStateNormal];
         [btnHeight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
