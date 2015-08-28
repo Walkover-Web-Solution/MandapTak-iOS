@@ -38,6 +38,12 @@
     
     arrCandidateProfiles = [[NSMutableArray alloc] init];
     
+    //hide trait label initially
+    lblTraits.hidden = YES;
+    
+    imgViewProfilePic.layer.cornerRadius = 80.0f;
+    imgViewProfilePic.clipsToBounds = YES;
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -92,10 +98,14 @@
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"]isEqualToString:@"no"])
     {
+        MBProgressHUD *HUD;
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         [PFCloud callFunctionInBackground:@"filterProfileLive"
                            withParameters:@{@"oid":@"nASUvS6R7Z"}
                                     block:^(NSArray *results, NSError *error)
          {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
              if (!error)
              {
                  // this is where you handle the results and change the UI.
@@ -114,7 +124,7 @@
                      profileModel.religion = [religion valueForKey:@"name"];
                      profileModel.caste = [caste valueForKey:@"name"];
                      profileModel.designation = profileObj[@"designation"];
-                     
+                     /*
                      //education
                      NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
                      NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
@@ -138,7 +148,7 @@
                      }
                      //NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
                      //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
-                     
+                     */
                      [arrCandidateProfiles addObject:profileModel];
                  }
                  [self showFirstProfile];
@@ -160,13 +170,51 @@
     lblHeight.text = firstProfile.height;
     lblProfession.text = firstProfile.designation;
     lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
-    NSLog(@"candidate name and age = %@",obj[@"name"]);
-    
+    [self showBlurredImage];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void) showBlurredImage
+{
+    
+    //adding blur effect to image
+    UIImage *theImage = [UIImage imageNamed:@"sampleImage03.jpg"];
+    
+    //create our blurred image
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIImage *inputImage = [CIImage imageWithCGImage:theImage.CGImage];
+    
+    //setting up Gaussian Blur (we could use one of many filters offered by Core Image)
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    [filter setValue:inputImage forKey:kCIInputImageKey];
+    [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
+    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+    //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
+    CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+    
+    //add our blurred image to the scrollview
+    self.imgProfileView.image = [UIImage imageWithCGImage:cgImage];
+   
+    //[self.view bringSubviewToFront:imgViewProfilePic];
+    /*
+    // show image
+    self.imgProfileView.image = [UIImage imageNamed:@"Profile_1.png"];
+    
+    // create effect
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    
+    // add effect to an effect view
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
+    effectView.frame = self.view.frame;
+    
+    // add the effect view to the image view
+    [self.imgProfileView addSubview:effectView];
+     */
 }
 
 
@@ -178,7 +226,6 @@
     {
         currentIndex++;
     }
-
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
     {
         NSLog(@"Right Swipe");

@@ -9,10 +9,13 @@
 #import "CandidateProfileDetailScreenVC.h"
 #import <Parse/Parse.h>
 #import "Profile.h"
+#import "MBProgressHUD.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface UserProfileViewController : UIViewController
 {
     NSMutableArray *arrCandidateProfiles,*arrEducation;
+    IBOutlet UIImageView *imgViewProfilePic;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 
