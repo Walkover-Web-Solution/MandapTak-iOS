@@ -7,20 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Photos.h"
 #import <Parse/Parse.h>
 @protocol UploadPhotosProfileViewControllerDelegate
 //-(void)selectedDateOfBirth:(NSDate*)date andTime:(NSDate*)time;
--(void)updatedPfObjectForFourthTab:(PFObject *)updatedUserProfile;
+-(void)updatedPfObjectForFourthTab:(PFObject *)updatedUserProfile withNewImg:(NSArray*)arrNewImg withProfilePic:(Photos*)profilePic andCropedProfilePic:(UIImage*)cropedProfilePic;
 @end
 @interface UploadPhotosProfileViewController : UIViewController{
     __weak IBOutlet UIButton *choosePhotoBtn;
-    __weak IBOutlet UIButton *takePhotoBtn;
 }
 @property (weak, nonatomic) id <UploadPhotosProfileViewControllerDelegate> delegate;
 @property (strong, nonatomic) PFObject *currentProfile;
 
-@property (nonatomic, retain) IBOutlet UIImageView * imageView;
 @property (nonatomic, retain) IBOutlet UIButton * choosePhotoBtn;
-@property (nonatomic, retain) IBOutlet UIButton * takePhotoBtn;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIButton *btnUploadBiodata;
+@property (weak, nonatomic) IBOutlet UIImageView *biodataImgView;
 
 @end

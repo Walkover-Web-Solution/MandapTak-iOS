@@ -17,6 +17,7 @@
 #import "IndustryPopoverViewController.h"
 #import "Constants.h"
 #import "SpecialisationPopoverViewController.h"
+#import "AppData.h"
 @interface ProfileWorkAndExperienceViewController ()<WYPopoverControllerDelegate,UITableViewDelegate,DegreePopoverForProfileViewControllerDelegate,UITextFieldDelegate,WorkAfterMarriagePopoverViewControllerDelegate,IndustryPopoverViewControllerDelegate,SpecialisationPopoverViewControllerDelegate>{
     WYPopoverController *settingsPopoverController;
     
@@ -40,6 +41,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateThirdTabObjects" object:nil];
+
     arrEducationData = [NSMutableArray array];
     Education *education = [[Education alloc]init];
     [arrEducationData addObject:education];
@@ -63,29 +66,36 @@
         
     }
     if(self.currentProfile ==nil){
-        NSString *userId = @"m2vi20vsi4";
-        PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-        
-        [query whereKey:@"userId" equalTo:userId];
-        [query includeKey:@"currentLocation.Parent.Parent"];
-        [query includeKey:@"placeOfBirth.Parent.Parent"];
-        [query includeKey:@"casteId.Parent.Parent"];
-        [query includeKey:@"religionId.Parent.Parent"];
-        [query includeKey:@"gotraId.Parent.Parent"];
-        [query includeKey:@"education1.degreeId"];
-        [query includeKey:@"education2.degreeId"];
-        [query includeKey:@"education3.degreeId"];
-        [query includeKey:@"industryId"];
+        if([[AppData sharedData]isInternetAvailable]){
+            NSString *userId = @"m2vi20vsi4";
+            PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+            
+            [query whereKey:@"userId" equalTo:userId];
+            [query includeKey:@"currentLocation.Parent.Parent"];
+            [query includeKey:@"placeOfBirth.Parent.Parent"];
+            [query includeKey:@"casteId.Parent.Parent"];
+            [query includeKey:@"religionId.Parent.Parent"];
+            [query includeKey:@"gotraId.Parent.Parent"];
+            [query includeKey:@"education1.degreeId"];
+            [query includeKey:@"education2.degreeId"];
+            [query includeKey:@"education3.degreeId"];
+            [query includeKey:@"industryId"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    // The find succeeded.
+                    PFObject *obj = objects[0];
+                    self.currentProfile = obj;
+                    [self updateUserInfo];
+                }
+            }];
 
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                // The find succeeded.
-                PFObject *obj = objects[0];
-                self.currentProfile = obj;
-                [self updateUserInfo];
-            }
-        }];
-        
+        }
+        else{
+            UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+
     }
     else{
         [self updateUserInfo];
@@ -94,7 +104,44 @@
 
     // Do any additional setup after loading the view.
 }
+-(void)updateCurrentProfile{
+    if(selectedWorkAfterMarraige){
+        int type;
+        if([selectedWorkAfterMarraige isEqual:@"No"])
+            type=0;
+        else if ([selectedWorkAfterMarraige isEqual:@"Yes"])
+            type=1;
+        else if ([selectedWorkAfterMarraige isEqual:@"May be"])
+            type = 2;
+        self.currentProfile[@"workAfterMarriage"] = @(type);
+    }
+    if(selectedIndustry)
+        [self.currentProfile setObject:selectedIndustry forKey:@"industryId"];
+    if(selectedDesignation)
+        [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
+    
+    if(selectedIncome)
+        self.currentProfile[@"package"] = @([selectedIncome integerValue]);
+    if(selectedDesignation)
+        [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
+    if(selectedCompany)
+        [self.currentProfile setObject:selectedCompany forKey:@"placeOfWork"];
+    for(Education *education in arrEducationData){
+        if(education.specialisation!=nil){
+            
+            [self.currentProfile setObject:education.specialisation forKey:@"education"];
+        }
+    }
+    for(int i =0;i<arrEducationData.count;i++){
+        Education *education = arrEducationData[i];
+        if(education.specialisation !=nil){
+            [self.currentProfile setObject:education.specialisation forKey:[NSString stringWithFormat:@"education%d",i+1]];
+            
+        }
+    }
+    [self.delegate updatedPfObjectForThirdTab:self.currentProfile];
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -117,8 +164,8 @@
     if(![[self.currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]){
         selectedIndustry  = [self.currentProfile valueForKey:@"industryId"];
     }
-    if(![[self.currentProfile valueForKey:@"company"] isKindOfClass: [NSNull class]]){
-        selectedCompany  = [self.currentProfile valueForKey:@"company"];
+    if(![[self.currentProfile valueForKey:@"placeOfWork"] isKindOfClass: [NSNull class]]){
+        selectedCompany  = [self.currentProfile valueForKey:@"placeOfWork"];
     }
     if(![[self.currentProfile valueForKey:@"package"] isKindOfClass: [NSNull class]]){
         selectedIncome = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"package"] ] ;
@@ -245,10 +292,12 @@
                         normalCell.textLabel.textColor = [UIColor blackColor];
                         
                     }
-                    else
+                    else{
                         normalCell.detailTextLabel.text=@"";
-
+                        
                         normalCell.textLabel.text = @"Industry";
+                    }
+                    
                     return normalCell;
                     //Normal Cell for Industry Selction
                     break;

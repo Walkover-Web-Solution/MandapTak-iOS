@@ -44,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.currentProfile ==nil){
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateSecondTabObjects" object:nil];
         NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         
@@ -62,7 +63,6 @@
                 [self updateUserInfo];
             }
         }];
-        
     }
     else{
         [self updateUserInfo];
@@ -70,6 +70,29 @@
     }
 
     // Do any additional setup after loading the view.
+}
+-(void)updateCurrentProfile{
+    int height  = [selectedHeightInCms intValue];
+    if(txtWeight.text.length>0)
+        self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
+    if(selectedHeight)
+        self.currentProfile[@"height"] = @(height);
+    if(selectedCaste)
+        [self.currentProfile setObject:selectedCaste forKey:@"casteId"];
+    else
+        [self.currentProfile setObject:[NSNull null] forKey:@"casteId"];
+    
+    if(selectedGotra)
+        [self.currentProfile setObject:selectedGotra forKey:@"gotraId"];
+    else
+        [self.currentProfile setObject:[NSNull null] forKey:@"gotraId"];
+    if(selectedReligion)
+        [self.currentProfile setObject:selectedReligion forKey:@"religionId"];
+    else
+        [self.currentProfile setObject:[NSNull null] forKey:@"religionId"];
+    
+    [self.delegate updatedPfObjectForSecondTab:self.currentProfile];
+
 }
 -(void)updateUserInfo{
     if([self.currentProfile valueForKey:@"height"]){
@@ -84,7 +107,6 @@
         [btnHeight setTitle:selectedHeight forState:UIControlStateNormal];
         [btnHeight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [popoverController dismissPopoverAnimated:YES];
-
     }
     if([self.currentProfile valueForKey:@"weight"]){
         txtWeight.text = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"weight"] ] ;
@@ -98,12 +120,12 @@
     }
     if(![[self.currentProfile valueForKey:@"gotraId"] isKindOfClass: [NSNull class]]){
         PFObject *obj  = [self.currentProfile valueForKey:@"gotraId"];
-        selectedCaste = obj;
+        selectedGotra = obj;
         [btnGotra setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnGotra setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
     if(![[self.currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]){
         PFObject *obj  = [self.currentProfile valueForKey:@"religionId"];
-        selectedCaste = obj;
+        selectedReligion = obj;
         [btnReligion setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
 }
@@ -281,6 +303,7 @@
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
+    
     int height  = [selectedHeightInCms intValue];
     if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
@@ -323,7 +346,6 @@
         {
             return YES;
         }
-        
     }
     return YES;
 }@end

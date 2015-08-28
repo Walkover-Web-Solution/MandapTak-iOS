@@ -13,6 +13,7 @@
 #import "DateOfBirthPopoverViewController.h"
 #import "BirthTimePopoverViewController.h"
 #import "GenderViewController.h"
+#import "MBProgressHUD.h"
 @interface BasicProfileViewController ()<PopOverListViewControllerDelegate,DateOfBirthPopoverViewControllerDelegate,BirthTimePopoverViewControllerDelegate,GenderViewControllerDelegate,WYPopoverControllerDelegate>{
     __weak IBOutlet UIButton *btnBirthTime;
     __weak IBOutlet UIButton *btnPlaceOfBirth;
@@ -38,30 +39,61 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateFirstTabObjects" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserProfile:) name:@"UpdateFirstTabWithCurrentInfo" object:nil ];
+
     lblBornInPlace.hidden= YES;
     if(self.currentProfile ==nil){
-        NSString *userId = @"m2vi20vsi4";
-        PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-        
-        [query whereKey:@"userId" equalTo:userId];
-        [query includeKey:@"currentLocation.Parent.Parent"];
-        [query includeKey:@"placeOfBirth.Parent.Parent"];
-
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                // The find succeeded.
-                PFObject *obj = objects[0];
-                self.currentProfile = obj;
-                [self updateUserInfo];
-            }
-        }];
+//        MBProgressHUD * hud;
+//        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//
+//        NSString *userId = @"m2vi20vsi4";
+//        PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+//        
+//        [query whereKey:@"userId" equalTo:userId];
+//        [query includeKey:@"currentLocation.Parent.Parent"];
+//        [query includeKey:@"placeOfBirth.Parent.Parent"];
+//
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//
+//            if (!error) {
+//                // The find succeeded.
+//                PFObject *obj = objects[0];
+//                self.currentProfile = obj;
+//                [self updateUserInfo];
+//            }
+//        }];
 
     }
     else{
         [self updateUserInfo];
-
     }
     
+}
+-(void)updateUserProfile:(NSNotification*)notification{
+    NSDictionary* userInfo = notification.userInfo;
+    self.currentProfile = [userInfo valueForKey:@"currentProfile"];
+    [self updateUserInfo];
+
+}
+-(void)updateCurrentProfile{
+    [self.currentProfile setObject:txtFullName.text forKey:@"name"];
+    if(selectedDate)
+        [self.currentProfile setObject:selectedDate forKey:@"dob"];
+    if(selectedGender)
+        [self.currentProfile setObject:selectedGender forKey:@"gender"];
+    if(selectedBirthTime)
+        [self.currentProfile setObject:selectedBirthTime forKey:@"tob"];
+    if(currentLocation)
+        [self.currentProfile setObject:currentLocation.cityPointer forKey:@"currentLocation"];
+    if(placeOfBirthLocation)
+        [self.currentProfile setObject:placeOfBirthLocation.cityPointer forKey:@"placeOfBirth"];
+    NSLog(@"placeOfBirthLocation%@",placeOfBirthLocation.descriptions);
+    NSLog(@"currentLocation%@",currentLocation.descriptions);
+    
+    [self.delegate updatedPfObject:self.currentProfile];
+
 }
 -(void)updateUserInfo{
     NSDate *dob  =[self.currentProfile valueForKey:@"dob"];
@@ -285,6 +317,7 @@ if ([segue.identifier isEqualToString:@"LocationIdentifier"])
 {
     [self.view endEditing:YES];
 }
+
 /*
 #pragma mark - Navigation
 

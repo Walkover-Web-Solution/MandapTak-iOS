@@ -176,7 +176,7 @@
 
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
-        currentIndex++;    
+        currentIndex++;
     }
 
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
