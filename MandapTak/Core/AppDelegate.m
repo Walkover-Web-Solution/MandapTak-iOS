@@ -25,12 +25,12 @@
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
     [PFFacebookUtils initializeFacebook];
 
-    [PFUser logInWithUsernameInBackground:@"Hussain" password:@"hussain123"
-                                    block:^(PFUser *user, NSError *error) {
-                                        if(!error){
-                                            NSLog(@"Success");
-                                        };
-                                        }];
+//    [PFUser logInWithUsernameInBackground:@"Hussain" password:@"hussain123"
+//                                    block:^(PFUser *user, NSError *error) {
+//                                        if(!error){
+//                                            NSLog(@"Success");
+//                                        };
+//                                        }];
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     
