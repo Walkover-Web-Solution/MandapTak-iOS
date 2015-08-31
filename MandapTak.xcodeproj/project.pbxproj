@@ -94,6 +94,7 @@
 		8967FADB1B8DB0C900AAC41E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8967FADA1B8DB0C900AAC41E /* FBSDKCoreKit.framework */; };
 		8967FADF1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8967FADE1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m */; };
 		8967FAE21B8DCCCD00AAC41E /* PhotoSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8967FAE11B8DCCCD00AAC41E /* PhotoSelectionCell.m */; };
+		896D18131B943116001513A5 /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896D18121B943116001513A5 /* VerficationViewController.m */; };
 		897C239C1B6B562C00FC32E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C239B1B6B562C00FC32E9 /* main.m */; };
 		897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 897C23A01B6B562C00FC32E9 /* MandapTak.xcdatamodeld */; };
 		897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897C23A91B6B562C00FC32E9 /* Images.xcassets */; };
@@ -326,6 +327,8 @@
 		8967FADE1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebooKProfilePictureViewController.m; sourceTree = "<group>"; };
 		8967FAE01B8DCCCD00AAC41E /* PhotoSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSelectionCell.h; sourceTree = "<group>"; };
 		8967FAE11B8DCCCD00AAC41E /* PhotoSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSelectionCell.m; sourceTree = "<group>"; };
+		896D18111B943116001513A5 /* VerficationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerficationViewController.h; sourceTree = "<group>"; };
+		896D18121B943116001513A5 /* VerficationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerficationViewController.m; sourceTree = "<group>"; };
 		897C23961B6B562C00FC32E9 /* MandapTak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MandapTak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		897C239B1B6B562C00FC32E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		897C23A11B6B562C00FC32E9 /* MandapTak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MandapTak.xcdatamodel; sourceTree = "<group>"; };
@@ -773,6 +776,15 @@
 			path = FacebookProfilePictureViewController;
 			sourceTree = "<group>";
 		};
+		896D18101B9430EF001513A5 /* VerificationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				896D18111B943116001513A5 /* VerficationViewController.h */,
+				896D18121B943116001513A5 /* VerficationViewController.m */,
+			);
+			path = VerificationViewController;
+			sourceTree = "<group>";
+		};
 		897C238D1B6B562C00FC32E9 = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1090,7 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				896D18101B9430EF001513A5 /* VerificationViewController */,
 				758535A81B8B1E19000B480A /* ViewFullProfile */,
 				757BDC751B85AA2D003B71BD /* CandidateProfileDetailScreen */,
 				75918F6E1B79E9C50082D7EC /* Preferences */,
@@ -1507,6 +1520,7 @@
 				898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */,
 				89E0FA5A1B85C92A000BD65A /* ZCImagePickerController.m in Sources */,
 				8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */,
+				896D18131B943116001513A5 /* VerficationViewController.m in Sources */,
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */,

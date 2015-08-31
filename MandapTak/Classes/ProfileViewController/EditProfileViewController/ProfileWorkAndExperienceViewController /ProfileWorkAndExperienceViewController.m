@@ -69,8 +69,9 @@
         if([[AppData sharedData]isInternetAvailable]){
             NSString *userId = @"m2vi20vsi4";
             PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-            
-            [query whereKey:@"userId" equalTo:userId];
+            [query whereKey:@"objectId" equalTo:@"EYKXEM27cu"];
+
+            //[query whereKey:@"userId" equalTo:userId];
             [query includeKey:@"currentLocation.Parent.Parent"];
             [query includeKey:@"placeOfBirth.Parent.Parent"];
             [query includeKey:@"casteId.Parent.Parent"];
@@ -514,6 +515,10 @@
 
     return view;
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section)
     {
@@ -658,6 +663,13 @@
 
 }
 #pragma mark UITextFeildDelegate
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if(textField.tag ==3){
+        NSIndexPath *index = [NSIndexPath indexPathForRow:3 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    return YES;
+}
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     switch (textField.tag) {
         case 1:

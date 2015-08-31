@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
+#import "VerficationViewController.h"
 #define LOGIN_TEXTFIELD_OFFSET        (IS_IPHONE_5 ? 160 :100)
 
 @interface TutorialContentViewController ()<UITextFieldDelegate>
@@ -87,15 +88,19 @@
     
     [PFCloud callFunctionInBackground:@"sendOtp"
                        withParameters:@{@"mobile":self.txtMobNumber.text}
-                                block:^(NSArray *results, NSError *error)
+                                block:^(NSString *results, NSError *error)
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          if (!error)
          {
-             // this is where you handle the results and change the UI.
-             for (PFObject *profileObj in results)
-             {
-             }
+             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"main" bundle:nil];
+             VerficationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"VerficationViewController"];
+            [self presentViewController:vc animated:YES completion:nil];
+            
+         }
+         else{
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [alert show];
          }
      }];
 

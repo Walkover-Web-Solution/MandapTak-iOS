@@ -33,6 +33,7 @@
 #import "AppData.h"
 @interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate,FacebooKProfilePictureViewControllerDelegate>
 {
+    __weak IBOutlet UIView *navBarView;
     WYPopoverController* popoverController;
     NSUInteger currentTab;
     NSString *selectedGender;
@@ -119,7 +120,7 @@ NSString *selectedHeight;
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         
         //[query whereKey:@"userId" equalTo:userId];
-        [query whereKey:@"objectId" equalTo:@""];
+        [query whereKey:@"objectId" equalTo:@"EYKXEM27cu"];
 
         [query includeKey:@"Parent.Parent"];
         [query includeKey:@"currentLocation.Parent.Parent"];
@@ -193,6 +194,10 @@ NSString *selectedHeight;
     
     [self updateuserInfo];
     [self setToolBarOnTextField];
+    navBarView.layer.shadowColor = [UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9].CGColor;
+    navBarView.layer.shadowOffset = CGSizeMake(0, 5);
+    navBarView.layer.shadowOpacity = 1;
+    navBarView.layer.shadowRadius = 1.0;
     //[self loadData];
     //[self getAlbum];
   //[self allFacebookPhotos];
