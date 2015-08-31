@@ -15,6 +15,7 @@
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
+            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
             <string>MyriadPro-Regular</string>
@@ -101,13 +102,87 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s1d-xG-RY2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-y8-jKS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-y8-jKS">
                                 <rect key="frame" x="80" y="439" width="160" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFC-4g-qdr">
-                                <rect key="frame" x="80" y="453" width="160" height="35"/>
-                                <color key="backgroundColor" red="0.82745098039215681" green="0.41568627450980389" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your number bellow to get access" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6d-Vn-oaG">
+                                <rect key="frame" x="27" y="366" width="267" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="ASx-SL-toc"/>
+                                    <constraint firstAttribute="height" constant="21" id="tsv-Ts-JmH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="OPJ-pb-LUe">
+                                <rect key="frame" x="120" y="265" width="81" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="81" id="Goi-5y-kxE"/>
+                                    <constraint firstAttribute="height" constant="37" id="fJL-V1-8ck"/>
+                                </constraints>
+                            </pageControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5x-63-arG">
+                                <rect key="frame" x="27" y="154" width="267" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="Pgl-g8-oqF"/>
+                                    <constraint firstAttribute="height" constant="28" id="iVt-sL-CMJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-Ud-C9S">
+                                <rect key="frame" x="27" y="190" width="267" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="RP6-3y-aX2"/>
+                                    <constraint firstAttribute="height" constant="32" id="gqb-cO-OSn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Whp-hq-fD3">
+                                <rect key="frame" x="110" y="46" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="0WB-F7-Yjk"/>
+                                    <constraint firstAttribute="width" constant="100" id="usv-NO-zm1"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Bo-aO-2o5">
+                                <rect key="frame" x="80" y="405" width="160" height="42"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="rpO-LY-nZv">
+                                        <rect key="frame" x="8" y="5" width="20" height="18"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9i-Ny-Zh6">
+                                        <rect key="frame" x="0.0" y="31" width="160" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="xxx-xxx-xxxx" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYF-RM-Vgi">
+                                        <rect key="frame" x="31" y="0.0" width="123" height="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="6CF-4b-L6l" id="Bco-yA-eFU"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="I62-Nb-4sg"/>
+                                    <constraint firstAttribute="height" constant="42" id="muk-hj-TAP"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFC-4g-qdr">
+                                <rect key="frame" x="80" y="466" width="160" height="35"/>
+                                <color key="backgroundColor" red="0.82745098039215681" green="0.41568627450980389" blue="0.43137254901960786" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="PIm-bf-Avd"/>
+                                    <constraint firstAttribute="height" constant="35" id="QXS-DL-T8y"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,10 +192,10 @@
                                     <action selector="loginButtonAction:" destination="6CF-4b-L6l" eventType="touchUpInside" id="siX-pX-vbc"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kty-1r-erw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="call_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kty-1r-erw">
                                 <rect key="frame" x="88" y="413" width="20" height="18"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="xxx-xxx-xxxx" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="to3-my-x2R">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="xxx-xxx-xxxx" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="to3-my-x2R">
                                 <rect key="frame" x="111" y="408" width="123" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="14"/>
@@ -129,38 +204,35 @@
                                     <outlet property="delegate" destination="6CF-4b-L6l" id="PZl-D6-Oef"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your number bellow to get access" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6d-Vn-oaG">
-                                <rect key="frame" x="27" y="366" width="267" height="21"/>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="OPJ-pb-LUe">
-                                <rect key="frame" x="120" y="239" width="81" height="37"/>
-                            </pageControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5x-63-arG">
-                                <rect key="frame" x="27" y="154" width="267" height="28"/>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-Ud-C9S">
-                                <rect key="frame" x="27" y="190" width="267" height="32"/>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Whp-hq-fD3">
-                                <rect key="frame" x="110" y="46" width="100" height="100"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="FFC-4g-qdr" secondAttribute="centerX" id="0pA-cr-tJA"/>
+                            <constraint firstItem="Whp-hq-fD3" firstAttribute="top" secondItem="64n-Tq-w4E" secondAttribute="bottom" constant="46" id="2rH-9t-H3z"/>
+                            <constraint firstAttribute="centerX" secondItem="OPJ-pb-LUe" secondAttribute="centerX" id="6Hz-O9-Kvn"/>
                             <constraint firstItem="6pA-4W-lAP" firstAttribute="top" secondItem="s1d-xG-RY2" secondAttribute="bottom" id="Aph-F5-CcJ"/>
+                            <constraint firstItem="W5x-63-arG" firstAttribute="top" secondItem="Whp-hq-fD3" secondAttribute="bottom" constant="8" id="OD2-cM-Eai"/>
+                            <constraint firstItem="FFC-4g-qdr" firstAttribute="top" secondItem="9Bo-aO-2o5" secondAttribute="bottom" constant="19" id="Q3z-o8-xb8"/>
+                            <constraint firstItem="G6d-Vn-oaG" firstAttribute="top" secondItem="OPJ-pb-LUe" secondAttribute="bottom" constant="64" id="etA-oR-NN7"/>
+                            <constraint firstAttribute="centerX" secondItem="G6d-Vn-oaG" secondAttribute="centerX" id="fVS-LM-qhq"/>
+                            <constraint firstItem="2lM-Ud-C9S" firstAttribute="top" secondItem="W5x-63-arG" secondAttribute="bottom" constant="8" id="fmn-fS-Z0L"/>
                             <constraint firstItem="s1d-xG-RY2" firstAttribute="leading" secondItem="pAM-QA-kfn" secondAttribute="leading" id="hvt-ty-fzn"/>
+                            <constraint firstItem="6pA-4W-lAP" firstAttribute="top" secondItem="FFC-4g-qdr" secondAttribute="bottom" constant="67" id="jpH-my-xq7"/>
+                            <constraint firstAttribute="centerX" secondItem="9Bo-aO-2o5" secondAttribute="centerX" id="lTK-hs-UlJ"/>
                             <constraint firstItem="s1d-xG-RY2" firstAttribute="top" secondItem="pAM-QA-kfn" secondAttribute="top" id="mZa-ux-57j"/>
+                            <constraint firstAttribute="centerX" secondItem="W5x-63-arG" secondAttribute="centerX" id="oW8-6g-xPq"/>
+                            <constraint firstAttribute="centerY" secondItem="OPJ-pb-LUe" secondAttribute="centerY" id="rOL-t7-RKr"/>
                             <constraint firstAttribute="trailing" secondItem="s1d-xG-RY2" secondAttribute="trailing" id="wRU-oT-8T4"/>
+                            <constraint firstAttribute="centerX" secondItem="Whp-hq-fD3" secondAttribute="centerX" id="yVA-8D-vYS"/>
+                            <constraint firstAttribute="centerX" secondItem="2lM-Ud-C9S" secondAttribute="centerX" id="yqt-ay-mrW"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="J6l-y8-jKS"/>
+                                <exclude reference="kty-1r-erw"/>
+                                <exclude reference="to3-my-x2R"/>
+                            </mask>
+                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -173,7 +245,7 @@
                         <outlet property="lblTitle" destination="W5x-63-arG" id="aXY-IB-Ihy"/>
                         <outlet property="lbldetail" destination="2lM-Ud-C9S" id="EgC-el-Tax"/>
                         <outlet property="pageControl" destination="OPJ-pb-LUe" id="s3H-Gy-kXC"/>
-                        <outlet property="txtMobNumber" destination="to3-my-x2R" id="29v-qO-tVf"/>
+                        <outlet property="txtMobNumber" destination="GYF-RM-Vgi" id="33r-Ly-Elt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crf-wf-cMW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1186,7 +1258,7 @@
         <!--Verfication View Controller-->
         <scene sceneID="eVm-Ij-1lI">
             <objects>
-                <viewController id="8HW-Rf-nRv" customClass="VerficationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerficationViewController" id="8HW-Rf-nRv" customClass="VerficationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0iD-jA-YNA"/>
                         <viewControllerLayoutGuide type="bottom" id="gLZ-mE-3ty"/>
@@ -1195,16 +1267,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackG.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ewq-Rg-cVh">
-                                <rect key="frame" x="0.0" y="-2" width="320" height="568"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Weeding_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ewq-Rg-cVh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gW-9N-RI3">
-                                <rect key="frame" x="120" y="447" width="80" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grP-6l-5nN">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grP-6l-5nN">
                                 <rect key="frame" x="80" y="461" width="160" height="35"/>
                                 <color key="backgroundColor" red="0.82745098039999998" green="0.41568627450000001" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="stT-Jz-soR"/>
+                                    <constraint firstAttribute="height" constant="35" id="uPl-Yh-DwV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
                                 <state key="normal" title="Verify">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1215,15 +1287,6 @@
                                     <action selector="verifyButtonAction:" destination="8HW-Rf-nRv" eventType="touchUpInside" id="GJr-gD-M7a"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pqd-wt-vNR">
-                                <rect key="frame" x="151" y="415" width="47" height="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="6CF-4b-L6l" id="uYv-uR-uBX"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the code you just recieved on mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2n-LM-kJY">
                                 <rect key="frame" x="16" y="368" width="288" height="21"/>
                                 <constraints>
@@ -1251,23 +1314,54 @@
                                     <constraint firstAttribute="width" constant="100" id="qvH-rl-jJf"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6em-QZ-Ebg">
-                                <rect key="frame" x="123" y="421" width="20" height="18"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeC-yG-VmM">
+                                <rect key="frame" x="100" y="406" width="120" height="39"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CQ-3m-FEj">
+                                        <rect key="frame" x="13" y="35" width="107" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IwQ-X7-SI2">
+                                        <rect key="frame" x="44" y="3" width="72" height="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="6CF-4b-L6l" id="SoI-ul-QL9"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="verify_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="acZ-L7-nPf">
+                                        <rect key="frame" x="16" y="9" width="20" height="18"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="VVf-n2-fe9"/>
+                                    <constraint firstAttribute="width" constant="120" id="iWv-KI-HNM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2eV-wg-hf1" firstAttribute="top" secondItem="0iD-jA-YNA" secondAttribute="bottom" constant="60" id="4aG-Qx-YlK"/>
+                            <constraint firstItem="grP-6l-5nN" firstAttribute="top" secondItem="VeC-yG-VmM" secondAttribute="bottom" constant="16" id="5fa-yz-ucG"/>
                             <constraint firstAttribute="centerX" secondItem="HXH-PI-wgH" secondAttribute="centerX" id="5n2-lF-N6Q"/>
                             <constraint firstItem="I2n-LM-kJY" firstAttribute="top" secondItem="HXH-PI-wgH" secondAttribute="bottom" constant="126" id="7Yu-H5-L9A"/>
+                            <constraint firstItem="Ewq-Rg-cVh" firstAttribute="leading" secondItem="di5-is-e3r" secondAttribute="leading" id="CJm-HM-XnV"/>
+                            <constraint firstAttribute="trailing" secondItem="Ewq-Rg-cVh" secondAttribute="trailing" id="F3b-Qd-H0x"/>
                             <constraint firstItem="HXH-PI-wgH" firstAttribute="top" secondItem="2eV-wg-hf1" secondAttribute="bottom" constant="13" id="FIc-hN-yCG"/>
+                            <constraint firstAttribute="centerX" secondItem="VeC-yG-VmM" secondAttribute="centerX" id="ISr-At-c66"/>
+                            <constraint firstItem="Ewq-Rg-cVh" firstAttribute="top" secondItem="di5-is-e3r" secondAttribute="top" id="QcT-2b-SWC"/>
                             <constraint firstAttribute="centerX" secondItem="2eV-wg-hf1" secondAttribute="centerX" id="WXP-0i-ErE"/>
+                            <constraint firstItem="gLZ-mE-3ty" firstAttribute="top" secondItem="grP-6l-5nN" secondAttribute="bottom" constant="72" id="Wbw-E6-0db"/>
+                            <constraint firstItem="gLZ-mE-3ty" firstAttribute="top" secondItem="Ewq-Rg-cVh" secondAttribute="bottom" id="cGp-an-jTv"/>
+                            <constraint firstAttribute="centerX" secondItem="grP-6l-5nN" secondAttribute="centerX" id="dGq-al-l5u"/>
                             <constraint firstAttribute="centerX" secondItem="I2n-LM-kJY" secondAttribute="centerX" id="vd1-eb-YtO"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="txtVerfication" destination="pqd-wt-vNR" id="lm5-tK-Saj"/>
+                        <outlet property="txtVerfication" destination="IwQ-X7-SI2" id="xjf-fy-tMP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpu-rG-0jQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1277,10 +1371,11 @@
     </scenes>
     <resources>
         <image name="01.png" width="512" height="512"/>
-        <image name="BackG.png" width="414" height="736"/>
         <image name="Profile-3.png" width="1024" height="1536"/>
+        <image name="Weeding_bg.png" width="414" height="736"/>
         <image name="backNew.png" width="44" height="44"/>
         <image name="calendar" width="32" height="32"/>
+        <image name="call_Icon.png" width="64" height="64"/>
         <image name="call_icon.png" width="64" height="64"/>
         <image name="frame" width="32" height="32"/>
         <image name="gender" width="32" height="32"/>
@@ -1296,5 +1391,6 @@
         <image name="slide.png" width="30" height="30"/>
         <image name="unlike.png" width="40" height="40"/>
         <image name="userProfile" width="32" height="32"/>
+        <image name="verify_Icon.png" width="64" height="64"/>
     </resources>
 </document>

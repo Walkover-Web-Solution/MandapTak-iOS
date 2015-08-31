@@ -17,9 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //235,84,80  EB5450
-    _pageTitles = @[@"Perfect Match", @"No Fake Profiles", @"No Spam Messages", @"Free Regular Update",@"See Matching Traits",@""];
-    NSArray *detailLbl = @[@"Meet your perfect partner right here",@"All profiles are verified by MandapTak team",@"Only matches can send messsage to each other",@"See the number of traits out of 36 matching for each profile you see",@""];
-    _pageImages = @[@"BackG", @"BackG",@"BackG",@"BackG",@"BackG",];
+   // _pageTitles = @[@"Perfect Match", @"No Fake Profiles", @"No Spam Messages", @"Free Regular Update",@"See Matching Traits",@""];
+   // _pageTitles = @[@"Perfect Match", @"No Fake Profiles", @"No Spam Messages", @"Free Regular Update",@""];
+    _pageTitles = @[@"Perfect Match", @"No Fake Profiles", @"No Spam Messages",@""];
+
+  //  NSArray *detailLbl = @[@"Meet your perfect partner right here",@"All profiles are verified by MandapTak team",@"Only matches can send messsage to each other",@"See the number of traits out of 36 matching for each profile you see",@""];
+    NSArray *detailLbl = @[@"Meet your perfect partner right here",@"All profiles are verified by MandapTak team",@"Only matches can send messsage to each other",@""];
+
+    _pageImages = @[@"Matches_bg", @"Fake_icon_bg",@"Spam_bg",@"Weeding_bg",];
     
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
