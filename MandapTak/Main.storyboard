@@ -1191,7 +1191,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundImages.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ewq-Rg-cVh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackG.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ewq-Rg-cVh">
                                 <rect key="frame" x="0.0" y="-2" width="320" height="568"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gW-9N-RI3">
@@ -1240,7 +1240,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-wg-hf1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01.png" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-wg-hf1">
                                 <rect key="frame" x="110" y="80" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="IpU-Nj-Xp3"/>
@@ -1272,9 +1272,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="01.png" width="512" height="512"/>
+        <image name="BackG.png" width="414" height="736"/>
         <image name="Profile-3.png" width="1024" height="1536"/>
         <image name="backNew.png" width="44" height="44"/>
-        <image name="backgroundImages.png" width="320" height="568"/>
         <image name="calendar" width="32" height="32"/>
         <image name="call_icon.png" width="64" height="64"/>
         <image name="frame" width="32" height="32"/>

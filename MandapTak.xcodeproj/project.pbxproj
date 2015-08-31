@@ -95,6 +95,8 @@
 		8967FADF1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8967FADE1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m */; };
 		8967FAE21B8DCCCD00AAC41E /* PhotoSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8967FAE11B8DCCCD00AAC41E /* PhotoSelectionCell.m */; };
 		896D18131B943116001513A5 /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896D18121B943116001513A5 /* VerficationViewController.m */; };
+		896D18171B9442DD001513A5 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D18151B9442DD001513A5 /* 01.png */; };
+		896D18191B94434D001513A5 /* BackG.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D18181B94434D001513A5 /* BackG.png */; };
 		897C239C1B6B562C00FC32E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C239B1B6B562C00FC32E9 /* main.m */; };
 		897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 897C23A01B6B562C00FC32E9 /* MandapTak.xcdatamodeld */; };
 		897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897C23A91B6B562C00FC32E9 /* Images.xcassets */; };
@@ -329,6 +331,8 @@
 		8967FAE11B8DCCCD00AAC41E /* PhotoSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSelectionCell.m; sourceTree = "<group>"; };
 		896D18111B943116001513A5 /* VerficationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerficationViewController.h; sourceTree = "<group>"; };
 		896D18121B943116001513A5 /* VerficationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerficationViewController.m; sourceTree = "<group>"; };
+		896D18151B9442DD001513A5 /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
+		896D18181B94434D001513A5 /* BackG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackG.png; sourceTree = "<group>"; };
 		897C23961B6B562C00FC32E9 /* MandapTak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MandapTak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		897C239B1B6B562C00FC32E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		897C23A11B6B562C00FC32E9 /* MandapTak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MandapTak.xcdatamodel; sourceTree = "<group>"; };
@@ -1201,6 +1205,8 @@
 		89D9F76B1B6B5DB4004CBE3D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				896D18181B94434D001513A5 /* BackG.png */,
+				896D18151B9442DD001513A5 /* 01.png */,
 				89D9F76E1B6B5DB4004CBE3D /* call_icon.png */,
 				89D9F76F1B6B5DB4004CBE3D /* Fake_icon.png */,
 				89D9F76C1B6B5DB4004CBE3D /* backgroundImage.png */,
@@ -1411,6 +1417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				896D18191B94434D001513A5 /* BackG.png in Resources */,
 				89E0FA531B85C92A000BD65A /* VideoOverlay.png in Resources */,
 				89D9F7871B6B5DB4004CBE3D /* Matches_icon.png in Resources */,
 				758C8EB81B87691000FF634E /* CMFGalleryCell.xib in Resources */,
@@ -1488,6 +1495,7 @@
 				758C71621B88588000D7423F /* sampleImage03.JPG in Resources */,
 				758C8E7A1B87412800FF634E /* like@2x.png in Resources */,
 				897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */,
+				896D18171B9442DD001513A5 /* 01.png in Resources */,
 				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
 				89E0FA541B85C92A000BD65A /* VideoOverlay@2x.png in Resources */,
 				8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */,

@@ -19,7 +19,7 @@
     //235,84,80  EB5450
     _pageTitles = @[@"Perfect Match", @"No Fake Profiles", @"No Spam Messages", @"Free Regular Update",@"See Matching Traits",@""];
     NSArray *detailLbl = @[@"Meet your perfect partner right here",@"All profiles are verified by MandapTak team",@"Only matches can send messsage to each other",@"See the number of traits out of 36 matching for each profile you see",@""];
-    _pageImages = @[@"backgroundImages", @"backgroundImages",@"backgroundImages",@"backgroundImages",@"backgroundImages",];
+    _pageImages = @[@"BackG", @"BackG",@"BackG",@"BackG",@"BackG",];
     
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
