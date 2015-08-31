@@ -114,52 +114,60 @@
              if (!error)
              {
                  // this is where you handle the results and change the UI.
-                 for (PFObject *profileObj in results)
+                 if (results.count > 0)
                  {
-                     Profile *profileModel = [[Profile alloc]init];
-                     profileModel.profilePointer = profileObj;
-                     profileModel.name = profileObj[@"name"];
-                     profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
-                     //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
-                     profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
-                     //caste label
-                     PFObject *caste = [profileObj valueForKey:@"casteId"];
-                     PFObject *religion = [profileObj valueForKey:@"religionId"];
-                     NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
-                     profileModel.religion = [religion valueForKey:@"name"];
-                     profileModel.caste = [caste valueForKey:@"name"];
-                     profileModel.designation = profileObj[@"designation"];
-                     
-                     //Height
-                     profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
-                     /*
-                     //education
-                     NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
-                     NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
-                     
-                     for (int i=1; i<4; i++)
+                     for (PFObject *profileObj in results)
                      {
-                         Education *educationObject = [[Education alloc]init];
-                         NSString *eduLevel = [NSString stringWithFormat:@"education%d",i];
-                         PFObject *specialization = [profileObj valueForKey:eduLevel];
-                         PFObject *degreeName = [specialization valueForKey:@"degreeId"];
-                         //NSString *specializationName = [specialization valueForKey:@"name"];
-                         NSString *strDegrees = [degreeName valueForKey:@"name"];
-                         if (strDegrees.length > 0)
-                         {
-                             [arrDegrees addObject:strDegrees];
-                             //save data for full profile screen
-                             educationObject.degree = degreeName;
-                             educationObject.specialisation = specialization;
-                             [arrEducation addObject:educationObject];
-                         }
+                         Profile *profileModel = [[Profile alloc]init];
+                         profileModel.profilePointer = profileObj;
+                         profileModel.name = profileObj[@"name"];
+                         profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
+                         //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
+                         profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
+                         //caste label
+                         PFObject *caste = [profileObj valueForKey:@"casteId"];
+                         PFObject *religion = [profileObj valueForKey:@"religionId"];
+                         NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
+                         profileModel.religion = [religion valueForKey:@"name"];
+                         profileModel.caste = [caste valueForKey:@"name"];
+                         profileModel.designation = profileObj[@"designation"];
+                         
+                         //Height
+                         profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
+                         /*
+                          //education
+                          NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
+                          NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
+                          
+                          for (int i=1; i<4; i++)
+                          {
+                          Education *educationObject = [[Education alloc]init];
+                          NSString *eduLevel = [NSString stringWithFormat:@"education%d",i];
+                          PFObject *specialization = [profileObj valueForKey:eduLevel];
+                          PFObject *degreeName = [specialization valueForKey:@"degreeId"];
+                          //NSString *specializationName = [specialization valueForKey:@"name"];
+                          NSString *strDegrees = [degreeName valueForKey:@"name"];
+                          if (strDegrees.length > 0)
+                          {
+                          [arrDegrees addObject:strDegrees];
+                          //save data for full profile screen
+                          educationObject.degree = degreeName;
+                          educationObject.specialisation = specialization;
+                          [arrEducation addObject:educationObject];
+                          }
+                          }
+                          //NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
+                          //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
+                          */
+                         [arrCandidateProfiles addObject:profileModel];
                      }
-                     //NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
-                     //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
-                     */
-                     [arrCandidateProfiles addObject:profileModel];
+                     [self showProfileOfCandidateNumber:profileNumber];
                  }
-                 [self showProfileOfCandidateNumber:profileNumber];
+                 else
+                 {
+                     //open blank View
+                     [self.view bringSubviewToFront:blankView];
+                 }
              }
          }];
     }
@@ -258,10 +266,13 @@
     {
         //if(self.currentIndex!=self.arrImages.count-1){
             //self.currentIndex++;
+        if (arrCandidateProfiles.count > 0)
+        {
             transition.duration = .3f;
             [transition setType:kCATransitionPush];
             [transition setSubtype:kCATransitionFromRight];
-        [self dislikeAction:nil];
+            [self dislikeAction:nil];
+        }
         /*}
         else{
             [transition setType:kCATransition];
@@ -284,7 +295,7 @@
     }
     
     
-    [self.imgProfileView.layer addAnimation:transition forKey:nil];
+    [self.view.layer addAnimation:transition forKey:nil];
     
     //Photos *photo = self.arrImages[self.currentIndex];
     //[imageView setImage:photo.image];
@@ -326,7 +337,10 @@
 
 - (IBAction)dislikeAction:(id)sender
 {
-    profileNumber++;
-    [self showProfileOfCandidateNumber:profileNumber];
+    if (arrCandidateProfiles.count >0)
+    {
+        profileNumber++;
+        [self showProfileOfCandidateNumber:profileNumber];
+    }
 }
 @end

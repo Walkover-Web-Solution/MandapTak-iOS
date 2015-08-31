@@ -18,6 +18,7 @@
     IBOutlet UIImageView *imgViewProfilePic;
     NSArray *arrHeight;
     int profileNumber;
+    IBOutlet UIView *blankView;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;

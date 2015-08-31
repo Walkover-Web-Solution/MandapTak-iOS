@@ -185,6 +185,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NM5-m3-e5L">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Profiles to display..!!!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMx-xG-2hy">
+                                        <rect key="frame" x="19" y="296" width="284" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTJ-Bk-uH2">
                                 <rect key="frame" x="0.0" y="117" width="320" height="44"/>
                                 <subviews>
@@ -271,9 +283,6 @@
                                     <action selector="showCandidateProfile:" destination="fCU-mN-wiz" eventType="touchUpInside" id="cvR-t1-Yyr"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sampleImage03.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="4DL-br-3h2">
-                                <rect key="frame" x="80" y="117" width="160" height="160"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xp-Gn-WON">
                                 <rect key="frame" x="43" y="487" width="38" height="30"/>
                                 <state key="normal" title="Undo">
@@ -307,6 +316,9 @@
                                     <action selector="pinAction:" destination="fCU-mN-wiz" eventType="touchUpInside" id="73s-uN-2gs"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sampleImage03.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="4DL-br-3h2">
+                                <rect key="frame" x="80" y="117" width="160" height="160"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -326,6 +338,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="blankView" destination="NM5-m3-e5L" id="stM-hc-0vo"/>
                         <outlet property="btnMatches" destination="E1C-Ty-0D4" id="2iN-Sh-y0b"/>
                         <outlet property="btnMenu" destination="0Zk-XA-iRb" id="OO3-gd-Xrf"/>
                         <outlet property="btnShare" destination="phG-7k-C1b" id="q7J-aF-F5t"/>
