@@ -13,10 +13,11 @@
 @interface VerficationViewController ()<UITextFieldDelegate>
 
 - (IBAction)loginButtonAction:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *txtMobNumber;
+@property (weak, nonatomic) IBOutlet UITextField *txtVerfication;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lbldetail;
+- (IBAction)verifyButtonAction:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
 @end
@@ -37,17 +38,17 @@
     [UIView commitAnimations];
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.txtMobNumber resignFirstResponder];
+    [self.txtVerfication resignFirstResponder];
     return YES;
 }
 -(void) textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == self.txtMobNumber) {
+    if (textField == self.txtVerfication) {
         [self performKeyboardAnimation:-LOGIN_TEXTFIELD_OFFSET];
     }
     
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField == self.txtMobNumber) {
+    if (textField == self.txtVerfication) {
         [self performKeyboardAnimation:LOGIN_TEXTFIELD_OFFSET];
     }
 }
@@ -76,5 +77,7 @@
     [UIView commitAnimations];
 
   //  [self setNeedsUpdateConstraints];
+}
+- (IBAction)verifyButtonAction:(id)sender {
 }
 @end
