@@ -118,7 +118,9 @@ NSString *selectedHeight;
         NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         
-        [query whereKey:@"userId" equalTo:userId];
+        //[query whereKey:@"userId" equalTo:userId];
+        [query whereKey:@"objectId" equalTo:@""];
+
         [query includeKey:@"Parent.Parent"];
         [query includeKey:@"currentLocation.Parent.Parent"];
         [query includeKey:@"placeOfBirth.Parent.Parent"];

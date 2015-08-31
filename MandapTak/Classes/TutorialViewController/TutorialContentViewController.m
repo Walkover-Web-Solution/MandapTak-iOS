@@ -8,6 +8,8 @@
 
 #import "TutorialContentViewController.h"
 #import "Constants.h"
+#import "MBProgressHUD.h"
+#import <Parse/Parse.h>
 #define LOGIN_TEXTFIELD_OFFSET        (IS_IPHONE_5 ? 160 :100)
 
 @interface TutorialContentViewController ()<UITextFieldDelegate>
@@ -80,5 +82,23 @@
 
 - (IBAction)loginButtonAction:(id)sender {
     
+    MBProgressHUD *HUD;
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [PFCloud callFunctionInBackground:@"sendOtp"
+                       withParameters:@{@"mobile":self.txtMobNumber.text}
+                                block:^(NSArray *results, NSError *error)
+     {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         if (!error)
+         {
+             // this is where you handle the results and change the UI.
+             for (PFObject *profileObj in results)
+             {
+             }
+         }
+     }];
+
 }
+
 @end
