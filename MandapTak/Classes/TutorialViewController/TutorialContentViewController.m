@@ -83,26 +83,26 @@
 
 - (IBAction)loginButtonAction:(id)sender {
     
-    MBProgressHUD *HUD;
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [PFCloud callFunctionInBackground:@"sendOtp"
-                       withParameters:@{@"mobile":self.txtMobNumber.text}
-                                block:^(NSString *results, NSError *error)
-     {
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
-         if (!error)
-         {
-             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"main" bundle:nil];
-             VerficationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"VerficationViewController"];
-            [self presentViewController:vc animated:YES completion:nil];
-            
-         }
-         else{
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-             [alert show];
-         }
-     }];
+//    MBProgressHUD *HUD;
+//    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    
+//    [PFCloud callFunctionInBackground:@"sendOtp"
+//                       withParameters:@{@"mobile":self.txtMobNumber.text}
+//                                block:^(NSString *results, NSError *error)
+//     {
+//         [MBProgressHUD hideHUDForView:self.view animated:YES];
+//         if (!error)
+//         {
+//             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"main" bundle:nil];
+//             VerficationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"VerficationViewController"];
+//            [self presentViewController:vc animated:YES completion:nil];
+//            
+//         }
+//         else{
+//             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//             [alert show];
+//         }
+//     }];
 
 }
 

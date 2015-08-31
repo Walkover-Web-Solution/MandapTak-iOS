@@ -10,6 +10,7 @@
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
+            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
             <string>MyriadPro-Regular</string>
@@ -1193,18 +1194,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundImages.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ewq-Rg-cVh">
                                 <rect key="frame" x="0.0" y="-2" width="320" height="568"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bqg-LE-caf">
-                                <rect key="frame" x="10" y="8" width="320" height="568"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gW-9N-RI3">
-                                <rect key="frame" x="90" y="447" width="160" height="1"/>
+                                <rect key="frame" x="120" y="447" width="80" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grP-6l-5nN">
-                                <rect key="frame" x="90" y="461" width="160" height="35"/>
+                                <rect key="frame" x="80" y="461" width="160" height="35"/>
                                 <color key="backgroundColor" red="0.82745098039999998" green="0.41568627450000001" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Login">
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
+                                <state key="normal" title="Verify">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1212,11 +1210,8 @@
                                     <action selector="loginButtonAction:" destination="6CF-4b-L6l" eventType="touchUpInside" id="8eN-Sa-tm1"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6em-QZ-Ebg">
-                                <rect key="frame" x="98" y="421" width="20" height="18"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="xxx-xxx-xxxx" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pqd-wt-vNR">
-                                <rect key="frame" x="121" y="416" width="123" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pqd-wt-vNR">
+                                <rect key="frame" x="151" y="415" width="47" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1250,6 +1245,9 @@
                                     <constraint firstAttribute="height" constant="100" id="IpU-Nj-Xp3"/>
                                     <constraint firstAttribute="width" constant="100" id="qvH-rl-jJf"/>
                                 </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6em-QZ-Ebg">
+                                <rect key="frame" x="123" y="421" width="20" height="18"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

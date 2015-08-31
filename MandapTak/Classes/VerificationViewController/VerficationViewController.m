@@ -60,14 +60,21 @@
     // Save the height of keyboard and animation duration
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
-  
+    [UIView beginAnimations:@"moveKeyboard" context:nil];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardRect.size.height, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
   //  [self setNeedsUpdateConstraints];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     // Reset the desired height (keep the duration)
-    
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
+    [UIView beginAnimations:@"moveKeyboard" context:nil];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardRect.size.height, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
+
   //  [self setNeedsUpdateConstraints];
 }
 @end

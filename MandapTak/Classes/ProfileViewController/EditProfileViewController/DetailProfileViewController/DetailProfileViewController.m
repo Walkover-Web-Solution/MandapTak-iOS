@@ -353,9 +353,14 @@
     NSString *sepStr;
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if([textField.text containsString:@"."]&&[string containsString:@"."]){
+    
+    if ([textField.text rangeOfString:@"."].location != NSNotFound &&[string rangeOfString:@"."].location != NSNotFound)
         return NO;
-    }
+
+
+//    if([textField.text containsString:@"."]&&[string containsString:@"."]){
+//        return NO;
+//    }
     NSArray *sep = [newString componentsSeparatedByString:@"."];
     if([sep count]>=2)
     {

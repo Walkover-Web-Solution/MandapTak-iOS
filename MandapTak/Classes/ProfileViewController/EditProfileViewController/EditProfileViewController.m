@@ -120,7 +120,7 @@ NSString *selectedHeight;
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         
         //[query whereKey:@"userId" equalTo:userId];
-        [query whereKey:@"objectId" equalTo:@"EYKXEM27cu"];
+        [query whereKey:@"objectId" equalTo:@"dlAGPMIl2R"];
 
         [query includeKey:@"Parent.Parent"];
         [query includeKey:@"currentLocation.Parent.Parent"];
@@ -845,7 +845,7 @@ NSString *selectedHeight;
     else
         btnDoneUp.hidden = YES;
 
-    if(![[currentProfile valueForKey:@"minMarriageBudget"] isKindOfClass: [NSNull class]]){
+    if([currentProfile valueForKey:@"minMarriageBudget"] != nil ){
         txtMinBudget.text = [NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"minMarriageBudget"] ] ;
     }
     if(![[currentProfile valueForKey:@"profilePic"] isKindOfClass: [NSNull class]]){
@@ -863,7 +863,7 @@ NSString *selectedHeight;
     }
     
 
-    if(![[currentProfile valueForKey:@"maxMarriageBudget"] isKindOfClass: [NSNull class]]){
+    if([currentProfile valueForKey:@"maxMarriageBudget"] != nil ){
         txtMaxBudget.text = [NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"maxMarriageBudget"] ] ;
     }
     if(![[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]){
