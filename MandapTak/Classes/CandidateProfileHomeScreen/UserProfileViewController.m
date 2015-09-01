@@ -34,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     currentIndex = 0;
     
     arrCandidateProfiles = [[NSMutableArray alloc] init];
@@ -62,9 +63,8 @@
     // Setting the swipe direction.
 
     [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
-
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-   // [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
     //[self.view addGestureRecognizer:swipeRight];
         // Set the side bar button action. When it's tapped, it'll show up the sidebar.
     _sidebarButton.target = self.revealViewController;
@@ -73,9 +73,11 @@
     // Set the gesture
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
     [self.view addGestureRecognizer:swipeUp];
 
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
+    [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeRight];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeUp];
     PFUser *user = [PFUser user];
     user.username = @"Hussain";
@@ -127,7 +129,7 @@
                          //caste label
                          PFObject *caste = [profileObj valueForKey:@"casteId"];
                          PFObject *religion = [profileObj valueForKey:@"religionId"];
-                         NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
+                         //NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
                          profileModel.religion = [religion valueForKey:@"name"];
                          profileModel.caste = [caste valueForKey:@"name"];
                          profileModel.designation = profileObj[@"designation"];
@@ -189,11 +191,69 @@
 {
     Profile *firstProfile = arrCandidateProfiles[profileNumber];
     PFObject *obj = firstProfile.profilePointer;
+    NSString *objID = obj.objectId;
     lblName.text = firstProfile.name;
     lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
     lblProfession.text = firstProfile.designation;
     lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
-    [self showBlurredImage];
+    [self getUserProfilePicForUser:objID];
+    [self showBlurredImageForUser:objID];
+}
+
+-(void) getUserProfilePicForUser:(NSString *)objectId
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"objectId" equalTo:objectId]; //7ZFYFmiMV9 //EYKXEM27cu   //IRQBKPDl0E
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             // The find succeeded.
+             [self retrieveImagesFromObject:objects[0]];
+         }
+         else
+         {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+         //
+         //[self performSelector:@selector(retrieveImagesFromArray) withObject:nil afterDelay:0.5];
+     }];
+
+}
+
+
+-(void) retrieveImagesFromObject:(PFObject *)object
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFFile *userImageFile = object[@"profilePic"];
+    if (userImageFile)
+    {
+        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+         {
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             if (!error)
+             {
+                 
+                 UIImage *image = [UIImage imageWithData:imageData];
+                 //[arrImages addObject:image];
+                 imgViewProfilePic.image = image;
+             }
+             else
+             {
+                 NSLog(@"Error = > %@",error);
+             }
+             //add our blurred image to the scrollview
+             //profileImageView.image = arrImages[0];
+         }];
+    }
+    else
+    {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        imgViewProfilePic.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+        imgViewProfilePic.image = [UIImage imageNamed:@"userProfile"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -202,47 +262,111 @@
 }
 
 
--(void) showBlurredImage
+-(void) showBlurredImageForUser:(NSString *)objectId
 {
+    //get primary image of user
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:objectId]];   //@"EYKXEM27cu"
+    [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
     
-    //adding blur effect to image
-    UIImage *theImage = [UIImage imageNamed:@"sampleImage03.jpg"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             if (objects.count > 0)
+             {
+                 [self getPrimaryImageFromObject:objects[0]];
+             }
+
+         }
+         else
+         {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+         //
+         //[self performSelector:@selector(retrieveImagesFromArray) withObject:nil afterDelay:0.5];
+     }];
     
-    //create our blurred image
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [CIImage imageWithCGImage:theImage.CGImage];
     
-    //setting up Gaussian Blur (we could use one of many filters offered by Core Image)
-    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-    [filter setValue:inputImage forKey:kCIInputImageKey];
-    [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
-    CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
-    
-    //add our blurred image to the scrollview
-    self.imgProfileView.image = [UIImage imageWithCGImage:cgImage];
-   
-    //[self.view bringSubviewToFront:imgViewProfilePic];
-    /*
-    // show image
-    self.imgProfileView.image = [UIImage imageNamed:@"Profile_1.png"];
-    
-    // create effect
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    
-    // add effect to an effect view
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
-    effectView.frame = self.view.frame;
-    
-    // add the effect view to the image view
-    [self.imgProfileView addSubview:effectView];
-     */
 }
 
 
+-(void) getPrimaryImageFromObject:(PFObject *)object
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFFile *primaryImage = object[@"file"];
+    if (primaryImage)
+    {
+        [primaryImage getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+         {
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             if (!error)
+             {
+                 
+                 UIImage *image = [UIImage imageWithData:imageData];
+                 self.imgProfileView.image = image;
+                 
+                 /*
+                     self.view.backgroundColor = [UIColor clearColor];
+                     
+                     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+                     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+                     blurEffectView.frame = self.view.bounds;
+                     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                     
+                     [self.imgProfileView addSubview:blurEffectView];
+                 */
+                 
+                 //code 02
+                 /*
+                 UIVisualEffect *blurEffect;
+                 blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+                 
+                 UIVisualEffectView *visualEffectView;
+                 visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+                 
+                 visualEffectView.frame = self.imgProfileView.bounds;
+                 [self.imgProfileView addSubview:visualEffectView];
+                  */
+
+                  
+                 
+                 //adding blur effect to image
+                 /*
+                 CIContext *context = [CIContext contextWithOptions:nil];
+                 CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
+                 
+                 CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+                 [filter setValue:inputImage forKey:kCIInputImageKey];
+                 [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
+                 CIImage *result = [filter valueForKey:kCIOutputImageKey];
+                  */
+                 //CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+                 
+                 //add our blurred image to the scrollview
+                 //self.imgProfileView.image = [UIImage imageWithCGImage:cgImage];
+                  //CGImageRelease(cgImage);
+             }
+             else
+             {
+                 NSLog(@"Error = > %@",error);
+             }
+             //add our blurred image to the scrollview
+             //profileImageView.image = arrImages[0];
+         }];
+    }
+    else
+    {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        imgViewProfilePic.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+        imgViewProfilePic.image = [UIImage imageNamed:@"userProfile"];
+    }
+}
+
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
 {
+    self.imgProfileView.image = [UIImage imageNamed:@"BackG.png"];
     /*
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
@@ -280,7 +404,8 @@
         }
          */
     }
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
+    {
       //  if(self.currentIndex!=0){
         //    self.currentIndex--;
             transition.duration = .3f;
@@ -293,8 +418,6 @@
         }
          */
     }
-    
-    
     [self.view.layer addAnimation:transition forKey:nil];
     
     //Photos *photo = self.arrImages[self.currentIndex];
