@@ -34,6 +34,7 @@
 		757F876E1B8F0DDB00C083A4 /* backNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757F876C1B8F0DDB00C083A4 /* backNew@2x.png */; };
 		758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */; };
 		75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75886EBE1B8C50CD008B7F94 /* Profile.m */; };
+		758914CE1B95BFC200585507 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 758914CD1B95BFC200585507 /* History.m */; };
 		758C71601B88588000D7423F /* sampleImage01.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715A1B88588000D7423F /* sampleImage01.JPG */; };
 		758C71611B88588000D7423F /* sampleImage02.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715B1B88588000D7423F /* sampleImage02.JPG */; };
 		758C71621B88588000D7423F /* sampleImage03.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715C1B88588000D7423F /* sampleImage03.JPG */; };
@@ -250,6 +251,8 @@
 		758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFullProfileVC.m; sourceTree = "<group>"; };
 		75886EBD1B8C50CD008B7F94 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		75886EBE1B8C50CD008B7F94 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		758914CC1B95BFC200585507 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		758914CD1B95BFC200585507 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		758C715A1B88588000D7423F /* sampleImage01.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage01.JPG; sourceTree = "<group>"; };
 		758C715B1B88588000D7423F /* sampleImage02.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage02.JPG; sourceTree = "<group>"; };
 		758C715C1B88588000D7423F /* sampleImage03.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage03.JPG; sourceTree = "<group>"; };
@@ -1110,6 +1113,8 @@
 				75886EBE1B8C50CD008B7F94 /* Profile.m */,
 				893E76E31B8871130009F512 /* Photos.h */,
 				893E76E41B8871130009F512 /* Photos.m */,
+				758914CC1B95BFC200585507 /* History.h */,
+				758914CD1B95BFC200585507 /* History.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1554,6 +1559,7 @@
 				758C8E871B87537500FF634E /* FullyHorizontalFlowLayout.m in Sources */,
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
+				758914CE1B95BFC200585507 /* History.m in Sources */,
 				757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */,
 				899C537F1B73447B00C24DA8 /* Location.m in Sources */,
 				89E0FA591B85C92A000BD65A /* ZCHelper.m in Sources */,

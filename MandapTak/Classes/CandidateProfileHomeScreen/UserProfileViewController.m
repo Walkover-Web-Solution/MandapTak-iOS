@@ -39,7 +39,10 @@
     
     arrCandidateProfiles = [[NSMutableArray alloc] init];
     arrCache = [[NSMutableArray alloc] init];
+    arrHistory = [[NSMutableArray alloc] init];
+    
     profileNumber = 0;
+    btnUndo.enabled = NO;
     //store height data in array
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
@@ -105,6 +108,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [arrHistory removeAllObjects];
+    [arrCache removeAllObjects];
+    
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"]isEqualToString:@"no"])
     {
@@ -121,6 +127,10 @@
                  // this is where you handle the results and change the UI.
                  if (results.count > 0)
                  {
+                     //show profile view
+                     blankView.hidden = YES;
+                     profileView.hidden = NO;
+                     
                      for (PFObject *profileObj in results)
                      {
                          Profile *profileModel = [[Profile alloc]init];
@@ -172,6 +182,7 @@
                  {
                      //open blank View
                      [self.view bringSubviewToFront:blankView];
+                     lblMessage.text = [NSString stringWithFormat:@"No matching profiles found...!!"];
                  }
              }
          }];
@@ -192,15 +203,27 @@
 
 -(void) showProfileOfCandidateNumber:(int)number
 {
-    Profile *firstProfile = arrCandidateProfiles[profileNumber];
-    PFObject *obj = firstProfile.profilePointer;
-    NSString *objID = obj.objectId;
-    lblName.text = firstProfile.name;
-    lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
-    lblProfession.text = firstProfile.designation;
-    lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
-    [self getUserProfilePicForUser:objID];
-    [self showBlurredImageForUser:objID];
+    if (arrCandidateProfiles.count >0)
+    {
+        blankView.hidden = YES;
+        profileView.hidden = NO;
+        
+        Profile *firstProfile = arrCandidateProfiles[profileNumber];
+        PFObject *obj = firstProfile.profilePointer;
+        NSString *objID = obj.objectId;
+        lblName.text = firstProfile.name;
+        lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
+        lblProfession.text = firstProfile.designation;
+        lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
+        [self getUserProfilePicForUser:objID];
+        [self showBlurredImageForUser:objID];
+    }
+    else
+    {
+        blankView.hidden = NO;
+        profileView.hidden = YES;
+    }
+    
 }
 
 -(void) getUserProfilePicForUser:(NSString *)objectId
@@ -308,6 +331,21 @@
              {
                  
                  UIImage *image = [UIImage imageWithData:imageData];
+                 CGSize originalSize = image.size;
+                 CGSize expectedSize = self.imgProfileView.frame.size;
+
+                 float ratio=expectedSize.width/originalSize.width;
+                 
+                 float scaledHeight=originalSize.height*1.0;
+                 if(scaledHeight < expectedSize.height)
+                 {
+                     //update height of your imageView frame with scaledHeight
+                     self.imgProfileView.frame = CGRectMake(self.imgProfileView.frame.origin.x, self.imgProfileView.frame.origin.y, self.imgProfileView.frame.size.width, scaledHeight);
+                    }
+                 
+                 //CGSize newSize = [self makeSize:originalSize fitInSize:expectedSize];
+                 //image.size = newSize;
+                 //self.imgProfileView.frame.size = newSize;
                  self.imgProfileView.image = image;
                  
                  profileView.hidden = NO;
@@ -370,9 +408,25 @@
     }
 }
 
+
+- (CGSize)makeSize:(CGSize)originalSize fitInSize:(CGSize)boxSize
+{
+    float widthScale = 0;
+    float heightScale = 0;
+    
+    widthScale = boxSize.width/originalSize.width;
+    heightScale = boxSize.height/originalSize.height;
+    
+    float scale = MIN(widthScale, heightScale);
+    
+    CGSize newSize = CGSizeMake(originalSize.width * scale, originalSize.height * scale);
+    
+    return newSize;
+}
+
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
 {
-    self.imgProfileView.image = [UIImage imageNamed:@"BackG.png"];
+    //self.imgProfileView.image = [UIImage imageNamed:@"BackG.png"];
     /*
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
@@ -394,50 +448,40 @@
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
-        //if(self.currentIndex!=self.arrImages.count-1){
-            //self.currentIndex++;
-        //show blank view till next profile loads
-        blankView.hidden = NO;
-        profileView.hidden = YES;
+       // [self dislikeAction:nil];
+    }
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
+    {
+       // [self likeAction:nil];
+      //  if(self.currentIndex!=0){
+        //    self.currentIndex--;
         
+        /*}
+        else{
+            [transition setType:kCATransition];
+            transition.duration = 0.0f;
+        }
+         */
+        /*
         //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
         [arrCache addObject:arrCandidateProfiles[profileNumber]];
+        Profile *userProfileObj = [arrCache lastObject];
         [arrCandidateProfiles removeObjectAtIndex:profileNumber];
-
+        
         
         if (arrCandidateProfiles.count > 0)
         {
             transition.duration = .3f;
             [transition setType:kCATransitionPush];
-            [transition setSubtype:kCATransitionFromRight];
-            [self dislikeAction:nil];
+            [transition setSubtype:kCATransitionFromLeft];
+            [self likeAction:userProfileObj];
         }
         else
         {
             [self viewWillAppear:NO];
-        }
-        /*}
-        else{
-            [transition setType:kCATransition];
-            transition.duration = 0.0f;
-        }
-         */
+        }*/
     }
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
-    {
-      //  if(self.currentIndex!=0){
-        //    self.currentIndex--;
-            transition.duration = .3f;
-            [transition setType:kCATransitionPush];
-            [transition setSubtype:kCATransitionFromLeft];
-        /*}
-        else{
-            [transition setType:kCATransition];
-            transition.duration = 0.0f;
-        }
-         */
-    }
-    [self.view.layer addAnimation:transition forKey:nil];
+    //[self.view.layer addAnimation:transition forKey:nil];
     
     //Photos *photo = self.arrImages[self.currentIndex];
     //[imageView setImage:photo.image];
@@ -459,31 +503,295 @@
     */
 }
 
-- (IBAction)menuButtonAction:(id)sender {
+- (IBAction)menuButtonAction:(id)sender
+{
+    
 }
-- (IBAction)shareButtonAction:(id)sender {
+- (IBAction)shareButtonAction:(id)sender
+{
+    
 }
 
-- (IBAction)matchesButtonAction:(id)sender {
+- (IBAction)matchesButtonAction:(id)sender
+{
+    
 }
+
 - (IBAction)showCandidateProfile:(id)sender
 {
     [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
 }
 
-- (IBAction)pinAction:(id)sender {
+- (IBAction)pinAction:(id)sender
+{
+    //insert data in pinned profile table
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    CATransition *transition = [CATransition animation];
+    
+    if (arrCandidateProfiles.count > 0)
+    {
+        transition.duration = .3f;
+        [transition setType:kCATransitionPush];
+        [transition setSubtype:kCATransitionFromRight];
+        //[self likeAction:userProfileObj];
+        Profile *userProfileObj = arrCandidateProfiles[profileNumber];
+        NSString *strObjId = userProfileObj.profilePointer.objectId;
+        //make entry in like table
+        PFObject *pinObj = [PFObject objectWithClassName:@"PinnedProfile"];
+        pinObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        pinObj[@"pinnedProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
+        
+        [pinObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if (succeeded)
+             {
+                 // The object has been saved.
+                 NSLog(@"new object Id = %@",pinObj.objectId);
+                 //NSString *strObj = likeObj.objectId;
+                 
+                 //add curent action data in History model
+                 History *historyObj = [[History alloc]init];
+                 historyObj.historyObjectId = pinObj.objectId;
+                 historyObj.profileId = @"nASUvS6R7Z";
+                 historyObj.actionProfileId = strObjId;
+                 historyObj.actionType = 2;     //pin action:2
+                 
+                 //save History model object in arrCache
+                 [arrHistory addObject:historyObj];
+                 
+                 //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                 [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                 [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                 
+                 //enable/disable undo Button
+                 if (arrCache.count > 0)
+                 {
+                     btnUndo.enabled = YES;
+                 }
+                 else
+                 {
+                     btnUndo.enabled = NO;
+                 }
+                 
+                 //perform animation
+                 [self.view.layer addAnimation:transition forKey:nil];
+                 profileNumber = 0;
+                 [self showProfileOfCandidateNumber:profileNumber];
+                 
+             }
+             else
+             {
+                 // There was a problem, check error.description
+             }
+         }];
+    }
+    else
+    {
+        [self viewWillAppear:NO];
+    }
 }
 
-- (IBAction)likeAction:(id)sender {
+- (IBAction)likeAction:(id)sender
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    CATransition *transition = [CATransition animation];
+    
+    if (arrCandidateProfiles.count > 0)
+    {
+        transition.duration = .3f;
+        [transition setType:kCATransitionPush];
+        [transition setSubtype:kCATransitionFromRight];
+        //[self likeAction:userProfileObj];
+        Profile *userProfileObj = arrCandidateProfiles[profileNumber];
+        NSString *strObjId = userProfileObj.profilePointer.objectId;
+        //make entry in like table
+        PFObject *likeObj = [PFObject objectWithClassName:@"LikedProfile"];
+        likeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        likeObj[@"likeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
+        
+        [likeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if (succeeded)
+             {
+                 // The object has been saved.
+                 NSLog(@"new object Id = %@",likeObj.objectId);
+                 //NSString *strObj = likeObj.objectId;
+                 
+                 //add curent action data in History model
+                 History *historyObj = [[History alloc]init];
+                 historyObj.historyObjectId = likeObj.objectId;
+                 historyObj.profileId = @"nASUvS6R7Z";
+                 historyObj.actionProfileId = strObjId;
+                 historyObj.actionType = 1;     //like action:1
+                 
+                 //save History model object in arrCache
+                 [arrHistory addObject:historyObj];
+                 
+                 //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                 [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                 [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                 
+                 //enable/disable undo Button
+                 if (arrCache.count > 0)
+                 {
+                     btnUndo.enabled = YES;
+                 }
+                 else
+                 {
+                     btnUndo.enabled = NO;
+                 }
+                 
+                 //perform animation
+                 [self.view.layer addAnimation:transition forKey:nil];
+                 profileNumber = 0;
+                 [self showProfileOfCandidateNumber:profileNumber];
+                 
+             }
+             else
+             {
+                 // There was a problem, check error.description
+             }
+         }];
+    }
+    else
+    {
+        [self viewWillAppear:NO];
+    }
 }
 
 - (IBAction)dislikeAction:(id)sender
 {
-    if (arrCandidateProfiles.count >0)
+    //make entry in dislike table
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    CATransition *transition = [CATransition animation];
+    
+    if (arrCandidateProfiles.count > 0)
     {
-        profileNumber++;
-        [self showProfileOfCandidateNumber:profileNumber];
+        transition.duration = .3f;
+        [transition setType:kCATransitionPush];
+        [transition setSubtype:kCATransitionFromRight];
+        Profile *userProfileObj = arrCandidateProfiles[profileNumber];
+        NSString *strObjId = userProfileObj.profilePointer.objectId;
+     
+        //make entry in like table
+        PFObject *dislikeObj = [PFObject objectWithClassName:@"DislikeProfile"];
+        dislikeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        dislikeObj[@"dislikeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
+        
+        [dislikeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if (succeeded)
+             {
+                 //add curent action data in History model
+                 History *historyObj = [[History alloc]init];
+                 historyObj.historyObjectId = dislikeObj.objectId;
+                 historyObj.profileId = @"nASUvS6R7Z";
+                 historyObj.actionProfileId = strObjId;
+                 historyObj.actionType = 0;     //dislike action:2
+                 
+                 //save History model object in arrCache
+                 [arrHistory addObject:historyObj];
+                 
+                 //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                 [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                 [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                 
+                 //enable/disable undo Button
+                 if (arrCache.count > 0)
+                 {
+                     btnUndo.enabled = YES;
+                 }
+                 else
+                 {
+                     btnUndo.enabled = NO;
+                 }
+                 
+                 //perform animation
+                 [self.view.layer addAnimation:transition forKey:nil];
+                 profileNumber = 0;
+                 [self showProfileOfCandidateNumber:profileNumber];
+                 
+             }
+             else
+             {
+                 // There was a problem, check error.description
+             }
+         }];
     }
+    else
+    {
+        [self viewWillAppear:NO];
+    }
+}
+
+- (IBAction)undoAction:(id)sender
+{
+    //get data from History Object
+    History *histObject = [arrHistory lastObject];
+    NSString *parseClassName;
+    switch (histObject.actionType)
+    {
+        case 0:
+            //dislike
+            parseClassName = @"DislikeProfile";
+            break;
+        case 1:
+            //like
+            parseClassName = @"LikedProfile";
+            break;
+        case 2:
+            //pin
+            parseClassName = @"PinnedProfile";
+            break;
+    }
+    [self deleteObject:histObject.historyObjectId FromClassName:parseClassName];
+}
+
+-(void) deleteObject:(NSString *)ObjectID FromClassName:(NSString *)class
+{
+    CATransition *transition = [CATransition animation];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:class];
+    [query whereKey:@"objectId" equalTo:ObjectID];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (!error)
+        {
+            transition.duration = .3f;
+            [transition setType:kCATransitionPush];
+            [transition setSubtype:kCATransitionFromLeft];
+            
+            [PFObject deleteAllInBackground:objects];
+            //[self showObjectFromHistory];
+            
+            //add history object in arrCandidateProfile
+            [arrCandidateProfiles addObject:[arrCache lastObject]];
+            profileNumber = arrCandidateProfiles.count - 1;
+            [self showProfileOfCandidateNumber:profileNumber];
+            [arrCache removeLastObject];
+            [arrHistory removeLastObject];
+            if (arrCache.count > 0)
+            {
+                btnUndo.enabled = YES;
+            }
+            else
+            {
+                btnUndo.enabled = NO;
+            }
+            
+            [self.view.layer addAnimation:transition forKey:nil];
+        }
+        else
+        {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 - (IBAction)openChatPinMatchScreen:(id)sender

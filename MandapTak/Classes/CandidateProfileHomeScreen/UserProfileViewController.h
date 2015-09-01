@@ -12,19 +12,23 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ChatPinMatchViewController.h"
+#import "History.h"
 
 @interface UserProfileViewController : UIViewController
 {
-    NSMutableArray *arrCandidateProfiles,*arrEducation,*arrCache;
+    NSMutableArray *arrCandidateProfiles,*arrEducation,*arrCache,*arrHistory;
     IBOutlet UIImageView *imgViewProfilePic;
     NSArray *arrHeight;
     int profileNumber;
     IBOutlet UIView *blankView;
     IBOutlet UIView *profileView;
+    IBOutlet UILabel *lblMessage;
+    IBOutlet UIButton *btnUndo;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;
 - (IBAction)likeAction:(id)sender;
 - (IBAction)dislikeAction:(id)sender;
 - (IBAction)openChatPinMatchScreen:(id)sender;
+- (IBAction)undoAction:(id)sender;
 @end
