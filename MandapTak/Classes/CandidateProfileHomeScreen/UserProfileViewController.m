@@ -38,6 +38,7 @@
     currentIndex = 0;
     
     arrCandidateProfiles = [[NSMutableArray alloc] init];
+    arrCache = [[NSMutableArray alloc] init];
     profileNumber = 0;
     //store height data in array
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
@@ -83,6 +84,8 @@
     user.username = @"Hussain";
     user.password = @"hussainPass";
     
+    blankView.hidden = NO;
+    profileView.hidden = YES;
     
 //    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 //        if (!error) {
@@ -270,7 +273,7 @@
     [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-     {
+    {
          if (!error)
          {
              if (objects.count > 0)
@@ -306,6 +309,9 @@
                  
                  UIImage *image = [UIImage imageWithData:imageData];
                  self.imgProfileView.image = image;
+                 
+                 profileView.hidden = NO;
+                 blankView.hidden = NO;
                  
                  /*
                      self.view.backgroundColor = [UIColor clearColor];
@@ -390,12 +396,25 @@
     {
         //if(self.currentIndex!=self.arrImages.count-1){
             //self.currentIndex++;
+        //show blank view till next profile loads
+        blankView.hidden = NO;
+        profileView.hidden = YES;
+        
+        //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+        [arrCache addObject:arrCandidateProfiles[profileNumber]];
+        [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+
+        
         if (arrCandidateProfiles.count > 0)
         {
             transition.duration = .3f;
             [transition setType:kCATransitionPush];
             [transition setSubtype:kCATransitionFromRight];
             [self dislikeAction:nil];
+        }
+        else
+        {
+            [self viewWillAppear:NO];
         }
         /*}
         else{
@@ -465,5 +484,15 @@
         profileNumber++;
         [self showProfileOfCandidateNumber:profileNumber];
     }
+}
+
+- (IBAction)openChatPinMatchScreen:(id)sender
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ChatPinMatch" bundle:nil];
+    ChatPinMatchViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatPinMatchViewController"];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+    navController.navigationBarHidden =YES;
+    [self presentViewController:navController animated:YES completion:nil];
+    //[self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
 }
 @end
