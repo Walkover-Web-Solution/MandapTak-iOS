@@ -106,6 +106,8 @@
 		896D182D1B9454C8001513A5 /* Spam_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D182B1B9454C8001513A5 /* Spam_icon.png */; };
 		896D18301B945D5A001513A5 /* call_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D182E1B945D5A001513A5 /* call_Icon.png */; };
 		896D18311B945D5A001513A5 /* verify_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D182F1B945D5A001513A5 /* verify_Icon.png */; };
+		896D18351B9487B6001513A5 /* ChatPinMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896D18341B9487B6001513A5 /* ChatPinMatchViewController.m */; };
+		896D183B1B9487F1001513A5 /* ChatPinMatch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D183A1B9487F1001513A5 /* ChatPinMatch.storyboard */; };
 		897C239C1B6B562C00FC32E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C239B1B6B562C00FC32E9 /* main.m */; };
 		897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 897C23A01B6B562C00FC32E9 /* MandapTak.xcdatamodeld */; };
 		897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897C23A91B6B562C00FC32E9 /* Images.xcassets */; };
@@ -346,6 +348,9 @@
 		896D182B1B9454C8001513A5 /* Spam_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spam_icon.png; sourceTree = "<group>"; };
 		896D182E1B945D5A001513A5 /* call_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_Icon.png; sourceTree = "<group>"; };
 		896D182F1B945D5A001513A5 /* verify_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verify_Icon.png; sourceTree = "<group>"; };
+		896D18331B9487B6001513A5 /* ChatPinMatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatPinMatchViewController.h; sourceTree = "<group>"; };
+		896D18341B9487B6001513A5 /* ChatPinMatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatPinMatchViewController.m; sourceTree = "<group>"; };
+		896D183A1B9487F1001513A5 /* ChatPinMatch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatPinMatch.storyboard; sourceTree = "<group>"; };
 		897C23961B6B562C00FC32E9 /* MandapTak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MandapTak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		897C239B1B6B562C00FC32E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		897C23A11B6B562C00FC32E9 /* MandapTak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MandapTak.xcdatamodel; sourceTree = "<group>"; };
@@ -797,6 +802,15 @@
 			path = VerificationViewController;
 			sourceTree = "<group>";
 		};
+		896D18321B9487AD001513A5 /* ChatPinMatchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				896D18331B9487B6001513A5 /* ChatPinMatchViewController.h */,
+				896D18341B9487B6001513A5 /* ChatPinMatchViewController.m */,
+			);
+			path = ChatPinMatchViewController;
+			sourceTree = "<group>";
+		};
 		897C238D1B6B562C00FC32E9 = {
 			isa = PBXGroup;
 			children = (
@@ -833,6 +847,7 @@
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
 				897EF9641B708F2E00F88CEC /* Profile.storyboard */,
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
+				896D183A1B9487F1001513A5 /* ChatPinMatch.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
 				89D9F7251B6B5797004CBE3D /* Models */,
@@ -1102,6 +1117,7 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				896D18321B9487AD001513A5 /* ChatPinMatchViewController */,
 				896D18101B9430EF001513A5 /* VerificationViewController */,
 				758535A81B8B1E19000B480A /* ViewFullProfile */,
 				757BDC751B85AA2D003B71BD /* CandidateProfileDetailScreen */,
@@ -1451,6 +1467,7 @@
 				896D18281B944DDB001513A5 /* Weeding_bg.png in Resources */,
 				89D9F78F1B6B5DB4004CBE3D /* setting@2x.png in Resources */,
 				758C8E7B1B87412800FF634E /* like@3x.png in Resources */,
+				896D183B1B9487F1001513A5 /* ChatPinMatch.storyboard in Resources */,
 				89D9F77D1B6B5DB4004CBE3D /* menu_icon.png in Resources */,
 				758C8E6E1B87404B00FF634E /* option@2x.png in Resources */,
 				757F87641B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome@2x.png in Resources */,
@@ -1598,6 +1615,7 @@
 				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
+				896D18351B9487B6001513A5 /* ChatPinMatchViewController.m in Sources */,
 				895CD7811B81E37D00816FDE /* IndustryPopoverViewController.m in Sources */,
 				895CD7781B81CFB500816FDE /* Education.m in Sources */,
 				89D9F7341B6B579E004CBE3D /* StartMainViewController.m in Sources */,

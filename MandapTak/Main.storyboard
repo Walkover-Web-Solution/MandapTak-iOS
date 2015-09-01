@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="232" y="415"/>
+            <point key="canvasLocation" x="295" y="340"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="mAU-Sf-qkj">
@@ -507,7 +507,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="Bhd-0I-odF">
             <objects>
-                <viewController id="B0V-vW-TGd" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SWRevealViewController" id="B0V-vW-TGd" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MEQ-bs-WtK"/>
                         <viewControllerLayoutGuide type="bottom" id="hEW-pw-KMC"/>
@@ -525,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feS-V8-WLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1152" y="915"/>
+            <point key="canvasLocation" x="1152" y="962"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Pm-pD-BrV">
@@ -1321,7 +1321,7 @@
                                         <rect key="frame" x="13" y="35" width="107" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IwQ-X7-SI2">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="XXXXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IwQ-X7-SI2">
                                         <rect key="frame" x="44" y="3" width="72" height="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1362,11 +1362,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="txtVerfication" destination="IwQ-X7-SI2" id="xjf-fy-tMP"/>
+                        <segue destination="B0V-vW-TGd" kind="presentation" identifier="Login" id="bKB-oe-NGi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpu-rG-0jQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-135" y="415"/>
+            <point key="canvasLocation" x="1152" y="287"/>
         </scene>
     </scenes>
     <resources>

@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
-
+#import "SWRevealViewController.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @interface AppDelegate ()
@@ -32,7 +32,14 @@
 //                                            NSLog(@"Success");
 //                                        };
 //                                        }];
+    
+    
 
+    if([PFUser currentUser]){
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+        self.window.rootViewController=vc;
+    }
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     

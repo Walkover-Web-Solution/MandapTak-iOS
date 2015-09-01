@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.txtMobNumber.delegate = self;
     self.pageControl.currentPage = self.pageIndex;
     self.backgroundImageView.image = [UIImage imageNamed:self.imageFile];
    // NSArray *arrImages = @[@"Matches_icon.png",@"Fake_icon.png",@"Kundli_icon",@"Spam_icon",@"Weeding_icon"];
@@ -47,15 +49,24 @@
     [self.txtMobNumber setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
+    self.txtMobNumber.keyboardType = UIKeyboardTypeNumberPad;
 
     // Do any additional setup after loading the view.
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    NSString *mobNo= [[NSUserDefaults standardUserDefaults] valueForKey:@"mobNo"];
+    if(mobNo){
+        self.txtMobNumber.text = mobNo;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSUserDefaults standardUserDefaults]setObject:self.txtMobNumber.text forKey:@"mobNo"];
 
+}
 /*
 #pragma mark - Navigation
 
@@ -89,25 +100,36 @@
  */
 
 #pragma mark UITextFieldDelegate
-- (void) performKeyboardAnimation: (NSInteger) offset  {
-    [UIView beginAnimations:@"moveKeyboard" context:nil];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + offset, self.view.frame.size.width, self.view.frame.size.height);
-    [UIView commitAnimations];
-}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [[NSUserDefaults standardUserDefaults]setObject:self.txtMobNumber.text forKey:@"mobNo"];
     [self.txtMobNumber resignFirstResponder];
     return YES;
 }
 -(void) textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == self.txtMobNumber) {
-        //[self performKeyboardAnimation:-LOGIN_TEXTFIELD_OFFSET];
-    }
+  
     
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField == self.txtMobNumber) {
-       // [self performKeyboardAnimation:LOGIN_TEXTFIELD_OFFSET];
+    [[NSUserDefaults standardUserDefaults]setObject:self.txtMobNumber.text forKey:@"mobNo"];
+
+   }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if(textField.text.length>9){
+        const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
+        int isBackSpace = strcmp(_char, "\b");
+        
+        if (isBackSpace == -8) {
+            return YES;
+        }
+
+        return NO;
     }
+    if(textField.text.length<=10){
+        return YES;
+    }
+    return YES;
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -141,11 +163,13 @@
 
 
 - (IBAction)loginButtonAction:(id)sender {
+
     if(self.txtMobNumber.text.length !=10){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter a number with 10 digits." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
     else{
+        [self.view endEditing:YES];
         MBProgressHUD *HUD;
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
@@ -161,7 +185,7 @@
                  [self presentViewController:vc animated:YES completion:nil];
              }
              else{
-                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                  [alert show];
              }
          }];
@@ -169,5 +193,4 @@
     }
    
 }
-
 @end
