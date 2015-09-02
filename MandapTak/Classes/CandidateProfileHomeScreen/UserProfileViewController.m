@@ -135,7 +135,7 @@
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
         [PFCloud callFunctionInBackground:@"filterProfileLive"
-                           withParameters:@{@"oid":@"nASUvS6R7Z"}
+                           withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}  //@"nASUvS6R7Z"
                                     block:^(NSArray *results, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
