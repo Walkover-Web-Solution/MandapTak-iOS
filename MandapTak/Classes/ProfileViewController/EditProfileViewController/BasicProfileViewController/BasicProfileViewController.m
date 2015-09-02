@@ -14,7 +14,7 @@
 #import "BirthTimePopoverViewController.h"
 #import "GenderViewController.h"
 #import "MBProgressHUD.h"
-@interface BasicProfileViewController ()<PopOverListViewControllerDelegate,DateOfBirthPopoverViewControllerDelegate,BirthTimePopoverViewControllerDelegate,GenderViewControllerDelegate,WYPopoverControllerDelegate>{
+@interface BasicProfileViewController ()<PopOverListViewControllerDelegate,DateOfBirthPopoverViewControllerDelegate,BirthTimePopoverViewControllerDelegate,GenderViewControllerDelegate,WYPopoverControllerDelegate,UITextFieldDelegate>{
     __weak IBOutlet UIButton *btnBirthTime;
     __weak IBOutlet UIButton *btnPlaceOfBirth;
     __weak IBOutlet UIButton *btnCurrentLocation;
@@ -42,7 +42,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateFirstTabObjects" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserProfile:) name:@"UpdateFirstTabWithCurrentInfo" object:nil ];
     [txtFullName setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
-
+    txtFullName.delegate =self;
     lblBornInPlace.hidden= YES;
     if(self.currentProfile ==nil){
 //        MBProgressHUD * hud;
@@ -317,6 +317,33 @@ if ([segue.identifier isEqualToString:@"LocationIdentifier"])
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if([textField isEqual:txtFullName]){
+        
+        NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ "] invertedSet];
+        
+        if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
+            return NO;
+        }
+        
+        else{
+            return YES;
+        }
+    }
+//    else if([textField isEqual:mPasswordTextField]){
+//        NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789@$}{._-()][:]+"] invertedSet];
+//        
+//        if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
+//            return NO;
+//        }
+//        
+//        else{
+//            return YES;
+//        }
+//        
+//    }
+    return YES;
 }
 
 /*

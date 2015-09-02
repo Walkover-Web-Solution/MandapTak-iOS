@@ -43,11 +43,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateSecondTabObjects" object:nil];
+
     if(self.currentProfile ==nil){
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateSecondTabObjects" object:nil];
         NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-        [query whereKey:@"objectId" equalTo:@"EYKXEM27cu"];
+        [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
 
         //[query whereKey:@"userId" equalTo:userId];
         [query includeKey:@"currentLocation.Parent.Parent"];

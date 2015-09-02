@@ -32,7 +32,15 @@
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     self.timePickerView.datePickerMode = UIDatePickerModeTime;
     self.datePicker.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSDate * currentDate = [NSDate date];
+    NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
 
+    NSDateComponents * comps = [[NSDateComponents alloc] init];
+    [comps setYear: -18];
+    NSDate * minDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
+    
+    self.datePicker.minimumDate = minDate;
+    self.datePicker.maximumDate = currentDate;
     // Do any additional setup after loading the view.
 }
 

@@ -11,7 +11,8 @@
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "SWRevealViewController.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "EditProfileViewController.h"
+//#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @interface AppDelegate ()
 
@@ -23,22 +24,28 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
-    [PFFacebookUtils initializeFacebook];
-
-
-//    [PFUser logInWithUsernameInBackground:@"Hussain" password:@"hussain123"
-//                                    block:^(PFUser *user, NSError *error) {
-//                                        if(!error){
-//                                            NSLog(@"Success");
-//                                        };
-//                                        }];
-    
-    
-
+   // [PFFacebookUtils initializeFacebook];
     if([PFUser currentUser]){
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-        self.window.rootViewController=vc;
+        [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
+
+        if([[[NSUserDefaults standardUserDefaults] valueForKey:@"isProfileComplete"] isEqual:@"completed"]){
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+            self.window.rootViewController=vc;
+        }
+        else{
+            UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+            EditProfileViewController *vc2 = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
+            
+            //vc.globalCompanyId = [self.companies.companyId intValue];
+            
+            UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];
+            navController.navigationBarHidden =YES;
+            self.window.rootViewController=vc2;
+
+
+        }
+        
     }
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
@@ -54,17 +61,17 @@
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                        withSession:[PFFacebookUtils session]];
-}
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    return [FBAppCall handleOpenURL:url
+//                  sourceApplication:sourceApplication
+//                        withSession:[PFFacebookUtils session]];
+//}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
-    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+   // [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 
@@ -81,7 +88,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [[PFFacebookUtils session] close];
+   // [[PFFacebookUtils session] close];
 
     [self saveContext];
 }

@@ -70,7 +70,9 @@
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
     [UIView beginAnimations:@"moveKeyboard" context:nil];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardRect.size.height, self.view.frame.size.width, self.view.frame.size.height);
+    float height = keyboardRect.size.height-60;
+
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - height, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
   //  [self setNeedsUpdateConstraints];
 }
@@ -81,13 +83,15 @@
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
     [UIView beginAnimations:@"moveKeyboard" context:nil];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardRect.size.height, self.view.frame.size.width, self.view.frame.size.height);
+    float height = keyboardRect.size.height-60;
+
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + height, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
 
   //  [self setNeedsUpdateConstraints];
 }
 - (IBAction)verifyButtonAction:(id)sender {
-    if(self.txtVerfication.text.length==6){
+    if(self.txtVerfication.text.length==4){
         [self.view endEditing:YES];
         MBProgressHUD *HUD;
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -109,7 +113,7 @@
 
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter a number with 6 digits." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter four digit verification code recieved on mobile." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
 
     }
@@ -118,7 +122,8 @@
 -(void)performLoginOnVerifactionWithPassword:(NSString*)password{
     MBProgressHUD *HUD;
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] );
+    NSLog(@"%@",password);
         [PFUser logInWithUsernameInBackground:[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] password:password
                                         block:^(PFUser *user, NSError *error) {
                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -131,12 +136,27 @@
     
 
 }
+-(void)writeArrayWithCustomObjToUserDefaults:(NSString *)keyName withArray:(NSMutableArray *)myArray
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:myArray];
+    [defaults setObject:data forKey:keyName];
+    [defaults synchronize];
+}
 
+-(NSArray *)readArrayWithCustomObjFromUserDefaults:(NSString*)keyName
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [defaults objectForKey:keyName];
+    NSArray *myArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [defaults synchronize];
+    return myArray;
+}
 -(void)checkForUseridInUserProfile{
-    PFQuery *query = [PFQuery queryWithClassName:@"userProfile"];
-    
-    [query whereKey:@"userId" equalTo:[[PFUser currentUser] valueForKey:@"objectId"]];
-    [query includeKey:@"Profile"];
+    PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
+    NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
+    [query whereKey:@"userId" equalTo:[PFUser currentUser]];
+    [query includeKey:@"profileId"];
 
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -147,6 +167,9 @@
           //  [self getUserProfileForUser:objects[0]];
             PFObject *userProfile =objects[0];
             PFObject *currentProfile = [userProfile valueForKey:@"profileId"];
+            [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
+          //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
+            [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
             if([[currentProfile valueForKey:@"isComplete"] boolValue]){
                 [self performSegueWithIdentifier:@"Login" sender:self];
             }
@@ -171,39 +194,4 @@
     }];
 
 }
--(void)getUserProfileForUser:(PFObject*)user{
-    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    [query whereKey:@"userId" equalTo:[user valueForKey:@"profileId"]];
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        if (!error) {
-            
-            PFObject *currentProfile =objects[0];
-            if([[currentProfile valueForKey:@"isComplete"] boolValue]){
-                [self performSegueWithIdentifier:@"Login" sender:self];
-            }
-            else{
-                UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-                EditProfileViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-                
-                //vc.globalCompanyId = [self.companies.companyId intValue];
-                
-                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
-                navController.navigationBarHidden =YES;
-                [self presentViewController:navController animated:YES completion:nil];
-
-            }
-
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-
-}
-
 @end

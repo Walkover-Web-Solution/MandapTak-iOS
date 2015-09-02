@@ -57,7 +57,7 @@
 - (void) getCityList:(NSString *)searchText
 {
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
-    [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchText]];
+    [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
     //[query whereKey:@"name" hasPrefix:searchBar.text];
     [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error)

@@ -24,14 +24,14 @@
 #import "ImageViewController.h"
 #import "ZCImagePickerController.h"
 #import "ImageViewCell.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+//#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
-#import "FacebooKProfilePictureViewController.h"
+//#import "FacebooKProfilePictureViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AppData.h"
-@interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate,FacebooKProfilePictureViewControllerDelegate>
+@interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate>
 {
     __weak IBOutlet UIView *navBarView;
     WYPopoverController* popoverController;
@@ -120,13 +120,13 @@ NSString *selectedHeight;
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         
         //[query whereKey:@"userId" equalTo:userId];
-        [query whereKey:@"objectId" equalTo:@"dlAGPMIl2R"];
+        [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
 
         [query includeKey:@"Parent.Parent"];
         [query includeKey:@"currentLocation.Parent.Parent"];
         [query includeKey:@"placeOfBirth.Parent.Parent"];
         [query includeKey:@"casteId.Parent.Parent"];
-        [query includeKey:@"religionId.Pare nt.Parent"];
+        [query includeKey:@"religionId.Parent.Parent"];
         [query includeKey:@"gotraId.Parent.Parent"];
         [query includeKey:@"education1.degreeId"];
         [query includeKey:@"education2.degreeId"];
@@ -382,6 +382,7 @@ NSString *selectedHeight;
   }
 
 - (IBAction)tabButtonAction:(id)sender {
+    [self removeSubview];
     currentTab = [sender tag];
     [self switchToCurrentTab];
     
@@ -687,11 +688,11 @@ NSString *selectedHeight;
             currentProfile[@"minMarriageBudget"] = @([txtMinBudget.text integerValue]);
         if([txtMaxBudget.text integerValue]>0)
             currentProfile[@"maxMarriageBudget"] = @([txtMaxBudget.text integerValue]);
-        if(primaryCropedPhoto){
-            NSData *pictureData = UIImagePNGRepresentation(primaryCropedPhoto);
-            PFFile *file = [PFFile fileWithName:@"profilePic" data:pictureData];
-            [currentProfile setObject:file forKey:@"profilePic"];
-        }
+//        if(primaryCropedPhoto){
+//            NSData *pictureData = UIImagePNGRepresentation(primaryCropedPhoto);
+//            PFFile *file = [PFFile fileWithName:@"profilePic" data:pictureData];
+//            [currentProfile setObject:file forKey:@"profilePic"];
+//        }
         
         NSString *name =[currentProfile valueForKey:@"name"];
         NSString *gender =[currentProfile valueForKey:@"gender"];
@@ -700,15 +701,17 @@ NSString *selectedHeight;
         NSString *designation =[currentProfile valueForKey:@"designation"];
         NSString *company =[currentProfile valueForKey:@"placeOfWork"];
         NSString *package =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"package"]];
-
-        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||package.length==0|| [[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"minMarriageBudget"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"maxMarriageBudget"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
+       
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||package.length==0||[[currentProfile valueForKey:@"minMarriageBudget"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"maxMarriageBudget"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
             NSMutableArray *arrMsg = [NSMutableArray array];
             if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
                 [arrMsg addObject:@"valid Full Name"];
             }
-            if([currentProfile valueForKey:@"currentLocation"] ==nil){
+            if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Current Location"];
-                
+            }
+            if(gender.length==0){
+                [arrMsg addObject:@"gender"];
             }
             if([currentProfile valueForKey:@"tob"] ==nil){
                 [arrMsg addObject:@"Time of Birth"];
@@ -716,16 +719,31 @@ NSString *selectedHeight;
             if([currentProfile valueForKey:@"dob"] ==nil ){
                 [arrMsg addObject:@"Date of Birth"];
             }
-            if( [currentProfile valueForKey:@"placeOfBirth"] ==nil){
+            if(height.length==0){
+                [arrMsg addObject:@"height"];
+            }
+            if(weight.length==0){
+                [arrMsg addObject:@"weight"];
+            }
+            if(package.length==0){
+                [arrMsg addObject:@"package"];
+            }
+            if(company.length==0){
+                [arrMsg addObject:@"company"];
+            }
+            if(designation.length==0){
+                [arrMsg addObject:@"designation"];
+            }
+            if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Place of Birth"];
             }
-            if( [currentProfile valueForKey:@"religionId"] ==nil){
+            if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Religion"];
             }
-            if([currentProfile valueForKey:@"casteId"] ==nil){
+            if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Caste"];
             }
-            if([currentProfile valueForKey:@"industryId"] ==nil){
+            if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Industry"];
             }
             if([currentProfile valueForKey:@"minMarriageBudget"] ==nil){
@@ -734,7 +752,7 @@ NSString *selectedHeight;
             if([currentProfile valueForKey:@"maxMarriageBudget"] ==nil){
                 [arrMsg addObject:@"max marriage budget"];
             }
-            if([currentProfile valueForKey:@"education1"] ==nil){
+            if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Degree and its specialization"];
             }
             
@@ -763,7 +781,7 @@ NSString *selectedHeight;
             hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [currentProfile setObject: @YES  forKey: @"isComplete"];
             [currentProfile setObject: @NO  forKey: @"paid"];
-
+            [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
             [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
@@ -840,10 +858,14 @@ NSString *selectedHeight;
 #pragma  mark FourthTabCode
 
 -(void)updateuserInfo{
-    if([[currentProfile valueForKey:@"isComplete"] boolValue])
+    if([[currentProfile valueForKey:@"isComplete"] boolValue]){
+        [[NSUserDefaults standardUserDefaults]setObject:@"notCompleted" forKey:@"isProfileComplete"];
         btnDoneUp.hidden = NO;
-    else
+    }
+    else{
+        [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
         btnDoneUp.hidden = YES;
+    }
 
     if([currentProfile valueForKey:@"minMarriageBudget"] != nil ){
         txtMinBudget.text = [NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"minMarriageBudget"] ] ;
@@ -889,13 +911,14 @@ NSString *selectedHeight;
 }
 
 -(void)openFacebookProfileViewController{
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
-    //vc.globalCompanyId = [self.companies.companyId intValue];
-    [self presentViewController:vc animated:YES completion:nil];
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+//    FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
+//    [self presentViewController:vc animated:YES completion:nil];
 
 }
+
 -(void)loginViaFacebook{
+    /*
     if ([PFUser currentUser]){
         
     if(![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
@@ -951,7 +974,11 @@ NSString *selectedHeight;
     }
     
     NSLog(@"%@",[PFUser currentUser]);
+     
+     */
 }
+
+/*  removed for parse
 -(void)allFacebookPhotos{
     //https://graph.facebook.com/[uid]/albums?access_token=[AUTH_TOKEN]
     
@@ -983,6 +1010,8 @@ NSString *selectedHeight;
                            }];
 
 }
+ 
+ */
 - (void)loadData {
     
     // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
@@ -1077,6 +1106,7 @@ NSString *selectedHeight;
 }
 #pragma mark ImageViewControllerDelegate
 -(void)selectedPrimaryPhoto:(Photos *)primaryImg andCropedPhoto:(UIImage *)cropedImg andIndex:(NSInteger)index withDeletedPhotos:(NSArray *)arrDeletedPhotos{
+    
     for(Photos *photo in arrDeletedPhotos){
         if([arrImageList containsObject:photo]){
             [arrImageList removeObject:photo];
@@ -1091,7 +1121,29 @@ NSString *selectedHeight;
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
     primaryPhoto = primaryImg;
     primaryCropedPhoto = cropedImg;
+    
+    if(arrImageList.count==0)
+        primaryPhoto = nil;
     [self.collectionView reloadData];
+    NSData *pictureData = UIImagePNGRepresentation(primaryCropedPhoto);
+    PFFile *file = [PFFile fileWithName:@"profilePic" data:pictureData];
+    [currentProfile setObject:file forKey:@"profilePic"];
+    [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        if (!error) {
+            // succesful
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            
+        } else {
+            //Something bad has ocurred
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
+        }
+    }];
+
 }
 #pragma mark PopoverDelegate
 -(void)selectedTag:(NSInteger)tag{
