@@ -28,7 +28,7 @@
     lblWeight.text = [NSString stringWithFormat:@"%@ Kg",profileObject.weight];
     lblTOB.text = profileObject.tob;
     lblPlaceOfBirth.text = profileObject.placeOfBirth;
-    lblReligion.text = profileObject.religion;
+    lblReligion.text = [NSString stringWithFormat:@"%@,%@",profileObject.religion,profileObject.caste];
     lblMinBudget.text = [NSString stringWithFormat:@"Min:%@",profileObject.minBudget];
     lblMaxBudget.text = [NSString stringWithFormat:@"Max:%@",profileObject.maxBudget];
     tableViewEducation.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

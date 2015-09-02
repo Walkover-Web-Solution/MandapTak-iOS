@@ -36,8 +36,8 @@
     NSMutableArray *loadimagesarray,*arrImages,*arrEducation;
     int *selectedIndex;
     BOOL primaryFlag;
-    Profile *profileObject;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;
+@property (strong,nonatomic) Profile *profileObject;
 @end

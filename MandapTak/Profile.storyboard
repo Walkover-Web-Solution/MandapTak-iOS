@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1922,16 +1922,16 @@
     <resources>
         <image name="calendar" width="32" height="32"/>
         <image name="delete" width="32" height="32"/>
-        <image name="frame" width="32" height="32"/>
+        <image name="frame" width="31" height="32"/>
         <image name="gender" width="32" height="32"/>
         <image name="location" width="32" height="32"/>
-        <image name="measures" width="32" height="32"/>
+        <image name="measures" width="32" height="28"/>
         <image name="next.png" width="32" height="32"/>
         <image name="placeOfBirth" width="32" height="32"/>
         <image name="profile-edit" width="32" height="32"/>
         <image name="qualification" width="32" height="32"/>
         <image name="timeOfBirth" width="32" height="32"/>
-        <image name="userProfile" width="32" height="32"/>
+        <image name="userProfile" width="25" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ug3-Vq-1pj"/>

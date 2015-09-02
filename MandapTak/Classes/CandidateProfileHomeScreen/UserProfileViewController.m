@@ -149,6 +149,38 @@
                          
                          //Height
                          profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
+                         
+                         //ADD data in model for complete profile view screen
+                         PFObject *currentLoc = [profileObj valueForKey:@"currentLocation"];
+                         PFObject *currentState = [currentLoc valueForKey:@"Parent"];
+                         profileModel.currentLocation = [NSString stringWithFormat:@"%@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
+                         NSLog(@"user current location --> %@",profileModel.currentLocation);
+                         
+                         profileModel.income = [profileObj valueForKey:@"package"];
+                         
+                         //birth location label
+                         PFObject *birthLoc = [profileObj valueForKey:@"placeOfBirth"];
+                         PFObject *birthState = [birthLoc valueForKey:@"Parent"];
+                         
+                         profileModel.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
+                         profileModel.minBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"minMarriageBudget"]];
+                         profileModel.maxBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"maxMarriageBudget"]];
+                         profileModel.company = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"placeOfWork"]];
+                         
+                         //DOB
+                         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                         [formatter setDateFormat:@"yyyy-MM-dd"];
+                         NSString *strDate = [formatter stringFromDate:[profileObj valueForKey:@"dob"]];
+                         profileModel.dob = strDate;
+                         
+                         //TOB
+                         NSDate *dateTOB = [profileObj valueForKey:@"tob"];
+                         NSDateFormatter *formatterTime = [[NSDateFormatter alloc] init];
+                         [formatterTime setDateFormat:@"hh:mm:ss"];
+                         [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+                         NSString *strTOB = [formatterTime stringFromDate:dateTOB];
+                         profileModel.tob = strTOB;
+                         
                          /*
                           //education
                           NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
@@ -192,8 +224,25 @@
         [userDefaults setValue:@"yes" forKey:@"reloadCandidateList"];
     }
 }
-
-
+/*
+-(void)viewDidAppear:(BOOL)animated
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    view.backgroundColor = [UIColor blueColor];
+    
+    CATransition *animation=[CATransition animation];
+    [animation setDelegate:self];
+    [animation setDuration:1.75];
+    [animation setTimingFunction:UIViewAnimationCurveEaseInOut];
+    [animation setType:@"rippleEffect"];
+    
+    [animation setFillMode:kCAFillModeRemoved];
+    animation.endProgress=1;
+    [animation setRemovedOnCompletion:NO];
+    [view.layer addAnimation:animation forKey:nil];
+    [self.view addSubview:view];
+}
+*/
 - (NSString *)getFormattedHeightFromValue:(NSString *)value
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
@@ -485,22 +534,6 @@
     
     //Photos *photo = self.arrImages[self.currentIndex];
     //[imageView setImage:photo.image];
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    /*
-    if ([segue.identifier isEqualToString:@"swipeUpIdentifier"])
-    {
-        CandidateProfileDetailScreenVC *profileVC = [segue destinationViewController];
-        [self.navigationController pushViewController:profileVC animated:YES];
-    }
-    */
 }
 
 - (IBAction)menuButtonAction:(id)sender
@@ -802,5 +835,23 @@
     navController.navigationBarHidden =YES;
     [self presentViewController:navController animated:YES completion:nil];
     //[self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"swipeUpIdentifier"])
+    {
+        CandidateProfileDetailScreenVC *profileVC = [segue destinationViewController];
+        Profile *candidateProfile = arrCandidateProfiles[profileNumber];
+        profileVC.profileObject = candidateProfile;
+        //[self.navigationController pushViewController:profileVC animated:YES];
+    }
+    
 }
 @end

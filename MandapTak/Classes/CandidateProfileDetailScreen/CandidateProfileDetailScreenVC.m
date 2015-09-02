@@ -13,7 +13,7 @@
 @end
 
 @implementation CandidateProfileDetailScreenVC
-
+@synthesize profileObject;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,16 +26,15 @@
     loadimagesarray = [[NSMutableArray alloc]init];
     arrImages = [[NSMutableArray alloc]init];
     arrEducation = [[NSMutableArray alloc]init];
-    profileObject = [[Profile alloc] init];
+    //profileObject = [[Profile alloc] init];
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
-    lblTraitMatch.hidden = YES;
-    [self getUserImages];
-    
     collectionImages = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_2.png",@"Profile_1.png", nil];
  
-    [self showBlurredImage];
+    lblTraitMatch.hidden = YES;
+    
+    [self showUserProfile];
     
     //collection view
     FullyHorizontalFlowLayout *collectionViewLayout = [FullyHorizontalFlowLayout new];
@@ -44,7 +43,15 @@
     ImagesCollectionView.pagingEnabled = YES;
     
     //get user profile
-    [self getUserProfileForId:@"nASUvS6R7Z"];
+    //[self getUserProfileForId:@"nASUvS6R7Z"];
+    //display user profile
+    [self getUserImages];
+    [self showBlurredImage];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
 }
 
 -(void) showBlurredImage
@@ -91,6 +98,7 @@
     profileImageView.image = [UIImage imageWithCGImage:cgImage];
 }
 
+/*
 -(void) getUserProfileForId : (NSString *)profileId
 {
     MBProgressHUD * hud;
@@ -114,6 +122,8 @@
             PFObject *obj = objects[0];
             profileObject.profilePointer = obj;
             lblName.text = [NSString stringWithFormat:@"%@",[obj valueForKey:@"name"]];
+            
+            
             //Age
             NSDate *birthday = [obj valueForKey:@"dob"];
             NSDate* now = [NSDate date];
@@ -146,7 +156,6 @@
             PFObject *birthLoc = [obj valueForKey:@"placeOfBirth"];
             PFObject *birthState = [birthLoc valueForKey:@"Parent"];
             
-            
             //save data in model object
             profileObject.height = strHeight;
             profileObject.weight = [obj valueForKey:@"weight"];
@@ -174,7 +183,7 @@
             //education label
             
             NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
-            NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
+            //NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
             
             for (int i=1; i<4; i++)
             {
@@ -198,6 +207,51 @@
         }
     }];
 }
+*/
+
+-(void) showUserProfile
+{
+    PFObject *obj = profileObject.profilePointer;
+    
+    //new code
+    lblName.text = profileObject.name;
+    lblAgeHeight.text = [NSString stringWithFormat:@"%@,%@",profileObject.age,profileObject.height];
+    lblDesignation.text = profileObject.designation;
+    lblOccupation.text = profileObject.designation;
+    
+    //lblIncome.text = [NSString stringWithFormat:@"%@",[obj valueForKey:@"package"]];
+    lblIndustry.text = [NSString stringWithFormat:@"%@ , %@/annum",[obj valueForKey:@"placeOfWork"],[obj valueForKey:@"package"]];
+    lblWeight.text = [NSString stringWithFormat:@"Weight : %@ Kg",[obj valueForKey:@"weight"]];
+    
+    //caste label
+    lblCaste.text = [NSString stringWithFormat:@"%@,%@",profileObject.religion,profileObject.caste];
+    
+    //current location label
+    lblCurrentLocation.text = [NSString stringWithFormat:@"Current Location : %@,",profileObject.currentLocation];
+    
+    NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
+    //NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
+    
+    for (int i=1; i<4; i++)
+    {
+        Education *educationObject = [[Education alloc]init];
+        NSString *eduLevel = [NSString stringWithFormat:@"education%d",i];
+        PFObject *specialization = [obj valueForKey:eduLevel];
+        PFObject *degreeName = [specialization valueForKey:@"degreeId"];
+        //NSString *specializationName = [specialization valueForKey:@"name"];
+        NSString *strDegrees = [degreeName valueForKey:@"name"];
+        if (strDegrees.length > 0)
+        {
+            [arrDegrees addObject:strDegrees];
+            //save data for full profile screen
+            educationObject.degree = degreeName;
+            educationObject.specialisation = specialization;
+            [arrEducation addObject:educationObject];
+        }
+    }
+    NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
+    lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
+}
 
 
 - (NSString *)getFormattedHeightFromValue:(NSString *)value
@@ -213,7 +267,7 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     __block int totalNumberOfEntries = 0;
-    [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"EYKXEM27cu"]];
+    [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileObject.profilePointer.objectId]];   //@"EYKXEM27cu"
     [query orderByDescending:@"createdAt"];
     [query countObjectsInBackgroundWithBlock:^(int number1, NSError *error) {
     if (!error)

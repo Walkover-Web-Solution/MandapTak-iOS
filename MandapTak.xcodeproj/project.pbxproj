@@ -14,6 +14,11 @@
 		7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A91B84AF0A00B83EFD /* show@2x.png */; };
 		7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6AA1B84AF0A00B83EFD /* show@3x.png */; };
 		75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75382F081B8CA522005E03FE /* WorkEducationCell.m */; };
+		7564E22B1B970B3200B8D052 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E2281B970B3200B8D052 /* dislike.png */; };
+		7564E22C1B970B3200B8D052 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E2291B970B3200B8D052 /* like.png */; };
+		7564E22D1B970B3200B8D052 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22A1B970B3200B8D052 /* undo.png */; };
+		7564E2301B970E6900B8D052 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22E1B970E6900B8D052 /* pin.png */; };
+		7564E2311B970E6900B8D052 /* pinFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22F1B970E6900B8D052 /* pinFill.png */; };
 		7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */; };
 		7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */; };
 		757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */; };
@@ -214,6 +219,11 @@
 		7533F6AA1B84AF0A00B83EFD /* show@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@3x.png"; sourceTree = "<group>"; };
 		75382F071B8CA522005E03FE /* WorkEducationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkEducationCell.h; sourceTree = "<group>"; };
 		75382F081B8CA522005E03FE /* WorkEducationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkEducationCell.m; sourceTree = "<group>"; };
+		7564E2281B970B3200B8D052 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
+		7564E2291B970B3200B8D052 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		7564E22A1B970B3200B8D052 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
+		7564E22E1B970E6900B8D052 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
+		7564E22F1B970E6900B8D052 /* pinFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinFill.png; sourceTree = "<group>"; };
 		7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
 		7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
 		757BDC761B85AA49003B71BD /* CandidateProfileDetailScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateProfileDetailScreenVC.h; sourceTree = "<group>"; };
@@ -1229,6 +1239,11 @@
 				89D9F76A1B6B5DB4004CBE3D /* share_icon.png */,
 				896D182E1B945D5A001513A5 /* call_Icon.png */,
 				896D182F1B945D5A001513A5 /* verify_Icon.png */,
+				7564E2281B970B3200B8D052 /* dislike.png */,
+				7564E2291B970B3200B8D052 /* like.png */,
+				7564E22A1B970B3200B8D052 /* undo.png */,
+				7564E22E1B970E6900B8D052 /* pin.png */,
+				7564E22F1B970E6900B8D052 /* pinFill.png */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -1461,6 +1476,7 @@
 				758C8E7C1B87412800FF634E /* unlike.png in Resources */,
 				7533F6AB1B84AF0A00B83EFD /* add.png in Resources */,
 				89E0FA501B85C92A000BD65A /* SelectionOverlay@2x.png in Resources */,
+				7564E22D1B970B3200B8D052 /* undo.png in Resources */,
 				89D9F78B1B6B5DB4004CBE3D /* preferences@2x.png in Resources */,
 				758C8EC51B8771D300FF634E /* 5.jpg in Resources */,
 				7533F6AE1B84AF0A00B83EFD /* show.png in Resources */,
@@ -1487,6 +1503,7 @@
 				89D9F7801B6B5DB4004CBE3D /* Profile_2.png in Resources */,
 				899170461B70B5D0000CF872 /* next.png in Resources */,
 				89E0FA4F1B85C92A000BD65A /* SelectionOverlay.png in Resources */,
+				7564E2301B970E6900B8D052 /* pin.png in Resources */,
 				7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */,
 				89E0FA511B85C92A000BD65A /* SelectionOverlay~iOS7.png in Resources */,
 				7533F6AC1B84AF0A00B83EFD /* add@2x.png in Resources */,
@@ -1503,6 +1520,7 @@
 				896D18241B944DDB001513A5 /* Matches_bg.png in Resources */,
 				897EF9651B708F2E00F88CEC /* Profile.storyboard in Resources */,
 				757F87661B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
+				7564E22C1B970B3200B8D052 /* like.png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
 				899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */,
 				897C23AD1B6B562C00FC32E9 /* LaunchScreen.xib in Resources */,
@@ -1525,6 +1543,7 @@
 				89D9F77F1B6B5DB4004CBE3D /* Profile_1.png in Resources */,
 				758C71651B88588000D7423F /* sampleImage06.JPG in Resources */,
 				75918F6D1B79E9A10082D7EC /* Preference.storyboard in Resources */,
+				7564E22B1B970B3200B8D052 /* dislike.png in Resources */,
 				758C8E701B87404B00FF634E /* slide.png in Resources */,
 				758C8E7D1B87412800FF634E /* unlike@2x.png in Resources */,
 				7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */,
@@ -1534,6 +1553,7 @@
 				758C8E7A1B87412800FF634E /* like@2x.png in Resources */,
 				897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */,
 				896D18171B9442DD001513A5 /* 01.png in Resources */,
+				7564E2311B970E6900B8D052 /* pinFill.png in Resources */,
 				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
 				89E0FA541B85C92A000BD65A /* VideoOverlay@2x.png in Resources */,
 				8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */,
