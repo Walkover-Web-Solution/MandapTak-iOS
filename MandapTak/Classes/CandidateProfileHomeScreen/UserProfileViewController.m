@@ -86,9 +86,25 @@
     PFUser *user = [PFUser user];
     user.username = @"Hussain";
     user.password = @"hussainPass";
+   /*
     
+    XHAmazingLoadingView *amazingLoadingView = [[XHAmazingLoadingView alloc] initWithType:XHAmazingLoadingAnimationTypeSkype];
+    amazingLoadingView.loadingTintColor = [UIColor redColor];
+    amazingLoadingView.backgroundTintColor = [UIColor whiteColor];
+    amazingLoadingView.frame = self.view.bounds;
+    [blankView addSubview:amazingLoadingView];
+    
+    [amazingLoadingView startAnimating];
+    */
     blankView.hidden = NO;
     profileView.hidden = YES;
+    /*
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    view.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:view];
+    //[self showAnimation:view];
+    [self performSelector:@selector(showAnimation:) withObject:view afterDelay:2.0];
+     */
     
 //    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 //        if (!error) {
@@ -110,6 +126,7 @@
 {
     [arrHistory removeAllObjects];
     [arrCache removeAllObjects];
+    lblMessage.text = @"Finding profiles...";
     
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"]isEqualToString:@"no"])
@@ -154,8 +171,6 @@
                          PFObject *currentLoc = [profileObj valueForKey:@"currentLocation"];
                          PFObject *currentState = [currentLoc valueForKey:@"Parent"];
                          profileModel.currentLocation = [NSString stringWithFormat:@"%@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
-                         NSLog(@"user current location --> %@",profileModel.currentLocation);
-                         
                          profileModel.income = [profileObj valueForKey:@"package"];
                          
                          //birth location label
@@ -224,12 +239,10 @@
         [userDefaults setValue:@"yes" forKey:@"reloadCandidateList"];
     }
 }
-/*
--(void)viewDidAppear:(BOOL)animated
+
+-(void) showAnimation:(UIView *)view
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
-    view.backgroundColor = [UIColor blueColor];
-    
+    /*
     CATransition *animation=[CATransition animation];
     [animation setDelegate:self];
     [animation setDuration:1.75];
@@ -240,9 +253,17 @@
     animation.endProgress=1;
     [animation setRemovedOnCompletion:NO];
     [view.layer addAnimation:animation forKey:nil];
-    [self.view addSubview:view];
+    */
+    /*
+    CATransition *animation2 = [CATransition animation];
+    [animation2 setDelegate:self];
+    [animation2 setDuration:2.0f];
+    [animation2 setTimingFunction:UIViewAnimationCurveEaseInOut];
+    [animation2 setType:@"rippleEffect" ];
+    [view.layer addAnimation:animation2 forKey:NULL];
+     */
 }
-*/
+
 - (NSString *)getFormattedHeightFromValue:(NSString *)value
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
@@ -269,8 +290,9 @@
     }
     else
     {
-        blankView.hidden = NO;
-        profileView.hidden = YES;
+        [self viewWillAppear:NO];
+        //blankView.hidden = NO;
+        //profileView.hidden = YES;
     }
     
 }
@@ -744,9 +766,10 @@
                  }
                  
                  //perform animation
-                 [self.view.layer addAnimation:transition forKey:nil];
+                 
                  profileNumber = 0;
                  [self showProfileOfCandidateNumber:profileNumber];
+                 [self.view.layer addAnimation:transition forKey:nil];
                  
              }
              else

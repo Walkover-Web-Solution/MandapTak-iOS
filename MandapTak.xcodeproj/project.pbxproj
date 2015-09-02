@@ -15,9 +15,10 @@
 		7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6AA1B84AF0A00B83EFD /* show@3x.png */; };
 		75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75382F081B8CA522005E03FE /* WorkEducationCell.m */; };
 		7564E22B1B970B3200B8D052 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E2281B970B3200B8D052 /* dislike.png */; };
-		7564E22C1B970B3200B8D052 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E2291B970B3200B8D052 /* like.png */; };
 		7564E22D1B970B3200B8D052 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22A1B970B3200B8D052 /* undo.png */; };
 		7564E2301B970E6900B8D052 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22E1B970E6900B8D052 /* pin.png */; };
+		7564E2311B970E6900B8D052 /* pinFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22F1B970E6900B8D052 /* pinFill.png */; };
+		7564E2531B9720BD00B8D052 /* likeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E2521B9720BD00B8D052 /* likeIcon.png */; };
 		7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */; };
 		7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */; };
 		757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */; };
@@ -224,10 +225,10 @@
 		75382F071B8CA522005E03FE /* WorkEducationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkEducationCell.h; sourceTree = "<group>"; };
 		75382F081B8CA522005E03FE /* WorkEducationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkEducationCell.m; sourceTree = "<group>"; };
 		7564E2281B970B3200B8D052 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
-		7564E2291B970B3200B8D052 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		7564E22A1B970B3200B8D052 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		7564E22E1B970E6900B8D052 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		7564E22F1B970E6900B8D052 /* pinFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinFill.png; sourceTree = "<group>"; };
+		7564E2521B9720BD00B8D052 /* likeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likeIcon.png; sourceTree = "<group>"; };
 		7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
 		7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
 		757BDC761B85AA49003B71BD /* CandidateProfileDetailScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateProfileDetailScreenVC.h; sourceTree = "<group>"; };
@@ -1275,6 +1276,7 @@
 			isa = PBXGroup;
 			children = (
 				896C19F21B96E49B00FFE0C6 /* call.png */,
+				7564E2521B9720BD00B8D052 /* likeIcon.png */,
 				89D9F7651B6B5DB4004CBE3D /* heart_icon.png */,
 				89D9F7661B6B5DB4004CBE3D /* menu_icon.png */,
 				89D9F7671B6B5DB4004CBE3D /* Profile-3.png */,
@@ -1284,7 +1286,6 @@
 				896D182E1B945D5A001513A5 /* call_Icon.png */,
 				896D182F1B945D5A001513A5 /* verify_Icon.png */,
 				7564E2281B970B3200B8D052 /* dislike.png */,
-				7564E2291B970B3200B8D052 /* like.png */,
 				7564E22A1B970B3200B8D052 /* undo.png */,
 				7564E22E1B970E6900B8D052 /* pin.png */,
 				7564E22F1B970E6900B8D052 /* pinFill.png */,
@@ -1538,6 +1539,7 @@
 				757F87641B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome@2x.png in Resources */,
 				898330E81B84AACA00847B31 /* Info.plist in Resources */,
 				89D9F77E1B6B5DB4004CBE3D /* Profile-3.png in Resources */,
+				7564E2531B9720BD00B8D052 /* likeIcon.png in Resources */,
 				89D9F7861B6B5DB4004CBE3D /* Kundli_icon.png in Resources */,
 				896D18251B944DDB001513A5 /* Matches_icon.png in Resources */,
 				757F875D1B8EF1DC00C083A4 /* SVWebViewController.strings in Resources */,
@@ -1566,7 +1568,6 @@
 				896D18241B944DDB001513A5 /* Matches_bg.png in Resources */,
 				897EF9651B708F2E00F88CEC /* Profile.storyboard in Resources */,
 				757F87661B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
-				7564E22C1B970B3200B8D052 /* like.png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
 				899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */,
 				897C23AD1B6B562C00FC32E9 /* LaunchScreen.xib in Resources */,
