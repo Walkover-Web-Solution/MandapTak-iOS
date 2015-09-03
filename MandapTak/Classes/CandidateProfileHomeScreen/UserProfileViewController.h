@@ -24,6 +24,8 @@
     IBOutlet UIView *profileView;
     IBOutlet UILabel *lblMessage;
     IBOutlet UIButton *btnUndo;
+    IBOutlet UIButton *btnRefresh;
+    IBOutlet NSLayoutConstraint *imageViewConstraint;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;
@@ -31,4 +33,5 @@
 - (IBAction)dislikeAction:(id)sender;
 - (IBAction)openChatPinMatchScreen:(id)sender;
 - (IBAction)undoAction:(id)sender;
+- (IBAction)refreshAction:(id)sender;
 @end

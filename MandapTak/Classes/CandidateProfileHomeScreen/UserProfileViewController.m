@@ -41,6 +41,9 @@
     arrCache = [[NSMutableArray alloc] init];
     arrHistory = [[NSMutableArray alloc] init];
     
+    //update constraints
+    imageViewConstraint.constant = [UIScreen mainScreen].bounds.size.height > 480.0f ? 137 : 70;
+    
     profileNumber = 0;
     btnUndo.enabled = NO;
     //store height data in array
@@ -124,16 +127,17 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [arrHistory removeAllObjects];
-    [arrCache removeAllObjects];
     lblMessage.text = @"Finding profiles...";
     
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
-    if (![[userDefaults valueForKey:@"reloadCandidateList"]isEqualToString:@"no"])
+    if (![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"])
     {
+        [arrHistory removeAllObjects];
+        [arrCache removeAllObjects];
+        [arrCandidateProfiles removeAllObjects];
         MBProgressHUD *HUD;
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+        //NSLog(@"current profile id --> %@ ", [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
         [PFCloud callFunctionInBackground:@"filterProfileLive"
                            withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}  //@"nASUvS6R7Z"
                                     block:^(NSArray *results, NSError *error)
@@ -228,9 +232,15 @@
                  else
                  {
                      //open blank View
-                     [self.view bringSubviewToFront:blankView];
+                     //[self.view bringSubviewToFront:blankView];
+                     blankView.hidden = NO;
+                     profileView.hidden = YES;
                      lblMessage.text = [NSString stringWithFormat:@"No matching profiles found...!!"];
                  }
+             }
+             else
+             {
+                 lblMessage.text = @"Please try again..";
              }
          }];
     }
@@ -300,7 +310,7 @@
 -(void) getUserProfilePicForUser:(NSString *)objectId
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    [query whereKey:@"objectId" equalTo:objectId]; //7ZFYFmiMV9 //EYKXEM27cu   //IRQBKPDl0E
+    [query whereKey:@"objectId" equalTo:objectId]; //7ZFYFmiMV9 //EYKXEM27cu  //IRQBKPDl0E
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
@@ -361,6 +371,9 @@
 
 -(void) showBlurredImageForUser:(NSString *)objectId
 {
+    //remove previously set image
+    self.imgProfileView.image= nil;
+    
     //get primary image of user
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:objectId]];   //@"EYKXEM27cu"
@@ -384,8 +397,6 @@
          //
          //[self performSelector:@selector(retrieveImagesFromArray) withObject:nil afterDelay:0.5];
      }];
-    
-    
 }
 
 
@@ -412,7 +423,7 @@
                  {
                      //update height of your imageView frame with scaledHeight
                      self.imgProfileView.frame = CGRectMake(self.imgProfileView.frame.origin.x, self.imgProfileView.frame.origin.y, self.imgProfileView.frame.size.width, scaledHeight);
-                    }
+                 }
                  
                  //CGSize newSize = [self makeSize:originalSize fitInSize:expectedSize];
                  //image.size = newSize;
@@ -420,7 +431,7 @@
                  self.imgProfileView.image = image;
                  
                  profileView.hidden = NO;
-                 blankView.hidden = NO;
+                 blankView.hidden = YES;
                  
                  /*
                      self.view.backgroundColor = [UIColor clearColor];
@@ -594,7 +605,7 @@
         NSString *strObjId = userProfileObj.profilePointer.objectId;
         //make entry in like table
         PFObject *pinObj = [PFObject objectWithClassName:@"PinnedProfile"];
-        pinObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        pinObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
         pinObj[@"pinnedProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
         
         [pinObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
@@ -609,7 +620,7 @@
                  //add curent action data in History model
                  History *historyObj = [[History alloc]init];
                  historyObj.historyObjectId = pinObj.objectId;
-                 historyObj.profileId = @"nASUvS6R7Z";
+                 historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
                  historyObj.actionProfileId = strObjId;
                  historyObj.actionType = 2;     //pin action:2
                  
@@ -631,9 +642,11 @@
                  }
                  
                  //perform animation
-                 [self.view.layer addAnimation:transition forKey:nil];
+                 
                  profileNumber = 0;
                  [self showProfileOfCandidateNumber:profileNumber];
+                //[self performSelector:@selector(animateScreenWithTransition:) withObject:transition afterDelay:2.0];
+                 [self.view.layer addAnimation:transition forKey:nil];
                  
              }
              else
@@ -646,6 +659,11 @@
     {
         [self viewWillAppear:NO];
     }
+}
+
+-(void) animateScreenWithTransition :(CATransition *)transition
+{
+    [self.view.layer addAnimation:transition forKey:nil];
 }
 
 - (IBAction)likeAction:(id)sender
@@ -663,7 +681,7 @@
         NSString *strObjId = userProfileObj.profilePointer.objectId;
         //make entry in like table
         PFObject *likeObj = [PFObject objectWithClassName:@"LikedProfile"];
-        likeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        likeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
         likeObj[@"likeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
         
         [likeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
@@ -678,7 +696,7 @@
                  //add curent action data in History model
                  History *historyObj = [[History alloc]init];
                  historyObj.historyObjectId = likeObj.objectId;
-                 historyObj.profileId = @"nASUvS6R7Z";
+                 historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
                  historyObj.actionProfileId = strObjId;
                  historyObj.actionType = 1;     //like action:1
                  
@@ -733,7 +751,7 @@
      
         //make entry in like table
         PFObject *dislikeObj = [PFObject objectWithClassName:@"DislikeProfile"];
-        dislikeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        dislikeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
         dislikeObj[@"dislikeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
         
         [dislikeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
@@ -744,7 +762,7 @@
                  //add curent action data in History model
                  History *historyObj = [[History alloc]init];
                  historyObj.historyObjectId = dislikeObj.objectId;
-                 historyObj.profileId = @"nASUvS6R7Z";
+                 historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
                  historyObj.actionProfileId = strObjId;
                  historyObj.actionType = 0;     //dislike action:2
                  
@@ -805,6 +823,11 @@
             break;
     }
     [self deleteObject:histObject.historyObjectId FromClassName:parseClassName];
+}
+
+- (IBAction)refreshAction:(id)sender
+{
+    [self viewWillAppear:NO];
 }
 
 -(void) deleteObject:(NSString *)ObjectID FromClassName:(NSString *)class

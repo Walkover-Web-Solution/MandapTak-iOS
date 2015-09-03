@@ -96,7 +96,7 @@
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    NSString *profileId = @"nASUvS6R7Z";    //gDlvVzftXF
+    NSString *profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];   //@"nASUvS6R7Z";    //gDlvVzftXF
     PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
 //
@@ -354,7 +354,7 @@
     {
         //insert preferences
         PFObject *pref = [PFObject objectWithClassName:@"Preference"];
-        pref[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:@"nASUvS6R7Z"];
+        pref[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
         pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
         pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
         pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];

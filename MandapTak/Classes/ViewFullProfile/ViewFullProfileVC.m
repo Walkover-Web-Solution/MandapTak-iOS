@@ -137,7 +137,8 @@
 - (IBAction)downloadBiodata:(id)sender
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    [query whereKey:@"objectId" equalTo:@"rvkzhpnLKr"];//rvkzhpnLKr //EYKXEM27cu
+    NSLog(@"candidater profile ID -> %@",profileObject.profilePointer.objectId);
+    [query whereKey:@"objectId" equalTo:profileObject.profilePointer.objectId];//rvkzhpnLKr //EYKXEM27cu
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         
@@ -147,10 +148,17 @@
         
         NSString *fileName = [userImageFile url];
         NSURL *URL = [NSURL URLWithString:fileName];
-        SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
-        webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-        [self presentViewController:webViewController animated:YES completion:NULL];
-
+        if (URL == nil)
+        {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:@"File not found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [av show];
+        }
+        else
+        {
+            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+            webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+            [self presentViewController:webViewController animated:YES completion:NULL];
+        }
     }
     }];
     
