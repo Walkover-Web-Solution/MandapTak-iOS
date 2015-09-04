@@ -14,6 +14,6 @@
 
 @interface CastePopoverViewController : UIViewController
 @property (weak, nonatomic) id <CastePopoverViewControllerDelegate> delegate;
-@property (strong, nonatomic) NSArray *arrTableData;
+@property (strong, nonatomic) NSMutableArray *arrTableData;
 @property (strong, nonatomic) PFObject *religionObj;
 @end

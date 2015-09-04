@@ -10,18 +10,27 @@
 #import "ServiceManager.h"
 #import "MBProgressHUD.h"
 #import "Location.h"
-@interface PopOverListViewController ()
+#import "UITableView+DragLoad.h"
+
+@interface PopOverListViewController ()<UITableViewDragLoadDelegate>{
+    BOOL isSearching;
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *arrTableData;
+@property (strong, nonatomic) NSMutableArray *arrTableData;
+- (IBAction)closeButtonAction:(id)sender;
+
 @end
 
 @implementation PopOverListViewController
 @synthesize arrSelectedData;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.arrTableData = [NSArray array];
+    isSearching = NO;
+    self.arrTableData = [NSMutableArray array];
+    [self loadMore];
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -35,19 +44,26 @@
 
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    if(searchBar.text.length>0){
+        isSearching = YES;
+    }
+    else{
+        isSearching = NO;
+    }
     }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
-    
+    query.limit = 20;
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchBar.text]];
   //  [query whereKey:@"name" hasPrefix:searchBar.text];
     [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+        self.arrTableData = [NSMutableArray array];
         NSMutableArray *arrLocData = [NSMutableArray array];
         for(PFObject *obj in comments){
             Location *location = [[Location alloc]init];
@@ -114,7 +130,61 @@
 {
     [self.delegate selectedLocation:self.arrTableData[indexPath.row]];
 }
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
+}
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
+}
 
+//- (void)dragTableRefreshCanceled:(UITableView *)tableView
+//{
+//    //cancel refresh request(generally network request) here
+//    
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishRefresh) object:nil];
+//}
+-(void)loadMore{
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:@"City" ];
+    query.skip = self.arrTableData.count;
+    query.limit = 20;
+    if(isSearching){
+        [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchBar.text]];
+
+    }
+    [query includeKey:@"Parent.Parent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(comments.count<20)
+            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+        for(PFObject *obj in comments){
+            Location *location = [[Location alloc]init];
+            PFObject *parent = [obj valueForKey:@"Parent"];
+            location.city = [obj valueForKey:@"name"];
+            location.cityPointer = obj;
+            location.placeId = [obj valueForKey:@"objectId"];
+            location.state = [parent valueForKey:@"name"];
+            PFObject *subParent = [parent valueForKey:@"Parent"];
+            location.country = [subParent valueForKey:@"name"];
+            location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+            [self.arrTableData addObject:location];
+        }
+        [self.tableView reloadData];
+        
+    }];
+    [self.tableView finishLoadMore];
+
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
 /*
 #pragma mark - Navigation
 
@@ -125,4 +195,7 @@
 }
 */
 
+- (IBAction)closeButtonAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

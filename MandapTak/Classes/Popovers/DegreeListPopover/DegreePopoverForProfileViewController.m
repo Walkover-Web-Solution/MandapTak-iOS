@@ -9,9 +9,11 @@
 #import "DegreePopoverForProfileViewController.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
+#import "UITableView+DragLoad.h"
 #import "Education.h"
-@interface DegreePopoverForProfileViewController (){
+@interface DegreePopoverForProfileViewController ()<UITableViewDragLoadDelegate>{
     BOOL isDegreeSelected;
+    BOOL isSearching;
 }
 @property (strong, nonatomic) NSMutableArray *arrTableData;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -23,8 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-   // self.arrTableData = [NSArray arrayWithObjects:@"B.E",@"B.Com",@"BCA",@"MCA",@"LLB",@"BBA", nil];
+    self.arrTableData = [NSMutableArray array];
+    [self loadMore];
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     // Do any additional setup after loading the view.
 }
 
@@ -34,6 +37,12 @@
 }
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if(searchBar.text.length>0){
+        isSearching = YES;
+    }
+    else{
+        isSearching = NO;
+    }
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -92,16 +101,55 @@
     [self.delegate selectedDegree:self.arrTableData[indexPath.row] forTag:self.btnTag];
     
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"Will begin dragging");
+    [self.searchBar resignFirstResponder];
 }
-*/
 
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
+}
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
+    
+}
+
+-(void)loadMore{
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:@"Degree"];
+    //  [query whereKey:@"casteId" equalTo:self.casteObj];
+    if(isSearching)
+        [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchBar.text]];
+    query.skip = self.arrTableData.count;
+    query.limit = 20;
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(comments.count<20)
+            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+        
+        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
+        [self.tableView reloadData];
+        for(Education *education in self.arrEducation){
+            for(PFObject *deg in self.arrTableData){
+                if([[deg valueForKey:@"objectId"] isEqual:[education.degree valueForKey:@"objectId"]]){
+                    [self.arrTableData removeObject:deg];
+                    break;
+                }
+            }
+        }
+        [self.tableView reloadData];
+        
+    }];
+    
+    [self.tableView finishLoadMore];
+}
 @end

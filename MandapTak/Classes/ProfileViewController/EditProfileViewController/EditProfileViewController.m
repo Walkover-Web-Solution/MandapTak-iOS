@@ -31,6 +31,7 @@
 //#import "FacebooKProfilePictureViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AppData.h"
+#import "SWRevealViewController.h"
 @interface EditProfileViewController ()<WYPopoverControllerDelegate,HeightPopoverViewControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate>
 {
     __weak IBOutlet UIView *navBarView;
@@ -115,6 +116,7 @@ NSString *selectedHeight;
     // [self hideAllView];
     UIColor* whyerColor = [UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1];
 //fetch profile for User id
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
     if([[AppData sharedData]isInternetAvailable]){
         NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
@@ -157,8 +159,8 @@ NSString *selectedHeight;
 
     }
     else{
-//       UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//        [alert show];
+       UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
     }
        WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     
@@ -408,9 +410,9 @@ NSString *selectedHeight;
         
                 } else {
                     //Something bad has ocurred
-                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
-                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                    [errorAlertView show];
+//                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
+//                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//                    [errorAlertView show];
                 }
             }];
 
@@ -428,9 +430,9 @@ NSString *selectedHeight;
             
         } else {
             //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
+//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [errorAlertView show];
         }
     }];
    }
@@ -468,9 +470,9 @@ NSString *selectedHeight;
             
         } else {
             //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
+//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [errorAlertView show];
         }
     }];
     
@@ -533,9 +535,9 @@ NSString *selectedHeight;
             
         } else {
             //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
+//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [errorAlertView show];
         }
     }];
 
@@ -558,21 +560,16 @@ NSString *selectedHeight;
     if([self.tab3View.subviews containsObject:vc3.view] && currentTab == 3) {
         [vc3 removeFromParentViewController];
         [vc3.view removeFromSuperview];
+        
     }
     if([self.tab2View.subviews containsObject:vc2.view]&& currentTab == 2) {
         [vc2 removeFromParentViewController];
         [vc2.view removeFromSuperview];
         
     }
-    //if([self.tab4View.subviews containsObject:vc4.view]&& currentTab == 4) {
-      //  [vc4 removeFromParentViewController];
-      // [vc4.view removeFromSuperview];
-        
-  //  }
     if([self.tab1View.subviews containsObject:vc1.view]&& currentTab == 1) {
         [vc1 removeFromParentViewController];
         [vc1.view removeFromSuperview];
-        
     }
 }
 
@@ -599,6 +596,7 @@ NSString *selectedHeight;
 
     switch (currentTab) {
         case 1:
+            vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
             self.tab1View.hidden = NO;
             vc1.delegate = self;
             vc1.currentProfile = currentProfile;
@@ -607,6 +605,7 @@ NSString *selectedHeight;
             self.btnTab1.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
         case 2:
+            vc2 = [sb2 instantiateViewControllerWithIdentifier:@"DetailProfileViewController"];
             self.tab2View.hidden = NO;
             vc2.delegate = self;
             vc2.currentProfile = currentProfile;
@@ -615,6 +614,7 @@ NSString *selectedHeight;
             self.btnTab2.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
         case 3:
+            vc3 = [sb2 instantiateViewControllerWithIdentifier:@"ProfileWorkAndExperienceViewController"];
             self.tab3View.hidden = NO;
             vc3.delegate = self;
             vc3.currentProfile = currentProfile;
@@ -700,9 +700,12 @@ NSString *selectedHeight;
         NSString *weight =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"weight"]];
         NSString *designation =[currentProfile valueForKey:@"designation"];
         NSString *company =[currentProfile valueForKey:@"placeOfWork"];
-        NSString *package =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"package"]];
-       
-        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||package.length==0||[[currentProfile valueForKey:@"minMarriageBudget"] isKindOfClass: [NSNull class]]||[[currentProfile valueForKey:@"maxMarriageBudget"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
+        NSString *strPackage =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"package"]];
+        int package = [strPackage intValue];
+        int minBugget =[txtMinBudget.text intValue];
+        int maxBudget =[txtMaxBudget.text intValue];
+
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
             NSMutableArray *arrMsg = [NSMutableArray array];
             if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
                 [arrMsg addObject:@"valid Full Name"];
@@ -725,7 +728,7 @@ NSString *selectedHeight;
             if(weight.length==0){
                 [arrMsg addObject:@"weight"];
             }
-            if(package.length==0){
+            if(package<1){
                 [arrMsg addObject:@"package"];
             }
             if(company.length==0){
@@ -746,12 +749,12 @@ NSString *selectedHeight;
             if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Industry"];
             }
-            if([currentProfile valueForKey:@"minMarriageBudget"] ==nil){
-                [arrMsg addObject:@"min marriage budget"];
-            }
-            if([currentProfile valueForKey:@"maxMarriageBudget"] ==nil){
-                [arrMsg addObject:@"max marriage budget"];
-            }
+//            if([currentProfile valueForKey:@"minMarriageBudget"] ==nil){
+//                [arrMsg addObject:@"min marriage budget"];
+//            }
+//            if([currentProfile valueForKey:@"maxMarriageBudget"] ==nil){
+//                [arrMsg addObject:@"max marriage budget"];
+//            }
             if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Degree and its specialization"];
             }
@@ -761,6 +764,10 @@ NSString *selectedHeight;
             }
             if(selectedBiodata ==nil){
                 [arrMsg addObject:@"select a Bio Data"];
+            }
+            if(maxBudget<minBugget){
+                [arrMsg addObject:@"max marriage budget less then min marriage budget"];
+
             }
             NSString *msg =@"Please enter";
             //        for(NSString *str in arrMsg){
@@ -787,8 +794,13 @@ NSString *selectedHeight;
                 
                 if (!error) {
                     // succesful
-                    [self dismissViewControllerAnimated:YES completion:nil];
-
+                    if(self.isMakingNewProfile){
+                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+                        [self presentViewController:vc animated:YES completion:nil];
+                    }
+                    else
+                        [self dismissViewControllerAnimated:YES completion:nil];
                     
                 } else {
                     //Something bad has ocurred
@@ -1131,18 +1143,7 @@ NSString *selectedHeight;
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
-        if (!error) {
-            // succesful
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-            
-        } else {
-            //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
-        }
-    }];
+}];
 
 }
 #pragma mark PopoverDelegate
@@ -1272,6 +1273,44 @@ NSString *selectedHeight;
 
     }
   }
+
+-(UIImage *)compressImage:(UIImage *)image{
+    float actualHeight = image.size.height;
+    float actualWidth = image.size.width;
+    float maxHeight = 600.0;
+    float maxWidth = 800.0;
+    float imgRatio = actualWidth/actualHeight;
+    float maxRatio = maxWidth/maxHeight;
+    float compressionQuality = 0.5;//50 percent compression
+    
+    if (actualHeight > maxHeight || actualWidth > maxWidth){
+        if(imgRatio < maxRatio){
+            //adjust width according to maxHeight
+            imgRatio = maxHeight / actualHeight;
+            actualWidth = imgRatio * actualWidth;
+            actualHeight = maxHeight;
+        }
+        else if(imgRatio > maxRatio){
+            //adjust height according to maxWidth
+            imgRatio = maxWidth / actualWidth;
+            actualHeight = imgRatio * actualHeight;
+            actualWidth = maxWidth;
+        }
+        else{
+            actualHeight = maxHeight;
+            actualWidth = maxWidth;
+        }
+    }
+    
+    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    [image drawInRect:rect];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
+    UIGraphicsEndImageContext();
+    
+    return [UIImage imageWithData:imageData];
+}
 -(void)addPhotosToParse{
     NSMutableArray *arrAllPhotoToBeSaved = [NSMutableArray array];
     for(Photos *photo in arrNewImages){
@@ -1389,6 +1428,7 @@ NSString *selectedHeight;
     [self dismissViewControllerAnimated:YES completion:NULL];
     // }
 }
+
 -(void)selectedProfilePhotoArray:(NSArray *)arrSelectedProfilePics{
     [arrNewImages addObjectsFromArray:arrSelectedProfilePics];
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];

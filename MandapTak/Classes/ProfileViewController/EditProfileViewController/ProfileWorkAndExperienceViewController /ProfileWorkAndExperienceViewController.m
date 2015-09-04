@@ -120,7 +120,7 @@
     if(selectedDesignation)
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
     
-    if(selectedIncome)
+    if([selectedIncome intValue]>0)
         self.currentProfile[@"package"] = @([selectedIncome integerValue]);
     if(selectedDesignation)
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
@@ -167,7 +167,7 @@
     if(![[self.currentProfile valueForKey:@"placeOfWork"] isKindOfClass: [NSNull class]]){
         selectedCompany  = [self.currentProfile valueForKey:@"placeOfWork"];
     }
-    if(![[self.currentProfile valueForKey:@"package"] isKindOfClass: [NSNull class]]){
+    if(![[self.currentProfile valueForKey:@"package"] isKindOfClass: [NSNull class]] && [self.currentProfile valueForKey:@"package"] !=nil ){
         selectedIncome = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"package"] ] ;
     }
     if(![[self.currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){

@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateSecondTabObjects" object:nil];
-
+    NSLog(@"%@",self.currentProfile);
     if(self.currentProfile ==nil){
         NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
@@ -122,6 +122,8 @@
         for(NSString *height in arrHeight){
             if ([height rangeOfString:selectedHeightInCms].location != NSNotFound) {
                 selectedHeight = height;
+                break;
+
             }
 //            if([height containsString:selectedHeightInCms]){
 //                selectedHeight = height;
@@ -138,6 +140,8 @@
     if(![[self.currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]){
         PFObject *obj  = [self.currentProfile valueForKey:@"casteId"];
         selectedCaste = obj;
+        isCasteSelected = YES;
+
         [btnCaste setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnCaste setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
@@ -150,6 +154,7 @@
     if(![[self.currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]){
         PFObject *obj  = [self.currentProfile valueForKey:@"religionId"];
         selectedReligion = obj;
+        isReligionSelected = YES;
         [btnReligion setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
 }

@@ -39,8 +39,8 @@
     [comps setYear: -18];
     NSDate * minDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
     
-    self.datePicker.minimumDate = minDate;
-    self.datePicker.maximumDate = currentDate;
+    //self.datePicker.minimumDate = minDate;
+    self.datePicker.maximumDate = minDate;
     // Do any additional setup after loading the view.
 }
 

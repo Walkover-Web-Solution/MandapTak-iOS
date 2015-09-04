@@ -7,6 +7,7 @@
 //
 
 #import "DegreeListVC.h"
+#import "UITableView+DragLoad.h"
 
 @interface DegreeListVC ()
 

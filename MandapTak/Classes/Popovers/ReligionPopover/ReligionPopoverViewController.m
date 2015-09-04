@@ -9,8 +9,10 @@
 #import "ReligionPopoverViewController.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
-@interface ReligionPopoverViewController (){
-    NSArray *arrTableData;
+#import "UITableView+DragLoad.h"
+@interface ReligionPopoverViewController ()<UITableViewDragLoadDelegate>{
+    NSMutableArray *arrTableData;
+    BOOL isSearching;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,8 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    arrTableData = [NSArray array];
-    NSLog(@"%@",self.type);
+    isSearching =NO;
+    arrTableData = [NSMutableArray array];
+    [self loadMore];
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+
     // Do any additional setup after loading the view.
 }
 
@@ -33,6 +38,12 @@
 
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if(searchBar.text.length>0){
+        isSearching = YES;
+    }
+    else{
+        isSearching = NO;
+    }
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -43,7 +54,7 @@
    [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        arrTableData = comments;
+        arrTableData = comments.mutableCopy;
         [self.tableView reloadData];
         
     }];
@@ -83,14 +94,45 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+       [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
 }
-*/
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+        [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
+
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"Will begin dragging");
+    [self.searchBar resignFirstResponder];
+}
+
+-(void)loadMore{
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:@"Religion"];
+    if(isSearching){
+        [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
+    }
+    [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
+    [query includeKey:@"Parent.Parent"];
+    query.skip = arrTableData.count;
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        arrTableData = [NSMutableArray arrayWithArray:[arrTableData arrayByAddingObjectsFromArray:comments]];
+        [self.tableView reloadData];
+        if(comments.count<20)
+            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+        
+    }];    [self.tableView finishLoadMore];
+
+}
 
 @end

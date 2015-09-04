@@ -10,13 +10,13 @@
 #import "MatchAndPinTableViewCell.h"
 #import "ChatTableViewCell.h"
 #import "MBProgressHUD.h"
-#import <Parse/Parse.h>
 @interface ChatPinMatchViewController (){
     NSInteger currentTab;
     NSArray *arrMatches;
     NSArray *arrPins;
     NSArray *arrChats;
-    PFObject *currentProfile;
+    __weak IBOutlet UILabel *lblUserInfo;
+  //  PFObject *currentProfile;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnChat;
 @property (weak, nonatomic) IBOutlet UIButton *btnPin;
@@ -34,30 +34,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     currentTab = 0;
+    lblUserInfo.hidden = YES;
+
     arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        if (!error) {
+    if(self.currentProfile){
+        [self switchToMatches];
+    }
+    else{
+        MBProgressHUD * hud;
+        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             
-            // The find succeeded.
-            PFObject *obj= objects[0];
-            currentProfile =obj;
-            [self switchToMatches];
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-}
+            if (!error) {
+                
+                // The find succeeded.
+                PFObject *obj= objects[0];
+                self.currentProfile =obj;
+                [self switchToMatches];
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+
+    }
+   }
 
 - (IBAction)backToHome:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -222,12 +230,19 @@
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [PFCloud callFunctionInBackground:@"getMatchedProfile"
-                       withParameters:@{@"profileId":[currentProfile objectId]}
+                       withParameters:@{@"profileId":[self.currentProfile objectId]}
                                 block:^(NSArray *results, NSError *error)
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          if (!error)
          {
+             if(results.count == 0){
+                 lblUserInfo.text = @"No Matches found!!";
+                 lblUserInfo.hidden = NO;
+             }
+             else
+                 lblUserInfo.hidden = YES;
+
              arrMatches = results;
              [self.tableView reloadData];
 
@@ -247,7 +262,7 @@
     
 
     PFQuery *query = [PFQuery queryWithClassName:@"PinnedProfile"];
-    [query whereKey:@"profileId" equalTo:currentProfile];
+    [query whereKey:@"profileId" equalTo:self.currentProfile];
     [query includeKey:@"pinnedProfileId.casteId.religionId"];
     [query includeKey:@"pinnedProfileId.religionId"];
     [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
@@ -260,6 +275,13 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         if (!error) {
+            if(objects.count == 0){
+                lblUserInfo.text = @"No Profiles Pinned.";
+            lblUserInfo.hidden = NO;
+        }
+        else
+            lblUserInfo.hidden = YES;
+
             //  [self getUserProfileForUser:objects[0]];
             arrPins = objects;
             [self.tableView reloadData];

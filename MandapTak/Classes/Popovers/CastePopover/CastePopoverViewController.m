@@ -8,7 +8,11 @@
 
 #import "CastePopoverViewController.h"
 #import "MBProgressHUD.h"
-@interface CastePopoverViewController ()
+#import "UITableView+DragLoad.h"
+@interface CastePopoverViewController ()<UITableViewDragLoadDelegate>{
+    BOOL isSearching;
+
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -19,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",self.arrTableData);
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+    self.arrTableData =[NSMutableArray array];
+    [self loadMore];
     // Do any additional setup after loading the view.
 }
 
@@ -28,6 +35,12 @@
 }
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if(searchBar.text.length>0){
+        isSearching = YES;
+    }
+    else{
+        isSearching = NO;
+    }
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -39,7 +52,7 @@
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        self.arrTableData = comments;
+        self.arrTableData = comments.mutableCopy;
         [self.tableView reloadData];
         
     }];
@@ -76,14 +89,42 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
 }
-*/
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
+}
+
+-(void)loadMore{
+    
+    
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:@"Caste"];
+    query.skip = self.arrTableData.count;
+    query.limit = 20;
+    if(isSearching)
+        [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
+    
+    [query whereKey:@"religionId" equalTo:self.religionObj];
+    [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
+        if(comments.count<=20)
+            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+
+        [self.tableView reloadData];
+        
+    }];
+    [self.tableView finishLoadMore];
+}
 
 @end

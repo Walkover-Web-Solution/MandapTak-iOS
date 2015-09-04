@@ -25,7 +25,14 @@
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
    // [PFFacebookUtils initializeFacebook];
+   
+  
     if([PFUser currentUser]){
+        PFACL *acl = [PFACL ACL];
+        [acl setPublicReadAccess:true];
+        [acl setWriteAccess:true forUser:[PFUser currentUser]];
+        [PFUser currentUser].ACL = acl;
+
         [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
 
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"isProfileComplete"] isEqual:@"completed"]){
@@ -36,7 +43,8 @@
         else{
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
             EditProfileViewController *vc2 = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-            
+            vc2.isMakingNewProfile =YES;
+
             //vc.globalCompanyId = [self.companies.companyId intValue];
             
             UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];

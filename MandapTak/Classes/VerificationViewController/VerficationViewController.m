@@ -130,6 +130,11 @@
 
                                             if(!error){
                                                 NSLog(@"Success");
+                                                PFACL *acl = [PFACL ACL];
+                                                [acl setPublicReadAccess:true];
+                                                [acl setWriteAccess:true forUser:[PFUser currentUser]];
+                                                [PFUser currentUser].ACL = acl;
+
                                                 [self checkForUseridInUserProfile];
                                             }
                                                                                        }];
@@ -176,7 +181,7 @@
             else{
                 UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
                 EditProfileViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-                
+                vc.isMakingNewProfile =YES;
                 //vc.globalCompanyId = [self.companies.companyId intValue];
                 
                 UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];

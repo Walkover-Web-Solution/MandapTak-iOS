@@ -76,6 +76,7 @@
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
 		75BF975B1B982BE600B091D8 /* pinFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BF975A1B982BE600B091D8 /* pinFill.png */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
+		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
 		8947186D1B8EF49600473EEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8947186C1B8EF49600473EEF /* AssetsLibrary.framework */; };
 		894BBA681B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 894BBA671B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m */; };
@@ -84,6 +85,13 @@
 		8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8954803C1B7DB49900AB37BF /* Profile.xcassets */; };
 		895480471B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */; };
 		8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 895480491B7E1C0B00AB37BF /* DegreeTableViewCell.m */; };
+		895A6E791B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E6C1B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m */; };
+		895A6E7A1B9843A200A9C8BC /* DragTableFooterView_ot.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E6F1B9843A200A9C8BC /* DragTableFooterView_ot.m */; };
+		895A6E7B1B9843A200A9C8BC /* DragTableGestureObserver_ot.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E711B9843A200A9C8BC /* DragTableGestureObserver_ot.m */; };
+		895A6E7C1B9843A200A9C8BC /* DragTableHeaderView_ot.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E731B9843A200A9C8BC /* DragTableHeaderView_ot.m */; };
+		895A6E7D1B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E751B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m */; };
+		895A6E7E1B9843A200A9C8BC /* UITableView+DragLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E781B9843A200A9C8BC /* UITableView+DragLoad.m */; };
+		895A6E801B98686E00A9C8BC /* closePopover.png in Resources */ = {isa = PBXBuildFile; fileRef = 895A6E7F1B98686E00A9C8BC /* closePopover.png */; };
 		895B72331B902087006AA638 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B72321B902087006AA638 /* AppData.m */; };
 		895B72361B9020A2006AA638 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B72351B9020A2006AA638 /* Reachability.m */; };
 		895B72391B902FC2006AA638 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B72381B902FC2006AA638 /* NSNotificationAdditions.m */; };
@@ -126,7 +134,6 @@
 		897C23AD1B6B562C00FC32E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897C23AB1B6B562C00FC32E9 /* LaunchScreen.xib */; };
 		897C23B91B6B562C00FC32E9 /* MandapTakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C23B81B6B562C00FC32E9 /* MandapTakTests.m */; };
 		897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */; };
-		897EF9651B708F2E00F88CEC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897EF9641B708F2E00F88CEC /* Profile.storyboard */; };
 		897EF96A1B708FE000F88CEC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897EF9691B708FE000F88CEC /* ProfileViewController.m */; };
 		897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897EF96C1B70901400F88CEC /* EditProfileViewController.m */; };
 		898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */; };
@@ -313,6 +320,7 @@
 		75BF975A1B982BE600B091D8 /* pinFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinFill.png; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
+		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		893E76E31B8871130009F512 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		893E76E41B8871130009F512 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
 		8947186C1B8EF49600473EEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -325,6 +333,20 @@
 		895480461B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileWorkAndExperienceViewController.m; sourceTree = "<group>"; };
 		895480481B7E1C0B00AB37BF /* DegreeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DegreeTableViewCell.h; sourceTree = "<group>"; };
 		895480491B7E1C0B00AB37BF /* DegreeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DegreeTableViewCell.m; sourceTree = "<group>"; };
+		895A6E6B1B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComOpenThreadOTScreenshotHelperSwizzleHelper.h; sourceTree = "<group>"; };
+		895A6E6C1B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComOpenThreadOTScreenshotHelperSwizzleHelper.m; sourceTree = "<group>"; };
+		895A6E6D1B9843A200A9C8BC /* DragTableDragState_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableDragState_ot.h; sourceTree = "<group>"; };
+		895A6E6E1B9843A200A9C8BC /* DragTableFooterView_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableFooterView_ot.h; sourceTree = "<group>"; };
+		895A6E6F1B9843A200A9C8BC /* DragTableFooterView_ot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragTableFooterView_ot.m; sourceTree = "<group>"; };
+		895A6E701B9843A200A9C8BC /* DragTableGestureObserver_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableGestureObserver_ot.h; sourceTree = "<group>"; };
+		895A6E711B9843A200A9C8BC /* DragTableGestureObserver_ot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragTableGestureObserver_ot.m; sourceTree = "<group>"; };
+		895A6E721B9843A200A9C8BC /* DragTableHeaderView_ot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragTableHeaderView_ot.h; sourceTree = "<group>"; };
+		895A6E731B9843A200A9C8BC /* DragTableHeaderView_ot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragTableHeaderView_ot.m; sourceTree = "<group>"; };
+		895A6E741B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DragTableSafeAnimation.h"; sourceTree = "<group>"; };
+		895A6E751B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DragTableSafeAnimation.m"; sourceTree = "<group>"; };
+		895A6E771B9843A200A9C8BC /* UITableView+DragLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DragLoad.h"; sourceTree = "<group>"; };
+		895A6E781B9843A200A9C8BC /* UITableView+DragLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DragLoad.m"; sourceTree = "<group>"; };
+		895A6E7F1B98686E00A9C8BC /* closePopover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closePopover.png; sourceTree = "<group>"; };
 		895B72311B902087006AA638 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		895B72321B902087006AA638 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		895B72341B9020A2006AA638 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -387,7 +409,6 @@
 		897C23B81B6B562C00FC32E9 /* MandapTakTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MandapTakTests.m; sourceTree = "<group>"; };
 		897D038B1B83566C008E0274 /* SpecialisationPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialisationPopoverViewController.h; sourceTree = "<group>"; };
 		897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialisationPopoverViewController.m; sourceTree = "<group>"; };
-		897EF9641B708F2E00F88CEC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		897EF9681B708FE000F88CEC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		897EF9691B708FE000F88CEC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		897EF96B1B70901400F88CEC /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -628,6 +649,7 @@
 		757F876A1B8F0DDB00C083A4 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				895A6E7F1B98686E00A9C8BC /* closePopover.png */,
 				757F876B1B8F0DDB00C083A4 /* backNew.png */,
 				757F876C1B8F0DDB00C083A4 /* backNew@2x.png */,
 			);
@@ -769,6 +791,42 @@
 			path = "ProfileWorkAndExperienceViewController ";
 			sourceTree = "<group>";
 		};
+		895A6E691B9843A200A9C8BC /* DragDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				895A6E6A1B9843A200A9C8BC /* PrivateClass */,
+				895A6E761B9843A200A9C8BC /* PublicClass */,
+			);
+			path = DragDelegate;
+			sourceTree = "<group>";
+		};
+		895A6E6A1B9843A200A9C8BC /* PrivateClass */ = {
+			isa = PBXGroup;
+			children = (
+				895A6E6B1B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.h */,
+				895A6E6C1B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m */,
+				895A6E6D1B9843A200A9C8BC /* DragTableDragState_ot.h */,
+				895A6E6E1B9843A200A9C8BC /* DragTableFooterView_ot.h */,
+				895A6E6F1B9843A200A9C8BC /* DragTableFooterView_ot.m */,
+				895A6E701B9843A200A9C8BC /* DragTableGestureObserver_ot.h */,
+				895A6E711B9843A200A9C8BC /* DragTableGestureObserver_ot.m */,
+				895A6E721B9843A200A9C8BC /* DragTableHeaderView_ot.h */,
+				895A6E731B9843A200A9C8BC /* DragTableHeaderView_ot.m */,
+				895A6E741B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.h */,
+				895A6E751B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m */,
+			);
+			path = PrivateClass;
+			sourceTree = "<group>";
+		};
+		895A6E761B9843A200A9C8BC /* PublicClass */ = {
+			isa = PBXGroup;
+			children = (
+				895A6E771B9843A200A9C8BC /* UITableView+DragLoad.h */,
+				895A6E781B9843A200A9C8BC /* UITableView+DragLoad.m */,
+			);
+			path = PublicClass;
+			sourceTree = "<group>";
+		};
 		895CD7721B81C41800816FDE /* DegreeListPopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -901,9 +959,9 @@
 				899C53751B73361600C24DA8 /* ServiceManager */,
 				89D9F7621B6B5DB4004CBE3D /* Images */,
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
-				897EF9641B708F2E00F88CEC /* Profile.storyboard */,
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
 				896D183A1B9487F1001513A5 /* ChatPinMatch.storyboard */,
+				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
 				89D9F7251B6B5797004CBE3D /* Models */,
@@ -1221,6 +1279,7 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				895A6E691B9843A200A9C8BC /* DragDelegate */,
 				896006251B9075870007B7AB /* PhotoTweak */,
 				895B72371B902FC2006AA638 /* NSNotificationAdditions.h */,
 				895B72381B902FC2006AA638 /* NSNotificationAdditions.m */,
@@ -1567,7 +1626,6 @@
 				896D182D1B9454C8001513A5 /* Spam_icon.png in Resources */,
 				89D9F78E1B6B5DB4004CBE3D /* setting.png in Resources */,
 				896D18241B944DDB001513A5 /* Matches_bg.png in Resources */,
-				897EF9651B708F2E00F88CEC /* Profile.storyboard in Resources */,
 				757F87661B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
 				899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */,
@@ -1585,6 +1643,7 @@
 				899170471B70B5D0000CF872 /* next@2x.png in Resources */,
 				896D18231B944DDB001513A5 /* Fake_icon.png in Resources */,
 				757F87611B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
+				895A6E801B98686E00A9C8BC /* closePopover.png in Resources */,
 				89D9F7831B6B5DB4004CBE3D /* backgroundImages.png in Resources */,
 				758C71611B88588000D7423F /* sampleImage02.JPG in Resources */,
 				896D18291B944DDB001513A5 /* Weeding_icon.png in Resources */,
@@ -1598,6 +1657,7 @@
 				757F87621B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
 				758C71631B88588000D7423F /* sampleImage04.JPG in Resources */,
 				758C71621B88588000D7423F /* sampleImage03.JPG in Resources */,
+				8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */,
 				758C8E7A1B87412800FF634E /* like@2x.png in Resources */,
 				897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */,
 				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
@@ -1621,8 +1681,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				757F87671B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari.m in Sources */,
+				895A6E7E1B9843A200A9C8BC /* UITableView+DragLoad.m in Sources */,
 				89E0FA101B85916C000BD65A /* UploadPhotosProfileViewController.m in Sources */,
 				758C8E871B87537500FF634E /* FullyHorizontalFlowLayout.m in Sources */,
+				895A6E7B1B9843A200A9C8BC /* DragTableGestureObserver_ot.m in Sources */,
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				758914CE1B95BFC200585507 /* History.m in Sources */,
@@ -1663,6 +1725,7 @@
 				894BBA681B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m in Sources */,
 				895480471B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */,
 				75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */,
+				895A6E791B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m in Sources */,
 				89E0FA5D1B85F3B6000BD65A /* ImageViewCell.m in Sources */,
 				898146491B7C9CCC00DF30AB /* ReligionPopoverViewController.m in Sources */,
 				899C53781B73363300C24DA8 /* ServiceManager.m in Sources */,
@@ -1677,6 +1740,7 @@
 				897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */,
 				89D9F7331B6B579E004CBE3D /* SideBarViewController.m in Sources */,
 				89E8D93C1B78CFF1008A8E2F /* DetailProfileViewController.m in Sources */,
+				895A6E7C1B9843A200A9C8BC /* DragTableHeaderView_ot.m in Sources */,
 				8991706B1B70E0BF000CF872 /* FPTouchView.m in Sources */,
 				8967FAE21B8DCCCD00AAC41E /* PhotoSelectionCell.m in Sources */,
 				898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */,
@@ -1694,8 +1758,10 @@
 				895CD7781B81CFB500816FDE /* Education.m in Sources */,
 				89D9F7341B6B579E004CBE3D /* StartMainViewController.m in Sources */,
 				89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */,
+				895A6E7A1B9843A200A9C8BC /* DragTableFooterView_ot.m in Sources */,
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
+				895A6E7D1B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m in Sources */,
 				898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */,
 				757F87631B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome.m in Sources */,
 				8960062D1B9075870007B7AB /* PhotoTweakView.m in Sources */,

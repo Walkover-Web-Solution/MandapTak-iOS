@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <Parse/Parse.h>
 @interface ChatPinMatchViewController : UIViewController
-
+@property (strong, nonatomic) PFObject *currentProfile;
 @end

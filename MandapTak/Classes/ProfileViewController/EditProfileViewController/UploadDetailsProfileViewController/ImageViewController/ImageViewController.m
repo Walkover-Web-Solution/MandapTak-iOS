@@ -154,7 +154,9 @@
                     [arrDeletedPhotos addObject:self.arrImages[currentIndex]];
                     [self.arrImages removeObject:self.arrImages[currentIndex]];
                     if(self.arrImages.count==0){
+                        [self.delegate selectedPrimaryPhoto:primaryPhoto andCropedPhoto:primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
                         [self dismissViewControllerAnimated:YES completion:nil];
+                        
                     }
                     NSLog(@"deleted"); // this is my function to refresh the data
                     Photos *photoToShow = self.arrImages[self.currentIndex];

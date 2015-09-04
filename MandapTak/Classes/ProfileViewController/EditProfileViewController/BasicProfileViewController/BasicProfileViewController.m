@@ -289,8 +289,8 @@ if ([segue.identifier isEqualToString:@"LocationIdentifier"])
     }
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    
-    [self.currentProfile setObject:txtFullName.text forKey:@"name"];
+    if(txtFullName.text.length>0)
+        [self.currentProfile setObject:txtFullName.text forKey:@"name"];
     if(selectedDate)
         [self.currentProfile setObject:selectedDate forKey:@"dob"];
     if(selectedGender)

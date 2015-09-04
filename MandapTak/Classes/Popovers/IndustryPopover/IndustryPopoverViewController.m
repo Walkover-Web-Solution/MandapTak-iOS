@@ -9,7 +9,11 @@
 #import "IndustryPopoverViewController.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
-@interface IndustryPopoverViewController ()
+#import "UITableView+DragLoad.h"
+@interface IndustryPopoverViewController ()<UITableViewDragLoadDelegate>{
+    BOOL isSearching;
+}
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *arrTableData;
@@ -20,18 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
-    //  [query whereKey:@"casteId" equalTo:self.casteObj];
-   // [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        self.arrTableData = comments;
-        [self.tableView reloadData];
-        
-    }];
-
+    self.arrTableData =[NSMutableArray array];
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+    [self loadMore];
+   
     // Do any additional setup after loading the view.
 }
 
@@ -41,8 +37,13 @@
 }
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-}
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+    if(searchBar.text.length>0){
+        isSearching = YES;
+    }
+    else{
+        isSearching = NO;
+    }
+}- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -105,8 +106,40 @@
         [self loadMore];
     }
 }
+
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
+}
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
+    
+}
 -(void)loadMore{
-    NSLog(@"Load More");
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
+    query.skip = self.arrTableData.count;
+    query.limit = 20;
+    if(isSearching)
+        [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
+
+    //  [query whereKey:@"casteId" equalTo:self.casteObj];
+    // [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(comments.count<20)
+            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
+        [self.tableView reloadData];
+        
+    }];
+    [self.tableView finishLoadMore];
 }
 /*
 #pragma mark - Navigation
