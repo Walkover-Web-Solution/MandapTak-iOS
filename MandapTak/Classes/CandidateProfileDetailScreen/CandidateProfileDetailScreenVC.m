@@ -240,7 +240,7 @@
         PFObject *degreeName = [specialization valueForKey:@"degreeId"];
         //NSString *specializationName = [specialization valueForKey:@"name"];
         NSString *strDegrees = [degreeName valueForKey:@"name"];
-        if (strDegrees.length > 0)
+        if (!(strDegrees == nil || strDegrees == (id)[NSNull null]))
         {
             [arrDegrees addObject:strDegrees];
             //save data for full profile screen

@@ -120,6 +120,7 @@
         default:
             break;
     }
+    cell.textLabel.font = [UIFont fontWithName: @"MYRIADPRO-REGULAR" size:16];
     //set font family
     return cell;
 }

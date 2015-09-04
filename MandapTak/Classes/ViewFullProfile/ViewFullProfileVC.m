@@ -137,7 +137,7 @@
 - (IBAction)downloadBiodata:(id)sender
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    NSLog(@"candidater profile ID -> %@",profileObject.profilePointer.objectId);
+    //NSLog(@"candidater profile ID -> %@",profileObject.profilePointer.objectId);
     [query whereKey:@"objectId" equalTo:profileObject.profilePointer.objectId];//rvkzhpnLKr //EYKXEM27cu
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {

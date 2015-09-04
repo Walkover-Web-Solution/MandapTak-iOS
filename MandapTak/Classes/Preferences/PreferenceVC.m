@@ -122,7 +122,16 @@
                     
                     strObj = object.objectId;
                     txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
+                    if (!([[object valueForKey:@"ageFrom"] intValue] > 0))
+                    {
+                        txtMinAge.text = nil;
+                    }
+                    
                     txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
+                    if (!([[object valueForKey:@"ageTo"] intValue] > 0))
+                    {
+                        txtMaxAge.text = nil;
+                    }
                     txtIncome.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minIncome"]];   //[object valueForKey:@"minIncome"];
                     txtminBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minBudget"]];    //[object valueForKey:@"minBudget"];
                     txtMaxBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"maxBudget"]];    //[object valueForKey:@"maxBudget"];
@@ -130,6 +139,9 @@
                     //find height value from array
                     NSString *strMinHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"minHeight"]]];
                     NSString *strMaxHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"maxHeight"]]];
+                    
+                    minHeight = [[object valueForKey:@"minHeight"] intValue];
+                    maxHeight = [[object valueForKey:@"maxHeight"] intValue];
                     
                     [btnMinHeight setTitle:strMinHeight forState:UIControlStateNormal];
                     [btnMaxHeight setTitle:strMaxHeight forState:UIControlStateNormal];
@@ -343,6 +355,106 @@
 
 - (IBAction)setPreferences:(id)sender
 {
+    //set validations
+    if (txtMinAge.text.length > 0)
+    {
+        if ([txtMinAge.text intValue] < 18)
+        {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Min age should be 18 years" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [av show];
+            return;
+        }
+        else if (txtMaxAge.text.length > 0)
+        {
+            int intMinAge = [txtMinAge.text intValue];
+            int intMaxAge = [txtMaxAge.text intValue];
+            if (intMaxAge < intMinAge)
+            {
+                UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Min age should be less than Max Age " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [av show];
+                return;
+            }
+        }
+        else
+        {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Max Age " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [av show];
+            return;
+        }
+        
+    }
+    if (txtMaxAge.text.length > 0)
+    {
+        if (txtMinAge.text.length > 0)
+        {
+            int intMinAge = [txtMinAge.text intValue];
+            int intMaxAge = [txtMaxAge.text intValue];
+            if (intMaxAge < intMinAge)
+            {
+                UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Max age should be greater than Min Age " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [av show];
+                return;
+            }
+        }
+        else
+        {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Age " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [av show];
+            return;
+        }
+    }
+    
+    //height validations
+    if (maxHeight < minHeight)
+    {
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Min Height should be less than Max Height " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [av show];
+        return;
+    }
+    
+    //budget validations
+    if (txtminBudget.text.length > 0)
+    {
+        if (txtMaxBudget.text.length > 0)
+        {
+            int intMinBudget = [txtminBudget.text intValue];
+            int intMaxBudget = [txtMaxBudget.text intValue];
+            if (intMaxBudget < intMinBudget)
+            {
+                UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Min Budget should be less than Max Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [av show];
+                return;
+            }
+        }
+        else
+        {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Max Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [av show];
+            return;
+        }
+        
+    }
+    if (txtMaxBudget.text.length > 0)
+    {
+        if (txtminBudget.text.length > 0)
+        {
+            int intMinBudget = [txtminBudget.text intValue];
+            int intMaxBudget = [txtMaxBudget.text intValue];
+            if (intMaxBudget < intMinBudget)
+            {
+                UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Max Budget should be greater than Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [av show];
+                return;
+            }
+        }
+        else
+        {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [av show];
+            return;
+        }
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     NSString *strMinHeight = [[btnMinHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];

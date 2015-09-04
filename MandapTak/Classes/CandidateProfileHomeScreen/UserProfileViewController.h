@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ChatPinMatchViewController.h"
 #import "History.h"
+#import "ALDBlurImageProcessor/ALDBlurImageProcessor.h"
 
 @interface UserProfileViewController : UIViewController
 {
@@ -26,6 +27,11 @@
     IBOutlet UIButton *btnUndo;
     IBOutlet UIButton *btnRefresh;
     IBOutlet NSLayoutConstraint *imageViewConstraint;
+    IBOutlet UIView *loaderView;
+    
+    //blur image view
+    ALDBlurImageProcessor *blurImageProcessor;
+    //UIImageView *blurTargetImageView;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;

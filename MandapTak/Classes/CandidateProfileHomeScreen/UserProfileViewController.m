@@ -35,8 +35,8 @@
 {
     [super viewDidLoad];
     
+    //set initial load conditions
     currentIndex = 0;
-    
     arrCandidateProfiles = [[NSMutableArray alloc] init];
     arrCache = [[NSMutableArray alloc] init];
     arrHistory = [[NSMutableArray alloc] init];
@@ -90,8 +90,9 @@
     PFUser *user = [PFUser user];
     user.username = @"Hussain";
     user.password = @"hussainPass";
-   /*
     
+    
+    /*
     XHAmazingLoadingView *amazingLoadingView = [[XHAmazingLoadingView alloc] initWithType:XHAmazingLoadingAnimationTypeSkype];
     amazingLoadingView.loadingTintColor = [UIColor redColor];
     amazingLoadingView.backgroundTintColor = [UIColor whiteColor];
@@ -129,10 +130,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     lblMessage.text = @"Finding profiles...";
-    
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"])
     {
+        btnUndo.enabled = NO;
+        imgViewProfilePic.image = nil;
+        self.imgProfileView.image = nil;
         [arrHistory removeAllObjects];
         [arrCache removeAllObjects];
         [arrCandidateProfiles removeAllObjects];
@@ -228,7 +231,7 @@
                           */
                          [arrCandidateProfiles addObject:profileModel];
                      }
-                     [self showProfileOfCandidateNumber:profileNumber];
+                     [self showProfileOfCandidateNumber:profileNumber withTransition:nil];
                  }
                  else
                  {
@@ -282,7 +285,7 @@
     return strFiltered;
 }
 
--(void) showProfileOfCandidateNumber:(int)number
+-(void) showProfileOfCandidateNumber:(int)number withTransition:(CATransition *)trans
 {
     if (arrCandidateProfiles.count >0)
     {
@@ -298,6 +301,7 @@
         lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
         [self getUserProfilePicForUser:objID];
         [self showBlurredImageForUser:objID];
+        [self.view.layer addAnimation:trans forKey:nil];
     }
     else
     {
@@ -374,6 +378,7 @@
 {
     //remove previously set image
     self.imgProfileView.image= nil;
+    imgViewProfilePic.image = nil;
     
     //get primary image of user
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
@@ -434,6 +439,17 @@
                  profileView.hidden = NO;
                  blankView.hidden = YES;
                  
+                 //blur image
+                 blurImageProcessor = [[ALDBlurImageProcessor alloc] initWithImage: self.imgProfileView.image];
+                 
+                 [blurImageProcessor asyncBlurWithRadius: 9
+                                              iterations: 7
+                                            successBlock: ^( UIImage *blurredImage) {
+                                                self.imgProfileView.image = blurredImage;
+                                            }
+                                              errorBlock: ^( NSNumber *errorCode ) {
+                                                  NSLog( @"Error code: %d", [errorCode intValue] );
+                                              }];
                  /*
                      self.view.backgroundColor = [UIColor clearColor];
                      
@@ -614,10 +630,6 @@
              [MBProgressHUD hideHUDForView:self.view animated:YES];
              if (succeeded)
              {
-                 // The object has been saved.
-                 NSLog(@"new object Id = %@",pinObj.objectId);
-                 //NSString *strObj = likeObj.objectId;
-                 
                  //add curent action data in History model
                  History *historyObj = [[History alloc]init];
                  historyObj.historyObjectId = pinObj.objectId;
@@ -645,10 +657,8 @@
                  //perform animation
                  
                  profileNumber = 0;
-                 [self showProfileOfCandidateNumber:profileNumber];
-                //[self performSelector:@selector(animateScreenWithTransition:) withObject:transition afterDelay:2.0];
-                 [self.view.layer addAnimation:transition forKey:nil];
-                 
+                 [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
+                 //[self performSelector:@selector(animateScreenWithTransition:) withObject:transition afterDelay:2.0];
              }
              else
              {
@@ -719,9 +729,9 @@
                  }
                  
                  //perform animation
-                 [self.view.layer addAnimation:transition forKey:nil];
+                 //[self.view.layer addAnimation:transition forKey:nil];
                  profileNumber = 0;
-                 [self showProfileOfCandidateNumber:profileNumber];
+                 [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
                  
              }
              else
@@ -787,8 +797,8 @@
                  //perform animation
                  
                  profileNumber = 0;
-                 [self showProfileOfCandidateNumber:profileNumber];
-                 [self.view.layer addAnimation:transition forKey:nil];
+                 [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
+                 //[self.view.layer addAnimation:transition forKey:nil];
                  
              }
              else
@@ -853,7 +863,7 @@
             //add history object in arrCandidateProfile
             [arrCandidateProfiles addObject:[arrCache lastObject]];
             profileNumber = arrCandidateProfiles.count - 1;
-            [self showProfileOfCandidateNumber:profileNumber];
+            [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
             [arrCache removeLastObject];
             [arrHistory removeLastObject];
             if (arrCache.count > 0)
@@ -865,7 +875,7 @@
                 btnUndo.enabled = NO;
             }
             
-            [self.view.layer addAnimation:transition forKey:nil];
+            //[self.view.layer addAnimation:transition forKey:nil];
         }
         else
         {

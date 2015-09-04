@@ -75,6 +75,7 @@
 		75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F851B79EC2C0082D7EC /* DegreeListVC.m */; };
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
 		75BF975B1B982BE600B091D8 /* pinFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BF975A1B982BE600B091D8 /* pinFill.png */; };
+		75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
@@ -318,6 +319,8 @@
 		75918F871B79ECBD0082D7EC /* Degree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Degree.h; sourceTree = "<group>"; };
 		75918F881B79ECBD0082D7EC /* Degree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Degree.m; sourceTree = "<group>"; };
 		75BF975A1B982BE600B091D8 /* pinFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinFill.png; sourceTree = "<group>"; };
+		75DBD9E91B99AAFA00381445 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
+		75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
 		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -762,6 +765,15 @@
 				75918F851B79EC2C0082D7EC /* DegreeListVC.m */,
 			);
 			path = DegreePopover;
+			sourceTree = "<group>";
+		};
+		75DBD9E81B99AAFA00381445 /* ALDBlurImageProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				75DBD9E91B99AAFA00381445 /* ALDBlurImageProcessor.h */,
+				75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */,
+			);
+			path = ALDBlurImageProcessor;
 			sourceTree = "<group>";
 		};
 		75E6028B1B7E288E0061BA39 /* LocationPreferencePopover */ = {
@@ -1250,6 +1262,7 @@
 		89D9F7271B6B579E004CBE3D /* CandidateProfileHomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				75DBD9E81B99AAFA00381445 /* ALDBlurImageProcessor */,
 				89D9F7281B6B579E004CBE3D /* UserProfileViewController.h */,
 				89D9F7291B6B579E004CBE3D /* UserProfileViewController.m */,
 			);
@@ -1713,6 +1726,7 @@
 				758C8E8B1B87546E00FF634E /* CandidateProfileGalleryVC.m in Sources */,
 				899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */,
 				758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */,
+				75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */,
 				895CD7751B81C47600816FDE /* DegreePopoverForProfileViewController.m in Sources */,
 				89E0FA611B8606D4000BD65A /* ImageViewController.m in Sources */,
 				899C537C1B7339EB00C24DA8 /* MBProgressHUD.m in Sources */,
