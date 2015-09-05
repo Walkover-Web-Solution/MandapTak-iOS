@@ -72,6 +72,7 @@
 		75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BA3EDC1B9ACB1600429C98 /* SettingsVC.m */; };
 		75BA3EE11B9AEDE200429C98 /* AddContactPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BA3EE01B9AEDE200429C98 /* AddContactPopoverVC.m */; };
 		75BF975B1B982BE600B091D8 /* pinFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BF975A1B982BE600B091D8 /* pinFill.png */; };
+		75D5D09D1B9B1CFE001703D8 /* ChatPinMatch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */; };
 		75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
@@ -311,12 +312,12 @@
 		75BA3EDF1B9AEDE200429C98 /* AddContactPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactPopoverVC.h; sourceTree = "<group>"; };
 		75BA3EE01B9AEDE200429C98 /* AddContactPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactPopoverVC.m; sourceTree = "<group>"; };
 		75BF975A1B982BE600B091D8 /* pinFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinFill.png; sourceTree = "<group>"; };
+		75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatPinMatch.storyboard; sourceTree = "<group>"; };
 		75DBD9E91B99AAFA00381445 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
 		75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
 		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		8936E2281B9990680080B6A5 /* ManglikPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManglikPopoverViewController.h; sourceTree = "<group>"; };
 		8936E2291B9990680080B6A5 /* ManglikPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManglikPopoverViewController.m; sourceTree = "<group>"; };
 		893E76E31B8871130009F512 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		893E76E41B8871130009F512 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
@@ -776,15 +777,6 @@
 			path = LocationPreferencePopover;
 			sourceTree = "<group>";
 		};
-		8936E2271B99904B0080B6A5 /* ManglikPopover */ = {
-			isa = PBXGroup;
-			children = (
-				8936E2281B9990680080B6A5 /* ManglikPopoverViewController.h */,
-				8936E2291B9990680080B6A5 /* ManglikPopoverViewController.m */,
-			);
-			path = ManglikPopover;
-			sourceTree = "<group>";
-		};
 		894BBA651B86ED15006C9D22 /* PhotosOptionPopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,6 +965,7 @@
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
 				75BA3ED81B9AC57C00429C98 /* Settings.storyboard */,
+				75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
 				89D9F7251B6B5797004CBE3D /* Models */,
@@ -1651,6 +1644,7 @@
 				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
 				89E0FA541B85C92A000BD65A /* VideoOverlay@2x.png in Resources */,
 				8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */,
+				75D5D09D1B9B1CFE001703D8 /* ChatPinMatch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1724,7 +1718,6 @@
 				895B72331B902087006AA638 /* AppData.m in Sources */,
 				89E0FA551B85C92A000BD65A /* ZCAlbumPickerController.m in Sources */,
 				75BA3EE11B9AEDE200429C98 /* AddContactPopoverVC.m in Sources */,
-				899170691B70E0BF000CF872 /* FPPopoverController.m in Sources */,
 				758C8EB71B87691000FF634E /* CMFGalleryCell.m in Sources */,
 				897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */,
 				89D9F7331B6B579E004CBE3D /* SideBarViewController.m in Sources */,
