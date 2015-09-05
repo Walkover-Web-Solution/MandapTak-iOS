@@ -10,6 +10,7 @@
 #import "EditProfileViewController.h"
 #import "SWRevealViewController.h"
 #import "PreferenceVC.h"
+#import "SettingsVC.h"
 
 @interface SideBarViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
@@ -137,6 +138,21 @@
       
         UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];
         navController.navigationBarHidden =YES;
+        [self presentViewController:navController animated:YES completion:nil];
+        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+    }
+    else if(indexPath.row == 1)
+    {
+        
+        UIStoryboard *sbPref = [UIStoryboard storyboardWithName:@"Settings" bundle:nil];
+        SettingsVC *settingsVC = [sbPref instantiateViewControllerWithIdentifier:@"SettingsVC"];
+        
+        //vc.globalCompanyId = [self.companies.companyId intValue];
+        
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:settingsVC];
+        navController.navigationBarHidden = YES;
+        self.navigationController.navigationBarHidden = YES;
+        //navController.navigationBarHidden =YES;
         [self presentViewController:navController animated:YES completion:nil];
         [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
     }

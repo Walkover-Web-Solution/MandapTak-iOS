@@ -20,6 +20,7 @@
 #import <Parse/PFObject.h>
 #import "MBProgressHUD.h"
 #import "LocationPreferencePopoverVC.h"
+#import "AppData.h"
 
 @interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate>
 {

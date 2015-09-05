@@ -93,92 +93,99 @@
 
 -(void) getUserPreference
 {
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    NSString *profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];   //@"nASUvS6R7Z";    //gDlvVzftXF
-    PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
-    [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
-//
-//    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-//    [query whereKey:@"objectId" equalTo:@"nASUvS6R7Z"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    if([[AppData sharedData]isInternetAvailable])
     {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (!error)
-        {
-            if (objects.count > 0)
-            {
-                insertFlag = false;
-                for (PFObject *object in objects)
-                {
-                    NSLog(@"%@", object.objectId);
-                    
-                    //get Degree Preference
-                    [self getDegreePrefFromPreferenceId:object.objectId];
-                    
-                    //get Location Preference
-                    [self getLocationPrefFromPreferenceId:object.objectId];
-                    
-                    strObj = object.objectId;
-                    txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
-                    if (!([[object valueForKey:@"ageFrom"] intValue] > 0))
-                    {
-                        txtMinAge.text = nil;
-                    }
-                    
-                    txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
-                    if (!([[object valueForKey:@"ageTo"] intValue] > 0))
-                    {
-                        txtMaxAge.text = nil;
-                    }
-                    txtIncome.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minIncome"]];   //[object valueForKey:@"minIncome"];
-                    txtminBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minBudget"]];    //[object valueForKey:@"minBudget"];
-                    txtMaxBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"maxBudget"]];    //[object valueForKey:@"maxBudget"];
-                    
-                    //find height value from array
-                    NSString *strMinHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"minHeight"]]];
-                    NSString *strMaxHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"maxHeight"]]];
-                    
-                    minHeight = [[object valueForKey:@"minHeight"] intValue];
-                    maxHeight = [[object valueForKey:@"maxHeight"] intValue];
-                    
-                    [btnMinHeight setTitle:strMinHeight forState:UIControlStateNormal];
-                    [btnMaxHeight setTitle:strMaxHeight forState:UIControlStateNormal];
-                    roundValue = [[object valueForKey:@"working"] intValue];
-                    [sliderWork setValue:roundValue animated:YES];
-                    [self sliderChanged:nil];
-                    
-                    roundValueManglik = [[object valueForKey:@"manglik"] intValue];
-                    [sliderManglik setValue:roundValueManglik animated:YES];
-                    [self manglikSliderChanged:nil];
-                    
-                    //NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
-                }
-                //PFObject *objUser = objects[0];
-                
-                //[self showUserPreference:objects];
-            }
-            else
-            {
-                insertFlag = true;
-            }
-            // The find succeeded.
-            //NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-            // Do something with the found objects
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+        MBProgressHUD * hud;
+        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        NSString *profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];   //@"nASUvS6R7Z";    //gDlvVzftXF
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
+        [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if (!error)
+             {
+                 if (objects.count > 0)
+                 {
+                     insertFlag = false;
+                     for (PFObject *object in objects)
+                     {
+                         NSLog(@"%@", object.objectId);
+                         
+                         //get Degree Preference
+                         [self getDegreePrefFromPreferenceId:object.objectId];
+                         
+                         //get Location Preference
+                         [self getLocationPrefFromPreferenceId:object.objectId];
+                         
+                         strObj = object.objectId;
+                         txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
+                         if (!([[object valueForKey:@"ageFrom"] intValue] > 0))
+                         {
+                             txtMinAge.text = nil;
+                         }
+                         
+                         txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
+                         if (!([[object valueForKey:@"ageTo"] intValue] > 0))
+                         {
+                             txtMaxAge.text = nil;
+                         }
+                         txtIncome.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minIncome"]];   //[object valueForKey:@"minIncome"];
+                         txtminBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minBudget"]];    //[object valueForKey:@"minBudget"];
+                         txtMaxBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"maxBudget"]];    //[object valueForKey:@"maxBudget"];
+                         
+                         //find height value from array
+                         NSString *strMinHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"minHeight"]]];
+                         NSString *strMaxHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"maxHeight"]]];
+                         
+                         minHeight = [[object valueForKey:@"minHeight"] intValue];
+                         maxHeight = [[object valueForKey:@"maxHeight"] intValue];
+                         
+                         [btnMinHeight setTitle:strMinHeight forState:UIControlStateNormal];
+                         [btnMaxHeight setTitle:strMaxHeight forState:UIControlStateNormal];
+                         roundValue = [[object valueForKey:@"working"] intValue];
+                         [sliderWork setValue:roundValue animated:YES];
+                         [self sliderChanged:nil];
+                         
+                         roundValueManglik = [[object valueForKey:@"manglik"] intValue];
+                         [sliderManglik setValue:roundValueManglik animated:YES];
+                         [self manglikSliderChanged:nil];
+                         
+                         //NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
+                     }
+                     //PFObject *objUser = objects[0];
+                     
+                     //[self showUserPreference:objects];
+                 }
+                 else
+                 {
+                     insertFlag = true;
+                 }
+                 // The find succeeded.
+                 //NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+                 // Do something with the found objects
+                 
+             } else {
+                 // Log details of the failure
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+             }
+         }];
+    }
+    else
+    {
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
 }
 
 - (void) getDegreePrefFromPreferenceId : (NSString *)prefId
 {
+    if ([[AppData sharedData] isInternetAvailable])
+    {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"degreeId"];
@@ -199,8 +206,8 @@
                       {
                       degree = [object valueForKey:@"degreeTypeId"];
                       }
-                     NSLog(@"Degree ID => %@", degree.objectId);
-                     NSLog(@"\n Degree Name %@",[degree valueForKey:@"name"]);
+                     //NSLog(@"Degree ID => %@", degree.objectId);
+                     //NSLog(@"\n Degree Name %@",[degree valueForKey:@"name"]);
                      Degree *obj = [[Degree alloc] init];
                      obj.objectId = degree.objectId;
                      obj.objectPointer = degree;
@@ -258,11 +265,19 @@
              NSLog(@"Error: %@ %@", error, [error userInfo]);
          }
      }];
+    }
+    else
+    {
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 
 - (void) getLocationPrefFromPreferenceId : (NSString *)prefId
 {
+    if ([[AppData sharedData]isInternetAvailable])
+    {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -320,6 +335,12 @@
              NSLog(@"Error: %@ %@", error, [error userInfo]);
          }
      }];
+    }
+    else
+    {
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 - (NSString *)getFormattedHeightFromValue:(NSString *)value
@@ -456,83 +477,94 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     NSString *strMinHeight = [[btnMinHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
     minHeight = [[self extractNumberFromText:strMinHeight] intValue];
     NSString *strMaxHeight = [[btnMaxHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
     maxHeight = [[self extractNumberFromText:strMaxHeight] intValue];
     
-    if (insertFlag)
+    if ([[AppData sharedData]isInternetAvailable])
     {
-        //insert preferences
-        PFObject *pref = [PFObject objectWithClassName:@"Preference"];
-        pref[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
-        pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
-        pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
-        pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
-        pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
-        pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
-        pref[@"working"] = [NSNumber numberWithInt:roundValue];
-        pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
-        pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
-        pref[@"minGunMatch"] = @0;
-        pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];
-        
-        [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        if (insertFlag)
         {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            if (succeeded)
-            {
-                // The object has been saved.
-                //execute further query of degree and location preference
-                NSLog(@"new object Id = %@",pref.objectId);
-                strObj = pref.objectId;
-                [self saveDegreePreference];
-                [self saveLocationPreference];
-            }
-            else
-            {
-                // There was a problem, check error.description
-            }
-        }];
-
+            //insert preferences
+            PFObject *pref = [PFObject objectWithClassName:@"Preference"];
+            pref[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+            pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
+            pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
+            pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
+            pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
+            pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
+            pref[@"working"] = [NSNumber numberWithInt:roundValue];
+            pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
+            pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
+            pref[@"minGunMatch"] = @0;
+            pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];
+            
+            [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 if (succeeded)
+                 {
+                     // The object has been saved.
+                     //execute further query of degree and location preference
+                     NSLog(@"new object Id = %@",pref.objectId);
+                     strObj = pref.objectId;
+                     [self saveDegreePreference];
+                     [self saveLocationPreference];
+                 }
+                 else
+                 {
+                     // There was a problem, check error.description
+                 }
+             }];
+            
+        }
+        else
+        {
+            //update preferences
+            PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
+            
+            // Retrieve the object by id
+            [query getObjectInBackgroundWithId:strObj
+                                         block:^(PFObject *pref, NSError *error)
+             {
+                 // Now let's update it with some new data. In this case, only cheatMode and score
+                 // will get sent to the cloud. playerName hasn't changed.
+                 NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
+                 
+                 pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
+                 pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
+                 pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
+                 pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
+                 pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
+                 pref[@"working"] = [NSNumber numberWithInt:roundValue];
+                 pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
+                 pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
+                 pref[@"minGunMatch"] = @0;
+                 pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];;
+                 [pref saveInBackground];
+                 
+                 //execute further query of degree and location preference
+                 [self saveDegreePreference];
+                 [self saveLocationPreference];
+             }];
+            
+        }
     }
     else
     {
-        //update preferences
-        PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
-        
-        // Retrieve the object by id
-        [query getObjectInBackgroundWithId:strObj
-                                     block:^(PFObject *pref, NSError *error)
-        {
-                                         // Now let's update it with some new data. In this case, only cheatMode and score
-                                         // will get sent to the cloud. playerName hasn't changed.
-                        NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
-                                         
-                                         pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
-                                         pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
-                                         pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
-                                         pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
-                                         pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
-                                         pref[@"working"] = [NSNumber numberWithInt:roundValue];
-                                         pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
-                                         pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
-                                         pref[@"minGunMatch"] = @0;
-                                         pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];;
-                                         [pref saveInBackground];
-                                         
-                                         //execute further query of degree and location preference
-                                         [self saveDegreePreference];
-                                         [self saveLocationPreference];
-        }];
-       
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [av show];
+        return;
     }
+    
 }
 
 
 -(void) saveDegreePreference
 {
+    if ([[AppData sharedData] isInternetAvailable])
+    {
     //delete previously set degree preferences
     //[arrSelectedDegreeId removeAllObjects];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -563,65 +595,68 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    
-    //then add new objects
-   
+    }
+    else
+    {
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [av show];
+        return;
+    }
 }
 
 - (void) addNewDegreePreference
 {
-    /*
-    //insert fresh data
-    for (int i=0; i< [arrSelectedDegreeId count]; i++)
+    if ([[AppData sharedData] isInternetAvailable])
     {
-        //save data in
-        PFObject *object = [PFObject objectWithClassName:@"DegreePreferences"];
-        object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:arrSelectedDegreeId[i]];
-        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
-        [arrDegreePref addObject:object];
-    }
-    */
-    
-    for (int i=0; i< [arrDegreeObject count]; i++)
-    {
-        //save data in
-        PFObject *object = [PFObject objectWithClassName:@"DegreePreferences"];
-        //object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:arrSelectedDegreeId[i]];
-        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
-        Degree *objDegree = arrDegreeObject[i];
-        PFObject *currentObj = objDegree.objectPointer;
-        NSString *strClassName = currentObj.parseClassName;
+        for (int i=0; i< [arrDegreeObject count]; i++)
+        {
+            //save data in
+            PFObject *object = [PFObject objectWithClassName:@"DegreePreferences"];
+            //object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:arrSelectedDegreeId[i]];
+            object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+            Degree *objDegree = arrDegreeObject[i];
+            PFObject *currentObj = objDegree.objectPointer;
+            NSString *strClassName = currentObj.parseClassName;
+            
+            //check object class from object id
+            if ([strClassName isEqualToString:@"Degree"])
+            {
+                object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:currentObj.objectId];
+            }
+            else if ([strClassName isEqualToString:@"DegreeType"])
+            {
+                object[@"degreeTypeId"] = [PFObject objectWithoutDataWithClassName:@"DegreeType" objectId:currentObj.objectId];
+            }
+            [arrDegreePref addObject:object];
+        }
         
-        //check object class from object id
-        if ([strClassName isEqualToString:@"Degree"])
-        {
-            object[@"degreeId"] = [PFObject objectWithoutDataWithClassName:@"Degree" objectId:currentObj.objectId];
-        }
-        else if ([strClassName isEqualToString:@"DegreeType"])
-        {
-            object[@"degreeTypeId"] = [PFObject objectWithoutDataWithClassName:@"DegreeType" objectId:currentObj.objectId];
-        }
-        [arrDegreePref addObject:object];
-    }
-    
-    
-    
-    [PFObject saveAllInBackground:arrDegreePref block:^(BOOL succeeded, NSError *error)
-     {
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
-         if(!error)
+        
+        
+        [PFObject saveAllInBackground:arrDegreePref block:^(BOOL succeeded, NSError *error)
          {
-             NSLog(@"save complete");
-             //[arrSelectedDegreeId removeAllObjects];
-         }else{
-             NSLog(@"SaveAll error %@", error);
-         }
-     }];
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if(!error)
+             {
+                 NSLog(@"save complete");
+                 //[arrSelectedDegreeId removeAllObjects];
+             }else{
+                 NSLog(@"SaveAll error %@", error);
+             }
+         }];
+    }
+    else
+    {
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [av show];
+        return;
+    }
 }
 
 #pragma mark Parse Location Preference
 -(void) saveLocationPreference
 {
+    if ([[AppData sharedData]isInternetAvailable])
+    {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     //delete previously set degree preferences
     //[arrSelectedDegreeId removeAllObjects];
@@ -647,7 +682,13 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    
+    }
+    else
+    {
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [av show];
+        return;
+    }
     //then add new objects
     
 }
@@ -655,52 +696,59 @@
 - (void) addNewLocationPreference
 {
     //insert fresh data
-    
-    
-    for (int i=0; i< [arrLocationObj count]; i++)
+    if ([[AppData sharedData]isInternetAvailable])
     {
-        Location *objLoc = arrLocationObj[i];
-        PFObject *currentObj = objLoc.cityPointer;
-        NSString *strClassName = currentObj.parseClassName;
-        
-        PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
-        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
-        
-        //check object class from object id
-        if ([strClassName isEqualToString:@"City"])
+        for (int i=0; i< [arrLocationObj count]; i++)
         {
-            object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:currentObj.objectId];
+            Location *objLoc = arrLocationObj[i];
+            PFObject *currentObj = objLoc.cityPointer;
+            NSString *strClassName = currentObj.parseClassName;
+            
+            PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
+            object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+            
+            //check object class from object id
+            if ([strClassName isEqualToString:@"City"])
+            {
+                object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:currentObj.objectId];
+            }
+            else if ([strClassName isEqualToString:@"State"])
+            {
+                object[@"stateId"] = [PFObject objectWithoutDataWithClassName:@"State" objectId:currentObj.objectId];
+            }
+            //save data in
+            
+            [arrLocationPref addObject:object];
         }
-        else if ([strClassName isEqualToString:@"State"])
-        {
-            object[@"stateId"] = [PFObject objectWithoutDataWithClassName:@"State" objectId:currentObj.objectId];
-        }
-        //save data in
         
-        [arrLocationPref addObject:object];
-    }
-    
-//    for (int i=0; i< [arrSelectedLocationId count]; i++)
-//    {
-//        //save data in
-//        PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
-//        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
-//        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
-//        [arrLocationPref addObject:object];
-//    }
-    
-    [PFObject saveAllInBackground:arrLocationPref block:^(BOOL succeeded, NSError *error)
-     {
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-         [self back:nil];
-         if(!error)
+    //    for (int i=0; i< [arrSelectedLocationId count]; i++)
+    //    {
+    //        //save data in
+    //        PFObject *object = [PFObject objectWithClassName:@"LocationPreferences"];
+    //        object[@"cityId"] = [PFObject objectWithoutDataWithClassName:@"City" objectId:arrSelectedLocationId[i]];
+    //        object[@"preferenceId"] = [PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj];
+    //        [arrLocationPref addObject:object];
+    //    }
+        
+        [PFObject saveAllInBackground:arrLocationPref block:^(BOOL succeeded, NSError *error)
          {
-             NSLog(@"save complete");
-             //[arrSelectedLocationId removeAllObjects];
-         }else{
-             NSLog(@"SaveAll error %@", error);
-         }
-     }];
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             [self back:nil];
+             if(!error)
+             {
+                 NSLog(@"save complete");
+                 //[arrSelectedLocationId removeAllObjects];
+             }else{
+                 NSLog(@"SaveAll error %@", error);
+             }
+         }];
+    }
+    else
+    {
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [av show];
+        return;
+    }
 }
 
 - (IBAction)goAction:(id)sender{

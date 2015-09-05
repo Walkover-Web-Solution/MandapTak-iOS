@@ -68,6 +68,9 @@
 		75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F7D1B79EBD70082D7EC /* SelectedLocationVC.m */; };
 		75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F851B79EC2C0082D7EC /* DegreeListVC.m */; };
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
+		75BA3ED91B9AC57C00429C98 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BA3ED81B9AC57C00429C98 /* Settings.storyboard */; };
+		75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BA3EDC1B9ACB1600429C98 /* SettingsVC.m */; };
+		75BA3EE11B9AEDE200429C98 /* AddContactPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BA3EE01B9AEDE200429C98 /* AddContactPopoverVC.m */; };
 		75BF975B1B982BE600B091D8 /* pinFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BF975A1B982BE600B091D8 /* pinFill.png */; };
 		75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
@@ -302,6 +305,11 @@
 		75918F851B79EC2C0082D7EC /* DegreeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DegreeListVC.m; sourceTree = "<group>"; };
 		75918F871B79ECBD0082D7EC /* Degree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Degree.h; sourceTree = "<group>"; };
 		75918F881B79ECBD0082D7EC /* Degree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Degree.m; sourceTree = "<group>"; };
+		75BA3ED81B9AC57C00429C98 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		75BA3EDB1B9ACB1600429C98 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		75BA3EDC1B9ACB1600429C98 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		75BA3EDF1B9AEDE200429C98 /* AddContactPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactPopoverVC.h; sourceTree = "<group>"; };
+		75BA3EE01B9AEDE200429C98 /* AddContactPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactPopoverVC.m; sourceTree = "<group>"; };
 		75BF975A1B982BE600B091D8 /* pinFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinFill.png; sourceTree = "<group>"; };
 		75DBD9E91B99AAFA00381445 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
 		75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
@@ -732,6 +740,24 @@
 			path = DegreePopover;
 			sourceTree = "<group>";
 		};
+		75BA3EDA1B9ACAFF00429C98 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				75BA3EDB1B9ACB1600429C98 /* SettingsVC.h */,
+				75BA3EDC1B9ACB1600429C98 /* SettingsVC.m */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		75BA3EDE1B9AEDC100429C98 /* AddContactPopover */ = {
+			isa = PBXGroup;
+			children = (
+				75BA3EDF1B9AEDE200429C98 /* AddContactPopoverVC.h */,
+				75BA3EE01B9AEDE200429C98 /* AddContactPopoverVC.m */,
+			);
+			path = AddContactPopover;
+			sourceTree = "<group>";
+		};
 		75DBD9E81B99AAFA00381445 /* ALDBlurImageProcessor */ = {
 			isa = PBXGroup;
 			children = (
@@ -946,7 +972,7 @@
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
-				896D183A1B9487F1001513A5 /* ChatPinMatch.storyboard */,
+				75BA3ED81B9AC57C00429C98 /* Settings.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
 				89D9F7251B6B5797004CBE3D /* Models */,
@@ -1074,7 +1100,7 @@
 		899C53681B732B6500C24DA8 /* Popovers */ = {
 			isa = PBXGroup;
 			children = (
-				8936E2271B99904B0080B6A5 /* ManglikPopover */,
+				75BA3EDE1B9AEDC100429C98 /* AddContactPopover */,
 				894BBA651B86ED15006C9D22 /* PhotosOptionPopover */,
 				897D038A1B835654008E0274 /* SpecialisationPopover */,
 				895CD77B1B81D93E00816FDE /* IndustryPopover */,
@@ -1203,6 +1229,7 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				75BA3EDA1B9ACAFF00429C98 /* Settings */,
 				896D18321B9487AD001513A5 /* ChatPinMatchViewController */,
 				896D18101B9430EF001513A5 /* VerificationViewController */,
 				758535A81B8B1E19000B480A /* ViewFullProfile */,
@@ -1615,6 +1642,7 @@
 				758C8E7D1B87412800FF634E /* unlike@2x.png in Resources */,
 				7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */,
 				757F87621B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
+				75BA3ED91B9AC57C00429C98 /* Settings.storyboard in Resources */,
 				758C71631B88588000D7423F /* sampleImage04.JPG in Resources */,
 				758C71621B88588000D7423F /* sampleImage03.JPG in Resources */,
 				8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */,
@@ -1660,6 +1688,7 @@
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */,
 				75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */,
+				75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */,
 				893E76E51B8871130009F512 /* Photos.m in Sources */,
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
@@ -1694,6 +1723,8 @@
 				89D9F73B1B6B57A8004CBE3D /* SWRevealViewController.m in Sources */,
 				895B72331B902087006AA638 /* AppData.m in Sources */,
 				89E0FA551B85C92A000BD65A /* ZCAlbumPickerController.m in Sources */,
+				75BA3EE11B9AEDE200429C98 /* AddContactPopoverVC.m in Sources */,
+				899170691B70E0BF000CF872 /* FPPopoverController.m in Sources */,
 				758C8EB71B87691000FF634E /* CMFGalleryCell.m in Sources */,
 				897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */,
 				89D9F7331B6B579E004CBE3D /* SideBarViewController.m in Sources */,
