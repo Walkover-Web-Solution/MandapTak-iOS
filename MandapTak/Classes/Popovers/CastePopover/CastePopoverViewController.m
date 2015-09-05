@@ -118,7 +118,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
-        if(comments.count<=20)
+        if(comments.count<20)
             [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
 
         [self.tableView reloadData];

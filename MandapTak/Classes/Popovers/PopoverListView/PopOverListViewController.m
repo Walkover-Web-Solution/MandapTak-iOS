@@ -52,6 +52,10 @@
         isSearching = NO;
     }
     }
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     MBProgressHUD * hud;

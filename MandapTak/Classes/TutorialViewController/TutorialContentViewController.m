@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
+#import "AppData.h"
 #import "VerficationViewController.h"
 #define LOGIN_TEXTFIELD_OFFSET        (IS_IPHONE_5 ? 160 :100)
 
@@ -163,34 +164,41 @@
 
 
 - (IBAction)loginButtonAction:(id)sender {
-
-    if(self.txtMobNumber.text.length !=10){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter a number with 10 digits." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    if([[AppData sharedData]isInternetAvailable]){
+        if(self.txtMobNumber.text.length !=10){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter a number with 10 digits." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        else{
+            [self.view endEditing:YES];
+            MBProgressHUD *HUD;
+            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            [PFCloud callFunctionInBackground:@"sendOtp"
+                               withParameters:@{@"mobile":self.txtMobNumber.text}
+                                        block:^(NSString *results, NSError *error)
+             {
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 if (!error)
+                 {
+                     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                     VerficationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"VerficationViewController"];
+                     [self presentViewController:vc animated:YES completion:nil];
+                 }
+                 else{
+                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                     [alert show];
+                 }
+             }];
+            
+        }
+ 
+    }
+        else{
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-    else{
-        [self.view endEditing:YES];
-        MBProgressHUD *HUD;
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        [PFCloud callFunctionInBackground:@"sendOtp"
-                           withParameters:@{@"mobile":self.txtMobNumber.text}
-                                    block:^(NSString *results, NSError *error)
-         {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-             if (!error)
-             {
-                 UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                 VerficationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"VerficationViewController"];
-                 [self presentViewController:vc animated:YES completion:nil];
-             }
-             else{
-                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                 [alert show];
-             }
-         }];
 
-    }
    
 }
 @end

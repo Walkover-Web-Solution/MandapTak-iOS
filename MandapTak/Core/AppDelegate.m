@@ -28,12 +28,6 @@
    
   
     if([PFUser currentUser]){
-        PFACL *acl = [PFACL ACL];
-        [acl setPublicReadAccess:true];
-        [acl setWriteAccess:true forUser:[PFUser currentUser]];
-        [PFUser currentUser].ACL = acl;
-
-        [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
 
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"isProfileComplete"] isEqual:@"completed"]){
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

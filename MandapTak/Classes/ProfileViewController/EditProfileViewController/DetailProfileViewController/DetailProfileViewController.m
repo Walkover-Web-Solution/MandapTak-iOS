@@ -14,9 +14,11 @@
 #import "Religion.h"
 #import "CastePopoverViewController.h"
 #import "GotraPopoverViewController.h"
-@interface DetailProfileViewController ()<HeightPopoverViewControllerDelegate,WYPopoverControllerDelegate,ReligionPopoverViewControllerDelegate,CastePopoverViewControllerDelegate,GotraPopoverViewControllerDelegate>{
+#import "ManglikPopoverViewController.h"
+@interface DetailProfileViewController ()<HeightPopoverViewControllerDelegate,WYPopoverControllerDelegate,ReligionPopoverViewControllerDelegate,CastePopoverViewControllerDelegate,GotraPopoverViewControllerDelegate,ManglikPopoverViewControllerDelegate>{
     WYPopoverController* popoverController;
 
+    __weak IBOutlet UIButton *btnManglik;
     __weak IBOutlet UIButton *btnGotra;
     __weak IBOutlet UIButton *btnCaste;
     __weak IBOutlet UIButton *btnReligion;
@@ -26,7 +28,7 @@
     BOOL isCasteSelected;
     NSString *selectedHeight;
     NSString *selectedHeightInCms;
-
+    NSInteger mangilk;
     PFObject *selectedReligion;
     PFObject *selectedCaste;
     PFObject *selectedGotra;
@@ -93,6 +95,9 @@
 }
 -(void)updateCurrentProfile{
     int height  = [selectedHeightInCms intValue];
+    if(mangilk)
+        self.currentProfile[@"mangalik"] = @(mangilk);
+
     if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
     if(selectedHeight)
@@ -112,6 +117,7 @@
         [self.currentProfile setObject:[NSNull null] forKey:@"religionId"];
     
     [self.delegate updatedPfObjectForSecondTab:self.currentProfile];
+    
 }
 
 
@@ -156,7 +162,27 @@
         selectedReligion = obj;
         isReligionSelected = YES;
         [btnReligion setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
-        [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
+        [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+    if([self.currentProfile valueForKey:@"mangalik"]){
+        NSString *strMangilk =[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"mangalik"] ] ;
+        mangilk = [strMangilk integerValue];
+        NSString *strManglikValue =@"";
+        switch (mangilk) {
+            case 0:
+                strManglikValue = @" : No";
+                break;
+            case 1:
+                strManglikValue = @": Yes";
+                break;
+            case 2:
+                strManglikValue = @" :Anshik";
+                break;
+        }
+        [btnManglik setTitle:[NSString stringWithFormat:@"Mangalik%@",strManglikValue] forState:UIControlStateNormal];
+        [btnManglik setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,6 +196,21 @@
    
     [txtWeight resignFirstResponder];
     [self.view endEditing:YES];
+    
+    
+    if ([segue.identifier isEqualToString:@"ManglikIdentifier"])
+    {
+        ManglikPopoverViewController *controller = segue.destinationViewController;
+        controller.preferredContentSize = CGSizeMake(300, 190);
+        WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
+        popoverController = [popoverSegue popoverControllerWithSender:sender
+                                             permittedArrowDirections:WYPopoverArrowDirectionAny
+                                                             animated:YES];
+        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
+        popoverController.delegate = self;
+        controller.delegate = self;
+    }
+
     if ([segue.identifier isEqualToString:@"HeightIdentifier"])
     {
         HeightPopoverViewController *controller = segue.destinationViewController;
@@ -222,7 +263,6 @@
         controller.delegate = self;
     }
 
-    
 }
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     
@@ -254,10 +294,7 @@
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Opps!" message:@"Please Select Religion first" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [alert show];
                 return NO;
-            }
-
-          
-            
+            }            
         
     }
       return YES;
@@ -281,6 +318,26 @@
     [popoverController dismissPopoverAnimated:YES];
 
 }
+
+-(void)selectedManglik:(int)manglikTag{
+    NSString *strManglikValue =@"";
+    switch (manglikTag) {
+        case 0:
+            strManglikValue = @": No";
+            break;
+        case 1:
+            strManglikValue = @": Yes";
+            break;
+        case 2:
+            strManglikValue = @": Anshik";
+            break;
+    }
+    mangilk =manglikTag;
+    [btnManglik setTitle:[NSString stringWithFormat:@"Mangalik%@",strManglikValue] forState:UIControlStateNormal];
+    [btnManglik setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [popoverController dismissPopoverAnimated:YES];
+
+ }
 -(void)selectedHeight:(NSString *)height{
     NSArray *array = [height componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     array = [array filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
@@ -336,6 +393,8 @@
     int height  = [selectedHeightInCms intValue];
     if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
+    if(mangilk)
+        self.currentProfile[@"mangalik"] = @(mangilk);
     if(selectedHeight)
         self.currentProfile[@"height"] = @(height);
    if(selectedCaste)

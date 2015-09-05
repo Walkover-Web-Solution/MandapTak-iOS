@@ -10,6 +10,9 @@
 #import "MatchAndPinTableViewCell.h"
 #import "ChatTableViewCell.h"
 #import "MBProgressHUD.h"
+#import "AppData.h"
+#import "Profile.h"
+#import "ViewFullProfileVC.h"
 @interface ChatPinMatchViewController (){
     NSInteger currentTab;
     NSArray *arrMatches;
@@ -46,26 +49,33 @@
         [self switchToMatches];
     }
     else{
-        MBProgressHUD * hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            
-            if (!error) {
+        if([[AppData sharedData]isInternetAvailable]){
+            MBProgressHUD * hud;
+            hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
-                // The find succeeded.
-                PFObject *obj= objects[0];
-                self.currentProfile =obj;
-                [self switchToMatches];
-                
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
+                if (!error) {
+                    
+                    // The find succeeded.
+                    PFObject *obj= objects[0];
+                    self.currentProfile =obj;
+                    [self switchToMatches];
+                    
+                } else {
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+
+        }
+        else{
+            UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
 
     }
-   }
+}
 
 - (IBAction)backToHome:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -140,10 +150,13 @@
         
         PFObject *profile = arrMatches[indexPath.row];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
-        [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            matchAndPinCell.imgProfile.image = [UIImage imageWithData:data];;
-        }];
-        matchAndPinCell.btnPinOrMatch.tag = indexPath.row;
+        if([profile objectForKey:@"profilePic"]!=nil){
+            [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                matchAndPinCell.imgProfile.image = [UIImage imageWithData:data];;
+            }];
+
+        }
+               matchAndPinCell.btnPinOrMatch.tag = indexPath.row;
         NSString *strReligion =@"";;
         if(![[profile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
             strReligion = [strReligion stringByAppendingString:[[profile valueForKey:@"religionId"] valueForKey:@"name"]];
@@ -166,20 +179,24 @@
         PFObject *pinnedProfile = arrPins[indexPath.row];
         PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
-        [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            matchAndPinCell.imgProfile.image = [UIImage imageWithData:data];;
-        }];
+        if([profile objectForKey:@"profilePic"]!=nil){
+            [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                matchAndPinCell.imgProfile.image = [UIImage imageWithData:data];;
+            }];
+
+        }
+       
         [matchAndPinCell.btnPinOrMatch setImage:[UIImage imageNamed:@"unpin"] forState:UIControlStateNormal];
         matchAndPinCell.btnPinOrMatch.tag = indexPath.row;
 
         NSString *strReligion =@"";;
-        if(![[profile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
+        if([profile valueForKey:@"religionId"] !=nil){
             strReligion = [strReligion stringByAppendingString:[[profile valueForKey:@"religionId"] valueForKey:@"name"]];
         }
-        if(![[profile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]){
+        if([profile valueForKey:@"casteId"]!=nil){
             strReligion = [strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"casteId"] valueForKey:@"name"]]];
         }
-        if(![[profile valueForKey:@"gotraId"] isKindOfClass:[NSNull class]]){
+        if([profile valueForKey:@"gotraId"] !=nil){
             strReligion =[strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"gotraId"] valueForKey:@"name"]]];
         }
         matchAndPinCell.lblReligion.text =strReligion;
@@ -197,25 +214,85 @@
 
        return matchAndPinCell;
 }
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    switch (currentTab) {
-        case 0:
-          
-            break;
-        case 1:
-           
-            break;
-        case 2:
-            
-            break;
-
-            
-        default:
-            break;
-    }
+- (NSString *)getFormattedHeightFromValue:(NSString *)value
+{
+    NSArray * arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
+    NSString *strFiltered = [[arrHeight filteredArrayUsingPredicate:predicate] firstObject];
+    return strFiltered;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(currentTab ==0){
+        PFObject *profile = arrMatches[indexPath.row];
+        [self showFullProfileForProfile:profile];
+    }
+    else if(currentTab == 1){
+        PFObject *pinnedProfile = arrPins[indexPath.row];
+        PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
+        [self showFullProfileForProfile:profile];
+
+    }
+    else{
+        
+    }
+}
+-(void)showFullProfileForProfile:(PFObject*)profileObj{
+    Profile *profileModel = [[Profile alloc]init];
+    profileModel.profilePointer = profileObj;
+    profileModel.name = profileObj[@"name"];
+    profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
+    //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
+    profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
+    //caste label
+    PFObject *caste = [profileObj valueForKey:@"casteId"];
+    PFObject *religion = [profileObj valueForKey:@"religionId"];
+    //NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
+    profileModel.religion = [religion valueForKey:@"name"];
+    profileModel.caste = [caste valueForKey:@"name"];
+    profileModel.designation = profileObj[@"designation"];
+    
+    //Height
+    profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
+    
+    //ADD data in model for complete profile view screen
+    PFObject *currentLoc = [profileObj valueForKey:@"currentLocation"];
+    PFObject *currentState = [currentLoc valueForKey:@"Parent"];
+    profileModel.currentLocation = [NSString stringWithFormat:@"%@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
+    profileModel.income = [profileObj valueForKey:@"package"];
+    
+    //birth location label
+    PFObject *birthLoc = [profileObj valueForKey:@"placeOfBirth"];
+    PFObject *birthState = [birthLoc valueForKey:@"Parent"];
+    
+    profileModel.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
+    profileModel.minBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"minMarriageBudget"]];
+    profileModel.maxBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"maxMarriageBudget"]];
+    profileModel.company = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"placeOfWork"]];
+    
+    //DOB
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *strDate = [formatter stringFromDate:[profileObj valueForKey:@"dob"]];
+    profileModel.dob = strDate;
+    
+    //TOB
+    NSDate *dateTOB = [profileObj valueForKey:@"tob"];
+    NSDateFormatter *formatterTime = [[NSDateFormatter alloc] init];
+    [formatterTime setDateFormat:@"hh:mm:ss"];
+    [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    NSString *strTOB = [formatterTime stringFromDate:dateTOB];
+    profileModel.tob = strTOB;
+    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewFullProfileVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"ViewFullProfileVC"];
+    vc.profileObject = profileModel;
+    //vc.globalCompanyId = [self.companies.companyId intValue];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+    navController.navigationBarHidden =YES;
+    [self presentViewController:navController animated:YES completion:nil];
+
+}
 #pragma TabBarAction
 
 -(void)resetTab{
@@ -225,74 +302,85 @@
 
 }
 -(void)switchToMatches{
-    [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
-    self.lblPageTitle.text = @"MATCHES";
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [PFCloud callFunctionInBackground:@"getMatchedProfile"
-                       withParameters:@{@"profileId":[self.currentProfile objectId]}
-                                block:^(NSArray *results, NSError *error)
-     {
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
-         if (!error)
+    if([[AppData sharedData]isInternetAvailable]){
+        [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
+        self.lblPageTitle.text = @"MATCHES";
+        MBProgressHUD * hud;
+        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [PFCloud callFunctionInBackground:@"getMatchedProfile"
+                           withParameters:@{@"profileId":[self.currentProfile objectId]}
+                                    block:^(NSArray *results, NSError *error)
          {
-             if(results.count == 0){
-                 lblUserInfo.text = @"No Matches found!!";
-                 lblUserInfo.hidden = NO;
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if (!error)
+             {
+                 if(results.count == 0){
+                     lblUserInfo.text = @"No Matches found!!";
+                     lblUserInfo.hidden = NO;
+                 }
+                 else
+                     lblUserInfo.hidden = YES;
+                 
+                 arrMatches = results;
+                 [self.tableView reloadData];
+                 
              }
-             else
-                 lblUserInfo.hidden = YES;
+             else{
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [alert show];
+             }
+         }];
 
-             arrMatches = results;
-             [self.tableView reloadData];
+    }
+    else{
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 
-         }
-         else{
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-             [alert show];
-         }
-     }];
-
+   
 }
 
-
 -(void)switchToPin{
-    [self.btnPin setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
-    self.lblPageTitle.text = @"PINS";
-    
-
-    PFQuery *query = [PFQuery queryWithClassName:@"PinnedProfile"];
-    [query whereKey:@"profileId" equalTo:self.currentProfile];
-    [query includeKey:@"pinnedProfileId.casteId.religionId"];
-    [query includeKey:@"pinnedProfileId.religionId"];
-    [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
-
-    [query includeKey:@"pinnedProfileId"];
-
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if([[AppData sharedData]isInternetAvailable]){
+        [self.btnPin setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
+        self.lblPageTitle.text = @"PINS";
+        PFQuery *query = [PFQuery queryWithClassName:@"PinnedProfile"];
+        [query whereKey:@"profileId" equalTo:self.currentProfile];
+        [query includeKey:@"pinnedProfileId.casteId.religionId"];
+        [query includeKey:@"pinnedProfileId.religionId"];
+        [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
         
-        if (!error) {
-            if(objects.count == 0){
-                lblUserInfo.text = @"No Profiles Pinned.";
-            lblUserInfo.hidden = NO;
-        }
-        else
-            lblUserInfo.hidden = YES;
-
-            //  [self getUserProfileForUser:objects[0]];
-            arrPins = objects;
-            [self.tableView reloadData];
+        [query includeKey:@"pinnedProfileId"];
+        
+        MBProgressHUD * hud;
+        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+            if (!error) {
+                if(objects.count == 0){
+                    lblUserInfo.text = @"No Profiles Pinned.";
+                    lblUserInfo.hidden = NO;
+                }
+                else
+                    lblUserInfo.hidden = YES;
+                
+                //  [self getUserProfileForUser:objects[0]];
+                arrPins = objects;
+                [self.tableView reloadData];
             } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
 
-    
+    }
+    else{
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 
+   
 }
 -(void)switchToChat{
     [self.btnChat setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];

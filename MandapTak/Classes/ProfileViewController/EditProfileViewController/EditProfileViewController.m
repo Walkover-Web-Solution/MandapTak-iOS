@@ -1,3 +1,4 @@
+
 //
 //  EditProfileViewController.m
 //  MandapTak
@@ -10,7 +11,6 @@
 #import "PopOverListViewController.h"
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
-#import "FPPopoverController.h"
 #import "GenderViewController.h"
 #import "DateOfBirthPopoverViewController.h"
 #import "HeightPopoverViewController.h"
@@ -204,7 +204,54 @@ NSString *selectedHeight;
     //[self getAlbum];
   //[self allFacebookPhotos];
     // Do any additional setup after loading the view.
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+
+      [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
+
 }
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    CATransition *transition = [CATransition animation];
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        if(currentTab<4){
+            currentTab++;
+            transition.duration = .3f;
+            [transition setType:kCATransitionPush];
+            [transition setSubtype:kCATransitionFromRight];
+        }
+        else{
+            [transition setType:kCATransition];
+            transition.duration = 0.0f;
+        }
+    }
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"Right Swipe");
+        if(currentTab>1){
+            currentTab--;
+            transition.duration = .3f;
+            [transition setType:kCATransitionPush];
+            [transition setSubtype:kCATransitionFromLeft];
+        }
+        else{
+            [transition setType:kCATransition];
+            transition.duration = 0.0f;
+        }
+    }
+    
+    
+    [self.tab1View.layer addAnimation:transition forKey:nil];
+    [self.tab2View.layer addAnimation:transition forKey:nil];
+    [self.tab3View.layer addAnimation:transition forKey:nil];
+    [self.tab4View.layer addAnimation:transition forKey:nil];
+
+    [self switchToCurrentTab];
+    
+}
+
 -(void)setToolBarOnTextField{
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleDefault;
@@ -267,6 +314,8 @@ NSString *selectedHeight;
         }
     }];
 }
+
+
 - (void)getPhotoWithObject:(NSArray *)objects
 {
     
@@ -440,6 +489,9 @@ NSString *selectedHeight;
 -(void)updatedPfObjectForSecondTab:(PFObject *)updatedUserProfile{
     if([updatedUserProfile valueForKey:@"weight"] !=nil)
         [currentProfile setObject:[updatedUserProfile valueForKey:@"weight"]forKey:@"weight"];
+    if([updatedUserProfile valueForKey:@"mangalik"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"mangalik"]forKey:@"mangalik"];
+
     if([updatedUserProfile valueForKey:@"height"] !=nil)
         [currentProfile setObject:[updatedUserProfile valueForKey:@"height"]forKey:@"height"];
 
@@ -596,7 +648,7 @@ NSString *selectedHeight;
 
     switch (currentTab) {
         case 1:
-            vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
+            //vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
             self.tab1View.hidden = NO;
             vc1.delegate = self;
             vc1.currentProfile = currentProfile;
@@ -858,7 +910,6 @@ NSString *selectedHeight;
                 }
             }];
 
-            
         } else {
             // Did not find any UserStats for the current user
             [self makePhotoToPrimary:primaryPhoto.imgObject];
@@ -867,15 +918,16 @@ NSString *selectedHeight;
         }
     }];
 }
+
 #pragma  mark FourthTabCode
 
 -(void)updateuserInfo{
     if([[currentProfile valueForKey:@"isComplete"] boolValue]){
-        [[NSUserDefaults standardUserDefaults]setObject:@"notCompleted" forKey:@"isProfileComplete"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
         btnDoneUp.hidden = NO;
     }
     else{
-        [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"notCompleted" forKey:@"isProfileComplete"];
         btnDoneUp.hidden = YES;
     }
 
@@ -891,9 +943,7 @@ NSString *selectedHeight;
         //primaryCropedPhoto = [UIImage imageWithData:image.getData];
         [[currentProfile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
            primaryCropedPhoto = [UIImage imageWithData:data];
-           
         }];
-
     }
     
 
@@ -1132,8 +1182,14 @@ NSString *selectedHeight;
     }
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
     primaryPhoto = primaryImg;
+    UIImage * primary = primaryPhoto.image;
     primaryCropedPhoto = cropedImg;
-    
+    for(Photos *ph in arrImageList){
+        [ ph.imgObject setObject:[NSNumber numberWithBool:NO] forKey:@"isPrimary"];
+        
+    }
+    [primaryPhoto.imgObject setObject:[NSNumber numberWithBool:YES] forKey:@"isPrimary"];
+
     if(arrImageList.count==0)
         primaryPhoto = nil;
     [self.collectionView reloadData];
@@ -1212,9 +1268,11 @@ NSString *selectedHeight;
         
     }
     Photos *photo = arrImageList[indexPath.row];
-    
+    UIImage * primary1 = primaryPhoto.image;
+    UIImage * primary2 = photo.image;
+
     cell.imgView.image =photo.image ;
-    if([photo isEqual:primaryPhoto]){
+    if([photo.image isEqual:primaryPhoto.image]){
         cell.starImgView.image =[UIImage imageNamed:@"star.png"];
     }
     else if ([[photo.imgObject valueForKey:@"isPrimary"] isEqual:[NSNumber numberWithBool:YES]]){

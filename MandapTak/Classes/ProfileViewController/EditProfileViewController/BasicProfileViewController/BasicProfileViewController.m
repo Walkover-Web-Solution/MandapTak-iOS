@@ -166,8 +166,9 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [self.view endEditing:YES];
-if ([segue.identifier isEqualToString:@"LocationIdentifier"])
-    {isSelectingCurrentLocation = YES;
+   if ([segue.identifier isEqualToString:@"LocationIdentifier"])
+    {
+        isSelectingCurrentLocation = YES;
         PopOverListViewController *controller = segue.destinationViewController;
         controller.preferredContentSize = CGSizeMake(310, 400);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
@@ -192,7 +193,7 @@ if ([segue.identifier isEqualToString:@"LocationIdentifier"])
     }
     if ([segue.identifier isEqualToString:@"DateOfBirthPickerIdentifier"]){
         DateOfBirthPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(310 , 206);
+        controller.preferredContentSize = CGSizeMake(300 , 205);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny

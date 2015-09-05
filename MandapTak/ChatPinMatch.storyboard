@@ -165,7 +165,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ENt-iX-4Bx" id="Ta7-E3-kLL">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R5X-G9-KE8">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userDefImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="R5X-G9-KE8">
                                                     <rect key="frame" x="14" y="13" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="EEQ-5s-332"/>
@@ -241,7 +241,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="edn-OR-DWC" id="qAm-Az-T6v">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-hi-RuZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userDefImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-hi-RuZ">
                                                     <rect key="frame" x="14" y="6" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="1Tq-Qs-cGP"/>
@@ -348,5 +348,6 @@
     <resources>
         <image name="option.png" width="30" height="30"/>
         <image name="unpin.png" width="32" height="32"/>
+        <image name="userDefImg.png" width="64" height="64"/>
     </resources>
 </document>

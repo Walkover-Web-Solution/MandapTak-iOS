@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import "EditProfileViewController.h"
+#import "AppData.h"
 @interface VerficationViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtVerfication;
@@ -43,7 +44,7 @@
     
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if(textField.text.length>5){
+    if(textField.text.length>3){
         const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
         int isBackSpace = strcmp(_char, "\b");
         
@@ -53,7 +54,7 @@
         
         return NO;
     }
-    if(textField.text.length<=6){
+    if(textField.text.length<=4){
         return YES;
     }
     return YES;
@@ -91,33 +92,42 @@
   //  [self setNeedsUpdateConstraints];
 }
 - (IBAction)verifyButtonAction:(id)sender {
-    if(self.txtVerfication.text.length==4){
-        [self.view endEditing:YES];
-        MBProgressHUD *HUD;
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        [PFCloud callFunctionInBackground:@"verifyNumber"
-                           withParameters:@{@"mobile":[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"],@"otp":self.txtVerfication.text}
-                                    block:^(NSString *results, NSError *error)
-         {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-             if (!error)
+    if([[AppData sharedData]isInternetAvailable]){
+        if(self.txtVerfication.text.length==4){
+            [self.view endEditing:YES];
+            MBProgressHUD *HUD;
+            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            [PFCloud callFunctionInBackground:@"verifyNumber"
+                               withParameters:@{@"mobile":[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"],@"otp":self.txtVerfication.text}
+                                        block:^(NSString *results, NSError *error)
              {
-                 [self performLoginOnVerifactionWithPassword:results];
-             }
-             else{
-                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                 [alert show];
-             }
-         }];
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 if (!error)
+                 {
+                     [self performLoginOnVerifactionWithPassword:results];
+                 }
+                 else{
+                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                     [alert show];
+                 }
+             }];
+            
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter four digit verification code recieved on mobile." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            
+        }
 
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Enter four digit verification code recieved on mobile." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
-
     }
-}
+
+    
+    }
 
 -(void)performLoginOnVerifactionWithPassword:(NSString*)password{
     MBProgressHUD *HUD;
@@ -133,13 +143,55 @@
                                                 PFACL *acl = [PFACL ACL];
                                                 [acl setPublicReadAccess:true];
                                                 [acl setWriteAccess:true forUser:[PFUser currentUser]];
+                                                
                                                 [PFUser currentUser].ACL = acl;
-
-                                                [self checkForUseridInUserProfile];
+                                                [self checkIfAgentOrUser];
                                             }
                                                                                        }];
     
 
+}
+
+-(void)checkIfAgentOrUser{
+    PFObject *role = [[PFUser currentUser]valueForKey:@"roleId"];
+    [role fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        NSString *roleValue = [object objectForKey:@"name"];
+        
+        if([roleValue isEqual:@"Agent"]){
+            // switch to admin
+            [self checkForAgentInUserProfile];
+        }
+        else if([roleValue isEqual:@"User"]){
+            [self checkForUseridInUserProfile];
+        }
+        
+        
+    }];
+
+}
+-(void)checkForAgentInUserProfile{
+    PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
+    NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
+    [query whereKey:@"userId" equalTo:[PFUser currentUser]];
+    [query includeKey:@"profileId"];
+    [query whereKey:@"isPrimary" equalTo:@YES];
+    [query whereKey:@"relation" notEqualTo:@"Agent"];
+    
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        if (!error) {
+            // Agent Login
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 -(void)writeArrayWithCustomObjToUserDefaults:(NSString *)keyName withArray:(NSMutableArray *)myArray
 {
@@ -170,28 +222,52 @@
         
         if (!error) {
           //  [self getUserProfileForUser:objects[0]];
-            PFObject *userProfile =objects[0];
-            PFObject *currentProfile = [userProfile valueForKey:@"profileId"];
-            [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
-          //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
-            [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
-            if([[currentProfile valueForKey:@"isComplete"] boolValue]){
-                [self performSegueWithIdentifier:@"Login" sender:self];
+            PFObject *currentProfile ;
+            PFObject *userProfile ;
+
+            for(PFObject * object in objects){
+                if([[object valueForKey:@"isPrimary"] boolValue]){
+                    currentProfile = [object valueForKey:@"profileId"];
+                    userProfile = object;
+                    break;
+                }
+            }
+            if(currentProfile==nil){
+                for(PFObject * object in objects){
+                    PFObject *profile =[object valueForKey:@"profileId"];
+                    if([[profile valueForKey:@"isActive"] boolValue]){
+                        currentProfile = [object valueForKey:@"profileId"];
+                        userProfile = object;
+                        break;
+                    }
+                }
+            }
+            if(currentProfile != nil){
+                [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
+                //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
+                [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
+                if([[currentProfile valueForKey:@"isComplete"] boolValue]){
+                    [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
+                    [self performSegueWithIdentifier:@"Login" sender:self];
+                }
+                else{
+                    [[NSUserDefaults standardUserDefaults]setObject:@"notCompleted" forKey:@"isProfileComplete"];
+                    
+                    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+                    EditProfileViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
+                    vc.isMakingNewProfile =YES;
+                    //vc.globalCompanyId = [self.companies.companyId intValue];
+                    
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+                    navController.navigationBarHidden =YES;
+                    [self presentViewController:navController animated:YES completion:nil];
+                }
             }
             else{
-                UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-                EditProfileViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-                vc.isMakingNewProfile =YES;
-                //vc.globalCompanyId = [self.companies.companyId intValue];
-                
-                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
-                navController.navigationBarHidden =YES;
-                [self presentViewController:navController animated:YES completion:nil];
-                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"No activated profile available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [alert show];
             }
 
-//            for(PFObject *user in objects){
-//            }
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
