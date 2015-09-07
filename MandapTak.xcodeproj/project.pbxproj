@@ -21,6 +21,7 @@
 		7564E2551B972B2800B8D052 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7564E2541B972B2800B8D052 /* Parse.framework */; };
 		7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */; };
 		7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */; };
+		75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75794A6A1B9D5F41007A028D /* ContactsListCell.m */; };
 		757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */; };
 		757F875D1B8EF1DC00C083A4 /* SVWebViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 757F873E1B8EF1DC00C083A4 /* SVWebViewController.strings */; };
 		757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757F87481B8EF1DC00C083A4 /* SVModalWebViewController.m */; };
@@ -40,12 +41,6 @@
 		758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */; };
 		75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75886EBE1B8C50CD008B7F94 /* Profile.m */; };
 		758914CE1B95BFC200585507 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 758914CD1B95BFC200585507 /* History.m */; };
-		758C71601B88588000D7423F /* sampleImage01.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715A1B88588000D7423F /* sampleImage01.JPG */; };
-		758C71611B88588000D7423F /* sampleImage02.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715B1B88588000D7423F /* sampleImage02.JPG */; };
-		758C71621B88588000D7423F /* sampleImage03.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715C1B88588000D7423F /* sampleImage03.JPG */; };
-		758C71631B88588000D7423F /* sampleImage04.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715D1B88588000D7423F /* sampleImage04.JPG */; };
-		758C71641B88588000D7423F /* sampleImage05.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715E1B88588000D7423F /* sampleImage05.JPG */; };
-		758C71651B88588000D7423F /* sampleImage06.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 758C715F1B88588000D7423F /* sampleImage06.JPG */; };
 		758C8E6D1B87404B00FF634E /* option.png in Resources */ = {isa = PBXBuildFile; fileRef = 758C8E671B87404B00FF634E /* option.png */; };
 		758C8E6E1B87404B00FF634E /* option@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 758C8E681B87404B00FF634E /* option@2x.png */; };
 		758C8E6F1B87404B00FF634E /* option@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 758C8E691B87404B00FF634E /* option@3x.png */; };
@@ -231,6 +226,8 @@
 		7564E2541B972B2800B8D052 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
 		7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
+		75794A691B9D5F41007A028D /* ContactsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsListCell.h; sourceTree = "<group>"; };
+		75794A6A1B9D5F41007A028D /* ContactsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsListCell.m; sourceTree = "<group>"; };
 		757BDC761B85AA49003B71BD /* CandidateProfileDetailScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateProfileDetailScreenVC.h; sourceTree = "<group>"; };
 		757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateProfileDetailScreenVC.m; sourceTree = "<group>"; };
 		757F873F1B8EF1DC00C083A4 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
@@ -268,12 +265,6 @@
 		75886EBE1B8C50CD008B7F94 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		758914CC1B95BFC200585507 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		758914CD1B95BFC200585507 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
-		758C715A1B88588000D7423F /* sampleImage01.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage01.JPG; sourceTree = "<group>"; };
-		758C715B1B88588000D7423F /* sampleImage02.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage02.JPG; sourceTree = "<group>"; };
-		758C715C1B88588000D7423F /* sampleImage03.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage03.JPG; sourceTree = "<group>"; };
-		758C715D1B88588000D7423F /* sampleImage04.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage04.JPG; sourceTree = "<group>"; };
-		758C715E1B88588000D7423F /* sampleImage05.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage05.JPG; sourceTree = "<group>"; };
-		758C715F1B88588000D7423F /* sampleImage06.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleImage06.JPG; sourceTree = "<group>"; };
 		758C8E671B87404B00FF634E /* option.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = option.png; sourceTree = "<group>"; };
 		758C8E681B87404B00FF634E /* option@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "option@2x.png"; sourceTree = "<group>"; };
 		758C8E691B87404B00FF634E /* option@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "option@3x.png"; sourceTree = "<group>"; };
@@ -572,6 +563,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		75794A681B9D5F0E007A028D /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				75794A691B9D5F41007A028D /* ContactsListCell.h */,
+				75794A6A1B9D5F41007A028D /* ContactsListCell.m */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		757BDC751B85AA2D003B71BD /* CandidateProfileDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,19 +668,6 @@
 			path = ViewFullProfile;
 			sourceTree = "<group>";
 		};
-		758C71591B88588000D7423F /* SampleImages */ = {
-			isa = PBXGroup;
-			children = (
-				758C715A1B88588000D7423F /* sampleImage01.JPG */,
-				758C715B1B88588000D7423F /* sampleImage02.JPG */,
-				758C715C1B88588000D7423F /* sampleImage03.JPG */,
-				758C715D1B88588000D7423F /* sampleImage04.JPG */,
-				758C715E1B88588000D7423F /* sampleImage05.JPG */,
-				758C715F1B88588000D7423F /* sampleImage06.JPG */,
-			);
-			path = SampleImages;
-			sourceTree = "<group>";
-		};
 		758C8E841B87537500FF634E /* HorizontalCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +738,7 @@
 		75BA3EDA1B9ACAFF00429C98 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				75794A681B9D5F0E007A028D /* CustomCell */,
 				75BA3EDB1B9ACB1600429C98 /* SettingsVC.h */,
 				75BA3EDC1B9ACB1600429C98 /* SettingsVC.m */,
 			);
@@ -1311,7 +1299,6 @@
 			children = (
 				896BBFF41B95861A009FD221 /* ChatPinMatches */,
 				757F876A1B8F0DDB00C083A4 /* General */,
-				758C71591B88588000D7423F /* SampleImages */,
 				7582B7131B844E79003215FE /* Preferences */,
 				89D9F7631B6B5DB4004CBE3D /* Chat */,
 				89D9F7641B6B5DB4004CBE3D /* HomeScreen */,
@@ -1579,7 +1566,6 @@
 				7533F6AE1B84AF0A00B83EFD /* show.png in Resources */,
 				896BBFF71B95877D009FD221 /* unpin.png in Resources */,
 				89D9F78C1B6B5DB4004CBE3D /* profile.png in Resources */,
-				758C71601B88588000D7423F /* sampleImage01.JPG in Resources */,
 				7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */,
 				7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */,
 				896D182C1B9454C8001513A5 /* Spam_bg.png in Resources */,
@@ -1632,9 +1618,7 @@
 				757F87611B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				895A6E801B98686E00A9C8BC /* closePopover.png in Resources */,
 				89D9F7831B6B5DB4004CBE3D /* backgroundImages.png in Resources */,
-				758C71611B88588000D7423F /* sampleImage02.JPG in Resources */,
 				896D18291B944DDB001513A5 /* Weeding_icon.png in Resources */,
-				758C71651B88588000D7423F /* sampleImage06.JPG in Resources */,
 				75918F6D1B79E9A10082D7EC /* Preference.storyboard in Resources */,
 				7564E22B1B970B3200B8D052 /* dislike.png in Resources */,
 				758C8E701B87404B00FF634E /* slide.png in Resources */,
@@ -1642,12 +1626,9 @@
 				7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */,
 				757F87621B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
 				75BA3ED91B9AC57C00429C98 /* Settings.storyboard in Resources */,
-				758C71631B88588000D7423F /* sampleImage04.JPG in Resources */,
-				758C71621B88588000D7423F /* sampleImage03.JPG in Resources */,
 				8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */,
 				758C8E7A1B87412800FF634E /* like@2x.png in Resources */,
 				897C23AA1B6B562C00FC32E9 /* Images.xcassets in Resources */,
-				758C71641B88588000D7423F /* sampleImage05.JPG in Resources */,
 				89E0FA541B85C92A000BD65A /* VideoOverlay@2x.png in Resources */,
 				8954803D1B7DB49900AB37BF /* Profile.xcassets in Resources */,
 				75D5D09D1B9B1CFE001703D8 /* ChatPinMatch.storyboard in Resources */,
@@ -1736,6 +1717,7 @@
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
+				75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */,
 				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
@@ -1903,8 +1885,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MandapTak/Frameworks",
@@ -1922,7 +1904,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "089d92e8-3307-463e-b131-9835edfd90a8";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1930,8 +1912,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MandapTak/Frameworks",
@@ -1949,7 +1931,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "089d92e8-3307-463e-b131-9835edfd90a8";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

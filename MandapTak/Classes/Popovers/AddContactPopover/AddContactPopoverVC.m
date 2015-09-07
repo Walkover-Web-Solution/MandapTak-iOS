@@ -7,6 +7,9 @@
 //
 
 #import "AddContactPopoverVC.h"
+#import <Parse/Parse.h>
+#import "MBProgressHUD.h"
+#import "AppData.h"
 
 @interface AddContactPopoverVC ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 {
@@ -69,7 +72,8 @@
     picView=[[UIPickerView alloc] initWithFrame:CGRectZero];
     CGRect bounds = [self.view bounds];
     int pickerHeight = picView.frame.size.height;
-    picView.frame = CGRectMake(0, bounds.size.height - (pickerHeight), picView.frame.size.width, picView.frame.size.height);
+    picView.frame = CGRectMake(0, bounds.size.height - (pickerHeight), MIN(picView.frame.size.width, 310) , picView.frame.size.height);
+    NSLog(@"pic view width -> %f",picView.frame.size.width);
     picView.dataSource = self;
     picView.delegate = self;
     [picView setBackgroundColor:[UIColor whiteColor]];
@@ -82,7 +86,7 @@
     [picView addSubview:headerView];
     
     buttonCancel=[UIButton buttonWithType:UIButtonTypeCustom];
-    buttonCancel.titleLabel.font = [UIFont fontWithName: @"MYRIADPRO-REGULAR" size:16];
+    buttonCancel.titleLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
     [buttonCancel setTitle:@"Cancel" forState:UIControlStateNormal];
     [buttonCancel setFrame:CGRectMake(5, bounds.size.height - (pickerHeight), 100, 26)];
     buttonCancel.tag=0;
@@ -91,7 +95,7 @@
     [self.view addSubview:buttonCancel];
     
     buttonDone=[UIButton buttonWithType:UIButtonTypeCustom];
-    buttonDone.titleLabel.font = [UIFont fontWithName: @"MYRIADPRO-REGULAR" size:16];
+    buttonDone.titleLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
     [buttonDone setTitle:@"Done" forState:UIControlStateNormal];
     [buttonDone setFrame:CGRectMake(self.view.frame.size.width-2-100, bounds.size.height - (pickerHeight), 100, 26)];
     buttonDone.tag=1;
@@ -154,7 +158,7 @@
     {
         tView = [[UILabel alloc] init];
         [tView setFont:[UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16]];
-        [tView setTextAlignment:UITextAlignmentCenter];
+        [tView setTextAlignment:NSTextAlignmentCenter];
     }
     
     // Fill the label text here
@@ -194,6 +198,38 @@
     }
     
     //hit query and close popover
-    [self.delegate showSelectedContacts:nil];
+    //check internet connection
+    if ([[AppData sharedData] isInternetAvailable])
+    {
+        MBProgressHUD *HUD;
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [PFCloud callFunctionInBackground:@"givePermissiontoNewUser"
+                           withParameters:@{@"profileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
+                                            @"mobile" : [NSString stringWithFormat:@"%@", txtNumber.text],
+                                            @"relation" : [NSString stringWithFormat:@"%@", strRelation]}
+                                    block:^(NSArray *results, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             if (!error)
+             {
+                 // this is where you handle the results and change the UI.
+                 [self.delegate showSelectedContacts:nil];
+             }
+             else
+             {
+                 UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [av show];
+                 return;
+             }
+         }];
+        
+        
+    }
+    else
+    {
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
 }
 @end
