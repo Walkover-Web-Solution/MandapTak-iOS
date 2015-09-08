@@ -39,6 +39,7 @@
     arrPrimary = [[NSMutableArray alloc]init];
     arrUserId = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
+    [self getUserCredits];
     [self getContactsList];
     tableViewContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
