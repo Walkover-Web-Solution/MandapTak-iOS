@@ -12,6 +12,7 @@
 #import "WYStoryboardPopoverSegue.h"
 #import "SWRevealViewController.h"
 #import "EditProfileViewController.h"
+#import "AgentViewController.h"
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @interface AppDelegate ()
@@ -28,23 +29,35 @@
    
   
     if([PFUser currentUser]){
-
-        if([[[NSUserDefaults standardUserDefaults] valueForKey:@"isProfileComplete"] isEqual:@"completed"]){
-            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-            self.window.rootViewController=vc;
-        }
-        else{
-            UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-            EditProfileViewController *vc2 = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-            vc2.isMakingNewProfile =YES;
-
+        if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
+            UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
+            AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
             //vc.globalCompanyId = [self.companies.companyId intValue];
             
-            UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];
+            UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
             navController.navigationBarHidden =YES;
-            self.window.rootViewController=vc2;
+            self.window.rootViewController=vc;
 
+        }
+        else{
+            if([[[NSUserDefaults standardUserDefaults] valueForKey:@"isProfileComplete"] isEqual:@"completed"]){
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+                self.window.rootViewController=vc;
+            }
+            else{
+                UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+                EditProfileViewController *vc2 = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
+                vc2.isMakingNewProfile =YES;
+                
+                //vc.globalCompanyId = [self.companies.companyId intValue];
+                
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];
+                navController.navigationBarHidden =YES;
+                self.window.rootViewController=vc2;
+                
+                
+            }
 
         }
         

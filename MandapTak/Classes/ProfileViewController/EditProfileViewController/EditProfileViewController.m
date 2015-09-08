@@ -70,7 +70,12 @@ NSString *selectedHeight;
     UIImage *primaryCropedPhoto;
     Photos *primaryPhoto;
     BOOL isImagePicker;
+    __weak IBOutlet UILabel *rsSymbol1;
+    __weak IBOutlet UIImageView *imgLine1;
+    __weak IBOutlet UILabel *rsSymbol2;
 
+    __weak IBOutlet UILabel *lblEstimatedBudgettxt;
+    __weak IBOutlet UIImageView *imgLine2;
     __weak IBOutlet UIButton *btnDoneUp;
     __weak IBOutlet UITextField *txtMinBudget;
     __weak IBOutlet UITextField *txtMaxBudget;
@@ -93,6 +98,7 @@ NSString *selectedHeight;
 @property (nonatomic, retain) IBOutlet UIButton * choosePhotoBtn;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUploadBiodata;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *uploadPhotoOrignConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *biodataImgView;
 
 @end
@@ -922,6 +928,18 @@ NSString *selectedHeight;
 #pragma  mark FourthTabCode
 
 -(void)updateuserInfo{
+    if(![[currentProfile valueForKey:@"isBudgetVisible"] boolValue]){
+     
+        txtMaxBudget.hidden = YES;
+        txtMinBudget.hidden = YES;
+        imgLine1.hidden = YES;
+        imgLine2.hidden = YES;
+        rsSymbol1.hidden = YES;
+        rsSymbol2.hidden = YES;
+        lblEstimatedBudgettxt.hidden = YES;
+        self.uploadPhotoOrignConstraint.constant = self.uploadPhotoOrignConstraint.constant-30;
+    }
+
     if([[currentProfile valueForKey:@"isComplete"] boolValue]){
         [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
         btnDoneUp.hidden = NO;

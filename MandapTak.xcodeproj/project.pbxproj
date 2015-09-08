@@ -138,6 +138,11 @@
 		899170471B70B5D0000CF872 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170451B70B5D0000CF872 /* next@2x.png */; };
 		8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899170591B70D458000CF872 /* WYPopoverController.m */; };
 		8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991705B1B70D458000CF872 /* WYStoryboardPopoverSegue.m */; };
+		89936ACC1B9D590B00C74E0A /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89936ACB1B9D590B00C74E0A /* Agent.storyboard */; };
+		89936AD11B9D5A7F00C74E0A /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936AD01B9D5A7F00C74E0A /* AgentViewController.m */; };
+		89936AD41B9D5A9200C74E0A /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */; };
+		89936ADB1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */; };
+		89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */; };
 		899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C536C1B732B6500C24DA8 /* GenderViewController.m */; };
 		899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C536F1B732B6500C24DA8 /* PopOverListViewController.m */; };
 		899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C53731B732B9700C24DA8 /* DateOfBirthPopoverViewController.m */; };
@@ -415,6 +420,15 @@
 		899170591B70D458000CF872 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
 		8991705A1B70D458000CF872 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
 		8991705B1B70D458000CF872 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		89936ACB1B9D590B00C74E0A /* Agent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Agent.storyboard; sourceTree = "<group>"; };
+		89936ACF1B9D5A7F00C74E0A /* AgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentViewController.h; sourceTree = "<group>"; };
+		89936AD01B9D5A7F00C74E0A /* AgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentViewController.m; sourceTree = "<group>"; };
+		89936AD21B9D5A9200C74E0A /* AgentCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCustomTableViewCell.h; sourceTree = "<group>"; };
+		89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCustomTableViewCell.m; sourceTree = "<group>"; };
+		89936AD91B9D64F900C74E0A /* AgentCellOptionPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCellOptionPopoverViewController.h; sourceTree = "<group>"; };
+		89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCellOptionPopoverViewController.m; sourceTree = "<group>"; };
+		89936ADD1B9D71F500C74E0A /* CreateNewUserPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewUserPopoverViewController.h; sourceTree = "<group>"; };
+		89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewUserPopoverViewController.m; sourceTree = "<group>"; };
 		899C536B1B732B6500C24DA8 /* GenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderViewController.h; sourceTree = "<group>"; };
 		899C536C1B732B6500C24DA8 /* GenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderViewController.m; sourceTree = "<group>"; };
 		899C536E1B732B6500C24DA8 /* PopOverListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverListViewController.h; sourceTree = "<group>"; };
@@ -961,6 +975,7 @@
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
 				75BA3ED81B9AC57C00429C98 /* Settings.storyboard */,
 				75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */,
+				89936ACB1B9D590B00C74E0A /* Agent.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
 				89D9F7251B6B5797004CBE3D /* Models */,
@@ -1085,9 +1100,48 @@
 			path = WYPopoverController;
 			sourceTree = "<group>";
 		};
+		89936ACD1B9D5A5800C74E0A /* AgentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89936ACE1B9D5A7000C74E0A /* AgentCustomTableCell */,
+				89936ACF1B9D5A7F00C74E0A /* AgentViewController.h */,
+				89936AD01B9D5A7F00C74E0A /* AgentViewController.m */,
+			);
+			path = AgentViewController;
+			sourceTree = "<group>";
+		};
+		89936ACE1B9D5A7000C74E0A /* AgentCustomTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				89936AD21B9D5A9200C74E0A /* AgentCustomTableViewCell.h */,
+				89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */,
+			);
+			path = AgentCustomTableCell;
+			sourceTree = "<group>";
+		};
+		89936AD81B9D64F900C74E0A /* AgentCellOptionPopoverViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89936AD91B9D64F900C74E0A /* AgentCellOptionPopoverViewController.h */,
+				89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */,
+			);
+			path = AgentCellOptionPopoverViewController;
+			sourceTree = "<group>";
+		};
+		89936ADC1B9D71E300C74E0A /* CreateNewUserPopover */ = {
+			isa = PBXGroup;
+			children = (
+				89936ADD1B9D71F500C74E0A /* CreateNewUserPopoverViewController.h */,
+				89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */,
+			);
+			path = CreateNewUserPopover;
+			sourceTree = "<group>";
+		};
 		899C53681B732B6500C24DA8 /* Popovers */ = {
 			isa = PBXGroup;
 			children = (
+				89936ADC1B9D71E300C74E0A /* CreateNewUserPopover */,
+				89936AD81B9D64F900C74E0A /* AgentCellOptionPopoverViewController */,
 				75B5BC2E1B9B2F730097C851 /* ManglikPopover */,
 				75BA3EDE1B9AEDC100429C98 /* AddContactPopover */,
 				894BBA651B86ED15006C9D22 /* PhotosOptionPopover */,
@@ -1218,6 +1272,7 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				89936ACD1B9D5A5800C74E0A /* AgentViewController */,
 				75BA3EDA1B9ACAFF00429C98 /* Settings */,
 				896D18321B9487AD001513A5 /* ChatPinMatchViewController */,
 				896D18101B9430EF001513A5 /* VerificationViewController */,
@@ -1586,6 +1641,7 @@
 				758C8E6D1B87404B00FF634E /* option.png in Resources */,
 				896BBFF81B95877D009FD221 /* unpin@2x.png in Resources */,
 				899170461B70B5D0000CF872 /* next.png in Resources */,
+				89936ACC1B9D590B00C74E0A /* Agent.storyboard in Resources */,
 				89E0FA4F1B85C92A000BD65A /* SelectionOverlay.png in Resources */,
 				7564E2301B970E6900B8D052 /* pin.png in Resources */,
 				7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */,
@@ -1669,6 +1725,8 @@
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */,
 				75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */,
+				89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */,
+				89936AD11B9D5A7F00C74E0A /* AgentViewController.m in Sources */,
 				75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */,
 				893E76E51B8871130009F512 /* Photos.m in Sources */,
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
@@ -1689,6 +1747,7 @@
 				899C537C1B7339EB00C24DA8 /* MBProgressHUD.m in Sources */,
 				89E0FA581B85C92A000BD65A /* ZCAssetTablePicker.m in Sources */,
 				8967FADF1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m in Sources */,
+				89936AD41B9D5A9200C74E0A /* AgentCustomTableViewCell.m in Sources */,
 				899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */,
 				897C239C1B6B562C00FC32E9 /* main.m in Sources */,
 				8981464C1B7C9F0000DF30AB /* Religion.m in Sources */,
@@ -1703,6 +1762,7 @@
 				757F87601B8EF1DC00C083A4 /* SVWebViewController.m in Sources */,
 				89D9F73B1B6B57A8004CBE3D /* SWRevealViewController.m in Sources */,
 				895B72331B902087006AA638 /* AppData.m in Sources */,
+				89936ADB1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m in Sources */,
 				89E0FA551B85C92A000BD65A /* ZCAlbumPickerController.m in Sources */,
 				75BA3EE11B9AEDE200429C98 /* AddContactPopoverVC.m in Sources */,
 				758C8EB71B87691000FF634E /* CMFGalleryCell.m in Sources */,
@@ -1835,7 +1895,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "089d92e8-3307-463e-b131-9835edfd90a8";
+				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1874,7 +1934,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "089d92e8-3307-463e-b131-9835edfd90a8";
+				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1904,7 +1964,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
 			};
 			name = Debug;
 		};
@@ -1931,7 +1991,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
 			};
 			name = Release;
 		};

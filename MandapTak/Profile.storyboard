@@ -685,7 +685,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Jrj-r5-UHH" firstAttribute="top" secondItem="B9L-Hn-ALh" secondAttribute="bottom" constant="8" id="0R2-db-Gcy"/>
-                                    <constraint firstItem="XGQ-Ql-b1D" firstAttribute="top" secondItem="jzD-fF-qzQ" secondAttribute="bottom" constant="8" id="2et-vf-Top"/>
                                     <constraint firstItem="bDJ-qd-mrJ" firstAttribute="top" secondItem="jEn-mf-qvb" secondAttribute="top" constant="2" id="2vZ-Vq-crq"/>
                                     <constraint firstItem="fYd-D6-jO5" firstAttribute="leading" secondItem="jEn-mf-qvb" secondAttribute="leading" constant="17" id="8Uh-GB-Nzz"/>
                                     <constraint firstItem="swj-ut-Yno" firstAttribute="top" secondItem="bDJ-qd-mrJ" secondAttribute="bottom" constant="1" id="ABU-FR-QBi"/>
@@ -698,6 +697,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Mkz-b8-VjU" secondAttribute="trailing" constant="58" id="LNe-T2-6fm"/>
                                     <constraint firstItem="Mkz-b8-VjU" firstAttribute="top" secondItem="jEn-mf-qvb" secondAttribute="top" constant="50" id="Mr1-IF-9ct"/>
                                     <constraint firstAttribute="trailing" secondItem="XGQ-Ql-b1D" secondAttribute="trailing" constant="118" id="S5R-L7-JVK"/>
+                                    <constraint firstItem="XGQ-Ql-b1D" firstAttribute="top" secondItem="jEn-mf-qvb" secondAttribute="top" constant="126" id="SY2-9S-4Xj"/>
                                     <constraint firstAttribute="trailing" secondItem="Jrj-r5-UHH" secondAttribute="trailing" constant="191" id="WLE-Ix-sAT"/>
                                     <constraint firstItem="ai7-2O-1Uw" firstAttribute="top" secondItem="Mkz-b8-VjU" secondAttribute="bottom" constant="8" id="a4c-CD-OX6"/>
                                     <constraint firstItem="ai7-2O-1Uw" firstAttribute="leading" secondItem="ULu-7X-lQ3" secondAttribute="trailing" id="d9G-7U-Fho"/>
@@ -771,13 +771,19 @@
                         <outlet property="btnUploadBiodata" destination="Lo9-Hq-h3a" id="VLL-6x-aER"/>
                         <outlet property="choosePhotoBtn" destination="XGQ-Ql-b1D" id="i78-4A-Lmr"/>
                         <outlet property="collectionView" destination="fYd-D6-jO5" id="OfN-Ce-h1O"/>
+                        <outlet property="imgLine1" destination="Jrj-r5-UHH" id="hLi-Bv-QKO"/>
+                        <outlet property="imgLine2" destination="jzD-fF-qzQ" id="ivB-jg-0Aj"/>
+                        <outlet property="lblEstimatedBudgettxt" destination="Mkz-b8-VjU" id="Yut-eu-gnC"/>
                         <outlet property="navBarView" destination="my1-Pb-XYo" id="ZYi-8T-aiz"/>
+                        <outlet property="rsSymbol1" destination="eNE-zp-Wrq" id="w11-90-TVA"/>
+                        <outlet property="rsSymbol2" destination="ULu-7X-lQ3" id="DUN-qt-cDg"/>
                         <outlet property="tab1View" destination="hwR-MK-fZe" id="c3B-Iy-Ys1"/>
                         <outlet property="tab2View" destination="Lla-JL-SLz" id="JTn-nr-Gug"/>
                         <outlet property="tab3View" destination="D6v-Km-py2" id="xP2-2j-waF"/>
                         <outlet property="tab4View" destination="jEn-mf-qvb" id="uWc-Su-EEb"/>
                         <outlet property="txtMaxBudget" destination="ai7-2O-1Uw" id="QtX-q4-rxm"/>
                         <outlet property="txtMinBudget" destination="B9L-Hn-ALh" id="BNc-Cb-ibL"/>
+                        <outlet property="uploadPhotoOrignConstraint" destination="SY2-9S-4Xj" id="rem-3s-hbs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUp-ue-1Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>

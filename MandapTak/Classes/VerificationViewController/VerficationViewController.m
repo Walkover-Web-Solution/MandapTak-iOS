@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "EditProfileViewController.h"
 #import "AppData.h"
+#import "AgentViewController.h"
 @interface VerficationViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtVerfication;
@@ -161,9 +162,13 @@
         
         if([roleValue isEqual:@"Agent"]){
             // switch to admin
+            [[NSUserDefaults standardUserDefaults]setObject:@"Agent" forKey:@"roleType"];
+
             [self checkForAgentInUserProfile];
         }
         else if([roleValue isEqual:@"User"]){
+            [[NSUserDefaults standardUserDefaults]setObject:@"User" forKey:@"roleType"];
+
             [self checkForUseridInUserProfile];
         }
         
@@ -186,6 +191,22 @@
         
         if (!error) {
             // Agent Login
+            PFObject *currentProfile ;
+            PFObject *userProfile ;
+            currentProfile = [objects[0] valueForKey:@"profileId"];
+            userProfile = objects[0];
+            [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
+            //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
+            [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
+
+            UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
+            AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
+            //vc.globalCompanyId = [self.companies.companyId intValue];
+            
+            UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+            navController.navigationBarHidden =YES;
+            [self presentViewController:navController animated:YES completion:nil];
+
             
         } else {
             // Log details of the failure
