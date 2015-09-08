@@ -159,7 +159,24 @@
                      for (PFObject *profileObj in results)
                      {
                          Profile *profileModel = [[Profile alloc]init];
+                         
                          profileModel.profilePointer = profileObj;
+                         
+                         //load images in background
+                         
+                         /*
+                         
+                          PFFile *userImageFile = profileObj[@"profilePic"];
+                          [userImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+                           {
+                               if (!error)
+                               {
+                                   //got profile pic data for circular image view
+                                   NSLog(@"Got data from file1@");
+                               }
+                           }];
+                         */
+                         
                          profileModel.name = profileObj[@"name"];
                          profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
                          //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
@@ -230,6 +247,8 @@
                           //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
                           */
                          [arrCandidateProfiles addObject:profileModel];
+                         
+                         
                      }
                      [self showProfileOfCandidateNumber:profileNumber withTransition:nil];
                  }
@@ -419,6 +438,13 @@
              {
                  
                  UIImage *image = [UIImage imageWithData:imageData];
+                 
+                 profileView.hidden = NO;
+                 blankView.hidden = YES;
+                 UIImage *effectImage = [UIImageEffects imageByApplyingLightEffectToImage:image];
+                 self.imgProfileView.image = effectImage;
+                 
+                 /*
                  CGSize originalSize = image.size;
                  CGSize expectedSize = self.imgProfileView.frame.size;
 
@@ -430,26 +456,31 @@
                      //update height of your imageView frame with scaledHeight
                      self.imgProfileView.frame = CGRectMake(self.imgProfileView.frame.origin.x, self.imgProfileView.frame.origin.y, self.imgProfileView.frame.size.width, scaledHeight);
                  }
-                 
+                 */
                  //CGSize newSize = [self makeSize:originalSize fitInSize:expectedSize];
                  //image.size = newSize;
                  //self.imgProfileView.frame.size = newSize;
-                 self.imgProfileView.image = image;
+                 //self.imgProfileView.image = image;
                  
-                 profileView.hidden = NO;
-                 blankView.hidden = YES;
+                 //apply memory condition
+                 //imageData = nil;
+                 
                  
                  //blur image
-                 blurImageProcessor = [[ALDBlurImageProcessor alloc] initWithImage: self.imgProfileView.image];
+                 /*
+                 blurImageProcessor = [[ALDBlurImageProcessor alloc] initWithImage: image];
                  
                  [blurImageProcessor asyncBlurWithRadius: 9
                                               iterations: 7
                                             successBlock: ^( UIImage *blurredImage) {
                                                 self.imgProfileView.image = blurredImage;
+                                                blurredImage = nil;
                                             }
                                               errorBlock: ^( NSNumber *errorCode ) {
                                                   NSLog( @"Error code: %d", [errorCode intValue] );
-                                              }];
+                                              }
+                  ];
+                 */
                  /*
                      self.view.backgroundColor = [UIColor clearColor];
                      
@@ -484,12 +515,34 @@
                  [filter setValue:inputImage forKey:kCIInputImageKey];
                  [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
                  CIImage *result = [filter valueForKey:kCIOutputImageKey];
-                  */
-                 //CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+                 
+                 CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
                  
                  //add our blurred image to the scrollview
-                 //self.imgProfileView.image = [UIImage imageWithCGImage:cgImage];
-                  //CGImageRelease(cgImage);
+                 self.imgProfileView.image = [UIImage imageWithCGImage:cgImage];
+                 CGImageRelease(cgImage);
+                 */
+                 
+                 //code 05
+                 //create our blurred image
+                 /*
+                 CIContext *context = [CIContext contextWithOptions:nil];
+                 CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
+                 
+                 //setting up Gaussian Blur (we could use one of many filters offered by Core Image)
+                 CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+                 [filter setValue:inputImage forKey:kCIInputImageKey];
+                 [filter setValue:[NSNumber numberWithFloat:10.0f] forKey:@"inputRadius"];
+                 CIImage *result = [filter valueForKey:kCIOutputImageKey];
+                 //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
+                 CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+                 
+                 //add our blurred image to the scrollview
+                 self.imgProfileView.image = [UIImage imageWithCGImage:cgImage];
+                  */
+                 
+                 //code 06
+                 //UIImage *blurImg = [self blur:image];
              }
              else
              {
@@ -506,7 +559,6 @@
         imgViewProfilePic.image = [UIImage imageNamed:@"userProfile"];
     }
 }
-
 
 - (CGSize)makeSize:(CGSize)originalSize fitInSize:(CGSize)boxSize
 {

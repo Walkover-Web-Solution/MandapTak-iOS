@@ -24,68 +24,79 @@
     [super viewDidLoad];
     lblUserName.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"];
     
-    //get user profile pic
-    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-    {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        if (!error)
-        {
-            
-            // The find succeeded.
-            PFObject *obj= objects[0];
-            lblUserName.text = [obj valueForKey:@"name"];
-            
-            PFFile *userImageFile = obj[@"profilePic"];
-            if (userImageFile)
-            {
-                [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-                 {
-                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                     if (!error)
-                     {
-                         
-                         UIImage *image = [UIImage imageWithData:imageData];
-                         //[arrImages addObject:image];
-                         self.imgView.image = image;
-                     }
-                     else
-                     {
-                         NSLog(@"Error = > %@",error);
-                     }
-                     //add our blurred image to the scrollview
-                     //profileImageView.image = arrImages[0];
-                 }];
-            }
-            else
-            {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                self.imgView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
-                self.imgView.image = [UIImage imageNamed:@"userProfile"];
-            }
-            //currentProfile =obj;
-            //[self switchToMatches];
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+    [self getUserProfilePic];
     
     self.imgView.layer.cornerRadius = 70;
     self.imgView.clipsToBounds = YES;
     // Do any additional setup after loading the view.
 }
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+}
+
+#pragma mark User Profile Pic
+-(void) getUserProfilePic
+{
+    //get user profile pic
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         if (!error)
+         {
+             // The find succeeded.
+             PFObject *obj= objects[0];
+             lblUserName.text = [obj valueForKey:@"name"];
+             
+             PFFile *userImageFile = obj[@"profilePic"];
+             if (userImageFile)
+             {
+                 [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+                  {
+                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                      if (!error)
+                      {
+                          
+                          UIImage *image = [UIImage imageWithData:imageData];
+                          //[arrImages addObject:image];
+                          self.imgView.image = image;
+                      }
+                      else
+                      {
+                          NSLog(@"Error = > %@",error);
+                      }
+                      //add our blurred image to the scrollview
+                      //profileImageView.image = arrImages[0];
+                  }];
+             }
+             else
+             {
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 self.imgView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+                 self.imgView.image = [UIImage imageNamed:@"userProfile"];
+             }
+             //currentProfile =obj;
+             //[self switchToMatches];
+             
+         } else {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+     }];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark UITableView Data Source
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -139,7 +150,7 @@
         UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];
         navController.navigationBarHidden =YES;
         [self presentViewController:navController animated:YES completion:nil];
-        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+        [self.revealViewController setFrontViewPosition:FrontViewPositionLeft animated: YES];
     }
     else if(indexPath.row == 1)
     {

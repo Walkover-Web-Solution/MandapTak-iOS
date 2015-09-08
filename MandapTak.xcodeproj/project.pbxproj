@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750869721B9F096800022596 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 750869711B9F096800022596 /* UIImageEffects.m */; };
 		7533F6AB1B84AF0A00B83EFD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A51B84AF0A00B83EFD /* add.png */; };
 		7533F6AC1B84AF0A00B83EFD /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A61B84AF0A00B83EFD /* add@2x.png */; };
 		7533F6AD1B84AF0A00B83EFD /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A71B84AF0A00B83EFD /* add@3x.png */; };
@@ -216,6 +217,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		750869701B9F096800022596 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
+		750869711B9F096800022596 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		7533F6A51B84AF0A00B83EFD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		7533F6A61B84AF0A00B83EFD /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		7533F6A71B84AF0A00B83EFD /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
@@ -559,6 +562,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7508696F1B9F096000022596 /* LightBlurEffect */ = {
+			isa = PBXGroup;
+			children = (
+				750869701B9F096800022596 /* UIImageEffects.h */,
+				750869711B9F096800022596 /* UIImageEffects.m */,
+			);
+			path = LightBlurEffect;
+			sourceTree = "<group>";
+		};
 		75382F061B8CA50D005E03FE /* CustomTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1291,6 +1303,7 @@
 		89D9F7271B6B579E004CBE3D /* CandidateProfileHomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7508696F1B9F096000022596 /* LightBlurEffect */,
 				75DBD9E81B99AAFA00381445 /* ALDBlurImageProcessor */,
 				89D9F7281B6B579E004CBE3D /* UserProfileViewController.h */,
 				89D9F7291B6B579E004CBE3D /* UserProfileViewController.m */,
@@ -1736,6 +1749,7 @@
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
 				89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */,
 				8960062C1B9075870007B7AB /* PhotoTweaksViewController.m in Sources */,
+				750869721B9F096800022596 /* UIImageEffects.m in Sources */,
 				8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */,
 				8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */,
 				758C8E8B1B87546E00FF634E /* CandidateProfileGalleryVC.m in Sources */,
@@ -1964,7 +1978,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1991,7 +2005,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

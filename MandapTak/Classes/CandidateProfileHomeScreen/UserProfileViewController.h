@@ -14,6 +14,7 @@
 #import "ChatPinMatchViewController.h"
 #import "History.h"
 #import "ALDBlurImageProcessor/ALDBlurImageProcessor.h"
+#import "UIImageEffects.h"
 
 @interface UserProfileViewController : UIViewController
 {
