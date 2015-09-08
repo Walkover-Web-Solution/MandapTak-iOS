@@ -143,7 +143,7 @@
     if([self.currentProfile valueForKey:@"weight"]){
         txtWeight.text = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"weight"] ] ;
     }
-    if(![[self.currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]){
+    if(![[self.currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]&&[self.currentProfile valueForKey:@"casteId"]!=nil){
         PFObject *obj  = [self.currentProfile valueForKey:@"casteId"];
         selectedCaste = obj;
         isCasteSelected = YES;
@@ -152,12 +152,12 @@
         [btnCaste setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
     }
-    if(![[self.currentProfile valueForKey:@"gotraId"] isKindOfClass: [NSNull class]]){
+    if(![[self.currentProfile valueForKey:@"gotraId"] isKindOfClass: [NSNull class]] &&[self.currentProfile valueForKey:@"gotraId"]!=nil){
         PFObject *obj  = [self.currentProfile valueForKey:@"gotraId"];
         selectedGotra = obj;
         [btnGotra setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnGotra setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
-    if(![[self.currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]){
+    if(![[self.currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]&&[self.currentProfile valueForKey:@"religionId"]!=nil){
         PFObject *obj  = [self.currentProfile valueForKey:@"religionId"];
         selectedReligion = obj;
         isReligionSelected = YES;
@@ -170,13 +170,13 @@
         NSString *strManglikValue =@"";
         switch (mangilk) {
             case 0:
-                strManglikValue = @" : No";
+                strManglikValue = @": No";
                 break;
             case 1:
                 strManglikValue = @": Yes";
                 break;
             case 2:
-                strManglikValue = @" :Anshik";
+                strManglikValue = @": Anshik";
                 break;
         }
         [btnManglik setTitle:[NSString stringWithFormat:@"Mangalik%@",strManglikValue] forState:UIControlStateNormal];

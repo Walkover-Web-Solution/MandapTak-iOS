@@ -8,6 +8,7 @@
         <mutableArray key="MYRIADPRO-BOLD.OTF">
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
+            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
             <string>MyriadPro-Regular</string>
@@ -141,6 +142,12 @@
                                     <outlet property="delegate" destination="70b-pc-Td2" id="VnC-T2-T3f"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No user added yet!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3j-Ei-JXh">
+                                <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8k-aE-5yv">
                                 <rect key="frame" x="0.0" y="48" width="320" height="52"/>
                                 <subviews>
@@ -177,6 +184,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="lblUserCredits" destination="oAg-gh-NBU" id="s82-pK-X4S"/>
+                        <outlet property="lblUserInfo" destination="n3j-Ei-JXh" id="1BC-bx-cmw"/>
                         <outlet property="tableView" destination="iNS-qg-IoA" id="BUZ-pO-Qk0"/>
                     </connections>
                 </viewController>

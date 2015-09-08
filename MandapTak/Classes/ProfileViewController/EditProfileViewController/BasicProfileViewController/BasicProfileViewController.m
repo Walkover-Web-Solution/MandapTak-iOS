@@ -111,7 +111,7 @@
     if([self.currentProfile valueForKey:@"tob"]){
         selectedBirthTime =[self.currentProfile valueForKey:@"tob"];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        dateFormatter.dateFormat = @"HH:mm";
+        dateFormatter.dateFormat = @"HH:mm a";
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 
         NSString *dateString = [dateFormatter stringFromDate: [self.currentProfile valueForKey:@"tob"]];
@@ -175,7 +175,6 @@
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                                              animated:YES];
-        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
         controller.delegate = self;
         
@@ -188,7 +187,6 @@
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                                              animated:YES];
         controller.delegate = self;
-        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
     }
     if ([segue.identifier isEqualToString:@"DateOfBirthPickerIdentifier"]){
@@ -199,7 +197,6 @@
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                                              animated:YES];
         controller.delegate = self;
-        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
     }
     if ([segue.identifier isEqualToString:@"PlaceOfBirthLocationIdentifier"])
@@ -210,7 +207,6 @@
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                                              animated:YES];
-        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
         controller.delegate = self;
         
@@ -223,7 +219,6 @@
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                                              animated:YES];
-        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
         controller.delegate = self;
     }
@@ -247,7 +242,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 
-    dateFormatter.dateFormat = @"HH:mm";
+    dateFormatter.dateFormat = @"HH:mm a";
 
     NSString *dateString = [dateFormatter stringFromDate:time];
     selectedBirthTime = time;

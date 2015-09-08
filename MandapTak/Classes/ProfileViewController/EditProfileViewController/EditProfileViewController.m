@@ -682,7 +682,7 @@ NSString *selectedHeight;
             break;
         case 4:
             self.tab4View.hidden = NO;
-
+            [self askCammeraRollPermission];
            // vc4.delegate = self;
             //vc4.currentProfile = currentProfile;
             //[self.tab4View addSubview:vc4.view];
@@ -695,7 +695,19 @@ NSString *selectedHeight;
     }
 
 }
-
+-(void)askCammeraRollPermission{
+    ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
+    
+    [lib enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        NSLog(@"%i",[group numberOfAssets]);
+    } failureBlock:^(NSError *error) {
+        if (error.code == ALAssetsLibraryAccessUserDeniedError) {
+            NSLog(@"user denied access, code: %i",error.code);
+        }else{
+            NSLog(@"Other error code: %i",error.code);
+        }
+    }];
+}
 #pragma mark Actions
 - (IBAction)homeScreenButtonAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -792,7 +804,8 @@ NSString *selectedHeight;
             if(company.length==0){
                 [arrMsg addObject:@"company"];
             }
-            if(designation.length==0){
+            if(designation==nil){
+            
                 [arrMsg addObject:@"designation"];
             }
             if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]]){
@@ -939,6 +952,18 @@ NSString *selectedHeight;
         lblEstimatedBudgettxt.hidden = YES;
         self.uploadPhotoOrignConstraint.constant = self.uploadPhotoOrignConstraint.constant-30;
     }
+    else {
+        txtMaxBudget.hidden = NO;
+        txtMinBudget.hidden = NO;
+        imgLine1.hidden = NO;
+        imgLine2.hidden = NO;
+        rsSymbol1.hidden = NO;
+        rsSymbol2.hidden = NO;
+        lblEstimatedBudgettxt.hidden = NO;
+        self.uploadPhotoOrignConstraint.constant = 126;
+
+    }
+    
 
     if([[currentProfile valueForKey:@"isComplete"] boolValue]){
         [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];

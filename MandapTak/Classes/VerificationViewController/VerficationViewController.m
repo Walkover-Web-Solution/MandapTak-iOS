@@ -30,11 +30,15 @@
     [self.txtVerfication setValue:[UIFont fontWithName: @"MYRIADPRO-BOLD" size: 15] forKeyPath:@"_placeholderLabel.font"];
     [self.txtVerfication setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     self.txtVerfication.keyboardType = UIKeyboardTypeNumberPad;
-
     // Do any additional setup after loading the view.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [self performSelector:@selector(txtFieldFirstResponder) withObject:nil afterDelay:.2];
+}
+-(void)txtFieldFirstResponder{
+    [self.txtVerfication becomeFirstResponder];
 
-
+}
 #pragma mark UITextFieldDelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{

@@ -22,10 +22,12 @@
     __weak IBOutlet UILabel *lblUserCredits;
     CGRect btnRect;
     NSMutableArray *arrBtnFrame;
+    NSInteger credit;
     WYPopoverController* popoverController;
 }
 - (IBAction)uploadMoreProfileAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *lblUserInfo;
 - (IBAction)backButtonAction:(id)sender;
 
 @end
@@ -34,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.lblUserInfo.hidden = YES;
     arrProfiles = [NSMutableArray array];
     arrBtnFrame = [NSMutableArray array];
     [self getUserCredits];
@@ -48,6 +51,7 @@
         
         if (!error) {
             PFObject *obj = objects[0];
+            credit =[[obj valueForKey:@"credits"] integerValue];
             lblUserCredits.text = [NSString stringWithFormat:@"%@ Credits",[obj valueForKey:@"credits"]];
             }
         else {
@@ -77,9 +81,10 @@
         
         if (!error) {
             if(objects.count == 0){
-              
+                self.lblUserInfo.hidden = NO;
             }
             else
+                self.lblUserInfo.hidden = YES;
                 arrBtnFrame = [NSMutableArray arrayWithCapacity:objects.count];
             //  [self getUserProfileForUser:objects[0]];
             arrProfiles = objects.mutableCopy;
@@ -234,7 +239,7 @@
 
 }
 -(void)selectedOption:(NSString *)option withTag:(NSInteger)tag{
-    
+  
     MBProgressHUD *HUD;
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFObject *userProfile = arrProfiles[tag];
@@ -261,4 +266,21 @@
 
     [settingsPopoverController dismissPopoverAnimated:YES];
 }
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    
+    if([identifier isEqualToString:@"NewUserIdentifier"]){
+        if(credit>20)
+            return true;
+        else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps!" message:@"You do not have sufficient credit to add a new user.Please contact your Admin." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            return false;
+        }
+         }
+    
+    
+      return YES;
+}
+
 @end

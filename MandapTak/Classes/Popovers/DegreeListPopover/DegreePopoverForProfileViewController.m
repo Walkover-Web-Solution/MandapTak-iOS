@@ -14,6 +14,9 @@
 @interface DegreePopoverForProfileViewController ()<UITableViewDragLoadDelegate>{
     BOOL isDegreeSelected;
     BOOL isSearching;
+    NSTimer *timer;
+    NSInteger currentTime;
+
 }
 @property (strong, nonatomic) NSMutableArray *arrTableData;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,10 +38,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)timerStart{
+    currentTime=currentTime+1;
+    if(currentTime==2){
+        [timer invalidate];
+        timer = nil;
+        self.arrTableData = [NSMutableArray array];
+        [self loadMore];
+    }
+}
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if(searchBar.text.length>0){
         isSearching = YES;
+        currentTime =0;
+        [timer invalidate];
+        timer = nil;
+        timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(timerStart) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        currentTime =0;
     }
     else{
         isSearching = NO;

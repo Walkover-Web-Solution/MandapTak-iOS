@@ -9,8 +9,6 @@
     <customFonts key="customFonts">
         <mutableArray key="MYRIADPRO-BOLD.OTF">
             <string>MyriadPro-Bold</string>
-            <string>MyriadPro-Bold</string>
-            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
             <string>MyriadPro-Regular</string>
@@ -80,33 +78,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="i8o-Rv-oOD">
-                                <rect key="frame" x="0.0" y="27" width="300" height="153"/>
-                                <date key="date" timeIntervalSinceReferenceDate="460532305.48474801">
-                                    <!--2015-08-06 05:38:25 +0000-->
-                                </date>
-                            </datePicker>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFH-Ye-2zk">
-                                <rect key="frame" x="5" y="181" width="291" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="Kqv-ue-UfY"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Birth time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCl-Ed-scH">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="27"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="tZa-uy-4pq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="42l-Le-7RQ">
                                 <rect key="frame" x="5" y="188" width="291" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="qTz-Lb-50v"/>
+                                    <constraint firstAttribute="height" constant="34" id="BNo-07-fc6"/>
                                 </constraints>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,21 +92,22 @@
                                     <action selector="doneButtonAction:" destination="VdR-Qb-IVa" eventType="touchUpInside" id="lH4-xs-PG4"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="i8o-Rv-oOD">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="186"/>
+                                <date key="date" timeIntervalSinceReferenceDate="460532305.48474801">
+                                    <!--2015-08-06 05:38:25 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="42l-Le-7RQ" firstAttribute="top" secondItem="jFH-Ye-2zk" secondAttribute="bottom" constant="6" id="0Aa-iC-mCp"/>
-                            <constraint firstAttribute="trailing" secondItem="jFH-Ye-2zk" secondAttribute="trailing" constant="4" id="3LV-mE-yju"/>
-                            <constraint firstItem="Lqs-Jr-UbJ" firstAttribute="top" secondItem="i8o-Rv-oOD" secondAttribute="bottom" constant="33" id="3TA-fd-CxW"/>
-                            <constraint firstItem="CCl-Ed-scH" firstAttribute="top" secondItem="Jsu-a7-aX6" secondAttribute="topMargin" id="9zB-0Q-S44"/>
-                            <constraint firstItem="i8o-Rv-oOD" firstAttribute="leading" secondItem="CCl-Ed-scH" secondAttribute="leading" id="AIL-H0-gYf"/>
-                            <constraint firstItem="i8o-Rv-oOD" firstAttribute="trailing" secondItem="CCl-Ed-scH" secondAttribute="trailing" id="ERz-g9-MvJ"/>
-                            <constraint firstAttribute="trailing" secondItem="42l-Le-7RQ" secondAttribute="trailing" constant="4" id="Nt4-6Q-i5J"/>
-                            <constraint firstItem="CCl-Ed-scH" firstAttribute="leading" secondItem="Jsu-a7-aX6" secondAttribute="leadingMargin" constant="-16" id="eUg-BI-hak"/>
-                            <constraint firstItem="Lqs-Jr-UbJ" firstAttribute="top" secondItem="42l-Le-7RQ" secondAttribute="bottom" id="k7c-ie-KEw"/>
-                            <constraint firstItem="42l-Le-7RQ" firstAttribute="leading" secondItem="Jsu-a7-aX6" secondAttribute="leading" constant="5" id="sBk-1S-Ffx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CCl-Ed-scH" secondAttribute="trailing" constant="-16" id="yZG-Qf-fwp"/>
-                            <constraint firstItem="jFH-Ye-2zk" firstAttribute="leading" secondItem="Jsu-a7-aX6" secondAttribute="leading" constant="5" id="ygc-OI-zd9"/>
+                            <constraint firstItem="42l-Le-7RQ" firstAttribute="leading" secondItem="Jsu-a7-aX6" secondAttribute="leading" constant="5" id="98z-tR-8eO"/>
+                            <constraint firstItem="i8o-Rv-oOD" firstAttribute="top" secondItem="Jsu-a7-aX6" secondAttribute="top" id="RQ5-AE-nH5"/>
+                            <constraint firstItem="i8o-Rv-oOD" firstAttribute="centerX" secondItem="42l-Le-7RQ" secondAttribute="centerX" id="cS9-W1-06c"/>
+                            <constraint firstItem="42l-Le-7RQ" firstAttribute="top" secondItem="i8o-Rv-oOD" secondAttribute="bottom" constant="8" symbolic="YES" id="jrV-ij-ayX"/>
+                            <constraint firstAttribute="trailing" secondItem="42l-Le-7RQ" secondAttribute="trailing" constant="4" id="tB0-lU-0Yz"/>
+                            <constraint firstItem="Lqs-Jr-UbJ" firstAttribute="top" secondItem="42l-Le-7RQ" secondAttribute="bottom" id="yiB-0b-ZPu"/>
+                            <constraint firstItem="i8o-Rv-oOD" firstAttribute="leading" secondItem="Jsu-a7-aX6" secondAttribute="leading" id="zz7-4I-ueR"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -142,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqR-F9-f21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="1173"/>
+            <point key="canvasLocation" x="665" y="1179"/>
         </scene>
         <!--Manglik Popover View Controller-->
         <scene sceneID="EfO-Pv-EBL">
@@ -998,27 +974,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="205"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IEP-ea-jQM">
-                                <rect key="frame" x="5" y="167" width="291" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="PmI-qG-OMe"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date of birth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pi-kU-l5v">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="27"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="XMt-dA-lgb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eFC-y5-Tuj">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="171"/>
+                                <date key="date" timeIntervalSinceReferenceDate="460532305.48474801">
+                                    <!--2015-08-06 05:38:25 +0000-->
+                                </date>
+                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlM-ex-dhu">
                                 <rect key="frame" x="5" y="171" width="291" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="DFS-Ip-sfb"/>
+                                    <constraint firstAttribute="height" constant="34" id="ckb-fx-JFu"/>
                                 </constraints>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1028,31 +993,21 @@
                                     <action selector="doneButtonAction:" destination="Dqz-dc-ehr" eventType="touchUpInside" id="0A4-c9-pAD"/>
                                 </connections>
                             </button>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eFC-y5-Tuj">
-                                <rect key="frame" x="0.0" y="27" width="300" height="136"/>
-                                <date key="date" timeIntervalSinceReferenceDate="460532305.48474801">
-                                    <!--2015-08-06 05:38:25 +0000-->
-                                </date>
-                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UlM-ex-dhu" firstAttribute="top" secondItem="IEP-ea-jQM" secondAttribute="bottom" constant="3" id="3us-5b-2eX"/>
-                            <constraint firstItem="UlM-ex-dhu" firstAttribute="leading" secondItem="H9W-13-T2b" secondAttribute="leading" constant="5" id="A0g-pA-RYZ"/>
-                            <constraint firstAttribute="trailing" secondItem="UlM-ex-dhu" secondAttribute="trailing" constant="4" id="GZC-15-4du"/>
-                            <constraint firstAttribute="trailing" secondItem="2pi-kU-l5v" secondAttribute="trailing" id="TsU-du-gDs"/>
-                            <constraint firstAttribute="trailing" secondItem="IEP-ea-jQM" secondAttribute="trailing" constant="4" id="VYu-CF-2Zb"/>
-                            <constraint firstItem="zvZ-Cd-Fiy" firstAttribute="top" secondItem="UlM-ex-dhu" secondAttribute="bottom" id="cL7-iA-YZu"/>
-                            <constraint firstItem="2pi-kU-l5v" firstAttribute="leading" secondItem="H9W-13-T2b" secondAttribute="leading" id="qZ8-AJ-kA7"/>
-                            <constraint firstItem="2pi-kU-l5v" firstAttribute="top" secondItem="H9W-13-T2b" secondAttribute="top" id="xzd-HE-ea0"/>
-                            <constraint firstItem="IEP-ea-jQM" firstAttribute="leading" secondItem="H9W-13-T2b" secondAttribute="leading" constant="5" id="yh4-iG-Q1y"/>
+                            <constraint firstItem="zvZ-Cd-Fiy" firstAttribute="top" secondItem="UlM-ex-dhu" secondAttribute="bottom" id="YFc-SQ-J6k"/>
+                            <constraint firstItem="eFC-y5-Tuj" firstAttribute="top" secondItem="H9W-13-T2b" secondAttribute="top" id="kDo-Dy-yEU"/>
+                            <constraint firstItem="UlM-ex-dhu" firstAttribute="leading" secondItem="H9W-13-T2b" secondAttribute="leadingMargin" constant="-11" id="l8F-dd-dUu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UlM-ex-dhu" secondAttribute="trailing" constant="-12" id="mcv-cI-L3T"/>
+                            <constraint firstItem="eFC-y5-Tuj" firstAttribute="leading" secondItem="H9W-13-T2b" secondAttribute="leading" id="oAG-qX-kaR"/>
+                            <constraint firstItem="eFC-y5-Tuj" firstAttribute="centerX" secondItem="UlM-ex-dhu" secondAttribute="centerX" id="uCu-is-k1N"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="205"/>
                     <connections>
                         <outlet property="datePicker" destination="eFC-y5-Tuj" id="Hmp-vX-4gn"/>
-                        <outlet property="lblSelect" destination="2pi-kU-l5v" id="Eux-4d-vg0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fj1-j5-iut" userLabel="First Responder" sceneMemberID="firstResponder"/>

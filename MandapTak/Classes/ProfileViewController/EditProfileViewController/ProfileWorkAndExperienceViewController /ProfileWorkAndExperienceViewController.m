@@ -170,13 +170,13 @@
     if(![[self.currentProfile valueForKey:@"package"] isKindOfClass: [NSNull class]] && [self.currentProfile valueForKey:@"package"] !=nil ){
         selectedIncome = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"package"] ] ;
     }
-    if(![[self.currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
+    if([self.currentProfile valueForKey:@"education1"] !=nil&&![[self.currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
         Education *education1 =arrEducationData[0];
         education1.specialisation= [self.currentProfile valueForKey:@"education1"];
         PFObject * deg = [education1.specialisation valueForKey:@"degreeId"];
         education1.degree = deg;
 
-        if(![[self.currentProfile valueForKey:@"education2"] isKindOfClass: [NSNull class]]){
+        if([self.currentProfile valueForKey:@"education2"] !=nil&&![[self.currentProfile valueForKey:@"education2"] isKindOfClass: [NSNull class]]){
             if(arrEducationData.count==2){
                 Education *education2 =arrEducationData[0];
                 education2.specialisation= [self.currentProfile valueForKey:@"education2"];
@@ -192,7 +192,7 @@
                 [arrEducationData addObject:education2];
             }
         }
-        if(![[self.currentProfile valueForKey:@"education3"] isKindOfClass: [NSNull class]]){
+        if([self.currentProfile valueForKey:@"education3"] !=nil&&![[self.currentProfile valueForKey:@"education3"] isKindOfClass: [NSNull class]]){
             if(arrEducationData.count==3){
                 Education *education3 =arrEducationData[0];
                 education3.specialisation= [self.currentProfile valueForKey:@"education3"];

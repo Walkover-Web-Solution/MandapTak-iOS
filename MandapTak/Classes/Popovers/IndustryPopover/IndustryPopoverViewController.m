@@ -12,6 +12,8 @@
 #import "UITableView+DragLoad.h"
 @interface IndustryPopoverViewController ()<UITableViewDragLoadDelegate>{
     BOOL isSearching;
+    NSTimer *timer;
+    NSInteger currentTime;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,15 +37,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)timerStart{
+    currentTime=currentTime+1;
+    if(currentTime==2){
+        [timer invalidate];
+        timer = nil;
+        self.arrTableData = [NSMutableArray array];
+        [self loadMore];
+    }
+}
 #pragma mark SearchBarDelagate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if(searchBar.text.length>0){
         isSearching = YES;
+        currentTime =0;
+        [timer invalidate];
+        timer = nil;
+        timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(timerStart) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        currentTime =0;
     }
     else{
         isSearching = NO;
     }
-}- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
