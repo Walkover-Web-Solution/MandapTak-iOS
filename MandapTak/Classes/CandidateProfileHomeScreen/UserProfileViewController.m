@@ -162,21 +162,6 @@
                          
                          profileModel.profilePointer = profileObj;
                          
-                         //load images in background
-                         
-                         /*
-                         
-                          PFFile *userImageFile = profileObj[@"profilePic"];
-                          [userImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-                           {
-                               if (!error)
-                               {
-                                   //got profile pic data for circular image view
-                                   NSLog(@"Got data from file1@");
-                               }
-                           }];
-                         */
-                         
                          profileModel.name = profileObj[@"name"];
                          profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
                          //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
@@ -246,11 +231,30 @@
                           //NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
                           //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
                           */
-                         [arrCandidateProfiles addObject:profileModel];
+                         
+                         //load images in background
+                         
+                         PFFile *userImageFile = profileObj[@"profilePic"];
+                         [userImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+                          {
+                              if (!error)
+                              {
+                                  //got profile pic data for circular image view
+                                  profileModel.profilePic = [UIImage imageWithData:data];
+                                  [arrCandidateProfiles addObject:profileModel];
+                                  
+                                  if (arrCandidateProfiles.count == results.count)
+                                  {
+                                      [self showProfileOfCandidateNumber:profileNumber withTransition:nil];
+                                  }
+                              }
+                          }];
+                         
+                         
                          
                          
                      }
-                     [self showProfileOfCandidateNumber:profileNumber withTransition:nil];
+                     
                  }
                  else
                  {
@@ -318,8 +322,10 @@
         lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
         lblProfession.text = firstProfile.designation;
         lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
-        [self getUserProfilePicForUser:objID];
-        [self showBlurredImageForUser:objID];
+        //[self getUserProfilePicForUser:objID];
+        //show user profile pic
+        imgViewProfilePic.image = firstProfile.profilePic;
+        //[self showBlurredImageForUser:objID];
         [self.view.layer addAnimation:trans forKey:nil];
     }
     else
@@ -335,7 +341,7 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     [query whereKey:@"objectId" equalTo:objectId]; //7ZFYFmiMV9 //EYKXEM27cu  //IRQBKPDl0E
-
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          if (!error)
@@ -397,13 +403,13 @@
 {
     //remove previously set image
     self.imgProfileView.image= nil;
-    imgViewProfilePic.image = nil;
+    //imgViewProfilePic.image = nil;
     
     //get primary image of user
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:objectId]];   //@"EYKXEM27cu"
     [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
-    
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
          if (!error)
@@ -900,6 +906,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:class];
     [query whereKey:@"objectId" equalTo:ObjectID];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

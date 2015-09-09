@@ -139,7 +139,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     //NSLog(@"candidater profile ID -> %@",profileObject.profilePointer.objectId);
     [query whereKey:@"objectId" equalTo:profileObject.profilePointer.objectId];//rvkzhpnLKr //EYKXEM27cu
-    
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         
     if (!error)

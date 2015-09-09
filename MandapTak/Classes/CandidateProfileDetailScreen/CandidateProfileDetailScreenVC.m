@@ -269,6 +269,7 @@
     __block int totalNumberOfEntries = 0;
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileObject.profilePointer.objectId]];   //@"EYKXEM27cu"
     [query orderByDescending:@"createdAt"];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query countObjectsInBackgroundWithBlock:^(int number1, NSError *error) {
     if (!error)
     {

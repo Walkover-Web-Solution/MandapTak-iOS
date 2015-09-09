@@ -85,6 +85,7 @@
         PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
         [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]]];
         [query includeKey:@"userId"];
+        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];

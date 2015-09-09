@@ -28,4 +28,5 @@
 @property (strong, nonatomic) NSString *maxBudget;
 @property (strong, nonatomic) NSString *designation;
 @property (strong, nonatomic) NSString *company;
+@property (strong, nonatomic) UIImage *profilePic;
 @end

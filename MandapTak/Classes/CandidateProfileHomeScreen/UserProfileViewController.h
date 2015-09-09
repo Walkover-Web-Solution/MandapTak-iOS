@@ -33,6 +33,8 @@
     //blur image view
     ALDBlurImageProcessor *blurImageProcessor;
     //UIImageView *blurTargetImageView;
+    
+    BOOL isReady;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;
