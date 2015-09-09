@@ -129,7 +129,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    lblMessage.text = @"Finding profiles...";
+    lblMessage.text = @"Finding matches...";
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"])
     {
@@ -322,11 +322,12 @@
         lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
         lblProfession.text = firstProfile.designation;
         lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
+        [self.view.layer addAnimation:trans forKey:nil];
         //[self getUserProfilePicForUser:objID];
         //show user profile pic
         imgViewProfilePic.image = firstProfile.profilePic;
         //[self showBlurredImageForUser:objID];
-        [self.view.layer addAnimation:trans forKey:nil];
+        
     }
     else
     {

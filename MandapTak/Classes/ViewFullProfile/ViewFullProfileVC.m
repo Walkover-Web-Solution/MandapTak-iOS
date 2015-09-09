@@ -24,13 +24,36 @@
     lblName.text = [profileObject.profilePointer valueForKey:@"name"];
     lblGender.text = [profileObject.profilePointer valueForKey:@"gender"];
     lblDOB.text = profileObject.dob;
+    
+    //set date format
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd-MM-yyyy"];
+    
     lblHeight.text = [NSString stringWithFormat:@"%@",profileObject.height];
     lblWeight.text = [NSString stringWithFormat:@"%@ Kg",profileObject.weight];
     lblTOB.text = profileObject.tob;
     lblPlaceOfBirth.text = profileObject.placeOfBirth;
     lblReligion.text = [NSString stringWithFormat:@"%@,%@",profileObject.religion,profileObject.caste];
-    lblMinBudget.text = [NSString stringWithFormat:@"Min:%@",profileObject.minBudget];
-    lblMaxBudget.text = [NSString stringWithFormat:@"Max:%@",profileObject.maxBudget];
+    
+    if (([profileObject.minBudget intValue] == 0) || ([profileObject.minBudget intValue] < 0))
+    {
+        lblMinBudget.text = @"Min:";
+    }
+    else
+    {
+        lblMinBudget.text = [NSString stringWithFormat:@"Min:%@",profileObject.minBudget];
+    }
+    
+    if (([profileObject.minBudget intValue] == 0) || ([profileObject.minBudget intValue] < 0))
+    {
+        lblMaxBudget.text = @"Min:";
+    }
+    else
+    {
+        lblMaxBudget.text = [NSString stringWithFormat:@"Max:%@",profileObject.maxBudget];
+    }
+    
+    
     tableViewEducation.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self showBasicDetails:nil];
 }

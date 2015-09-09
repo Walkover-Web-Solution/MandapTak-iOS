@@ -36,6 +36,8 @@
     NSMutableArray *loadimagesarray,*arrImages,*arrEducation;
     int *selectedIndex;
     BOOL primaryFlag;
+    IBOutlet UIButton *btnMatchPin;
+    IBOutlet UIButton *btnLike;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;

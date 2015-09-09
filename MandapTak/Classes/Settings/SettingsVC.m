@@ -158,7 +158,7 @@
     //Degree View
     if ([segue.identifier isEqualToString:@"AddContactIdentifier"])
     {
-        if (userCredits < 20)
+        if (userCredits < 10)
         {
             UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Insufficient Credits!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [av show];

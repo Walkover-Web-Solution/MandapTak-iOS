@@ -101,7 +101,7 @@
         
         PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
         [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileId]];
-        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+        //query.cachePolicy = kPFCachePolicyCacheElseNetwork;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -191,7 +191,7 @@
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"degreeId"];
     [query includeKey:@"degreeTypeId"];
-        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+       // query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -287,7 +287,7 @@
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"cityId"];
     [query includeKey:@"stateId"];
-    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    //query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -526,7 +526,7 @@
         {
             //update preferences
             PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
-            query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+            //query.cachePolicy = kPFCachePolicyCacheElseNetwork;
             // Retrieve the object by id
             [query getObjectInBackgroundWithId:strObj
                                          block:^(PFObject *pref, NSError *error)

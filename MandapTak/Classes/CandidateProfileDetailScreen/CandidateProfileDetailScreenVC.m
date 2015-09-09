@@ -46,7 +46,10 @@
     //[self getUserProfileForId:@"nASUvS6R7Z"];
     //display user profile
     [self getUserImages];
-    [self showBlurredImage];
+    //[self showBlurredImage];
+    //current changes
+    btnLike.hidden = YES;
+    btnMatchPin.hidden = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -313,7 +316,7 @@
                      UIImage *image = [UIImage imageWithData:imageData];
                      if (primaryFlag)
                      {
-                         [self showPrimaryImageFromObject:image];
+                         //[self showPrimaryImageFromObject:image];
                      }
                  }
              }];
