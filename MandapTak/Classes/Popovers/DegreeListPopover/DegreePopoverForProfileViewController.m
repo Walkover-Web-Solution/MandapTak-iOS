@@ -67,7 +67,7 @@
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Degree"];
-  //  [query whereKey:@"casteId" equalTo:self.casteObj];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -148,7 +148,7 @@
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchBar.text]];
     query.skip = self.arrTableData.count;
     query.limit = 20;
-    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

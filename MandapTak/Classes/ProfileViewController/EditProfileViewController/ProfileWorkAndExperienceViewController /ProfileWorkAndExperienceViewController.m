@@ -131,12 +131,12 @@
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
     if(selectedCompany)
         [self.currentProfile setObject:selectedCompany forKey:@"placeOfWork"];
-    for(Education *education in arrEducationData){
-        if(education.specialisation!=nil){
-            
-            [self.currentProfile setObject:education.specialisation forKey:@"education"];
-        }
-    }
+//    for(Education *education in arrEducationData){
+//        if(education.specialisation!=nil){
+//            
+//            [self.currentProfile setObject:education.specialisation forKey:@"education"];
+//        }
+//    }
     for(int i =0;i<arrEducationData.count;i++){
         Education *education = arrEducationData[i];
         if(education.specialisation !=nil){
@@ -369,7 +369,7 @@
                     [degCell.btnSpecialisation addTarget:self action:@selector(specialisationButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                      [degCell.btnMore addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     education =arrEducationData[indexPath.row];
-                    if(education.degree){
+                    if(education.degree!= nil && ![education.degree isKindOfClass:[NSNull class]]){
                         [degCell.btnDegree setTitle:[education.degree valueForKey:@"name"] forState:UIControlStateNormal];
                         [degCell.btnDegree  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                         [degCell.btnSpecialisation setTitle:[education.specialisation valueForKey:@"name"] forState:UIControlStateNormal];
@@ -777,12 +777,12 @@
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
      if(selectedCompany)
         [self.currentProfile setObject:selectedCompany forKey:@"placeOfWork"];
-        for(Education *education in arrEducationData){
-        if(education.specialisation!=nil){
-            
-            [self.currentProfile setObject:education.specialisation forKey:@"education"];
-        }
-    }
+//    for(Education *education in arrEducationData){
+//        if(education.specialisation!=nil){
+//            
+//            [self.currentProfile setObject:education.specialisation forKey:@"education"];
+//        }
+//    }
     for(int i =0;i<arrEducationData.count;i++){
         Education *education = arrEducationData[i];
         if(education.specialisation !=nil){

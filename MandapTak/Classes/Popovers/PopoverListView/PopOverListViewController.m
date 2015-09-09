@@ -200,10 +200,6 @@ replacementString:(NSString *)string {
             PFObject *subParent = [parent valueForKey:@"Parent"];
             location.country = [subParent valueForKey:@"name"];
             location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", location.descriptions];
-//            if(![[self.arrTableData filteredArrayUsingPredicate:predicate] firstObject]){
-//
-//            }
             [self.arrTableData addObject:location];
 
         }

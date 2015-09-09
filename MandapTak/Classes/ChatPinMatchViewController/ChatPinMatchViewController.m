@@ -13,6 +13,7 @@
 #import "AppData.h"
 #import "Profile.h"
 #import "ViewFullProfileVC.h"
+#import "CandidateProfileDetailScreenVC.h"
 @interface ChatPinMatchViewController (){
     NSInteger currentTab;
     NSArray *arrMatches;
@@ -284,14 +285,13 @@
     NSString *strTOB = [formatterTime stringFromDate:dateTOB];
     profileModel.tob = strTOB;
     UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ViewFullProfileVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"ViewFullProfileVC"];
+    CandidateProfileDetailScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     vc.profileObject = profileModel;
     //vc.globalCompanyId = [self.companies.companyId intValue];
-    
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
     navController.navigationBarHidden =YES;
     [self presentViewController:navController animated:YES completion:nil];
-
+   
 }
 #pragma TabBarAction
 
@@ -349,9 +349,20 @@
         [query includeKey:@"pinnedProfileId.casteId.religionId"];
         [query includeKey:@"pinnedProfileId.religionId"];
         [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
-        
         [query includeKey:@"pinnedProfileId"];
         
+        
+        [query includeKey:@"pinnedProfileId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.currentLocation.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.placeOfBirth.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.casteId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.religionId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.gotraId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.education1.degreeId"];
+        [query includeKey:@"pinnedProfileId.education2.degreeId"];
+        [query includeKey:@"pinnedProfileId.education3.degreeId"];
+        [query includeKey:@"pinnedProfileId.industryId"];
+
         MBProgressHUD * hud;
         hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
