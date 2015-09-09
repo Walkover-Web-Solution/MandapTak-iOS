@@ -66,6 +66,7 @@
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Caste"];
     [query whereKey:@"religionId" equalTo:self.religionObj];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -127,6 +128,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Caste"];
     query.skip = self.arrTableData.count;
     query.limit = 20;
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     if(isSearching)
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
     

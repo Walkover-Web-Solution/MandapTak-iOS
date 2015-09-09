@@ -69,6 +69,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Religion"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
    [query includeKey:@"Parent.Parent"];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         arrTableData = comments.mutableCopy;
@@ -137,6 +138,7 @@
     if(isSearching){
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
     }
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
     [query includeKey:@"Parent.Parent"];
     query.skip = arrTableData.count;

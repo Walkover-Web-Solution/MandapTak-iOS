@@ -64,6 +64,7 @@
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Gotra"];
     [query whereKey:@"casteId" equalTo:self.casteObj];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -130,6 +131,7 @@
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Gotra"];
     query.skip = self.arrTableData.count;
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     query.limit = 20;
     if(isSearching)
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];

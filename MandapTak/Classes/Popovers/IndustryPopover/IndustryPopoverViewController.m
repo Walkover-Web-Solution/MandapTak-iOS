@@ -67,6 +67,7 @@
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     //  [query whereKey:@"casteId" equalTo:self.casteObj];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
@@ -144,6 +145,7 @@
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
     query.skip = self.arrTableData.count;
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     query.limit = 20;
     if(isSearching)
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];

@@ -43,17 +43,13 @@
     Location *currentLocation;
     PFObject *currentProfile;
     Location *placeOfBirthLocation;
-   // NSString *selectedFeets;
-    //NSString *selectedInches;
-NSString *selectedHeight;
+  NSString *selectedHeight;
     __weak IBOutlet UIButton *btnMenu;
     UIStoryboard *sb2;
     BasicProfileViewController *vc1;
     DetailProfileViewController *vc2;
     ProfileWorkAndExperienceViewController *vc3;
-   // UploadPhotosProfileViewController *vc4;
     __weak IBOutlet UIButton *btnDone;
-//    __weak IBOutlet UIButton *btnNext;
     BOOL isSavingFourthTabData;
     __weak IBOutlet UIButton *choosePhotoBtn;
     
@@ -70,6 +66,9 @@ NSString *selectedHeight;
     UIImage *primaryCropedPhoto;
     Photos *primaryPhoto;
     BOOL isImagePicker;
+    BOOL isUploadingBiodata;
+    BOOL isUploadingPhotos;
+
     __weak IBOutlet UILabel *rsSymbol1;
     __weak IBOutlet UIImageView *imgLine1;
     __weak IBOutlet UILabel *rsSymbol2;
@@ -124,9 +123,9 @@ NSString *selectedHeight;
 //fetch profile for User id
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
     if([[AppData sharedData]isInternetAvailable]){
-        NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-        
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+
         //[query whereKey:@"userId" equalTo:userId];
         [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
 
@@ -217,6 +216,25 @@ NSString *selectedHeight;
 
       [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
+ //   [self pinCurrentProfile];
+}
+-(void)pinCurrentProfile{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    
+    // Pin PFQuery results
+    NSArray *objects = [query findObjects]; // Online PFQuery results
+    [PFObject pinAllInBackground:objects block:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // succesful
+            
+        } else {
+            //Something bad has ocurred
+            //            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            //            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            //            [errorAlertView show];
+        }
+    }];
+
 
 }
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -285,22 +303,17 @@ NSString *selectedHeight;
 }
 
 -(void)getAllPhotos{
-    //MBProgressHUD * hud;
-    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     
     [query whereKey:@"profileId" equalTo:currentProfile];
-    
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-///[MBProgressHUD hideHUDForView:self.view animated:YES];
 
         if (!error) {
-            // The find succeeded.
-            //[self getPhotoWithObject:objects];
+            arrOldImages = [NSMutableArray array];
             for(PFObject *object in objects){
-               // PFFile *image = (PFFile *)[object objectForKey:@"file"];
-                //photo.image = [UIImage imageWithData:image.getData];
                 [[object objectForKey:@"file"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     Photos *photo = [[Photos alloc]init];
                     photo.imgObject = object;
@@ -406,6 +419,29 @@ NSString *selectedHeight;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
       
+}
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    
+    if([identifier isEqualToString:@"BiodataIdentifier"]){
+        if(isUploadingBiodata)
+            return NO;
+        else{
+            return YES;
+        }
+        
+        
+    }
+    if([identifier isEqualToString:@"PhotosIdentifier"]){
+        if(isUploadingPhotos)
+            return NO;
+        else{
+            return YES;
+        }
+        
+        
+    }
+
+        return YES;
 }
 
 -(void)hideAllView{
@@ -717,16 +753,24 @@ NSString *selectedHeight;
     NSLog(@"%@",selectedBiodata.name);
     PFFile *file = [PFFile fileWithName:selectedBiodata.name data:pictureData];
     [currentProfile setObject:file forKey:@"bioData"];
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
+   // MBProgressHUD * hud;
+    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+      [self.btnUploadBiodata setTitle:@"Uploading...." forState:UIControlStateNormal];
+    self.btnUploadBiodata.enabled =NO;
+    isUploadingBiodata  = YES;
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+       // [MBProgressHUD hideHUDForView:self.view animated:YES];
+        isUploadingBiodata  = NO;
         
         if (!error) {
+            [self.btnUploadBiodata setTitle:@"Updated Biodata" forState:UIControlStateNormal];
+            self.btnUploadBiodata.enabled =YES;
+
             // succesful
             
         } else {
+            [self.btnUploadBiodata setTitle:@"+Upload BioData" forState:UIControlStateNormal];
+
             //Something bad has ocurred
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -1431,20 +1475,25 @@ NSString *selectedHeight;
             
         }
     }
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //MBProgressHUD * hud;
+    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
+    [self.choosePhotoBtn setTitle:@"Uploading...." forState:UIControlStateNormal];
+    isUploadingPhotos = YES;
 
     [PFObject saveAllInBackground:arrAllPhotoToBeSaved block:^(BOOL succeeded, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //[MBProgressHUD hideHUDForView:self.view animated:YES];
+        isUploadingPhotos = NO;
 
         if (succeeded) {
             NSLog(@"Woohoo!");
             arrNewImages = [NSMutableArray array];
-            
+            [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
+
             [self getAllPhotos];
         }
         else {
+            [choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
             //Something bad has ocurred
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -1535,4 +1584,6 @@ NSString *selectedHeight;
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
     [self.collectionView reloadData];
 }
+
+
 @end

@@ -65,10 +65,15 @@
         self.heightConstraint.constant = 281;
         
     }
+    NSLog(@"%@",self.currentProfile);
+    NSLog(@"%@",[self.currentProfile valueForKey:@"name"]);
+    PFObject *currentProfile = self.currentProfile;
+    [self updateUserInfo];
     if(self.currentProfile ==nil){
         if([[AppData sharedData]isInternetAvailable]){
             PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
             [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+            query.cachePolicy = kPFCachePolicyCacheElseNetwork;
 
             //[query whereKey:@"userId" equalTo:userId];
             [query includeKey:@"currentLocation.Parent.Parent"];

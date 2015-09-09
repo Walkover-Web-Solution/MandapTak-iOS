@@ -88,6 +88,7 @@ replacementString:(NSString *)string {
     query.limit = 20;
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchBar.text]];
     [query includeKey:@"Parent.Parent"];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.arrTableData = [NSMutableArray array];
@@ -175,21 +176,20 @@ replacementString:(NSString *)string {
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
     query.skip = self.arrTableData.count;
     query.limit = 20;
-    NSLog(@"text----%@",self.searchBar.text);
-
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     if(isSearching){
-        NSLog(@"text----%@",self.searchBar.text);
 
         NSString *searchText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
-
-
     }
     [query includeKey:@"Parent.Parent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(comments.count<20)
             [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+        else
+            [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+
         for(PFObject *obj in comments){
             Location *location = [[Location alloc]init];
             PFObject *parent = [obj valueForKey:@"Parent"];
@@ -200,7 +200,12 @@ replacementString:(NSString *)string {
             PFObject *subParent = [parent valueForKey:@"Parent"];
             location.country = [subParent valueForKey:@"name"];
             location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", location.descriptions];
+//            if(![[self.arrTableData filteredArrayUsingPredicate:predicate] firstObject]){
+//
+//            }
             [self.arrTableData addObject:location];
+
         }
         [self.tableView reloadData];
         

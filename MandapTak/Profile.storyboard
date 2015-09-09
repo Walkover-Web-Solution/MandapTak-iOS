@@ -895,8 +895,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="ebT-Sf-YwM" id="2Bu-Pd-K0k"/>
-                                    <outlet property="delegate" destination="ebT-Sf-YwM" id="w4H-RM-iKx"/>
+                                    <outlet property="dataSource" destination="ebT-Sf-YwM" id="TBb-aN-NMa"/>
+                                    <outlet property="delegate" destination="ebT-Sf-YwM" id="xVS-sp-rEO"/>
                                 </connections>
                             </tableView>
                         </subviews>

@@ -148,6 +148,7 @@
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchBar.text]];
     query.skip = self.arrTableData.count;
     query.limit = 20;
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
