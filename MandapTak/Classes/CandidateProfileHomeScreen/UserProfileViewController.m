@@ -103,6 +103,9 @@
     */
     blankView.hidden = NO;
     profileView.hidden = YES;
+    
+    //add animation
+    [self animateArrayOfImagesForImageCount:30];
     /*
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
     view.backgroundColor = [UIColor blueColor];
@@ -130,6 +133,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     lblMessage.text = @"Finding matches...";
+    [self animateArrayOfImagesForImageCount:30];
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"])
     {
@@ -139,14 +143,17 @@
         [arrHistory removeAllObjects];
         [arrCache removeAllObjects];
         [arrCandidateProfiles removeAllObjects];
-        MBProgressHUD *HUD;
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD *HUD;
+        //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //NSLog(@"current profile id --> %@ ", [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
+        
+        //[PFCloud callFunction:@"filterProfileLive" withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}];
         [PFCloud callFunctionInBackground:@"filterProfileLive"
                            withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}  //@"nASUvS6R7Z"
                                     block:^(NSArray *results, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self animateArrayOfImagesForImageCount:30];
              if (!error)
              {
                  // this is where you handle the results and change the UI.
@@ -158,6 +165,7 @@
                      
                      for (PFObject *profileObj in results)
                      {
+                         [[[UIAlertView alloc ] initWithTitle:@"Result Count" message:[NSString stringWithFormat:@"%d",results.count] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                          Profile *profileModel = [[Profile alloc]init];
                          
                          profileModel.profilePointer = profileObj;
@@ -249,12 +257,7 @@
                                   }
                               }
                           }];
-                         
-                         
-                         
-                         
                      }
-                     
                  }
                  else
                  {
@@ -263,7 +266,17 @@
                      blankView.hidden = NO;
                      profileView.hidden = YES;
                      lblMessage.text = [NSString stringWithFormat:@"No matching profiles found...!!"];
+                     animationImageView.hidden = YES;
                  }
+             }
+             else if (error.code ==209)
+             {
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
+                 UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                 [PFQuery clearAllCachedResults];
+                 StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
+                 [self presentViewController:vc animated:YES completion:nil];
              }
              else
              {
@@ -275,6 +288,43 @@
     {
         [userDefaults setValue:@"yes" forKey:@"reloadCandidateList"];
     }
+}
+
+#pragma mark Animation Methods
+
+-(void) animateArrayOfImagesForImageCount:(int) aCount
+{
+    animationImageView.hidden = NO;
+    NSMutableArray *imgListArray = [NSMutableArray array];
+    
+    for (int i=1; i <= aCount; i++) {
+        
+        NSString *strImgeName = [NSString stringWithFormat:@"Anim (%d).png", i];
+        
+        UIImage *image = [UIImage imageNamed:strImgeName];
+        
+        if (!image) {
+            
+            // NSLog(@"Could not load image named: %@", strImgeName);
+            
+        }
+        
+        else {
+            
+            [imgListArray addObject:image];
+            
+        }
+        
+    }
+    
+    animationImageView.animationImages=imgListArray;
+    
+    animationImageView.animationDuration=1;
+    
+    animationImageView.animationRepeatCount=3;
+    
+    [animationImageView startAnimating];
+    
 }
 
 -(void) showAnimation:(UIView *)view
@@ -322,15 +372,24 @@
         lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
         lblProfession.text = firstProfile.designation;
         lblReligion.text = [NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste];
-        [self.view.layer addAnimation:trans forKey:nil];
+        
         //[self getUserProfilePicForUser:objID];
         //show user profile pic
         imgViewProfilePic.image = firstProfile.profilePic;
+        
+        //show blurred image
+        profileView.hidden = NO;
+        blankView.hidden = YES;
+        UIImage *effectImage = [UIImageEffects imageByApplyingLightEffectToImage:firstProfile.profilePic];
+        self.imgProfileView.image = effectImage;
+        
+        [self.view.layer addAnimation:trans forKey:nil];
         //[self showBlurredImageForUser:objID];
         
     }
     else
     {
+        [self.view.layer addAnimation:trans forKey:nil];
         [self viewWillAppear:NO];
         //blankView.hidden = NO;
         //profileView.hidden = YES;
@@ -602,7 +661,7 @@
         [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     }
      */
-    CATransition *transition = [CATransition animation];
+    //CATransition *transition = [CATransition animation];
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
@@ -661,7 +720,13 @@
 
 - (IBAction)showCandidateProfile:(id)sender
 {
-    [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
+    //[self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
+    CandidateProfileDetailScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
+    Profile *candidateProfile = arrCandidateProfiles[profileNumber];
+    vc.profileObject = candidateProfile;
+    //UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+    //navController.navigationBarHidden =YES;
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 
 - (IBAction)pinAction:(id)sender
@@ -968,6 +1033,12 @@
         Profile *candidateProfile = arrCandidateProfiles[profileNumber];
         profileVC.profileObject = candidateProfile;
         //[self.navigationController pushViewController:profileVC animated:YES];
+        
+//        CandidateProfileDetailScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
+//        vc.profileObject = profileModel;
+//        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+//        navController.navigationBarHidden =YES;
+//        [self presentViewController:navController animated:YES completion:nil];
     }
     
 }

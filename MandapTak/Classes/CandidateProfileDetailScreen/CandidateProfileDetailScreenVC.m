@@ -82,9 +82,6 @@
 
 -(void) showPrimaryImageFromObject:(UIImage *)img
 {
-    //adding blur effect to image
-    //UIImage *theImage = [UIImage imageNamed:@"sampleImage01.jpg"];
-    
     //create our blurred image
     CIContext *context = [CIContext contextWithOptions:nil];
     CIImage *inputImage = [CIImage imageWithCGImage:img.CGImage];
@@ -272,7 +269,7 @@
     __block int totalNumberOfEntries = 0;
     [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:profileObject.profilePointer.objectId]];   //@"EYKXEM27cu"
     [query orderByDescending:@"createdAt"];
-    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    //query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query countObjectsInBackgroundWithBlock:^(int number1, NSError *error) {
     if (!error)
     {
@@ -301,7 +298,7 @@
 {
     for (PFObject *obj in loadimagesarray)
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showHUDAddedTo:ImagesCollectionView animated:YES];
         PFFile *userImageFile = obj[@"file"];
         
         int highScore = [obj[@"isPrimary"] intValue];
@@ -327,7 +324,7 @@
          {
              if (!error)
              {
-                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 [MBProgressHUD hideAllHUDsForView:ImagesCollectionView animated:YES];
                  UIImage *image = [UIImage imageWithData:imageData];
                  [arrImages addObject:image];
              }

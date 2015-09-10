@@ -15,6 +15,7 @@
 #import "History.h"
 #import "ALDBlurImageProcessor/ALDBlurImageProcessor.h"
 #import "UIImageEffects.h"
+#import "StartMainViewController.h"
 
 @interface UserProfileViewController : UIViewController
 {
@@ -30,6 +31,7 @@
     IBOutlet NSLayoutConstraint *imageViewConstraint;
     IBOutlet UIView *loaderView;
     
+    IBOutlet UIImageView *animationImageView;
     //blur image view
     ALDBlurImageProcessor *blurImageProcessor;
     //UIImageView *blurTargetImageView;

@@ -43,11 +43,12 @@
     //get user profile pic
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud=[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         [MBProgressHUD hideHUDForView:self.imgView animated:YES];
          if (!error)
          {
              // The find succeeded.
@@ -59,7 +60,7 @@
              {
                  [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
                   {
-                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                      [MBProgressHUD hideAllHUDsForView:self.imgView animated:YES];
                       if (!error)
                       {
                           
@@ -77,14 +78,22 @@
              }
              else
              {
-                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                 self.imgView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
-                 self.imgView.image = [UIImage imageNamed:@"userProfile"];
+                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                     self.imgView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+                     self.imgView.image = [UIImage imageNamed:@"userProfile"];
+                 
+                 
              }
              //currentProfile =obj;
              //[self switchToMatches];
              
-         } else {
+         } else
+         {
+             if (error.code == 120)
+             {
+                 //handle cache miss condition
+                 [MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+             }
              // Log details of the failure
              NSLog(@"Error: %@ %@", error, [error userInfo]);
          }

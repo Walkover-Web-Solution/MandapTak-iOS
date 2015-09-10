@@ -23,11 +23,17 @@
     
     lblName.text = [profileObject.profilePointer valueForKey:@"name"];
     lblGender.text = [profileObject.profilePointer valueForKey:@"gender"];
-    lblDOB.text = profileObject.dob;
+    //lblDOB.text = profileObject.dob;
     
     //set date format
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"dd-MM-yyyy"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateDOB = [formatter dateFromString:profileObject.dob];
+    
+    NSDateFormatter *dateToStrFormat = [[NSDateFormatter alloc]init];
+    [dateToStrFormat setDateFormat:@"dd-MM-yyyy"];
+    lblDOB.text = [dateToStrFormat stringFromDate:dateDOB];
+    
     
     lblHeight.text = [NSString stringWithFormat:@"%@",profileObject.height];
     lblWeight.text = [NSString stringWithFormat:@"%@ Kg",profileObject.weight];
