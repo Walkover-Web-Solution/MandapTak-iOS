@@ -35,6 +35,9 @@
 {
     [super viewDidLoad];
     
+    //call method to get current user profile pic
+    [self getUserProfilePic];
+    
     //set initial load conditions
     currentIndex = 0;
     arrCandidateProfiles = [[NSMutableArray alloc] init];
@@ -56,6 +59,10 @@
     imgViewProfilePic.layer.borderWidth = 2.0f;
     imgViewProfilePic.layer.borderColor = [[UIColor whiteColor] CGColor];
     imgViewProfilePic.clipsToBounds = YES;
+    
+    //apply circular border on user image view
+    userImageView.layer.cornerRadius = 60.0f;
+    userImageView.clipsToBounds = YES;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -106,6 +113,8 @@
     
     //add animation
     [self animateArrayOfImagesForImageCount:30];
+    
+    //
     /*
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
     view.backgroundColor = [UIColor blueColor];
@@ -163,8 +172,7 @@
                  {
                      //show profile view
                      [self animateArrayOfImagesForImageCount:30];
-                     blankView.hidden = YES;
-                     profileView.hidden = NO;
+                     
                      //[[[UIAlertView alloc ] initWithTitle:@"Result Count" message:[NSString stringWithFormat:@"%d",results.count] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                      NSLog(@"profile count = %d", results.count);
                      for (PFObject *profileObj in results)
@@ -270,6 +278,85 @@
     }
 }
 
+
+#pragma mark User Profile Pic
+-(void) getUserProfilePic
+{
+    //get user profile pic
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    //MBProgressHUD * hud;
+    //hud=[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         //[MBProgressHUD hideHUDForView:self.imgView animated:YES];
+         if (!error)
+         {
+             // The find succeeded.
+             PFObject *obj= objects[0];
+             
+             PFFile *userImageFile = obj[@"profilePic"];
+             if (userImageFile)
+             {
+                 [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+                  {
+                      //[MBProgressHUD hideAllHUDsForView:self.imgView animated:YES];
+                      if (!error)
+                      {
+                          
+                          UIImage *image = [UIImage imageWithData:imageData];
+                          //[arrImages addObject:image];
+                          userImageView.image = image;
+                          userImageView.layer.borderWidth = 2.0f;
+                          userImageView.layer.borderColor = [[UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1] CGColor];
+                      }
+                      else
+                      {
+                          NSLog(@"Error = > %@",error);
+                      }
+                      //add our blurred image to the scrollview
+                      //profileImageView.image = arrImages[0];
+                  }];
+             }
+             else
+             {
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 userImageView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+                 userImageView.image = [UIImage imageNamed:@"userProfile"];
+             }
+             //currentProfile =obj;
+             //[self switchToMatches];
+             
+         }
+         
+         else if (error.code ==100){
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
+         }
+         else if (error.code ==120)
+         {
+             //handle cache miss condition
+             //[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+         }
+         else if (error.code ==209){
+             [PFUser logOut];
+             PFUser *user = nil;
+             PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+             [currentInstallation setObject:user forKey:@"user"];
+             [currentInstallation saveInBackground];
+             
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
+             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+             StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
+             [self presentViewController:vc animated:YES completion:nil];
+         }
+     }];
+}
+
 #pragma mark Animation Methods
 /*
 -(void) animateArrayOfImagesForImageCount:(int) aCount
@@ -298,7 +385,7 @@
     animationImageView.hidden = NO;
         NSMutableArray *imgListArray = [NSMutableArray array];
         for (int i=1; i <= aCount; i++) {
-            NSString *strImgeName = [NSString stringWithFormat:@"Anim (%d).png", i];
+            NSString *strImgeName = [NSString stringWithFormat:@"Anim-(%d).png", i];
             UIImage *image = [UIImage imageNamed:strImgeName];
             if (!image) {
                 // NSLog(@"Could not load image named: %@", strImgeName);

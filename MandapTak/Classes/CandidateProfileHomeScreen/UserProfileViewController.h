@@ -37,6 +37,7 @@
     //UIImageView *blurTargetImageView;
     
     BOOL isReady;
+    IBOutlet UIImageView *userImageView;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;
