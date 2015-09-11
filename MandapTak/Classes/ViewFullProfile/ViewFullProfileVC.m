@@ -135,6 +135,12 @@
     view2.hidden = true;
     view3.hidden = true;
     view4.hidden = true;
+    
+    button1.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
+    button2.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button3.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button4.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+
 }
 
 - (IBAction)showHeightWeight:(id)sender
@@ -144,7 +150,11 @@
     view2.hidden = false;
     view3.hidden = true;
     view4.hidden = true;
-
+    
+    button1.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button2.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
+    button3.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button4.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
 }
 
 - (IBAction)showWorkDetails:(id)sender
@@ -153,6 +163,11 @@
     view1.hidden = true;
     view2.hidden = true;
     view4.hidden = true;
+    
+    button1.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button2.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button3.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
+    button4.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
 }
 
 - (IBAction)showBiodata:(id)sender
@@ -161,6 +176,10 @@
     view1.hidden = true;
     view2.hidden = true;
     view3.hidden = true;
+    button1.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button2.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button3.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    button4.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
 }
 
 - (IBAction)downloadBiodata:(id)sender
@@ -198,11 +217,13 @@
 {
     return 2;
 }
-/*
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    /*
     UILabel *myLabel = [[UILabel alloc] init];
     myLabel.frame = CGRectMake(20, 8, 320, 20);
+    myLabel.backgroundColor = [UIColor darkGrayColor];
     myLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17];
     myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     
@@ -210,8 +231,24 @@
     [headerView addSubview:myLabel];
     
     return headerView;
+     */
+    
+    // Create label with section title
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(20, 0, 284, 23);
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17];
+    label.text = [self tableView:tableView titleForHeaderInSection:section];
+    label.backgroundColor = [UIColor clearColor];
+    
+    // Create header view and add label as a subview
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 23)];
+    view.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    [view addSubview:label];
+    
+    return view;
 }
-*/
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *sectionName;

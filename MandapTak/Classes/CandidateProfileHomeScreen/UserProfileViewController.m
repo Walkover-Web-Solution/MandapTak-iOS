@@ -137,12 +137,14 @@
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     if (![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"])
     {
-        btnUndo.enabled = NO;
         imgViewProfilePic.image = nil;
         self.imgProfileView.image = nil;
-        [arrHistory removeAllObjects];
-        [arrCache removeAllObjects];
         [arrCandidateProfiles removeAllObjects];
+        
+        //show blank and loading screen
+        blankView.hidden = NO;
+        profileView.hidden = YES;
+        [self animateArrayOfImagesForImageCount:30];
         //MBProgressHUD *HUD;
         //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //NSLog(@"current profile id --> %@ ", [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
@@ -153,19 +155,20 @@
                                     block:^(NSArray *results, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
-             [self animateArrayOfImagesForImageCount:30];
+             
              if (!error)
              {
                  // this is where you handle the results and change the UI.
                  if (results.count > 0)
                  {
                      //show profile view
+                     [self animateArrayOfImagesForImageCount:30];
                      blankView.hidden = YES;
                      profileView.hidden = NO;
-                     
+                     //[[[UIAlertView alloc ] initWithTitle:@"Result Count" message:[NSString stringWithFormat:@"%d",results.count] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                     NSLog(@"profile count = %d", results.count);
                      for (PFObject *profileObj in results)
                      {
-                         [[[UIAlertView alloc ] initWithTitle:@"Result Count" message:[NSString stringWithFormat:@"%d",results.count] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                          Profile *profileModel = [[Profile alloc]init];
                          
                          profileModel.profilePointer = profileObj;
@@ -214,32 +217,6 @@
                          NSString *strTOB = [formatterTime stringFromDate:dateTOB];
                          profileModel.tob = strTOB;
                          
-                         /*
-                          //education
-                          NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
-                          NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
-                          
-                          for (int i=1; i<4; i++)
-                          {
-                          Education *educationObject = [[Education alloc]init];
-                          NSString *eduLevel = [NSString stringWithFormat:@"education%d",i];
-                          PFObject *specialization = [profileObj valueForKey:eduLevel];
-                          PFObject *degreeName = [specialization valueForKey:@"degreeId"];
-                          //NSString *specializationName = [specialization valueForKey:@"name"];
-                          NSString *strDegrees = [degreeName valueForKey:@"name"];
-                          if (strDegrees.length > 0)
-                          {
-                          [arrDegrees addObject:strDegrees];
-                          //save data for full profile screen
-                          educationObject.degree = degreeName;
-                          educationObject.specialisation = specialization;
-                          [arrEducation addObject:educationObject];
-                          }
-                          }
-                          //NSString *strAllDegree = [arrDegrees componentsJoinedByString:@","];
-                          //lblEducation.text = [NSString stringWithFormat:@"%@",strAllDegree];
-                          */
-                         
                          //load images in background
                          
                          PFFile *userImageFile = profileObj[@"profilePic"];
@@ -265,6 +242,9 @@
                      //[self.view bringSubviewToFront:blankView];
                      blankView.hidden = NO;
                      profileView.hidden = YES;
+                     btnUndo.enabled = NO;
+                     [arrHistory removeAllObjects];
+                     [arrCache removeAllObjects];
                      lblMessage.text = [NSString stringWithFormat:@"No matching profiles found...!!"];
                      animationImageView.hidden = YES;
                  }
@@ -291,41 +271,49 @@
 }
 
 #pragma mark Animation Methods
-
+/*
 -(void) animateArrayOfImagesForImageCount:(int) aCount
 {
     animationImageView.hidden = NO;
     NSMutableArray *imgListArray = [NSMutableArray array];
-    
     for (int i=1; i <= aCount; i++) {
-        
         NSString *strImgeName = [NSString stringWithFormat:@"Anim (%d).png", i];
-        
         UIImage *image = [UIImage imageNamed:strImgeName];
-        
         if (!image) {
-            
             // NSLog(@"Could not load image named: %@", strImgeName);
-            
         }
-        
         else {
-            
             [imgListArray addObject:image];
-            
         }
-        
     }
-    
     animationImageView.animationImages=imgListArray;
-    
     animationImageView.animationDuration=1;
-    
     animationImageView.animationRepeatCount=3;
-    
     [animationImageView startAnimating];
-    
 }
+*/
+
+-(void) animateArrayOfImagesForImageCount:(int) aCount
+{
+    animationImageView.hidden = NO;
+        NSMutableArray *imgListArray = [NSMutableArray array];
+        for (int i=1; i <= aCount; i++) {
+            NSString *strImgeName = [NSString stringWithFormat:@"Anim (%d).png", i];
+            UIImage *image = [UIImage imageNamed:strImgeName];
+            if (!image) {
+                // NSLog(@"Could not load image named: %@", strImgeName);
+            }
+            else {
+                [imgListArray addObject:image];
+            }
+        }
+        animationImageView.animationImages=imgListArray;
+        animationImageView.animationDuration=1.5;
+        animationImageView.animationRepeatCount=-1;
+        [animationImageView startAnimating];
+}
+    
+
 
 -(void) showAnimation:(UIView *)view
 {
@@ -761,7 +749,7 @@
                  historyObj.actionProfileId = strObjId;
                  historyObj.actionType = 2;     //pin action:2
                  
-                 //save History model object in arrCache
+                 //save History model object in arrHistory
                  [arrHistory addObject:historyObj];
                  
                  //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
@@ -835,7 +823,7 @@
                  historyObj.actionProfileId = strObjId;
                  historyObj.actionType = 1;     //like action:1
                  
-                 //save History model object in arrCache
+                 //save History model object in arrHistory
                  [arrHistory addObject:historyObj];
                  
                  //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
@@ -901,7 +889,7 @@
                  historyObj.actionProfileId = strObjId;
                  historyObj.actionType = 0;     //dislike action:2
                  
-                 //save History model object in arrCache
+                 //save History model object in arrHistory
                  [arrHistory addObject:historyObj];
                  
                  //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
@@ -972,7 +960,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:class];
     [query whereKey:@"objectId" equalTo:ObjectID];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

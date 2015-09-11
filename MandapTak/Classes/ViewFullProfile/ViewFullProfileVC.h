@@ -38,6 +38,10 @@
 
     IBOutlet UILabel *lblMinBudget;
     IBOutlet UILabel *lblMaxBudget;
+    IBOutlet UIButton *button1;
+    IBOutlet UIButton *button2;
+    IBOutlet UIButton *button3;
+    IBOutlet UIButton *button4;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)showBasicDetails:(id)sender;
