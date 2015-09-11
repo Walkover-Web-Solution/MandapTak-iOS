@@ -10,5 +10,4 @@
 #import <Parse/Parse.h>
 @interface ChatPinMatchViewController : UIViewController
 @property (strong, nonatomic) PFObject *currentProfile;
-@property (strong, nonatomic) NSArray *arrMatches;
 @end

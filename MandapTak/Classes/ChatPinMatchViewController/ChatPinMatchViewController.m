@@ -16,6 +16,7 @@
 #import "CandidateProfileDetailScreenVC.h"
 @interface ChatPinMatchViewController (){
     NSInteger currentTab;
+    NSArray *arrMatches;
     NSArray *arrPins;
     NSArray *arrChats;
     NSMutableArray *arrCachedMatches;
@@ -41,7 +42,7 @@
     lblUserInfo.hidden = YES;
     arrCachedMatches = [NSMutableArray array];
 
-    self.arrMatches = [NSArray array];
+    arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
@@ -127,7 +128,7 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (currentTab) {
         case 0:
-            return self.arrMatches.count;
+            return arrMatches.count;
             break;
         case 1:
             return arrPins.count;
@@ -151,7 +152,7 @@
     ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
     if(currentTab ==0){
         
-        PFObject *profile = self.arrMatches[indexPath.row];
+        PFObject *profile = arrMatches[indexPath.row];
         Profile *profileModel = arrCachedMatches[indexPath.row];
         matchAndPinCell.lblDesignation.text = profileModel.designation;
 
@@ -233,7 +234,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(currentTab ==0){
-        PFObject *profile = self.arrMatches[indexPath.row];
+        PFObject *profile = arrMatches[indexPath.row];
         [self showFullProfileForProfile:profile];
     }
     else if(currentTab == 1){
@@ -328,8 +329,9 @@
                  else
                      lblUserInfo.hidden = YES;
                  
-                 self.arrMatches = results;
-                [self.tableView reloadData];
+                 arrMatches = results;
+                 [PFObject pinAllInBackground:arrMatches];
+                 [self.tableView reloadData];
                  
              }
              else{
