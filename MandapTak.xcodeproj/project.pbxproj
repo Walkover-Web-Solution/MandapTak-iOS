@@ -119,7 +119,6 @@
 		895A6E7E1B9843A200A9C8BC /* UITableView+DragLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A6E781B9843A200A9C8BC /* UITableView+DragLoad.m */; };
 		895A6E801B98686E00A9C8BC /* closePopover.png in Resources */ = {isa = PBXBuildFile; fileRef = 895A6E7F1B98686E00A9C8BC /* closePopover.png */; };
 		895B72331B902087006AA638 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B72321B902087006AA638 /* AppData.m */; };
-		895B72361B9020A2006AA638 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B72351B9020A2006AA638 /* Reachability.m */; };
 		895B72391B902FC2006AA638 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B72381B902FC2006AA638 /* NSNotificationAdditions.m */; };
 		895CD7751B81C47600816FDE /* DegreePopoverForProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7741B81C47600816FDE /* DegreePopoverForProfileViewController.m */; };
 		895CD7781B81CFB500816FDE /* Education.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7771B81CFB500816FDE /* Education.m */; };
@@ -137,7 +136,6 @@
 		896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BC0011B959577009FD221 /* ChatTableViewCell.m */; };
 		896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BC0041B95958A009FD221 /* MatchAndPinTableViewCell.m */; };
 		896BC0091B95B5B1009FD221 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896BC0081B95B5B1009FD221 /* Bolts.framework */; };
-		896BC00B1B95B841009FD221 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896BC00A1B95B841009FD221 /* ParseFacebookUtils.framework */; };
 		896BC00E1B95D856009FD221 /* matchCellOption.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BC00C1B95D856009FD221 /* matchCellOption.png */; };
 		896BC00F1B95D856009FD221 /* matchCellOption@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BC00D1B95D856009FD221 /* matchCellOption@2x.png */; };
 		896C19F31B96E49B00FFE0C6 /* call.png in Resources */ = {isa = PBXBuildFile; fileRef = 896C19F21B96E49B00FFE0C6 /* call.png */; };
@@ -174,6 +172,19 @@
 		89936AD41B9D5A9200C74E0A /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */; };
 		89936ADB1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */; };
 		89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */; };
+		8997CC591BA16C18001B11AA /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8997CC581BA16C18001B11AA /* ParseFacebookUtils.framework */; };
+		8997CC6D1BA18280001B11AA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC6C1BA18280001B11AA /* Reachability.m */; };
+		8997CC851BA182C8001B11AA /* SCReachabilityFlagsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC711BA182C8001B11AA /* SCReachabilityFlagsParser.m */; };
+		8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC731BA182C8001B11AA /* SCReachabilityRefBuilder.m */; };
+		8997CC871BA182C8001B11AA /* SCReachabilityScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC751BA182C8001B11AA /* SCReachabilityScheduler.m */; };
+		8997CC881BA182C8001B11AA /* SCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC781BA182C8001B11AA /* SCNetworkReachability.m */; };
+		8997CC891BA182C8001B11AA /* SCNetworkReachability+Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC7D1BA182C8001B11AA /* SCNetworkReachability+Compatibility.m */; };
+		8997CC8A1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC7F1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m */; };
+		8997CC8B1BA182C8001B11AA /* SCNetworkReachability+Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC841BA182C8001B11AA /* SCNetworkReachability+Shared.m */; };
+		8997CC991BA1840A001B11AA /* ABMultitonInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC8F1BA1840A001B11AA /* ABMultitonInjector.m */; };
+		8997CC9A1BA1840A001B11AA /* dispatch_safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC911BA1840A001B11AA /* dispatch_safe.m */; };
+		8997CC9B1BA1840A001B11AA /* ABMultiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC941BA1840A001B11AA /* ABMultiton.m */; };
+		8997CC9C1BA1840A001B11AA /* ABMultiton+SetInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC981BA1840A001B11AA /* ABMultiton+SetInstance.m */; };
 		899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C536C1B732B6500C24DA8 /* GenderViewController.m */; };
 		899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C536F1B732B6500C24DA8 /* PopOverListViewController.m */; };
 		899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C53731B732B9700C24DA8 /* DateOfBirthPopoverViewController.m */; };
@@ -405,8 +416,6 @@
 		895A6E7F1B98686E00A9C8BC /* closePopover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closePopover.png; sourceTree = "<group>"; };
 		895B72311B902087006AA638 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		895B72321B902087006AA638 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
-		895B72341B9020A2006AA638 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		895B72351B9020A2006AA638 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		895B72371B902FC2006AA638 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
 		895B72381B902FC2006AA638 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
 		895CD7731B81C47600816FDE /* DegreePopoverForProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DegreePopoverForProfileViewController.h; sourceTree = "<group>"; };
@@ -436,7 +445,6 @@
 		896BC0031B95958A009FD221 /* MatchAndPinTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAndPinTableViewCell.h; sourceTree = "<group>"; };
 		896BC0041B95958A009FD221 /* MatchAndPinTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAndPinTableViewCell.m; sourceTree = "<group>"; };
 		896BC0081B95B5B1009FD221 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		896BC00A1B95B841009FD221 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		896BC00C1B95D856009FD221 /* matchCellOption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = matchCellOption.png; sourceTree = "<group>"; };
 		896BC00D1B95D856009FD221 /* matchCellOption@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "matchCellOption@2x.png"; sourceTree = "<group>"; };
 		896C19F21B96E49B00FFE0C6 /* call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call.png; sourceTree = "<group>"; };
@@ -492,6 +500,35 @@
 		89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCellOptionPopoverViewController.m; sourceTree = "<group>"; };
 		89936ADD1B9D71F500C74E0A /* CreateNewUserPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewUserPopoverViewController.h; sourceTree = "<group>"; };
 		89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewUserPopoverViewController.m; sourceTree = "<group>"; };
+		8997CC581BA16C18001B11AA /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		8997CC6B1BA18280001B11AA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		8997CC6C1BA18280001B11AA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		8997CC701BA182C8001B11AA /* SCReachabilityFlagsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCReachabilityFlagsParser.h; sourceTree = "<group>"; };
+		8997CC711BA182C8001B11AA /* SCReachabilityFlagsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCReachabilityFlagsParser.m; sourceTree = "<group>"; };
+		8997CC721BA182C8001B11AA /* SCReachabilityRefBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCReachabilityRefBuilder.h; sourceTree = "<group>"; };
+		8997CC731BA182C8001B11AA /* SCReachabilityRefBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCReachabilityRefBuilder.m; sourceTree = "<group>"; };
+		8997CC741BA182C8001B11AA /* SCReachabilityScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCReachabilityScheduler.h; sourceTree = "<group>"; };
+		8997CC751BA182C8001B11AA /* SCReachabilityScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCReachabilityScheduler.m; sourceTree = "<group>"; };
+		8997CC771BA182C8001B11AA /* SCNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNetworkReachability.h; sourceTree = "<group>"; };
+		8997CC781BA182C8001B11AA /* SCNetworkReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNetworkReachability.m; sourceTree = "<group>"; };
+		8997CC791BA182C8001B11AA /* SCNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNetworkStatus.h; sourceTree = "<group>"; };
+		8997CC7C1BA182C8001B11AA /* SCNetworkReachability+Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNetworkReachability+Compatibility.h"; sourceTree = "<group>"; };
+		8997CC7D1BA182C8001B11AA /* SCNetworkReachability+Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNetworkReachability+Compatibility.m"; sourceTree = "<group>"; };
+		8997CC7E1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCReachabilityRefBuilder+Compatibility.h"; sourceTree = "<group>"; };
+		8997CC7F1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCReachabilityRefBuilder+Compatibility.m"; sourceTree = "<group>"; };
+		8997CC811BA182C8001B11AA /* SCNetworkReachability+Multithreading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNetworkReachability+Multithreading.h"; sourceTree = "<group>"; };
+		8997CC831BA182C8001B11AA /* SCNetworkReachability+Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNetworkReachability+Shared.h"; sourceTree = "<group>"; };
+		8997CC841BA182C8001B11AA /* SCNetworkReachability+Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNetworkReachability+Shared.m"; sourceTree = "<group>"; };
+		8997CC8E1BA1840A001B11AA /* ABMultitonInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMultitonInjector.h; sourceTree = "<group>"; };
+		8997CC8F1BA1840A001B11AA /* ABMultitonInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMultitonInjector.m; sourceTree = "<group>"; };
+		8997CC901BA1840A001B11AA /* dispatch_safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dispatch_safe.h; sourceTree = "<group>"; };
+		8997CC911BA1840A001B11AA /* dispatch_safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dispatch_safe.m; sourceTree = "<group>"; };
+		8997CC931BA1840A001B11AA /* ABMultiton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMultiton.h; sourceTree = "<group>"; };
+		8997CC941BA1840A001B11AA /* ABMultiton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMultiton.m; sourceTree = "<group>"; };
+		8997CC951BA1840A001B11AA /* ABMultitonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMultitonProtocol.h; sourceTree = "<group>"; };
+		8997CC971BA1840A001B11AA /* ABMultiton+SetInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ABMultiton+SetInstance.h"; sourceTree = "<group>"; };
+		8997CC981BA1840A001B11AA /* ABMultiton+SetInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ABMultiton+SetInstance.m"; sourceTree = "<group>"; };
+		8997CC9D1BA184D6001B11AA /* macros_blocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros_blocks.h; sourceTree = "<group>"; };
 		899C536B1B732B6500C24DA8 /* GenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderViewController.h; sourceTree = "<group>"; };
 		899C536C1B732B6500C24DA8 /* GenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderViewController.m; sourceTree = "<group>"; };
 		899C536E1B732B6500C24DA8 /* PopOverListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverListViewController.h; sourceTree = "<group>"; };
@@ -602,7 +639,7 @@
 				89D9F7511B6B5998004CBE3D /* AudioToolbox.framework in Frameworks */,
 				89D9F74F1B6B5993004CBE3D /* Security.framework in Frameworks */,
 				89D9F74D1B6B5988004CBE3D /* libz.1.1.3.dylib in Frameworks */,
-				896BC00B1B95B841009FD221 /* ParseFacebookUtils.framework in Frameworks */,
+				8997CC591BA16C18001B11AA /* ParseFacebookUtils.framework in Frameworks */,
 				89D9F74B1B6B5982004CBE3D /* QuartzCore.framework in Frameworks */,
 				89D9F7491B6B592E004CBE3D /* libsqlite3.dylib in Frameworks */,
 				89D9F7471B6B5927004CBE3D /* CoreGraphics.framework in Frameworks */,
@@ -1071,8 +1108,8 @@
 		897C23981B6B562C00FC32E9 /* MandapTak */ = {
 			isa = PBXGroup;
 			children = (
+				8997CC581BA16C18001B11AA /* ParseFacebookUtils.framework */,
 				7564E2541B972B2800B8D052 /* Parse.framework */,
-				896BC00A1B95B841009FD221 /* ParseFacebookUtils.framework */,
 				896BC0081B95B5B1009FD221 /* Bolts.framework */,
 				7565F7861B8DDA52003FE061 /* Resources */,
 				8967FADA1B8DB0C900AAC41E /* FBSDKCoreKit.framework */,
@@ -1244,6 +1281,119 @@
 				89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */,
 			);
 			path = CreateNewUserPopover;
+			sourceTree = "<group>";
+		};
+		8997CC6E1BA182C8001B11AA /* Reachablity */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC9D1BA184D6001B11AA /* macros_blocks.h */,
+				8997CC8C1BA1840A001B11AA /* ABMultiton */,
+				8997CC6F1BA182C8001B11AA /* Private */,
+				8997CC761BA182C8001B11AA /* Public */,
+				8997CC7A1BA182C8001B11AA /* Subspecs */,
+			);
+			path = Reachablity;
+			sourceTree = "<group>";
+		};
+		8997CC6F1BA182C8001B11AA /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC701BA182C8001B11AA /* SCReachabilityFlagsParser.h */,
+				8997CC711BA182C8001B11AA /* SCReachabilityFlagsParser.m */,
+				8997CC721BA182C8001B11AA /* SCReachabilityRefBuilder.h */,
+				8997CC731BA182C8001B11AA /* SCReachabilityRefBuilder.m */,
+				8997CC741BA182C8001B11AA /* SCReachabilityScheduler.h */,
+				8997CC751BA182C8001B11AA /* SCReachabilityScheduler.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		8997CC761BA182C8001B11AA /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC771BA182C8001B11AA /* SCNetworkReachability.h */,
+				8997CC781BA182C8001B11AA /* SCNetworkReachability.m */,
+				8997CC791BA182C8001B11AA /* SCNetworkStatus.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		8997CC7A1BA182C8001B11AA /* Subspecs */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC7B1BA182C8001B11AA /* Compatibility */,
+				8997CC801BA182C8001B11AA /* Multithreading */,
+				8997CC821BA182C8001B11AA /* Shared */,
+			);
+			path = Subspecs;
+			sourceTree = "<group>";
+		};
+		8997CC7B1BA182C8001B11AA /* Compatibility */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC7C1BA182C8001B11AA /* SCNetworkReachability+Compatibility.h */,
+				8997CC7D1BA182C8001B11AA /* SCNetworkReachability+Compatibility.m */,
+				8997CC7E1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.h */,
+				8997CC7F1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m */,
+			);
+			path = Compatibility;
+			sourceTree = "<group>";
+		};
+		8997CC801BA182C8001B11AA /* Multithreading */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC811BA182C8001B11AA /* SCNetworkReachability+Multithreading.h */,
+			);
+			path = Multithreading;
+			sourceTree = "<group>";
+		};
+		8997CC821BA182C8001B11AA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC831BA182C8001B11AA /* SCNetworkReachability+Shared.h */,
+				8997CC841BA182C8001B11AA /* SCNetworkReachability+Shared.m */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		8997CC8C1BA1840A001B11AA /* ABMultiton */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC8D1BA1840A001B11AA /* Private */,
+				8997CC921BA1840A001B11AA /* Public */,
+				8997CC961BA1840A001B11AA /* Subspecs */,
+			);
+			path = ABMultiton;
+			sourceTree = "<group>";
+		};
+		8997CC8D1BA1840A001B11AA /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC8E1BA1840A001B11AA /* ABMultitonInjector.h */,
+				8997CC8F1BA1840A001B11AA /* ABMultitonInjector.m */,
+				8997CC901BA1840A001B11AA /* dispatch_safe.h */,
+				8997CC911BA1840A001B11AA /* dispatch_safe.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		8997CC921BA1840A001B11AA /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC931BA1840A001B11AA /* ABMultiton.h */,
+				8997CC941BA1840A001B11AA /* ABMultiton.m */,
+				8997CC951BA1840A001B11AA /* ABMultitonProtocol.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		8997CC961BA1840A001B11AA /* Subspecs */ = {
+			isa = PBXGroup;
+			children = (
+				8997CC971BA1840A001B11AA /* ABMultiton+SetInstance.h */,
+				8997CC981BA1840A001B11AA /* ABMultiton+SetInstance.m */,
+			);
+			path = Subspecs;
 			sourceTree = "<group>";
 		};
 		899C53681B732B6500C24DA8 /* Popovers */ = {
@@ -1431,12 +1581,13 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8997CC6E1BA182C8001B11AA /* Reachablity */,
+				8997CC6B1BA18280001B11AA /* Reachability.h */,
+				8997CC6C1BA18280001B11AA /* Reachability.m */,
 				895A6E691B9843A200A9C8BC /* DragDelegate */,
 				896006251B9075870007B7AB /* PhotoTweak */,
 				895B72371B902FC2006AA638 /* NSNotificationAdditions.h */,
 				895B72381B902FC2006AA638 /* NSNotificationAdditions.m */,
-				895B72341B9020A2006AA638 /* Reachability.h */,
-				895B72351B9020A2006AA638 /* Reachability.m */,
 				895B72311B902087006AA638 /* AppData.h */,
 				895B72321B902087006AA638 /* AppData.m */,
 				89E0FA361B85C92A000BD65A /* ZCImagePicker */,
@@ -1847,28 +1998,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				757F87671B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari.m in Sources */,
+				8997CC8A1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m in Sources */,
 				895A6E7E1B9843A200A9C8BC /* UITableView+DragLoad.m in Sources */,
 				89E0FA101B85916C000BD65A /* UploadPhotosProfileViewController.m in Sources */,
+				8997CC8B1BA182C8001B11AA /* SCNetworkReachability+Shared.m in Sources */,
 				758C8E871B87537500FF634E /* FullyHorizontalFlowLayout.m in Sources */,
+				8997CC9C1BA1840A001B11AA /* ABMultiton+SetInstance.m in Sources */,
 				895A6E7B1B9843A200A9C8BC /* DragTableGestureObserver_ot.m in Sources */,
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				758914CE1B95BFC200585507 /* History.m in Sources */,
 				757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */,
 				899C537F1B73447B00C24DA8 /* Location.m in Sources */,
+				8997CC871BA182C8001B11AA /* SCReachabilityScheduler.m in Sources */,
 				89E0FA591B85C92A000BD65A /* ZCHelper.m in Sources */,
 				895CD77E1B81E36D00816FDE /* WorkAfterMarriagePopoverViewController.m in Sources */,
 				898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */,
 				89E0FA5A1B85C92A000BD65A /* ZCImagePickerController.m in Sources */,
 				8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */,
+				8997CC851BA182C8001B11AA /* SCReachabilityFlagsParser.m in Sources */,
 				896D18131B943116001513A5 /* VerficationViewController.m in Sources */,
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */,
 				75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */,
+				8997CC891BA182C8001B11AA /* SCNetworkReachability+Compatibility.m in Sources */,
 				89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */,
 				89936AD11B9D5A7F00C74E0A /* AgentViewController.m in Sources */,
 				75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */,
+				8997CC9B1BA1840A001B11AA /* ABMultiton.m in Sources */,
 				893E76E51B8871130009F512 /* Photos.m in Sources */,
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
@@ -1885,6 +2043,7 @@
 				758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */,
 				75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */,
 				895CD7751B81C47600816FDE /* DegreePopoverForProfileViewController.m in Sources */,
+				8997CC9A1BA1840A001B11AA /* dispatch_safe.m in Sources */,
 				89E0FA611B8606D4000BD65A /* ImageViewController.m in Sources */,
 				899C537C1B7339EB00C24DA8 /* MBProgressHUD.m in Sources */,
 				89E0FA581B85C92A000BD65A /* ZCAssetTablePicker.m in Sources */,
@@ -1898,6 +2057,7 @@
 				895480471B7E172200AB37BF /* ProfileWorkAndExperienceViewController.m in Sources */,
 				75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */,
 				895A6E791B9843A200A9C8BC /* ComOpenThreadOTScreenshotHelperSwizzleHelper.m in Sources */,
+				8997CC6D1BA18280001B11AA /* Reachability.m in Sources */,
 				89E0FA5D1B85F3B6000BD65A /* ImageViewCell.m in Sources */,
 				898146491B7C9CCC00DF30AB /* ReligionPopoverViewController.m in Sources */,
 				899C53781B73363300C24DA8 /* ServiceManager.m in Sources */,
@@ -1915,14 +2075,16 @@
 				8967FAE21B8DCCCD00AAC41E /* PhotoSelectionCell.m in Sources */,
 				898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */,
 				757F87691B8EF1DC00C083A4 /* SVWebViewControllerActivity.m in Sources */,
-				895B72361B9020A2006AA638 /* Reachability.m in Sources */,
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
+				8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
+				8997CC881BA182C8001B11AA /* SCNetworkReachability.m in Sources */,
 				75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */,
 				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
+				8997CC991BA1840A001B11AA /* ABMultitonInjector.m in Sources */,
 				896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */,
 				896D18351B9487B6001513A5 /* ChatPinMatchViewController.m in Sources */,
 				75B5BC311B9B2F730097C851 /* ManglikPopoverViewController.m in Sources */,
@@ -2014,7 +2176,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2037,7 +2199,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2060,7 +2222,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2076,7 +2238,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ddf067db-fde4-4275-85ae-4585629ddc57";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2087,7 +2249,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2106,7 +2268,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 			};
 			name = Debug;
 		};
@@ -2114,7 +2276,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2133,7 +2295,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 			};
 			name = Release;
 		};

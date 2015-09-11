@@ -149,16 +149,27 @@
     query.limit = 20;
     if(isSearching)
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
-
-    //  [query whereKey:@"casteId" equalTo:self.casteObj];
-    // [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if(comments.count<20)
-            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
-        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
-        [self.tableView reloadData];
-        
+        if(!error){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSMutableArray *arrFetchedItems =comments.mutableCopy;
+            for(PFObject *tempObj in comments){
+                for(PFObject *obj in self.arrTableData){
+                    if([[tempObj valueForKey:@"name" ] isEqual:[obj valueForKey:@"name" ]]){
+                        [arrFetchedItems removeObject:tempObj];
+                        break;
+                    }
+                }
+            }
+            if(comments.count<20)
+                [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+            else
+                [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+
+            self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
+            [self.tableView reloadData];
+        }
     }];
     [self.tableView finishLoadMore];
 }

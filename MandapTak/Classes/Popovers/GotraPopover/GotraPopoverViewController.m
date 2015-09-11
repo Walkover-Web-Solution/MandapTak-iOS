@@ -138,13 +138,27 @@
 
     [query whereKey:@"casteId" equalTo:self.casteObj];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if(comments.count<20)
-            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+        if(!error){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSMutableArray *arrFetchedItems =comments.mutableCopy;
+            for(PFObject *tempObj in comments){
+                for(PFObject *obj in self.arrTableData){
+                    if([[tempObj valueForKey:@"name" ] isEqual:[obj valueForKey:@"name" ]]){
+                        [arrFetchedItems removeObject:tempObj];
+                        break;
+                    }
+                }
+            }
+            if(comments.count<20)
+                [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+            else
+                [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
 
-        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
-        [self.tableView reloadData];
-    }];
+            self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:arrFetchedItems]];
+            [self.tableView reloadData];
+
+        }
+            }];
     [self.tableView finishLoadMore];
 }
 @end

@@ -9,7 +9,11 @@
 #import "AppData.h"
 #import "AppDelegate.h"
 #import "ServiceManager.h"
-@implementation AppData
+#import "SCNetworkReachability.h"
+
+@implementation AppData{
+     SCNetworkReachability *_reachability;
+}
 
 SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
 -(BOOL) isInternetAvailable{
@@ -21,6 +25,32 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
     }
     return available;
 }
+-(void)checkReachablitywithCompletionBlock:(ReachablityCompletionBlock)completionBlock{
+    _reachability = [[SCNetworkReachability alloc] initWithHost:@"https://www.parse.com/apps/mandaptak/"];
+    [_reachability observeReachability:^(SCNetworkStatus status)
+     {
+         
+         if(status==0){
+             completionBlock (false);
+             NSLog(@"Not reachable");
+         }
+         else{
+             completionBlock (TRUE);
+         }
+     }
+     ];
 
-
+}
+//-(BOOL)checkReachablity{
+//    _reachability = [[SCNetworkReachability alloc] initWithHost:@"https://www.parse.com/apps/mandaptak/"];
+//    [_reachability observeReachability:^(SCNetworkStatus status)
+//     {
+//         
+//         if(status==0){
+//             NSLog(@"Not reachable");
+//         }
+//     }
+//     ];
+//
+//}
 @end

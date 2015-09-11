@@ -11,8 +11,11 @@
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 @interface AppData : NSObject
+typedef void (^ReachablityCompletionBlock)(bool isReachable);
+
 @property (strong, nonatomic) MBProgressHUD *hud;
 -(BOOL) isInternetAvailable;
+-(void)checkReachablitywithCompletionBlock:(ReachablityCompletionBlock)completionBlock;
 //- (BOOL)askContactsPermission ;
 DECLARE_SINGLETON_METHOD(AppData, sharedData)
 @end

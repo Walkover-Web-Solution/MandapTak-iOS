@@ -144,13 +144,31 @@
     query.skip = arrTableData.count;
     query.limit = 20;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        arrTableData = [NSMutableArray arrayWithArray:[arrTableData arrayByAddingObjectsFromArray:comments]];
-        [self.tableView reloadData];
-        if(comments.count<20)
-            [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
-        
-    }];    [self.tableView finishLoadMore];
+        if(!error){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSMutableArray *arrFetchedItems =comments.mutableCopy;
+            for(PFObject *tempObj in comments){
+                for(PFObject *obj in arrTableData){
+                    if([[tempObj valueForKey:@"name" ] isEqual:[obj valueForKey:@"name" ]]){
+                        [arrFetchedItems removeObject:tempObj];
+                        break;
+                    }
+                }
+            }
+            
+            arrTableData = [NSMutableArray arrayWithArray:[arrTableData arrayByAddingObjectsFromArray:arrFetchedItems]];
+            [self.tableView reloadData];
+            if(comments.count<20)
+                [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+            else{
+                [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+
+            }
+
+        }
+                
+    }];
+    [self.tableView finishLoadMore];
 
 }
 

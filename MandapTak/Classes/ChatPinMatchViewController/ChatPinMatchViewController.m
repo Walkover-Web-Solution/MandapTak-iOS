@@ -19,6 +19,7 @@
     NSArray *arrMatches;
     NSArray *arrPins;
     NSArray *arrChats;
+    NSMutableArray *arrCachedMatches;
     __weak IBOutlet UILabel *lblUserInfo;
   //  PFObject *currentProfile;
 }
@@ -39,11 +40,13 @@
     [super viewDidLoad];
     currentTab = 0;
     lblUserInfo.hidden = YES;
+    arrCachedMatches = [NSMutableArray array];
 
     arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
     if(self.currentProfile){
@@ -150,6 +153,10 @@
     if(currentTab ==0){
         
         PFObject *profile = arrMatches[indexPath.row];
+        Profile *profileModel = arrCachedMatches[indexPath.row];
+        matchAndPinCell.lblDesignation.text = profileModel.designation;
+
+        /*
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
         if([profile objectForKey:@"profilePic"]!=nil){
             [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -173,6 +180,8 @@
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
         [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+         
+         */
         return matchAndPinCell;
 
     }
@@ -322,7 +331,56 @@
                      lblUserInfo.hidden = YES;
                  
                  arrMatches = results;
-                 [self.tableView reloadData];
+                 [PFObject pinAllInBackground:arrMatches];
+                 for(PFObject *profileObj in arrMatches){
+                     Profile *profileModel = [[Profile alloc]init];
+                     profileModel.profilePointer = profileObj;
+                     profileModel.name = profileObj[@"name"];
+                     profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
+                     //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
+                     profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
+                     //caste label
+                     PFObject *caste = [profileObj valueForKey:@"casteId"];
+                     PFObject *religion = [profileObj valueForKey:@"religionId"];
+                     //NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
+                     profileModel.religion = [religion valueForKey:@"name"];
+                     profileModel.caste = [caste valueForKey:@"name"];
+                     profileModel.designation = profileObj[@"designation"];
+                     
+                     //Height
+                     profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
+                     
+                     //ADD data in model for complete profile view screen
+                     PFObject *currentLoc = [profileObj valueForKey:@"currentLocation"];
+                     PFObject *currentState = [currentLoc valueForKey:@"Parent"];
+                     profileModel.currentLocation = [NSString stringWithFormat:@"%@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
+                     profileModel.income = [profileObj valueForKey:@"package"];
+                     
+                     //birth location label
+                     PFObject *birthLoc = [profileObj valueForKey:@"placeOfBirth"];
+                     PFObject *birthState = [birthLoc valueForKey:@"Parent"];
+                     
+                     profileModel.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
+                     profileModel.minBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"minMarriageBudget"]];
+                     profileModel.maxBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"maxMarriageBudget"]];
+                     profileModel.company = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"placeOfWork"]];
+                     
+                     //DOB
+                     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                     [formatter setDateFormat:@"yyyy-MM-dd"];
+                     NSString *strDate = [formatter stringFromDate:[profileObj valueForKey:@"dob"]];
+                     profileModel.dob = strDate;
+                     
+                     //TOB
+                     NSDate *dateTOB = [profileObj valueForKey:@"tob"];
+                     NSDateFormatter *formatterTime = [[NSDateFormatter alloc] init];
+                     [formatterTime setDateFormat:@"hh:mm:ss"];
+                     [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+                     NSString *strTOB = [formatterTime stringFromDate:dateTOB];
+                     profileModel.tob = strTOB;
+                     [arrCachedMatches addObject:profileModel];
+                 }
+                [self.tableView reloadData];
                  
              }
              else{
@@ -330,14 +388,11 @@
                  [alert show];
              }
          }];
-
     }
     else{
         UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-
-   
 }
 
 -(void)switchToPin{
@@ -351,7 +406,8 @@
         [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
         [query includeKey:@"pinnedProfileId"];
         
-        
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+
         [query includeKey:@"pinnedProfileId.Parent.Parent"];
         [query includeKey:@"pinnedProfileId.currentLocation.Parent.Parent"];
         [query includeKey:@"pinnedProfileId.placeOfBirth.Parent.Parent"];
@@ -362,7 +418,6 @@
         [query includeKey:@"pinnedProfileId.education2.degreeId"];
         [query includeKey:@"pinnedProfileId.education3.degreeId"];
         [query includeKey:@"pinnedProfileId.industryId"];
-
         MBProgressHUD * hud;
         hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -382,6 +437,9 @@
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+                if(error.code ==100 ){
+                    
+                }
             }
         }];
 

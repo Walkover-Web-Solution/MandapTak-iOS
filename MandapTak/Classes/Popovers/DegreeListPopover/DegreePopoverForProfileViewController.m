@@ -154,8 +154,16 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(comments.count<20)
             [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
-        
-        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:comments]];
+        NSMutableArray *arrFetchedItems =comments.mutableCopy;
+        for(PFObject *tempObj in comments){
+            for(PFObject *obj in self.arrTableData){
+                if([[tempObj valueForKey:@"name" ] isEqual:[obj valueForKey:@"name" ]]){
+                    [arrFetchedItems removeObject:tempObj];
+                    break;
+                }
+            }
+        }
+        self.arrTableData = [NSMutableArray arrayWithArray:[self.arrTableData arrayByAddingObjectsFromArray:arrFetchedItems]];
         [self.tableView reloadData];
         for(Education *education in self.arrEducation){
             for(PFObject *deg in self.arrTableData){
