@@ -16,7 +16,6 @@
 #import "CandidateProfileDetailScreenVC.h"
 @interface ChatPinMatchViewController (){
     NSInteger currentTab;
-    NSArray *arrMatches;
     NSArray *arrPins;
     NSArray *arrChats;
     NSMutableArray *arrCachedMatches;
@@ -42,7 +41,7 @@
     lblUserInfo.hidden = YES;
     arrCachedMatches = [NSMutableArray array];
 
-    arrMatches = [NSArray array];
+    self.arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
@@ -128,7 +127,7 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (currentTab) {
         case 0:
-            return arrMatches.count;
+            return self.arrMatches.count;
             break;
         case 1:
             return arrPins.count;
@@ -152,7 +151,7 @@
     ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
     if(currentTab ==0){
         
-        PFObject *profile = arrMatches[indexPath.row];
+        PFObject *profile = self.arrMatches[indexPath.row];
         Profile *profileModel = arrCachedMatches[indexPath.row];
         matchAndPinCell.lblDesignation.text = profileModel.designation;
 
@@ -234,7 +233,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(currentTab ==0){
-        PFObject *profile = arrMatches[indexPath.row];
+        PFObject *profile = self.arrMatches[indexPath.row];
         [self showFullProfileForProfile:profile];
     }
     else if(currentTab == 1){
@@ -329,56 +328,7 @@
                  else
                      lblUserInfo.hidden = YES;
                  
-                 arrMatches = results;
-                 [PFObject pinAllInBackground:arrMatches];
-                 for(PFObject *profileObj in arrMatches){
-                     Profile *profileModel = [[Profile alloc]init];
-                     profileModel.profilePointer = profileObj;
-                     profileModel.name = profileObj[@"name"];
-                     profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
-                     //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
-                     profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
-                     //caste label
-                     PFObject *caste = [profileObj valueForKey:@"casteId"];
-                     PFObject *religion = [profileObj valueForKey:@"religionId"];
-                     //NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
-                     profileModel.religion = [religion valueForKey:@"name"];
-                     profileModel.caste = [caste valueForKey:@"name"];
-                     profileModel.designation = profileObj[@"designation"];
-                     
-                     //Height
-                     profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
-                     
-                     //ADD data in model for complete profile view screen
-                     PFObject *currentLoc = [profileObj valueForKey:@"currentLocation"];
-                     PFObject *currentState = [currentLoc valueForKey:@"Parent"];
-                     profileModel.currentLocation = [NSString stringWithFormat:@"%@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
-                     profileModel.income = [profileObj valueForKey:@"package"];
-                     
-                     //birth location label
-                     PFObject *birthLoc = [profileObj valueForKey:@"placeOfBirth"];
-                     PFObject *birthState = [birthLoc valueForKey:@"Parent"];
-                     
-                     profileModel.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
-                     profileModel.minBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"minMarriageBudget"]];
-                     profileModel.maxBudget = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"maxMarriageBudget"]];
-                     profileModel.company = [NSString stringWithFormat:@"%@",[profileObj valueForKey:@"placeOfWork"]];
-                     
-                     //DOB
-                     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                     [formatter setDateFormat:@"yyyy-MM-dd"];
-                     NSString *strDate = [formatter stringFromDate:[profileObj valueForKey:@"dob"]];
-                     profileModel.dob = strDate;
-                     
-                     //TOB
-                     NSDate *dateTOB = [profileObj valueForKey:@"tob"];
-                     NSDateFormatter *formatterTime = [[NSDateFormatter alloc] init];
-                     [formatterTime setDateFormat:@"hh:mm:ss"];
-                     [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-                     NSString *strTOB = [formatterTime stringFromDate:dateTOB];
-                     profileModel.tob = strTOB;
-                     [arrCachedMatches addObject:profileModel];
-                 }
+                 self.arrMatches = results;
                 [self.tableView reloadData];
                  
              }

@@ -10,8 +10,11 @@
 #import "CommonMacros.h"
 #import "Reachability.h"
 #import "MBProgressHUD.h"
-@interface AppData : NSObject
+@interface AppData : NSObject{
+    NSArray *arrMatches;
+}
 typedef void (^ReachablityCompletionBlock)(bool isReachable);
+
 
 @property (strong, nonatomic) MBProgressHUD *hud;
 -(BOOL) isInternetAvailable;

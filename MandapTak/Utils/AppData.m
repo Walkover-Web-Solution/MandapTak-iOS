@@ -41,7 +41,6 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
      ];
 
 }
-
 -(void)logOut{
     [PFUser logOutInBackgroundWithBlock:^(NSError *PF_NULLABLE_S error){
         NSLog(@"%@",error.userInfo);

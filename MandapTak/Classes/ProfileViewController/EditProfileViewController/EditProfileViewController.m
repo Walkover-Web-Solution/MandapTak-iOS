@@ -148,9 +148,9 @@
          hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         btnMenu.enabled = YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
             
             if (!error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
 
                 // The find succeeded.
                 PFObject *obj= objects[0];
@@ -163,10 +163,17 @@
                 
             }
             else if (error.code ==100){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [errorAlertView show];
             }
+            else if (error.code ==120){
+            }
+
             else if (error.code ==209){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                 [[AppData sharedData]logOut];
                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [errorAlertView show];
@@ -176,6 +183,8 @@
             }
 
             else {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
@@ -937,17 +946,21 @@
                     
                 }
                 else if (error.code ==100){
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    
                     UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [errorAlertView show];
                 }
+                else if (error.code ==120){
+                }
+                
                 else if (error.code ==209){
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    
+                    [[AppData sharedData]logOut];
                     UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [errorAlertView show];
                     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    //[PFQuery clearAllCachedResults];
-                    [PFUser logOutInBackgroundWithBlock:^(NSError *PF_NULLABLE_S error){
-                        NSLog(@"%@",error.userInfo);
-                    }];
                     StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
                     [self presentViewController:vc animated:YES completion:nil];
                 }
