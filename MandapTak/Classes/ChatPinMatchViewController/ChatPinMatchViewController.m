@@ -156,7 +156,7 @@
         Profile *profileModel = arrCachedMatches[indexPath.row];
         matchAndPinCell.lblDesignation.text = profileModel.designation;
 
-        /*
+        
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
         if([profile objectForKey:@"profilePic"]!=nil){
             [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -169,10 +169,10 @@
         if(![[profile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
             strReligion = [strReligion stringByAppendingString:[[profile valueForKey:@"religionId"] valueForKey:@"name"]];
         }
-        if(![[profile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]){
+        if(![[profile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]&&[profile valueForKey:@"casteId"] !=nil){
             strReligion = [strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"casteId"] valueForKey:@"name"]]];
         }
-        if(![[profile valueForKey:@"gotraId"] isKindOfClass:[NSNull class]]){
+        if(![[profile valueForKey:@"gotraId"] isKindOfClass:[NSNull class]] &&[profile valueForKey:@"gotraId"] !=nil){
             strReligion =[strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"gotraId"] valueForKey:@"name"]]];
         }
         matchAndPinCell.lblReligion.text =strReligion;
@@ -181,7 +181,7 @@
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
         [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
          
-         */
+        
         return matchAndPinCell;
 
     }
