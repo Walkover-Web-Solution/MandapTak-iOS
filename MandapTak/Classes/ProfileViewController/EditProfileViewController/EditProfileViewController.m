@@ -167,10 +167,10 @@
                 [errorAlertView show];
             }
             else if (error.code ==209){
+                [[AppData sharedData]logOut];
                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [errorAlertView show];
                 UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                [PFQuery clearAllCachedResults];
                 StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
                 [self presentViewController:vc animated:YES completion:nil];
             }
@@ -814,156 +814,159 @@
     }
     [[AppData sharedData] checkReachablitywithCompletionBlock:^(bool isReachable) {
         if(isReachable){
-            [self updateThePhotoFromPrimary];
-            if([txtMinBudget.text integerValue]>0)
-                currentProfile[@"minMarriageBudget"] = @([txtMinBudget.text integerValue]);
-            if([txtMaxBudget.text integerValue]>0)
-                currentProfile[@"maxMarriageBudget"] = @([txtMaxBudget.text integerValue]);
-            NSString *name =[currentProfile valueForKey:@"name"];
-            NSString *gender =[currentProfile valueForKey:@"gender"];
-            NSString *height =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"height"]];
-            NSString *weight =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"weight"]];
-            NSString *designation =[currentProfile valueForKey:@"designation"];
-            NSString *company =[currentProfile valueForKey:@"placeOfWork"];
-            NSString *strPackage =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"package"]];
-            int package = [strPackage intValue];
-            int minBugget =[txtMinBudget.text intValue];
-            int maxBudget =[txtMaxBudget.text intValue];
-            
-            if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
-                NSMutableArray *arrMsg = [NSMutableArray array];
-                if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
-                    [arrMsg addObject:@"valid Full Name"];
-                }
-                if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]]){
-                    [arrMsg addObject:@"Current Location"];
-                }
-                if(gender.length==0){
-                    [arrMsg addObject:@"gender"];
-                }
-                if([currentProfile valueForKey:@"tob"] ==nil){
-                    [arrMsg addObject:@"Time of Birth"];
-                }
-                if([currentProfile valueForKey:@"dob"] ==nil ){
-                    [arrMsg addObject:@"Date of Birth"];
-                }
-                if(height.length==0){
-                    [arrMsg addObject:@"height"];
-                }
-                if(weight.length==0){
-                    [arrMsg addObject:@"weight"];
-                }
-                if(package<1){
-                    [arrMsg addObject:@"package"];
-                }
-                if(company.length==0){
-                    [arrMsg addObject:@"company"];
-                }
-                if(designation==nil){
-                    
-                    [arrMsg addObject:@"designation"];
-                }
-                if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]]){
-                    [arrMsg addObject:@"Place of Birth"];
-                }
-                if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
-                    [arrMsg addObject:@"Religion"];
-                }
-                if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]){
-                    [arrMsg addObject:@"Caste"];
-                }
-                if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]]){
-                    [arrMsg addObject:@"Industry"];
-                }
-                //            if([currentProfile valueForKey:@"minMarriageBudget"] ==nil){
-                //                [arrMsg addObject:@"min marriage budget"];
-                //            }
-                //            if([currentProfile valueForKey:@"maxMarriageBudget"] ==nil){
-                //                [arrMsg addObject:@"max marriage budget"];
-                //            }
-                if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]]){
-                    [arrMsg addObject:@"Degree and its specialization"];
-                }
-                
-                if(primaryPhoto ==nil){
-                    [arrMsg addObject:@"select a Primary Photo"];
-                }
-                if(selectedBiodata ==nil){
-                    [arrMsg addObject:@"select a Bio Data"];
-                }
-                if(maxBudget<minBugget){
-                    [arrMsg addObject:@"max marriage budget less then min marriage budget"];
-                    
-                }
-                NSString *msg =@"Please enter";
-                //        for(NSString *str in arrMsg){
-                //            [msg stringByAppendingString:[NSString stringWithFormat:@"%@",str]];
-                //        }
-                for(int i=0; i<arrMsg.count;i++){
-                    if(i==0)
-                        msg=  [msg stringByAppendingString:[NSString stringWithFormat:@" %@",arrMsg[i]]];
-                    else
-                        msg=  [msg stringByAppendingString:[NSString stringWithFormat:@", %@",arrMsg[i]]];
-                    
-                }
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps!!" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-            else{
-                MBProgressHUD * hud;
-                hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [currentProfile setObject: @YES  forKey: @"isComplete"];
-                [currentProfile setObject: @NO  forKey: @"paid"];
-                [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
-                [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    
-                    if (!error) {
-                        // succesful
-                        if(self.isMakingNewProfile){
-                            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                            SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-                            [self presentViewController:vc animated:YES completion:nil];
-                        }
-                        else
-                            [self dismissViewControllerAnimated:YES completion:nil];
-                        
-                    }
-                    else if (error.code ==100){
-                        UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                        [errorAlertView show];
-                    }
-                    else if (error.code ==209){
-                        UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                        [errorAlertView show];
-                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                        [PFQuery clearAllCachedResults];
-                        StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
-                        [self presentViewController:vc animated:YES completion:nil];
-                    }
-                    
-                    else {
-                        //Something bad has ocurred
-                        NSString *errorString = [[error userInfo] objectForKey:@"error"];
-                        UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                        [errorAlertView show];
-                    }
-                }];
-                
-            }
-
-        }
+                   }
         else{
-            UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+          
         }
     }];
     if([[AppData sharedData]isInternetAvailable]){
         
-       
+        [self updateThePhotoFromPrimary];
+        if([txtMinBudget.text integerValue]>0)
+            currentProfile[@"minMarriageBudget"] = @([txtMinBudget.text integerValue]);
+        if([txtMaxBudget.text integerValue]>0)
+            currentProfile[@"maxMarriageBudget"] = @([txtMaxBudget.text integerValue]);
+        NSString *name =[currentProfile valueForKey:@"name"];
+        NSString *gender =[currentProfile valueForKey:@"gender"];
+        NSString *height =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"height"]];
+        NSString *weight =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"weight"]];
+        NSString *designation =[currentProfile valueForKey:@"designation"];
+        NSString *company =[currentProfile valueForKey:@"placeOfWork"];
+        NSString *strPackage =[NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"package"]];
+        int package = [strPackage intValue];
+        int minBugget =[txtMinBudget.text intValue];
+        int maxBudget =[txtMaxBudget.text intValue];
+        
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| designation.length==0 ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
+            NSMutableArray *arrMsg = [NSMutableArray array];
+            if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
+                [arrMsg addObject:@"valid Full Name"];
+            }
+            if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]]){
+                [arrMsg addObject:@"Current Location"];
+            }
+            if(gender.length==0){
+                [arrMsg addObject:@"gender"];
+            }
+            if([currentProfile valueForKey:@"tob"] ==nil){
+                [arrMsg addObject:@"Time of Birth"];
+            }
+            if([currentProfile valueForKey:@"dob"] ==nil ){
+                [arrMsg addObject:@"Date of Birth"];
+            }
+            if(height.length==0){
+                [arrMsg addObject:@"height"];
+            }
+            if(weight.length==0){
+                [arrMsg addObject:@"weight"];
+            }
+            if(package<1){
+                [arrMsg addObject:@"package"];
+            }
+            if(company.length==0){
+                [arrMsg addObject:@"company"];
+            }
+            if(designation==nil){
+                
+                [arrMsg addObject:@"designation"];
+            }
+            if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]]){
+                [arrMsg addObject:@"Place of Birth"];
+            }
+            if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
+                [arrMsg addObject:@"Religion"];
+            }
+            if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]){
+                [arrMsg addObject:@"Caste"];
+            }
+            if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]]){
+                [arrMsg addObject:@"Industry"];
+            }
+            //            if([currentProfile valueForKey:@"minMarriageBudget"] ==nil){
+            //                [arrMsg addObject:@"min marriage budget"];
+            //            }
+            //            if([currentProfile valueForKey:@"maxMarriageBudget"] ==nil){
+            //                [arrMsg addObject:@"max marriage budget"];
+            //            }
+            if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]]){
+                [arrMsg addObject:@"Degree and its specialization"];
+            }
+            
+            if(primaryPhoto ==nil){
+                [arrMsg addObject:@"select a Primary Photo"];
+            }
+            if(selectedBiodata ==nil){
+                [arrMsg addObject:@"select a Bio Data"];
+            }
+            if(maxBudget<minBugget){
+                [arrMsg addObject:@"max marriage budget less then min marriage budget"];
+                
+            }
+            NSString *msg =@"Please enter";
+            //        for(NSString *str in arrMsg){
+            //            [msg stringByAppendingString:[NSString stringWithFormat:@"%@",str]];
+            //        }
+            for(int i=0; i<arrMsg.count;i++){
+                if(i==0)
+                    msg=  [msg stringByAppendingString:[NSString stringWithFormat:@" %@",arrMsg[i]]];
+                else
+                    msg=  [msg stringByAppendingString:[NSString stringWithFormat:@", %@",arrMsg[i]]];
+                
+            }
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps!!" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        else{
+            MBProgressHUD * hud;
+            hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [currentProfile setObject: @YES  forKey: @"isComplete"];
+            [currentProfile setObject: @NO  forKey: @"paid"];
+            [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
+            [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+                if (!error) {
+                    // succesful
+                    if(self.isMakingNewProfile){
+                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+                        [self presentViewController:vc animated:YES completion:nil];
+                    }
+                    else
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    
+                }
+                else if (error.code ==100){
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                }
+                else if (error.code ==209){
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    //[PFQuery clearAllCachedResults];
+                    [PFUser logOutInBackgroundWithBlock:^(NSError *PF_NULLABLE_S error){
+                        NSLog(@"%@",error.userInfo);
+                    }];
+                    StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
+                    [self presentViewController:vc animated:YES completion:nil];
+                }
+                
+                else {
+                    //Something bad has ocurred
+                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                }
+            }];
+            
+        }
+        
+ 
     }
     else{
-        
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
     }
     
 }

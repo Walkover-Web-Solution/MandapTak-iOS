@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "ServiceManager.h"
 #import "SCNetworkReachability.h"
-
+#import <Parse/Parse.h>
 @implementation AppData{
      SCNetworkReachability *_reachability;
 }
@@ -39,6 +39,23 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
          }
      }
      ];
+
+}
+
+-(void)logOut{
+    [PFUser logOutInBackgroundWithBlock:^(NSError *PF_NULLABLE_S error){
+        NSLog(@"%@",error.userInfo);
+    }];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setObject:nil forKey:@"user"];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // succesful
+            
+        } else {
+        }
+    }];
+    
 
 }
 //-(BOOL)checkReachablity{

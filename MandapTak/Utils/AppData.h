@@ -15,6 +15,7 @@ typedef void (^ReachablityCompletionBlock)(bool isReachable);
 
 @property (strong, nonatomic) MBProgressHUD *hud;
 -(BOOL) isInternetAvailable;
+-(void) logOut;
 -(void)checkReachablitywithCompletionBlock:(ReachablityCompletionBlock)completionBlock;
 //- (BOOL)askContactsPermission ;
 DECLARE_SINGLETON_METHOD(AppData, sharedData)

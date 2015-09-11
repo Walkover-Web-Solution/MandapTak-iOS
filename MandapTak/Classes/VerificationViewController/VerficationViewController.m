@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "EditProfileViewController.h"
 #import "AppData.h"
+#import "AppDelegate.h"
 #import "AgentViewController.h"
 @interface VerficationViewController ()<UITextFieldDelegate>
 
@@ -148,7 +149,16 @@
                                                 PFACL *acl = [PFACL ACL];
                                                 [acl setPublicReadAccess:true];
                                                 [acl setWriteAccess:true forUser:[PFUser currentUser]];
-                                                
+                                                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                                                [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+                                                [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                    if (!error) {
+                                                        // succesful
+                                                        
+                                                    } else {
+                                                                                                            }
+                                                }];
+
                                                 [PFUser currentUser].ACL = acl;
                                                 [self checkIfAgentOrUser];
                                             }

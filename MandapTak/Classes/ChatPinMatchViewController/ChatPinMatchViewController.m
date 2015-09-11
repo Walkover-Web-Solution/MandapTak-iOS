@@ -294,13 +294,12 @@
     NSString *strTOB = [formatterTime stringFromDate:dateTOB];
     profileModel.tob = strTOB;
     UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     CandidateProfileDetailScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
+    
     vc.profileObject = profileModel;
-    //vc.globalCompanyId = [self.companies.companyId intValue];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
-    navController.navigationBarHidden =YES;
-    [self presentViewController:navController animated:YES completion:nil];
-   
+    
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 #pragma TabBarAction
 
