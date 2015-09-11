@@ -173,8 +173,11 @@
 
             else if (error.code ==209){
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-                [[AppData sharedData]logOut];
+                [PFUser logOut];
+                PFUser *user = nil;
+                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                [currentInstallation setObject:user forKey:@"user"];
+                [currentInstallation saveInBackground];
                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [errorAlertView show];
                 UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

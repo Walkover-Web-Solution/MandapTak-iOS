@@ -45,10 +45,7 @@
     arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
-    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+      self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if(self.currentProfile){
         [self switchToMatches];
     }
@@ -56,6 +53,9 @@
         if([[AppData sharedData]isInternetAvailable]){
             MBProgressHUD * hud;
             hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+            query.cachePolicy = kPFCachePolicyCacheOnly;
+            [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 

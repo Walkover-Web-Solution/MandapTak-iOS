@@ -45,16 +45,10 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
     [PFUser logOutInBackgroundWithBlock:^(NSError *PF_NULLABLE_S error){
         NSLog(@"%@",error.userInfo);
     }];
+    PFUser *user  = nil;
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setObject:nil forKey:@"user"];
-    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // succesful
-            
-        } else {
-        }
-    }];
-    
+    [currentInstallation setObject:user forKey:@"user"];
+    [currentInstallation saveInBackground];
 
 }
 //-(BOOL)checkReachablity{
