@@ -94,10 +94,6 @@
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeRight];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeUp];
-    PFUser *user = [PFUser user];
-    user.username = @"Hussain";
-    user.password = @"hussainPass";
-    
     
     /*
     XHAmazingLoadingView *amazingLoadingView = [[XHAmazingLoadingView alloc] initWithType:XHAmazingLoadingAnimationTypeSkype];
@@ -174,7 +170,7 @@
                      [self animateArrayOfImagesForImageCount:30];
                      
                      //[[[UIAlertView alloc ] initWithTitle:@"Result Count" message:[NSString stringWithFormat:@"%d",results.count] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-                     NSLog(@"profile count = %d", results.count);
+                     NSLog(@"profile count = %lu", (unsigned long)results.count);
                      for (PFObject *profileObj in results)
                      {
                          Profile *profileModel = [[Profile alloc]init];
@@ -259,7 +255,7 @@
              }
              else if (error.code ==209)
              {
-                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                  [errorAlertView show];
                  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                  [PFQuery clearAllCachedResults];
@@ -268,7 +264,13 @@
              }
              else
              {
+                 blankView.hidden = NO;
+                 profileView.hidden = YES;
+                 btnUndo.enabled = NO;
+                 [arrHistory removeAllObjects];
+                 [arrCache removeAllObjects];
                  lblMessage.text = @"Please try again..";
+                 animationImageView.hidden = YES;
              }
          }];
     }
@@ -295,7 +297,7 @@
          {
              // The find succeeded.
              PFObject *obj= objects[0];
-             
+             [[NSUserDefaults standardUserDefaults] setValue:obj[@"name"] forKey:@"currentProfileName"];
              PFFile *userImageFile = obj[@"profilePic"];
              if (userImageFile)
              {
@@ -878,6 +880,10 @@
 
 - (IBAction)likeAction:(id)sender
 {
+    PFUser *user = [PFUser currentUser];
+    NSLog(@"user name -> %@",user.username);
+    NSLog(@"profile user name -> %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]);
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     CATransition *transition = [CATransition animation];
     
@@ -889,10 +895,11 @@
         //[self likeAction:userProfileObj];
         Profile *userProfileObj = arrCandidateProfiles[profileNumber];
         NSString *strObjId = userProfileObj.profilePointer.objectId;
+        /*
         //make entry in like table
         PFObject *likeObj = [PFObject objectWithClassName:@"LikedProfile"];
         likeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
-        likeObj[@"likeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
+        likeObj[@"likeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:userProfileObj.name];
         
         [likeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
          {
@@ -938,6 +945,38 @@
                  // There was a problem, check error.description
              }
          }];
+        */
+        [PFCloud callFunctionInBackground:@"likeAndFind"
+                           withParameters:@{@"userProfileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
+                                            @"likeProfileId":strObjId,
+                                            @"userName":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]}
+                                    block:^(NSDictionary *results, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             
+             if (!error)
+             {
+                 // this is where you handle the results and change the UI.
+                 if (results.count > 0)
+                 {
+                     
+                 }
+                 else
+                 {
+                     //open blank View
+                     //[self.view bringSubviewToFront:blankView];
+                     blankView.hidden = NO;
+                     profileView.hidden = YES;
+                     btnUndo.enabled = NO;
+                     [arrHistory removeAllObjects];
+                     [arrCache removeAllObjects];
+                     lblMessage.text = [NSString stringWithFormat:@"No matching profiles found...!!"];
+                     animationImageView.hidden = YES;
+                 }
+             }
+             
+         }];
+        
     }
     else
     {

@@ -51,6 +51,7 @@
     IBOutlet UILabel *lblLocation;
     IBOutlet UILabel *lblDegree;
     
+    IBOutlet UILabel *lblBudget;
     //flag values
     BOOL heightFlag,insertFlag,addFlag;
     

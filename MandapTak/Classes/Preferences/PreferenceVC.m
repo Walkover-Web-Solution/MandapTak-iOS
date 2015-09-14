@@ -80,6 +80,7 @@
     txtminBudget.inputAccessoryView = numberToolbar;
     txtMaxBudget.inputAccessoryView = numberToolbar;
     
+    [self checkBudgetVisiblity];
 }
 
 -(void)cancelNumberPad{
@@ -132,9 +133,24 @@
                          {
                              txtMaxAge.text = nil;
                          }
+                         
                          txtIncome.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minIncome"]];   //[object valueForKey:@"minIncome"];
+                         if (!([[object valueForKey:@"minIncome"] intValue] > 0))
+                         {
+                             txtIncome.text = nil;
+                         }
+                         
                          txtminBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minBudget"]];    //[object valueForKey:@"minBudget"];
+                         if (!([[object valueForKey:@"minBudget"] intValue] > 0))
+                         {
+                             txtminBudget.text = nil;
+                         }
+                         
                          txtMaxBudget.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"maxBudget"]];    //[object valueForKey:@"maxBudget"];
+                         if (!([[object valueForKey:@"maxBudget"] intValue] > 0))
+                         {
+                             txtMaxBudget.text = nil;
+                         }
                          
                          //find height value from array
                          NSString *strMinHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"minHeight"]]];
@@ -181,7 +197,7 @@
     
 }
 
-- (void) getDegreePrefFromPreferenceId : (NSString *)prefId
+- (void) getDegreePrefFromPreferenceId :(NSString *)prefId
 {
     if ([[AppData sharedData] isInternetAvailable])
     {
@@ -985,8 +1001,42 @@
     }
 }
 
-#pragma mark - Navigation
+#pragma mark Check Budget Visiblity
+#pragma mark User Profile Pic
+-(void) checkBudgetVisiblity
+{
+    //get user profile pic
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+         if (!error)
+         {
+             // The find succeeded.
+             PFObject *obj= objects[0];
+             //lblUserName.text = [obj valueForKey:@"isBudgetVisible"];
+             
+             int visibleFlag = [obj[@"isBudgetVisible"] intValue];
+             if (visibleFlag == 1)
+             {
+                //show budget option
+                 lblBudget.hidden = NO;
+                 txtMaxBudget.hidden = NO;
+                 txtminBudget.hidden = NO;
+             }
+             else
+             {
+                 //hide budget option
+                 lblBudget.hidden = YES;
+                 txtMaxBudget.hidden = YES;
+                 txtminBudget.hidden = YES;
+             }
+         }
+     }];
+}
 
+#pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -997,7 +1047,7 @@
         //isSelectingCurrentLocation = YES;
         LocationPreferencePopoverVC *controller = segue.destinationViewController;
         controller.arrSelectedData = arrSelectedLocationId;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 400);
+        controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -1013,7 +1063,7 @@
         //isSelectingCurrentLocation = YES;
         SelectedLocationVC *controller = segue.destinationViewController;
         controller.arrTableData = arrLocationObj;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 400);
+        controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny

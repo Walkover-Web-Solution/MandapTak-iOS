@@ -340,6 +340,10 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
      */
+    
+    //set font family
+    cell.textLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
+    
     return cell;
 }
 

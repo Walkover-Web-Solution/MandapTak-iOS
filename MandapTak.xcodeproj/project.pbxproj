@@ -53,6 +53,10 @@
 		757849E31BA2EF2D005490E6 /* Anim-(9).png in Resources */ = {isa = PBXBuildFile; fileRef = 757849C61BA2EF2D005490E6 /* Anim-(9).png */; };
 		75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75794A6A1B9D5F41007A028D /* ContactsListCell.m */; };
 		757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */; };
+		757CBB101BA6E2DE00EFD870 /* dislikeNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB0F1BA6E2DE00EFD870 /* dislikeNew.png */; };
+		757CBB121BA6E2E900EFD870 /* likeNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB111BA6E2E900EFD870 /* likeNew.png */; };
+		757CBB141BA6E2F200EFD870 /* undoNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB131BA6E2F200EFD870 /* undoNew.png */; };
+		757CBB161BA6F18500EFD870 /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB151BA6F18500EFD870 /* reload.png */; };
 		757F875D1B8EF1DC00C083A4 /* SVWebViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 757F873E1B8EF1DC00C083A4 /* SVWebViewController.strings */; };
 		757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757F87481B8EF1DC00C083A4 /* SVModalWebViewController.m */; };
 		757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 757F87491B8EF1DC00C083A4 /* SVWebViewController.bundle */; };
@@ -306,6 +310,10 @@
 		75794A6A1B9D5F41007A028D /* ContactsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsListCell.m; sourceTree = "<group>"; };
 		757BDC761B85AA49003B71BD /* CandidateProfileDetailScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateProfileDetailScreenVC.h; sourceTree = "<group>"; };
 		757BDC771B85AA49003B71BD /* CandidateProfileDetailScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateProfileDetailScreenVC.m; sourceTree = "<group>"; };
+		757CBB0F1BA6E2DE00EFD870 /* dislikeNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislikeNew.png; sourceTree = "<group>"; };
+		757CBB111BA6E2E900EFD870 /* likeNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likeNew.png; sourceTree = "<group>"; };
+		757CBB131BA6E2F200EFD870 /* undoNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undoNew.png; sourceTree = "<group>"; };
+		757CBB151BA6F18500EFD870 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
 		757F873F1B8EF1DC00C083A4 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
 		757F87401B8EF1DC00C083A4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
 		757F87411B8EF1DC00C083A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
@@ -1110,8 +1118,8 @@
 				899C53751B73361600C24DA8 /* ServiceManager */,
 				89D9F7621B6B5DB4004CBE3D /* Images */,
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
-				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
+				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
 				75BA3ED81B9AC57C00429C98 /* Settings.storyboard */,
 				75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */,
 				89936ACB1B9D590B00C74E0A /* Agent.storyboard */,
@@ -1640,6 +1648,10 @@
 				7564E22A1B970B3200B8D052 /* undo.png */,
 				7564E22E1B970E6900B8D052 /* pin.png */,
 				75BF975A1B982BE600B091D8 /* pinFill.png */,
+				757CBB0F1BA6E2DE00EFD870 /* dislikeNew.png */,
+				757CBB111BA6E2E900EFD870 /* likeNew.png */,
+				757CBB131BA6E2F200EFD870 /* undoNew.png */,
+				757CBB151BA6F18500EFD870 /* reload.png */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -1860,12 +1872,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				757849C81BA2EF2D005490E6 /* Anim-(10).png in Resources */,
+				757CBB161BA6F18500EFD870 /* reload.png in Resources */,
 				89E0FA531B85C92A000BD65A /* VideoOverlay.png in Resources */,
 				757849DE1BA2EF2D005490E6 /* Anim-(30).png in Resources */,
 				757849D01BA2EF2D005490E6 /* Anim-(18).png in Resources */,
 				75BF975B1B982BE600B091D8 /* pinFill.png in Resources */,
 				757849D11BA2EF2D005490E6 /* Anim-(19).png in Resources */,
 				758C8EB81B87691000FF634E /* CMFGalleryCell.xib in Resources */,
+				757CBB121BA6E2E900EFD870 /* likeNew.png in Resources */,
 				896D18221B944DDB001513A5 /* Fake_icon_bg.png in Resources */,
 				757849E31BA2EF2D005490E6 /* Anim-(9).png in Resources */,
 				758C8E711B87404B00FF634E /* slide@2x.png in Resources */,
@@ -1935,6 +1949,7 @@
 				896D18241B944DDB001513A5 /* Matches_bg.png in Resources */,
 				757F87661B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				757849E11BA2EF2D005490E6 /* Anim-(6).png in Resources */,
+				757CBB101BA6E2DE00EFD870 /* dislikeNew.png in Resources */,
 				757849DA1BA2EF2D005490E6 /* Anim-(27).png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
 				757849D81BA2EF2D005490E6 /* Anim-(25).png in Resources */,
@@ -1947,6 +1962,7 @@
 				89D9F7811B6B5DB4004CBE3D /* share_icon.png in Resources */,
 				757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */,
 				757F87651B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
+				757CBB141BA6E2F200EFD870 /* undoNew.png in Resources */,
 				757F876E1B8F0DDB00C083A4 /* backNew@2x.png in Resources */,
 				896D18311B945D5A001513A5 /* verify_Icon.png in Resources */,
 				896D18301B945D5A001513A5 /* call_Icon.png in Resources */,

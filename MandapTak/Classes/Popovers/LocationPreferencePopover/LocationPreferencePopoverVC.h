@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Location.h"
 #import <Parse/Parse.h>
+#import "UITableView+DragLoad.h"
 
 @protocol LocationPreferencePopoverVCDelegate
 -(void)selectedLocation:(Location*)location andUpdateFlag:(BOOL)flag;
 @end
-@interface LocationPreferencePopoverVC : UIViewController<UISearchBarDelegate>
+@interface LocationPreferencePopoverVC : UIViewController<UISearchBarDelegate,UITableViewDragLoadDelegate,UITableViewDelegate>
 {
     NSMutableArray *arrLocData;
+    BOOL isSearching;
 }
 @property (weak, nonatomic) id <LocationPreferencePopoverVCDelegate> delegate;
 @property (strong, nonatomic) NSArray *arrSelectedData;

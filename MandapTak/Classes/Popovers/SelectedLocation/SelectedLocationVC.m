@@ -54,8 +54,9 @@
         cell.textLabel.text = obj.state;
     }
     
-    
     //set font family
+    cell.textLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
+    
     return cell;
 }
 

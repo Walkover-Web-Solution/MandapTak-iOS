@@ -14,7 +14,7 @@
 @interface LocationPreferencePopoverVC ()
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *arrTableData;
+@property (strong, nonatomic) NSMutableArray *arrTableData;
 @end
 
 @implementation LocationPreferencePopoverVC
@@ -22,9 +22,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arrTableData = [NSArray array];
+    self.arrTableData = [NSMutableArray array];
     arrLocData = [[NSMutableArray alloc] init];
     self.searchBar.delegate = self;
+    [self loadMore];
+    
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+    
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -162,6 +166,7 @@
         cell.userInteractionEnabled = YES;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    cell.textLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
     return cell;
 }
 
@@ -173,6 +178,69 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+}
+
+#pragma mark Load More Method
+-(void)loadMore{
+    MBProgressHUD * hud;
+    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PFQuery *query = [PFQuery queryWithClassName:@"City" ];
+    query.skip = self.arrTableData.count;
+    query.limit = 20;
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    if(isSearching){
+        
+        NSString *searchText = [NSString stringWithFormat:@"%@",self.searchBar.text];
+        [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
+    }
+    [query includeKey:@"Parent.Parent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        if(!error){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if(comments.count<20)
+                [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+            else
+                [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+            NSMutableArray *arrFetchedItems =comments.mutableCopy;
+            for(PFObject *tempObj in arrFetchedItems){
+                for(Location *obj in self.arrTableData){
+                    if([obj.placeId isEqual:[tempObj valueForKey:@"objectId"]]){
+                        [arrFetchedItems removeObject:tempObj];
+                        break;
+                    }
+                }
+            }
+            for(PFObject *obj in arrFetchedItems)
+            {
+                Location *location = [[Location alloc]init];
+                PFObject *parent = [obj valueForKey:@"Parent"];
+                location.city = [obj valueForKey:@"name"];
+                location.cityPointer = obj;
+                location.placeId = [obj valueForKey:@"objectId"];
+                location.state = [parent valueForKey:@"name"];
+                PFObject *subParent = [parent valueForKey:@"Parent"];
+                location.country = [subParent valueForKey:@"name"];
+                location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+                [self.arrTableData addObject:location];
+            }
+            [self.tableView reloadData];
+        }
+    }];
+    [self.tableView finishLoadMore];
+    
+}
+
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    //cancel load more request(generally network request) here
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
+}
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    //send load more request(generally network request) here
+    
+    [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
 }
 
 /*
