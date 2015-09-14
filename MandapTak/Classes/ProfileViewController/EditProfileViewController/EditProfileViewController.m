@@ -25,8 +25,8 @@
 #import "ZCImagePickerController.h"
 #import "ImageViewCell.h"
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "AppDelegate.h"
 //#import "FacebooKProfilePictureViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -35,8 +35,8 @@
 #import "SWRevealViewController.h"
 #import "Reachability.h"
 #import "SCNetworkReachability.h"
-
-@interface EditProfileViewController ()<WYPopoverControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate>
+#import "FacebooKProfilePictureViewController.h"
+@interface EditProfileViewController ()<WYPopoverControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate,FacebooKProfilePictureViewControllerDelegate>
 {    SCNetworkReachability *_reachability;
     __weak IBOutlet UIView *navBarView;
     WYPopoverController* popoverController;
@@ -184,11 +184,8 @@
                 StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
                 [self presentViewController:vc animated:YES completion:nil];
             }
-
             else {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-                // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
@@ -198,7 +195,7 @@
        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-       WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
+    WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     
     [popoverAppearance setTintColor:[UIColor colorWithRed:63./255. green:92./255. blue:128./255. alpha:1]];
     
@@ -423,7 +420,7 @@
     if ([segue.identifier isEqualToString:@"PhotosIdentifier"])
     {
         PhotosOptionPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(300, 140);
+        controller.preferredContentSize = CGSizeMake(300, 250);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -701,6 +698,7 @@
    [self hideAllView];
     [self.view endEditing:YES];
     if(currentTab ==4){
+       // [self FbLogin];
         btnDone.hidden = NO;
         btnDoneUp.hidden = NO;
 
@@ -1035,6 +1033,47 @@
 }
 
 #pragma  mark FourthTabCode
+-(void)FbLogin
+{
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions: @[@"public_profile",@"user_photos"]
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             [self fetchUserInfo];
+             NSLog(@"Logged in");
+         }
+     }];
+}
+
+-(void)fetchUserInfo
+{
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+        NSLog(@"Token is available : %@",[[FBSDKAccessToken currentAccessToken]tokenString]);
+        
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, name, link, first_name, last_name, picture.type(large), email, birthday, bio ,location ,friends ,hometown , friendlists"}]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error)
+             {
+                 NSLog(@"resultis:%@",result);
+                 NSString *userId = [result valueForKey:@"id"];
+                 [[NSUserDefaults standardUserDefaults]setObject:userId forKey:@"FacebookUserId"];
+                 [self loginViaFacebook];
+             }
+             else
+             {
+                 NSLog(@"Error %@",error);
+             }
+         }];
+        
+    }
+    
+}
 
 -(void)updateuserInfo{
     if(![[currentProfile valueForKey:@"isBudgetVisible"] boolValue]){
@@ -1112,13 +1151,22 @@
 }
 
 -(void)openFacebookProfileViewController{
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-//    FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
-//    [self presentViewController:vc animated:YES completion:nil];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
 
 }
 
 -(void)loginViaFacebook{
+    
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+        [self openFacebookProfileViewController];
+    }
+    else{
+        [self FbLogin];
+    }
     /*
     if ([PFUser currentUser]){
         
@@ -1212,7 +1260,7 @@
 
 }
  
- */
+ 
 - (void)loadData {
     
     // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
@@ -1305,6 +1353,8 @@
     }
    
 }
+
+*/
 #pragma mark ImageViewControllerDelegate
 -(void)selectedPrimaryPhoto:(Photos *)primaryImg andCropedPhoto:(UIImage *)cropedImg andIndex:(NSInteger)index withDeletedPhotos:(NSArray *)arrDeletedPhotos{
     
@@ -1651,6 +1701,7 @@
     [arrNewImages addObjectsFromArray:arrSelectedProfilePics];
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
     [self.collectionView reloadData];
+    [self addPhotosToParse];
 }
 
 

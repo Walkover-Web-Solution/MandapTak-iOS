@@ -13,6 +13,7 @@
 
 //Anuj Api section
 typedef void (^LocationCompletionBlock)(NSArray *arrLocation, NSError *error);
+typedef void (^FbPhotosCompletionBlock)(NSDictionary *arrLocation, NSError *error);
 
 @interface ServiceManager : NSObject
 {
@@ -24,5 +25,5 @@ DECLARE_SINGLETON_METHOD(ServiceManager, sharedManager);
 
 // hussain api section
 -(void)getLocationFromCityInput:(NSString*)input withCompletionBlock:(LocationCompletionBlock)completionBlock;
-
+-(void)FetchPhotosUsingUserId:(NSString*)userId withPicId:(NSString*)id withCompletionBlock:(FbPhotosCompletionBlock)completionBlock;
 @end

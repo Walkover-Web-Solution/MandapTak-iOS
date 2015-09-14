@@ -13,8 +13,8 @@
 #import "SWRevealViewController.h"
 #import "EditProfileViewController.h"
 #import "AgentViewController.h"
-//#import <ParseFacebookUtils/PFFacebookUtils.h>
-
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 @interface AppDelegate ()
 
 @end
@@ -25,13 +25,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
-   // [PFFacebookUtils initializeFacebook];
     [PFUser enableRevocableSessionInBackgroundWithBlock:^(NSError *PF_NULLABLE_S error){
         NSLog(@"%@",error.userInfo);
     }];
     if([PFUser currentUser]){
-        //[PFUser enableRevocableSessionInBackground];
-
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
             AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
@@ -49,7 +46,6 @@
                 UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
                 EditProfileViewController *vc2 = [sb2 instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
                 vc2.isMakingNewProfile =YES;
-                //vc.globalCompanyId = [self.companies.companyId intValue];
                 UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc2];
                 navController.navigationBarHidden =YES;
                 self.window.rootViewController=vc2;
@@ -76,7 +72,7 @@
         [application registerForRemoteNotificationTypes:
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     }
-    
+    //[[FBSDKApplicationDelegate sharedInstance]application:application didFinishLaunchingWithOptions:launchOptions];
     // Override point for customization after application launch.
     return YES;
 }
@@ -87,7 +83,12 @@
     currentInstallation.channels = @[ @"global" ];
     [currentInstallation saveInBackground];
 }
-
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     // NSLog(@"Did Fail to Register for Remote Notifications");
     
@@ -123,7 +124,7 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
-   // [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    //[FBSDKAppEvents activateApp];
 }
 
 

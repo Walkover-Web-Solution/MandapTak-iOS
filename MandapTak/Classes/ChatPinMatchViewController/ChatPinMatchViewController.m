@@ -18,6 +18,7 @@
     NSInteger currentTab;
     NSArray *arrMatches;
     NSArray *arrPins;
+    __weak IBOutlet UIButton *btnBack;
     NSArray *arrChats;
     NSMutableArray *arrCachedMatches;
     __weak IBOutlet UILabel *lblUserInfo;
@@ -53,6 +54,7 @@
         if([[AppData sharedData]isInternetAvailable]){
             MBProgressHUD * hud;
             hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            btnBack.enabled =YES;
             PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
             query.cachePolicy = kPFCachePolicyCacheOnly;
             [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
@@ -315,6 +317,7 @@
         self.lblPageTitle.text = @"MATCHES";
         MBProgressHUD * hud;
         hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        btnBack.enabled =YES;
         [PFCloud callFunctionInBackground:@"getMatchedProfile"
                            withParameters:@{@"profileId":[self.currentProfile objectId]}
                                     block:^(NSArray *results, NSError *error)
@@ -371,6 +374,7 @@
         [query includeKey:@"pinnedProfileId.industryId"];
         MBProgressHUD * hud;
         hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        btnBack.enabled =YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             

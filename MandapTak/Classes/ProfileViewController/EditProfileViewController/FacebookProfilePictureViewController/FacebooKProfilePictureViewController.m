@@ -7,13 +7,17 @@
 //
 
 #import "FacebooKProfilePictureViewController.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import "PhotoSelectionCell.h"
 #import "Photos.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "ServiceManager.h"
 @interface FacebooKProfilePictureViewController (){
     NSMutableArray *arrImageList;
     NSMutableArray *arrSelectedImages;
+    NSString *profileAlbumId;
+    NSUInteger allPicCount;
+    NSUInteger currentCount;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 - (IBAction)cancelButtonAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -27,11 +31,95 @@
     [super viewDidLoad];
     arrImageList = [NSMutableArray array];
     arrSelectedImages = [NSMutableArray array];
-    [self getAllAlbums];
+    allPicCount = 0;
+    currentCount = 0;
+        [self getAllAlbums];
+    [activityIndicator startAnimating];
+    activityIndicator.hidden = NO;
+
     //  [self getAllPhotos];
     // Do any additional setup after loading the view.
     
 }
+-(void)getAllAlbums{
+
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:[NSString stringWithFormat:@"/%@/albums",[[NSUserDefaults standardUserDefaults]valueForKey:@"FacebookUserId"]]
+                                  parameters:nil
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        if(!error){
+            NSArray *arrData = [result valueForKey:@"data"];
+            for(NSDictionary *dict in arrData){
+                if([[dict valueForKey:@"name"] isEqual:@"Profile Pictures"]){
+                    profileAlbumId = [dict valueForKey:@"id"];
+                    [self getAllPhotos];
+                    break;
+                }
+            }
+        }
+        // Handle the result
+    }];
+}
+-(void)getAllPhotos{
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:[NSString stringWithFormat:@"/%@/photos",profileAlbumId]
+                                  parameters:nil
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        if(!error){
+            NSArray *arrData = [result valueForKey:@"data"];
+            allPicCount = arrData.count;
+            for(NSDictionary *dict in arrData){
+
+                [self getPictureForId:[dict valueForKey:@"id"]];
+                //[self getp:[dict valueForKey:@"id"]];
+
+                 }
+
+        
+        }
+        // Handle the result
+    }];
+
+}
+-(void)getPictureForId:(NSString*)picId{
+    NSDictionary *params = @{ @"redirect" : @false};
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:[NSString stringWithFormat:@"/%@/picture",picId] //As many fields as you need
+                                  parameters:params
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        currentCount ++;
+        if (!error){
+             NSDictionary* data = [result valueForKey:@"data"];
+           // NSDictionary *data = arrData [0];
+            NSString *url = [data objectForKey:@"url"];
+            NSData *dataImage = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+            UIImage *img = [UIImage imageWithData:dataImage];
+            [arrImageList addObject:img];
+            [self.collectionView reloadData];
+            if(currentCount ==allPicCount){
+                [activityIndicator stopAnimating];
+                activityIndicator.hidden = YES;
+
+            }
+        }
+    }];
+}
+-(void)getPicForId:(NSString*)picid{
+    [[ServiceManager sharedManager]FetchPhotosUsingUserId:profileAlbumId withPicId:picid withCompletionBlock:^(NSDictionary *responce, NSError *error) {
+        NSLog(@"%@",responce);
+    }];
+}
+/*
 -(void)getAllAlbums{
     // https://graph.facebook.com/[ALBUM_ID]/photos?access_token=[AUTH_TOKEN]
     FBAccessTokenData *token = [[PFFacebookUtils session] accessTokenData];
@@ -55,11 +143,9 @@
     
 
 }
-
+ */
 -(void)getAllPhotosForAlbumId:(NSString*)albumId{
-    FBAccessTokenData *token = [[PFFacebookUtils session] accessTokenData];
-    NSString *accessToken =token.accessToken;
-    NSString *url =[NSString stringWithFormat:@"https://graph.facebook.com/%@/photos?access_token=%@",albumId,accessToken];
+    NSString *url =[NSString stringWithFormat:@"https://graph.facebook.com/%@/photos?access_token=%@",albumId,[[FBSDKAccessToken currentAccessToken]tokenString]];
     NSURL *pictureURL = [NSURL URLWithString:url];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
     
@@ -77,7 +163,6 @@
                            }];
 
 }
-
 #pragma mark UICollectionViewDataSource
 
 -(NSInteger)numberOfSectionsInCollectionView:
@@ -100,14 +185,14 @@
                                                                      forIndexPath:indexPath];
     
     if(cell!=nil){
-        cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageViewCell" forIndexPath:indexPath];
+        cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoSelectionCell" forIndexPath:indexPath];
         
     }
     Photos *photo = arrImageList[indexPath.row];
     
-    cell.imgProfile.image =photo.image ;
+    cell.imgProfile.image =arrImageList[indexPath.row] ;
     if([arrSelectedImages containsObject:photo]){
-        cell.imgSelection.image =[UIImage imageNamed:@"star.png"];
+        cell.imgSelection.image =[UIImage imageNamed:@"SelectionOverlay~iOS7"];
     }
     else {
         cell.imgSelection.image =[UIImage imageNamed:@""];
@@ -132,6 +217,15 @@
 }
 
 - (IBAction)doneButtonAction:(id)sender {
-    [self.delegate selectedProfilePhotoArray:arrSelectedImages];
+    NSMutableArray *arrData = [NSMutableArray array];
+    for(UIImage *img in arrSelectedImages){
+        Photos *photo = [[Photos alloc]init];
+        photo.image =img;
+        photo.imgObject = nil;
+        [arrData addObject:photo];
+    }
+    [self.delegate selectedProfilePhotoArray:arrData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 @end

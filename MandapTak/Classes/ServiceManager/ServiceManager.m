@@ -52,5 +52,22 @@ SYNTHESIZE_SINGLETON_METHOD(ServiceManager, sharedManager);
     }];
 
 }
+-(void)FetchPhotosUsingUserId:(NSString*)userId withPicId:(NSString*)picId withCompletionBlock:(FbPhotosCompletionBlock)completionBlock{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",picId]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        
+        if (!error) {
+            NSDictionary *responce=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                       completionBlock (responce,nil);
+        }
+        else {
+            completionBlock (nil,error);
+        }
+    }];
+
+}
 
 @end

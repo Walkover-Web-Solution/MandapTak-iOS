@@ -151,18 +151,11 @@
                                                 [acl setWriteAccess:true forUser:[PFUser currentUser]];
                                                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                                                 [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
-                                                [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                                                    if (!error) {
-                                                        // succesful
-                                                        
-                                                    } else {
-                                                                                                            }
-                                                }];
-
+                                                [currentInstallation saveInBackground];
                                                 [PFUser currentUser].ACL = acl;
                                                 [self checkIfAgentOrUser];
                                             }
-                                                                                       }];
+                                            }];
     
 
 }
@@ -171,22 +164,16 @@
     PFObject *role = [[PFUser currentUser]valueForKey:@"roleId"];
     [role fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
         NSString *roleValue = [object objectForKey:@"name"];
-        
         if([roleValue isEqual:@"Agent"]){
             // switch to admin
             [[NSUserDefaults standardUserDefaults]setObject:@"Agent" forKey:@"roleType"];
-
             [self checkForAgentInUserProfile];
         }
         else if([roleValue isEqual:@"User"]){
             [[NSUserDefaults standardUserDefaults]setObject:@"User" forKey:@"roleType"];
-
             [self checkForUseridInUserProfile];
         }
-        
-        
     }];
 
 }
