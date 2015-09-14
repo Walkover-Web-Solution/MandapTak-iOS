@@ -155,8 +155,6 @@
     if(currentTab ==0){
         
         PFObject *profile = arrMatches[indexPath.row];
-        Profile *profileModel = arrCachedMatches[indexPath.row];
-        matchAndPinCell.lblDesignation.text = profileModel.designation;
 
         
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
