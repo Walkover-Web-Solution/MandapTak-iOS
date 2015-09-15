@@ -42,7 +42,6 @@
     currentTab = 0;
     lblUserInfo.hidden = YES;
     arrCachedMatches = [NSMutableArray array];
-
     arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
@@ -62,18 +61,12 @@
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
                 if (!error) {
-                    
                     // The find succeeded.
                     PFObject *obj= objects[0];
                     self.currentProfile =obj;
                     [self switchToMatches];
-                    
-                } else {
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];
-
         }
         else{
             UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -104,7 +97,7 @@
             break;
     }
     }
-   }
+}
 -(void)unPinButtonAction:(id)sender {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -117,13 +110,8 @@
             NSLog(@"Woohoo, Success!");
         }
     }];
-    
 }
 
-
--(void)matchButtonAction:(id)sender {
-    
-}
 
 #pragma mark UITableViewDelegate
 
@@ -149,7 +137,7 @@
     
     static NSString *cellIdentifier2 = @"MatchAndPinTableViewCell";
     MatchAndPinTableViewCell *matchAndPinCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
-    
+    matchAndPinCell.selectionStyle = UITableViewCellSelectionStyleNone;
     static NSString *cellIdentifier3 = @"DegreeTableViewCell";
     ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
     if(currentTab ==0){
@@ -179,9 +167,9 @@
         [matchAndPinCell.btnPinOrMatch setImage:[UIImage imageNamed:@"matchCellOption"] forState:UIControlStateNormal];
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
-        [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+       // [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
          
-        
+        matchAndPinCell.btnPinOrMatch.hidden = YES;
         return matchAndPinCell;
 
     }
@@ -214,6 +202,7 @@
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
         [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(unPinButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        matchAndPinCell.btnPinOrMatch.hidden = NO;
 
         return matchAndPinCell;
 
@@ -252,12 +241,10 @@
     profileModel.profilePointer = profileObj;
     profileModel.name = profileObj[@"name"];
     profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
-    //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
     profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
     //caste label
     PFObject *caste = [profileObj valueForKey:@"casteId"];
     PFObject *religion = [profileObj valueForKey:@"religionId"];
-    //NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
     profileModel.religion = [religion valueForKey:@"name"];
     profileModel.caste = [caste valueForKey:@"name"];
     profileModel.designation = profileObj[@"designation"];

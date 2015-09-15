@@ -90,9 +90,6 @@
         [self.currentProfile setObject:currentLocation.cityPointer forKey:@"currentLocation"];
     if(placeOfBirthLocation)
         [self.currentProfile setObject:placeOfBirthLocation.cityPointer forKey:@"placeOfBirth"];
-    NSLog(@"placeOfBirthLocation%@",placeOfBirthLocation.descriptions);
-    NSLog(@"currentLocation%@",currentLocation.descriptions);
-    
     [self.delegate updatedPfObject:self.currentProfile];
 
 }
@@ -297,9 +294,6 @@
         [self.currentProfile setObject:currentLocation.cityPointer forKey:@"currentLocation"];
     if(placeOfBirthLocation)
         [self.currentProfile setObject:placeOfBirthLocation.cityPointer forKey:@"placeOfBirth"];
-    NSLog(@"placeOfBirthLocation%@",placeOfBirthLocation.descriptions);
-    NSLog(@"currentLocation%@",currentLocation.descriptions);
-
     [self.delegate updatedPfObject:self.currentProfile];
 }
 

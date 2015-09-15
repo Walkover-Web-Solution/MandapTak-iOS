@@ -24,6 +24,7 @@
     
     int userCredits;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *givePermissionYOffset;
 - (IBAction)resetAction:(id)sender;
 @end
 
@@ -187,6 +188,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(arrUserProfileId.count!=0){
+        _givePermissionYOffset.constant = _givePermissionYOffset.constant+ (arrUserProfileId.count*59);
+    }
     return arrUserProfileId.count;
 }
 

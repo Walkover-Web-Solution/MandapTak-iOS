@@ -33,14 +33,11 @@
     arrSelectedImages = [NSMutableArray array];
     allPicCount = 0;
     currentCount = 0;
-        [self getAllAlbums];
+    [self getAllAlbums];
     [activityIndicator startAnimating];
     activityIndicator.hidden = NO;
-
-    //  [self getAllPhotos];
-    // Do any additional setup after loading the view.
-    
 }
+
 -(void)getAllAlbums{
 
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
@@ -75,16 +72,11 @@
         if(!error){
             NSArray *arrData = [result valueForKey:@"data"];
             allPicCount = arrData.count;
+            
             for(NSDictionary *dict in arrData){
-
                 [self getPictureForId:[dict valueForKey:@"id"]];
-                //[self getp:[dict valueForKey:@"id"]];
-
                  }
-
-        
         }
-        // Handle the result
     }];
 
 }
@@ -100,7 +92,6 @@
         currentCount ++;
         if (!error){
              NSDictionary* data = [result valueForKey:@"data"];
-           // NSDictionary *data = arrData [0];
             NSString *url = [data objectForKey:@"url"];
             NSData *dataImage = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
             UIImage *img = [UIImage imageWithData:dataImage];
@@ -114,55 +105,7 @@
         }
     }];
 }
--(void)getPicForId:(NSString*)picid{
-    [[ServiceManager sharedManager]FetchPhotosUsingUserId:profileAlbumId withPicId:picid withCompletionBlock:^(NSDictionary *responce, NSError *error) {
-        NSLog(@"%@",responce);
-    }];
-}
-/*
--(void)getAllAlbums{
-    // https://graph.facebook.com/[ALBUM_ID]/photos?access_token=[AUTH_TOKEN]
-    FBAccessTokenData *token = [[PFFacebookUtils session] accessTokenData];
-    NSString *accessToken =token.accessToken;
-    NSString *url =[NSString stringWithFormat:@"https://graph.facebook.com/%@/albums?access_token=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"facebookUserId"],accessToken];
-    NSURL *pictureURL = [NSURL URLWithString:url];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-    
-    [NSURLConnection sendAsynchronousRequest:urlRequest
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               if (connectionError == nil && data != nil) {
-                                   NSError *error;
-                                   NSDictionary *responce=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                                   
-                                   [self.collectionView reloadData];
-                               } else {
-                                   NSLog(@"Failed to load profile photo.");
-                               }
-                           }];
-    
 
-}
- */
--(void)getAllPhotosForAlbumId:(NSString*)albumId{
-    NSString *url =[NSString stringWithFormat:@"https://graph.facebook.com/%@/photos?access_token=%@",albumId,[[FBSDKAccessToken currentAccessToken]tokenString]];
-    NSURL *pictureURL = [NSURL URLWithString:url];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-    
-    [NSURLConnection sendAsynchronousRequest:urlRequest
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               if (connectionError == nil && data != nil) {
-                                   NSError *error;
-                                   NSDictionary *responce=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                                   
-                                   [self.collectionView reloadData];
-                               } else {
-                                   NSLog(@"Failed to load profile photo.");
-                               }
-                           }];
-
-}
 #pragma mark UICollectionViewDataSource
 
 -(NSInteger)numberOfSectionsInCollectionView:

@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@",self.arrTableData);
     [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     self.arrTableData =[NSMutableArray array];
     [self loadMore];

@@ -393,7 +393,6 @@
     int height  = [selectedHeightInCms intValue];
     if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
-    if(mangilk)
         self.currentProfile[@"mangalik"] = @(mangilk);
     if(selectedHeight)
         self.currentProfile[@"height"] = @(height);

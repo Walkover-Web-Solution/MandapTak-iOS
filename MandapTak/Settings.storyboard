@@ -36,87 +36,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSs-yI-QwA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s22-Ke-33J">
-                                        <rect key="frame" x="282" y="6" width="30" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="uVU-PQ-Fmk"/>
-                                        </constraints>
-                                        <state key="normal" image="option.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backAction:" destination="MYz-Wm-zHq" eventType="touchUpInside" id="Fj0-90-945"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WK-fE-NLa">
-                                        <rect key="frame" x="18" y="11" width="88" height="21"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="20"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="s22-Ke-33J" firstAttribute="top" secondItem="tSs-yI-QwA" secondAttribute="top" constant="6" id="lfX-2J-rgd"/>
-                                    <constraint firstAttribute="height" constant="44" id="n2Q-M6-Yos"/>
-                                    <constraint firstAttribute="trailing" secondItem="s22-Ke-33J" secondAttribute="trailing" constant="8" id="wAA-Xj-mVr"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile edit permissions are given to following contact numbers:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNl-Ic-n2k">
-                                <rect key="frame" x="10" y="73" width="300" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="sYa-kF-dqR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dn-01-8SA">
-                                <rect key="frame" x="53" y="386" width="214" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="aMh-bG-H02"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
-                                <state key="normal" title=" + Give Permission to more people">
-                                    <color key="titleColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="3VV-Ck-vCM" kind="custom" identifier="AddContactIdentifier" customClass="WYStoryboardPopoverSegue" id="aby-Ci-NyO"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fgy-pV-Xnf">
-                                <rect key="frame" x="0.0" y="430" width="320" height="41"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reset the profiles." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKu-AW-5QF">
-                                        <rect key="frame" x="32" y="0.0" width="145" height="21"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bgF-Hg-km8">
-                                        <rect key="frame" x="17" y="-8" width="294" height="55"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
-                                        <state key="normal" title=" profiles viewed before will be visible again.">
-                                            <color key="titleColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="resetAction:" destination="MYz-Wm-zHq" eventType="touchUpInside" id="TNL-gt-Iw1"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3S-bY-Q5h">
-                                <rect key="frame" x="10" y="52" width="294" height="21"/>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NB8-NT-9TP">
                                 <rect key="frame" x="10" y="115" width="300" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -169,21 +88,108 @@
                                     <outlet property="delegate" destination="MYz-Wm-zHq" id="AAp-cj-iEg"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSs-yI-QwA">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s22-Ke-33J">
+                                        <rect key="frame" x="282" y="6" width="30" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="uVU-PQ-Fmk"/>
+                                        </constraints>
+                                        <state key="normal" image="option.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backAction:" destination="MYz-Wm-zHq" eventType="touchUpInside" id="Fj0-90-945"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WK-fE-NLa">
+                                        <rect key="frame" x="18" y="11" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="s22-Ke-33J" firstAttribute="top" secondItem="tSs-yI-QwA" secondAttribute="top" constant="6" id="lfX-2J-rgd"/>
+                                    <constraint firstAttribute="height" constant="44" id="n2Q-M6-Yos"/>
+                                    <constraint firstAttribute="trailing" secondItem="s22-Ke-33J" secondAttribute="trailing" constant="8" id="wAA-Xj-mVr"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile edit permissions are given to following contact numbers:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNl-Ic-n2k">
+                                <rect key="frame" x="10" y="73" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="sYa-kF-dqR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dn-01-8SA">
+                                <rect key="frame" x="53" y="130" width="214" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="aMh-bG-H02"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
+                                <state key="normal" title=" + Give Permission to more people">
+                                    <color key="titleColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3VV-Ck-vCM" kind="custom" identifier="AddContactIdentifier" customClass="WYStoryboardPopoverSegue" id="aby-Ci-NyO"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgy-pV-Xnf">
+                                <rect key="frame" x="0.0" y="172" width="320" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reset the profiles." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKu-AW-5QF">
+                                        <rect key="frame" x="32" y="0.0" width="145" height="21"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bgF-Hg-km8">
+                                        <rect key="frame" x="17" y="-8" width="294" height="55"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
+                                        <state key="normal" title=" profiles viewed before will be visible again.">
+                                            <color key="titleColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetAction:" destination="MYz-Wm-zHq" eventType="touchUpInside" id="TNL-gt-Iw1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="e6P-v4-4qW"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3S-bY-Q5h">
+                                <rect key="frame" x="10" y="52" width="294" height="21"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0dn-01-8SA" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" constant="53" id="5RL-Vy-nbn"/>
+                            <constraint firstItem="fgy-pV-Xnf" firstAttribute="top" secondItem="0dn-01-8SA" secondAttribute="bottom" constant="12" id="AMi-0T-mQT"/>
                             <constraint firstItem="tSs-yI-QwA" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" id="BTP-1y-ujf"/>
                             <constraint firstAttribute="trailing" secondItem="tSs-yI-QwA" secondAttribute="trailing" id="Exc-hN-VTc"/>
                             <constraint firstItem="NB8-NT-9TP" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" constant="10" id="FNt-ge-cm6"/>
                             <constraint firstItem="fNl-Ic-n2k" firstAttribute="top" secondItem="tSs-yI-QwA" secondAttribute="bottom" constant="29" id="OuE-rl-VEY"/>
+                            <constraint firstItem="0dn-01-8SA" firstAttribute="top" secondItem="tSs-yI-QwA" secondAttribute="bottom" constant="86" id="SZz-sj-mkk"/>
                             <constraint firstItem="NB8-NT-9TP" firstAttribute="top" secondItem="fNl-Ic-n2k" secondAttribute="bottom" constant="2" id="YIU-Lq-TZk"/>
                             <constraint firstAttribute="trailing" secondItem="NB8-NT-9TP" secondAttribute="trailing" constant="10" id="b4Y-gS-x3M"/>
                             <constraint firstItem="tSs-yI-QwA" firstAttribute="top" secondItem="tMV-hh-GxU" secondAttribute="bottom" id="fih-XS-7ge"/>
                             <constraint firstAttribute="trailing" secondItem="0dn-01-8SA" secondAttribute="trailing" constant="53" id="fxu-c6-gEM"/>
                             <constraint firstAttribute="trailing" secondItem="fNl-Ic-n2k" secondAttribute="trailing" constant="10" id="iLc-mM-Sx1"/>
                             <constraint firstItem="fNl-Ic-n2k" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" constant="10" id="lxz-5b-1JE"/>
-                            <constraint firstItem="0dn-01-8SA" firstAttribute="top" secondItem="NB8-NT-9TP" secondAttribute="bottom" constant="18" id="xfn-ms-x2C"/>
+                            <constraint firstItem="fgy-pV-Xnf" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" id="p31-EB-cxO"/>
+                            <constraint firstAttribute="trailing" secondItem="fgy-pV-Xnf" secondAttribute="trailing" id="xSh-Up-XFU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3wA-y7-MK8"/>
@@ -192,6 +198,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnPermission" destination="0dn-01-8SA" id="pNi-K9-dUw"/>
+                        <outlet property="givePermissionYOffset" destination="SZz-sj-mkk" id="6LY-fU-hOW"/>
                         <outlet property="lblUserCredits" destination="j3S-bY-Q5h" id="qNm-LW-0Ue"/>
                         <outlet property="tableViewContacts" destination="NB8-NT-9TP" id="oGs-I0-HqW"/>
                         <outlet property="viewResetProfile" destination="fgy-pV-Xnf" id="Fpi-NR-pop"/>

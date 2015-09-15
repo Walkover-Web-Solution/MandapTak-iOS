@@ -161,6 +161,8 @@
 }
 
 -(void)checkIfAgentOrUser{
+    MBProgressHUD *HUD;
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFObject *role = [[PFUser currentUser]valueForKey:@"roleId"];
     [role fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
         [MBProgressHUD hideHUDForView:self.view animated:YES];

@@ -117,16 +117,13 @@
     vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
     vc2 = [sb2 instantiateViewControllerWithIdentifier:@"DetailProfileViewController"];
     vc3 = [sb2 instantiateViewControllerWithIdentifier:@"ProfileWorkAndExperienceViewController"];
-    //vc4 = [sb2 instantiateViewControllerWithIdentifier:@"UploadPhotosProfileViewController"];
     arrNewImages = [NSMutableArray array];
     arrOldImages = [NSMutableArray array];
     
     arrImageList = [NSMutableArray array];
     selectedBiodata = [[Photos alloc]init];
-    // [self hideAllView];
     UIColor* whyerColor = [UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1];
-//fetch profile for User id
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
+    //fetch profile for User id
     if([[AppData sharedData]isInternetAvailable]){
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
@@ -192,6 +189,41 @@
 
     }
     else{
+        PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+        query.cachePolicy = kPFCachePolicyCacheOnly;
+        
+        //[query whereKey:@"userId" equalTo:userId];
+        [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+        
+        [query includeKey:@"Parent.Parent"];
+        [query includeKey:@"currentLocation.Parent.Parent"];
+        [query includeKey:@"placeOfBirth.Parent.Parent"];
+        [query includeKey:@"casteId.Parent.Parent"];
+        [query includeKey:@"religionId.Parent.Parent"];
+        [query includeKey:@"gotraId.Parent.Parent"];
+        [query includeKey:@"education1.degreeId"];
+        [query includeKey:@"education2.degreeId"];
+        [query includeKey:@"education3.degreeId"];
+        [query includeKey:@"industryId"];
+        MBProgressHUD * hud;
+        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        btnMenu.enabled = YES;
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            if (!error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+                // The find succeeded.
+                PFObject *obj= objects[0];
+                currentProfile = obj;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFirstTabWithCurrentInfo" object:self userInfo:@{@"currentProfile": currentProfile}];
+                
+                [self switchToCurrentTab];
+                [self getAllPhotos];
+                [self updateuserInfo];
+                
+            }
+        }];
        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
@@ -266,7 +298,6 @@
         }
     }];
 
-
 }
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     CATransition *transition = [CATransition animation];
@@ -284,7 +315,6 @@
         }
     }
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"Right Swipe");
         if(currentTab>1){
             currentTab--;
             transition.duration = .3f;
@@ -352,49 +382,19 @@
                     [self.collectionView reloadData];
                 }];
             }
-
-                    } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
-    }];
+           }];
 }
 
 
 - (void)getPhotoWithObject:(NSArray *)objects
 {
-    
-//    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//    // Add code here to do background processing
-//    //
-//    for(PFObject *object in objects){
-//        Photos *photo = [[Photos alloc]init];
-//        PFFile *image = (PFFile *)[object objectForKey:@"file"];
-//        photo.image = [UIImage imageWithData:image.getData];
-//        photo.imgObject = object;
-//        [arrOldImages addObject:photo];
-//    }
-//    arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
-//    
-//    [self.collectionView reloadData];
-//    //
-//    dispatch_async( dispatch_get_main_queue(), ^{
-//        arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
-//        
-//        [self.collectionView reloadData];
-//        // Add code here to update the UI/send notifications based on the
-//        // results of the background processing
-//    });
-//});
-    //you can use any string instead "com.mycompany.myqueue"
     dispatch_queue_t backgroundQueue = dispatch_queue_create("com.walkover.photoQueue", 0);
     dispatch_async(backgroundQueue, ^{
         arrImageList= [NSMutableArray array];
         arrOldImages= [NSMutableArray array];
         for(PFObject *object in objects){
             Photos *photo = [[Photos alloc]init];
-            PFFile *image = (PFFile *)[object objectForKey:@"file"];
-            //photo.image = [UIImage imageWithData:image.getData];
             photo.imgObject = object;
             [arrOldImages addObject:photo];
         }
@@ -420,7 +420,7 @@
     if ([segue.identifier isEqualToString:@"PhotosIdentifier"])
     {
         PhotosOptionPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(300, 250);
+        controller.preferredContentSize = CGSizeMake(300, 152);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -433,7 +433,7 @@
     if ([segue.identifier isEqualToString:@"BiodataIdentifier"])
     {
         PhotosOptionPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(300, 140);
+        controller.preferredContentSize = CGSizeMake(300, 102);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         isSelectingBiodata =YES;
@@ -451,20 +451,15 @@
     if([identifier isEqualToString:@"BiodataIdentifier"]){
         if(isUploadingBiodata)
             return NO;
-        else{
+        else
             return YES;
-        }
-        
-        
     }
+    
     if([identifier isEqualToString:@"PhotosIdentifier"]){
         if(isUploadingPhotos)
             return NO;
-        else{
+        else
             return YES;
-        }
-        
-        
     }
 
         return YES;
@@ -648,7 +643,6 @@
         [currentProfile setObject:[NSNull null] forKey:@"education3"];
         
     }
-
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             // succesful
@@ -662,20 +656,6 @@
     }];
 
 }
-//-(void)selectedHeight:(NSString *)height{
-//    selectedHeight = height;
-//    [btnHeight setTitle:height forState:UIControlStateNormal];
-//    [btnHeight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [popoverController dismissPopoverAnimated:YES];
-//}
-//-(void)selectedHeightWithFeet:(NSString *)feet andInches:(NSString *)inches{
-////    selectedInches= inches;
-////    selectedFeets = feet;
-//    [btnHeight setTitle:[NSString stringWithFormat:@"%@\'%@\"",feet,inches] forState:UIControlStateNormal];
-//    [btnHeight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [popoverController dismissPopoverAnimated:YES];
-//
-//}
 -(void)removeSubview{
     if([self.tab3View.subviews containsObject:vc3.view] && currentTab == 3) {
         [vc3 removeFromParentViewController];
@@ -762,7 +742,6 @@
     ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
     
     [lib enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        NSLog(@"%i",[group numberOfAssets]);
     } failureBlock:^(NSError *error) {
         if (error.code == ALAssetsLibraryAccessUserDeniedError) {
             NSLog(@"user denied access, code: %i",error.code);
@@ -777,18 +756,14 @@
 }
 -(void)updateBioData{
     NSData *pictureData = UIImagePNGRepresentation(selectedBiodata.image);
-    NSLog(@"%@",selectedBiodata.name);
     PFFile *file = [PFFile fileWithName:selectedBiodata.name data:pictureData];
     [currentProfile setObject:file forKey:@"bioData"];
-   // MBProgressHUD * hud;
-    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      [self.btnUploadBiodata setTitle:@"Uploading...." forState:UIControlStateNormal];
+    [self.btnUploadBiodata setTitle:@"Uploading...." forState:UIControlStateNormal];
     self.btnUploadBiodata.enabled =NO;
     isUploadingBiodata  = YES;
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-       // [MBProgressHUD hideHUDForView:self.view animated:YES];
-        isUploadingBiodata  = NO;
         
+        isUploadingBiodata  = NO;
         if (!error) {
             [self.btnUploadBiodata setTitle:@"Updated Biodata" forState:UIControlStateNormal];
             self.btnUploadBiodata.enabled =YES;
@@ -1004,10 +979,7 @@
     [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject * userStats, NSError *error) {
         if (!error) {
-            // Found UserStats
-            
             [userStats setObject:[NSNumber numberWithBool:NO] forKey:@"isPrimary"];
-            
             // Save
             [userStats saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
@@ -1024,7 +996,6 @@
             }];
 
         } else {
-            // Did not find any UserStats for the current user
             [self makePhotoToPrimary:primaryPhoto.imgObject];
 
             NSLog(@"Error: %@", error);
@@ -1054,25 +1025,21 @@
 {
     if ([FBSDKAccessToken currentAccessToken])
     {
-        NSLog(@"Token is available : %@",[[FBSDKAccessToken currentAccessToken]tokenString]);
-        
+        MBProgressHUD * hud;
+        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //NSLog(@"Token is available : %@",[[FBSDKAccessToken currentAccessToken]tokenString]);
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, name, link, first_name, last_name, picture.type(large), email, birthday, bio ,location ,friends ,hometown , friendlists"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
              if (!error)
              {
-                 NSLog(@"resultis:%@",result);
+                 //NSLog(@"resultis:%@",result);
                  NSString *userId = [result valueForKey:@"id"];
                  [[NSUserDefaults standardUserDefaults]setObject:userId forKey:@"FacebookUserId"];
                  [self loginViaFacebook];
              }
-             else
-             {
-                 NSLog(@"Error %@",error);
-             }
-         }];
-        
+        }];
     }
-    
 }
 
 -(void)updateuserInfo{
@@ -1113,41 +1080,24 @@
         txtMinBudget.text = [NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"minMarriageBudget"] ] ;
     }
     if(![[currentProfile valueForKey:@"profilePic"] isKindOfClass: [NSNull class]]){
-//        PFFile *image = (PFFile *)[currentProfile valueForKey:@"profileCropedPhoto"];
-//        [[currentProfile objectForKey:@"profileCropedPhoto"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-//            primaryCropedPhoto = [UIImage imageWithData:data];;
-//        }];
-      //  PFFile *image = (PFFile *)[currentProfile valueForKey:@"profilePic"];
-        //primaryCropedPhoto = [UIImage imageWithData:image.getData];
         [[currentProfile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
            primaryCropedPhoto = [UIImage imageWithData:data];
         }];
     }
     
-
     if([currentProfile valueForKey:@"maxMarriageBudget"] != nil ){
         txtMaxBudget.text = [NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"maxMarriageBudget"] ] ;
     }
     if(![[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]){
         selectedBiodata = [[Photos alloc]init];
         PFFile *image = (PFFile *)[currentProfile valueForKey:@"bioData"];
-        NSLog(@"%@",image.name);
-             //   PFFile *image1 = (PFFile *)[currentProfile valueForKey:@"bioData"];
                 [[currentProfile objectForKey:@"bioData"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     selectedBiodata.image = [UIImage imageWithData:data];
                     selectedBiodata.name = image.name;
                     self.biodataImgView.image =selectedBiodata.image;
                 }];
         [self.btnUploadBiodata setTitle:@"Updated Biodata" forState:UIControlStateNormal];
-
-//        selectedBiodata.image = [UIImage imageWithData:image.getData];
-//        selectedBiodata.name = image.name;
-//        if(selectedBiodata!=nil){
-//            self.biodataImgView.image =selectedBiodata.image;
-//            [self.btnUploadBiodata setTitle:selectedBiodata.name forState:UIControlStateNormal];
-//        }
     }
-    
 }
 
 -(void)openFacebookProfileViewController{
@@ -1155,7 +1105,6 @@
     FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
     vc.delegate = self;
     [self presentViewController:vc animated:YES completion:nil];
-
 }
 
 -(void)loginViaFacebook{
@@ -1167,194 +1116,8 @@
     else{
         [self FbLogin];
     }
-    /*
-    if ([PFUser currentUser]){
-        
-    if(![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        NSArray *permissionsArray = @[ @"user_photos",@"public_profile"];
-        MBProgressHUD * hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        [PFFacebookUtils linkUser:[PFUser currentUser] permissions:permissionsArray block:^(BOOL succeeded, NSError *error) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                if (succeeded) {
-                    
-                    NSLog(@"Woohoo, user is linked with Facebook!");
-                    [self loadData];
-                }
-                else {
-                    NSLog(@"%@",[error localizedDescription]);
-                }
-            }];
-            
-            // Do stuff after successful login.
-            NSLog(@"success login");
-        } else {
-            if([[[NSUserDefaults standardUserDefaults] valueForKey:@"facebookDataLoad"] isEqual:@"loaded"]){
-                [self openFacebookProfileViewController];
-            }
-            else
-               [self loadData];
-        }
-    }
-    
-    NSString *userProfilePhotoURLString = [PFUser currentUser][@"profile"][@"pictureURL"];
-    // Download the user's facebook profile picture
-    if (userProfilePhotoURLString) {
-        NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
-        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-        
-        [NSURLConnection sendAsynchronousRequest:urlRequest
-                                           queue:[NSOperationQueue mainQueue]
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                                   if (connectionError == nil && data != nil) {
-                                       Photos *photo = [[Photos alloc]init];
-                                       photo.image =[UIImage imageWithData:data];
-                                       UIImage *image =[UIImage imageWithData:data];
-                                       photo.imgObject = nil;
-                                       [arrNewImages addObject:photo];
-                                       arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
+ }
 
-                                       [self.collectionView reloadData];
-                                   } else {
-                                       NSLog(@"Failed to load profile photo.");
-                                   }
-                               }];
-    }
-    
-    NSLog(@"%@",[PFUser currentUser]);
-     
-     */
-}
-
-/*  removed for parse
--(void)allFacebookPhotos{
-    //https://graph.facebook.com/[uid]/albums?access_token=[AUTH_TOKEN]
-    
-   // https://graph.facebook.com/[ALBUM_ID]/photos?access_token=[AUTH_TOKEN]
-    FBAccessTokenData *token = [[PFFacebookUtils session] accessTokenData];
-    NSString *accessToken =token.accessToken;
-    NSString *url =[NSString stringWithFormat:@"https://graph.facebook.com/me?access_token=%@",accessToken];
-    NSURL *pictureURL = [NSURL URLWithString:url];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-    
-    [NSURLConnection sendAsynchronousRequest:urlRequest
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               if (connectionError == nil && data != nil) {
-                                   NSError *error;
-                                   NSDictionary *responce=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-
-                                   Photos *photo = [[Photos alloc]init];
-                                   photo.image =[UIImage imageWithData:data];
-                                   UIImage *image =[UIImage imageWithData:data];
-                                   photo.imgObject = nil;
-                                   [arrNewImages addObject:photo];
-                                   arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
-                                   
-                                   [self.collectionView reloadData];
-                               } else {
-                                   NSLog(@"Failed to load profile photo.");
-                               }
-                           }];
-
-}
- 
- 
-- (void)loadData {
-    
-    // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
-    if ([PFUser currentUser]) {
-       // [self _updateProfileData];
-    }
-    
-    // Send request to Facebook
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-
-    FBRequest *request = [FBRequest requestForMe];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        // handle response
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-        if (!error) {
-            // Parse the data received
-            NSDictionary *userData = (NSDictionary *)result;
-            
-            NSString *facebookID = userData[@"id"];
-            [[NSUserDefaults standardUserDefaults]setObject:[userData valueForKey:@"id"] forKey:@"facebookUserId"];
-            if([userData valueForKey:@"id"]){
-                [[NSUserDefaults standardUserDefaults]setObject:@"loaded" forKey:@"facebookDataLoad"];
-            }
-            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
-            
-            if (facebookID) {
-                userProfile[@"facebookId"] = facebookID;
-            }
-            [self openFacebookProfileViewController];
-            NSString *name = userData[@"name"];
-            if (name) {
-                userProfile[@"name"] = name;
-            }
-            
-            NSString *location = userData[@"location"][@"name"];
-            if (location) {
-                userProfile[@"location"] = location;
-            }
-            
-            NSString *gender = userData[@"gender"];
-            if (gender) {
-                userProfile[@"gender"] = gender;
-            }
-            
-            NSString *birthday = userData[@"birthday"];
-            if (birthday) {
-                userProfile[@"birthday"] = birthday;
-            }
-            
-            NSString *relationshipStatus = userData[@"relationship_status"];
-            if (relationshipStatus) {
-                userProfile[@"relationship"] = relationshipStatus;
-            }
-            
-            userProfile[@"pictureURL"] = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
-            
-            [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
-            [[PFUser currentUser] saveInBackground];
-            
-           // [self _updateProfileData];
-        } else if ([[[[error userInfo] objectForKey:@"error"] objectForKey:@"type"]
-                    isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
-            NSLog(@"The facebook session was invalidated");
-        } else {
-            NSLog(@"Some other error: %@", error);
-        }
-    }];
-}
-
--(void)getAlbum{
-    if( [[NSUserDefaults standardUserDefaults]valueForKey:@"facebookUserId"]){
-        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/albums", [[NSUserDefaults standardUserDefaults]valueForKey:@"facebookUserId"]]
-                              completionHandler:^(  FBRequestConnection *connection, id result,  NSError *error )
-         {
-             // result will contain an array with your user's albums in the "data" key
-             NSArray * albumsObjects = [result objectForKey:@"data"];
-             NSMutableArray * albums = [NSMutableArray arrayWithCapacity:albumsObjects.count];
-             
-             for (NSDictionary * albumObject in albumsObjects)
-             {
-                 //DO STUFF
-             }
-             //self.albums = albums;
-             // [self.tableView reloadData];
-         }];
-
-    }
-   
-}
-
-*/
 #pragma mark ImageViewControllerDelegate
 -(void)selectedPrimaryPhoto:(Photos *)primaryImg andCropedPhoto:(UIImage *)cropedImg andIndex:(NSInteger)index withDeletedPhotos:(NSArray *)arrDeletedPhotos{
     
@@ -1371,7 +1134,6 @@
     }
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
     primaryPhoto = primaryImg;
-    UIImage * primary = primaryPhoto.image;
     primaryCropedPhoto = cropedImg;
     for(Photos *ph in arrImageList){
         [ ph.imgObject setObject:[NSNumber numberWithBool:NO] forKey:@"isPrimary"];
@@ -1566,7 +1328,6 @@
     NSMutableArray *arrAllPhotoToBeSaved = [NSMutableArray array];
     for(Photos *photo in arrNewImages){
         NSData *pictureData = UIImagePNGRepresentation(photo.image);
-        NSLog(@"%@",photo.name);
         PFFile *file = [PFFile fileWithName:photo.name data:pictureData];
         PFObject *photo = [PFObject objectWithClassName:@"Photo"];
         [photo setObject:file forKey:@"file"];
@@ -1633,7 +1394,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    //_imageView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     if(isSelectingBiodata){
         self.biodataImgView.image =[info objectForKey:@"UIImagePickerControllerOriginalImage"];
         NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
@@ -1647,7 +1407,6 @@
             selectedBiodata.name =fileName;
             [self updateBioData];
         } failureBlock:nil];
-        NSLog(@"%@",fileName);
         selectedBiodata.image =[info objectForKey:@"UIImagePickerControllerOriginalImage"];
      
     }
