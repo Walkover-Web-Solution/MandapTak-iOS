@@ -24,8 +24,6 @@
     [super viewDidLoad];
     lblUserName.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"];
     
-    [self getUserProfilePic];
-    
     self.imgView.layer.cornerRadius = 70;
     self.imgView.clipsToBounds = YES;
     // Do any additional setup after loading the view.
@@ -34,7 +32,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+    [self getUserProfilePic];
 }
 
 #pragma mark User Profile Pic
