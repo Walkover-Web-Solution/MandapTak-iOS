@@ -15,6 +15,7 @@
 		7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A91B84AF0A00B83EFD /* show@2x.png */; };
 		7533F6B01B84AF0A00B83EFD /* show@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6AA1B84AF0A00B83EFD /* show@3x.png */; };
 		75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75382F081B8CA522005E03FE /* WorkEducationCell.m */; };
+		7561180A1BA80F03009D19D2 /* MatchScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 756118091BA80F03009D19D2 /* MatchScreenVC.m */; };
 		7564E22B1B970B3200B8D052 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E2281B970B3200B8D052 /* dislike.png */; };
 		7564E22D1B970B3200B8D052 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22A1B970B3200B8D052 /* undo.png */; };
 		7564E2301B970E6900B8D052 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7564E22E1B970E6900B8D052 /* pin.png */; };
@@ -270,6 +271,8 @@
 		7533F6AA1B84AF0A00B83EFD /* show@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@3x.png"; sourceTree = "<group>"; };
 		75382F071B8CA522005E03FE /* WorkEducationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkEducationCell.h; sourceTree = "<group>"; };
 		75382F081B8CA522005E03FE /* WorkEducationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkEducationCell.m; sourceTree = "<group>"; };
+		756118081BA80F03009D19D2 /* MatchScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchScreenVC.h; sourceTree = "<group>"; };
+		756118091BA80F03009D19D2 /* MatchScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchScreenVC.m; sourceTree = "<group>"; };
 		7564E2281B970B3200B8D052 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
 		7564E22A1B970B3200B8D052 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		7564E22E1B970E6900B8D052 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
@@ -678,6 +681,15 @@
 				75382F081B8CA522005E03FE /* WorkEducationCell.m */,
 			);
 			path = CustomTableCell;
+			sourceTree = "<group>";
+		};
+		756118071BA80E05009D19D2 /* MatchView */ = {
+			isa = PBXGroup;
+			children = (
+				756118081BA80F03009D19D2 /* MatchScreenVC.h */,
+				756118091BA80F03009D19D2 /* MatchScreenVC.m */,
+			);
+			path = MatchView;
 			sourceTree = "<group>";
 		};
 		7565F7861B8DDA52003FE061 /* Resources */ = {
@@ -1541,6 +1553,7 @@
 				75918F6E1B79E9C50082D7EC /* Preferences */,
 				899C53681B732B6500C24DA8 /* Popovers */,
 				897EF9661B708FE000F88CEC /* ProfileViewController */,
+				756118071BA80E05009D19D2 /* MatchView */,
 				89D9F7271B6B579E004CBE3D /* CandidateProfileHomeScreen */,
 				89D9F72A1B6B579E004CBE3D /* SideMenuViewController */,
 				89D9F72D1B6B579E004CBE3D /* TutorialViewController */,
@@ -2014,6 +2027,7 @@
 				8997CC9C1BA1840A001B11AA /* ABMultiton+SetInstance.m in Sources */,
 				895A6E7B1B9843A200A9C8BC /* DragTableGestureObserver_ot.m in Sources */,
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
+				7561180A1BA80F03009D19D2 /* MatchScreenVC.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				758914CE1B95BFC200585507 /* History.m in Sources */,
 				757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */,

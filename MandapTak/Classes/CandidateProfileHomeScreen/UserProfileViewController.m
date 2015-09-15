@@ -910,34 +910,9 @@
                  NSLog(@"new object Id = %@",likeObj.objectId);
                  //NSString *strObj = likeObj.objectId;
                  
-                 //add curent action data in History model
-                 History *historyObj = [[History alloc]init];
-                 historyObj.historyObjectId = likeObj.objectId;
-                 historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
-                 historyObj.actionProfileId = strObjId;
-                 historyObj.actionType = 1;     //like action:1
+         
                  
-                 //save History model object in arrHistory
-                 [arrHistory addObject:historyObj];
-                 
-                 //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
-                 [arrCache addObject:arrCandidateProfiles[profileNumber]];
-                 [arrCandidateProfiles removeObjectAtIndex:profileNumber];
-                 
-                 //enable/disable undo Button
-                 if (arrCache.count > 0)
-                 {
-                     btnUndo.enabled = YES;
-                 }
-                 else
-                 {
-                     btnUndo.enabled = NO;
-                 }
-                 
-                 //perform animation
-                 //[self.view.layer addAnimation:transition forKey:nil];
-                 profileNumber = 0;
-                 [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
+         
                  
              }
              else
@@ -950,28 +925,125 @@
                            withParameters:@{@"userProfileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
                                             @"likeProfileId":strObjId,
                                             @"userName":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]}
-                                    block:^(NSDictionary *results, NSError *error)
+                                    block:^(id results, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
              
              if (!error)
              {
+                 //insert data in History Model
+                 
                  // this is where you handle the results and change the UI.
-                 if (results.count > 0)
+                 if ([results isKindOfClass:[NSString class]])
                  {
+                     //proceed to show next profile
                      
+                     //add curent action data in History model
+                     History *historyObj = [[History alloc]init];
+                     historyObj.historyObjectId = results;
+                     historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+                     historyObj.actionProfileId = strObjId;
+                     historyObj.actionType = 1;     //like action:1
+                     
+                     //save History model object in arrHistory
+                     [arrHistory addObject:historyObj];
+                     
+                     //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                     [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                     [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                     
+                     //enable/disable undo Button
+                     if (arrCache.count > 0)
+                     {
+                         btnUndo.enabled = YES;
+                     }
+                     else
+                     {
+                         btnUndo.enabled = NO;
+                     }
+                     
+                     //perform animation
+                     //[self.view.layer addAnimation:transition forKey:nil];
+                     profileNumber = 0;
+                     [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
                  }
                  else
                  {
-                     //open blank View
-                     //[self.view bringSubviewToFront:blankView];
-                     blankView.hidden = NO;
-                     profileView.hidden = YES;
-                     btnUndo.enabled = NO;
-                     [arrHistory removeAllObjects];
-                     [arrCache removeAllObjects];
-                     lblMessage.text = [NSString stringWithFormat:@"No matching profiles found...!!"];
-                     animationImageView.hidden = YES;
+                     //show "You just got matched" view
+                     //retrieve last inserted object id from likedprofile class
+                     PFObject *likeObj = results;
+                     
+                     //add curent action data in History model
+                     History *historyObj = [[History alloc]init];
+                     historyObj.historyObjectId = likeObj.objectId;
+                     historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+                     historyObj.actionProfileId = strObjId;
+                     historyObj.actionType = 1;     //like action:1
+                     
+                     //save History model object in arrHistory
+                     [arrHistory addObject:historyObj];
+                     
+                     //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                     [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                     [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                     
+                     //enable/disable undo Button
+                     if (arrCache.count > 0)
+                     {
+                         btnUndo.enabled = YES;
+                     }
+                     else
+                     {
+                         btnUndo.enabled = NO;
+                     }
+                     
+                     //perform animation
+                     //[self.view.layer addAnimation:transition forKey:nil];
+                     profileNumber = 0;
+                     [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
+                     
+                     //show popover view
+                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+                     [self.navigationController presentViewController:vc animated:YES completion:nil];
+                     
+                     //new code
+                     /*
+                     //[settingsPopoverController dismissPopoverAnimated:YES];
+                     MatchScreenVC *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+                     viewController.preferredContentSize = CGSizeMake(310, 200);
+                     viewController.delegate = self;
+                     viewController.modalInPopover = NO;
+                     
+                     
+                     //UINavigationController *contentViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+                     //settingsPopoverController = [[WYPopoverController alloc]initWithContentViewController:contentViewController];
+                     //settingsPopoverController.delegate = self;
+                     //settingsPopoverController.popoverLayoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
+                     //settingsPopoverController.wantsDefaultContentAppearance = NO;
+                     [viewController presentPopoverFromRect:CGRectMake(0, 0, 300, 480)
+                                                                inView:self.view
+                                              permittedArrowDirections:WYPopoverArrowDirectionAny
+                                                              animated:YES
+                                                               options:WYPopoverAnimationOptionFadeWithScale];
+                     */
+                      /*
+                     [settingsPopoverController dismissPopoverAnimated:YES];
+                     WorkAfterMarriagePopoverViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkAfterMarriagePopoverViewController"];
+                     viewController.preferredContentSize = CGSizeMake(310, 200);
+                     viewController.delegate = self;
+                     viewController.title = @"Want to work after Marriage?";
+                     viewController.modalInPopover = NO;
+                     UINavigationController *contentViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+                     settingsPopoverController = [[WYPopoverController alloc]initWithContentViewController:contentViewController];
+                     settingsPopoverController.delegate = self;
+                     //settingsPopoverController.popoverLayoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
+                     settingsPopoverController.wantsDefaultContentAppearance = NO;
+                     [settingsPopoverController presentPopoverFromRect:marraigeCellRect
+                                                                inView:self.tableView
+                                              permittedArrowDirections:WYPopoverArrowDirectionAny
+                                                              animated:YES
+                                                               options:WYPopoverAnimationOptionFadeWithScale];
+                      */
                  }
              }
              

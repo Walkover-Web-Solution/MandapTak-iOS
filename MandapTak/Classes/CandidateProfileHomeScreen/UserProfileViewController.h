@@ -16,6 +16,9 @@
 #import "ALDBlurImageProcessor/ALDBlurImageProcessor.h"
 #import "UIImageEffects.h"
 #import "StartMainViewController.h"
+#import "MatchScreenVC.h"
+#import "WYPopoverController.h"
+#import "WYStoryboardPopoverSegue.h"
 
 @interface UserProfileViewController : UIViewController
 {
