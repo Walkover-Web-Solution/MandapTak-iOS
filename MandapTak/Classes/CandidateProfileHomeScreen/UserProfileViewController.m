@@ -35,6 +35,14 @@
 {
     [super viewDidLoad];
     
+    //check notification
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])  
+    {
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+        MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }
+    
     //call method to get current user profile pic
     [self getUserProfilePic];
     
@@ -1003,6 +1011,8 @@
                      [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
                      
                      //show popover view
+                     
+                     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
                      MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
                      [self.navigationController presentViewController:vc animated:YES completion:nil];
                      

@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
     // Do any additional setup after loading the view.
 }
 

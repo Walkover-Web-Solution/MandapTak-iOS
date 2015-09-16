@@ -15,6 +15,7 @@
 #import "AgentViewController.h"
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "MatchScreenVC.h"
 @interface AppDelegate ()
 
 @end
@@ -102,9 +103,22 @@
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Notification" message:[NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]]delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+           [alertView show];
         
-        [alertView show];
-        
+    }
+    else
+    {
+        //handle inactive state condition
+        //show match screen with user profile info
+        [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isNotification"];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+        self.window.rootViewController=vc;
+        /*
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+        self.window.rootViewController=vc;
+         */
     }
 
 }
