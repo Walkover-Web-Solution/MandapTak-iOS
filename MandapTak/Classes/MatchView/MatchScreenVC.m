@@ -7,6 +7,7 @@
 //
 
 #import "MatchScreenVC.h"
+#import "SWRevealViewController.h"
 
 @interface MatchScreenVC ()
 - (IBAction)back:(id)sender;
@@ -17,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+    //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
     // Do any additional setup after loading the view.
 }
 
@@ -38,6 +39,17 @@
 
 - (IBAction)back:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
+    {
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+        //UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SWRevealViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
 }
 @end

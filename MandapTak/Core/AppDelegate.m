@@ -94,14 +94,14 @@
     //NSLog(@"%@, %@", error, error.localizedDescription);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    /*
     [PFPush handlePush:userInfo];
     if (application.applicationState == UIApplicationStateActive)
         
     {
-        
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Notification" message:[NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]]delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
            [alertView show];
         
@@ -114,18 +114,18 @@
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
         self.window.rootViewController=vc;
-        /*
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
-        self.window.rootViewController=vc;
-         */
     }
-
+*/
+    [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isNotification"];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+    self.window.rootViewController=vc;
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
+
 //- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 //    return [FBAppCall handleOpenURL:url
 //                  sourceApplication:sourceApplication
