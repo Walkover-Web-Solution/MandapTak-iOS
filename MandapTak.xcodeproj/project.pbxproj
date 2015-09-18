@@ -23,6 +23,8 @@
 		7564E2551B972B2800B8D052 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7564E2541B972B2800B8D052 /* Parse.framework */; };
 		7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */; };
 		7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */; };
+		7577EFD31BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7577EFD01BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m */; };
+		7577EFD41BAC0C4300CE55C6 /* MBCircularProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7577EFD21BAC0C4300CE55C6 /* MBCircularProgressBarView.m */; };
 		757849C71BA2EF2D005490E6 /* Anim-(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 757849AA1BA2EF2D005490E6 /* Anim-(1).png */; };
 		757849C81BA2EF2D005490E6 /* Anim-(10).png in Resources */ = {isa = PBXBuildFile; fileRef = 757849AB1BA2EF2D005490E6 /* Anim-(10).png */; };
 		757849C91BA2EF2D005490E6 /* Anim-(11).png in Resources */ = {isa = PBXBuildFile; fileRef = 757849AC1BA2EF2D005490E6 /* Anim-(11).png */; };
@@ -280,6 +282,10 @@
 		7564E2541B972B2800B8D052 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
 		7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
+		7577EFCF1BAC0C4300CE55C6 /* MBCircularProgressBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCircularProgressBarLayer.h; sourceTree = "<group>"; };
+		7577EFD01BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCircularProgressBarLayer.m; sourceTree = "<group>"; };
+		7577EFD11BAC0C4300CE55C6 /* MBCircularProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCircularProgressBarView.h; sourceTree = "<group>"; };
+		7577EFD21BAC0C4300CE55C6 /* MBCircularProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCircularProgressBarView.m; sourceTree = "<group>"; };
 		757849AA1BA2EF2D005490E6 /* Anim-(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Anim-(1).png"; sourceTree = "<group>"; };
 		757849AB1BA2EF2D005490E6 /* Anim-(10).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Anim-(10).png"; sourceTree = "<group>"; };
 		757849AC1BA2EF2D005490E6 /* Anim-(11).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Anim-(11).png"; sourceTree = "<group>"; };
@@ -699,6 +705,17 @@
 				7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7577EFCE1BAC0C4300CE55C6 /* MBCircularProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				7577EFCF1BAC0C4300CE55C6 /* MBCircularProgressBarLayer.h */,
+				7577EFD01BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m */,
+				7577EFD11BAC0C4300CE55C6 /* MBCircularProgressBarView.h */,
+				7577EFD21BAC0C4300CE55C6 /* MBCircularProgressBarView.m */,
+			);
+			path = MBCircularProgressBar;
 			sourceTree = "<group>";
 		};
 		757849A91BA2EF2D005490E6 /* Animation */ = {
@@ -1564,6 +1581,7 @@
 		89D9F7271B6B579E004CBE3D /* CandidateProfileHomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7577EFCE1BAC0C4300CE55C6 /* MBCircularProgressBar */,
 				7508696F1B9F096000022596 /* LightBlurEffect */,
 				75DBD9E81B99AAFA00381445 /* ALDBlurImageProcessor */,
 				89D9F7281B6B579E004CBE3D /* UserProfileViewController.h */,
@@ -2028,9 +2046,11 @@
 				895A6E7B1B9843A200A9C8BC /* DragTableGestureObserver_ot.m in Sources */,
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				7561180A1BA80F03009D19D2 /* MatchScreenVC.m in Sources */,
+				7577EFD31BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				758914CE1B95BFC200585507 /* History.m in Sources */,
 				757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */,
+				7577EFD41BAC0C4300CE55C6 /* MBCircularProgressBarView.m in Sources */,
 				899C537F1B73447B00C24DA8 /* Location.m in Sources */,
 				8997CC871BA182C8001B11AA /* SCReachabilityScheduler.m in Sources */,
 				89E0FA591B85C92A000BD65A /* ZCHelper.m in Sources */,

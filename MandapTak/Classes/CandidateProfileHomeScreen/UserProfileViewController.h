@@ -19,6 +19,7 @@
 #import "MatchScreenVC.h"
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
+#import "MBCircularProgressBar/MBCircularProgressBarView.h"
 
 @interface UserProfileViewController : UIViewController
 {
@@ -41,6 +42,8 @@
     
     BOOL isReady;
     IBOutlet UIImageView *userImageView;
+    IBOutlet MBCircularProgressBarView *progressBar;
+    IBOutlet UILabel *lblTraitMatch;
 }
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;

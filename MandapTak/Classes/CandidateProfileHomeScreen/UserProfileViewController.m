@@ -35,6 +35,9 @@
 {
     [super viewDidLoad];
     
+    //set circular border of progress bar
+    progressBar.layer.cornerRadius = 34.0f;
+    
     //check notification
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])  
     {
@@ -154,15 +157,11 @@
         self.imgProfileView.image = nil;
         [arrCandidateProfiles removeAllObjects];
         
-        //show blank and loading screen
+        //show loading screen
         blankView.hidden = NO;
         profileView.hidden = YES;
         [self animateArrayOfImagesForImageCount:30];
-        //MBProgressHUD *HUD;
-        //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        //NSLog(@"current profile id --> %@ ", [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
-        
-        //[PFCloud callFunction:@"filterProfileLive" withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}];
+      
         [PFCloud callFunctionInBackground:@"filterProfileLive"
                            withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}  //@"nASUvS6R7Z"
                                     block:^(NSArray *results, NSError *error)
@@ -177,7 +176,6 @@
                      //show profile view
                      [self animateArrayOfImagesForImageCount:30];
                      
-                     //[[[UIAlertView alloc ] initWithTitle:@"Result Count" message:[NSString stringWithFormat:@"%d",results.count] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                      NSLog(@"profile count = %lu", (unsigned long)results.count);
                      for (PFObject *profileObj in results)
                      {
@@ -228,6 +226,7 @@
                          [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
                          NSString *strTOB = [formatterTime stringFromDate:dateTOB];
                          profileModel.tob = strTOB;
+                         
                          
                          //load images in background
                          
@@ -304,7 +303,7 @@
          if (!error)
          {
              // The find succeeded.
-             PFObject *obj= objects[0];
+             PFObject *obj = objects[0];
              [[NSUserDefaults standardUserDefaults] setValue:obj[@"name"] forKey:@"currentProfileName"];
              PFFile *userImageFile = obj[@"profilePic"];
              if (userImageFile)
@@ -453,6 +452,31 @@
         Profile *firstProfile = arrCandidateProfiles[profileNumber];
         PFObject *obj = firstProfile.profilePointer;
         NSString *objID = obj.objectId;
+        
+        //reset progress bar value if already set
+        progressBar.hidden = YES;
+        [progressBar setValue:0 animateWithDuration:0];
+        
+        //get traits count
+        [PFCloud callFunctionInBackground:@"matchKundli"
+                           withParameters:@{@"boyProfileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
+                                            @"girlProfileId":objID}
+                                    block:^(NSString *traitResult, NSError *error)
+         {
+             if (!error)
+             {
+                 progressBar.hidden = NO;
+                 [progressBar setValue:[traitResult floatValue] animateWithDuration:0.5];
+                 lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
+                 NSLog(@"Traits matching  = %@",traitResult);
+             }
+             else
+             {
+                 NSLog(@"Error info -> %@",error.description);
+             }
+             
+         }];
+        
         lblName.text = firstProfile.name;
         lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
         lblProfession.text = firstProfile.designation;
@@ -469,6 +493,7 @@
         self.imgProfileView.image = effectImage;
         
         [self.view.layer addAnimation:trans forKey:nil];
+        
         //[self showBlurredImageForUser:objID];
         
     }
