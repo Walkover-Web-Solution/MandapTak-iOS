@@ -32,12 +32,6 @@ static const int kMultitonQueueKey = 1;
         _instances = [[NSMutableDictionary alloc] init];
         _concurrentQueue = [self createDispatchQueueWithConcurrency:YES];
         _serialQueue = [self createDispatchQueueWithConcurrency:NO];
-#if TARGET_OS_IOS
-        [[NSNotificationCenter defaultCenter]
-                               addObserver:self selector:@selector(memoryWarningReceived:)
-                                      name:UIApplicationDidReceiveMemoryWarningNotification
-                                    object:nil];
-#endif
     }
     return self;
 }

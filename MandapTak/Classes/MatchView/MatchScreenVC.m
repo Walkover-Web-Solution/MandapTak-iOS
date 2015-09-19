@@ -44,7 +44,9 @@
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
         //UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SWRevealViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+        //[self dismissViewControllerAnimated:NO completion:nil];
+        //[self.navigationController popToRootViewControllerAnimated:YES];
     }
     else
     {
