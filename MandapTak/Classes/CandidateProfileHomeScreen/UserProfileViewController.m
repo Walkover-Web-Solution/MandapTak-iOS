@@ -38,14 +38,6 @@
     //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;
     
-    //check notification
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])  
-    {
-        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
-        MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
-        [self.navigationController presentViewController:vc animated:YES completion:nil];
-    }
-    
     //call method to get current user profile pic
     [self getUserProfilePic];
     
@@ -148,6 +140,46 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    //check notification
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = TRUE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        //show popover view
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+        MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }
+    
+    //check first load
+    else if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isFirstLoad"] isEqualToString:@"yes"])
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"first load" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isFirstLoad"];
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+    }
+
+ /*
+    else
+    {
+        //check notification
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
+        {
+            //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = TRUE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+            //show popover view
+            [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+            [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+            MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+            [self.navigationController presentViewController:vc animated:YES completion:nil];
+        }
+        else
+        {
+            //[[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isNotification"];
+            //[[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"reloadCandidateList"];
+            //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = FALSE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        }
+    }
+   */ 
     lblMessage.text = @"Finding matches...";
     [self animateArrayOfImagesForImageCount:30];
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
@@ -1036,7 +1068,6 @@
                      [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
                      
                      //show popover view
-                     
                      [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
                      MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
                      [self.navigationController presentViewController:vc animated:YES completion:nil];

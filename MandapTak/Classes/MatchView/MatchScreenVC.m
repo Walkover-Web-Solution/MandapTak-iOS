@@ -39,6 +39,7 @@
 
 - (IBAction)back:(id)sender
 {
+    /*
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
     {
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
@@ -52,6 +53,8 @@
     {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-
+     */
+    [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
