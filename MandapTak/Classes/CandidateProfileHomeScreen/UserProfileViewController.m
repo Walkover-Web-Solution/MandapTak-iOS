@@ -183,7 +183,8 @@
     lblMessage.text = @"Finding matches...";
     [self animateArrayOfImagesForImageCount:30];
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
-    if (![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"])
+    //reload only if reload condition is true or no objects found in candidate profile list
+    if ((![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"]) || (arrCandidateProfiles.count == 0) )
     {
         imgViewProfilePic.image = nil;
         self.imgProfileView.image = nil;
@@ -1034,6 +1035,10 @@
                  }
                  else
                  {
+                     //store profile object to show profile details on popover screen
+                     Profile *likedProfileObj = [[Profile alloc] init];
+                     likedProfileObj = arrCandidateProfiles[profileNumber];
+                     
                      //show "You just got matched" view
                      //retrieve last inserted object id from likedprofile class
                      PFObject *likeObj = results;
@@ -1070,6 +1075,9 @@
                      //show popover view
                      [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
                      MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+                     vc.profileObj = likedProfileObj;
+                     vc.txtTraits = lblTraitMatch.text;
+                     
                      [self.navigationController presentViewController:vc animated:YES completion:nil];
                      
                      //new code

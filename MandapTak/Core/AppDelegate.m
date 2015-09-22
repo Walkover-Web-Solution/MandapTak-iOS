@@ -27,6 +27,13 @@
 {
     //apply firstload condition
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isFirstLoad"];
+    //Remote notification info
+    NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    //Accept push notification when app is not open
+    if (remoteNotifiInfo) {
+        [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
+    }
     
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
@@ -138,6 +145,12 @@
 //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
 //    self.window.rootViewController=vc;
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [[[UIAlertView alloc] initWithTitle:@"Test" message:@"notification handler called" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -10,16 +10,40 @@
 #import "SWRevealViewController.h"
 
 @interface MatchScreenVC ()
+{
+    
+    IBOutlet UIImageView *userImageView;
+    IBOutlet UILabel *lblName;
+    IBOutlet UILabel *lblAgeHeight;
+    IBOutlet UILabel *lblReligion;
+    IBOutlet UILabel *lblDesignation;
+    IBOutlet UILabel *lblTraits;
+}
 - (IBAction)back:(id)sender;
 
 @end
 
 @implementation MatchScreenVC
+@synthesize profileObj,txtTraits;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //set image view frame = circular
+    userImageView.layer.cornerRadius = 80.0f;
+    userImageView.clipsToBounds = YES;
+    
     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
     // Do any additional setup after loading the view.
+    
+    lblName.text = profileObj.name;
+    lblAgeHeight.text = [NSString stringWithFormat:@"%@,%@",profileObj.age,profileObj.height];
+    lblDesignation.text = profileObj.designation;
+    lblReligion.text = [NSString stringWithFormat:@"%@,%@",profileObj.religion,profileObj.caste];
+    lblTraits.text = txtTraits;
+    //[self getUserProfilePicForUser:objID];
+    //show user profile pic
+    userImageView.image = profileObj.profilePic;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,6 +79,10 @@
     }
      */
     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
+    
+    //if user likes a profile and receives a popup,then we need to reload the homescreen
+    //[[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"reloadCandidateList"];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
