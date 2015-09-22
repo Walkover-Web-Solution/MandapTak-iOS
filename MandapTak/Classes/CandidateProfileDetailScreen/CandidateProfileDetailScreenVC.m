@@ -392,6 +392,7 @@
     {
         CandidateProfileGalleryVC *vc = [segue destinationViewController];
         vc.arrImages = arrImages;
+        
         vc.selectedIndex = selectedIndex;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -400,6 +401,9 @@
     {
         ViewFullProfileVC *vc = [segue destinationViewController];
         vc.arrImages = arrImages;
+        vc.layerClient = self.layerClient;
+        vc.isFromMatches = self.isFromMatches;
+        vc.currentProfile = self.currentProfile;
         vc.profileObject = profileObject;
         vc.arrEducation = arrEducation;
         [self.navigationController pushViewController:vc animated:YES];

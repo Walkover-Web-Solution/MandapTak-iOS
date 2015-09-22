@@ -39,6 +39,9 @@
     IBOutlet UIButton *btnMatchPin;
     IBOutlet UIButton *btnLike;
 }
+@property (strong, nonatomic) PFObject *currentProfile;
+@property (nonatomic) LYRClient *layerClient;
+@property (nonatomic) BOOL isFromMatches;
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;
 @property (strong,nonatomic) Profile *profileObject;

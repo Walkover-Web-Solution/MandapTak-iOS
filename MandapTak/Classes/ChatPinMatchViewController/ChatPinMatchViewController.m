@@ -14,7 +14,10 @@
 #import "Profile.h"
 #import "ViewFullProfileVC.h"
 #import "CandidateProfileDetailScreenVC.h"
-@interface ChatPinMatchViewController (){
+#import <Atlas/Atlas.h>
+#import "UserManager.h"
+#import "ConversationListViewController.h"
+@interface ChatPinMatchViewController ()<ATLConversationListViewControllerDelegate, ATLConversationListViewControllerDataSource,LYRQueryControllerDelegate>{
     NSInteger currentTab;
     NSArray *arrMatches;
     NSArray *arrPins;
@@ -22,8 +25,12 @@
     NSArray *arrChats;
     NSMutableArray *arrCachedMatches;
     __weak IBOutlet UILabel *lblUserInfo;
+    NSOrderedSet *conversations;
+    __weak IBOutlet UIView *chatView;
   //  PFObject *currentProfile;
 }
+@property (nonatomic) LYRQueryController *queryController;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnChat;
 @property (weak, nonatomic) IBOutlet UIButton *btnPin;
 @property (weak, nonatomic) IBOutlet UIButton *btnMatch;
@@ -34,11 +41,16 @@
 
 @end
 
+static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-11e5-9685-919001005125";
 @implementation ChatPinMatchViewController
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.layerClient = [LYRClient clientWithAppID:appID];
+    //self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+    
+    chatView.hidden = YES;
+    
+    [self loginLayer];
     currentTab = 0;
     lblUserInfo.hidden = YES;
     arrCachedMatches = [NSMutableArray array];
@@ -74,11 +86,46 @@
         }
 
     }
+    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
+    
+    NSError *error;
+    NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
+    if (messages) {
+        NSLog(@"%tu messages", messages.count);
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+    
+    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    
+    NSError *error2 = nil;
+    NSOrderedSet *conversations = [self.layerClient executeQuery:query2 error:&error2];
+    if (conversations) {
+        NSLog(@"%tu conversations", conversations.count);
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+       
+    
+}
+
+-(void)getAllChat{
+    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    
+    NSError *error2 = nil;
+    conversations = [self.layerClient executeQuery:query2 error:&error2];
+    if (conversations) {
+        NSLog(@"%tu conversations", conversations.count);
+    } else {
+        NSLog(@"Query failed with error %@", error2);
+    }
+    [self.tableView reloadData];
 }
 
 - (IBAction)backToHome:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)tabButtonAction:(id)sender {
     [self resetTab];
     if(currentTab != [sender tag]){
@@ -98,6 +145,7 @@
     }
     }
 }
+
 -(void)unPinButtonAction:(id)sender {
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -124,7 +172,7 @@
             return arrPins.count;
             break;
         case 2:
-            return arrChats.count;
+            return conversations.count;
             break;
        
     }
@@ -138,7 +186,7 @@
     static NSString *cellIdentifier2 = @"MatchAndPinTableViewCell";
     MatchAndPinTableViewCell *matchAndPinCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
     matchAndPinCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    static NSString *cellIdentifier3 = @"DegreeTableViewCell";
+    static NSString *cellIdentifier3 = @"ChatTableViewCell";
     ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
     if(currentTab ==0){
         
@@ -208,11 +256,58 @@
 
           }
     else if(currentTab ==2){
+        LYRConversation *conv = conversations[indexPath.row];
+        if ([conv.metadata valueForKey:@"title"]){
+            chatCell.lblName = [conv.metadata valueForKey:@"title"];
+            return chatCell;
+        } else {
+            NSArray *unresolvedParticipants = [[UserManager sharedManager] unCachedUserIDsFromParticipants:[conv.participants allObjects]];
+            NSArray *resolvedNames = [[UserManager sharedManager] resolvedNamesFromParticipants:[conv.participants allObjects]];
+            
+            if ([unresolvedParticipants count]) {
+                [[UserManager sharedManager] queryAndCacheUsersWithIDs:unresolvedParticipants completion:^(NSArray *participants, NSError *error) {
+                    if (!error) {
+                        if (participants.count) {
+                            [self reloadCellForConversation:conv];
+                        }
+                    } else {
+                        NSLog(@"Error querying for Users: %@", error);
+                    }
+                }];
+            }
+            
+            if ([resolvedNames count] && [unresolvedParticipants count]) {
+                chatCell.lblName.text = [NSString stringWithFormat:@"%@ and %lu others", [resolvedNames componentsJoinedByString:@", "], (unsigned long)[unresolvedParticipants count]];
+                
+                return chatCell;
+
+            } else if ([resolvedNames count] && [unresolvedParticipants count] == 0) {
+                chatCell.lblName.text =  [NSString stringWithFormat:@"%@", [resolvedNames componentsJoinedByString:@", "]];
+                return chatCell;
+
+            } else {
+                chatCell.lblName.text =  [NSString stringWithFormat:@"Conversation with %lu users...", (unsigned long)conv.participants.count];
+                return chatCell;
+            }
+        }
         return chatCell;
+
     }
 
-       return matchAndPinCell;
+       return chatCell;
 }
+
+- (void)reloadCellForConversation:(LYRConversation *)conversation
+{
+    if (!conversation) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"`conversation` cannot be nil." userInfo:nil];
+    }
+    NSIndexPath *indexPath = [self.queryController indexPathForObject:conversation];
+    if (indexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 - (NSString *)getFormattedHeightFromValue:(NSString *)value
 {
     NSArray * arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
@@ -233,7 +328,11 @@
 
     }
     else{
-        
+       // if ([self.delegate respondsToSelector:@selector(conversationListViewController:didSelectConversation:)]){
+            LYRConversation *conversation = [self.queryController objectAtIndexPath:indexPath];
+         //   [self.delegate conversationListViewController:self didSelectConversation:conversation];
+       // }
+
     }
 }
 -(void)showFullProfileForProfile:(PFObject*)profileObj{
@@ -283,9 +382,10 @@
     UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     CandidateProfileDetailScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
-    
+    vc.currentProfile = self.currentProfile;
     vc.profileObject = profileModel;
-    
+    vc.isFromMatches = true;
+    vc.layerClient = self.layerClient;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 #pragma TabBarAction
@@ -297,6 +397,7 @@
 
 }
 -(void)switchToMatches{
+    chatView.hidden = YES;
     if([[AppData sharedData]isInternetAvailable]){
         [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
         self.lblPageTitle.text = @"MATCHES";
@@ -335,6 +436,7 @@
 }
 
 -(void)switchToPin{
+    chatView.hidden = YES;
     if([[AppData sharedData]isInternetAvailable]){
         [self.btnPin setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
         self.lblPageTitle.text = @"PINS";
@@ -392,8 +494,172 @@
    
 }
 -(void)switchToChat{
+    chatView.hidden = NO;
     [self.btnChat setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
     self.lblPageTitle.text = @"CHATS";
     [self.tableView reloadData];
 }
+#pragma mark - ATLConversationListViewControllerDataSource Methods
+
+- (NSString *)conversationListViewController:(ATLConversationListViewController *)conversationListViewController titleForConversation:(LYRConversation *)conversation
+{
+    if ([conversation.metadata valueForKey:@"title"]){
+        return [conversation.metadata valueForKey:@"title"];
+    }
+    else {
+        NSArray *unresolvedParticipants = [[UserManager sharedManager] unCachedUserIDsFromParticipants:[conversation.participants allObjects]];
+        NSArray *resolvedNames = [[UserManager sharedManager] resolvedNamesFromParticipants:[conversation.participants allObjects]];
+        
+        if ([unresolvedParticipants count]) {
+            [[UserManager sharedManager] queryAndCacheUsersWithIDs:unresolvedParticipants completion:^(NSArray *participants, NSError *error) {
+                if (!error) {
+                    if (participants.count) {
+                      //  [self reloadCellForConversation:conversation];
+                    }
+                } else {
+                    NSLog(@"Error querying for Users: %@", error);
+                }
+            }];
+        }
+        
+        if ([resolvedNames count] && [unresolvedParticipants count]) {
+            return [NSString stringWithFormat:@"%@ and %lu others", [resolvedNames componentsJoinedByString:@", "], (unsigned long)[unresolvedParticipants count]];
+        } else if ([resolvedNames count] && [unresolvedParticipants count] == 0) {
+            return [NSString stringWithFormat:@"%@", [resolvedNames componentsJoinedByString:@", "]];
+        } else {
+            return [NSString stringWithFormat:@"Conversation with %lu users...", (unsigned long)conversation.participants.count];
+        }
+    }
+}
+
+#pragma mark - Layer Authentication Methods
+
+- (void)loginLayer
+{
+    // Connect to Layer
+    // See "Quick Start - Connect" for more details
+    // https://developer.layer.com/docs/quick-start/ios#connect
+    [self.layerClient connectWithCompletion:^(BOOL success, NSError *error) {
+        if (!success) {
+            if(error.code ==6000)
+                [self presentConversationListViewController];
+        } else {
+            PFUser *user = [PFUser currentUser];
+            NSString *userID = user.objectId;
+            [self authenticateLayerWithUserID:userID completion:^(BOOL success, NSError *error) {
+                if (!error){
+                    
+                    [self presentConversationListViewController];
+                    [self getAllChat];
+                } else {
+                    NSLog(@"Failed Authenticating Layer Client with error:%@", error);
+                }
+            }];
+        }
+    }];
+}
+
+- (void)authenticateLayerWithUserID:(NSString *)userID completion:(void (^)(BOOL success, NSError * error))completion
+{
+    // Check to see if the layerClient is already authenticated.
+    if (self.layerClient.authenticatedUserID) {
+        // If the layerClient is authenticated with the requested userID, complete the authentication process.
+        if ([self.layerClient.authenticatedUserID isEqualToString:userID]){
+            NSLog(@"Layer Authenticated as User %@", self.layerClient.authenticatedUserID);
+            if (completion) completion(YES, nil);
+            return;
+        } else {
+            //If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
+            [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
+                if (!error){
+                    [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
+                        if (completion){
+                            completion(success, error);
+                        }
+                    }];
+                } else {
+                    if (completion){
+                        completion(NO, error);
+                    }
+                }
+            }];
+        }
+    } else {
+        // If the layerClient isn't already authenticated, then authenticate.
+        [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
+            if (completion){
+                completion(success, error);
+            }
+        }];
+    }
+}
+
+- (void)authenticationTokenWithUserId:(NSString *)userID completion:(void (^)(BOOL success, NSError* error))completion
+{
+    /*
+     * 1. Request an authentication Nonce from Layer
+     */
+    [self.layerClient requestAuthenticationNonceWithCompletion:^(NSString *nonce, NSError *error) {
+        if (!nonce) {
+            if (completion) {
+                completion(NO, error);
+            }
+            return;
+        }
+        
+        /*
+         * 2. Acquire identity Token from Layer Identity Service
+         */
+        NSDictionary *parameters = @{@"nonce" : nonce, @"userID" : userID};
+        
+        [PFCloud callFunctionInBackground:@"generateToken" withParameters:parameters block:^(id object, NSError *error) {
+            if (!error){
+                
+                NSString *identityToken = (NSString*)object;
+                [self.layerClient authenticateWithIdentityToken:identityToken completion:^(NSString *authenticatedUserID, NSError *error) {
+                    if (authenticatedUserID) {
+                        if (completion) {
+                            completion(YES, nil);
+                        }
+                        NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
+                    } else {
+                        completion(NO, error);
+                    }
+                }];
+            } else {
+                NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
+            }
+        }];
+        
+    }];
+}
+- (void)presentConversationListViewController
+{
+    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
+    
+    NSError *error;
+    NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
+    if (messages) {
+        NSLog(@"%tu messages", messages.count);
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+    
+    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    NSError *error2 = nil;
+    NSOrderedSet *conversations = [self.layerClient executeQuery:query2 error:&error2];
+    if (conversations) {
+        NSLog(@"%tu conversations", conversations.count);
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+    ConversationListViewController *controller = [ConversationListViewController  conversationListViewControllerWithLayerClient:self.layerClient];
+    [chatView addSubview:controller.view];
+    [self addChildViewController:controller];
+    //[self.navigationController pushViewController:controller animated:YES];
+
+}
+
+
+
 @end

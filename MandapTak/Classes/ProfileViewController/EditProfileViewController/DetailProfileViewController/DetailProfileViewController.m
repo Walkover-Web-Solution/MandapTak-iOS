@@ -96,7 +96,7 @@
 -(void)updateCurrentProfile{
     int height  = [selectedHeightInCms intValue];
     if(mangilk)
-        self.currentProfile[@"mangalik"] = @(mangilk);
+        self.currentProfile[@"manglik"] = @(mangilk);
 
     if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
@@ -165,7 +165,7 @@
         [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if([self.currentProfile valueForKey:@"mangalik"]){
-        NSString *strMangilk =[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"mangalik"] ] ;
+        NSString *strMangilk =[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"manglik"] ] ;
         mangilk = [strMangilk integerValue];
         NSString *strManglikValue =@"";
         switch (mangilk) {
@@ -179,7 +179,7 @@
                 strManglikValue = @": Anshik";
                 break;
         }
-        [btnManglik setTitle:[NSString stringWithFormat:@"Mangalik%@",strManglikValue] forState:UIControlStateNormal];
+        [btnManglik setTitle:[NSString stringWithFormat:@"manglik%@",strManglikValue] forState:UIControlStateNormal];
         [btnManglik setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
     }
@@ -333,7 +333,7 @@
             break;
     }
     mangilk =manglikTag;
-    [btnManglik setTitle:[NSString stringWithFormat:@"Mangalik%@",strManglikValue] forState:UIControlStateNormal];
+    [btnManglik setTitle:[NSString stringWithFormat:@"manglik%@",strManglikValue] forState:UIControlStateNormal];
     [btnManglik setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [popoverController dismissPopoverAnimated:YES];
 
@@ -393,7 +393,7 @@
     int height  = [selectedHeightInCms intValue];
     if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
-        self.currentProfile[@"mangalik"] = @(mangilk);
+    self.currentProfile[@"manglik"] = @(mangilk);
     if(selectedHeight)
         self.currentProfile[@"height"] = @(height);
    if(selectedCaste)

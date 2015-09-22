@@ -16,12 +16,18 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "MatchScreenVC.h"
+#import <LayerKit/LayerKit.h>
+#import <Atlas.h>
+#import "StartMainViewController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-11e5-9685-919001005125";
+static NSString *const ParseAppIDString = @"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0";
+static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -38,6 +44,21 @@
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
     [PFUser enableRevocableSessionInBackground];
+    if (LayerAppIDString.length == 0 || ParseAppIDString.length == 0 || ParseClientKeyString.length == 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Configuration" message:@"You have not configured your Layer and/or Parse keys. Please check your configuration and try again." delegate:nil cancelButtonTitle:@"Rats!" otherButtonTitles:nil];
+        [alertView show];
+        return YES;
+    }
+    // Set default ACLs
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    // Initializes a LYRClient object
+    //NSURL *appID = [NSURL URLWithString:LayerAppIDString];
+   // LYRClient *layerClient = [LYRClient clientWithAppID:appID];
+   // layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+    
+
     if([PFUser currentUser]){
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
@@ -64,6 +85,13 @@
         }
         
     }
+//    else{
+//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
+//        vc.layerClient = layerClient;
+//        self.window.rootViewController=vc;
+//
+//    }
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     

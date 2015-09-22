@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <LayerKit/LayerKit.h>
 @interface TutorialContentViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property NSUInteger pageIndex;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property NSString *titleText;
 @property NSString *imageFile;
+@property (nonatomic) LYRClient *layerClient;
+
 @end

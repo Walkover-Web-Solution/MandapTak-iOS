@@ -116,17 +116,6 @@
     
 }
 
-/*
- // The designated initializer. Override to perform setup that is required before the view is loaded.
- - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
- if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
- // Custom initialization
- }
- return self;
- }
- */
-
-
 
 #pragma mark UICollectionViewDataSource
 
@@ -227,12 +216,7 @@
 }
 
 - (void)dismissPickerView {
-//    if (_popoverController) {
-//        [_popoverController dismissPopoverAnimated:YES];
-//    }
-   // else {
         [self dismissViewControllerAnimated:YES completion:NULL];
-   // }
 }
 #pragma mark - Navigation
 

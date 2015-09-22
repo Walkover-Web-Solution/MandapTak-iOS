@@ -127,10 +127,7 @@
     if([[AppData sharedData]isInternetAvailable]){
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-
-        //[query whereKey:@"userId" equalTo:userId];
         [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
-
         [query includeKey:@"Parent.Parent"];
         [query includeKey:@"currentLocation.Parent.Parent"];
         [query includeKey:@"placeOfBirth.Parent.Parent"];
@@ -148,16 +145,13 @@
             
             if (!error) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-
                 // The find succeeded.
                 PFObject *obj= objects[0];
                 currentProfile = obj;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFirstTabWithCurrentInfo" object:self userInfo:@{@"currentProfile": currentProfile}];
-
                 [self switchToCurrentTab];
                 [self getAllPhotos];
                 [self updateuserInfo];
-                
             }
             else if (error.code ==100){
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -171,6 +165,7 @@
             else if (error.code ==209){
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [PFUser logOut];
+                
                 PFUser *user = nil;
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation setObject:user forKey:@"user"];
@@ -552,8 +547,8 @@
 -(void)updatedPfObjectForSecondTab:(PFObject *)updatedUserProfile{
     if([updatedUserProfile valueForKey:@"weight"] !=nil)
         [currentProfile setObject:[updatedUserProfile valueForKey:@"weight"]forKey:@"weight"];
-    if([updatedUserProfile valueForKey:@"mangalik"] !=nil)
-        [currentProfile setObject:[updatedUserProfile valueForKey:@"mangalik"]forKey:@"mangalik"];
+    if([updatedUserProfile valueForKey:@"manglik"] !=nil)
+        [currentProfile setObject:[updatedUserProfile valueForKey:@"manglik"]forKey:@"manglik"];
 
     if([updatedUserProfile valueForKey:@"height"] !=nil)
         [currentProfile setObject:[updatedUserProfile valueForKey:@"height"]forKey:@"height"];
@@ -799,14 +794,13 @@
     }
     [[AppData sharedData] checkReachablitywithCompletionBlock:^(bool isReachable) {
         if(isReachable){
-                   }
+        }
         else{
           
         }
     }];
     if([[AppData sharedData]isInternetAvailable]){
         
-        [self updateThePhotoFromPrimary];
         if([txtMinBudget.text integerValue]>0)
             currentProfile[@"minMarriageBudget"] = @([txtMinBudget.text integerValue]);
         if([txtMaxBudget.text integerValue]>0)
@@ -899,32 +893,41 @@
                 
             }
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps!!" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [alert show]; 
         }
         else{
-            MBProgressHUD * hud;
-            hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            //MBProgressHUD * hud;
+            //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [currentProfile setObject: @YES  forKey: @"isComplete"];
             [currentProfile setObject: @NO  forKey: @"paid"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserProfileUpdatedNotification" object:self];
+
             [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
             [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
+                //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                if(self.isMakingNewProfile){
+                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+                    [self presentViewController:vc animated:YES completion:nil];
+                }
+                else
+                    [self dismissViewControllerAnimated:YES completion:nil];
+
                 if (!error) {
                     // succesful
-                    if(self.isMakingNewProfile){
-                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-                        [self presentViewController:vc animated:YES completion:nil];
-                    }
-                    else
-                        [self dismissViewControllerAnimated:YES completion:nil];
+//                    if(self.isMakingNewProfile){
+//                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//                        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+//                        [self presentViewController:vc animated:YES completion:nil];
+//                    }
+//                    else
+//                        [self dismissViewControllerAnimated:YES completion:nil];
                     
                 }
                 else if (error.code ==100){
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
-                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Profile Error" message:@"Connection Failed." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [errorAlertView show];
                 }
                 else if (error.code ==120){
@@ -934,7 +937,7 @@
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
                     [[AppData sharedData]logOut];
-                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Profile Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [errorAlertView show];
                     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
@@ -944,7 +947,7 @@
                 else {
                     //Something bad has ocurred
                     NSString *errorString = [[error userInfo] objectForKey:@"error"];
-                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Profile Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [errorAlertView show];
                 }
             }];
@@ -962,15 +965,6 @@
 -(void)makePhotoToPrimary:(PFObject*)primaryPic{
     [primaryPic setObject:[NSNumber numberWithBool:YES] forKey:@"isPrimary"];
     [primaryPic saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // succesful
-            
-        } else {
-            //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
-        }
     }];
 }
 -(void)updateThePhotoFromPrimary{
@@ -1151,6 +1145,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
 }];
+    [self updateThePhotoFromPrimary];
 
 }
 #pragma mark PopoverDelegate
@@ -1462,6 +1457,5 @@
     [self.collectionView reloadData];
     [self addPhotosToParse];
 }
-
 
 @end

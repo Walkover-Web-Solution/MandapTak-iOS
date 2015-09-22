@@ -13,7 +13,7 @@
 #import "Education.h"
 #import "SVWebViewController.h"
 #import "SVModalWebViewController.h"
-
+#import <LayerKit/LayerKit.h>
 
 @interface ViewFullProfileVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -49,7 +49,9 @@
 - (IBAction)showWorkDetails:(id)sender;
 - (IBAction)showBiodata:(id)sender;
 - (IBAction)downloadBiodata:(id)sender;
-
+@property (nonatomic) LYRClient *layerClient;
+@property (nonatomic) BOOL isFromMatches;
+@property (strong, nonatomic) PFObject *currentProfile;
 @property (strong,nonatomic) NSMutableArray *arrImages;
 @property (strong,nonatomic) NSMutableArray *arrEducation;
 @property (strong,nonatomic) Profile *profileObject;

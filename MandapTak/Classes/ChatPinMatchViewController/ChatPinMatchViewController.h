@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <LayerKit/LayerKit.h>
+
 @interface ChatPinMatchViewController : UIViewController
+@property (nonatomic) LYRClient *layerClient;
 @property (strong, nonatomic) PFObject *currentProfile;
 @end

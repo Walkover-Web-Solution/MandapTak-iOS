@@ -74,7 +74,7 @@
 
 
 #import <UIKit/UIKit.h>
-
+#import <LayerKit/LayerKit.h>
 @class SWRevealViewController;
 @protocol SWRevealViewControllerDelegate;
 
@@ -215,6 +215,7 @@ typedef enum
 
 // Delegate
 @property (weak, nonatomic) id<SWRevealViewControllerDelegate> delegate;
+@property (nonatomic) LYRClient *layerClient;
 
 @end
 

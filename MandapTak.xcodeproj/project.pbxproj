@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		571991487120229D756C60BF /* libPods-MandapTak.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */; };
 		750869721B9F096800022596 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 750869711B9F096800022596 /* UIImageEffects.m */; };
 		7533F6AB1B84AF0A00B83EFD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A51B84AF0A00B83EFD /* add.png */; };
 		7533F6AC1B84AF0A00B83EFD /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A61B84AF0A00B83EFD /* add@2x.png */; };
@@ -110,6 +111,15 @@
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
+		893F03361BAAA94400BB1B59 /* PFUser+ATLParticipant.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F03351BAAA94400BB1B59 /* PFUser+ATLParticipant.m */; };
+		893F033B1BAAC60400BB1B59 /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F03381BAAC60400BB1B59 /* ConversationViewController.m */; };
+		893F033C1BAAC60400BB1B59 /* ParticipantTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F033A1BAAC60400BB1B59 /* ParticipantTableViewController.m */; };
+		893F033F1BAACB9A00BB1B59 /* ConversationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F033E1BAACB9A00BB1B59 /* ConversationListViewController.m */; };
+		893F03491BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F03421BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m */; };
+		893F034A1BAACC3C00BB1B59 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 893F03441BAACC3C00BB1B59 /* SVProgressHUD.bundle */; };
+		893F034B1BAACC3C00BB1B59 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F03461BAACC3C00BB1B59 /* SVProgressHUD.m */; };
+		893F034C1BAACC3C00BB1B59 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F03481BAACC3C00BB1B59 /* SVRadialGradientLayer.m */; };
+		893F034E1BAACCCB00BB1B59 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893F034D1BAACCCB00BB1B59 /* ParseUI.framework */; };
 		8947186D1B8EF49600473EEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8947186C1B8EF49600473EEF /* AssetsLibrary.framework */; };
 		894BBA681B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 894BBA671B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m */; };
 		894BBA7A1B870F89006C9D22 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894BBA791B870F89006C9D22 /* MobileCoreServices.framework */; };
@@ -250,6 +260,7 @@
 		89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E8D9381B78AF3F008A8E2F /* BasicProfileViewController.m */; };
 		89E8D93C1B78CFF1008A8E2F /* DetailProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E8D93B1B78CFF1008A8E2F /* DetailProfileViewController.m */; };
 		89EADB221BA6A2A300D56DBC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EADB211BA6A2A300D56DBC /* FBSDKLoginKit.framework */; };
+		89FBCBDB1BA97B3900CF2274 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FBCBDA1BA97B3900CF2274 /* UserManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,6 +274,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7332D6DDB271BE417996C2BD /* Pods-MandapTak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MandapTak.release.xcconfig"; path = "Pods/Target Support Files/Pods-MandapTak/Pods-MandapTak.release.xcconfig"; sourceTree = "<group>"; };
 		750869701B9F096800022596 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
 		750869711B9F096800022596 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		7533F6A51B84AF0A00B83EFD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
@@ -404,6 +416,23 @@
 		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		893E76E31B8871130009F512 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		893E76E41B8871130009F512 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
+		893F03341BAAA94400BB1B59 /* PFUser+ATLParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFUser+ATLParticipant.h"; sourceTree = "<group>"; };
+		893F03351BAAA94400BB1B59 /* PFUser+ATLParticipant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFUser+ATLParticipant.m"; sourceTree = "<group>"; };
+		893F03371BAAC60400BB1B59 /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
+		893F03381BAAC60400BB1B59 /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		893F03391BAAC60400BB1B59 /* ParticipantTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticipantTableViewController.h; sourceTree = "<group>"; };
+		893F033A1BAAC60400BB1B59 /* ParticipantTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticipantTableViewController.m; sourceTree = "<group>"; };
+		893F033D1BAACB9A00BB1B59 /* ConversationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListViewController.h; sourceTree = "<group>"; };
+		893F033E1BAACB9A00BB1B59 /* ConversationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListViewController.m; sourceTree = "<group>"; };
+		893F03411BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		893F03421BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		893F03431BAACC3C00BB1B59 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		893F03441BAACC3C00BB1B59 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		893F03451BAACC3C00BB1B59 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		893F03461BAACC3C00BB1B59 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		893F03471BAACC3C00BB1B59 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		893F03481BAACC3C00BB1B59 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		893F034D1BAACCCB00BB1B59 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		8947186C1B8EF49600473EEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		894BBA661B86EDFD006C9D22 /* PhotosOptionPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosOptionPopoverViewController.h; sourceTree = "<group>"; };
 		894BBA671B86EDFD006C9D22 /* PhotosOptionPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosOptionPopoverViewController.m; sourceTree = "<group>"; };
@@ -631,6 +660,10 @@
 		89E8D93A1B78CFF1008A8E2F /* DetailProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailProfileViewController.h; sourceTree = "<group>"; };
 		89E8D93B1B78CFF1008A8E2F /* DetailProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailProfileViewController.m; sourceTree = "<group>"; };
 		89EADB211BA6A2A300D56DBC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		89FBCBD91BA97B3900CF2274 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		89FBCBDA1BA97B3900CF2274 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
+		F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MandapTak.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB50B474CF238D2E716E2AA5 /* Pods-MandapTak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MandapTak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MandapTak/Pods-MandapTak.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -638,6 +671,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				893F034E1BAACCCB00BB1B59 /* ParseUI.framework in Frameworks */,
 				8947186D1B8EF49600473EEF /* AssetsLibrary.framework in Frameworks */,
 				894BBA7C1B870F90006C9D22 /* libz.dylib in Frameworks */,
 				894BBA7A1B870F89006C9D22 /* MobileCoreServices.framework in Frameworks */,
@@ -658,6 +692,7 @@
 				89D9F7451B6B591C004CBE3D /* StoreKit.framework in Frameworks */,
 				89D9F7431B6B590F004CBE3D /* CoreLocation.framework in Frameworks */,
 				89D9F7411B6B5905004CBE3D /* libstdc++.6.dylib in Frameworks */,
+				571991487120229D756C60BF /* libPods-MandapTak.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +706,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20548297EDF85810D4CF6305 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F16B09727B6978195951B6F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB50B474CF238D2E716E2AA5 /* Pods-MandapTak.debug.xcconfig */,
+				7332D6DDB271BE417996C2BD /* Pods-MandapTak.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7508696F1B9F096000022596 /* LightBlurEffect */ = {
 			isa = PBXGroup;
 			children = (
@@ -963,6 +1015,21 @@
 			path = LocationPreferencePopover;
 			sourceTree = "<group>";
 		};
+		893F03401BAACC3C00BB1B59 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				893F03411BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.h */,
+				893F03421BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m */,
+				893F03431BAACC3C00BB1B59 /* SVProgressHUD-Prefix.pch */,
+				893F03441BAACC3C00BB1B59 /* SVProgressHUD.bundle */,
+				893F03451BAACC3C00BB1B59 /* SVProgressHUD.h */,
+				893F03461BAACC3C00BB1B59 /* SVProgressHUD.m */,
+				893F03471BAACC3C00BB1B59 /* SVRadialGradientLayer.h */,
+				893F03481BAACC3C00BB1B59 /* SVRadialGradientLayer.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		894BBA651B86ED15006C9D22 /* PhotosOptionPopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -1107,6 +1174,12 @@
 		896D18321B9487AD001513A5 /* ChatPinMatchViewController */ = {
 			isa = PBXGroup;
 			children = (
+				893F033D1BAACB9A00BB1B59 /* ConversationListViewController.h */,
+				893F033E1BAACB9A00BB1B59 /* ConversationListViewController.m */,
+				893F03371BAAC60400BB1B59 /* ConversationViewController.h */,
+				893F03381BAAC60400BB1B59 /* ConversationViewController.m */,
+				893F03391BAAC60400BB1B59 /* ParticipantTableViewController.h */,
+				893F033A1BAAC60400BB1B59 /* ParticipantTableViewController.m */,
 				896BBFFE1B95956B009FD221 /* Chat Cell */,
 				896BBFFF1B95956B009FD221 /* MatchAndPinCell */,
 				896D18331B9487B6001513A5 /* ChatPinMatchViewController.h */,
@@ -1118,12 +1191,15 @@
 		897C238D1B6B562C00FC32E9 = {
 			isa = PBXGroup;
 			children = (
+				893F034D1BAACCCB00BB1B59 /* ParseUI.framework */,
 				8947186C1B8EF49600473EEF /* AssetsLibrary.framework */,
 				894BBA7B1B870F90006C9D22 /* libz.dylib */,
 				894BBA791B870F89006C9D22 /* MobileCoreServices.framework */,
 				897C23981B6B562C00FC32E9 /* MandapTak */,
 				897C23B51B6B562C00FC32E9 /* MandapTakTests */,
 				897C23971B6B562C00FC32E9 /* Products */,
+				3F16B09727B6978195951B6F /* Pods */,
+				20548297EDF85810D4CF6305 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1540,6 +1616,10 @@
 		89D9F7251B6B5797004CBE3D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				893F03341BAAA94400BB1B59 /* PFUser+ATLParticipant.h */,
+				893F03351BAAA94400BB1B59 /* PFUser+ATLParticipant.m */,
+				89FBCBD91BA97B3900CF2274 /* UserManager.h */,
+				89FBCBDA1BA97B3900CF2274 /* UserManager.m */,
 				899C537D1B73447B00C24DA8 /* Location.h */,
 				899C537E1B73447B00C24DA8 /* Location.m */,
 				8981464A1B7C9F0000DF30AB /* Religion.h */,
@@ -1613,6 +1693,7 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				893F03401BAACC3C00BB1B59 /* SVProgressHUD */,
 				8997CC6E1BA182C8001B11AA /* Reachablity */,
 				8997CC6B1BA18280001B11AA /* Reachability.h */,
 				8997CC6C1BA18280001B11AA /* Reachability.m */,
@@ -1818,9 +1899,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 897C23BC1B6B562C00FC32E9 /* Build configuration list for PBXNativeTarget "MandapTak" */;
 			buildPhases = (
+				7B407C0C63AFA4A478705F1C /* Check Pods Manifest.lock */,
 				897C23921B6B562C00FC32E9 /* Sources */,
 				897C23931B6B562C00FC32E9 /* Frameworks */,
 				897C23941B6B562C00FC32E9 /* Resources */,
+				722BEC9F038B2374F4047006 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2007,6 +2090,7 @@
 				896D18291B944DDB001513A5 /* Weeding_icon.png in Resources */,
 				75918F6D1B79E9A10082D7EC /* Preference.storyboard in Resources */,
 				7564E22B1B970B3200B8D052 /* dislike.png in Resources */,
+				893F034A1BAACC3C00BB1B59 /* SVProgressHUD.bundle in Resources */,
 				758C8E701B87404B00FF634E /* slide.png in Resources */,
 				758C8E7D1B87412800FF634E /* unlike@2x.png in Resources */,
 				7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */,
@@ -2030,6 +2114,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		722BEC9F038B2374F4047006 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MandapTak/Pods-MandapTak-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B407C0C63AFA4A478705F1C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		897C23921B6B562C00FC32E9 /* Sources */ = {
@@ -2060,10 +2177,12 @@
 				8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */,
 				8997CC851BA182C8001B11AA /* SCReachabilityFlagsParser.m in Sources */,
 				896D18131B943116001513A5 /* VerficationViewController.m in Sources */,
+				893F03361BAAA94400BB1B59 /* PFUser+ATLParticipant.m in Sources */,
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */,
 				75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */,
+				89FBCBDB1BA97B3900CF2274 /* UserManager.m in Sources */,
 				8997CC891BA182C8001B11AA /* SCNetworkReachability+Compatibility.m in Sources */,
 				89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */,
 				89936AD11B9D5A7F00C74E0A /* AgentViewController.m in Sources */,
@@ -2073,6 +2192,7 @@
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
 				899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */,
+				893F03491BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m in Sources */,
 				897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */,
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
 				89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */,
@@ -2091,6 +2211,7 @@
 				89E0FA581B85C92A000BD65A /* ZCAssetTablePicker.m in Sources */,
 				8967FADF1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m in Sources */,
 				89936AD41B9D5A9200C74E0A /* AgentCustomTableViewCell.m in Sources */,
+				893F033B1BAAC60400BB1B59 /* ConversationViewController.m in Sources */,
 				899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */,
 				897C239C1B6B562C00FC32E9 /* main.m in Sources */,
 				8981464C1B7C9F0000DF30AB /* Religion.m in Sources */,
@@ -2119,18 +2240,22 @@
 				757F87691B8EF1DC00C083A4 /* SVWebViewControllerActivity.m in Sources */,
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
 				8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */,
+				893F034C1BAACC3C00BB1B59 /* SVRadialGradientLayer.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
 				8997CC881BA182C8001B11AA /* SCNetworkReachability.m in Sources */,
 				75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */,
 				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */,
+				893F033F1BAACB9A00BB1B59 /* ConversationListViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
 				8997CC991BA1840A001B11AA /* ABMultitonInjector.m in Sources */,
 				896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */,
 				896D18351B9487B6001513A5 /* ChatPinMatchViewController.m in Sources */,
 				75B5BC311B9B2F730097C851 /* ManglikPopoverViewController.m in Sources */,
+				893F034B1BAACC3C00BB1B59 /* SVProgressHUD.m in Sources */,
 				895CD7811B81E37D00816FDE /* IndustryPopoverViewController.m in Sources */,
+				893F033C1BAAC60400BB1B59 /* ParticipantTableViewController.m in Sources */,
 				895CD7781B81CFB500816FDE /* Education.m in Sources */,
 				89D9F7341B6B579E004CBE3D /* StartMainViewController.m in Sources */,
 				89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */,
@@ -2291,6 +2416,7 @@
 		};
 		897C23BD1B6B562C00FC32E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB50B474CF238D2E716E2AA5 /* Pods-MandapTak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
@@ -2311,7 +2437,7 @@
 				INFOPLIST_FILE = MandapTak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 			};
@@ -2319,6 +2445,7 @@
 		};
 		897C23BE1B6B562C00FC32E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7332D6DDB271BE417996C2BD /* Pods-MandapTak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
@@ -2339,7 +2466,7 @@
 				INFOPLIST_FILE = MandapTak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 			};

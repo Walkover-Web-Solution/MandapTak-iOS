@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6ADEB722-A354-423D-88E0-879F5A51DB45</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MandapTak</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4F3F46D7D407095CC8C7AEDEEC54CEECD8DA63AF</key>
+		<string>walkover.git.beanstalkapp.com:/walkover/mandaptak-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MandapTak.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4F3F46D7D407095CC8C7AEDEEC54CEECD8DA63AF</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>walkover.git.beanstalkapp.com:/walkover/mandaptak-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4F3F46D7D407095CC8C7AEDEEC54CEECD8DA63AF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4F3F46D7D407095CC8C7AEDEEC54CEECD8DA63AF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mandaptak-ios%202</string>
+		</dict>
+	</array>
+</dict>
+</plist>

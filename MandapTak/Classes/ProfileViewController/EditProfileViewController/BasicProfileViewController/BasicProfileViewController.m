@@ -45,32 +45,10 @@
     txtFullName.delegate =self;
     lblBornInPlace.hidden= YES;
     if(self.currentProfile ==nil){
-//        MBProgressHUD * hud;
-//        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//
-//        NSString *userId = @"m2vi20vsi4";
-//        PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-//        
-//        [query whereKey:@"userId" equalTo:userId];
-//        [query includeKey:@"currentLocation.Parent.Parent"];
-//        [query includeKey:@"placeOfBirth.Parent.Parent"];
-//
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//            [MBProgressHUD hideHUDForView:self.view animated:YES];
-//
-//            if (!error) {
-//                // The find succeeded.
-//                PFObject *obj = objects[0];
-//                self.currentProfile = obj;
-//                [self updateUserInfo];
-//            }
-//        }];
-
     }
     else{
         [self updateUserInfo];
     }
-    
 }
 -(void)updateUserProfile:(NSNotification*)notification{
     NSDictionary* userInfo = notification.userInfo;
@@ -321,18 +299,6 @@
             return YES;
         }
     }
-//    else if([textField isEqual:mPasswordTextField]){
-//        NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789@$}{._-()][:]+"] invertedSet];
-//        
-//        if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
-//            return NO;
-//        }
-//        
-//        else{
-//            return YES;
-//        }
-//        
-//    }
     return YES;
 }
 

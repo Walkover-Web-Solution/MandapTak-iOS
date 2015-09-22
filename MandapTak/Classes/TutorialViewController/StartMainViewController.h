@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <LayerKit/LayerKit.h>
 @interface StartMainViewController : UIViewController
+
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageTitles;
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+@property (nonatomic) LYRClient *layerClient;
 @property (strong, nonatomic) NSArray *pageImages;
 @end

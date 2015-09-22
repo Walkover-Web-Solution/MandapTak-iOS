@@ -20,6 +20,7 @@
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "MBCircularProgressBar/MBCircularProgressBarView.h"
+#import <LayerKit/LayerKit.h>
 
 @interface UserProfileViewController : UIViewController
 {
@@ -45,6 +46,7 @@
     IBOutlet MBCircularProgressBarView *progressBar;
     IBOutlet UILabel *lblTraitMatch;
 }
+@property (nonatomic) LYRClient *layerClient;
 - (IBAction)showCandidateProfile:(id)sender;
 - (IBAction)pinAction:(id)sender;
 - (IBAction)likeAction:(id)sender;
