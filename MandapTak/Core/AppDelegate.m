@@ -156,8 +156,9 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     }
 */
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isNotification"];
-    
-    [[[UIAlertView alloc] initWithTitle:@"Test" message:@"notification msg" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+    //NSLog(@"profile id -> %@",[userInfo valueForKey:@"profileid"]);
+    [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"profileid"] forKey:@"notificationProfileId"];
+    //[[[UIAlertView alloc] initWithTitle:@"Test" message:@"notification msg" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
     
     if (application.applicationState == UIApplicationStateActive)
     {
@@ -174,13 +175,13 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 //    MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
 //    self.window.rootViewController=vc;
 }
-
+/*
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [[[UIAlertView alloc] initWithTitle:@"Test" message:@"notification handler called" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
 
 }
-
+*/
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

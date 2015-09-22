@@ -150,7 +150,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //check notification
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
     {
-        [[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = TRUE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = TRUE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
         //show popover view
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
@@ -161,7 +161,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //check first load
     else if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isFirstLoad"] isEqualToString:@"yes"])
     {
-        [[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"first load" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"first load" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isFirstLoad"];
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
     }
@@ -227,6 +227,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                          profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
                          //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
                          profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
+                         profileModel.gender = profileObj[@"gender"];
                          //caste label
                          PFObject *caste = [profileObj valueForKey:@"casteId"];
                          PFObject *religion = [profileObj valueForKey:@"religionId"];
@@ -512,9 +513,22 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         [progressBar setValue:0 animateWithDuration:0];
         
         //get traits count
+        //condition for gender
+        NSString *boyProfileId,*girlProfileId;
+        if ([firstProfile.gender isEqualToString:@"Male"])
+        {
+            boyProfileId = objID;
+            girlProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+        }
+        else
+        {
+            boyProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+            girlProfileId = objID;
+        }
+        
         [PFCloud callFunctionInBackground:@"matchKundli"
-                           withParameters:@{@"boyProfileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
-                                            @"girlProfileId":objID}
+                           withParameters:@{@"boyProfileId":boyProfileId,
+                                            @"girlProfileId":girlProfileId}
                                     block:^(NSString *traitResult, NSError *error)
          {
              if (!error)
