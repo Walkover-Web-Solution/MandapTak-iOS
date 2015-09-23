@@ -320,6 +320,8 @@
                 case 2:
                     txtFldCell.txtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Company" attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
                     txtFldCell.txtField.tag = 2;
+                    [txtFldCell.txtField setKeyboardType:UIKeyboardTypeAlphabet];
+
                     if(selectedCompany){
                         txtFldCell.txtField.text = selectedCompany;
                     }

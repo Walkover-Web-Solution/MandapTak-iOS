@@ -375,6 +375,8 @@
                     [arrOldImages addObject:photo];
                     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
                     [self.collectionView reloadData];
+                    [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
+
                 }];
             }
         }
@@ -512,16 +514,7 @@
         [currentProfile setObject:[updatedUserProfile valueForKey:@"placeOfBirth"] forKey:@"placeOfBirth"];
     // Save
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    // succesful
-        
-                } else {
-                    //Something bad has ocurred
-//                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
-//                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//                    [errorAlertView show];
-                }
-            }];
+                         }];
 
 }
 -(void)updatedPfObjectForFourthTab:(PFObject *)updatedUserProfile{
@@ -532,17 +525,8 @@
     if([updatedUserProfile valueForKey:@"bioData"] !=nil)
         [currentProfile setObject:[updatedUserProfile valueForKey:@"bioData"]forKey:@"bioData"];
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // succesful
-            
-        } else {
-            //Something bad has ocurred
-//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [errorAlertView show];
-        }
-    }];
-   }
+     }];
+}
 
 -(void)updatedPfObjectForSecondTab:(PFObject *)updatedUserProfile{
     if([updatedUserProfile valueForKey:@"weight"] !=nil)
@@ -573,17 +557,9 @@
 
     }
     if([updatedUserProfile valueForKey:@"weight"] !=nil)
-        [currentProfile setObject:[updatedUserProfile valueForKey:@"weight"]forKey:@"weight"];
+       [currentProfile setObject:[updatedUserProfile valueForKey:@"weight"]forKey:@"weight"];
+    
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // succesful
-            
-        } else {
-            //Something bad has ocurred
-//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [errorAlertView show];
-        }
     }];
     
 }
@@ -639,16 +615,7 @@
         
     }
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // succesful
-            
-        } else {
-            //Something bad has ocurred
-//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [errorAlertView show];
-        }
-    }];
+        }];
 
 }
 -(void)removeSubview{
@@ -1346,19 +1313,20 @@
     [PFObject saveAllInBackground:arrAllPhotoToBeSaved block:^(BOOL succeeded, NSError *error) {
         //[MBProgressHUD hideHUDForView:self.view animated:YES];
         isUploadingPhotos = NO;
-        [choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
-
+        [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
         if (succeeded) {
-            NSLog(@"Woohoo!");
+            [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
             arrNewImages = [NSMutableArray array];
 
             [self getAllPhotos];
         }
         else if (error.code ==100){
+            [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [errorAlertView show];
         }
         else if (error.code ==209){
+            [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [errorAlertView show];
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -1368,6 +1336,7 @@
         }
 
         else {
+            [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
             //Something bad has ocurred
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];

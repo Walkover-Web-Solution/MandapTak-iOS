@@ -41,7 +41,6 @@
 
 @end
 
-static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-11e5-9685-919001005125";
 @implementation ChatPinMatchViewController
 - (void)viewDidLoad {
     [super viewDidLoad];

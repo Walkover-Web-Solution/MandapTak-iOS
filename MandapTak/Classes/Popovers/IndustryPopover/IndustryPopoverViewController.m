@@ -26,10 +26,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isSearching =NO;
+    currentTime = 0;
     self.arrTableData =[NSMutableArray array];
-    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
     [self loadMore];
-   
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+
     // Do any additional setup after loading the view.
 }
 
@@ -122,9 +124,9 @@
 {
     // check if indexPath.row is last row
     // Perform operation to load new Cell's.
-    if(indexPath.row ==self.arrTableData.count-1){
-        [self loadMore];
-    }
+//    if(indexPath.row ==self.arrTableData.count-1){
+//        [self loadMore];
+//    }
 }
 
 #pragma mark - Drag delegate methods
@@ -136,9 +138,7 @@
 - (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
 {
     //send load more request(generally network request) here
-    
     [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
-    
 }
 -(void)loadMore{
     MBProgressHUD * hud;
