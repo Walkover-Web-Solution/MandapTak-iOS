@@ -61,6 +61,10 @@
     NSArray *arrHeight;
     
     NSString *strObj;
+    
+    //constraints
+    IBOutlet NSLayoutConstraint *equalHeightConstraint;
+    
 }
 - (IBAction)back:(id)sender;
 - (IBAction)setPreferences:(id)sender;

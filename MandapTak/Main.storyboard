@@ -629,53 +629,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxb-02-Tjg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alia Chopra" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxb-02-Tjg">
                                 <rect key="frame" x="16" y="268" width="288" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="5Gf-cC-yaD"/>
+                                    <constraint firstAttribute="width" constant="288" id="ohu-ie-1OL"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="20"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Epe-tY-Lwq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23, 5,7&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Epe-tY-Lwq">
                                 <rect key="frame" x="16" y="294" width="288" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="qwJ-wq-01O"/>
+                                    <constraint firstAttribute="width" constant="288" id="xiQ-tH-G0l"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBj-Tc-Klr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hindu, Punjabi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBj-Tc-Klr">
                                 <rect key="frame" x="16" y="320" width="288" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="6p0-3m-mni"/>
+                                    <constraint firstAttribute="width" constant="288" id="SDd-di-F0n"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZe-al-uPc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Software Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZe-al-uPc">
                                 <rect key="frame" x="16" y="346" width="288" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="TJC-UF-coV"/>
+                                    <constraint firstAttribute="width" constant="288" id="qBv-sL-2uo"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKS-xu-ofk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 Traits match" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKS-xu-ofk">
                                 <rect key="frame" x="16" y="372" width="288" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Be8-LR-N1z"/>
+                                    <constraint firstAttribute="width" constant="288" id="uRs-dN-W59"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You just got matched with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu0-jE-KDf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You just got matched with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu0-jE-KDf">
                                 <rect key="frame" x="34" y="30" width="252" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="252" id="FHc-N0-1OX"/>
+                                    <constraint firstAttribute="height" constant="24" id="mj0-qY-Iw6"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="20"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kY0-KC-LO9">
-                                <rect key="frame" x="0.0" y="428" width="320" height="40"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
-                                <state key="normal" title="Chat">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0E-fy-qNc">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0E-fy-qNc">
                                 <rect key="frame" x="281" y="5" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="5d1-We-F3A"/>
+                                    <constraint firstAttribute="height" constant="32" id="ecK-Dg-VNV"/>
+                                </constraints>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
                                 <state key="normal" image="matchCellOption.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -685,11 +704,49 @@
                                     <action selector="back:" destination="DU5-Rv-5oI" eventType="touchUpInside" id="gyB-cQ-x73"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aib-Am-zat">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aib-Am-zat">
                                 <rect key="frame" x="80" y="79" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Bw4-Mk-dUm"/>
+                                    <constraint firstAttribute="height" constant="160" id="jNj-t9-ZsN"/>
+                                </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kY0-KC-LO9">
+                                <rect key="frame" x="0.0" y="515" width="320" height="40"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="NB7-TS-1Xq"/>
+                                    <constraint firstAttribute="height" constant="40" id="PzD-XV-B9q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                <state key="normal" title="Chat">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZZe-al-uPc" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="1qs-cs-Aww"/>
+                            <constraint firstItem="M0E-fy-qNc" firstAttribute="top" secondItem="HnU-Uo-vFa" secondAttribute="bottom" constant="5" id="2j4-Q5-mnD"/>
+                            <constraint firstItem="Epe-tY-Lwq" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="9AX-2I-Vte"/>
+                            <constraint firstItem="kY0-KC-LO9" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="IMk-1x-9oE"/>
+                            <constraint firstItem="aib-Am-zat" firstAttribute="top" secondItem="Iu0-jE-KDf" secondAttribute="bottom" constant="25" id="KMt-sJ-h8G"/>
+                            <constraint firstItem="Iu0-jE-KDf" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="Pvs-M0-q9K"/>
+                            <constraint firstItem="Epe-tY-Lwq" firstAttribute="top" secondItem="Dxb-02-Tjg" secondAttribute="bottom" constant="2" id="PyG-A0-ft2"/>
+                            <constraint firstItem="M0E-fy-qNc" firstAttribute="leading" secondItem="ZCB-X3-gsr" secondAttribute="leading" constant="281" id="REp-gP-gzj"/>
+                            <constraint firstItem="PMX-re-7M9" firstAttribute="top" secondItem="kY0-KC-LO9" secondAttribute="bottom" constant="13" id="WOR-a1-6TC"/>
+                            <constraint firstItem="SBj-Tc-Klr" firstAttribute="top" secondItem="Epe-tY-Lwq" secondAttribute="bottom" constant="2" id="XTa-c1-k7g"/>
+                            <constraint firstItem="Dxb-02-Tjg" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="Z0v-Fv-aH7"/>
+                            <constraint firstAttribute="trailing" secondItem="M0E-fy-qNc" secondAttribute="trailing" constant="7" id="dsz-Ez-1F3"/>
+                            <constraint firstItem="Iu0-jE-KDf" firstAttribute="top" secondItem="HnU-Uo-vFa" secondAttribute="bottom" constant="30" id="ezO-x7-lwx"/>
+                            <constraint firstItem="Dxb-02-Tjg" firstAttribute="top" secondItem="aib-Am-zat" secondAttribute="bottom" constant="29" id="jdZ-NR-SGk"/>
+                            <constraint firstItem="yKS-xu-ofk" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="kjP-Qu-dnt"/>
+                            <constraint firstItem="yKS-xu-ofk" firstAttribute="top" secondItem="ZZe-al-uPc" secondAttribute="bottom" constant="2" id="lne-5G-u98"/>
+                            <constraint firstItem="ZZe-al-uPc" firstAttribute="top" secondItem="SBj-Tc-Klr" secondAttribute="bottom" constant="2" id="mqy-ZH-kyf"/>
+                            <constraint firstItem="aib-Am-zat" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="wQR-TV-OrF"/>
+                            <constraint firstItem="SBj-Tc-Klr" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="wp0-YH-NBn"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
