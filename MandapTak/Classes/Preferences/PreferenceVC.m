@@ -19,12 +19,16 @@
     [super viewDidLoad];
     //[[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:(240/255.0f) green:(113/255.0f) blue:(116/255.0f) alpha:1.0f]];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    //self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName : [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17.0f]};
+    
+    self.navigationController.navigationBar.titleTextAttributes = @{
+                                                                    NSFontAttributeName:[UIFont fontWithName:@"MYRIADPRO-REGULAR" size:17],
+                                                                    NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                                    };
     
     //update constraints
     if ([UIScreen mainScreen].bounds.size.height == 480.0f)
     {
-        //[NSLayoutConstraint deactivateConstraints:[NSArray arrayWithObject:equalHeightConstraint]];
         [self.view removeConstraint:equalHeightConstraint];
     }
     

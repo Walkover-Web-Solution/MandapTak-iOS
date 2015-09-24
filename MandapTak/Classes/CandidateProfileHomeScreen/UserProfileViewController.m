@@ -400,13 +400,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                      NSLog(@"Previous user deauthenticated");
                  }
              }];
-             [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
-                 if (!success) {
-                     NSLog(@"Failed to deauthenticate: %@", error);
-                 } else {
-                     NSLog(@"Previous user deauthenticated");
-                 }
-             }];
+             
              PFUser *user = nil;
              PFInstallation *currentInstallation = [PFInstallation currentInstallation];
              [currentInstallation setObject:user forKey:@"user"];

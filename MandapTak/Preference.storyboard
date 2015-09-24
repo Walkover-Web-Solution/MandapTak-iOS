@@ -397,7 +397,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Your Preferences" id="P8N-ar-Kn2">
+                    <navigationItem key="navigationItem" title="Your Preferences" id="P8N-ar-Kn2" propertyAccessControl="all">
                         <barButtonItem key="leftBarButtonItem" image="menu_white.png" style="plain" id="X8O-d7-N5V">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PHh-5r-mBM">
                                 <rect key="frame" x="16" y="-10" width="64" height="64"/>
