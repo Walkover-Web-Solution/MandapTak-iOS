@@ -2,32 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SchemeUserState</key>
-	<dict>
-		<key>Atlas-AtlasResource.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Atlas.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-MandapTak.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2921A4BBB9079AE650FDE26EE03BFAA2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>307384174BEDD12CFCA41E912D65C302</key>
+		<key>100C82EB745AAFB8854CFC266A150A5C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -38,6 +15,11 @@
 			<true/>
 		</dict>
 		<key>7A487230C7D8C32E4373B71419E63E20</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80F3F4FEB6C9F9A4C6EF6D9D8C25A3BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

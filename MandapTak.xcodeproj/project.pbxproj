@@ -109,6 +109,7 @@
 		75D5D09D1B9B1CFE001703D8 /* ChatPinMatch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */; };
 		75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
+		892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892DAFAB1BB3FC870025094B /* VerficationViewController.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
 		893F03361BAAA94400BB1B59 /* PFUser+ATLParticipant.m in Sources */ = {isa = PBXBuildFile; fileRef = 893F03351BAAA94400BB1B59 /* PFUser+ATLParticipant.m */; };
@@ -154,7 +155,6 @@
 		896BC00E1B95D856009FD221 /* matchCellOption.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BC00C1B95D856009FD221 /* matchCellOption.png */; };
 		896BC00F1B95D856009FD221 /* matchCellOption@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BC00D1B95D856009FD221 /* matchCellOption@2x.png */; };
 		896C19F31B96E49B00FFE0C6 /* call.png in Resources */ = {isa = PBXBuildFile; fileRef = 896C19F21B96E49B00FFE0C6 /* call.png */; };
-		896D18131B943116001513A5 /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896D18121B943116001513A5 /* VerficationViewController.m */; };
 		896D18221B944DDB001513A5 /* Fake_icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D181A1B944DDB001513A5 /* Fake_icon_bg.png */; };
 		896D18231B944DDB001513A5 /* Fake_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D181B1B944DDB001513A5 /* Fake_icon.png */; };
 		896D18241B944DDB001513A5 /* Matches_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 896D181C1B944DDB001513A5 /* Matches_bg.png */; };
@@ -413,6 +413,8 @@
 		75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
+		892DAFAA1BB3FC870025094B /* VerficationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerficationViewController.h; sourceTree = "<group>"; };
+		892DAFAB1BB3FC870025094B /* VerficationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerficationViewController.m; sourceTree = "<group>"; };
 		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		893E76E31B8871130009F512 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		893E76E41B8871130009F512 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
@@ -490,8 +492,6 @@
 		896BC00C1B95D856009FD221 /* matchCellOption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = matchCellOption.png; sourceTree = "<group>"; };
 		896BC00D1B95D856009FD221 /* matchCellOption@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "matchCellOption@2x.png"; sourceTree = "<group>"; };
 		896C19F21B96E49B00FFE0C6 /* call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call.png; sourceTree = "<group>"; };
-		896D18111B943116001513A5 /* VerficationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerficationViewController.h; sourceTree = "<group>"; };
-		896D18121B943116001513A5 /* VerficationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerficationViewController.m; sourceTree = "<group>"; };
 		896D181A1B944DDB001513A5 /* Fake_icon_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fake_icon_bg.png; sourceTree = "<group>"; };
 		896D181B1B944DDB001513A5 /* Fake_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fake_icon.png; sourceTree = "<group>"; };
 		896D181C1B944DDB001513A5 /* Matches_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Matches_bg.png; sourceTree = "<group>"; };
@@ -1165,8 +1165,8 @@
 		896D18101B9430EF001513A5 /* VerificationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				896D18111B943116001513A5 /* VerficationViewController.h */,
-				896D18121B943116001513A5 /* VerficationViewController.m */,
+				892DAFAA1BB3FC870025094B /* VerficationViewController.h */,
+				892DAFAB1BB3FC870025094B /* VerficationViewController.m */,
 			);
 			path = VerificationViewController;
 			sourceTree = "<group>";
@@ -1904,6 +1904,7 @@
 				897C23931B6B562C00FC32E9 /* Frameworks */,
 				897C23941B6B562C00FC32E9 /* Resources */,
 				722BEC9F038B2374F4047006 /* Copy Pods Resources */,
+				892DAFA81BB3B71E0025094B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2146,6 +2147,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		892DAFA81BB3B71E0025094B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 43ed4cc2dd186161187c6eb5e25cfb0867993881 b72aa29c53f8dfeca6c3009671c730f3dafa6bd590414b3b714067667e80a4b7";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2176,7 +2190,6 @@
 				89E0FA5A1B85C92A000BD65A /* ZCImagePickerController.m in Sources */,
 				8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */,
 				8997CC851BA182C8001B11AA /* SCReachabilityFlagsParser.m in Sources */,
-				896D18131B943116001513A5 /* VerficationViewController.m in Sources */,
 				893F03361BAAA94400BB1B59 /* PFUser+ATLParticipant.m in Sources */,
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
@@ -2226,6 +2239,7 @@
 				899C53781B73363300C24DA8 /* ServiceManager.m in Sources */,
 				757F87601B8EF1DC00C083A4 /* SVWebViewController.m in Sources */,
 				89D9F73B1B6B57A8004CBE3D /* SWRevealViewController.m in Sources */,
+				892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */,
 				895B72331B902087006AA638 /* AppData.m in Sources */,
 				89936ADB1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m in Sources */,
 				89E0FA551B85C92A000BD65A /* ZCAlbumPickerController.m in Sources */,
@@ -2437,6 +2451,10 @@
 				INFOPLIST_FILE = MandapTak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TesseractOCR/lib",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
@@ -2466,6 +2484,10 @@
 				INFOPLIST_FILE = MandapTak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TesseractOCR/lib",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";

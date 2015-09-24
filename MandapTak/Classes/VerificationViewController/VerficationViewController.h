@@ -10,6 +10,5 @@
 #import <LayerKit/LayerKit.h>
 
 @interface VerficationViewController : UIViewController
-@property (nonatomic) LYRClient *layerClient;
 
 @end

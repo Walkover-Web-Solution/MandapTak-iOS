@@ -19,6 +19,9 @@
 #import <LayerKit/LayerKit.h>
 #import <Atlas.h>
 #import "StartMainViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 @interface AppDelegate ()
 
 @end
@@ -92,6 +95,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 //        self.window.rootViewController=vc;
 //
 //    }
+    [Fabric with:@[[Crashlytics class]]];
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     

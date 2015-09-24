@@ -1,13 +1,21 @@
 PODS:
   - Atlas (1.0.11):
     - LayerKit (>= 0.16.0)
+  - Crashlytics (3.3.1)
+  - Fabric (1.5.1):
+    - Fabric/Base (= 1.5.1)
+  - Fabric/Base (1.5.1)
   - LayerKit (0.16.0)
 
 DEPENDENCIES:
   - Atlas
+  - Crashlytics
+  - Fabric
 
 SPEC CHECKSUMS:
   Atlas: 9bb6dccf270236d591b36882288ecf185b464f82
+  Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
+  Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
   LayerKit: 8976a2a4d5f73b808e6328a5c66732605a3c247a
 
 COCOAPODS: 0.38.2

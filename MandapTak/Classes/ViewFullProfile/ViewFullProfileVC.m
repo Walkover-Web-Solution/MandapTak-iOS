@@ -122,14 +122,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)back:(id)sender
 {
@@ -149,7 +149,7 @@
     button2.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     button3.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     button4.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
-
+    
 }
 
 - (IBAction)showHeightWeight:(id)sender
@@ -199,24 +199,24 @@
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         
-    if (!error)
-    {
-        PFFile *userImageFile = [object objectForKey:@"bioData"]; //profileCropedPhoto
-        
-        NSString *fileName = [userImageFile url];
-        NSURL *URL = [NSURL URLWithString:fileName];
-        if (URL == nil)
+        if (!error)
         {
-            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:@"File not found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [av show];
+            PFFile *userImageFile = [object objectForKey:@"bioData"]; //profileCropedPhoto
+            
+            NSString *fileName = [userImageFile url];
+            NSURL *URL = [NSURL URLWithString:fileName];
+            if (URL == nil)
+            {
+                UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:@"File not found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [av show];
+            }
+            else
+            {
+                SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+                webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+                [self presentViewController:webViewController animated:YES completion:NULL];
+            }
         }
-        else
-        {
-            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
-            webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-            [self presentViewController:webViewController animated:YES completion:NULL];
-        }
-    }
     }];
     
 }
@@ -230,16 +230,16 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     /*
-    UILabel *myLabel = [[UILabel alloc] init];
-    myLabel.frame = CGRectMake(20, 8, 320, 20);
-    myLabel.backgroundColor = [UIColor darkGrayColor];
-    myLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17];
-    myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
-    
-    UIView *headerView = [[UIView alloc] init];
-    [headerView addSubview:myLabel];
-    
-    return headerView;
+     UILabel *myLabel = [[UILabel alloc] init];
+     myLabel.frame = CGRectMake(20, 8, 320, 20);
+     myLabel.backgroundColor = [UIColor darkGrayColor];
+     myLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17];
+     myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+     
+     UIView *headerView = [[UIView alloc] init];
+     [headerView addSubview:myLabel];
+     
+     return headerView;
      */
     
     // Create label with section title
@@ -338,11 +338,40 @@
         cell.lblDetail.text = specializationName;
         cell.lblDescription.hidden = YES;
     }
-
+    
     return cell;
 }
 
 #pragma mark Chat
+-(LYRConversation*)getChatConversationIfPossibleWithUsers:(NSMutableArray*)arrUser{
+    NSArray *participants = arrUser;
+    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    query.predicate = [LYRPredicate predicateWithProperty:@"participants" predicateOperator:LYRPredicateOperatorIsEqualTo value:participants];
+    
+    NSError *error = nil;
+    NSOrderedSet *conversations = [self.layerClient executeQuery:query error:&error];
+    if (!error) {
+        NSLog(@"%tu conversations with participants %@", conversations.count, participants);
+        if(conversations.count==0){
+            NSError *error = nil;
+            LYRConversation *conversation = [self.layerClient newConversationWithParticipants:[NSSet setWithArray:arrUser] options:nil error:&error];
+            userConversation = conversation;
+        }
+        else{
+            userConversation = conversations[0];
+        }
+        UIButton *chat=[UIButton buttonWithType:UIButtonTypeCustom];
+        [chat setTitle:@"Chat" forState:UIControlStateNormal];
+        btnChat.hidden = NO;
+        [chat addTarget:self action:@selector(chatButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        chat.frame=CGRectMake(0, 0, 300, 40);
+        tableViewEducation.tableFooterView = chat;
+        
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+    return nil;
+}
 -(void)getAllUserForAConversation{
     //get all user corresponding to currentProfile
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
@@ -353,7 +382,7 @@
     [query whereKey:@"profileId" equalTo:self.currentProfile];
     [query whereKey:@"profileId" equalTo:profileObject.profilePointer];
     [query whereKey:@"relation" notEqualTo:@"Agent"];
-
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (!error) {
@@ -364,12 +393,12 @@
                 [arrUserIds addObject:user.objectId];
             }
             NSLog(@"arrUserIds --  %@",arrUserIds);
-            //[self getChatConversationIfPossibleWithUsers:arrUserIds];
+            [self getChatConversationIfPossibleWithUsers:arrUserIds];
             
             // The find succeeded.
-            }
-        }];
-
+        }
+    }];
+    
 }
 
 #pragma mark - Layer Authentication Methods
@@ -380,15 +409,15 @@
     // See "Quick Start - Connect" for more details
     [self.layerClient connectWithCompletion:^(BOOL success, NSError *error) {
         if (!success) {
-           // if(error.code ==6000)
-                //[self getAllUserForAConversation];
+            if(error.code ==6000)
+                [self getAllUserForAConversation];
         } else {
             PFUser *user = [PFUser currentUser];
             NSString *userID = user.objectId;
             [self authenticateLayerWithUserID:userID completion:^(BOOL success, NSError *error) {
                 if (!error){
-                   // [self getAllUserForAConversation];
-
+                    [self getAllUserForAConversation];
+                    
                 } else {
                     NSLog(@"Failed Authenticating Layer Client with error:%@", error);
                 }
@@ -473,5 +502,12 @@
 }
 
 - (IBAction)chatButtonAction:(id)sender {
-   }
+    ConversationViewController *controller = [ConversationViewController conversationViewControllerWithLayerClient:self.layerClient];
+    controller.conversation = userConversation;
+    controller.displaysAddressBar = NO;
+    UINavigationController *navController  = [[UINavigationController alloc]initWithRootViewController:controller];
+    controller.title = self.profileObject.name;
+    [self presentViewController:navController animated:YES completion:nil];
+    //[self.navigationController pushViewController:controller animated:YES];
+}
 @end

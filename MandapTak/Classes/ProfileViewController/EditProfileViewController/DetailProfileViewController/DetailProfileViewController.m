@@ -164,7 +164,7 @@
         [btnReligion setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
-    if([self.currentProfile valueForKey:@"mangalik"]){
+    if([self.currentProfile valueForKey:@"manglik"]){
         NSString *strMangilk =[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"manglik"] ] ;
         mangilk = [strMangilk integerValue];
         NSString *strManglikValue =@"";

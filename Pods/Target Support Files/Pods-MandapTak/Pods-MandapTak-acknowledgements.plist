@@ -224,6 +224,22 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2015 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt</string>
+			<key>Title</key>
+			<string>Crashlytics</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
+			<key>Title</key>
+			<string>Fabric</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string># LAYER SDK LICENSE
 
 This is an agreement between You ("You") and Layer Inc., located at 470 Alabama Street, San Francisco, CA 94110, ("Layer") regarding Your use of the Layer SDK and any associated documentation or other materials made available by Layer (collectively the "SDK"). This agreement applies to any updates or supplements for the SDK, unless other terms accompany those items. If so, those other terms apply.

@@ -14,6 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property NSString *titleText;
 @property NSString *imageFile;
-@property (nonatomic) LYRClient *layerClient;
 
 @end

@@ -3,6 +3,8 @@
 
 target 'MandapTak' do
   pod 'Atlas'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
 
 target 'MandapTakTests' do

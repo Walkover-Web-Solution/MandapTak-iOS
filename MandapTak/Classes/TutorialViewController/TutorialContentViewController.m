@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.txtMobNumber.delegate = self;
     self.pageControl.currentPage = self.pageIndex;
     self.backgroundImageView.image = [UIImage imageNamed:self.imageFile];
@@ -68,37 +67,6 @@
     [[NSUserDefaults standardUserDefaults]setObject:self.txtMobNumber.text forKey:@"mobNo"];
 
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
-#pragma mark UITextFieldDelegate
-- (void) performKeyboardAnimation: (NSInteger) offset  {
-    [UIView beginAnimations:@"moveKeyboard" context:nil];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + offset, self.view.frame.size.width, self.view.frame.size.height);
-    [UIView commitAnimations];
-}
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.txtMobNumber resignFirstResponder];
-    return YES;
-}
--(void) textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == self.txtMobNumber) {
-        [self performKeyboardAnimation:-LOGIN_TEXTFIELD_OFFSET];
-    }
-    
-}
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField == self.txtMobNumber) {
-        [self performKeyboardAnimation:LOGIN_TEXTFIELD_OFFSET];
-    }
-}
- */
 
 #pragma mark UITextFieldDelegate
 
@@ -115,7 +83,6 @@
     [[NSUserDefaults standardUserDefaults]setObject:self.txtMobNumber.text forKey:@"mobNo"];
 
    }
-
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if(textField.text.length>9){
         const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];

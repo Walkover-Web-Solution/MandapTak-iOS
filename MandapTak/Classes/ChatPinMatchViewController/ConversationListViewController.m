@@ -127,7 +127,6 @@
 - (void)logoutButtonTapped:(id)sender
 {
     NSLog(@"logOutButtonTapAction");
-    
     [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
         if (!error) {
             [PFUser logOut];

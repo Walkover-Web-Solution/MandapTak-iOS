@@ -23,15 +23,9 @@
 
 @end
 @implementation VerficationViewController
-static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-11e5-9685-919001005125";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-    //self.layerClient = [LYRClient clientWithAppID:appID];
-    //self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
-    
-
     self.txtVerfication.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
@@ -45,7 +39,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 }
 -(void)txtFieldFirstResponder{
     [self.txtVerfication becomeFirstResponder];
-
+    
 }
 #pragma mark UITextFieldDelegate
 
@@ -73,7 +67,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-   }
+}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
@@ -85,10 +79,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
     [UIView beginAnimations:@"moveKeyboard" context:nil];
     float height = keyboardRect.size.height-60;
-
+    
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - height, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
-  //  [self setNeedsUpdateConstraints];
+    //  [self setNeedsUpdateConstraints];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -98,11 +92,11 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
     [UIView beginAnimations:@"moveKeyboard" context:nil];
     float height = keyboardRect.size.height-60;
-
+    
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + height, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
-
-  //  [self setNeedsUpdateConstraints];
+    
+    //  [self setNeedsUpdateConstraints];
 }
 - (IBAction)verifyButtonAction:(id)sender {
     if([[AppData sharedData]isInternetAvailable]){
@@ -132,43 +126,45 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [alert show];
             
         }
-
+        
     }
     else{
         UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-
     
-    }
+    
+}
 
 -(void)performLoginOnVerifactionWithPassword:(NSString*)password{
     MBProgressHUD *HUD;
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] );
     NSLog(@"%@",password);
-        [PFUser logInWithUsernameInBackground:[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] password:password
-                                        block:^(PFUser *user, NSError *error) {
-                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-                                            if(!error){
-                                                NSLog(@"Success");
-                                                PFACL *acl = [PFACL ACL];
-                                                [acl setPublicReadAccess:true];
-                                                [acl setWriteAccess:true forUser:[PFUser currentUser]];
-                                                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-                                                [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
-                                                [currentInstallation saveInBackground];
-                                                [PFUser currentUser].ACL = acl;
-                                                [self checkIfAgentOrUser];
-                                            }
+    [PFUser logInWithUsernameInBackground:[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] password:password
+                                    block:^(PFUser *user, NSError *error) {
+                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                        
+                                        if(!error){
+                                            NSLog(@"Success");
+                                            PFACL *acl = [PFACL ACL];
+                                            [acl setPublicReadAccess:true];
+                                            [acl setWriteAccess:true forUser:[PFUser currentUser]];
+                                            PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                                            [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+                                            [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+                                                if(succeeded){
+                                                    [PFCloud callFunction:@"deleteDuplicateInstallations" withParameters:@{ @"userid" : [[PFUser currentUser] objectId]}];
+                                                }
                                             }];
-    
-
+                                            [PFUser currentUser].ACL = acl;
+                                            [self checkIfAgentOrUser];
+                                        }
+                                    }];
 }
 
 -(void)checkIfAgentOrUser{
-    [self loginLayer];
+   // [self loginLayer];
     MBProgressHUD *HUD;
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFObject *role = [[PFUser currentUser]valueForKey:@"roleId"];
@@ -185,7 +181,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [self checkForUseridInUserProfile];
         }
     }];
-
+    
 }
 -(void)checkForAgentInUserProfile{
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
@@ -209,7 +205,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
             //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
             [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
-
+            
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
             AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
             //vc.globalCompanyId = [self.companies.companyId intValue];
@@ -217,7 +213,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
             navController.navigationBarHidden =YES;
             [self presentViewController:navController animated:YES completion:nil];
-
+            
             
         } else {
             // Log details of the failure
@@ -246,17 +242,17 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
-
+    
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         if (!error) {
-          //  [self getUserProfileForUser:objects[0]];
+            //  [self getUserProfileForUser:objects[0]];
             PFObject *currentProfile ;
             PFObject *userProfile ;
-
+            
             for(PFObject * object in objects){
                 if([[object valueForKey:@"isPrimary"] boolValue]){
                     currentProfile = [object valueForKey:@"profileId"];
@@ -299,135 +295,13 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"No activated profile available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [alert show];
             }
-
+            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
-}
-#pragma mark - Layer Authentication Methods
-
-- (void)loginLayer
-{
     
-    // Connect to Layer
-    // See "Quick Start - Connect" for more details
-    // https://developer.layer.com/docs/quick-start/ios#connect
-    [self.layerClient connectWithCompletion:^(BOOL success, NSError *error) {
-        if (!success) {
-            NSLog(@"Failed to connect to Layer: %@", error);
-        } else {
-            PFUser *user = [PFUser currentUser];
-            NSString *userID = user.objectId;
-            [self authenticateLayerWithUserID:userID completion:^(BOOL success, NSError *error) {
-                if (!error){
-                    [self presentConversationListViewController];
-                } else {
-                    NSLog(@"Failed Authenticating Layer Client with error:%@", error);
-                }
-            }];
-        }
-    }];
 }
-
-- (void)authenticateLayerWithUserID:(NSString *)userID completion:(void (^)(BOOL success, NSError * error))completion
-{
-    // Check to see if the layerClient is already authenticated.
-    if (self.layerClient.authenticatedUserID) {
-        // If the layerClient is authenticated with the requested userID, complete the authentication process.
-        if ([self.layerClient.authenticatedUserID isEqualToString:userID]){
-            NSLog(@"Layer Authenticated as User %@", self.layerClient.authenticatedUserID);
-            if (completion) completion(YES, nil);
-            return;
-        } else {
-            //If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
-            [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
-                if (!error){
-                    [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
-                        if (completion){
-                            completion(success, error);
-                        }
-                    }];
-                } else {
-                    if (completion){
-                        completion(NO, error);
-                    }
-                }
-            }];
-        }
-    } else {
-        // If the layerClient isn't already authenticated, then authenticate.
-        [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
-            if (completion){
-                completion(success, error);
-            }
-        }];
-    }
-}
-
-- (void)authenticationTokenWithUserId:(NSString *)userID completion:(void (^)(BOOL success, NSError* error))completion
-{
-    /*
-     * 1. Request an authentication Nonce from Layer
-     */
-    [self.layerClient requestAuthenticationNonceWithCompletion:^(NSString *nonce, NSError *error) {
-        if (!nonce) {
-            if (completion) {
-                completion(NO, error);
-            }
-            return;
-        }
-        
-        /*
-         * 2. Acquire identity Token from Layer Identity Service
-         */
-        NSDictionary *parameters = @{@"nonce" : nonce, @"userID" : userID};
-        
-        [PFCloud callFunctionInBackground:@"generateToken" withParameters:parameters block:^(id object, NSError *error) {
-            if (!error){
-                
-                NSString *identityToken = (NSString*)object;
-                [self.layerClient authenticateWithIdentityToken:identityToken completion:^(NSString *authenticatedUserID, NSError *error) {
-                    if (authenticatedUserID) {
-                        if (completion) {
-                            completion(YES, nil);
-                        }
-                        NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
-                    } else {
-                        completion(NO, error);
-                    }
-                }];
-            } else {
-                NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
-            }
-        }];
-        
-    }];
-}
-- (void)presentConversationListViewController
-{
-    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
-    
-    NSError *error;
-    NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
-    if (messages) {
-        NSLog(@"%tu messages", messages.count);
-    } else {
-        NSLog(@"Query failed with error %@", error);
-    }
-    
-    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
-    
-    NSError *error2 = nil;
-    NSOrderedSet *conversations = [self.layerClient executeQuery:query2 error:&error2];
-    if (conversations) {
-        NSLog(@"%tu conversations", conversations.count);
-    } else {
-        NSLog(@"Query failed with error %@", error);
-    }
-}
-
 
 @end
