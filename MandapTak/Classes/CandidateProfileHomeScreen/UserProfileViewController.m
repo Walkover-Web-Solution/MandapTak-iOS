@@ -36,13 +36,15 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-    if(self.layerClient.appID == nil){
-        self.layerClient = [LYRClient clientWithAppID:appID];
-        self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+    if([PFUser currentUser]){
+        NSURL *appID = [NSURL URLWithString:LayerAppIDString];
+        if(self.layerClient.appID == nil){
+            self.layerClient = [LYRClient clientWithAppID:appID];
+            self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+        }
+        [self loginLayer];
     }
-      [self loginLayer];
-
+  
 
     //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;
