@@ -50,19 +50,31 @@
     
     if (([profileObject.minBudget intValue] == 0) || ([profileObject.minBudget intValue] < 0))
     {
+        //hide budget labels
+        lblBudget.hidden = YES;
+        lblMinBudget.hidden = YES;
         lblMinBudget.text = @"Min:";
     }
     else
     {
+        //show budget labels
+        lblBudget.hidden = NO;
+        lblMinBudget.hidden = NO;
         lblMinBudget.text = [NSString stringWithFormat:@"Min:%@",profileObject.minBudget];
     }
     
     if (([profileObject.minBudget intValue] == 0) || ([profileObject.minBudget intValue] < 0))
     {
+        //hide budget labels
+        lblBudget.hidden = YES;
+        lblMaxBudget.hidden = YES;
         lblMaxBudget.text = @"Min:";
     }
     else
     {
+        //show budget labels
+        lblBudget.hidden = NO;
+        lblMaxBudget.hidden = NO;
         lblMaxBudget.text = [NSString stringWithFormat:@"Max:%@",profileObject.maxBudget];
     }
     

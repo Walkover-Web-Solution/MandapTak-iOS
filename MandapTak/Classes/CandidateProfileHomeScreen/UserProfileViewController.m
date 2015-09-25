@@ -36,7 +36,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"isNotification"] isEqual:@"yes"]){
+    if(![[[NSUserDefaults standardUserDefaults]valueForKey:@"isNotification"] isEqual:@"yes"]){
         if( !self.layerClient.authenticatedUserID){
             if([PFUser currentUser]){
                 NSURL *appID = [NSURL URLWithString:LayerAppIDString];
@@ -1038,7 +1038,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  // this is where you handle the results and change the UI.
                  if ([results isKindOfClass:[NSString class]])
                  {
-                     //proceed to show next profile
+                     //proceed to show next profile - like function
                      
                      //add curent action data in History model
                      History *historyObj = [[History alloc]init];
@@ -1071,7 +1071,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  }
                  else
                  {
-                     //store profile object to show profile details on popover screen
+                     //store profile object to show profile details on popover screen - like back
                      Profile *likedProfileObj = [[Profile alloc] init];
                      likedProfileObj = arrCandidateProfiles[profileNumber];
                      

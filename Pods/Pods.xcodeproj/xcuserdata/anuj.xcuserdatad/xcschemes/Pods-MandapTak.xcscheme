@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7EF62332A8FD3B55C6E04936"
+               BlueprintIdentifier = "72CE521E5C569A585C23A7FB"
                BuildableName = "libPods-MandapTak.a"
                BlueprintName = "Pods-MandapTak"
                ReferencedContainer = "container:Pods.xcodeproj">

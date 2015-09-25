@@ -75,18 +75,12 @@
         //apply visiblity settings
         PFObject *obj =  [PFUser currentUser];
         
-        [arrContactNumber removeAllObjects];
-        [arrPrimary removeAllObjects];
-        [arrRelation removeAllObjects];
-        [arrUpdateInfo removeAllObjects];
-        [arrUserProfileId removeAllObjects];
-        
         MBProgressHUD *hud;
         hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
         [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]]];
         [query includeKey:@"userId"];
-        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
          {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -94,6 +88,11 @@
              {
                  if (objects.count > 0)
                  {
+                     [arrContactNumber removeAllObjects];
+                     [arrPrimary removeAllObjects];
+                     [arrRelation removeAllObjects];
+                     [arrUpdateInfo removeAllObjects];
+                     [arrUserProfileId removeAllObjects];
                      for (PFObject *object in objects)
                      {
                          [arrUserProfileId addObject:object.objectId];
