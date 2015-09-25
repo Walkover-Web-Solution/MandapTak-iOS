@@ -172,6 +172,7 @@
 		897C23B91B6B562C00FC32E9 /* MandapTakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C23B81B6B562C00FC32E9 /* MandapTakTests.m */; };
 		897D038D1B83566C008E0274 /* SpecialisationPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */; };
 		897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897EF96C1B70901400F88CEC /* EditProfileViewController.m */; };
+		89813C5C1BB56E4F001B3E9C /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89813C5B1BB56E4F001B3E9C /* ParseCrashReporting.framework */; };
 		898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */; };
 		898146491B7C9CCC00DF30AB /* ReligionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146481B7C9CCC00DF30AB /* ReligionPopoverViewController.m */; };
 		8981464C1B7C9F0000DF30AB /* Religion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8981464B1B7C9F0000DF30AB /* Religion.m */; };
@@ -516,6 +517,7 @@
 		897D038C1B83566C008E0274 /* SpecialisationPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialisationPopoverViewController.m; sourceTree = "<group>"; };
 		897EF96B1B70901400F88CEC /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		897EF96C1B70901400F88CEC /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		89813C5B1BB56E4F001B3E9C /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		898146331B7C6E5900DF30AB /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
 		898146341B7C6E5900DF30AB /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		898146471B7C9CCC00DF30AB /* ReligionPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReligionPopoverViewController.h; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 				89D9F74F1B6B5993004CBE3D /* Security.framework in Frameworks */,
 				89D9F74D1B6B5988004CBE3D /* libz.1.1.3.dylib in Frameworks */,
 				89D9F74B1B6B5982004CBE3D /* QuartzCore.framework in Frameworks */,
+				89813C5C1BB56E4F001B3E9C /* ParseCrashReporting.framework in Frameworks */,
 				89D9F7491B6B592E004CBE3D /* libsqlite3.dylib in Frameworks */,
 				89D9F7471B6B5927004CBE3D /* CoreGraphics.framework in Frameworks */,
 				89D9F7451B6B591C004CBE3D /* StoreKit.framework in Frameworks */,
@@ -1191,6 +1194,7 @@
 		897C238D1B6B562C00FC32E9 = {
 			isa = PBXGroup;
 			children = (
+				89813C5B1BB56E4F001B3E9C /* ParseCrashReporting.framework */,
 				893F034D1BAACCCB00BB1B59 /* ParseUI.framework */,
 				8947186C1B8EF49600473EEF /* AssetsLibrary.framework */,
 				894BBA7B1B870F90006C9D22 /* libz.dylib */,

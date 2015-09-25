@@ -132,6 +132,8 @@
                  {
                      
                  }
+                 _givePermissionYOffset.constant = 86;
+                 
                  [tableViewContacts reloadData];
              }
              else

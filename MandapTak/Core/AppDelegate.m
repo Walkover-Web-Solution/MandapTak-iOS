@@ -21,7 +21,7 @@
 #import "StartMainViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import <ParseCrashReporting/ParseCrashReporting.h>
 @interface AppDelegate ()
 
 @end
@@ -56,11 +56,14 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     PFACL *defaultACL = [PFACL ACL];
     [defaultACL setPublicReadAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+
     // Initializes a LYRClient object
     //NSURL *appID = [NSURL URLWithString:LayerAppIDString];
    // LYRClient *layerClient = [LYRClient clientWithAppID:appID];
    // layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
     
+    [ParseCrashReporting enable];
 
     if([PFUser currentUser]){
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
