@@ -44,6 +44,8 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
     }
     
+    [ParseCrashReporting enable];
+    
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
     [PFUser enableRevocableSessionInBackground];
@@ -63,8 +65,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
    // LYRClient *layerClient = [LYRClient clientWithAppID:appID];
    // layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
     
-    [ParseCrashReporting enable];
-
+    
     if([PFUser currentUser]){
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
