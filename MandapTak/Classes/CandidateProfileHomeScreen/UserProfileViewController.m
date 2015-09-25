@@ -47,7 +47,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                 [self loginLayer];
             }
         }
-
     }
         //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;

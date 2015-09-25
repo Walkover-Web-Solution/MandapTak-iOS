@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -319,17 +319,22 @@
                                 <rect key="frame" x="0.0" y="104" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s5P-FU-OEt">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RLi-2j-uIU" firstAttribute="top" secondItem="uOT-r1-9rL" secondAttribute="top" id="4rQ-rU-Xc6"/>
                             <constraint firstAttribute="trailing" secondItem="RLi-2j-uIU" secondAttribute="trailing" id="ERt-SH-7bL"/>
+                            <constraint firstAttribute="centerY" secondItem="s5P-FU-OEt" secondAttribute="centerY" id="Gk0-Xd-yeo"/>
                             <constraint firstItem="LNV-ag-mrg" firstAttribute="leading" secondItem="uOT-r1-9rL" secondAttribute="leading" id="YcF-1w-yDF"/>
                             <constraint firstAttribute="trailing" secondItem="q7q-xL-qSm" secondAttribute="trailing" id="ZVn-O6-LbS"/>
                             <constraint firstItem="RLi-2j-uIU" firstAttribute="leading" secondItem="uOT-r1-9rL" secondAttribute="leading" id="cwx-Od-35H"/>
                             <constraint firstAttribute="centerX" secondItem="5jC-xI-RQz" secondAttribute="centerX" id="eZq-Z3-gOz"/>
                             <constraint firstItem="q7q-xL-qSm" firstAttribute="top" secondItem="RLi-2j-uIU" secondAttribute="bottom" id="f7o-4q-heT"/>
                             <constraint firstItem="q7q-xL-qSm" firstAttribute="leading" secondItem="uOT-r1-9rL" secondAttribute="leading" id="hGG-1M-0RX"/>
+                            <constraint firstAttribute="centerX" secondItem="s5P-FU-OEt" secondAttribute="centerX" id="hbZ-4H-mmb"/>
                             <constraint firstItem="LNV-ag-mrg" firstAttribute="top" secondItem="q7q-xL-qSm" secondAttribute="bottom" id="kSo-sF-l5N"/>
                             <constraint firstAttribute="trailing" secondItem="LNV-ag-mrg" secondAttribute="trailing" id="kXd-ks-ruR"/>
                             <constraint firstAttribute="centerY" secondItem="5jC-xI-RQz" secondAttribute="centerY" id="n9J-jt-MoY"/>
@@ -338,6 +343,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="s5P-FU-OEt" id="4bY-Nu-PTi"/>
                         <outlet property="btnBack" destination="qcw-SS-122" id="x3B-jD-bkD"/>
                         <outlet property="btnChat" destination="Dwd-Hj-K78" id="CPr-9h-xIe"/>
                         <outlet property="btnMatch" destination="AhX-f7-wMd" id="oLw-xS-6xO"/>

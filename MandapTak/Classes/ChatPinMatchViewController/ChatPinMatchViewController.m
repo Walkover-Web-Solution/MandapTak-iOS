@@ -16,6 +16,7 @@
 #import "CandidateProfileDetailScreenVC.h"
 #import <Atlas/Atlas.h>
 #import "UserManager.h"
+#import "SVProgressHUD.h"
 #import "ConversationListViewController.h"
 @interface ChatPinMatchViewController ()<ATLConversationListViewControllerDelegate, ATLConversationListViewControllerDataSource,LYRQueryControllerDelegate>{
     NSInteger currentTab;
@@ -27,6 +28,7 @@
     __weak IBOutlet UILabel *lblUserInfo;
     NSOrderedSet *conversations;
     __weak IBOutlet UIView *chatView;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 @property (nonatomic) LYRQueryController *queryController;
 
@@ -57,15 +59,13 @@
     }
     else{
         if([[AppData sharedData]isInternetAvailable]){
-            MBProgressHUD * hud;
-            hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self showLoader];
             btnBack.enabled =YES;
             PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
             query.cachePolicy = kPFCachePolicyCacheOnly;
             [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
+                [self hideLoader];
                 if (!error) {
                     // The find succeeded.
                     PFObject *obj= objects[0];
@@ -395,14 +395,17 @@
     if([[AppData sharedData]isInternetAvailable]){
         [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
         self.lblPageTitle.text = @"MATCHES";
-        MBProgressHUD * hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+       // MBProgressHUD * hud;
+        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         btnBack.enabled =YES;
         [PFCloud callFunctionInBackground:@"getMatchedProfile"
                            withParameters:@{@"profileId":[self.currentProfile objectId]}
                                     block:^(NSArray *results, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
+
              if (!error)
              {
                  if(results.count == 0){
@@ -453,12 +456,14 @@
         [query includeKey:@"pinnedProfileId.education2.degreeId"];
         [query includeKey:@"pinnedProfileId.education3.degreeId"];
         [query includeKey:@"pinnedProfileId.industryId"];
-        MBProgressHUD * hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD * hud;
+        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         btnBack.enabled =YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            
+            //[MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self hideLoader];
+
             if (!error) {
                 if(objects.count == 0){
                     lblUserInfo.text = @"No Profiles Pinned.";
@@ -700,6 +705,25 @@
  return [messages firstObject];
  }
  */
+#pragma mark ShowActiviatyIndicator
 
+-(void)showLoader{
+    //activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    self.btnChat.enabled = NO;
+    self.btnPin.enabled = NO;
+    self.btnMatch.enabled = NO;
+    self.tableView.allowsSelection = NO;
+    lblUserInfo.hidden = YES;
 
+}
+-(void)hideLoader{
+    //activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    self.btnChat.enabled = YES;
+    self.btnPin.enabled = YES;
+    self.btnMatch.enabled = YES;
+    self.tableView.allowsSelection = YES;
+
+}
 @end

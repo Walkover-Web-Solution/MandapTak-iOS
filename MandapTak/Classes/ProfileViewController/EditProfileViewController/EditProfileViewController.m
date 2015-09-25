@@ -688,10 +688,6 @@
         case 4:
             self.tab4View.hidden = NO;
             [self askCammeraRollPermission];
-           // vc4.delegate = self;
-            //vc4.currentProfile = currentProfile;
-            //[self.tab4View addSubview:vc4.view];
-           // [self addChildViewController:vc4];
             self.btnTab4.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
             break;
 
@@ -706,9 +702,9 @@
     [lib enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
     } failureBlock:^(NSError *error) {
         if (error.code == ALAssetsLibraryAccessUserDeniedError) {
-            NSLog(@"user denied access, code: %i",error.code);
+            NSLog(@"user denied access, code: %li",(long)error.code);
         }else{
-            NSLog(@"Other error code: %i",error.code);
+            NSLog(@"Other error code: %li",(long)error.code);
         }
     }];
 }
@@ -782,8 +778,7 @@
         int package = [strPackage intValue];
         int minBugget =[txtMinBudget.text intValue];
         int maxBudget =[txtMaxBudget.text intValue];
-        NSLog(@"%lu", (unsigned long)designation.length);
-        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]] ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]]||designation == nil ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
             NSMutableArray *arrMsg = [NSMutableArray array];
             if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
                 [arrMsg addObject:@"valid Full Name"];
@@ -812,7 +807,7 @@
             if(company.length==0){
                 [arrMsg addObject:@"company"];
             }
-            if(designation==nil){
+            if( [designation isKindOfClass:[NSNull class]]|| designation==nil){
                 
                 [arrMsg addObject:@"designation"];
             }
