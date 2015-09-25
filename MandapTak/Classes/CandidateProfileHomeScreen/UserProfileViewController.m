@@ -36,17 +36,20 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if([PFUser currentUser]){
-        NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-        if(self.layerClient.appID == nil){
-            self.layerClient = [LYRClient clientWithAppID:appID];
-            self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"isNotification"] isEqual:@"yes"]){
+        if( !self.layerClient.authenticatedUserID){
+            if([PFUser currentUser]){
+                NSURL *appID = [NSURL URLWithString:LayerAppIDString];
+                if(self.layerClient.appID == nil){
+                    self.layerClient = [LYRClient clientWithAppID:appID];
+                    self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+                }
+                [self loginLayer];
+            }
         }
-        [self loginLayer];
-    }
-  
 
-    //set circular border of progress bar
+    }
+        //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;
     
     //call method to get current user profile pic
@@ -1411,26 +1414,29 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         /*
          * 2. Acquire identity Token from Layer Identity Service
          */
-        NSDictionary *parameters = @{@"nonce" : nonce, @"userID" : userID};
-        
-        [PFCloud callFunctionInBackground:@"generateToken" withParameters:parameters block:^(id object, NSError *error) {
-            if (!error){
-                
-                NSString *identityToken = (NSString*)object;
-                [self.layerClient authenticateWithIdentityToken:identityToken completion:^(NSString *authenticatedUserID, NSError *error) {
-                    if (authenticatedUserID) {
-                        if (completion) {
-                            completion(YES, nil);
+        if(userID){
+            NSDictionary *parameters = @{@"nonce" : nonce, @"userID" : userID};
+            [PFCloud callFunctionInBackground:@"generateToken" withParameters:parameters block:^(id object, NSError *error) {
+                if (!error){
+                    
+                    NSString *identityToken = (NSString*)object;
+                    [self.layerClient authenticateWithIdentityToken:identityToken completion:^(NSString *authenticatedUserID, NSError *error) {
+                        if (authenticatedUserID) {
+                            if (completion) {
+                                completion(YES, nil);
+                            }
+                            NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
+                        } else {
+                            completion(NO, error);
                         }
-                        NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
-                    } else {
-                        completion(NO, error);
-                    }
-                }];
-            } else {
-                NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
-            }
-        }];
+                    }];
+                } else {
+                    NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
+                }
+            }];
+
+        }
+        
         
     }];
 }

@@ -27,7 +27,6 @@
     __weak IBOutlet UILabel *lblUserInfo;
     NSOrderedSet *conversations;
     __weak IBOutlet UIView *chatView;
-  //  PFObject *currentProfile;
 }
 @property (nonatomic) LYRQueryController *queryController;
 
@@ -44,11 +43,7 @@
 @implementation ChatPinMatchViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.layerClient = [LYRClient clientWithAppID:appID];
-    //self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
-    
     chatView.hidden = YES;
-    
     [self loginLayer];
     currentTab = 0;
     lblUserInfo.hidden = YES;
@@ -658,7 +653,53 @@
     //[self.navigationController pushViewController:controller animated:YES];
 
 }
-
+/*
+ - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NS
+ Dictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+ {
+ NSError *error;
+ 
+ BOOL success = [self.applicationController.layerClient synchronizeWithRemoteNotification:userInfo completion:^(NSArray *changes, NSError *error) {
+ if (changes) {
+ if ([changes count]) {
+ message = [self messageFromRemoteNotification:userInfo];
+ completionHandler(UIBackgroundFetchResultNewData);
+ } else {
+ completionHandler(UIBackgroundFetchResultNoData);
+ }
+ } else {
+ completionHandler(UIBackgroundFetchResultFailed);
+ }
+ }];
+ if (!success) {
+ completionHandler(UIBackgroundFetchResultNoData);
+ }
+ 
+ - (LYRMessage *)messageFromRemoteNotification:(NSDictionary *)remoteNotification
+ {
+ static NSString *const LQSPushMessageIdentifierKeyPath = @"layer.message_identifier";
+ 
+ // Retrieve message URL from Push Notification
+ NSURL *messageURL = [NSURL URLWithString:[remoteNotification valueForKeyPath:LQSPushMessageIdentifierKeyPath]];
+ 
+ // Retrieve LYRMessage from Message URL
+ LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
+ query.predicate = [LYRPredicate predicateWithProperty:@"identifier" predicateOperator:LYRPredicateOperatorIsIn value:[NSSet setWithObject:messageURL]];
+ 
+ NSError *error = nil;
+ NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
+ if (messages) {
+ NSLog(@"Query contains %lu messages", (unsigned long)messages.count);
+ LYRMessage *message= messages.firstObject;
+ LYRMessagePart *messagePart = message.parts[0];
+ NSLog(@"Pushed Message Contents: %@", [[NSString alloc] initWithData:messagePart.data encoding:NSUTF8StringEncoding]);
+ } else {
+ NSLog(@"Query failed with error %@", error);
+ }
+ 
+ return [messages firstObject];
+ }
+ */
 
 
 @end
