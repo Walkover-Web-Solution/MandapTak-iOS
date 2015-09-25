@@ -37,9 +37,11 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 {
     [super viewDidLoad];
     NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-    self.layerClient = [LYRClient clientWithAppID:appID];
-    self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
-    [self loginLayer];
+    if(self.layerClient.appID == nil){
+        self.layerClient = [LYRClient clientWithAppID:appID];
+        self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+    }
+      [self loginLayer];
 
 
     //set circular border of progress bar
