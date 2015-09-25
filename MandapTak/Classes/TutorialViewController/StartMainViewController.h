@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageTitles;
-@property (nonatomic) LYRClient *layerClient;
 @property (strong, nonatomic) NSArray *pageImages;
 @end
