@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="MYRIADPRO-BOLD.OTF">
@@ -125,7 +125,7 @@
                                     <constraint firstAttribute="height" constant="40" id="sYa-kF-dqR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dn-01-8SA">
@@ -171,9 +171,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3S-bY-Q5h">
                                 <rect key="frame" x="10" y="52" width="294" height="21"/>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mYw-B4-6Bu">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -186,11 +189,13 @@
                             <constraint firstItem="0dn-01-8SA" firstAttribute="top" secondItem="tSs-yI-QwA" secondAttribute="bottom" constant="86" id="SZz-sj-mkk"/>
                             <constraint firstItem="NB8-NT-9TP" firstAttribute="top" secondItem="fNl-Ic-n2k" secondAttribute="bottom" constant="2" id="YIU-Lq-TZk"/>
                             <constraint firstAttribute="trailing" secondItem="NB8-NT-9TP" secondAttribute="trailing" constant="10" id="b4Y-gS-x3M"/>
+                            <constraint firstItem="mYw-B4-6Bu" firstAttribute="centerX" secondItem="OeY-yd-E3t" secondAttribute="centerX" id="bI3-4w-Y6E"/>
                             <constraint firstItem="tSs-yI-QwA" firstAttribute="top" secondItem="tMV-hh-GxU" secondAttribute="bottom" id="fih-XS-7ge"/>
                             <constraint firstAttribute="trailing" secondItem="0dn-01-8SA" secondAttribute="trailing" constant="53" id="fxu-c6-gEM"/>
                             <constraint firstAttribute="trailing" secondItem="fNl-Ic-n2k" secondAttribute="trailing" constant="10" id="iLc-mM-Sx1"/>
                             <constraint firstItem="fNl-Ic-n2k" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" constant="10" id="lxz-5b-1JE"/>
                             <constraint firstItem="fgy-pV-Xnf" firstAttribute="leading" secondItem="OeY-yd-E3t" secondAttribute="leading" id="p31-EB-cxO"/>
+                            <constraint firstItem="mYw-B4-6Bu" firstAttribute="centerY" secondItem="OeY-yd-E3t" secondAttribute="centerY" id="s4e-kC-7P4"/>
                             <constraint firstAttribute="trailing" secondItem="fgy-pV-Xnf" secondAttribute="trailing" id="xSh-Up-XFU"/>
                         </constraints>
                     </view>
@@ -199,6 +204,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="mYw-B4-6Bu" id="pGQ-ak-MFV"/>
                         <outlet property="btnPermission" destination="0dn-01-8SA" id="pNi-K9-dUw"/>
                         <outlet property="givePermissionYOffset" destination="SZz-sj-mkk" id="6LY-fU-hOW"/>
                         <outlet property="lblUserCredits" destination="j3S-bY-Q5h" id="qNm-LW-0Ue"/>
@@ -246,13 +252,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mobile number of person:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeH-1d-xBF">
                                 <rect key="frame" x="16" y="26" width="278" height="21"/>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Relation:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2W-vL-wGE">
                                 <rect key="frame" x="16" y="101" width="278" height="21"/>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oaP-B3-UKw">

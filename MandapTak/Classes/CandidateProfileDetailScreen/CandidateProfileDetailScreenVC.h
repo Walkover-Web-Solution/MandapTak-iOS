@@ -38,6 +38,9 @@
     BOOL primaryFlag;
     IBOutlet UIButton *btnMatchPin;
     IBOutlet UIButton *btnLike;
+    
+    //activity indicator
+    IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 @property (strong, nonatomic) PFObject *currentProfile;
 @property (nonatomic) LYRClient *layerClient;

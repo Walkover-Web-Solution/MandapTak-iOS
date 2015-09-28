@@ -13,6 +13,10 @@
 #import "SettingsVC.h"
 
 @interface SideBarViewController ()
+{
+    //activity indicator
+    IBOutlet UIActivityIndicatorView *activityIndicator;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @end
@@ -45,11 +49,13 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+    //MBProgressHUD * hud;
+    //hud=[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+    [self showLoader];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         [MBProgressHUD hideHUDForView:self.imgView animated:YES];
+         //[MBProgressHUD hideHUDForView:self.imgView animated:YES];
+         [self hideLoader];
          if (!error)
          {
              // The find succeeded.
@@ -61,7 +67,8 @@
              {
                  [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
                   {
-                      [MBProgressHUD hideAllHUDsForView:self.imgView animated:YES];
+                      //[MBProgressHUD hideAllHUDsForView:self.imgView animated:YES];
+                      [self hideLoader];
                       if (!error)
                       {
                           
@@ -79,11 +86,10 @@
              }
              else
              {
-                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                     self.imgView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
-                     self.imgView.image = [UIImage imageNamed:@"userProfile"];
-                 
-                 
+                 //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 [self hideLoader];
+                 self.imgView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+                 self.imgView.image = [UIImage imageNamed:@"userProfile"];
              }
              //currentProfile =obj;
              //[self switchToMatches];
@@ -91,19 +97,20 @@
          }
          
          else if (error.code ==100){
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-             
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              [errorAlertView show];
          }
          else if (error.code ==120)
          {
              //handle cache miss condition
-             [MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+             //[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
+             [self hideLoader];
          }
          else if (error.code ==209){
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-             
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              [PFUser logOut];
              PFUser *user = nil;
              PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -235,4 +242,16 @@
 }
 
 
+#pragma mark ShowActivityIndicator
+
+-(void)showLoader{
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+}
+
+-(void)hideLoader
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+}
 @end

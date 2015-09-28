@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -488,6 +488,9 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="showValueString" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Vgb-i3-2aL">
+                                        <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -503,7 +506,9 @@
                                     <constraint firstAttribute="centerX" secondItem="fhO-2N-UqV" secondAttribute="centerX" id="IoS-YQ-loc"/>
                                     <constraint firstAttribute="trailing" secondItem="J1y-gw-Muu" secondAttribute="trailing" constant="55" id="QiB-NF-0UA"/>
                                     <constraint firstItem="020-0W-f1f" firstAttribute="top" secondItem="ZDO-Hp-ckP" secondAttribute="bottom" constant="13" id="Qqc-D6-e2g"/>
+                                    <constraint firstItem="Vgb-i3-2aL" firstAttribute="centerY" secondItem="mkq-5m-LuS" secondAttribute="centerY" id="TZb-lg-NiB"/>
                                     <constraint firstItem="xxQ-za-YAY" firstAttribute="top" secondItem="mkq-5m-LuS" secondAttribute="top" id="VON-Os-nEc"/>
+                                    <constraint firstItem="Vgb-i3-2aL" firstAttribute="centerX" secondItem="mkq-5m-LuS" secondAttribute="centerX" id="Zee-f2-feW"/>
                                     <constraint firstItem="ZDO-Hp-ckP" firstAttribute="leading" secondItem="7Xp-Gn-WON" secondAttribute="trailing" constant="30" id="d6b-wQ-ZkK"/>
                                     <constraint firstAttribute="centerX" secondItem="RPT-CZ-xC1" secondAttribute="centerX" id="eME-OK-FI4"/>
                                     <constraint firstAttribute="centerX" secondItem="C8l-3w-I7g" secondAttribute="centerX" id="erM-9W-f36"/>
@@ -549,8 +554,13 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Vgb-i3-2aL" id="xwQ-5N-Ha6"/>
                         <outlet property="animationImageView" destination="IHj-1E-DL9" id="l58-HM-ZY5"/>
                         <outlet property="blankView" destination="NM5-m3-e5L" id="stM-hc-0vo"/>
+                        <outlet property="btnDetail" destination="020-0W-f1f" id="bjh-ge-Mqv"/>
+                        <outlet property="btnDislike" destination="J1y-gw-Muu" id="EdT-sL-0ox"/>
+                        <outlet property="btnLike" destination="ZDO-Hp-ckP" id="lBj-xE-nvW"/>
+                        <outlet property="btnPin" destination="OwC-H4-tFE" id="1Q5-6q-Xdw"/>
                         <outlet property="btnRefresh" destination="GOG-dY-d4Q" id="KJj-UU-c2Z"/>
                         <outlet property="btnUndo" destination="7Xp-Gn-WON" id="TZZ-xw-8jp"/>
                         <outlet property="imageViewConstraint" destination="2ek-J8-Ebm" id="8mH-Wm-C71"/>
@@ -607,12 +617,16 @@
                                 <rect key="frame" x="60" y="63" width="140" height="140"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9qH-Bp-Slu">
+                                <rect key="frame" x="120" y="123" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="260" height="568"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="9qH-Bp-Slu" id="a9A-0I-3lK"/>
                         <outlet property="imgUser" destination="mTN-2j-lRJ" id="7f4-z9-E65"/>
                         <outlet property="imgView" destination="mTN-2j-lRJ" id="dc6-0g-VBs"/>
                         <outlet property="lblUserName" destination="5HQ-Qx-fmT" id="OfF-hX-YCP"/>
@@ -925,6 +939,10 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
+                                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" id="hk0-ez-4CH">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Cell" reuseIdentifier="Cell" id="bvo-Q9-u9q">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -1037,6 +1055,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="ImagesCollectionView" destination="ox4-2V-3jc" id="ipg-9F-rLX"/>
+                        <outlet property="activityIndicator" destination="hk0-ez-4CH" id="YEf-Ci-AK7"/>
                         <outlet property="btnLike" destination="Ebh-mF-A4R" id="uqf-ec-h8u"/>
                         <outlet property="btnMatchPin" destination="C52-Gk-PvG" id="XuI-68-W5G"/>
                         <outlet property="lblAgeHeight" destination="uXG-df-cRI" id="U4B-MK-524"/>
@@ -1055,7 +1074,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUA-se-X9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2562" y="915"/>
+            <point key="canvasLocation" x="2542" y="909"/>
         </scene>
         <!--Candidate Profile GalleryVC-->
         <scene sceneID="lCu-zg-s4V">

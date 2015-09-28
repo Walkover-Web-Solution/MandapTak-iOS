@@ -33,6 +33,10 @@
     IBOutlet UILabel *lblMessage;
     IBOutlet UIButton *btnUndo;
     IBOutlet UIButton *btnRefresh;
+    IBOutlet UIButton *btnLike;
+    IBOutlet UIButton *btnDislike;
+    IBOutlet UIButton *btnPin;
+    IBOutlet UIButton *btnDetail;
     IBOutlet NSLayoutConstraint *imageViewConstraint;
     IBOutlet UIView *loaderView;
     
@@ -45,6 +49,9 @@
     IBOutlet UIImageView *userImageView;
     IBOutlet MBCircularProgressBarView *progressBar;
     IBOutlet UILabel *lblTraitMatch;
+
+    //activity indicator
+    IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 @property (nonatomic) LYRClient *layerClient;
 - (IBAction)showCandidateProfile:(id)sender;

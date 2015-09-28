@@ -53,8 +53,12 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             }
         }
     }
-        //set circular border of progress bar
+    
+    //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;
+    
+    //hide activity indicator initially
+    [self hideLoader];
     
     //call method to get current user profile pic
     [self getUserProfilePic];
@@ -217,8 +221,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                            withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}  //@"nASUvS6R7Z"
                                     block:^(NSArray *results, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-             
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[self hideLoader];
              if (!error)
              {
                  // this is where you handle the results and change the UI.
@@ -347,11 +351,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    //MBProgressHUD * hud;
-    //hud=[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         //[MBProgressHUD hideHUDForView:self.imgView animated:YES];
          if (!error)
          {
              // The find succeeded.
@@ -362,7 +363,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              {
                  [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
                   {
-                      //[MBProgressHUD hideAllHUDsForView:self.imgView animated:YES];
                       if (!error)
                       {
                           
@@ -382,7 +382,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              }
              else
              {
-                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 [self hideLoader];
                  userImageView.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
                  userImageView.image = [UIImage imageNamed:@"userProfile"];
              }
@@ -392,7 +393,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
          }
          
          else if (error.code ==100){
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              
              UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              [errorAlertView show];
@@ -400,7 +402,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
          else if (error.code ==120)
          {
              //handle cache miss condition
-             //[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
          }
          else if (error.code ==209){
              [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
@@ -606,13 +607,15 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 -(void) retrieveImagesFromObject:(PFObject *)object
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     PFFile *userImageFile = object[@"profilePic"];
     if (userImageFile)
     {
         [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
          {
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             [self hideLoader];
              if (!error)
              {
                  
@@ -630,7 +633,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     }
     else
     {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self hideLoader];
         imgViewProfilePic.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
         imgViewProfilePic.image = [UIImage imageNamed:@"userProfile"];
     }
@@ -676,13 +680,15 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 -(void) getPrimaryImageFromObject:(PFObject *)object
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     PFFile *primaryImage = object[@"file"];
     if (primaryImage)
     {
         [primaryImage getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
          {
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             [self hideLoader];
              if (!error)
              {
                  
@@ -803,7 +809,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     }
     else
     {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self hideLoader];
         imgViewProfilePic.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
         imgViewProfilePic.image = [UIImage imageNamed:@"userProfile"];
     }
@@ -916,7 +923,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 {
     //insert data in pinned profile table
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     CATransition *transition = [CATransition animation];
     
     if (arrCandidateProfiles.count > 0)
@@ -934,7 +942,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         
         [pinObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if (succeeded)
              {
                  //add curent action data in History model
@@ -969,7 +978,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              }
              else
              {
-                 // There was a problem, check error.description
+                 //There was a problem, check error.description
              }
          }];
     }
@@ -990,7 +999,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     NSLog(@"user name -> %@",user.username);
     NSLog(@"profile user name -> %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]);
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     CATransition *transition = [CATransition animation];
     
     if (arrCandidateProfiles.count > 0)
@@ -1033,7 +1043,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                                             @"userName":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]}
                                     block:^(id results, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              
              if (!error)
              {
@@ -1173,7 +1184,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 - (IBAction)dislikeAction:(id)sender
 {
     //make entry in dislike table
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     CATransition *transition = [CATransition animation];
     
     if (arrCandidateProfiles.count > 0)
@@ -1191,7 +1203,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         
         [dislikeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if (succeeded)
              {
                  //add curent action data in History model
@@ -1269,13 +1282,15 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 {
     CATransition *transition = [CATransition animation];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     PFQuery *query = [PFQuery queryWithClassName:class];
     [query whereKey:@"objectId" equalTo:ObjectID];
     //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //[MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self hideLoader];
         if (!error)
         {
             transition.duration = .3f;
@@ -1443,6 +1458,29 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         
         
     }];
+}
+
+#pragma mark ShowActivityIndicator
+
+-(void)showLoader{
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    btnDetail.enabled = NO;
+    btnUndo.enabled = NO;
+    btnLike.enabled = NO;
+    btnDislike.enabled = NO;
+    btnPin.enabled = NO;
+}
+
+-(void)hideLoader
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    btnDetail.enabled = YES;
+    btnUndo.enabled = YES;
+    btnLike.enabled = YES;
+    btnDislike.enabled = YES;
+    btnPin.enabled = YES;
 }
 
 @end

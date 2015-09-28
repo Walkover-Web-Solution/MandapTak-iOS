@@ -18,7 +18,10 @@
 {
     [super viewDidLoad];
     selectedIndex = 0;
-
+    
+    //hide acitvity indicator initially
+    [self showLoader];
+    
     //set user default for pop case
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     [userDefaults setValue:@"no" forKey:@"reloadCandidateList"];
@@ -298,7 +301,8 @@
 {
     for (PFObject *obj in loadimagesarray)
     {
-        [MBProgressHUD showHUDAddedTo:ImagesCollectionView animated:YES];
+        //[MBProgressHUD showHUDAddedTo:ImagesCollectionView animated:YES];
+        [self showLoader];
         PFFile *userImageFile = obj[@"file"];
         
         int highScore = [obj[@"isPrimary"] intValue];
@@ -324,7 +328,8 @@
          {
              if (!error)
              {
-                 [MBProgressHUD hideAllHUDsForView:ImagesCollectionView animated:YES];
+                 //[MBProgressHUD hideAllHUDsForView:ImagesCollectionView animated:YES];
+                 [self hideLoader];
                  UIImage *image = [UIImage imageWithData:imageData];
                  [arrImages addObject:image];
              }
@@ -420,7 +425,18 @@
 
 - (IBAction)viewFullProfile:(id)sender
 {
-    
-    
+}
+
+#pragma mark ShowActivityIndicator
+
+-(void)showLoader{
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+}
+
+-(void)hideLoader
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
 }
 @end

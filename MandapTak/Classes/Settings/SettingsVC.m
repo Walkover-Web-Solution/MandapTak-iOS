@@ -23,6 +23,8 @@
     IBOutlet UILabel *lblUserCredits;
     
     int userCredits;
+    //activity indicator
+    IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *givePermissionYOffset;
 - (IBAction)resetAction:(id)sender;
@@ -75,15 +77,17 @@
         //apply visiblity settings
         PFObject *obj =  [PFUser currentUser];
         
-        MBProgressHUD *hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD *hud;
+        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
         [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]]];
         [query includeKey:@"userId"];
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if (!error)
              {
                  if (objects.count > 0)
@@ -98,7 +102,6 @@
                          [arrUserProfileId addObject:object.objectId];
                          PFObject *userObj = object[@"userId"];
                          [arrUserId addObject:userObj.objectId];
-                         
                          if ([obj.objectId isEqualToString:userObj.objectId])
                          {
                              //NSNumber *primaryNumber = [NSNumber numberWithInt:[object objectForKey:@"isPrimary"]];
@@ -241,14 +244,16 @@
     
     if ([[AppData sharedData] isInternetAvailable])
     {
-        MBProgressHUD *HUD;
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD *HUD;
+        //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         [PFCloud callFunctionInBackground:@"deletePermission"
                            withParameters:@{@"profileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
                                             @"mobile" : [NSString stringWithFormat:@"%@",strMobile]}
                                     block:^(NSArray *results, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if (!error)
              {
                  // this is where you handle the results and change the UI.
@@ -291,13 +296,15 @@
 {
     if ([[AppData sharedData] isInternetAvailable])
     {
-        MBProgressHUD *HUD;
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD *HUD;
+        //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         [PFCloud callFunctionInBackground:@"resetProfiles"
                            withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}
                                     block:^(NSArray *results, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if (!error)
              {
                  // this is where you handle the results and change the UI.
@@ -321,5 +328,18 @@
         UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
+}
+
+#pragma mark ShowActivityIndicator
+
+-(void)showLoader{
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+}
+
+-(void)hideLoader
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
 }
 @end

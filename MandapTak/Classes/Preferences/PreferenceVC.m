@@ -215,8 +215,9 @@
 {
     if ([[AppData sharedData] isInternetAvailable])
     {
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //MBProgressHUD * hud;
+    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"degreeId"];
@@ -224,7 +225,8 @@
        // query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         //[MBProgressHUD hideHUDForView:self.view animated:YES];
+         [self hideLoader];
          if (!error)
          {
              if (objects.count > 0)
@@ -236,7 +238,7 @@
                      PFObject *degree = [object valueForKey:@"degreeId"];
                       if (!degree)
                       {
-                      degree = [object valueForKey:@"degreeTypeId"];
+                          degree = [object valueForKey:@"degreeTypeId"];
                       }
                      //NSLog(@"Degree ID => %@", degree.objectId);
                      //NSLog(@"\n Degree Name %@",[degree valueForKey:@"name"]);
@@ -310,9 +312,9 @@
 {
     if ([[AppData sharedData]isInternetAvailable])
     {
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
+    //MBProgressHUD * hud;
+    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     PFQuery *query = [PFQuery queryWithClassName:@"LocationPreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:prefId]];     //@"0hIRQZw3di"
     [query includeKey:@"cityId"];
@@ -320,7 +322,8 @@
     //query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         [self hideLoader];
          if (!error)
          {
              if (objects.count > 0)
@@ -509,7 +512,8 @@
         }
     }
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     NSString *strMinHeight = [[btnMinHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
     minHeight = [[self extractNumberFromText:strMinHeight] intValue];
     NSString *strMaxHeight = [[btnMaxHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
@@ -535,7 +539,8 @@
             
             [pref saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
              {
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [self hideLoader];
                  if (succeeded)
                  {
                      // The object has been saved.
@@ -600,7 +605,8 @@
     {
     //delete previously set degree preferences
     //[arrSelectedDegreeId removeAllObjects];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     
     PFQuery *query = [PFQuery queryWithClassName:@"DegreePreferences"];
     [query whereKey:@"preferenceId" equalTo:[PFObject objectWithoutDataWithClassName:@"Preference" objectId:strObj]];
@@ -667,7 +673,8 @@
         
         [PFObject saveAllInBackground:arrDegreePref block:^(BOOL succeeded, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if(!error)
              {
                  NSLog(@"save complete");
@@ -690,7 +697,8 @@
 {
     if ([[AppData sharedData]isInternetAvailable])
     {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
     //delete previously set degree preferences
     //[arrSelectedDegreeId removeAllObjects];
     
@@ -765,7 +773,8 @@
         
         [PFObject saveAllInBackground:arrLocationPref block:^(BOOL succeeded, NSError *error)
          {
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             [self hideLoader];
              [self back:nil];
              if(!error)
              {
@@ -1141,22 +1150,29 @@
 #pragma mark ShowActivityIndicator
 
 -(void)showLoader{
-    //activityIndicator.hidden = NO;
+    activityIndicator.hidden = NO;
     [activityIndicator startAnimating];
-//    self.btnChat.enabled = NO;
-//    self.btnPin.enabled = NO;
-//    self.btnMatch.enabled = NO;
-//    self.tableView.allowsSelection = NO;
-//    lblUserInfo.hidden = YES;
-    
+    txtMinAge.enabled = NO;
+    txtMaxAge.enabled = NO;
+    txtIncome.enabled = NO;
+    txtminBudget.enabled = NO;
+    txtMaxBudget.enabled = NO;
+    btnLocation.enabled = NO;
+    btnMinHeight.enabled = NO;
+    btnMaxHeight.enabled = NO;
 }
--(void)hideLoader{
-    //activityIndicator.hidden = YES;
+
+-(void)hideLoader
+{
+    activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
-//    self.btnChat.enabled = YES;
-//    self.btnPin.enabled = YES;
-//    self.btnMatch.enabled = YES;
-//    self.tableView.allowsSelection = YES;
-    
+    txtMinAge.enabled = YES;
+    txtMaxAge.enabled = YES;
+    txtIncome.enabled = YES;
+    txtminBudget.enabled = YES;
+    txtMaxBudget.enabled = YES;
+    btnLocation.enabled = YES;
+    btnMinHeight.enabled = YES;
+    btnMaxHeight.enabled = YES;
 }
 @end
