@@ -53,6 +53,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjU-Wd-BNB" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                         <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g4a-bH-fMQ">
+                                                <rect key="frame" x="150" y="252" width="20" height="20"/>
+                                            </activityIndicatorView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPc-gr-Wcn">
                                                 <rect key="frame" x="12" y="417" width="136" height="30"/>
                                                 <constraints>
@@ -416,6 +419,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="g4a-bH-fMQ" id="09Q-qU-gEb"/>
                         <outlet property="btnLocation" destination="wof-Sf-Gpo" id="ppd-Ci-M7H"/>
                         <outlet property="btnMaxHeight" destination="vww-4q-QrM" id="isP-3j-gOh"/>
                         <outlet property="btnMinHeight" destination="86g-nb-SrX" id="9QP-Ba-Hez"/>

@@ -65,6 +65,9 @@
     //constraints
     IBOutlet NSLayoutConstraint *equalHeightConstraint;
     
+    //activity indicator
+    
+    IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)setPreferences:(id)sender;

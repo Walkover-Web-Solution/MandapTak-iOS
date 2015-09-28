@@ -108,8 +108,9 @@
 {
     if([[AppData sharedData]isInternetAvailable])
     {
-        MBProgressHUD * hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD * hud;
+        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         NSString *profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];   //@"nASUvS6R7Z";    //gDlvVzftXF
         
         PFQuery *query = [PFQuery queryWithClassName:@"Preference"];
@@ -117,7 +118,8 @@
         //query.cachePolicy = kPFCachePolicyCacheElseNetwork;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
          {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
              if (!error)
              {
                  if (objects.count > 0)
@@ -1134,7 +1136,27 @@
         controller.delegate = self;
         
     }
+}
+
+#pragma mark ShowActivityIndicator
+
+-(void)showLoader{
+    //activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+//    self.btnChat.enabled = NO;
+//    self.btnPin.enabled = NO;
+//    self.btnMatch.enabled = NO;
+//    self.tableView.allowsSelection = NO;
+//    lblUserInfo.hidden = YES;
     
+}
+-(void)hideLoader{
+    //activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+//    self.btnChat.enabled = YES;
+//    self.btnPin.enabled = YES;
+//    self.btnMatch.enabled = YES;
+//    self.tableView.allowsSelection = YES;
     
 }
 @end
