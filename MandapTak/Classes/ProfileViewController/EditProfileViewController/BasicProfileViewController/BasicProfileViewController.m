@@ -45,6 +45,14 @@
     txtFullName.delegate =self;
     lblBornInPlace.hidden= YES;
     if(self.currentProfile ==nil){
+        btnBirthTime.enabled = NO;
+        btnCurrentLocation.enabled = NO;
+        btnDateOfBirth.enabled = NO;
+        btnGender.enabled = NO;
+        btnBirthTime.enabled = NO;
+        btnPlaceOfBirth.enabled = NO;
+        txtFullName.enabled = NO;
+
     }
     else{
         [self updateUserInfo];
@@ -54,6 +62,13 @@
     NSDictionary* userInfo = notification.userInfo;
     self.currentProfile = [userInfo valueForKey:@"currentProfile"];
     [self updateUserInfo];
+    btnBirthTime.enabled = YES;
+    btnCurrentLocation.enabled = YES;
+    btnDateOfBirth.enabled = YES;
+    btnGender.enabled = YES;
+    btnBirthTime.enabled = YES;
+    btnPlaceOfBirth.enabled = YES;
+    txtFullName.enabled = YES;
 
 }
 -(void)updateCurrentProfile{

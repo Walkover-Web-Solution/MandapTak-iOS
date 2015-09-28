@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self performSelector:@selector(txtFieldFirstResponder) withObject:nil afterDelay:.2];
+   // [self performSelector:@selector(txtFieldFirstResponder) withObject:nil afterDelay:.2];
 }
 -(void)txtFieldFirstResponder{
     [self.txtVerfication becomeFirstResponder];

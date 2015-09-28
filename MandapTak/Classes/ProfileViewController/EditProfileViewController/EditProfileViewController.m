@@ -40,6 +40,7 @@
 {    SCNetworkReachability *_reachability;
     __weak IBOutlet UIView *navBarView;
     WYPopoverController* popoverController;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicator;
     NSUInteger currentTab;
     NSString *selectedGender;
     NSDate *selectedDate;
@@ -200,14 +201,16 @@
         [query includeKey:@"education2.degreeId"];
         [query includeKey:@"education3.degreeId"];
         [query includeKey:@"industryId"];
-        MBProgressHUD * hud;
-        hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //MBProgressHUD * hud;
+        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         btnMenu.enabled = YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
+               // [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideLoader];
+
                 // The find succeeded.
                 PFObject *obj= objects[0];
                 currentProfile = obj;
@@ -1420,6 +1423,24 @@
     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
     [self.collectionView reloadData];
     [self addPhotosToParse];
+}
+#pragma mark ShowActiviatyIndicator
+
+-(void)showLoader{
+    //activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    self.btnTab1.enabled = NO;
+    self.btnTab2.enabled = NO;
+    self.btnTab3.enabled = NO;
+    self.btnTab4.enabled = NO;
+}
+-(void)hideLoader{
+    //activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    self.btnTab1.enabled = YES;
+    self.btnTab2.enabled = YES;
+    self.btnTab3.enabled = YES;
+    self.btnTab4.enabled = YES;
 }
 
 @end
