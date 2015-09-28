@@ -41,8 +41,13 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             if([PFUser currentUser]){
                 NSURL *appID = [NSURL URLWithString:LayerAppIDString];
                 if(self.layerClient.appID == nil){
-                    self.layerClient = [LYRClient clientWithAppID:appID];
-                    self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+                    @try {
+                        self.layerClient = [LYRClient clientWithAppID:appID];
+                        self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+                    } @catch(NSException *theException) {
+                        
+                    }
+                   
                 }
                 [self loginLayer];
             }
@@ -398,7 +403,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              //[MBProgressHUD showHUDAddedTo:self.imgView animated:YES];
          }
          else if (error.code ==209){
-             [PFUser logOut];
              [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
                  if (!success) {
                      NSLog(@"Failed to deauthenticate: %@", error);
@@ -406,7 +410,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                      NSLog(@"Previous user deauthenticated");
                  }
              }];
-             
+             [PFUser logOut];
+
              PFUser *user = nil;
              PFInstallation *currentInstallation = [PFInstallation currentInstallation];
              [currentInstallation setObject:user forKey:@"user"];

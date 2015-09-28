@@ -14,7 +14,10 @@
 #import "VerficationViewController.h"
 #define LOGIN_TEXTFIELD_OFFSET        (IS_IPHONE_5 ? 160 :100)
 
-@interface TutorialContentViewController ()<UITextFieldDelegate>
+@interface TutorialContentViewController ()<UITextFieldDelegate>{
+    BOOL isShowingKeyboard;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicator;
+}
 
 - (IBAction)loginButtonAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtMobNumber;
@@ -105,18 +108,22 @@
 }
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    // Save the height of keyboard and animation duration
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
-    [UIView beginAnimations:@"moveKeyboard" context:nil];
-    float height = keyboardRect.size.height-60;
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - height, self.view.frame.size.width, self.view.frame.size.height);
-    [UIView commitAnimations];
-    //  [self setNeedsUpdateConstraints];
+   if(isShowingKeyboard== NO){
+        // Save the height of keyboard and animation duration
+        NSDictionary *userInfo = [notification userInfo];
+        CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
+        [UIView beginAnimations:@"moveKeyboard" context:nil];
+        float height = keyboardRect.size.height-60;
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - height, self.view.frame.size.width, self.view.frame.size.height);
+        [UIView commitAnimations];
+        //  [self setNeedsUpdateConstraints];
+       isShowingKeyboard= YES;
 }
+   }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    isShowingKeyboard = NO;
     // Reset the desired height (keep the duration)
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];

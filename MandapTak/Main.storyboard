@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -161,17 +161,17 @@
                                 <rect key="frame" x="80" y="405" width="160" height="42"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call.png" translatesAutoresizingMaskIntoConstraints="NO" id="rpO-LY-nZv">
-                                        <rect key="frame" x="8" y="5" width="20" height="18"/>
+                                        <rect key="frame" x="24" y="5" width="20" height="18"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9i-Ny-Zh6">
-                                        <rect key="frame" x="0.0" y="31" width="160" height="1"/>
+                                        <rect key="frame" x="14" y="31" width="133" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="xxx-xxx-xxxx" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYF-RM-Vgi">
-                                        <rect key="frame" x="31" y="0.0" width="123" height="30"/>
+                                        <rect key="frame" x="47" y="0.0" width="89" height="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                         <connections>
                                             <outlet property="delegate" destination="6CF-4b-L6l" id="Bco-yA-eFU"/>
                                         </connections>
@@ -199,6 +199,9 @@
                                     <action selector="loginButtonAction:" destination="6CF-4b-L6l" eventType="touchUpInside" id="N2q-fY-vwm"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6xW-lA-tKJ">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -206,8 +209,10 @@
                             <constraint firstItem="Whp-hq-fD3" firstAttribute="top" secondItem="64n-Tq-w4E" secondAttribute="bottom" constant="46" id="2rH-9t-H3z"/>
                             <constraint firstAttribute="centerX" secondItem="OPJ-pb-LUe" secondAttribute="centerX" id="6Hz-O9-Kvn"/>
                             <constraint firstItem="6pA-4W-lAP" firstAttribute="top" secondItem="s1d-xG-RY2" secondAttribute="bottom" id="Aph-F5-CcJ"/>
+                            <constraint firstAttribute="centerY" secondItem="6xW-lA-tKJ" secondAttribute="centerY" id="IBV-0U-62Z"/>
                             <constraint firstItem="W5x-63-arG" firstAttribute="top" secondItem="Whp-hq-fD3" secondAttribute="bottom" constant="8" id="OD2-cM-Eai"/>
                             <constraint firstItem="FFC-4g-qdr" firstAttribute="top" secondItem="9Bo-aO-2o5" secondAttribute="bottom" constant="19" id="Q3z-o8-xb8"/>
+                            <constraint firstAttribute="centerX" secondItem="6xW-lA-tKJ" secondAttribute="centerX" id="Y6k-TK-SGl"/>
                             <constraint firstAttribute="centerX" secondItem="G6d-Vn-oaG" secondAttribute="centerX" id="fVS-LM-qhq"/>
                             <constraint firstItem="2lM-Ud-C9S" firstAttribute="top" secondItem="W5x-63-arG" secondAttribute="bottom" constant="8" id="fmn-fS-Z0L"/>
                             <constraint firstItem="s1d-xG-RY2" firstAttribute="leading" secondItem="pAM-QA-kfn" secondAttribute="leading" id="hvt-ty-fzn"/>
@@ -227,6 +232,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="6xW-lA-tKJ" id="Jdm-KV-cYy"/>
                         <outlet property="backgroundImageView" destination="s1d-xG-RY2" id="I3j-zP-Wr5"/>
                         <outlet property="btnLogin" destination="FFC-4g-qdr" id="J9g-oE-U5m"/>
                         <outlet property="imgView" destination="Whp-hq-fD3" id="YHg-aI-spz"/>
@@ -1617,11 +1623,11 @@
                                 <rect key="frame" x="100" y="406" width="120" height="39"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CQ-3m-FEj">
-                                        <rect key="frame" x="13" y="35" width="107" height="1"/>
+                                        <rect key="frame" x="15" y="35" width="90" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="XXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IwQ-X7-SI2">
-                                        <rect key="frame" x="44" y="3" width="72" height="30"/>
+                                        <rect key="frame" x="46" y="3" width="49" height="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1630,7 +1636,7 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="verify_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="acZ-L7-nPf">
-                                        <rect key="frame" x="16" y="9" width="20" height="18"/>
+                                        <rect key="frame" x="25" y="9" width="20" height="18"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1639,15 +1645,20 @@
                                     <constraint firstAttribute="width" constant="120" id="iWv-KI-HNM"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MYv-pC-Ero">
+                                <rect key="frame" x="142" y="265" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2eV-wg-hf1" firstAttribute="top" secondItem="0iD-jA-YNA" secondAttribute="bottom" constant="60" id="4aG-Qx-YlK"/>
                             <constraint firstItem="grP-6l-5nN" firstAttribute="top" secondItem="VeC-yG-VmM" secondAttribute="bottom" constant="16" id="5fa-yz-ucG"/>
                             <constraint firstAttribute="centerX" secondItem="HXH-PI-wgH" secondAttribute="centerX" id="5n2-lF-N6Q"/>
+                            <constraint firstAttribute="centerY" secondItem="MYv-pC-Ero" secondAttribute="centerY" id="ASv-5p-139"/>
                             <constraint firstItem="Ewq-Rg-cVh" firstAttribute="leading" secondItem="di5-is-e3r" secondAttribute="leading" id="CJm-HM-XnV"/>
                             <constraint firstAttribute="trailing" secondItem="Ewq-Rg-cVh" secondAttribute="trailing" id="F3b-Qd-H0x"/>
                             <constraint firstItem="HXH-PI-wgH" firstAttribute="top" secondItem="2eV-wg-hf1" secondAttribute="bottom" constant="13" id="FIc-hN-yCG"/>
+                            <constraint firstAttribute="centerX" secondItem="MYv-pC-Ero" secondAttribute="centerX" id="Gwc-ez-2Me"/>
                             <constraint firstItem="VeC-yG-VmM" firstAttribute="top" secondItem="I2n-LM-kJY" secondAttribute="bottom" constant="17" id="HhI-jk-vff"/>
                             <constraint firstAttribute="centerX" secondItem="VeC-yG-VmM" secondAttribute="centerX" id="ISr-At-c66"/>
                             <constraint firstItem="Ewq-Rg-cVh" firstAttribute="top" secondItem="di5-is-e3r" secondAttribute="top" id="QcT-2b-SWC"/>
@@ -1660,6 +1671,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="MYv-pC-Ero" id="P0a-43-ov6"/>
                         <outlet property="txtVerfication" destination="IwQ-X7-SI2" id="xjf-fy-tMP"/>
                         <segue destination="B0V-vW-TGd" kind="presentation" identifier="Login" id="bKB-oe-NGi"/>
                     </connections>

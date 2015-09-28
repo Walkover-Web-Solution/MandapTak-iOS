@@ -15,7 +15,10 @@
 #import "AppDelegate.h"
 #import "AgentViewController.h"
 #import <Atlas.h>
-@interface VerficationViewController ()<UITextFieldDelegate>
+@interface VerficationViewController ()<UITextFieldDelegate>{
+    
+    __weak IBOutlet UIActivityIndicatorView *activityIndicator;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *txtVerfication;
 
@@ -35,7 +38,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)viewWillAppear:(BOOL)animated{
-   // [self performSelector:@selector(txtFieldFirstResponder) withObject:nil afterDelay:.2];
+    [self performSelector:@selector(txtFieldFirstResponder) withObject:nil afterDelay:.1];
 }
 -(void)txtFieldFirstResponder{
     [self.txtVerfication becomeFirstResponder];

@@ -139,12 +139,14 @@
         [query includeKey:@"education2.degreeId"];
         [query includeKey:@"education3.degreeId"];
         [query includeKey:@"industryId"];
-         MBProgressHUD * hud;
-         hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+         //MBProgressHUD * hud;
+         //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showLoader];
         btnMenu.enabled = YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
+                [self hideLoader];
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 // The find succeeded.
                 PFObject *obj= objects[0];
