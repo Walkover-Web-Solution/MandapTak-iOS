@@ -21,7 +21,6 @@
 #import "StartMainViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import <ParseCrashReporting/ParseCrashReporting.h>
 @interface AppDelegate ()
 
 @end
@@ -43,7 +42,6 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
     }
     
-    [ParseCrashReporting enable];
     
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
