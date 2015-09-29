@@ -906,6 +906,9 @@
                                         <state key="normal" image="unlike.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="likeAction:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="hC5-GA-4sS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1069,6 +1072,7 @@
                         <outlet property="lblTraitMatch" destination="ZBp-g8-Ks0" id="7PL-Ts-peD"/>
                         <outlet property="lblWeight" destination="qkL-ax-EYk" id="ukb-Le-JWS"/>
                         <outlet property="profileImageView" destination="Xtl-b9-mUO" id="bcl-ro-NoH"/>
+                        <outletCollection property="likeAction" destination="Ebh-mF-A4R" id="2vT-wk-dtK"/>
                         <segue destination="Agl-qW-yOW" kind="show" identifier="galleryIdentifier" id="vHo-9N-AWl"/>
                     </connections>
                 </viewController>

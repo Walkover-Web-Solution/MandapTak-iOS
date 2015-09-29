@@ -14,6 +14,7 @@
 #import "ViewFullProfileVC.h"
 #import "Profile.h"
 #import "Education.h"
+#import "MatchScreenVC.h"
 
 @interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
@@ -47,5 +48,6 @@
 @property (nonatomic) BOOL isFromMatches;
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;
+- (IBAction)likeAction:(id)sender;
 @property (strong,nonatomic) Profile *profileObject;
 @end

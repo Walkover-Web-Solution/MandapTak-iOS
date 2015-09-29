@@ -51,7 +51,7 @@
     [self getUserImages];
     //[self showBlurredImage];
     //current changes
-    btnLike.hidden = YES;
+    //btnLike.hidden = YES;
     btnMatchPin.hidden = YES;
 }
 
@@ -425,6 +425,129 @@
 
 - (IBAction)viewFullProfile:(id)sender
 {
+}
+
+- (IBAction)likeAction:(id)sender
+{
+    
+    PFUser *user = [PFUser currentUser];
+    NSLog(@"user name -> %@",user.username);
+    NSLog(@"profile user name -> %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]);
+    
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
+    
+    Profile *userProfileObj = profileObject;
+        NSString *strObjId = userProfileObj.profilePointer.objectId;
+       
+        [PFCloud callFunctionInBackground:@"likeAndFind"
+                           withParameters:@{@"userProfileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
+                                            @"likeProfileId":strObjId,
+                                            @"userName":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]}
+                                    block:^(id results, NSError *error)
+         {
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
+             
+             if (!error)
+             {
+                 //insert data in History Model
+                 
+                 // this is where you handle the results and change the UI.
+                 if ([results isKindOfClass:[NSString class]])
+                 {
+                     //proceed to show next profile - like function
+                     //go back to home screen and reload home screen
+                     [self back:nil];
+                     
+                     /*
+                     //add current action data in History model
+                     History *historyObj = [[History alloc]init];
+                     historyObj.historyObjectId = results;
+                     historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+                     historyObj.actionProfileId = strObjId;
+                     historyObj.actionType = 1;     //like action:1
+                     
+                     //save History model object in arrHistory
+                     [arrHistory addObject:historyObj];
+                     
+                     //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                     [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                     [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                     
+                     //enable/disable undo Button
+                     if (arrCache.count > 0)
+                     {
+                         btnUndo.enabled = YES;
+                     }
+                     else
+                     {
+                         btnUndo.enabled = NO;
+                     }
+                     
+                     //perform animation
+                     //[self.view.layer addAnimation:transition forKey:nil];
+                     profileNumber = 0;
+                     [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
+                      */
+                 }
+                 else
+                 {
+                     //store profile object to show profile details on popover screen - like back
+                     Profile *likedProfileObj = profileObject;
+                     
+                     //show "You just got matched" view
+                     //retrieve last inserted object id from likedprofile class
+                     
+                     /*
+                     PFObject *likeObj = results;
+                     
+                     //add curent action data in History model
+                     History *historyObj = [[History alloc]init];
+                     historyObj.historyObjectId = likeObj.objectId;
+                     historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+                     historyObj.actionProfileId = strObjId;
+                     historyObj.actionType = 1;     //like action:1
+                     
+                     //save History model object in arrHistory
+                     [arrHistory addObject:historyObj];
+                     
+                     //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                     [arrCache addObject:arrCandidateProfiles[profileNumber]];
+                     [arrCandidateProfiles removeObjectAtIndex:profileNumber];
+                     
+                     //enable/disable undo Button
+                     if (arrCache.count > 0)
+                     {
+                         btnUndo.enabled = YES;
+                     }
+                     else
+                     {
+                         btnUndo.enabled = NO;
+                     }
+                     
+                     //perform animation
+                     //[self.view.layer addAnimation:transition forKey:nil];
+                     profileNumber = 0;
+                     [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
+                     */
+                     //show popover view
+                     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+                     vc.profileObj = likedProfileObj;
+                     vc.txtTraits = lblTraitMatch.text;
+                     
+                     [self.navigationController presentViewController:vc animated:YES completion:nil];
+                     
+                    
+                 }
+             }
+             
+         }];
+        
+    
+    
+
 }
 
 #pragma mark ShowActivityIndicator
