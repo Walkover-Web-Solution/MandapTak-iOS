@@ -147,7 +147,7 @@
             
             if (!error) {
                 [self hideLoader];
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                //[MBProgressHUD hideHUDForView:self.view animated:YES];
                 // The find succeeded.
                 PFObject *obj= objects[0];
                 currentProfile = obj;
@@ -157,7 +157,8 @@
                 [self updateuserInfo];
             }
             else if (error.code ==100){
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideLoader];
 
                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [errorAlertView show];
@@ -166,9 +167,9 @@
             }
 
             else if (error.code ==209){
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideLoader];
+                //[MBProgressHUD hideHUDForView:self.view animated:YES];
                 [PFUser logOut];
-                
                 PFUser *user = nil;
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation setObject:user forKey:@"user"];
@@ -180,7 +181,8 @@
                 [self presentViewController:vc animated:YES completion:nil];
             }
             else {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideLoader];
+                //[MBProgressHUD hideHUDForView:self.view animated:YES];
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];

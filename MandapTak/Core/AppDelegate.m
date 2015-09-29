@@ -38,7 +38,6 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isFirstLoad"];
     //Remote notification info
     NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
-    
     //Accept push notification when app is not open
     if (remoteNotifiInfo) {
         [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
@@ -49,22 +48,12 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
     [PFUser enableRevocableSessionInBackground];
-//    if (LayerAppIDString.length == 0 || ParseAppIDString.length == 0 || ParseClientKeyString.length == 0) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Configuration" message:@"You have not configured your Layer and/or Parse keys. Please check your configuration and try again." delegate:nil cancelButtonTitle:@"Rats!" otherButtonTitles:nil];
-//        [alertView show];
-//        return YES;
-//    }
+    
     // Set default ACLs
     PFACL *defaultACL = [PFACL ACL];
     [defaultACL setPublicReadAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-
-    // Initializes a LYRClient object
-    //NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-   // LYRClient *layerClient = [LYRClient clientWithAppID:appID];
-   // layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
-    
     
     if([PFUser currentUser]){
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
@@ -92,14 +81,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         }
         
     }
-//    else{
-//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
-//        vc.layerClient = layerClient;
-//        self.window.rootViewController=vc;
-//
-//    }
-    //[Fabric with:@[[Crashlytics class]]];
+    [Fabric with:@[[Crashlytics class]]];
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     

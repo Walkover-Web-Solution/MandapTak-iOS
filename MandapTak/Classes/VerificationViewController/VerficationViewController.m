@@ -19,6 +19,7 @@
     
     __weak IBOutlet UIActivityIndicatorView *activityIndicator;
 }
+@property (weak, nonatomic) IBOutlet UIButton *btnVerify;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtVerfication;
 
@@ -105,14 +106,16 @@
     if([[AppData sharedData]isInternetAvailable]){
         if(self.txtVerfication.text.length==4){
             [self.view endEditing:YES];
-            MBProgressHUD *HUD;
-            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
+//            MBProgressHUD *HUD;
+//            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self showLoader];
             [PFCloud callFunctionInBackground:@"verifyNumber"
                                withParameters:@{@"mobile":[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"],@"otp":self.txtVerfication.text}
                                         block:^(NSString *results, NSError *error)
              {
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [self hideLoader];
+
                  if (!error)
                  {
                      [self performLoginOnVerifactionWithPassword:results];
@@ -140,14 +143,16 @@
 }
 
 -(void)performLoginOnVerifactionWithPassword:(NSString*)password{
-    MBProgressHUD *HUD;
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] );
-    NSLog(@"%@",password);
+//    MBProgressHUD *HUD;
+//    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] );
+//    NSLog(@"%@",password);
+    [self showLoader];
+
     [PFUser logInWithUsernameInBackground:[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] password:password
                                     block:^(PFUser *user, NSError *error) {
-                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                        
+                                        //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                                        [self hideLoader];
                                         if(!error){
                                             NSLog(@"Success");
                                             PFACL *acl = [PFACL ACL];
@@ -168,11 +173,14 @@
 
 -(void)checkIfAgentOrUser{
    // [self loginLayer];
-    MBProgressHUD *HUD;
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    MBProgressHUD *HUD;
+//    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
+
     PFObject *role = [[PFUser currentUser]valueForKey:@"roleId"];
     [role fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+       // [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self hideLoader];
         NSString *roleValue = [object objectForKey:@"name"];
         if([roleValue isEqual:@"Agent"]){
             // switch to admin
@@ -193,11 +201,12 @@
     [query includeKey:@"profileId"];
     [query whereKey:@"isPrimary" equalTo:@YES];
     [query whereKey:@"relation" notEqualTo:@"Agent"];
-    
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
+
+//    MBProgressHUD * hud;
+//    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self hideLoader];
         
         if (!error) {
             // Agent Login
@@ -245,12 +254,12 @@
     NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
-    
-    MBProgressHUD * hud;
-    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showLoader];
+
+//    MBProgressHUD * hud;
+//    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
+        [self hideLoader];
         if (!error) {
             //  [self getUserProfileForUser:objects[0]];
             PFObject *currentProfile ;
@@ -305,6 +314,21 @@
         }
     }];
     
+}
+#pragma mark ShowActiviatyIndicator
+
+-(void)showLoader{
+    //activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    self.btnVerify.enabled = NO;
+    self.txtVerfication.enabled = NO;
+}
+
+-(void)hideLoader{
+    //activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    self.btnVerify.enabled = YES;
+    self.txtVerfication.enabled = YES;
 }
 
 @end

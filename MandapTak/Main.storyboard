@@ -1691,6 +1691,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="activityIndicator" destination="MYv-pC-Ero" id="P0a-43-ov6"/>
+                        <outlet property="btnVerify" destination="grP-6l-5nN" id="a0s-6q-CRd"/>
                         <outlet property="txtVerfication" destination="IwQ-X7-SI2" id="xjf-fy-tMP"/>
                         <segue destination="B0V-vW-TGd" kind="presentation" identifier="Login" id="bKB-oe-NGi"/>
                     </connections>

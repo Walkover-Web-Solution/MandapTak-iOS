@@ -80,27 +80,29 @@
         }
 
     }
-    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
-    
+//    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
+//    
     NSError *error;
-    NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
-    if (messages) {
-        NSLog(@"%tu messages", messages.count);
-    } else {
-        NSLog(@"Query failed with error %@", error);
-    }
-    
+//    NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
+//    if (messages) {
+//        NSLog(@"%tu messages", messages.count);
+//    } else {
+//        NSLog(@"Query failed with error %@", error);
+//    }
+//    
     LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
     
     NSError *error2 = nil;
     NSOrderedSet *conversations = [self.layerClient executeQuery:query2 error:&error2];
     if (conversations) {
+        if(conversations.count == 0){
+            
+        }
         NSLog(@"%tu conversations", conversations.count);
     } else {
         NSLog(@"Query failed with error %@", error);
     }
        
-    
 }
 
 -(void)getAllChat{
@@ -497,6 +499,24 @@
     [self.btnChat setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
     self.lblPageTitle.text = @"CHATS";
     [self.tableView reloadData];
+    NSError *error;
+    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    
+    NSError *error2 = nil;
+    NSOrderedSet *conversation = [self.layerClient executeQuery:query2 error:&error2];
+    if (conversation) {
+        if(conversation.count == 0){
+            lblUserInfo.text = @"No Chat Available!!";
+            lblUserInfo.hidden = NO;
+        }
+        else
+            lblUserInfo.hidden = YES;
+
+        NSLog(@"%tu conversations", conversation.count);
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+
 }
 #pragma mark - ATLConversationListViewControllerDataSource Methods
 

@@ -2030,8 +2030,8 @@
                                     <action selector="nextBtnAction:" destination="RZ3-DY-SJj" eventType="touchUpInside" id="XU8-Jj-iSe"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4gc-TV-YWb">
-                                <rect key="frame" x="150" y="285" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="4gc-TV-YWb">
+                                <rect key="frame" x="142" y="268" width="37" height="37"/>
                                 <color key="color" red="0.92156862750000001" green="0.3294117647" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>

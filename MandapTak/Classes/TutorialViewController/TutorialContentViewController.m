@@ -145,14 +145,15 @@
         }
         else{
             [self.view endEditing:YES];
-            MBProgressHUD *HUD;
-            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
+           // MBProgressHUD *HUD;
+            //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self showLoader];
             [PFCloud callFunctionInBackground:@"sendOtp"
                                withParameters:@{@"mobile":self.txtMobNumber.text}
                                         block:^(NSString *results, NSError *error)
              {
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [self hideLoader];
                  if (!error)
                  {
                      UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -175,4 +176,21 @@
 
    
 }
+
+#pragma mark ShowActiviatyIndicator
+
+-(void)showLoader{
+    //activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    self.btnLogin.enabled = NO;
+    self.txtMobNumber.enabled = NO;
+}
+
+-(void)hideLoader{
+    //activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    self.btnLogin.enabled = YES;
+    self.txtMobNumber.enabled = YES;
+}
+
 @end
