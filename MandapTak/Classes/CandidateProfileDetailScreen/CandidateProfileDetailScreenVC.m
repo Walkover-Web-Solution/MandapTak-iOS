@@ -452,7 +452,7 @@
              if (!error)
              {
                  //insert data in History Model
-                 
+                 [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"reloadCandidateList"];
                  // this is where you handle the results and change the UI.
                  if ([results isKindOfClass:[NSString class]])
                  {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -1072,7 +1072,6 @@
                         <outlet property="lblTraitMatch" destination="ZBp-g8-Ks0" id="7PL-Ts-peD"/>
                         <outlet property="lblWeight" destination="qkL-ax-EYk" id="ukb-Le-JWS"/>
                         <outlet property="profileImageView" destination="Xtl-b9-mUO" id="bcl-ro-NoH"/>
-                        <outletCollection property="likeAction" destination="Ebh-mF-A4R" id="2vT-wk-dtK"/>
                         <segue destination="Agl-qW-yOW" kind="show" identifier="galleryIdentifier" id="vHo-9N-AWl"/>
                     </connections>
                 </viewController>
