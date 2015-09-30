@@ -149,8 +149,12 @@
     if([arrSelectedImages containsObject:arrImageList[indexPath.row]]){
         [arrSelectedImages removeObject:arrImageList[indexPath.row]];
     }
-    else
-         [arrSelectedImages addObject:arrImageList[indexPath.row]];
+    else{
+        if(currentCount<8)
+            [arrSelectedImages addObject:arrImageList[indexPath.row]];
+
+    }
+    
     
     [self.collectionView reloadData];
 }

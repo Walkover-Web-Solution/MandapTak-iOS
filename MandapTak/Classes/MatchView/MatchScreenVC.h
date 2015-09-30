@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Profile.h"
+#import <LayerKit/LayerKit.h>
 @protocol MatchScreenDelegate
 @end
 
@@ -15,4 +16,7 @@
 @property (weak, nonatomic) id <MatchScreenDelegate> delegate;
 @property (strong,nonatomic) Profile *profileObj;
 @property (strong,nonatomic) NSString *txtTraits;
+@property (nonatomic) LYRClient *layerClient;
+@property (strong, nonatomic) PFObject *currentProfile;
+
 @end

@@ -251,10 +251,9 @@
 
 #pragma mark ImageViewControllerDelegate
 -(void)selectedPrimaryPhoto:(UIImage *)primaryPhoto andCropedPhoto:(UIImage *)cropedPhoto andIndex:(NSInteger)index{
-    for(UIImage *image in arrImageList){
-        
-    }
+    
 }
+
 -(void)selectedPrimaryPhoto:(Photos *)primaryImg andCropedPhoto:(UIImage *)cropedImg andIndex:(NSInteger)index withDeletedPhotos:(NSArray *)arrDeletedPhotos{
     for(Photos *photo in arrDeletedPhotos){
         if([arrImageList containsObject:photo]){

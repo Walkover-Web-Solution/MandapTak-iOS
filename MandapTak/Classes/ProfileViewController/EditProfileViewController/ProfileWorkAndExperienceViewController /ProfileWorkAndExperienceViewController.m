@@ -162,7 +162,7 @@
 }
 */
 -(void)updateUserInfo{
-   
+    PFObject *cur = self.currentProfile;
     if(![[self.currentProfile valueForKey:@"designation"] isKindOfClass: [NSNull class]]){
         selectedDesignation  = [self.currentProfile valueForKey:@"designation"];
     }
@@ -178,7 +178,7 @@
     if([self.currentProfile valueForKey:@"education1"] !=nil&&![[self.currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
         Education *education1 =arrEducationData[0];
         education1.specialisation= [self.currentProfile valueForKey:@"education1"];
-        PFObject * deg = [education1.specialisation valueForKey:@"degreeId"];
+        PFObject * deg = [[self.currentProfile valueForKey:@"education1"] valueForKey:@"degreeId"];
         education1.degree = deg;
 
         if([self.currentProfile valueForKey:@"education2"] !=nil&&![[self.currentProfile valueForKey:@"education2"] isKindOfClass: [NSNull class]]){
@@ -262,7 +262,7 @@
     
     static NSString *cellIdentifier3 = @"DegreeTableViewCell";
     DegreeTableViewCell *degCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
-    
+    PFObject *deg ;
     if (!normalCell) {
         normalCell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         [normalCell setBackgroundColor:[UIColor clearColor]];
@@ -371,6 +371,7 @@
                     [degCell.btnSpecialisation addTarget:self action:@selector(specialisationButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                      [degCell.btnMore addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     education =arrEducationData[indexPath.row];
+                    deg= education.degree;
                     if(education.degree!= nil && ![education.degree isKindOfClass:[NSNull class]]){
                         [degCell.btnDegree setTitle:[education.degree valueForKey:@"name"] forState:UIControlStateNormal];
                         [degCell.btnDegree  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -650,6 +651,7 @@
     [arrEducationData replaceObjectAtIndex:tag withObject:education];
     PFQuery *query = [PFQuery queryWithClassName:@"Specialization"];
     [query whereKey:@"degreeId" equalTo:education.degree];
+   // [query includeKey:@"degreeId"];
     //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if(comments.count ==1){
@@ -787,8 +789,10 @@
 //    }
     for(int i =0;i<arrEducationData.count;i++){
         Education *education = arrEducationData[i];
+        PFObject *spec = education.specialisation;
         if(education.specialisation !=nil){
             [self.currentProfile setObject:education.specialisation forKey:[NSString stringWithFormat:@"education%d",i+1]];
+            NSLog(@"%@",[NSString stringWithFormat:@"education%d",i+1]);
 
         }
     }

@@ -82,11 +82,11 @@
         return nil;
     }
     
-    NSMutableArray *fullNameComponents = [[[participants valueForKey:@"fullName"] allObjects] mutableCopy];
-    NSString *fullNamesText = [self typingIndicatorTextWithParticipantStrings:fullNameComponents participantsCount:participantsCount];
-    if ([self typingIndicatorLabelHasSpaceForText:fullNamesText]) {
-        return fullNamesText;
-    }
+//    NSMutableArray *fullNameComponents = [[[participants valueForKey:@"fullName"] allObjects] mutableCopy];
+//    NSString *fullNamesText = [self typingIndicatorTextWithParticipantStrings:fullNameComponents participantsCount:participantsCount];
+//    if ([self typingIndicatorLabelHasSpaceForText:fullNamesText]) {
+//        return fullNamesText;
+//    }
     
     NSArray *firstNames = [[participants valueForKey:@"firstName"] allObjects];
     NSMutableArray *firstNameComponents = [firstNames mutableCopy];

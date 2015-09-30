@@ -11,6 +11,9 @@
 #import "ServiceManager.h"
 #import "SCNetworkReachability.h"
 #import <Parse/Parse.h>
+#import <Atlas/Atlas.h>
+static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-11e5-9685-919001005125";
+
 @implementation AppData{
      SCNetworkReachability *_reachability;
 }
@@ -63,4 +66,27 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
 //     ];
 //
 //}
+
+-(LYRClient*)installLayerClient{
+    if([PFUser currentUser]){
+        NSURL *appID = [NSURL URLWithString:LayerAppIDString];
+        if(self.layerClient.appID == nil){
+            @try {
+                self.layerClient = [LYRClient clientWithAppID:appID];
+                self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+            }
+            @catch(NSException *theException) {
+                
+            }
+
+        }
+    }
+    return self.layerClient;
+
+}
+    
+-(LYRClient*)fetchLayerClient{
+    return self.layerClient;
+}
+
 @end

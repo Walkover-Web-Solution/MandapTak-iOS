@@ -121,9 +121,16 @@
                      [self performLoginOnVerifactionWithPassword:results];
                  }
                  else{
-                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                     [alert show];
-                 }
+                     if(error.code==400){
+                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry!!" message:@"Please enter valid verification code." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                         [alert show];
+
+                     }
+                     else{
+                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                         [alert show];
+                     }
+                                      }
              }];
             
         }
@@ -167,6 +174,7 @@
                                             }];
                                             [PFUser currentUser].ACL = acl;
                                             [self checkIfAgentOrUser];
+                                            [[AppData sharedData] installLayerClient];
                                         }
                                     }];
 }

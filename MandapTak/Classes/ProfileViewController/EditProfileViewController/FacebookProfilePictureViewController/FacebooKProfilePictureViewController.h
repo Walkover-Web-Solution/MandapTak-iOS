@@ -15,4 +15,6 @@
 @interface FacebooKProfilePictureViewController : UIViewController
 @property (weak, nonatomic) id <FacebooKProfilePictureViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSString *userId;
+@property (assign, nonatomic) NSUInteger currentPhotosCount;
+
 @end

@@ -21,7 +21,9 @@
 #import "StartMainViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "AppData.h"
 @interface AppDelegate ()
+@property (nonatomic) LYRClient *layerClient;
 
 @end
 
@@ -54,6 +56,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     if([PFUser currentUser]){
+        self.layerClient = [[AppData sharedData] installLayerClient];
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
             AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
@@ -79,7 +82,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         }
         
     }
-    [Fabric with:@[[Crashlytics class]]];
+    //[Fabric with:@[[Crashlytics class]]];
 
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     
@@ -113,7 +116,8 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
                                                 sourceApplication:sourceApplication
-                                                       annotation:annotation];
+                                                       annotation:annotation
+            ];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     // NSLog(@"Did Fail to Register for Remote Notifications");
@@ -287,5 +291,52 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         }
     }
 }
+/*
+ - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NS
+ Dictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+ {
+ NSError *error;
+ 
+ BOOL success = [self.applicationController.layerClient synchronizeWithRemoteNotification:userInfo completion:^(NSArray *changes, NSError *error) {
+ if (changes) {
+ if ([changes count]) {
+ message = [self messageFromRemoteNotification:userInfo];
+ completionHandler(UIBackgroundFetchResultNewData);
+ } else {
+ completionHandler(UIBackgroundFetchResultNoData);
+ }
+ } else {
+ completionHandler(UIBackgroundFetchResultFailed);
+ }
+ }];
+ if (!success) {
+ completionHandler(UIBackgroundFetchResultNoData);
+ }
+ */
+ - (LYRMessage *)messageFromRemoteNotification:(NSDictionary *)remoteNotification
+ {
+     static NSString *const LQSPushMessageIdentifierKeyPath = @"layer.message_identifier";
+     
+     // Retrieve message URL from Push Notification
+     NSURL *messageURL = [NSURL URLWithString:[remoteNotification valueForKeyPath:LQSPushMessageIdentifierKeyPath]];
+     
+     // Retrieve LYRMessage from Message URL
+     LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
+     query.predicate = [LYRPredicate predicateWithProperty:@"identifier" predicateOperator:LYRPredicateOperatorIsIn value:[NSSet setWithObject:messageURL]];
+     
+     NSError *error = nil;
+     NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
+     if (messages) {
+     NSLog(@"Query contains %lu messages", (unsigned long)messages.count);
+     LYRMessage *message= messages.firstObject;
+     LYRMessagePart *messagePart = message.parts[0];
+     NSLog(@"Pushed Message Contents: %@", [[NSString alloc] initWithData:messagePart.data encoding:NSUTF8StringEncoding]);
+     } else {
+     NSLog(@"Query failed with error %@", error);
+     }
+     
+     return [messages firstObject];
+ }
+ 
 
 @end

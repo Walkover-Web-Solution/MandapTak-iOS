@@ -9,7 +9,8 @@
 #import "MatchScreenVC.h"
 #import "SWRevealViewController.h"
 #import "MBProgressHUD.h"
-
+#import "ConversationViewController.h"
+#import "AppData.h"
 @interface MatchScreenVC ()
 {
     
@@ -19,10 +20,14 @@
     IBOutlet UILabel *lblReligion;
     IBOutlet UILabel *lblDesignation;
     IBOutlet UILabel *lblTraits;
-    
+    LYRConversation *userConversation;
+    BOOL isFetchingConversation;
+    BOOL isConversationAvailable;
+
     NSArray *arrHeight;
 }
 - (IBAction)back:(id)sender;
+- (IBAction)chatButtonAction:(id)sender;
 
 @end
 
@@ -32,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.layerClient = [[AppData sharedData]fetchLayerClient];
     //set image view frame = circular
     userImageView.layer.cornerRadius = 80.0f;
     userImageView.clipsToBounds = YES;
@@ -58,8 +63,27 @@
         //get data from object id
         [self getUserProfile];
     }
-}
+    
+    //Login layer
+    [self getCurrentProfile];
 
+}
+-(void)getCurrentProfile{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    query.cachePolicy = kPFCachePolicyCacheOnly;
+    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        //[self hideLoader];
+        if (!error) {
+            // The find succeeded.
+            PFObject *obj= objects[0];
+            self.currentProfile =obj;
+            [self loginLayer];
+
+        }
+    }];
+
+}
 
 #pragma mark User Profile Pic
 -(void) getUserProfile
@@ -233,4 +257,171 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Layer Authentication Methods
+
+- (void)loginLayer
+{
+    // Connect to Layer
+    // See "Quick Start - Connect" for more details
+    [self.layerClient connectWithCompletion:^(BOOL success, NSError *error) {
+        if (!success) {
+            if(error.code ==6000)
+                [self getAllUserForAConversation];
+        } else {
+            PFUser *user = [PFUser currentUser];
+            NSString *userID = user.objectId;
+            [self authenticateLayerWithUserID:userID completion:^(BOOL success, NSError *error) {
+                if (!error){
+                    [self getAllUserForAConversation];
+                    
+                } else {
+                    NSLog(@"Failed Authenticating Layer Client with error:%@", error);
+                }
+            }];
+        }
+    }];
+}
+
+- (void)authenticateLayerWithUserID:(NSString *)userID completion:(void (^)(BOOL success, NSError * error))completion
+{
+    // Check to see if the layerClient is already authenticated.
+    if (self.layerClient.authenticatedUserID) {
+        // If the layerClient is authenticated with the requested userID, complete the authentication process.
+        if ([self.layerClient.authenticatedUserID isEqualToString:userID]){
+            NSLog(@"Layer Authenticated as User %@", self.layerClient.authenticatedUserID);
+            if (completion) completion(YES, nil);
+            return;
+        } else {
+            //If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
+            [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
+                if (!error){
+                    [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
+                        if (completion){
+                            completion(success, error);
+                        }
+                    }];
+                } else {
+                    if (completion){
+                        completion(NO, error);
+                    }
+                }
+            }];
+        }
+    } else {
+        // If the layerClient isn't already authenticated, then authenticate.
+        [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
+            if (completion){
+                completion(success, error);
+            }
+        }];
+    }
+}
+
+- (void)authenticationTokenWithUserId:(NSString *)userID completion:(void (^)(BOOL success, NSError* error))completion
+{
+    /*
+     * 1. Request an authentication Nonce from Layer
+     */
+    [self.layerClient requestAuthenticationNonceWithCompletion:^(NSString *nonce, NSError *error) {
+        if (!nonce) {
+            if (completion) {
+                completion(NO, error);
+            }
+            return;
+        }
+        
+        /*
+         * 2. Acquire identity Token from Layer Identity Service
+         */
+        NSDictionary *parameters = @{@"nonce" : nonce, @"userID" : userID};
+        
+        [PFCloud callFunctionInBackground:@"generateToken" withParameters:parameters block:^(id object, NSError *error) {
+            if (!error){
+                
+                NSString *identityToken = (NSString*)object;
+                [self.layerClient authenticateWithIdentityToken:identityToken completion:^(NSString *authenticatedUserID, NSError *error) {
+                    if (authenticatedUserID) {
+                        if (completion) {
+                            completion(YES, nil);
+                        }
+                        NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
+                    } else {
+                        completion(NO, error);
+                    }
+                }];
+            } else {
+                NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
+            }
+        }];
+        
+    }];
+}
+
+- (IBAction)chatButtonAction:(id)sender {
+    if(userConversation){
+        ConversationViewController *controller = [ConversationViewController conversationViewControllerWithLayerClient:self.layerClient];
+        controller.conversation = userConversation;
+        controller.displaysAddressBar = NO;
+        UINavigationController *navController  = [[UINavigationController alloc]initWithRootViewController:controller];
+        controller.title = self.profileObj.name;
+        [self presentViewController:navController animated:YES completion:nil];
+
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Processing.." message:@"Please Wait." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];;
+        [alert show];
+    }
+      //[self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark Chat
+-(LYRConversation*)getChatConversationIfPossibleWithUsers:(NSMutableArray*)arrUser{
+    NSArray *participants = arrUser;
+    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    query.predicate = [LYRPredicate predicateWithProperty:@"participants" predicateOperator:LYRPredicateOperatorIsEqualTo value:participants];
+    
+    NSError *error = nil;
+    NSOrderedSet *conversations = [self.layerClient executeQuery:query error:&error];
+    if (!error) {
+        NSLog(@"%tu conversations with participants %@", conversations.count, participants);
+        if(conversations.count==0){
+            NSError *error = nil;
+            LYRConversation *conversation = [self.layerClient newConversationWithParticipants:[NSSet setWithArray:arrUser] options:nil error:&error];
+            userConversation = conversation;
+        }
+        else{
+            userConversation = conversations[0];
+        }
+        //btnChat.hidden = NO;
+       
+        
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+    return nil;
+}
+-(void)getAllUserForAConversation{
+    PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
+    [query whereKey:@"profileId" equalTo:self.currentProfile];
+    [query whereKey:@"profileId" equalTo:self.profileObj.profilePointer];
+    [query whereKey:@"relation" notEqualTo:@"Agent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSMutableArray *arrUserIds = [NSMutableArray array];
+            for(PFObject *obj in objects){
+                PFUser *user = [obj valueForKey:@"userId"];
+                [arrUserIds addObject:user.objectId];
+            }
+            NSLog(@"arrUserIds --  %@",arrUserIds);
+            [self getChatConversationIfPossibleWithUsers:arrUserIds];
+            
+            // The find succeeded.
+        }
+    }];
+    
+}
+
+
 @end

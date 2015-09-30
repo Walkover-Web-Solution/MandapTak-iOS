@@ -17,7 +17,6 @@
     NSString *selectedHeight;
 }
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
-- (IBAction)doneButtonAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

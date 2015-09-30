@@ -209,6 +209,7 @@
 		899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C53821B7383C200C24DA8 /* HeightPopoverViewController.m */; };
 		899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 899CBDE61B75FF3A00D1778A /* menu_white.png */; };
 		899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */; };
+		89AD119E1BBA94F400ADC9B9 /* LNBRippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */; settings = {ASSET_TAGS = (); }; };
 		89AF50951B9AFF2800E170D2 /* userDefImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 89AF50941B9AFF2800E170D2 /* userDefImg.png */; };
 		89AF50971B9B049E00E170D2 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 89AF50961B9B049E00E170D2 /* splash.png */; };
 		89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9F7221B6B578C004CBE3D /* AppDelegate.m */; };
@@ -590,6 +591,8 @@
 		899CBDE61B75FF3A00D1778A /* menu_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_white.png; sourceTree = "<group>"; };
 		899CBDE91B75FFEE00D1778A /* BirthTimePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthTimePopoverViewController.h; sourceTree = "<group>"; };
 		899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthTimePopoverViewController.m; sourceTree = "<group>"; };
+		89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNBRippleEffect.h; sourceTree = "<group>"; };
+		89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNBRippleEffect.m; sourceTree = "<group>"; };
 		89AF50941B9AFF2800E170D2 /* userDefImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userDefImg.png; sourceTree = "<group>"; };
 		89AF50961B9B049E00E170D2 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		89D9F7211B6B578C004CBE3D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1697,6 +1700,8 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */,
+				89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */,
 				893F03401BAACC3C00BB1B59 /* SVProgressHUD */,
 				8997CC6E1BA182C8001B11AA /* Reachablity */,
 				8997CC6B1BA18280001B11AA /* Reachability.h */,
@@ -2273,6 +2278,7 @@
 				757F87601B8EF1DC00C083A4 /* SVWebViewController.m in Sources */,
 				89D9F73B1B6B57A8004CBE3D /* SWRevealViewController.m in Sources */,
 				892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */,
+				89AD119E1BBA94F400ADC9B9 /* LNBRippleEffect.m in Sources */,
 				895B72331B902087006AA638 /* AppData.m in Sources */,
 				89936ADB1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m in Sources */,
 				89E0FA551B85C92A000BD65A /* ZCAlbumPickerController.m in Sources */,
@@ -2414,7 +2420,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2454,7 +2460,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2490,7 +2496,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2523,7 +2529,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

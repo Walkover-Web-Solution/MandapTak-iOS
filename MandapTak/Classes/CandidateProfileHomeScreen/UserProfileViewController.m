@@ -9,7 +9,7 @@
 #import "UserProfileViewController.h"
 #import "SWRevealViewController.h"
 #import <Atlas/Atlas.h>
-
+#import "AppData.h"
 @interface UserProfileViewController (){
     
     __weak IBOutlet UILabel *lblTraits;
@@ -36,23 +36,24 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(![[[NSUserDefaults standardUserDefaults]valueForKey:@"isNotification"] isEqual:@"yes"]){
-        if( !self.layerClient.authenticatedUserID){
-            if([PFUser currentUser]){
-                NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-                if(self.layerClient.appID == nil){
-                    @try {
-                        self.layerClient = [LYRClient clientWithAppID:appID];
-                        self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
-                    } @catch(NSException *theException) {
-                        
-                    }
-                   
-                }
-                [self loginLayer];
-            }
-        }
-    }
+    self.layerClient = [[AppData sharedData]fetchLayerClient];
+//    if(![[[NSUserDefaults standardUserDefaults]valueForKey:@"isNotification"] isEqual:@"yes"]){
+//        if( !self.layerClient.authenticatedUserID){
+//            if([PFUser currentUser]){
+//                NSURL *appID = [NSURL URLWithString:LayerAppIDString];
+//                if(self.layerClient.appID == nil){
+//                    @try {
+//                        self.layerClient = [LYRClient clientWithAppID:appID];
+//                        self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
+//                    } @catch(NSException *theException) {
+//                        
+//                    }
+//                   
+//                }
+//                [self loginLayer];
+//            }
+//        }
+//    }
     
     //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;

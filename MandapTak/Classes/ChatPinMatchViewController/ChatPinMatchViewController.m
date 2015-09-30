@@ -18,7 +18,8 @@
 #import "UserManager.h"
 #import "SVProgressHUD.h"
 #import "ConversationListViewController.h"
-@interface ChatPinMatchViewController ()<ATLConversationListViewControllerDelegate, ATLConversationListViewControllerDataSource,LYRQueryControllerDelegate>{
+//#import "LNBRippleEffect.h"
+@interface ChatPinMatchViewController ()<LYRQueryControllerDelegate>{
     NSInteger currentTab;
     NSArray *arrMatches;
     NSArray *arrPins;
@@ -29,6 +30,8 @@
     NSOrderedSet *conversations;
     __weak IBOutlet UIView *chatView;
     __weak IBOutlet UIActivityIndicatorView *activityIndicator;
+    // add ripple effect
+    //LNBRippleEffect *rippleEffect;
 }
 @property (nonatomic) LYRQueryController *queryController;
 
@@ -80,29 +83,12 @@
         }
 
     }
-//    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
-//    
-    NSError *error;
-//    NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
-//    if (messages) {
-//        NSLog(@"%tu messages", messages.count);
-//    } else {
-//        NSLog(@"Query failed with error %@", error);
-//    }
-//    
-    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    // add ripple effect
     
-    NSError *error2 = nil;
-    NSOrderedSet *conversations = [self.layerClient executeQuery:query2 error:&error2];
-    if (conversations) {
-        if(conversations.count == 0){
-            
-        }
-        NSLog(@"%tu conversations", conversations.count);
-    } else {
-        NSLog(@"Query failed with error %@", error);
-    }
-       
+//    rippleEffect = [[LNBRippleEffect alloc]initWithImage:[UIImage imageNamed:@""] Frame:CGRectMake(110, 200, 100, 100) Color:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9] Target:nil ID:self];
+//    [rippleEffect setRippleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9]];
+//    [rippleEffect setRippleTrailColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9]];
+//    [self.view addSubview:rippleEffect];
 }
 
 -(void)getAllChat{
@@ -323,13 +309,6 @@
         [self showFullProfileForProfile:profile];
 
     }
-    else{
-       // if ([self.delegate respondsToSelector:@selector(conversationListViewController:didSelectConversation:)]){
-            LYRConversation *conversation = [self.queryController objectAtIndexPath:indexPath];
-         //   [self.delegate conversationListViewController:self didSelectConversation:conversation];
-       // }
-
-    }
 }
 -(void)showFullProfileForProfile:(PFObject*)profileObj{
     Profile *profileModel = [[Profile alloc]init];
@@ -380,7 +359,15 @@
     CandidateProfileDetailScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     vc.currentProfile = self.currentProfile;
     vc.profileObject = profileModel;
-    vc.isFromMatches = true;
+    
+    // Show chat button if it is match profile
+    if(currentTab==0)
+        vc.isFromMatches = true;
+    else{
+        vc.isFromMatches = false;
+
+    }
+    
     vc.layerClient = self.layerClient;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
@@ -397,15 +384,12 @@
     if([[AppData sharedData]isInternetAvailable]){
         [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
         self.lblPageTitle.text = @"MATCHES";
-       // MBProgressHUD * hud;
-        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self showLoader];
         btnBack.enabled =YES;
         [PFCloud callFunctionInBackground:@"getMatchedProfile"
                            withParameters:@{@"profileId":[self.currentProfile objectId]}
                                     block:^(NSArray *results, NSError *error)
          {
-             //[MBProgressHUD hideHUDForView:self.view animated:YES];
              [self hideLoader];
 
              if (!error)
@@ -435,6 +419,8 @@
 }
 
 -(void)switchToPin{
+   // [rippleEffect removeFromSuperview];
+
     chatView.hidden = YES;
     if([[AppData sharedData]isInternetAvailable]){
         [self.btnPin setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
@@ -458,12 +444,9 @@
         [query includeKey:@"pinnedProfileId.education2.degreeId"];
         [query includeKey:@"pinnedProfileId.education3.degreeId"];
         [query includeKey:@"pinnedProfileId.industryId"];
-        //MBProgressHUD * hud;
-        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self showLoader];
         btnBack.enabled =YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            //[MBProgressHUD hideHUDForView:self.view animated:YES];
             [self hideLoader];
 
             if (!error) {
@@ -499,23 +482,23 @@
     [self.btnChat setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
     self.lblPageTitle.text = @"CHATS";
     [self.tableView reloadData];
-    NSError *error;
-    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
-    
-    NSError *error2 = nil;
-    NSOrderedSet *conversation = [self.layerClient executeQuery:query2 error:&error2];
-    if (conversation) {
-        if(conversation.count == 0){
-            lblUserInfo.text = @"No Chat Available!!";
-            lblUserInfo.hidden = NO;
-        }
-        else
-            lblUserInfo.hidden = YES;
-
-        NSLog(@"%tu conversations", conversation.count);
-    } else {
-        NSLog(@"Query failed with error %@", error);
-    }
+//    NSError *error;
+//    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+//    
+//    NSError *error2 = nil;
+//    NSOrderedSet *conversation = [self.layerClient executeQuery:query2 error:&error2];
+//    if (conversation) {
+//        if(conversation.count == 0){
+//            lblUserInfo.text = @"No Chat Available!!";
+//            lblUserInfo.hidden = NO;
+//        }
+//        else
+//            lblUserInfo.hidden = YES;
+//
+//        NSLog(@"%tu conversations", conversation.count);
+//    } else {
+//        NSLog(@"Query failed with error %@", error);
+//    }
 
 }
 #pragma mark - ATLConversationListViewControllerDataSource Methods
@@ -666,9 +649,9 @@
     
     LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
     NSError *error2 = nil;
-    NSOrderedSet *conversations = [self.layerClient executeQuery:query2 error:&error2];
-    if (conversations) {
-        NSLog(@"%tu conversations", conversations.count);
+    NSOrderedSet *conversation = [self.layerClient executeQuery:query2 error:&error2];
+    if (conversation) {
+        NSLog(@"%tu conversations", conversation.count);
     } else {
         NSLog(@"Query failed with error %@", error);
     }
@@ -678,53 +661,6 @@
     //[self.navigationController pushViewController:controller animated:YES];
 
 }
-/*
- - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NS
- Dictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
- {
- NSError *error;
- 
- BOOL success = [self.applicationController.layerClient synchronizeWithRemoteNotification:userInfo completion:^(NSArray *changes, NSError *error) {
- if (changes) {
- if ([changes count]) {
- message = [self messageFromRemoteNotification:userInfo];
- completionHandler(UIBackgroundFetchResultNewData);
- } else {
- completionHandler(UIBackgroundFetchResultNoData);
- }
- } else {
- completionHandler(UIBackgroundFetchResultFailed);
- }
- }];
- if (!success) {
- completionHandler(UIBackgroundFetchResultNoData);
- }
- 
- - (LYRMessage *)messageFromRemoteNotification:(NSDictionary *)remoteNotification
- {
- static NSString *const LQSPushMessageIdentifierKeyPath = @"layer.message_identifier";
- 
- // Retrieve message URL from Push Notification
- NSURL *messageURL = [NSURL URLWithString:[remoteNotification valueForKeyPath:LQSPushMessageIdentifierKeyPath]];
- 
- // Retrieve LYRMessage from Message URL
- LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRMessage class]];
- query.predicate = [LYRPredicate predicateWithProperty:@"identifier" predicateOperator:LYRPredicateOperatorIsIn value:[NSSet setWithObject:messageURL]];
- 
- NSError *error = nil;
- NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
- if (messages) {
- NSLog(@"Query contains %lu messages", (unsigned long)messages.count);
- LYRMessage *message= messages.firstObject;
- LYRMessagePart *messagePart = message.parts[0];
- NSLog(@"Pushed Message Contents: %@", [[NSString alloc] initWithData:messagePart.data encoding:NSUTF8StringEncoding]);
- } else {
- NSLog(@"Query failed with error %@", error);
- }
- 
- return [messages firstObject];
- }
- */
 #pragma mark ShowActiviatyIndicator
 
 -(void)showLoader{

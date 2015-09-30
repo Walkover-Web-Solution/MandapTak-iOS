@@ -57,7 +57,7 @@
     __weak IBOutlet UIButton *btnDone;
     BOOL isSavingFourthTabData;
     __weak IBOutlet UIButton *choosePhotoBtn;
-    
+    BOOL isPrimaryPhoto;
     //fourth tab
     NSMutableArray *arrNewImages;
     NSMutableArray *arrOldImages;
@@ -120,7 +120,7 @@
     vc3 = [sb2 instantiateViewControllerWithIdentifier:@"ProfileWorkAndExperienceViewController"];
     arrNewImages = [NSMutableArray array];
     arrOldImages = [NSMutableArray array];
-    
+    activityIndicator.hidden = YES;
     arrImageList = [NSMutableArray array];
     selectedBiodata = [[Photos alloc]init];
     UIColor* whyerColor = [UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1];
@@ -163,9 +163,6 @@
                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [errorAlertView show];
             }
-            else if (error.code ==120){
-            }
-
             else if (error.code ==209){
                 [self hideLoader];
                 //[MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -283,24 +280,7 @@
     
     
 }
--(void)pinCurrentProfile{
-    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    
-    // Pin PFQuery results
-    NSArray *objects = [query findObjects]; // Online PFQuery results
-    [PFObject pinAllInBackground:objects block:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // succesful
-            
-        } else {
-            //Something bad has ocurred
-            //            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            //            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            //            [errorAlertView show];
-        }
-    }];
 
-}
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     CATransition *transition = [CATransition animation];
     
@@ -362,7 +342,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)checkIfPrimaryPic{
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query clearCachedResult];
+    [query whereKey:@"profileId" equalTo:currentProfile];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (!error) {
+            arrOldImages = [NSMutableArray array];
+            for(PFObject *object in objects){
+                NSString *strIsPrimary =[NSString stringWithFormat:@"%@",[object valueForKey:@"isPrimaryPhoto"] ] ;
+                if([strIsPrimary integerValue]){
+                    isPrimaryPhoto = YES;
+                }
+                    
+                
+            }
+        }
+    }];
 
+}
 -(void)getAllPhotos{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
@@ -375,6 +376,10 @@
         if (!error) {
             arrOldImages = [NSMutableArray array];
             for(PFObject *object in objects){
+                NSString *strIsPrimary =[NSString stringWithFormat:@"%@",[object valueForKey:@"isPrimary"] ] ;
+                if([strIsPrimary integerValue]){
+                    isPrimaryPhoto = YES;
+                }
                 [[object objectForKey:@"file"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     Photos *photo = [[Photos alloc]init];
                     photo.imgObject = object;
@@ -391,30 +396,6 @@
 }
 
 
-- (void)getPhotoWithObject:(NSArray *)objects
-{
-    dispatch_queue_t backgroundQueue = dispatch_queue_create("com.walkover.photoQueue", 0);
-    dispatch_async(backgroundQueue, ^{
-        arrImageList= [NSMutableArray array];
-        arrOldImages= [NSMutableArray array];
-        for(PFObject *object in objects){
-            Photos *photo = [[Photos alloc]init];
-            photo.imgObject = object;
-            [arrOldImages addObject:photo];
-        }
-        arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
-        
-        [self.collectionView reloadData];
-
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
-            
-            [self.collectionView reloadData];
-
-        });
-    });
-}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -785,7 +766,7 @@
         int package = [strPackage intValue];
         int minBugget =[txtMinBudget.text intValue];
         int maxBudget =[txtMaxBudget.text intValue];
-        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]]||designation == nil ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||primaryPhoto ==nil||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]]||designation == nil ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||isPrimaryPhoto == NO ||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
             NSMutableArray *arrMsg = [NSMutableArray array];
             if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
                 [arrMsg addObject:@"valid Full Name"];
@@ -830,17 +811,11 @@
             if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Industry"];
             }
-            //            if([currentProfile valueForKey:@"minMarriageBudget"] ==nil){
-            //                [arrMsg addObject:@"min marriage budget"];
-            //            }
-            //            if([currentProfile valueForKey:@"maxMarriageBudget"] ==nil){
-            //                [arrMsg addObject:@"max marriage budget"];
-            //            }
             if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]]){
                 [arrMsg addObject:@"Degree and its specialization"];
             }
             
-            if(primaryPhoto ==nil){
+            if(isPrimaryPhoto ==NO){
                 [arrMsg addObject:@"select a Primary Photo"];
             }
             if(selectedBiodata ==nil){
@@ -851,9 +826,7 @@
                 
             }
             NSString *msg =@"Please enter";
-            //        for(NSString *str in arrMsg){
-            //            [msg stringByAppendingString:[NSString stringWithFormat:@"%@",str]];
-            //        }
+        
             for(int i=0; i<arrMsg.count;i++){
                 if(i==0)
                     msg=  [msg stringByAppendingString:[NSString stringWithFormat:@" %@",arrMsg[i]]];
@@ -865,15 +838,12 @@
             [alert show]; 
         }
         else{
-            //MBProgressHUD * hud;
-            //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [currentProfile setObject: @YES  forKey: @"isComplete"];
             [currentProfile setObject: @NO  forKey: @"paid"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UserProfileUpdatedNotification" object:self];
 
             [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
             [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                //[MBProgressHUD hideHUDForView:self.view animated:YES];
                 if(self.isMakingNewProfile){
                     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
@@ -1067,6 +1037,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
     vc.delegate = self;
+    
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -1112,7 +1083,10 @@
     [currentProfile setObject:file forKey:@"profilePic"];
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
+        if(primaryPhoto)
+            isPrimaryPhoto = YES;
+        else
+            isPrimaryPhoto = NO;
 }];
     [self updateThePhotoFromPrimary];
 
