@@ -53,6 +53,15 @@
     //current changes
     //btnLike.hidden = YES;
     btnMatchPin.hidden = YES;
+    
+    if (self.isFromMatches)
+    {
+        btnLike.hidden = YES;
+    }
+    else
+    {
+        btnLike.hidden = NO;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
