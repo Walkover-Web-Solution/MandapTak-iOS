@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "17A48FE0678FD6E5CC4C1251"
+               BlueprintIdentifier = "F881CF198DE8D9036CA384BB"
                BuildableName = "libAtlas.a"
                BlueprintName = "Atlas"
                ReferencedContainer = "container:Pods.xcodeproj">

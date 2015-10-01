@@ -148,10 +148,18 @@
     [self.collectionView reloadData];
     if([arrSelectedImages containsObject:arrImageList[indexPath.row]]){
         [arrSelectedImages removeObject:arrImageList[indexPath.row]];
+        currentCount = currentCount-1;
+
     }
     else{
-        if(currentCount<8)
+        if(currentCount<8){
             [arrSelectedImages addObject:arrImageList[indexPath.row]];
+            currentCount = currentCount+1;
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps!" message:@"Maximum upload limit is 8." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
 
     }
     

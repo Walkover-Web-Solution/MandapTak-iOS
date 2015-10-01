@@ -109,17 +109,17 @@ NSString *const ATLAvatarImageViewAccessibilityLabel = @"ATLAvatarImageViewAcces
 
 - (void)setAvatarItem:(id<ATLAvatarItem>)avatarItem
 {
-    if ([avatarItem avatarImageURL]) {
-        self.initialsLabel.text = nil;
-        [self loadAvatarImageWithURL:[avatarItem avatarImageURL]];
-    } else if (avatarItem.avatarImage) {
-        self.initialsLabel.text = nil;
-        self.image = avatarItem.avatarImage;
-    } else if (avatarItem.avatarInitials) {
-        self.image = nil;
-        self.initialsLabel.text = avatarItem.avatarInitials;
-    }
-    _avatarItem = avatarItem;
+//    if ([avatarItem avatarImageURL]) {
+//        self.initialsLabel.text = nil;
+//        [self loadAvatarImageWithURL:[avatarItem avatarImageURL]];
+//    } else if (avatarItem.avatarImage) {
+//        self.initialsLabel.text = nil;
+//        self.image = avatarItem.avatarImage;
+//    } else if (avatarItem.avatarInitials) {
+//        self.image = nil;
+//        self.initialsLabel.text = avatarItem.avatarInitials;
+//    }
+//    _avatarItem = avatarItem;
 }
 
 - (void)setInitialsColor:(UIColor *)initialsColor

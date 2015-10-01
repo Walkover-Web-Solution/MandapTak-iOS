@@ -56,6 +56,7 @@
     arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPin) name:@"UpdatePinNotification" object:nil ];
       self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if(self.currentProfile){
         [self switchToMatches];
@@ -477,11 +478,13 @@
 
    
 }
+
 -(void)switchToChat{
     chatView.hidden = NO;
     [self.btnChat setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
     self.lblPageTitle.text = @"CHATS";
     [self.tableView reloadData];
+    lblUserInfo.hidden = YES;
 //    NSError *error;
 //    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
 //    

@@ -23,7 +23,6 @@
 #import "ConversationViewController.h"
 #import "UserManager.h"
 #import <Atlas/Atlas.h>
-
 #import <ATLConstants.h>
 #import "SVProgressHUD.h" 
 @interface ConversationListViewController () <ATLConversationListViewControllerDelegate, ATLConversationListViewControllerDataSource>
@@ -41,10 +40,8 @@
     self.delegate = self;
     
     [self.navigationController.navigationBar setTintColor:ATLBlueColor()];
-    
     UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTapped:)];
     [self.navigationItem setLeftBarButtonItem:logoutItem];
-
     UIBarButtonItem *composeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(composeButtonTapped:)];
     [self.navigationItem setRightBarButtonItem:composeItem];
 }

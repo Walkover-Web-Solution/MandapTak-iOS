@@ -8,7 +8,7 @@
 //
 
 #import "EditProfileViewController.h"
-#import "PopOverListViewController.h"566
+#import "PopOverListViewController.h"
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "GenderViewController.h"
@@ -211,7 +211,7 @@
             if (!error) {
                // [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self hideLoader];
-
+                [self checkIfPrimaryPic];
                 // The find succeeded.
                 PFObject *obj= objects[0];
                 currentProfile = obj;
@@ -344,22 +344,17 @@
 }
 -(void)checkIfPrimaryPic{
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
-    [query clearCachedResult];
     [query whereKey:@"profileId" equalTo:currentProfile];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    
+    [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
         if (!error) {
-            arrOldImages = [NSMutableArray array];
-            for(PFObject *object in objects){
-                NSString *strIsPrimary =[NSString stringWithFormat:@"%@",[object valueForKey:@"isPrimaryPhoto"] ] ;
-                if([strIsPrimary integerValue]){
-                    isPrimaryPhoto = YES;
-                }
-                    
-                
+            if(objects.count>0){
+                isPrimaryPhoto = YES;
             }
+        } else {
+            [self makePhotoToPrimary:primaryPhoto.imgObject];
+            
+            NSLog(@"Error: %@", error);
         }
     }];
 
@@ -1037,7 +1032,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     FacebooKProfilePictureViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FacebooKProfilePictureViewController"];
     vc.delegate = self;
-    
+    vc.currentPhotosCount = arrImageList.count;
     [self presentViewController:vc animated:YES completion:nil];
 }
 

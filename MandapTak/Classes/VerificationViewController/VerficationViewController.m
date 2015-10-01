@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "AgentViewController.h"
 #import <Atlas.h>
+
 @interface VerficationViewController ()<UITextFieldDelegate>{
     
     __weak IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -162,6 +163,7 @@
                                         [self hideLoader];
                                         if(!error){
                                             NSLog(@"Success");
+                                            
                                             PFACL *acl = [PFACL ACL];
                                             [acl setPublicReadAccess:true];
                                             [acl setWriteAccess:true forUser:[PFUser currentUser]];
