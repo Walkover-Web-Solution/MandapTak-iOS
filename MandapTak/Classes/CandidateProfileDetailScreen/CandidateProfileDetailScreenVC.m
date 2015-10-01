@@ -467,6 +467,10 @@
                  {
                      //proceed to show next profile - like function
                      //go back to home screen and reload home screen
+                     
+                     //fire notification to handle on chatpin match screen
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePinNotification" object:nil];
+                     
                      [self back:nil];
                      
                      /*
@@ -502,53 +506,52 @@
                  }
                  else
                  {
+                     /*
                      //store profile object to show profile details on popover screen - like back
-                     Profile *likedProfileObj = profileObject;
+                     Profile *likedProfileObj = [[Profile alloc] init];
+                     likedProfileObj = profileObject;
                      
                      //show "You just got matched" view
                      //retrieve last inserted object id from likedprofile class
                      
-                     /*
-                     PFObject *likeObj = results;
-                     
-                     //add curent action data in History model
-                     History *historyObj = [[History alloc]init];
-                     historyObj.historyObjectId = likeObj.objectId;
-                     historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
-                     historyObj.actionProfileId = strObjId;
-                     historyObj.actionType = 1;     //like action:1
-                     
-                     //save History model object in arrHistory
-                     [arrHistory addObject:historyObj];
-                     
-                     //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
-                     [arrCache addObject:arrCandidateProfiles[profileNumber]];
-                     [arrCandidateProfiles removeObjectAtIndex:profileNumber];
-                     
-                     //enable/disable undo Button
-                     if (arrCache.count > 0)
-                     {
-                         btnUndo.enabled = YES;
-                     }
-                     else
-                     {
-                         btnUndo.enabled = NO;
-                     }
-                     
-                     //perform animation
-                     //[self.view.layer addAnimation:transition forKey:nil];
-                     profileNumber = 0;
-                     [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
-                     */
                      //show popover view
-                     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+                     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+                     //MatchScreenVC *vc = [[MatchScreenVC alloc]init];
                      MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
                      vc.profileObj = likedProfileObj;
-                     vc.txtTraits = lblTraitMatch.text;
+                     vc.txtTraits = @"abc def ghi";
                      
                      [self.navigationController presentViewController:vc animated:YES completion:nil];
                      
-                    
+                     */
+                     
+                     Profile *likedProfileObj = [[Profile alloc] init];
+                     likedProfileObj = profileObject;
+//                     
+//                     //show popover view
+//                     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+//                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+//                     vc.profileObj = likedProfileObj;
+//                     vc.txtTraits = @"30 traits match";
+//                     NSLog(@"push command fired");
+//                     [self.navigationController pushViewController:vc animated:YES];
+//                     NSLog(@"after push called");
+                     
+                     //NSString *storyboardName = @"Main";
+                     //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+//                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+//                     vc.profileObj = likedProfileObj;
+//                     vc.txtTraits = @"24 traits match";
+//                     [self presentViewController:vc animated:YES completion:nil];
+                     //[self dismissViewControllerAnimated:YES completion:nil];
+                     
+                     //new code
+                     
+                     
+                     // Does not break
+                     [self dismissViewControllerAnimated:YES completion:^{
+                         [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchedNotification" object:likedProfileObj];
+                     }];
                  }
              }
              

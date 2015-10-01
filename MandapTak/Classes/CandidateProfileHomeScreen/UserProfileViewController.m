@@ -55,6 +55,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 //        }
 //    }
     
+    //notification for matched profile
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchedNotification" object:nil];
+    
     //set circular border of progress bar
     progressBar.layer.cornerRadius = 34.0f;
     
@@ -1334,6 +1337,28 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     navController.navigationBarHidden =YES;
     [self presentViewController:navController animated:YES completion:nil];
     //[self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+}
+
+#pragma mark - Notification
+-(void) openMatchScreen:(NSNotification *) notification
+{
+    Profile *pro = [notification object];
+    //pro = notification.object;
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+    MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+    vc.profileObj = pro;
+    vc.txtTraits = @"20 traits match";
+    
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
+    
+    /*
+    //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+    MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+     vc.profileObj = pro;
+     vc.txtTraits = @"24 traits match";
+     [self.navigationController presentViewController:vc animated:YES completion:nil];
+     */
 }
 
 #pragma mark - Navigation

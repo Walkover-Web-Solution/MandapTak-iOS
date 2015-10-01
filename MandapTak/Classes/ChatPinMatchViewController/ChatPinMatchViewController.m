@@ -56,6 +56,10 @@
     arrMatches = [NSArray array];
     arrPins = [NSArray array];
     arrChats = [NSArray array];
+    
+    //notification for matched profile
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchedNotification" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPin) name:@"UpdatePinNotification" object:nil ];
       self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if(self.currentProfile){
@@ -684,5 +688,28 @@
     self.btnMatch.enabled = YES;
     self.tableView.allowsSelection = YES;
 
+}
+
+
+#pragma mark - Notification
+-(void) openMatchScreen:(NSNotification *) notification
+{
+    Profile *pro = [notification object];
+    //pro = notification.object;
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+    MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+    vc.profileObj = pro;
+    vc.txtTraits = @"20 traits match";
+    
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
+    
+    /*
+     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
+     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+     vc.profileObj = pro;
+     vc.txtTraits = @"24 traits match";
+     [self.navigationController presentViewController:vc animated:YES completion:nil];
+     */
 }
 @end
