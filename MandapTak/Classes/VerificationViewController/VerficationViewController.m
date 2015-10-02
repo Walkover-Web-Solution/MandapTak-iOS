@@ -209,8 +209,9 @@
     NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
-    [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
-    //[query whereKey:@"relation" notEqualTo:@"Agent"];
+    [query whereKey:@"relation" notEqualTo:@"Agent"];
+
+    [query whereKey:@"isPrimary" equalTo:@YES];
     [self showLoader];
 
 //    MBProgressHUD * hud;
