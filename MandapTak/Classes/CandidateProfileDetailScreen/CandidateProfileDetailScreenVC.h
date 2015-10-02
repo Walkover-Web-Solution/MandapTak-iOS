@@ -46,8 +46,10 @@
 @property (strong, nonatomic) PFObject *currentProfile;
 @property (nonatomic) LYRClient *layerClient;
 @property (nonatomic) BOOL isFromMatches;
+@property (nonatomic) BOOL isFromPins;
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;
 - (IBAction)likeAction:(id)sender;
 @property (strong,nonatomic) Profile *profileObject;
+@property (strong,nonatomic) NSString *textTraits;
 @end

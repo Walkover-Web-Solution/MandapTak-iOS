@@ -58,7 +58,7 @@
     arrChats = [NSArray array];
     
     //notification for matched profile
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchedNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchPinnedNotification" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPin) name:@"UpdatePinNotification" object:nil ];
       self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -359,18 +359,34 @@
     [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     NSString *strTOB = [formatterTime stringFromDate:dateTOB];
     profileModel.tob = strTOB;
-    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
+    //profilepic
+    //load images in background
+    PFFile *userImageFile = profileObj[@"profilePic"];
+    [userImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+     {
+         if (!error)
+         {
+             //got profile pic data for circular image view
+             profileModel.profilePic = [UIImage imageWithData:data];
+         }
+     }];
+    
+    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CandidateProfileDetailScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     vc.currentProfile = self.currentProfile;
     vc.profileObject = profileModel;
     
     // Show chat button if it is match profile
     if(currentTab==0)
+    {
         vc.isFromMatches = true;
-    else{
+        vc.isFromPins = false;
+    }
+    else
+    {
         vc.isFromMatches = false;
-
+        vc.isFromPins = true;
     }
     
     vc.layerClient = self.layerClient;
@@ -692,24 +708,18 @@
 
 
 #pragma mark - Notification
--(void) openMatchScreen:(NSNotification *) notification
+-(void)openMatchScreen:(NSNotification *) notification
 {
+    [self switchToPin];
+    
     Profile *pro = [notification object];
-    //pro = notification.object;
-    
-    [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
-    MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+    //get traits count
+    NSDictionary* userInfo = notification.userInfo;
+    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MatchScreenVC *vc = [sb2 instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
     vc.profileObj = pro;
-    vc.txtTraits = @"20 traits match";
-    
+    vc.txtTraits = userInfo[@"traitsCount"];;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
-    
-    /*
-     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
-     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
-     vc.profileObj = pro;
-     vc.txtTraits = @"24 traits match";
-     [self.navigationController presentViewController:vc animated:YES completion:nil];
-     */
+
 }
 @end

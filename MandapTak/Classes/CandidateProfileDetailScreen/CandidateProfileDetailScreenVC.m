@@ -13,7 +13,7 @@
 @end
 
 @implementation CandidateProfileDetailScreenVC
-@synthesize profileObject;
+@synthesize profileObject,textTraits;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,7 +35,7 @@
     
     collectionImages = [NSArray arrayWithObjects:@"sampleImage01.jpg",@"sampleImage02.jpg",@"sampleImage03.jpg",@"sampleImage04.jpg",@"sampleImage05.jpg",@"sampleImage06.jpg",@"Profile_2.png",@"Profile_1.png", nil];
  
-    lblTraitMatch.hidden = YES;
+    //lblTraitMatch.hidden = YES;
     
     [self showUserProfile];
     
@@ -240,6 +240,50 @@
     
     //current location label
     lblCurrentLocation.text = [NSString stringWithFormat:@"Current Location : %@,",profileObject.currentLocation];
+    
+    //traits label
+    //get traits count
+    NSString *objID = obj.objectId;
+    
+    //condition for gender
+    NSString *boyProfileId,*girlProfileId;
+    if ([profileObject.gender isEqualToString:@"Male"])
+    {
+        boyProfileId = objID;
+        girlProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+    }
+    else
+    {
+        boyProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
+        girlProfileId = objID;
+    }
+    
+    if (textTraits.length == 0)
+    {
+        //hit API to get traits matching count
+        [PFCloud callFunctionInBackground:@"matchKundli"
+                           withParameters:@{@"boyProfileId":boyProfileId,
+                                            @"girlProfileId":girlProfileId}
+                                    block:^(NSString *traitResult, NSError *error)
+         {
+             if (!error)
+             {
+                 lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
+                 NSLog(@"Traits matching on detail screen  = %@",traitResult);
+             }
+             else
+             {
+                 NSLog(@"Error info -> %@",error.description);
+             }
+             
+         }];
+    }
+    else
+    {
+        lblTraitMatch.text = textTraits;
+    }
+    
+    
     
     NSMutableArray *arrDegrees = [[NSMutableArray alloc]init];
     //NSMutableArray *arrSpecialization = [[NSMutableArray alloc]init];
@@ -549,9 +593,20 @@
                      
                      
                      // Does not break
-                     [self dismissViewControllerAnimated:YES completion:^{
-                         [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchedNotification" object:likedProfileObj];
-                     }];
+                     NSDictionary* userInfo = @{@"traitsCount": lblTraitMatch.text};
+                     if (self.isFromPins)
+                     {
+                         [self dismissViewControllerAnimated:YES completion:^{
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchPinnedNotification" object:likedProfileObj userInfo:userInfo];
+                         }];
+                     }
+                     else
+                     {
+                         [self dismissViewControllerAnimated:YES completion:^{
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchedNotification" object:likedProfileObj userInfo:userInfo];
+                         }];
+                     }
                  }
              }
              

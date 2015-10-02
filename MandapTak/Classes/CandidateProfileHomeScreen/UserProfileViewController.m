@@ -56,6 +56,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 //    }
     
     //notification for matched profile
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"MatchedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchedNotification" object:nil];
     
     //set circular border of progress bar
@@ -289,7 +290,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                          
                          
                          //load images in background
-                         
                          PFFile *userImageFile = profileObj[@"profilePic"];
                          [userImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
                           {
@@ -918,6 +918,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     CandidateProfileDetailScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     Profile *candidateProfile = arrCandidateProfiles[profileNumber];
     vc.profileObject = candidateProfile;
+    vc.textTraits = lblTraitMatch.text;
     //UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
     //navController.navigationBarHidden =YES;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
@@ -1343,12 +1344,14 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 -(void) openMatchScreen:(NSNotification *) notification
 {
     Profile *pro = [notification object];
-    //pro = notification.object;
+    //get traits count
+    NSDictionary* userInfo = notification.userInfo;
+    //NSString *traits = userInfo[@"traitsCount"];
     
     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
     vc.profileObj = pro;
-    vc.txtTraits = @"20 traits match";
+    vc.txtTraits = userInfo[@"traitsCount"];;
     
     [self.navigationController presentViewController:vc animated:YES completion:nil];
     

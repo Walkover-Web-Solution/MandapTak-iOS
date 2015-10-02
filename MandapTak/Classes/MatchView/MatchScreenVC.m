@@ -57,15 +57,17 @@
         lblReligion.text = [NSString stringWithFormat:@"%@,%@",profileObj.religion,profileObj.caste];
         lblTraits.text = txtTraits;
         userImageView.image = profileObj.profilePic;
+        //Login layer
+        [self getCurrentProfile];
     }
     else
     {
         //get data from object id
         [self getUserProfile];
+        
     }
     
-    //Login layer
-    [self getCurrentProfile];
+    
 
 }
 -(void)getCurrentProfile{
@@ -88,13 +90,35 @@
 #pragma mark User Profile Pic
 -(void) getUserProfile
 {
+    NSString *strId = [[NSUserDefaults standardUserDefaults]valueForKey:@"notificationProfileId"];
+    if (strId.length == 0)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        window.rootViewController = [storyboard instantiateInitialViewController];
+    } else {
+        
+    
     //get user profile pic
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     NSLog(@"user profile id - > %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"notificationProfileId"]);
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"notificationProfileId"]];
     [query includeKey:@"casteId"];
     [query includeKey:@"religionId"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query includeKey:@"currentLocation.Parent.Parent"];
+    [query includeKey:@"placeOfBirth.Parent.Parent"];
+//        query2.include("placeOfBirth.Parent.Parent");
+//        query2.include("industryId");
+//        query2.include("education1.degreeId.degreeTypeId");
+//        query2.include("education1.eduBranchId");
+//        query2.include("education2.degreeId.degreeTypeId");
+//        query2.include("education2.eduBranchId");
+//        query2.include("education3.degreeId.degreeTypeId");
+//        query2.include("education3.eduBranchId");
+//        query2.include("religionId");
+//        query2.include("casteId.religionId");
+//        query2.include("gotraId.casteId.religionId");
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -105,14 +129,64 @@
              // The find succeeded.
              PFObject *obj = objects[0];
              
+             //add values in profile object
+             Profile *profileModel = [[Profile alloc]init];
+             profileModel.profilePointer = obj;
+             
+             profileModel.name = obj[@"name"];
+             profileModel.age = [NSString stringWithFormat:@"%@",obj[@"age"]];
+             //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
+             profileModel.weight = [NSString stringWithFormat:@"%@",obj[@"weight"]];
+             profileModel.gender = obj[@"gender"];
+             //caste label
+             PFObject *caste = [obj valueForKey:@"casteId"];
+             PFObject *religion = [obj valueForKey:@"religionId"];
+             //NSLog(@"religion = %@ and caste = %@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]);
+             profileModel.religion = [religion valueForKey:@"name"];
+             profileModel.caste = [caste valueForKey:@"name"];
+             profileModel.designation = obj[@"designation"];
+             
+             //Height
+             profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[obj valueForKey:@"height"]]];
+             
+             //ADD data in model for complete profile view screen
+             PFObject *currentLoc = [obj valueForKey:@"currentLocation"];
+             PFObject *currentState = [currentLoc valueForKey:@"Parent"];
+             profileModel.currentLocation = [NSString stringWithFormat:@"%@,%@",[currentLoc valueForKey:@"name"],[currentState valueForKey:@"name"]];
+             profileModel.income = [obj valueForKey:@"package"];
+             
+             //birth location label
+             PFObject *birthLoc = [obj valueForKey:@"placeOfBirth"];
+             PFObject *birthState = [birthLoc valueForKey:@"Parent"];
+             
+             profileModel.placeOfBirth = [NSString stringWithFormat:@"%@,%@",[birthLoc valueForKey:@"name"],[birthState valueForKey:@"name"]];
+             profileModel.minBudget = [NSString stringWithFormat:@"%@",[obj valueForKey:@"minMarriageBudget"]];
+             profileModel.maxBudget = [NSString stringWithFormat:@"%@",[obj valueForKey:@"maxMarriageBudget"]];
+             profileModel.company = [NSString stringWithFormat:@"%@",[obj valueForKey:@"placeOfWork"]];
+             
+             //DOB
+             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+             [formatter setDateFormat:@"yyyy-MM-dd"];
+             NSString *strDate = [formatter stringFromDate:[obj valueForKey:@"dob"]];
+             profileModel.dob = strDate;
+             
+             //TOB
+             NSDate *dateTOB = [obj valueForKey:@"tob"];
+             NSDateFormatter *formatterTime = [[NSDateFormatter alloc] init];
+             [formatterTime setDateFormat:@"hh:mm:ss"];
+             [formatterTime setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+             NSString *strTOB = [formatterTime stringFromDate:dateTOB];
+             profileModel.tob = strTOB;
+             
+             
              //get basic details
              lblName.text = obj[@"name"];
              lblAgeHeight.text = [NSString stringWithFormat:@"%@, %@",obj[@"age"],[self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",obj[@"height"]]]];
              lblDesignation.text = obj[@"designation"];
              
              //caste label
-             PFObject *caste = [obj valueForKey:@"casteId"];
-             PFObject *religion = [obj valueForKey:@"religionId"];
+             //PFObject *caste = [obj valueForKey:@"casteId"];
+             //PFObject *religion = [obj valueForKey:@"religionId"];
              lblReligion.text = [NSString stringWithFormat:@"%@,%@",[religion valueForKey:@"name"],[caste valueForKey:@"name"]];
              //lblTraits.text = txtTraits;
              
@@ -125,7 +199,7 @@
                       //[MBProgressHUD hideAllHUDsForView:self.imgView animated:YES];
                       if (!error)
                       {
-                          
+                          profileModel.profilePic = [UIImage imageWithData:imageData];
                           UIImage *image = [UIImage imageWithData:imageData];
                           //[arrImages addObject:image];
                           userImageView.image = image;
@@ -177,14 +251,19 @@
                   }
                   
               }];
+             
+             //save current obj in profile object
+             profileObj = profileModel;
+             
              //currentProfile =obj;
              //[self switchToMatches];
-             
+             //Login layer
+             [self getCurrentProfile];
          }
          /*
          else if (error.code ==100){
              //[MBProgressHUD hideHUDForView:self.view animated:YES];
-             
+          
              UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Connection Failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              [errorAlertView show];
          }
@@ -208,6 +287,8 @@
          }
           */
      }];
+    }
+    
 }
 
 
@@ -404,7 +485,7 @@
 -(void)getAllUserForAConversation{
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
     [query whereKey:@"profileId" equalTo:self.currentProfile];
-    [query whereKey:@"profileId" equalTo:self.profileObj.profilePointer];
+    [query whereKey:@"profileId" equalTo:profileObj.profilePointer];
     [query whereKey:@"relation" notEqualTo:@"Agent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
