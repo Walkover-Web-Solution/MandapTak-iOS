@@ -6,6 +6,7 @@ target 'MandapTak' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Raygun4iOS'
+
 end
 
 target 'MandapTakTests' do

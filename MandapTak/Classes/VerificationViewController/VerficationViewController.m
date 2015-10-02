@@ -209,13 +209,9 @@
     NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
-    [query whereKey:@"relation" notEqualTo:@"Agent"];
-
-    [query whereKey:@"isPrimary" equalTo:@YES];
+    [query whereKey:@"relation" equalTo:@"Agent"];
+    [query whereKey:@"isPrimary" equalTo:[NSNumber numberWithBool:YES]];
     [self showLoader];
-
-//    MBProgressHUD * hud;
-//    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [self hideLoader];
         
@@ -226,18 +222,13 @@
             currentProfile = [objects[0] valueForKey:@"profileId"];
             userProfile = objects[0];
             [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
-            //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
             [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
             
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
             AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
-            //vc.globalCompanyId = [self.companies.companyId intValue];
-            
             UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
             navController.navigationBarHidden =YES;
             [self presentViewController:navController animated:YES completion:nil];
-            
-            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -266,13 +257,9 @@
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
     [self showLoader];
-
-//    MBProgressHUD * hud;
-//    hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [self hideLoader];
         if (!error) {
-            //  [self getUserProfileForUser:objects[0]];
             PFObject *currentProfile ;
             PFObject *userProfile ;
             

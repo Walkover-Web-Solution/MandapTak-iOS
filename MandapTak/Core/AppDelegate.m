@@ -22,8 +22,9 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "AppData.h"
-#import <Raygun4iOS/Raygun.h>
-//#import <NewRelicAgent/NewRelic.h>
+
+//#import <Raygun4iOS/Raygun.h>
+#import <NewRelicAgent/NewRelic.h>
 @interface AppDelegate ()
 @property (nonatomic) LYRClient *layerClient;
 
@@ -37,7 +38,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //[NewRelicAgent startWithApplicationToken:@"AA2875f7ae1c1a56c03450a6cf9036195aff7b4924"];
+    [NewRelicAgent startWithApplicationToken:@"AA2875f7ae1c1a56c03450a6cf9036195aff7b4924"];
 
     //apply firstload condition
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isFirstLoad"];
@@ -48,7 +49,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
     }
     // Raygun Initialisation
-    [Raygun sharedReporterWithApiKey:@"FmwFxRVKP/T932mxk9zzEA=="];
+    //[Raygun sharedReporterWithApiKey:@"FmwFxRVKP/T932mxk9zzEA=="];
 
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
@@ -61,7 +62,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     if([PFUser currentUser]){
-        [[Raygun sharedReporter] identify:[[PFUser currentUser] valueForKey:@"username"]];
+        //[[Raygun sharedReporter] identify:[[PFUser currentUser] valueForKey:@"username"]];
 
         self.layerClient = [[AppData sharedData] installLayerClient];
         if([[[NSUserDefaults standardUserDefaults] valueForKey:@"roleType"] isEqual:@"Agent"]){

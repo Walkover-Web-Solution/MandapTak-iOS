@@ -1,0 +1,16 @@
+//
+//  MandapTak-Prefix.pch
+//  MandapTak
+//
+//  Created by Hussain Chhatriwala on 02/10/15.
+//  Copyright (c) 2015 Walkover. All rights reserved.
+//
+
+#ifndef MandapTak_MandapTak_Prefix_pch
+
+#define MandapTak_MandapTak_Prefix_pch
+//#import <NewRelicAgent/NewRelic.h>
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

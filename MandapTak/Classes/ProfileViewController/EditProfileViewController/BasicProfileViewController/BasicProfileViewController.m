@@ -25,11 +25,19 @@
     NSString *selectedGender;
     NSDate *selectedDate;
     NSDate *selectedBirthTime;
-    NSString *selectedHeight;
     BOOL isSelectingCurrentLocation;
     Location * currentLocation;
     Location * placeOfBirthLocation;
     __weak IBOutlet UILabel *lblBornInPlace;
+    PFObject *fetchedProfile;
+    
+    //Pre Selected Fields
+    NSString *preSelectedGender;
+    NSDate *preSelectedDate;
+    NSDate *preSelectedBirthTime;
+    Location * preCurrentLocation;
+    Location * prePlaceOfBirthLocation;
+    NSString *preSelectedName;
 
 }
 
@@ -58,9 +66,15 @@
         [self updateUserInfo];
     }
 }
+-(void)viewWillAppear:(BOOL)animated{
+    if(self.currentProfile !=nil)
+        [self updateUserInfo];
+        
+    }
 -(void)updateUserProfile:(NSNotification*)notification{
     NSDictionary* userInfo = notification.userInfo;
     self.currentProfile = [userInfo valueForKey:@"currentProfile"];
+    fetchedProfile = [userInfo valueForKey:@"currentProfile"];
     [self updateUserInfo];
     btnBirthTime.enabled = YES;
     btnCurrentLocation.enabled = YES;
@@ -94,27 +108,30 @@
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 
         selectedDate =[self.currentProfile valueForKey:@"dob"];
+        preSelectedDate=[self.currentProfile valueForKey:@"dob"];
         NSString *dateString = [dateFormatter stringFromDate: [self.currentProfile valueForKey:@"dob"]];
         [btnDateOfBirth setTitle:[NSString stringWithFormat:@"%@",dateString] forState:UIControlStateNormal];
         [btnDateOfBirth setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if([self.currentProfile valueForKey:@"tob"]){
         selectedBirthTime =[self.currentProfile valueForKey:@"tob"];
+        preSelectedBirthTime = [self.currentProfile valueForKey:@"tob"];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         dateFormatter.dateFormat = @"HH:mm a";
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-
         NSString *dateString = [dateFormatter stringFromDate: [self.currentProfile valueForKey:@"tob"]];
         [btnBirthTime setTitle:[NSString stringWithFormat:@"%@",dateString] forState:UIControlStateNormal];
         [btnBirthTime setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if([self.currentProfile valueForKey:@"gender"]){
         selectedGender=[self.currentProfile valueForKey:@"gender"];
+        preSelectedGender = [self.currentProfile valueForKey:@"gender"];
         [btnGender setTitle:[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"gender"]] forState:UIControlStateNormal];
         [btnGender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if([self.currentProfile valueForKey:@"name"]){
         txtFullName.text = [self.currentProfile valueForKey:@"name"];
+        preSelectedName = [self.currentProfile valueForKey:@"name"];
     }
     if([self.currentProfile valueForKey:@"currentLocation"]){
         PFObject *obj  = [self.currentProfile valueForKey:@"currentLocation"];
@@ -130,7 +147,7 @@
         currentLocation = location;
         [btnCurrentLocation setTitle:[NSString stringWithFormat:@"%@",location.descriptions] forState:UIControlStateNormal];
         [btnCurrentLocation setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
+        preCurrentLocation  = location;
     }
     if([self.currentProfile valueForKey:@"placeOfBirth"]){
         PFObject *obj  = [self.currentProfile valueForKey:@"placeOfBirth"];
@@ -144,6 +161,7 @@
         location.country = [subParent valueForKey:@"name"];
         location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
         placeOfBirthLocation = location;
+        prePlaceOfBirthLocation = location;
         [btnPlaceOfBirth setTitle:[NSString stringWithFormat:@"%@",location.descriptions] forState:UIControlStateNormal];
         [btnPlaceOfBirth setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
@@ -287,7 +305,9 @@
         [self.currentProfile setObject:currentLocation.cityPointer forKey:@"currentLocation"];
     if(placeOfBirthLocation)
         [self.currentProfile setObject:placeOfBirthLocation.cityPointer forKey:@"placeOfBirth"];
-    [self.delegate updatedPfObject:self.currentProfile];
+  
+    if(!([preSelectedName isEqual:txtFullName.text] &&[preCurrentLocation isEqual:currentLocation] &&[preSelectedGender isEqual:selectedGender] &&[preSelectedDate isEqual:selectedDate]&&[preSelectedBirthTime isEqual:selectedBirthTime]&&[prePlaceOfBirthLocation isEqual:placeOfBirthLocation]) )
+         [self.delegate updatedPfObject:self.currentProfile];
 }
 
 #pragma mark UITextFeildDelegate

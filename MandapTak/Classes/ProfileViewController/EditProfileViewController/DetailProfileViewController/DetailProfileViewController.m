@@ -34,6 +34,14 @@
     PFObject *selectedGotra;
     NSString *selectedWeight;
     NSString *religionSelectionType;
+    
+    //Pre Selected Fields
+    NSString *preSelectedHeight;
+    NSInteger preMangilk;
+    PFObject *preSelectedReligion;
+    PFObject *preSelectedCaste;
+    PFObject *preSelectedGotra;
+    NSString *preSelectedWeight;
 }
 - (IBAction)religionButtonAction:(id)sender;
 - (IBAction)gotraButtonAction:(id)sender;
@@ -136,18 +144,21 @@
 //                break;
 //            }
         }
+        preSelectedHeight = selectedHeight;
         [btnHeight setTitle:selectedHeight forState:UIControlStateNormal];
         [btnHeight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [popoverController dismissPopoverAnimated:YES];
     }
     if([self.currentProfile valueForKey:@"weight"]){
         txtWeight.text = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"weight"] ] ;
+        preSelectedWeight =txtWeight.text;
+        selectedWeight = preSelectedWeight;
     }
     if(![[self.currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]&&[self.currentProfile valueForKey:@"casteId"]!=nil){
         PFObject *obj  = [self.currentProfile valueForKey:@"casteId"];
         selectedCaste = obj;
         isCasteSelected = YES;
-
+        preSelectedCaste = obj;
         [btnCaste setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnCaste setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
@@ -155,11 +166,13 @@
     if(![[self.currentProfile valueForKey:@"gotraId"] isKindOfClass: [NSNull class]] &&[self.currentProfile valueForKey:@"gotraId"]!=nil){
         PFObject *obj  = [self.currentProfile valueForKey:@"gotraId"];
         selectedGotra = obj;
+        preSelectedGotra = obj;
         [btnGotra setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnGotra setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];    }
     if(![[self.currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]&&[self.currentProfile valueForKey:@"religionId"]!=nil){
         PFObject *obj  = [self.currentProfile valueForKey:@"religionId"];
         selectedReligion = obj;
+        preSelectedReligion = obj;
         isReligionSelected = YES;
         [btnReligion setTitle:[obj valueForKey:@"name"] forState:UIControlStateNormal];
         [btnReligion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -167,6 +180,7 @@
     if([self.currentProfile valueForKey:@"manglik"]){
         NSString *strMangilk =[NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"manglik"] ] ;
         mangilk = [strMangilk integerValue];
+        preMangilk = mangilk;
         NSString *strManglikValue =@"";
         switch (mangilk) {
             case 0:
@@ -409,8 +423,8 @@
         [self.currentProfile setObject:selectedReligion forKey:@"religionId"];
     else
         [self.currentProfile setObject:[NSNull null] forKey:@"religionId"];
-
-        [self.delegate updatedPfObjectForSecondTab:self.currentProfile];
+    //if(!([preSelectedHeight isEqual:selectedHeight]&&preMangilk==mangilk &&[[preSelectedReligion valueForKey:@"name"] isEqual:[selectedReligion valueForKey:@"name"]]&&[[preSelectedCaste valueForKey:@"name"] isEqual:[selectedCaste valueForKey:@"name"]]&&[[preSelectedGotra valueForKey:@"name"] isEqual:[selectedGotra valueForKey:@"name"]]&&[preSelectedWeight isEqual:selectedWeight]))
+    [self.delegate updatedPfObjectForSecondTab:self.currentProfile];
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
