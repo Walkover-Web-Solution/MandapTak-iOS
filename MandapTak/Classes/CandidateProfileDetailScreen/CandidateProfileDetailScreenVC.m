@@ -247,7 +247,7 @@
     
     //condition for gender
     NSString *boyProfileId,*girlProfileId;
-    if ([profileObject.gender isEqualToString:@"Male"])
+    if ([[profileObject.profilePointer valueForKey:@"gender"] isEqualToString:@"Male"])
     {
         boyProfileId = objID;
         girlProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];

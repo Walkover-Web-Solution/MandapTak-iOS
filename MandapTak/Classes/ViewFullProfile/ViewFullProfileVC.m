@@ -94,7 +94,16 @@
 #pragma mark Image Collection View methods
 -(void)loadImages
 {
-    dataArray = arrImages;
+    if (arrImages.count > 0)
+    {
+        dataArray = arrImages;
+    }
+    else
+    {
+        //get images of profile from photos class
+        dataArray = arrImages;
+    }
+    
     //pageControl.numberOfPages = [dataArray count];
 }
 

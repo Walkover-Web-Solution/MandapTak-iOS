@@ -133,7 +133,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     //NSLog(@"%@, %@", error, error.localizedDescription);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
 {
     /*
     [PFPush handlePush:userInfo];
@@ -160,9 +160,16 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"profileid"] forKey:@"notificationProfileId"];
     //[[[UIAlertView alloc] initWithTitle:@"Test" message:@"notification msg" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
     
-    if (application.applicationState == UIApplicationStateActive)
+    if (application.applicationState == UIApplicationStateActive )
     {
-        
+        /*
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.userInfo = userInfo;
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        //localNotification.alertBody = message;
+        localNotification.fireDate = [NSDate date];
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+         */
     }
     else
     {

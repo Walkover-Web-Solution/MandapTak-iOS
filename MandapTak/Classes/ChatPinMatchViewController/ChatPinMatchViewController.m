@@ -377,6 +377,13 @@
     vc.currentProfile = self.currentProfile;
     vc.profileObject = profileModel;
     
+    //change screen navigation to full profile screen
+    /*
+     ViewFullProfileVC *vc = [segue destinationViewController];
+     vc.arrImages = arrImages;
+     vc.arrEducation = arrEducation;
+     [self.navigationController pushViewController:vc animated:YES];
+     */
     // Show chat button if it is match profile
     if(currentTab==0)
     {
