@@ -17,6 +17,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //set preference to handle back button in matched case
+    [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isFromPreference"];
+    
+    //notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveData:) name:@"ActiveStateNotification" object:nil];
+
     //[[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:(240/255.0f) green:(113/255.0f) blue:(116/255.0f) alpha:1.0f]];
     //self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName : [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17.0f]};
@@ -93,6 +99,11 @@
     txtMaxBudget.inputAccessoryView = numberToolbar;
     
     [self checkBudgetVisiblity];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"Preference view will appear called");
 }
 
 -(void)cancelNumberPad{
@@ -1174,5 +1185,17 @@
     btnLocation.enabled = YES;
     btnMinHeight.enabled = YES;
     btnMaxHeight.enabled = YES;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"preference delegate method called");
+    
+}
+
+#pragma mark - Notification
+-(void)saveData:(NSNotification *) notification
+{
+    [self setPreferences:nil];
 }
 @end

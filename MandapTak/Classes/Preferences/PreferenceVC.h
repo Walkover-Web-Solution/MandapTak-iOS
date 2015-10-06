@@ -22,7 +22,7 @@
 #import "LocationPreferencePopoverVC.h"
 #import "AppData.h"
 
-@interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate>
+@interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate,UIAlertViewDelegate>
 {
     
     IBOutlet UITextField *txtMinAge;

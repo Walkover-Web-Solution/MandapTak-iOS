@@ -331,8 +331,15 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
      */
+    
     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isNotification"];
     
+    if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"isFromPreference"]  isEqualToString:@"yes"])
+    {
+        //[self.navigationController popViewControllerAnimated:YES];
+        [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"redirectToPref"];
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"isFromPreference"];
+    }
     //if user likes a profile and receives a popup,then we need to reload the homescreen
     //[[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"reloadCandidateList"];
     

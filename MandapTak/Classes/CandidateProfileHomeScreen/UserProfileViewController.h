@@ -21,6 +21,7 @@
 #import "WYStoryboardPopoverSegue.h"
 #import "MBCircularProgressBar/MBCircularProgressBarView.h"
 #import <LayerKit/LayerKit.h>
+#import "PreferenceVC.h"
 
 @interface UserProfileViewController : UIViewController
 {

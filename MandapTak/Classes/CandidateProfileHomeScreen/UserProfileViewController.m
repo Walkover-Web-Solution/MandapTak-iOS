@@ -125,6 +125,20 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeRight];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeUp];
     
+    
+    //check notification
+    if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"redirectToPref"]  isEqualToString:@"yes"])
+    {
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"redirectToPref"];
+        //open preference screen
+        /*
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Preference" bundle:nil];
+        PreferenceVC *vc = [sb instantiateViewControllerWithIdentifier:@"PreferenceVC"];
+        [self presentViewController:vc animated:YES completion:nil];
+        return;
+         */
+    }
+    
     /*
     XHAmazingLoadingView *amazingLoadingView = [[XHAmazingLoadingView alloc] initWithType:XHAmazingLoadingAnimationTypeSkype];
     amazingLoadingView.loadingTintColor = [UIColor redColor];
@@ -167,7 +181,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //check notification
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
     {
         //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = TRUE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];

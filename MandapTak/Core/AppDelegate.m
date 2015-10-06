@@ -91,7 +91,7 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         
     }
     [Fabric with:@[[Crashlytics class]]];
-
+    
     WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
     
     [popoverAppearance setTintColor:[UIColor colorWithRed:63./255. green:92./255. blue:128./255. alpha:1]];
@@ -166,10 +166,22 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.userInfo = userInfo;
         localNotification.soundName = UILocalNotificationDefaultSoundName;
-        //localNotification.alertBody = message;
+        localNotification.alertBody = @"local notification";
         localNotification.fireDate = [NSDate date];
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        */
+        /*
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Preference" bundle:nil];
+        MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"PreferenceVC"];
+        UINavigationController *navController =(UINavigationController *) self.window.rootViewController;
+        [navController presentViewController:vc animated:YES completion:nil];
          */
+        //[[[UIAlertView alloc]initWithTitle:@"Success" message:@"Someone liked you back" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"View", nil] show];
+        
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+        self.window.rootViewController=vc;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ActiveStateNotification" object:self];
     }
     else
     {
@@ -181,6 +193,23 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
 //    self.window.rootViewController=vc;
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    if (application.applicationState == UIApplicationStateActive)
+    {
+        /*
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+        self.window.rootViewController=vc;
+         */
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
+        //self.window.rootViewController = vc ;
+        UINavigationController *navController =(UINavigationController *) self.window.rootViewController;
+        [navController pushViewController:vc animated:YES];
+    }
 }
 /*
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -351,7 +380,11 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
      }
      
      return [messages firstObject];
- }
- 
+}
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"app delegate method called");
+    
+}
 @end
