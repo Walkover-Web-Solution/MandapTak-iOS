@@ -1201,7 +1201,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 - (IBAction)dislikeAction:(id)sender
 {
-    //make entry in dislike table
     //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self showLoader];
     CATransition *transition = [CATransition animation];
@@ -1214,7 +1213,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         Profile *userProfileObj = arrCandidateProfiles[profileNumber];
         NSString *strObjId = userProfileObj.profilePointer.objectId;
      
-        //make entry in like table
+        //make entry in dislike table
         PFObject *dislikeObj = [PFObject objectWithClassName:@"DislikeProfile"];
         dislikeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
         dislikeObj[@"dislikeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];

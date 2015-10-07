@@ -37,7 +37,7 @@
     NSMutableArray *loadimagesarray,*arrImages,*arrEducation;
     int *selectedIndex;
     BOOL primaryFlag;
-    IBOutlet UIButton *btnMatchPin;
+    IBOutlet UIButton *btnDislike;
     IBOutlet UIButton *btnLike;
     
     //activity indicator
@@ -50,6 +50,7 @@
 - (IBAction)back:(id)sender;
 - (IBAction)viewFullProfile:(id)sender;
 - (IBAction)likeAction:(id)sender;
+- (IBAction)dislikeAction:(id)sender;
 @property (strong,nonatomic) Profile *profileObject;
 @property (strong,nonatomic) NSString *textTraits;
 @end

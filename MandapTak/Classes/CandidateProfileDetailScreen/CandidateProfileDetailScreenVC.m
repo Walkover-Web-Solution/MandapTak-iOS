@@ -52,7 +52,7 @@
     //[self showBlurredImage];
     //current changes
     //btnLike.hidden = YES;
-    btnMatchPin.hidden = YES;
+    //btnMatchPin.hidden = YES;
     
     if (self.isFromMatches)
     {
@@ -509,89 +509,18 @@
                  // this is where you handle the results and change the UI.
                  if ([results isKindOfClass:[NSString class]])
                  {
-                     //proceed to show next profile - like function
                      //go back to home screen and reload home screen
-                     
                      //fire notification to handle on chatpin match screen
                      [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePinNotification" object:nil];
                      
                      [self back:nil];
                      
-                     /*
-                     //add current action data in History model
-                     History *historyObj = [[History alloc]init];
-                     historyObj.historyObjectId = results;
-                     historyObj.profileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
-                     historyObj.actionProfileId = strObjId;
-                     historyObj.actionType = 1;     //like action:1
-                     
-                     //save History model object in arrHistory
-                     [arrHistory addObject:historyObj];
-                     
-                     //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
-                     [arrCache addObject:arrCandidateProfiles[profileNumber]];
-                     [arrCandidateProfiles removeObjectAtIndex:profileNumber];
-                     
-                     //enable/disable undo Button
-                     if (arrCache.count > 0)
-                     {
-                         btnUndo.enabled = YES;
-                     }
-                     else
-                     {
-                         btnUndo.enabled = NO;
-                     }
-                     
-                     //perform animation
-                     //[self.view.layer addAnimation:transition forKey:nil];
-                     profileNumber = 0;
-                     [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
-                      */
                  }
                  else
                  {
-                     /*
-                     //store profile object to show profile details on popover screen - like back
                      Profile *likedProfileObj = [[Profile alloc] init];
                      likedProfileObj = profileObject;
-                     
-                     //show "You just got matched" view
-                     //retrieve last inserted object id from likedprofile class
-                     
-                     //show popover view
-                     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
-                     //MatchScreenVC *vc = [[MatchScreenVC alloc]init];
-                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
-                     vc.profileObj = likedProfileObj;
-                     vc.txtTraits = @"abc def ghi";
-                     
-                     [self.navigationController presentViewController:vc animated:YES completion:nil];
-                     
-                     */
-                     
-                     Profile *likedProfileObj = [[Profile alloc] init];
-                     likedProfileObj = profileObject;
-//                     
-//                     //show popover view
-//                     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"reloadCandidateList"];
-//                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
-//                     vc.profileObj = likedProfileObj;
-//                     vc.txtTraits = @"30 traits match";
-//                     NSLog(@"push command fired");
-//                     [self.navigationController pushViewController:vc animated:YES];
-//                     NSLog(@"after push called");
-                     
-                     //NSString *storyboardName = @"Main";
-                     //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-//                     MatchScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
-//                     vc.profileObj = likedProfileObj;
-//                     vc.txtTraits = @"24 traits match";
-//                     [self presentViewController:vc animated:YES completion:nil];
-                     //[self dismissViewControllerAnimated:YES completion:nil];
-                     
-                     //new code
-                     
-                     
+
                      // Does not break
                      NSDictionary* userInfo = @{@"traitsCount": lblTraitMatch.text};
                      if (self.isFromPins)
@@ -603,18 +532,72 @@
                      else
                      {
                          [self dismissViewControllerAnimated:YES completion:^{
-                             
                              [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchedNotification" object:likedProfileObj userInfo:userInfo];
                          }];
                      }
                  }
              }
-             
          }];
-        
-    
-    
+}
 
+- (IBAction)dislikeAction:(id)sender
+{
+    [self showLoader];
+    Profile *userProfileObj = profileObject;
+    NSString *strObjId = userProfileObj.profilePointer.objectId;
+    
+    //make entry in dislike table
+    PFObject *dislikeObj = [PFObject objectWithClassName:@"DislikeProfile"];
+    dislikeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    dislikeObj[@"dislikeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
+    
+    [dislikeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+     {
+         [self hideLoader];
+         if (succeeded)
+         {
+             //[self back:nil];
+             //go back to previous screen
+             //delete entry from pin table(if exists)
+             NSLog(@"profile id --> %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
+             NSLog(@"pinned profile Id --> %@",strObjId);
+             
+             PFQuery *query = [PFQuery queryWithClassName:@"PinnedProfile"];
+             [query whereKey:@"profileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]]];
+             
+             [query whereKey:@"pinnedProfileId" equalTo:[PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId]];
+             
+             [query findObjectsInBackgroundWithBlock:^(NSArray *profileArray, NSError *error)
+             {
+                 if (!error)
+                 {
+                     PFObject *profileObj = profileArray[0];
+                     
+                     [profileObj deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                     {
+                         if (succeeded)
+                         {
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePinNotification" object:nil];
+                             [self back:nil];
+                         }
+                         else
+                         {
+                             NSLog(@"DELETE ERROR");
+                         }
+                     }];
+                 }
+                 else
+                 {
+                     NSLog(@"%@",error);
+                 }
+             }];
+             
+         }
+         else
+         {
+             // There was a problem, check error.description
+         }
+     }];
 }
 
 #pragma mark ShowActivityIndicator

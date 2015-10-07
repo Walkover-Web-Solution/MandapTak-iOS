@@ -648,7 +648,7 @@
     }
     else
     {
-        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Enter Min Budget " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Internet not available " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [av show];
         return;
     }
@@ -1190,11 +1190,10 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"preference delegate method called");
-    
 }
 
 #pragma mark - Notification
--(void)saveData:(NSNotification *) notification
+-(void)saveData:(NSNotification *)notification
 {
     [self setPreferences:nil];
 }
