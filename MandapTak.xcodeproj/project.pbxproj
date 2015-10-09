@@ -61,6 +61,18 @@
 		757CBB121BA6E2E900EFD870 /* likeNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB111BA6E2E900EFD870 /* likeNew.png */; };
 		757CBB141BA6E2F200EFD870 /* undoNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB131BA6E2F200EFD870 /* undoNew.png */; };
 		757CBB161BA6F18500EFD870 /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 757CBB151BA6F18500EFD870 /* reload.png */; };
+		757D44571BC64E17004E84AF /* dislikea.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44561BC64E17004E84AF /* dislikea.png */; settings = {ASSET_TAGS = (); }; };
+		757D445B1BC64ED9004E84AF /* dislikePlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D445A1BC64ED9004E84AF /* dislikePlain.png */; settings = {ASSET_TAGS = (); }; };
+		757D445F1BC678A9004E84AF /* MARKRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 757D445E1BC678A9004E84AF /* MARKRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
+		757D447C1BC6794B004E84AF /* rangeSliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44731BC6794B004E84AF /* rangeSliderThumb.png */; settings = {ASSET_TAGS = (); }; };
+		757D447D1BC6794B004E84AF /* rangeSliderThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44741BC6794B004E84AF /* rangeSliderThumb@2x.png */; settings = {ASSET_TAGS = (); }; };
+		757D447E1BC6794B004E84AF /* rangeSliderThumb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44751BC6794B004E84AF /* rangeSliderThumb@3x.png */; settings = {ASSET_TAGS = (); }; };
+		757D447F1BC6794B004E84AF /* rangeSliderTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44761BC6794B004E84AF /* rangeSliderTrack.png */; settings = {ASSET_TAGS = (); }; };
+		757D44801BC6794B004E84AF /* rangeSliderTrack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44771BC6794B004E84AF /* rangeSliderTrack@2x.png */; settings = {ASSET_TAGS = (); }; };
+		757D44811BC6794B004E84AF /* rangeSliderTrack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44781BC6794B004E84AF /* rangeSliderTrack@3x.png */; settings = {ASSET_TAGS = (); }; };
+		757D44821BC6794B004E84AF /* rangeSliderTrackRange.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D44791BC6794B004E84AF /* rangeSliderTrackRange.png */; settings = {ASSET_TAGS = (); }; };
+		757D44831BC6794B004E84AF /* rangeSliderTrackRange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D447A1BC6794B004E84AF /* rangeSliderTrackRange@2x.png */; settings = {ASSET_TAGS = (); }; };
+		757D44841BC6794B004E84AF /* rangeSliderTrackRange@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757D447B1BC6794B004E84AF /* rangeSliderTrackRange@3x.png */; settings = {ASSET_TAGS = (); }; };
 		757F875D1B8EF1DC00C083A4 /* SVWebViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 757F873E1B8EF1DC00C083A4 /* SVWebViewController.strings */; };
 		757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757F87481B8EF1DC00C083A4 /* SVModalWebViewController.m */; };
 		757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 757F87491B8EF1DC00C083A4 /* SVWebViewController.bundle */; };
@@ -340,6 +352,19 @@
 		757CBB111BA6E2E900EFD870 /* likeNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likeNew.png; sourceTree = "<group>"; };
 		757CBB131BA6E2F200EFD870 /* undoNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undoNew.png; sourceTree = "<group>"; };
 		757CBB151BA6F18500EFD870 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
+		757D44561BC64E17004E84AF /* dislikea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislikea.png; sourceTree = "<group>"; };
+		757D445A1BC64ED9004E84AF /* dislikePlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislikePlain.png; sourceTree = "<group>"; };
+		757D445D1BC678A9004E84AF /* MARKRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARKRangeSlider.h; sourceTree = "<group>"; };
+		757D445E1BC678A9004E84AF /* MARKRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARKRangeSlider.m; sourceTree = "<group>"; };
+		757D44731BC6794B004E84AF /* rangeSliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rangeSliderThumb.png; sourceTree = "<group>"; };
+		757D44741BC6794B004E84AF /* rangeSliderThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeSliderThumb@2x.png"; sourceTree = "<group>"; };
+		757D44751BC6794B004E84AF /* rangeSliderThumb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeSliderThumb@3x.png"; sourceTree = "<group>"; };
+		757D44761BC6794B004E84AF /* rangeSliderTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rangeSliderTrack.png; sourceTree = "<group>"; };
+		757D44771BC6794B004E84AF /* rangeSliderTrack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeSliderTrack@2x.png"; sourceTree = "<group>"; };
+		757D44781BC6794B004E84AF /* rangeSliderTrack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeSliderTrack@3x.png"; sourceTree = "<group>"; };
+		757D44791BC6794B004E84AF /* rangeSliderTrackRange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rangeSliderTrackRange.png; sourceTree = "<group>"; };
+		757D447A1BC6794B004E84AF /* rangeSliderTrackRange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeSliderTrackRange@2x.png"; sourceTree = "<group>"; };
+		757D447B1BC6794B004E84AF /* rangeSliderTrackRange@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeSliderTrackRange@3x.png"; sourceTree = "<group>"; };
 		757F873F1B8EF1DC00C083A4 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
 		757F87401B8EF1DC00C083A4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
 		757F87411B8EF1DC00C083A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SVWebViewController.strings; sourceTree = "<group>"; };
@@ -842,6 +867,31 @@
 			path = CandidateProfileDetailScreen;
 			sourceTree = "<group>";
 		};
+		757D445C1BC67892004E84AF /* RangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				757D445D1BC678A9004E84AF /* MARKRangeSlider.h */,
+				757D445E1BC678A9004E84AF /* MARKRangeSlider.m */,
+			);
+			path = RangeSlider;
+			sourceTree = "<group>";
+		};
+		757D44601BC678EB004E84AF /* RangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				757D44731BC6794B004E84AF /* rangeSliderThumb.png */,
+				757D44741BC6794B004E84AF /* rangeSliderThumb@2x.png */,
+				757D44751BC6794B004E84AF /* rangeSliderThumb@3x.png */,
+				757D44761BC6794B004E84AF /* rangeSliderTrack.png */,
+				757D44771BC6794B004E84AF /* rangeSliderTrack@2x.png */,
+				757D44781BC6794B004E84AF /* rangeSliderTrack@3x.png */,
+				757D44791BC6794B004E84AF /* rangeSliderTrackRange.png */,
+				757D447A1BC6794B004E84AF /* rangeSliderTrackRange@2x.png */,
+				757D447B1BC6794B004E84AF /* rangeSliderTrackRange@3x.png */,
+			);
+			path = RangeSlider;
+			sourceTree = "<group>";
+		};
 		757F873D1B8EF1DC00C083A4 /* SVWebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +1009,7 @@
 		75918F6E1B79E9C50082D7EC /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				757D445C1BC67892004E84AF /* RangeSlider */,
 				75918F6F1B79E9C50082D7EC /* CustomLabel.h */,
 				75918F701B79E9C50082D7EC /* CustomLabel.m */,
 				75918F711B79E9C50082D7EC /* PreferenceVC.h */,
@@ -1746,6 +1797,7 @@
 		89D9F7621B6B5DB4004CBE3D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				757D44601BC678EB004E84AF /* RangeSlider */,
 				757849A91BA2EF2D005490E6 /* Animation */,
 				896BBFF41B95861A009FD221 /* ChatPinMatches */,
 				757F876A1B8F0DDB00C083A4 /* General */,
@@ -1813,6 +1865,8 @@
 				758C8E761B87412800FF634E /* unlike.png */,
 				758C8E771B87412800FF634E /* unlike@2x.png */,
 				758C8E781B87412800FF634E /* unlike@3x.png */,
+				757D44561BC64E17004E84AF /* dislikea.png */,
+				757D445A1BC64ED9004E84AF /* dislikePlain.png */,
 				758C8E671B87404B00FF634E /* option.png */,
 				758C8E681B87404B00FF634E /* option@2x.png */,
 				758C8E691B87404B00FF634E /* option@3x.png */,
@@ -2029,8 +2083,10 @@
 				7533F6AB1B84AF0A00B83EFD /* add.png in Resources */,
 				757849DB1BA2EF2D005490E6 /* Anim-(28).png in Resources */,
 				89E0FA501B85C92A000BD65A /* SelectionOverlay@2x.png in Resources */,
+				757D44811BC6794B004E84AF /* rangeSliderTrack@3x.png in Resources */,
 				7564E22D1B970B3200B8D052 /* undo.png in Resources */,
 				896C19F31B96E49B00FFE0C6 /* call.png in Resources */,
+				757D447F1BC6794B004E84AF /* rangeSliderTrack.png in Resources */,
 				757849C91BA2EF2D005490E6 /* Anim-(11).png in Resources */,
 				89D9F78B1B6B5DB4004CBE3D /* preferences@2x.png in Resources */,
 				7533F6AE1B84AF0A00B83EFD /* show.png in Resources */,
@@ -2054,9 +2110,11 @@
 				896D18251B944DDB001513A5 /* Matches_icon.png in Resources */,
 				757849C71BA2EF2D005490E6 /* Anim-(1).png in Resources */,
 				757849D71BA2EF2D005490E6 /* Anim-(24).png in Resources */,
+				757D44821BC6794B004E84AF /* rangeSliderTrackRange.png in Resources */,
 				757F875D1B8EF1DC00C083A4 /* SVWebViewController.strings in Resources */,
 				896BC00F1B95D856009FD221 /* matchCellOption@2x.png in Resources */,
 				89AF50951B9AFF2800E170D2 /* userDefImg.png in Resources */,
+				757D447D1BC6794B004E84AF /* rangeSliderThumb@2x.png in Resources */,
 				758C8E6D1B87404B00FF634E /* option.png in Resources */,
 				896BBFF81B95877D009FD221 /* unpin@2x.png in Resources */,
 				757849D31BA2EF2D005490E6 /* Anim-(20).png in Resources */,
@@ -2078,19 +2136,26 @@
 				7533F6AD1B84AF0A00B83EFD /* add@3x.png in Resources */,
 				89D9F73F1B6B582C004CBE3D /* Main.storyboard in Resources */,
 				89E0FA4E1B85C92A000BD65A /* ZCLocalized.strings in Resources */,
+				757D44831BC6794B004E84AF /* rangeSliderTrackRange@2x.png in Resources */,
 				89D9F77C1B6B5DB4004CBE3D /* heart_icon.png in Resources */,
+				757D447E1BC6794B004E84AF /* rangeSliderThumb@3x.png in Resources */,
 				896D182D1B9454C8001513A5 /* Spam_icon.png in Resources */,
 				757849CA1BA2EF2D005490E6 /* Anim-(12).png in Resources */,
+				757D44841BC6794B004E84AF /* rangeSliderTrackRange@3x.png in Resources */,
 				89D9F78E1B6B5DB4004CBE3D /* setting.png in Resources */,
 				896D18241B944DDB001513A5 /* Matches_bg.png in Resources */,
+				757D445B1BC64ED9004E84AF /* dislikePlain.png in Resources */,
 				757F87661B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				757849E11BA2EF2D005490E6 /* Anim-(6).png in Resources */,
 				757CBB101BA6E2DE00EFD870 /* dislikeNew.png in Resources */,
 				757849DA1BA2EF2D005490E6 /* Anim-(27).png in Resources */,
+				757D44801BC6794B004E84AF /* rangeSliderTrack@2x.png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
+				757D447C1BC6794B004E84AF /* rangeSliderThumb.png in Resources */,
 				757849D81BA2EF2D005490E6 /* Anim-(25).png in Resources */,
 				899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */,
 				757849CE1BA2EF2D005490E6 /* Anim-(16).png in Resources */,
+				757D44571BC64E17004E84AF /* dislikea.png in Resources */,
 				757F87681B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari@2x.png in Resources */,
 				757F876D1B8F0DDB00C083A4 /* backNew.png in Resources */,
 				757849D41BA2EF2D005490E6 /* Anim-(21).png in Resources */,
@@ -2289,6 +2354,7 @@
 				8967FAE21B8DCCCD00AAC41E /* PhotoSelectionCell.m in Sources */,
 				898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */,
 				757F87691B8EF1DC00C083A4 /* SVWebViewControllerActivity.m in Sources */,
+				757D445F1BC678A9004E84AF /* MARKRangeSlider.m in Sources */,
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
 				8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */,
 				893F034C1BAACC3C00BB1B59 /* SVRadialGradientLayer.m in Sources */,

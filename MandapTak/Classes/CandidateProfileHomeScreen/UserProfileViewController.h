@@ -46,7 +46,7 @@
     ALDBlurImageProcessor *blurImageProcessor;
     //UIImageView *blurTargetImageView;
     
-    BOOL isReady;
+    BOOL isTraitsAvailable;
     IBOutlet UIImageView *userImageView;
     IBOutlet MBCircularProgressBarView *progressBar;
     IBOutlet UILabel *lblTraitMatch;

@@ -54,13 +54,16 @@
     //btnLike.hidden = YES;
     //btnMatchPin.hidden = YES;
     
+    //apply like/dislike buttons visiblity conditions
     if (self.isFromMatches)
     {
         btnLike.hidden = YES;
+        btnDislike.hidden = YES;
     }
     else
     {
         btnLike.hidden = NO;
+        btnDislike.hidden = NO;
     }
 }
 
@@ -257,7 +260,7 @@
         boyProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
         girlProfileId = objID;
     }
-    
+    //textTraits = @"";
     if (textTraits.length == 0)
     {
         //hit API to get traits matching count
@@ -269,6 +272,7 @@
              if (!error)
              {
                  lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
+                 textTraits = lblTraitMatch.text;
                  NSLog(@"Traits matching on detail screen  = %@",traitResult);
              }
              else
@@ -473,6 +477,8 @@
 - (IBAction)back:(id)sender
 {
     //[self.navigationController popViewControllerAnimated:YES];
+    //set traits to nil
+    textTraits = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -512,7 +518,6 @@
                      //go back to home screen and reload home screen
                      //fire notification to handle on chatpin match screen
                      [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePinNotification" object:nil];
-                     
                      [self back:nil];
                      
                  }
@@ -556,7 +561,9 @@
          [self hideLoader];
          if (succeeded)
          {
-             //[self back:nil];
+             //set reload condition = true
+             [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"reloadCandidateList"];
+             [self back:nil];
              //go back to previous screen
              //delete entry from pin table(if exists)
              NSLog(@"profile id --> %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
@@ -578,7 +585,7 @@
                          if (succeeded)
                          {
                              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePinNotification" object:nil];
-                             [self back:nil];
+                             //[self back:nil];
                          }
                          else
                          {

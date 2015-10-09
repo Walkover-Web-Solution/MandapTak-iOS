@@ -8,12 +8,15 @@
 
 #import "PreferenceVC.h"
 
+static CGFloat const kViewControllerRangeSliderWidth = 290.0;
+static CGFloat const kViewControllerLabelWidth = 100.0;
+
 @interface PreferenceVC ()
 
 @end
 
 @implementation PreferenceVC
-
+@synthesize rangeSlider,label;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -98,7 +101,36 @@
     txtminBudget.inputAccessoryView = numberToolbar;
     txtMaxBudget.inputAccessoryView = numberToolbar;
     
-    [self checkBudgetVisiblity];
+    //hide budget option
+    lblBudget.hidden = YES;
+    txtMaxBudget.hidden = YES;
+    txtminBudget.hidden = YES;
+    
+    //hide degree option
+    lblDegree.hidden = YES;
+    btnAddDegree.hidden = YES;
+    
+   // [self checkBudgetVisiblity];
+    
+    /*
+    [super viewWillLayoutSubviews];
+    rangeSlider = [[MARKRangeSlider alloc] init] ;
+    rangeSlider.frame = CGRectMake(20, 80 , 290.0, 20.0);
+    [rangeSlider addTarget:self
+                         action:@selector(rangeSliderValueDidChange:)
+               forControlEvents:UIControlEventValueChanged];
+    rangeSlider.minimumValue = 0;
+    rangeSlider.maximumValue = 4.0;
+    rangeSlider.leftValue = 0.8;
+    rangeSlider.rightValue = 4.0;
+    rangeSlider.minimumDistance = 0.1;
+    
+    [self.view addSubview:rangeSlider];
+     */
+}
+
+- (void)rangeSliderValueDidChange:(MARKRangeSlider *)slider {
+    NSLog(@"%0.1f - %0.2f", slider.leftValue, slider.rightValue);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -863,13 +895,13 @@
     }
     switch (roundValue) {
         case 0:
-            strStatus = @"NO";
+            strStatus = @"Both";
             break;
         case 1:
             strStatus = @"YES";
             break;
         case 2:
-            strStatus = @"May Be";
+            strStatus = @"NO";
             break;
         default:
             break;
@@ -892,13 +924,13 @@
     }
     switch (roundValueManglik) {
         case 0:
-            strStatus = @"NO";
+            strStatus = @"Both";
             break;
         case 1:
             strStatus = @"YES";
             break;
         case 2:
-            strStatus = @"May Be";
+            strStatus = @"NO";
             break;
         default:
             break;

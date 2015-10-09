@@ -902,8 +902,8 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C52-Gk-PvG">
                                         <rect key="frame" x="273" y="59" width="40" height="40"/>
-                                        <inset key="imageEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
-                                        <state key="normal" image="dislike.png">
+                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="dislikePlain.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1706,8 +1706,8 @@
         <image name="backNew.png" width="44" height="44"/>
         <image name="calendar" width="32" height="32"/>
         <image name="call.png" width="64" height="64"/>
-        <image name="dislike.png" width="50" height="50"/>
         <image name="dislikeNew.png" width="50" height="50"/>
+        <image name="dislikePlain.png" width="40" height="40"/>
         <image name="frame" width="31" height="32"/>
         <image name="gender" width="32" height="32"/>
         <image name="heart_icon.png" width="32" height="32"/>

@@ -21,6 +21,7 @@
 #import "MBProgressHUD.h"
 #import "LocationPreferencePopoverVC.h"
 #import "AppData.h"
+#import "MARKRangeSlider.h"
 
 @interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate,UIAlertViewDelegate>
 {
@@ -33,6 +34,7 @@
     IBOutlet UITextField *txtminBudget;
     IBOutlet UITextField *txtMaxBudget;
     
+    IBOutlet UIButton *btnAddDegree;
     //autocomplete
     /*
     UITableView *autocompleteTableView;
@@ -68,6 +70,10 @@
     //activity indicator
     IBOutlet UIActivityIndicatorView *activityIndicator;
 }
+//range slider
+@property (nonatomic, strong) MARKRangeSlider *rangeSlider;
+@property (nonatomic, strong) UILabel *label;
+
 - (IBAction)back:(id)sender;
 - (IBAction)setPreferences:(id)sender;
 - (IBAction)goAction:(id)sender;

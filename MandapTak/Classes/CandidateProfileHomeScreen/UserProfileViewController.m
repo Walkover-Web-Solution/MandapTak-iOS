@@ -219,24 +219,27 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = FALSE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
         }
     }
-   */ 
+   */
+    //isTraitsAvailable = false;
     lblMessage.text = @"Finding matches...";
     [self animateArrayOfImagesForImageCount:30];
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
     //reload only if reload condition is true or no objects found in candidate profile list
     if ((![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"]) || (arrCandidateProfiles.count == 0) )
     {
+        btnUndo.enabled = NO;
         imgViewProfilePic.image = nil;
         self.imgProfileView.image = nil;
         [arrCandidateProfiles removeAllObjects];
-        
+        //temp code
+        [arrCache removeAllObjects];
         //show loading screen
         blankView.hidden = NO;
         profileView.hidden = YES;
         [self animateArrayOfImagesForImageCount:30];
       
         [PFCloud callFunctionInBackground:@"filterProfileLive"
-                           withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}  //@"nASUvS6R7Z"
+                           withParameters:@{@"oid":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}
                                     block:^(NSArray *results, NSError *error)
          {
              //[MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -356,6 +359,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     }
     else
     {
+        //isTraitsAvailable = true;
         [userDefaults setValue:@"yes" forKey:@"reloadCandidateList"];
     }
 }
@@ -548,7 +552,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             boyProfileId = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"];
             girlProfileId = objID;
         }
-        
+        isTraitsAvailable = false;
         [PFCloud callFunctionInBackground:@"matchKundli"
                            withParameters:@{@"boyProfileId":boyProfileId,
                                             @"girlProfileId":girlProfileId}
@@ -557,9 +561,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              if (!error)
              {
                  progressBar.hidden = NO;
+                 isTraitsAvailable = true;
                  [progressBar setValue:[traitResult floatValue] animateWithDuration:0.5];
                  lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
-                 NSLog(@"Traits matching  = %@",traitResult);
+                 NSLog(@"Traits matching at first call  = %@",traitResult);
              }
              else
              {
@@ -601,7 +606,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 -(void) getUserProfilePicForUser:(NSString *)objectId
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    [query whereKey:@"objectId" equalTo:objectId]; //7ZFYFmiMV9 //EYKXEM27cu  //IRQBKPDl0E
+    [query whereKey:@"objectId" equalTo:objectId];
     query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
@@ -931,7 +936,14 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     CandidateProfileDetailScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     Profile *candidateProfile = arrCandidateProfiles[profileNumber];
     vc.profileObject = candidateProfile;
-    vc.textTraits = lblTraitMatch.text;
+
+    if (isTraitsAvailable)
+    {
+        NSLog(@"traits score -> %@",lblTraitMatch.text);
+        vc.textTraits = lblTraitMatch.text;
+    }
+    
+    //lblTraitMatch.text = @"";
     //UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
     //navController.navigationBarHidden =YES;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
@@ -989,7 +1001,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  }
                  
                  //perform animation
-                 
                  profileNumber = 0;
                  [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
                  //[self performSelector:@selector(animateScreenWithTransition:) withObject:transition afterDelay:2.0];
