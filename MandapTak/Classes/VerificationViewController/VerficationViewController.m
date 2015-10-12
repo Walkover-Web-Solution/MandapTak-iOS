@@ -110,13 +110,34 @@
 //            MBProgressHUD *HUD;
 //            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [self showLoader];
-            [PFCloud callFunctionInBackground:@"verifyNumber"
+            NSString *strFunctionName;
+            //hard code a user for demo account
+            if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] isEqualToString:@"9425061919"])
+            {
+                if(![self.txtVerfication.text isEqualToString:@"1234"])
+                {
+                    [self hideLoader];
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry!!" message:@"Please enter valid verification code." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                    return;
+                }
+                
+                //set test function name
+                strFunctionName = @"verifyNumberTest";
+                //call login method with default password
+                //[self performLoginOnVerifactionWithPassword:@"12345678"];
+            }
+            else
+            {
+                strFunctionName = @"verifyNumber";
+            }
+            [PFCloud callFunctionInBackground:strFunctionName
                                withParameters:@{@"mobile":[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"],@"otp":self.txtVerfication.text}
                                         block:^(NSString *results, NSError *error)
              {
                  //[MBProgressHUD hideHUDForView:self.view animated:YES];
                  [self hideLoader];
-
+                 
                  if (!error)
                  {
                      [self performLoginOnVerifactionWithPassword:results];
@@ -125,13 +146,13 @@
                      if(error.code==400){
                          UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry!!" message:@"Please enter valid verification code." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                          [alert show];
-
+                         
                      }
                      else{
                          UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                          [alert show];
                      }
-                                      }
+                 }
              }];
             
         }
@@ -156,7 +177,7 @@
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] );
 //    NSLog(@"%@",password);
     [self showLoader];
-
+    NSLog(@"username -> %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"mobNo"]);
     [PFUser logInWithUsernameInBackground:[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] password:password
                                     block:^(PFUser *user, NSError *error) {
                                         //[MBProgressHUD hideHUDForView:self.view animated:YES];
