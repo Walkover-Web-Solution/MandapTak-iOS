@@ -40,6 +40,8 @@
     self.layerClient = [[AppData sharedData]fetchLayerClient];
     //set image view frame = circular
     userImageView.layer.cornerRadius = 80.0f;
+    userImageView.layer.borderWidth = 2.0f;
+    userImageView.layer.borderColor = [[UIColor colorWithRed:242/255.0f green:112/255.0f blue:114/255.0f alpha:1] CGColor];
     userImageView.clipsToBounds = YES;
     
     //store height data in array

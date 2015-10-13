@@ -314,9 +314,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                                   //got profile pic data for circular image view
                                   profileModel.profilePic = [UIImage imageWithData:data];
                                   [arrCandidateProfiles addObject:profileModel];
-                                  
+                                  profileNumber = 0 ;
                                   if (arrCandidateProfiles.count == results.count)
                                   {
+                                      //NSLog(@"profile number = %d ",profileNumber);
                                       [self showProfileOfCandidateNumber:profileNumber withTransition:nil];
                                   }
                               }
@@ -530,7 +531,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     {
         blankView.hidden = YES;
         profileView.hidden = NO;
-        
+        //NSLog(@"profile number to be displayed = %d",profileNumber);
         Profile *firstProfile = arrCandidateProfiles[profileNumber];
         PFObject *obj = firstProfile.profilePointer;
         NSString *objID = obj.objectId;
@@ -564,7 +565,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  isTraitsAvailable = true;
                  [progressBar setValue:[traitResult floatValue] animateWithDuration:0.5];
                  lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
-                 NSLog(@"Traits matching at first call  = %@",traitResult);
+                 //NSLog(@"Traits matching at first call  = %@",traitResult);
              }
              else
              {
@@ -939,7 +940,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
     if (isTraitsAvailable)
     {
-        NSLog(@"traits score -> %@",lblTraitMatch.text);
         vc.textTraits = lblTraitMatch.text;
     }
     
