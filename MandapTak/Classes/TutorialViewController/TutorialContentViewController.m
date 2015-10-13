@@ -50,8 +50,8 @@
 
     [self.txtMobNumber setValue:[UIFont fontWithName: @"MYRIADPRO-BOLD" size: 15] forKeyPath:@"_placeholderLabel.font"];
     [self.txtMobNumber setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
     self.txtMobNumber.keyboardType = UIKeyboardTypeNumberPad;
 
     // Do any additional setup after loading the view.
@@ -61,6 +61,7 @@
     if(mobNo){
         self.txtMobNumber.text = mobNo;
     }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -78,14 +79,9 @@
     [self.txtMobNumber resignFirstResponder];
     return YES;
 }
--(void) textFieldDidBeginEditing:(UITextField *)textField{
-  
-    
-}
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     [[NSUserDefaults standardUserDefaults]setObject:self.txtMobNumber.text forKey:@"mobNo"];
-
-   }
+}
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if(textField.text.length>9){
         const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
@@ -132,7 +128,6 @@
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + height, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
-    
     //  [self setNeedsUpdateConstraints];
 }
 
@@ -175,8 +170,6 @@
                      }
                  }];
             }
-            
-            
         }
  
     }
@@ -184,8 +177,6 @@
         UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-
-   
 }
 
 #pragma mark ShowActiviatyIndicator

@@ -24,11 +24,9 @@
 #import "ImageViewController.h"
 #import "ZCImagePickerController.h"
 #import "ImageViewCell.h"
-//#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "AppDelegate.h"
-//#import "FacebooKProfilePictureViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AppData.h"
 #import "StartMainViewController.h"
@@ -202,14 +200,11 @@
         [query includeKey:@"education2.degreeId"];
         [query includeKey:@"education3.degreeId"];
         [query includeKey:@"industryId"];
-        //MBProgressHUD * hud;
-        //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self showLoader];
         btnMenu.enabled = YES;
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
-               // [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self hideLoader];
                 [self checkIfPrimaryPic];
                 // The find succeeded.
@@ -264,10 +259,6 @@
     navBarView.layer.shadowOffset = CGSizeMake(0, 5);
     navBarView.layer.shadowOpacity = 1;
     navBarView.layer.shadowRadius = 1.0;
-    //[self loadData];
-    //[self getAlbum];
-    //[self allFacebookPhotos];
-    // Do any additional setup after loading the view.
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
@@ -275,10 +266,6 @@
 
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
- //   [self pinCurrentProfile];
-   
-    
-    
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -331,8 +318,6 @@
    // [UIFont fontNamesForFamilyName:@"AmericanTypewriter"]
     [txtMaxBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
     [txtMinBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
-
-
 
 }
 -(void)cancelNumberPad{
@@ -1181,6 +1166,8 @@
         imageViewController.selectedImage = arrImageList[indexPath.row];
         imageViewController.arrImages = arrImageList;
         imageViewController.delegate = self;
+        imageViewController.primaryCropPhoto = primaryCropedPhoto;
+        imageViewController.primaryPhoto = primaryPhoto;
         imageViewController.currentIndex = indexPath.row;
         //vc.globalCompanyId = [self.companies.companyId intValue];
         
@@ -1218,7 +1205,7 @@
        
 
     }
-  }
+}
 
 -(UIImage *)compressImage:(UIImage *)image{
     float actualHeight = image.size.height;
@@ -1275,14 +1262,10 @@
             
         }
     }
-    //MBProgressHUD * hud;
-    //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     [self.choosePhotoBtn setTitle:@"Uploading...." forState:UIControlStateNormal];
     isUploadingPhotos = YES;
 
     [PFObject saveAllInBackground:arrAllPhotoToBeSaved block:^(BOOL succeeded, NSError *error) {
-        //[MBProgressHUD hideHUDForView:self.view animated:YES];
         isUploadingPhotos = NO;
         [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
         if (succeeded) {
@@ -1383,12 +1366,7 @@
 }
 
 - (void)dismissPickerView {
-    //    if (_popoverController) {
-    //        [_popoverController dismissPopoverAnimated:YES];
-    //    }
-    // else {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    // }
 }
 
 -(void)selectedProfilePhotoArray:(NSArray *)arrSelectedProfilePics{
@@ -1400,7 +1378,6 @@
 #pragma mark ShowActiviatyIndicator
 
 -(void)showLoader{
-    //activityIndicator.hidden = NO;
     [activityIndicator startAnimating];
     self.btnTab1.enabled = NO;
     self.btnTab2.enabled = NO;
@@ -1408,7 +1385,6 @@
     self.btnTab4.enabled = NO;
 }
 -(void)hideLoader{
-    //activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     self.btnTab1.enabled = YES;
     self.btnTab2.enabled = YES;

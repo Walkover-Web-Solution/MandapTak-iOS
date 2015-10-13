@@ -13,9 +13,7 @@
 #import "AppData.h"
 @interface ImageViewController ()<PhotoTweaksViewControllerDelegate>{
     NSInteger currentIndex;
-    Photos *primaryPhoto;
     NSMutableArray *arrDeletedPhotos;
-    UIImage *primaryCropPhoto;
   }
 @property (weak, nonatomic) IBOutlet UIButton *deleteButtonAction;
 - (IBAction)deleteButtonAction:(id)sender;
@@ -47,11 +45,11 @@
 }
 
 - (IBAction)doneButtonAction:(id)sender {
-    [self.delegate selectedPrimaryPhoto:primaryPhoto andCropedPhoto:primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
+    [self.delegate selectedPrimaryPhoto:self.primaryPhoto andCropedPhoto:self.primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)cancelButtonAction:(id)sender {
-    [self.delegate selectedPrimaryPhoto:primaryPhoto andCropedPhoto:primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
+    [self.delegate selectedPrimaryPhoto:self.primaryPhoto andCropedPhoto:self.primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
@@ -64,7 +62,7 @@
 }
 - (IBAction)makePrimary:(id)sender {
     Photos *photo = self.arrImages[self.currentIndex];
-    primaryPhoto = photo;
+    self.primaryPhoto = photo;
 //    if(photo.imgObject!=nil){
 //        [photo.imgObject setObject:[NSNumber numberWithBool:YES] forKey:@"isPrimary"];
 //        [photo.imgObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -89,8 +87,8 @@
 
 - (void)photoTweaksController:(PhotoTweaksViewController *)controller didFinishWithCroppedImage:(UIImage *)croppedImage
 {
-    primaryCropPhoto = croppedImage;
-    [self.delegate selectedPrimaryPhoto:primaryPhoto andCropedPhoto:primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
+    self.primaryCropPhoto = croppedImage;
+    [self.delegate selectedPrimaryPhoto:self.primaryPhoto andCropedPhoto:self.primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
     [self dismissViewControllerAnimated:YES completion:^{
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -154,10 +152,13 @@
                     [arrDeletedPhotos addObject:self.arrImages[currentIndex]];
                     [self.arrImages removeObject:self.arrImages[currentIndex]];
                     if(self.arrImages.count==0){
-                        [self.delegate selectedPrimaryPhoto:primaryPhoto andCropedPhoto:primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
+                        [self.delegate selectedPrimaryPhoto:self.primaryPhoto andCropedPhoto:self.primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
                         [self dismissViewControllerAnimated:YES completion:nil];
                         
                     }
+                    if(self.currentIndex == self.arrImages.count)
+                        self.currentIndex = self.currentIndex-1;
+                    
                     NSLog(@"deleted"); // this is my function to refresh the data
                     Photos *photoToShow = self.arrImages[self.currentIndex];
                     imageView.image = photoToShow.image;

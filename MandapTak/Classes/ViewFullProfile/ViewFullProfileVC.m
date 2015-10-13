@@ -14,6 +14,7 @@
     BOOL isFetchingConversation;
     BOOL isConversationAvailable;
     __weak IBOutlet UIButton *btnChat;
+    BOOL isChatAvailable;
 }
 - (IBAction)chatButtonAction:(id)sender;
 
@@ -24,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isChatAvailable  = NO;
     // Do any additional setup after loading the view.
     [self loadImages];
     [self setupCollectionView];
@@ -165,7 +167,9 @@
     view2.hidden = true;
     view3.hidden = true;
     view4.hidden = true;
-    
+    if(isChatAvailable)
+        btnChat.hidden = NO;
+
     button1.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
     button2.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     button3.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
@@ -180,7 +184,8 @@
     view2.hidden = false;
     view3.hidden = true;
     view4.hidden = true;
-    
+    if(isChatAvailable)
+        btnChat.hidden = NO;
     button1.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     button2.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
     button3.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
@@ -193,7 +198,8 @@
     view1.hidden = true;
     view2.hidden = true;
     view4.hidden = true;
-    btnChat.hidden = true;
+    if(isChatAvailable)
+        btnChat.hidden = NO;
     button1.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     button2.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     button3.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
@@ -202,6 +208,9 @@
 
 - (IBAction)showBiodata:(id)sender
 {
+    if(isChatAvailable)
+        btnChat.hidden = NO;
+
     view4.hidden = false;
     view1.hidden = true;
     view2.hidden = true;
@@ -384,6 +393,7 @@
         UIButton *chat=[UIButton buttonWithType:UIButtonTypeCustom];
         [chat setTitle:@"Chat" forState:UIControlStateNormal];
         btnChat.hidden = NO;
+        isChatAvailable = YES;
         [chat addTarget:self action:@selector(chatButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         chat.frame=CGRectMake(0, 0, 300, 40);
         tableViewEducation.tableFooterView = chat;

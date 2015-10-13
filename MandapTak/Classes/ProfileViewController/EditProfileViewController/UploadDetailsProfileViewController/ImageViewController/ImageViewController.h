@@ -22,4 +22,7 @@
 @property (strong, nonatomic) UIImage *selectedImage;
 @property (strong, nonatomic) NSMutableArray *arrImages;
 @property (assign, nonatomic) NSInteger currentIndex;
+@property (strong, nonatomic) UIImage *primaryCropPhoto;
+@property (strong, nonatomic)  Photos *primaryPhoto;
+
 @end

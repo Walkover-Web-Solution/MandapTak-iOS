@@ -256,7 +256,6 @@
 		89D9F78D1B6B5DB4004CBE3D /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D9F7791B6B5DB4004CBE3D /* profile@2x.png */; };
 		89D9F78E1B6B5DB4004CBE3D /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D9F77A1B6B5DB4004CBE3D /* setting.png */; };
 		89D9F78F1B6B5DB4004CBE3D /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D9F77B1B6B5DB4004CBE3D /* setting@2x.png */; };
-		89E0FA101B85916C000BD65A /* UploadPhotosProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E0FA0F1B85916C000BD65A /* UploadPhotosProfileViewController.m */; };
 		89E0FA4E1B85C92A000BD65A /* ZCLocalized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89E0FA371B85C92A000BD65A /* ZCLocalized.strings */; };
 		89E0FA4F1B85C92A000BD65A /* SelectionOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E0FA3A1B85C92A000BD65A /* SelectionOverlay.png */; };
 		89E0FA501B85C92A000BD65A /* SelectionOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E0FA3B1B85C92A000BD65A /* SelectionOverlay@2x.png */; };
@@ -662,8 +661,6 @@
 		89D9F7791B6B5DB4004CBE3D /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
 		89D9F77A1B6B5DB4004CBE3D /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		89D9F77B1B6B5DB4004CBE3D /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
-		89E0FA0E1B85916C000BD65A /* UploadPhotosProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotosProfileViewController.h; sourceTree = "<group>"; };
-		89E0FA0F1B85916C000BD65A /* UploadPhotosProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotosProfileViewController.m; sourceTree = "<group>"; };
 		89E0FA381B85C92A000BD65A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ZCLocalized.strings; sourceTree = "<group>"; };
 		89E0FA3A1B85C92A000BD65A /* SelectionOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectionOverlay.png; sourceTree = "<group>"; };
 		89E0FA3B1B85C92A000BD65A /* SelectionOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SelectionOverlay@2x.png"; sourceTree = "<group>"; };
@@ -1899,8 +1896,6 @@
 			isa = PBXGroup;
 			children = (
 				89E0FA5E1B8606B9000BD65A /* ImageViewController */,
-				89E0FA0E1B85916C000BD65A /* UploadPhotosProfileViewController.h */,
-				89E0FA0F1B85916C000BD65A /* UploadPhotosProfileViewController.m */,
 			);
 			path = UploadDetailsProfileViewController;
 			sourceTree = "<group>";
@@ -2270,7 +2265,6 @@
 				757F87671B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari.m in Sources */,
 				8997CC8A1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m in Sources */,
 				895A6E7E1B9843A200A9C8BC /* UITableView+DragLoad.m in Sources */,
-				89E0FA101B85916C000BD65A /* UploadPhotosProfileViewController.m in Sources */,
 				8997CC8B1BA182C8001B11AA /* SCNetworkReachability+Shared.m in Sources */,
 				758C8E871B87537500FF634E /* FullyHorizontalFlowLayout.m in Sources */,
 				8997CC9C1BA1840A001B11AA /* ABMultiton+SetInstance.m in Sources */,
