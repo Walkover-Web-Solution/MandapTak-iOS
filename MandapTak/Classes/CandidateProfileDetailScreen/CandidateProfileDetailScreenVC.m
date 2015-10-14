@@ -7,8 +7,13 @@
 //
 
 #import "CandidateProfileDetailScreenVC.h"
+#import "ConversationViewController.h"
+@interface CandidateProfileDetailScreenVC (){
+    LYRConversation *userConversation;
+    __weak IBOutlet UIButton *btnChat;
 
-@interface CandidateProfileDetailScreenVC ()
+}
+- (IBAction)chatButtonAction:(id)sender;
 
 @end
 
@@ -65,6 +70,10 @@
         btnLike.hidden = NO;
         btnDislike.hidden = NO;
     }
+    if(self.isFromMatches){
+        [self loginLayer];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -619,4 +628,6 @@
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
 }
+
+
 @end
