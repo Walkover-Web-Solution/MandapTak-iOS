@@ -51,6 +51,8 @@
     self.dateFormatter.dateStyle = NSDateFormatterShortStyle;
     self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
     NSLog(@"%@",[self.conversation.metadata valueForKey:@"title"]);
+    NSSet *participents =self.conversation.participants;
+    
     NSLog(@"%@",self.conversation.participants) ;
     NSArray *resolvedNames = [[UserManager sharedManager] resolvedNamesFromParticipants:[self.conversation.participants allObjects]];
     if(resolvedNames.count!=0){
