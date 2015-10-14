@@ -10,7 +10,10 @@
 #import "ConversationViewController.h"
 @interface CandidateProfileDetailScreenVC (){
     LYRConversation *userConversation;
+    BOOL isFetchingConversation;
+    BOOL isConversationAvailable;
     __weak IBOutlet UIButton *btnChat;
+    BOOL isChatAvailable;
 
 }
 - (IBAction)chatButtonAction:(id)sender;
@@ -70,11 +73,9 @@
         btnLike.hidden = NO;
         btnDislike.hidden = NO;
     }
-    if(self.isFromMatches){
-        [self loginLayer];
-    }
+    btnChat.hidden = YES;
 
-}
+    }
 
 -(void)viewWillAppear:(BOOL)animated
 {
