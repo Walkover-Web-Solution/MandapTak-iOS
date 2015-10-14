@@ -8,9 +8,6 @@
 
 #import "PreferenceVC.h"
 
-static CGFloat const kViewControllerRangeSliderWidth = 290.0;
-static CGFloat const kViewControllerLabelWidth = 100.0;
-
 @interface PreferenceVC ()
 
 @end
@@ -38,7 +35,7 @@ static CGFloat const kViewControllerLabelWidth = 100.0;
     //update constraints
     if ([UIScreen mainScreen].bounds.size.height == 480.0f)
     {
-        [self.view removeConstraint:equalHeightConstraint];
+        //[self.view removeConstraint:equalHeightConstraint];
     }
     
     

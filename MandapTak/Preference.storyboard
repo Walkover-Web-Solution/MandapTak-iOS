@@ -57,7 +57,7 @@
                                                 <rect key="frame" x="150" y="252" width="20" height="20"/>
                                             </activityIndicatorView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPc-gr-Wcn">
-                                                <rect key="frame" x="12" y="417" width="136" height="30"/>
+                                                <rect key="frame" x="12" y="375" width="136" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="BIq-Zt-KiJ"/>
                                                     <constraint firstAttribute="width" secondItem="HPc-gr-Wcn" secondAttribute="height" multiplier="68:15" id="ZfF-fs-lIv"/>
@@ -69,7 +69,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Income (More than)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SWE-aJ-Wr4">
-                                                <rect key="frame" x="12" y="206" width="271" height="30"/>
+                                                <rect key="frame" x="12" y="164" width="271" height="30"/>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <connections>
@@ -111,7 +111,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want a working partner?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOQ-9o-w1l">
-                                                <rect key="frame" x="14" y="346" width="157" height="21"/>
+                                                <rect key="frame" x="14" y="304" width="157" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="70q-ny-ubw"/>
                                                     <constraint firstAttribute="width" secondItem="mOQ-9o-w1l" secondAttribute="height" multiplier="157:21" id="HJP-0c-Rgw"/>
@@ -121,7 +121,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Both" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EH8-nG-2Pk">
-                                                <rect key="frame" x="260" y="346" width="60" height="21"/>
+                                                <rect key="frame" x="260" y="304" width="60" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="EH8-nG-2Pk" secondAttribute="height" multiplier="20:7" id="CiS-hz-Saf"/>
                                                     <constraint firstAttribute="height" constant="21" id="Gvi-NY-VAk"/>
@@ -131,7 +131,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUDGET OF PARTNER FOR MARRIAGE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJD-JQ-p2U">
-                                                <rect key="frame" x="14" y="388" width="261" height="21"/>
+                                                <rect key="frame" x="14" y="346" width="261" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="CJD-JQ-p2U" secondAttribute="height" multiplier="87:7" id="2hd-o4-VYW"/>
                                                     <constraint firstAttribute="height" constant="21" id="YrN-Rz-hP6"/>
@@ -176,7 +176,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hcc-lU-vR8">
-                                                <rect key="frame" x="285" y="256" width="30" height="30"/>
+                                                <rect key="frame" x="285" y="214" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Hcc-lU-vR8" secondAttribute="height" multiplier="1:1" id="4v1-Yh-dWM"/>
                                                     <constraint firstAttribute="height" constant="30" id="xPg-4P-5hx"/>
@@ -190,7 +190,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORe-T8-BHS" customClass="CustomLabel">
-                                                <rect key="frame" x="12" y="255" width="271" height="32"/>
+                                                <rect key="frame" x="12" y="213" width="271" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="Ge8-Te-Mmt"/>
                                                 </constraints>
@@ -199,7 +199,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wof-Sf-Gpo">
-                                                <rect key="frame" x="251" y="256" width="30" height="30"/>
+                                                <rect key="frame" x="251" y="214" width="30" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="LYU-4F-JhL"/>
@@ -268,7 +268,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JQK-l0-hm8">
-                                                <rect key="frame" x="158" y="417" width="125" height="30"/>
+                                                <rect key="frame" x="158" y="375" width="125" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="JQK-l0-hm8" secondAttribute="height" multiplier="25:6" id="dgI-F9-QTV"/>
                                                     <constraint firstAttribute="height" constant="30" id="zZM-PL-gVB"/>
@@ -280,7 +280,7 @@
                                                 </connections>
                                             </textField>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="4K3-K3-pLt">
-                                                <rect key="frame" x="177" y="342" width="86" height="31"/>
+                                                <rect key="frame" x="177" y="300" width="86" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="4K3-K3-pLt" secondAttribute="height" multiplier="41:15" id="ANb-hC-DN5"/>
                                                     <constraint firstAttribute="height" constant="30" id="Yh5-sk-x1u"/>
@@ -291,7 +291,7 @@
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Both" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkt-WX-FgA">
-                                                <rect key="frame" x="260" y="307" width="60" height="21"/>
+                                                <rect key="frame" x="260" y="265" width="60" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="gkt-WX-FgA" secondAttribute="height" multiplier="20:7" id="47h-XF-cGi"/>
                                                     <constraint firstAttribute="height" constant="21" id="mvC-aT-DK9"/>
@@ -301,7 +301,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="d58-JK-I0H">
-                                                <rect key="frame" x="177" y="304" width="86" height="31"/>
+                                                <rect key="frame" x="177" y="262" width="86" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="dA8-sl-Pu1"/>
                                                     <constraint firstAttribute="width" secondItem="d58-JK-I0H" secondAttribute="height" multiplier="41:15" id="ky7-V6-Ohu"/>
@@ -311,7 +311,7 @@
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manglik?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgP-Z3-nlB">
-                                                <rect key="frame" x="14" y="307" width="155" height="21"/>
+                                                <rect key="frame" x="14" y="265" width="155" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="RgP-Z3-nlB" secondAttribute="height" multiplier="155:21" id="CS6-xb-6Wz"/>
                                                     <constraint firstAttribute="height" constant="21" id="Rrk-fF-lKu"/>
@@ -324,7 +324,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="EJo-IO-vIk" firstAttribute="leading" secondItem="cjU-Wd-BNB" secondAttribute="leading" constant="12" id="0CO-dE-HHa"/>
-                                            <constraint firstItem="SWE-aJ-Wr4" firstAttribute="top" secondItem="EJo-IO-vIk" secondAttribute="bottom" constant="13" id="0pK-z7-Gfs"/>
+                                            <constraint firstItem="SWE-aJ-Wr4" firstAttribute="top" secondItem="EJo-IO-vIk" secondAttribute="bottom" constant="-29" id="0pK-z7-Gfs"/>
                                             <constraint firstAttribute="width" constant="320" id="1jq-ow-TJG"/>
                                             <constraint firstAttribute="trailing" secondItem="gkt-WX-FgA" secondAttribute="trailing" id="24g-Mb-MJn"/>
                                             <constraint firstAttribute="trailing" secondItem="Wgv-kA-pAm" secondAttribute="trailing" constant="37" id="30V-DA-Iv1"/>
@@ -369,7 +369,7 @@
                                             <constraint firstAttribute="trailing" secondItem="vww-4q-QrM" secondAttribute="trailing" constant="37" id="ez8-QW-tbI"/>
                                             <constraint firstItem="86g-nb-SrX" firstAttribute="top" secondItem="JUs-2W-gJS" secondAttribute="bottom" constant="3" id="fUe-dN-7OA"/>
                                             <constraint firstItem="vww-4q-QrM" firstAttribute="top" secondItem="Wgv-kA-pAm" secondAttribute="bottom" constant="35" id="fVr-De-yP0"/>
-                                            <constraint firstItem="Hcc-lU-vR8" firstAttribute="top" secondItem="TaY-oQ-Xv8" secondAttribute="bottom" constant="63" id="kIW-Yc-yZ0"/>
+                                            <constraint firstItem="Hcc-lU-vR8" firstAttribute="top" secondItem="TaY-oQ-Xv8" secondAttribute="bottom" constant="21" id="kIW-Yc-yZ0"/>
                                             <constraint firstItem="qDR-g6-Gfb" firstAttribute="leading" secondItem="cjU-Wd-BNB" secondAttribute="leading" constant="12" id="m2b-np-6lT"/>
                                             <constraint firstAttribute="trailing" secondItem="Hcc-lU-vR8" secondAttribute="trailing" constant="5" id="mk3-vK-Cit"/>
                                             <constraint firstItem="g4a-bH-fMQ" firstAttribute="centerX" secondItem="cjU-Wd-BNB" secondAttribute="centerX" id="n4d-Rq-IF9"/>
