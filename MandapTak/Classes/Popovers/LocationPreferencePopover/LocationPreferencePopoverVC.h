@@ -18,6 +18,8 @@
 {
     NSMutableArray *arrLocData;
     BOOL isSearching;
+    NSTimer *timer;
+    NSInteger currentTime;
 }
 @property (weak, nonatomic) id <LocationPreferencePopoverVCDelegate> delegate;
 @property (strong, nonatomic) NSArray *arrSelectedData;
