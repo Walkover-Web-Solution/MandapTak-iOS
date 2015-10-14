@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -8,7 +8,6 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="MYRIADPRO-BOLD.OTF">
-            <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
@@ -851,54 +850,41 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="157"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xtl-b9-mUO">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="157"/>
+                                        <rect key="frame" x="0.0" y="48" width="320" height="113"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhm-pr-Qxj">
-                                        <rect key="frame" x="281" y="12" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="XQ8-Df-S44"/>
-                                            <constraint firstAttribute="height" constant="32" id="bRh-3q-g5a"/>
-                                        </constraints>
-                                        <state key="normal" image="option.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="back:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="Ysf-ZT-34P"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffv-5P-bpf">
-                                        <rect key="frame" x="27" y="68" width="192" height="21"/>
+                                        <rect key="frame" x="27" y="91" width="192" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFP-jY-fHc">
-                                        <rect key="frame" x="27" y="90" width="192" height="21"/>
+                                        <rect key="frame" x="27" y="112" width="192" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBp-g8-Ks0">
-                                        <rect key="frame" x="27" y="113" width="192" height="21"/>
+                                        <rect key="frame" x="27" y="133" width="192" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXG-df-cRI">
-                                        <rect key="frame" x="27" y="46" width="192" height="21"/>
+                                        <rect key="frame" x="27" y="70" width="192" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jv-3g-sKp">
-                                        <rect key="frame" x="27" y="17" width="212" height="21"/>
+                                        <rect key="frame" x="27" y="49" width="212" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebh-mF-A4R">
-                                        <rect key="frame" x="228" y="59" width="40" height="40"/>
+                                        <rect key="frame" x="228" y="70" width="40" height="40"/>
                                         <state key="normal" image="unlike.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -907,7 +893,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C52-Gk-PvG">
-                                        <rect key="frame" x="273" y="59" width="40" height="40"/>
+                                        <rect key="frame" x="273" y="70" width="40" height="40"/>
                                         <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                         <state key="normal" image="dislikePlain.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -916,24 +902,48 @@
                                             <action selector="dislikeAction:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="iZN-Ce-BfI"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScE-Ll-gdH">
+                                        <rect key="frame" x="-1" y="0.0" width="321" height="46"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXt-4Q-1vQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="79" height="46"/>
+                                                <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title=" Back" image="back.png">
+                                                    <color key="titleColor" red="0.83529411760000005" green="0.4431372549" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="back:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="xCa-8v-8jH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHw-2N-rU8">
+                                                <rect key="frame" x="249" y="0.0" width="72" height="46"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="Chat">
+                                                    <color key="titleColor" red="0.83529411760000005" green="0.4431372549" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="chatButtonAction:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="jK8-1s-Zr8"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Xtl-b9-mUO" secondAttribute="trailing" id="8y7-cK-l32"/>
                                     <constraint firstAttribute="height" constant="157" id="GX7-66-F1y"/>
-                                    <constraint firstItem="Xtl-b9-mUO" firstAttribute="height" secondItem="oyp-IG-eJ4" secondAttribute="height" id="K8a-G3-Uh9"/>
+                                    <constraint firstItem="Xtl-b9-mUO" firstAttribute="height" secondItem="oyp-IG-eJ4" secondAttribute="height" constant="-44" id="K8a-G3-Uh9"/>
                                     <constraint firstItem="Xtl-b9-mUO" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" id="MmP-nS-8wS"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rhm-pr-Qxj" secondAttribute="trailing" constant="7" id="ndk-bY-mJN"/>
-                                    <constraint firstItem="Rhm-pr-Qxj" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="top" constant="12" id="pVk-LV-K4f"/>
                                     <constraint firstItem="Xtl-b9-mUO" firstAttribute="width" secondItem="oyp-IG-eJ4" secondAttribute="width" id="q77-ed-zfH"/>
-                                    <constraint firstItem="Xtl-b9-mUO" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="top" id="smL-P0-4SI"/>
+                                    <constraint firstItem="Xtl-b9-mUO" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="top" constant="48" id="smL-P0-4SI"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uje-uN-1yk">
                                 <rect key="frame" x="0.0" y="157" width="320" height="85"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ox4-2V-3jc">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                        <rect key="frame" x="0.0" y="3" width="320" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="85" id="exl-TI-REm"/>
@@ -973,9 +983,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ox4-2V-3jc" secondAttribute="bottom" id="7rH-je-Ug7"/>
+                                    <constraint firstAttribute="bottom" secondItem="ox4-2V-3jc" secondAttribute="bottom" constant="-3" id="7rH-je-Ug7"/>
                                     <constraint firstAttribute="height" constant="85" id="MB3-LW-6g2"/>
-                                    <constraint firstItem="ox4-2V-3jc" firstAttribute="top" secondItem="uje-uN-1yk" secondAttribute="top" id="Ovz-H0-wkR"/>
+                                    <constraint firstItem="ox4-2V-3jc" firstAttribute="top" secondItem="uje-uN-1yk" secondAttribute="top" constant="3" id="Ovz-H0-wkR"/>
                                     <constraint firstAttribute="trailing" secondItem="ox4-2V-3jc" secondAttribute="trailing" id="lJH-KY-caK"/>
                                     <constraint firstItem="ox4-2V-3jc" firstAttribute="leading" secondItem="uje-uN-1yk" secondAttribute="leading" id="oZd-rh-etq"/>
                                 </constraints>
@@ -1037,21 +1047,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fet-wI-gCi">
-                                <rect key="frame" x="258" y="508" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.83529411764705885" green="0.44313725490196076" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="H9G-5E-gPM"/>
-                                    <constraint firstAttribute="height" constant="50" id="YPO-Yu-XaY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
-                                <state key="normal" title="Chat">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="chatButtonAction:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="7jD-4o-P4a"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1060,8 +1055,6 @@
                             <constraint firstItem="oyp-IG-eJ4" firstAttribute="top" secondItem="yi9-CU-DQl" secondAttribute="bottom" id="4ST-zS-0XP"/>
                             <constraint firstItem="oyp-IG-eJ4" firstAttribute="top" secondItem="yi9-CU-DQl" secondAttribute="bottom" id="4xS-EV-ebs"/>
                             <constraint firstAttribute="width" secondItem="oyp-IG-eJ4" secondAttribute="width" id="AY1-Ir-igE"/>
-                            <constraint firstItem="TPY-TN-jGb" firstAttribute="top" secondItem="fet-wI-gCi" secondAttribute="bottom" constant="10" id="Fh8-9y-3F4"/>
-                            <constraint firstAttribute="trailing" secondItem="fet-wI-gCi" secondAttribute="trailing" constant="12" id="ITm-KQ-IT0"/>
                             <constraint firstAttribute="trailing" secondItem="oyp-IG-eJ4" secondAttribute="trailing" id="LJS-UW-Iib"/>
                             <constraint firstItem="uje-uN-1yk" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="bottom" id="RaO-nE-Rvr"/>
                             <constraint firstItem="uje-uN-1yk" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" id="XOG-RC-jBf"/>
@@ -1078,9 +1071,10 @@
                     <connections>
                         <outlet property="ImagesCollectionView" destination="ox4-2V-3jc" id="ipg-9F-rLX"/>
                         <outlet property="activityIndicator" destination="hk0-ez-4CH" id="YEf-Ci-AK7"/>
-                        <outlet property="btnChat" destination="fet-wI-gCi" id="3b6-6X-40f"/>
+                        <outlet property="btnChat" destination="AHw-2N-rU8" id="5gQ-YE-Rqs"/>
                         <outlet property="btnDislike" destination="C52-Gk-PvG" id="TPn-Qq-jAy"/>
                         <outlet property="btnLike" destination="Ebh-mF-A4R" id="uqf-ec-h8u"/>
+                        <outlet property="headerView" destination="ScE-Ll-gdH" id="SZt-rP-qLu"/>
                         <outlet property="lblAgeHeight" destination="uXG-df-cRI" id="U4B-MK-524"/>
                         <outlet property="lblCaste" destination="ffv-5P-bpf" id="len-oe-qle"/>
                         <outlet property="lblCurrentLocation" destination="RgC-ly-LEo" id="v0d-dX-H8q"/>
@@ -1097,7 +1091,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUA-se-X9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="909"/>
+            <point key="canvasLocation" x="2427" y="908"/>
         </scene>
         <!--Candidate Profile GalleryVC-->
         <scene sceneID="lCu-zg-s4V">
@@ -1524,7 +1518,7 @@
                                     <constraint firstItem="Nte-Gi-1pK" firstAttribute="leading" secondItem="QRj-Q4-fos" secondAttribute="leading" constant="46" id="pIc-6h-inf"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Reu-ij-CmQ">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Reu-ij-CmQ">
                                 <rect key="frame" x="10" y="429" width="300" height="45"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1727,6 +1721,7 @@
     <resources>
         <image name="01.png" width="512" height="512"/>
         <image name="Weeding_bg.png" width="414" height="736"/>
+        <image name="back.png" width="16" height="16"/>
         <image name="backNew.png" width="44" height="44"/>
         <image name="calendar" width="32" height="32"/>
         <image name="call.png" width="64" height="64"/>
@@ -1741,7 +1736,6 @@
         <image name="matchCellOption.png" width="32" height="32"/>
         <image name="measures" width="32" height="28"/>
         <image name="menu_icon.png" width="32" height="32"/>
-        <image name="option.png" width="30" height="30"/>
         <image name="pinFill.png" width="50" height="50"/>
         <image name="profile-edit" width="32" height="32"/>
         <image name="qualification" width="32" height="32"/>

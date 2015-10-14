@@ -137,6 +137,7 @@
         [query includeKey:@"education2.degreeId"];
         [query includeKey:@"education3.degreeId"];
         [query includeKey:@"industryId"];
+        // [query orderByAscending:@"name"];
          //MBProgressHUD * hud;
          //hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self showLoader];

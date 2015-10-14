@@ -163,6 +163,7 @@
 		896A8A221BCE2287009D2698 /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 896A8A201BCE2287009D2698 /* Default-568h.png */; settings = {ASSET_TAGS = (); }; };
 		896A8A231BCE2287009D2698 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896A8A211BCE2287009D2698 /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
 		896A8A251BCE2D62009D2698 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 896A8A241BCE2D62009D2698 /* chat.png */; settings = {ASSET_TAGS = (); }; };
+		896A8A2B1BCE3EFB009D2698 /* chatBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 896A8A2A1BCE3EFB009D2698 /* chatBubble.png */; settings = {ASSET_TAGS = (); }; };
 		896BBFF71B95877D009FD221 /* unpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BBFF51B95877D009FD221 /* unpin.png */; };
 		896BBFF81B95877D009FD221 /* unpin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BBFF61B95877D009FD221 /* unpin@2x.png */; };
 		896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BC0011B959577009FD221 /* ChatTableViewCell.m */; };
@@ -194,6 +195,7 @@
 		898146501B7CB5F600DF30AB /* CastePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8981464F1B7CB5F600DF30AB /* CastePopoverViewController.m */; };
 		898146541B7CB6AE00DF30AB /* GotraPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898146531B7CB6AE00DF30AB /* GotraPopoverViewController.m */; };
 		898330E81B84AACA00847B31 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 898330E71B84AACA00847B31 /* Info.plist */; };
+		898403CA1BCE68FF001FBD9A /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 898403C91BCE68FF001FBD9A /* back.png */; settings = {ASSET_TAGS = (); }; };
 		899170461B70B5D0000CF872 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170441B70B5D0000CF872 /* next.png */; };
 		899170471B70B5D0000CF872 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170451B70B5D0000CF872 /* next@2x.png */; };
 		8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899170591B70D458000CF872 /* WYPopoverController.m */; };
@@ -519,6 +521,7 @@
 		896A8A201BCE2287009D2698 /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h.png"; sourceTree = "<group>"; };
 		896A8A211BCE2287009D2698 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		896A8A241BCE2D62009D2698 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
+		896A8A2A1BCE3EFB009D2698 /* chatBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatBubble.png; sourceTree = "<group>"; };
 		896BBFF51B95877D009FD221 /* unpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unpin.png; sourceTree = "<group>"; };
 		896BBFF61B95877D009FD221 /* unpin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unpin@2x.png"; sourceTree = "<group>"; };
 		896BC0001B959577009FD221 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
@@ -564,6 +567,7 @@
 		898146521B7CB6AE00DF30AB /* GotraPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotraPopoverViewController.h; sourceTree = "<group>"; };
 		898146531B7CB6AE00DF30AB /* GotraPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotraPopoverViewController.m; sourceTree = "<group>"; };
 		898330E71B84AACA00847B31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		898403C91BCE68FF001FBD9A /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		899170441B70B5D0000CF872 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		899170451B70B5D0000CF872 /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
 		899170581B70D458000CF872 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
@@ -949,6 +953,7 @@
 		757F876A1B8F0DDB00C083A4 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				898403C91BCE68FF001FBD9A /* back.png */,
 				896A8A241BCE2D62009D2698 /* chat.png */,
 				896A8A201BCE2287009D2698 /* Default-568h.png */,
 				896A8A211BCE2287009D2698 /* Default-568h@2x.png */,
@@ -1823,6 +1828,7 @@
 		89D9F7631B6B5DB4004CBE3D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				896A8A2A1BCE3EFB009D2698 /* chatBubble.png */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2097,6 +2103,7 @@
 				757D447F1BC6794B004E84AF /* rangeSliderTrack.png in Resources */,
 				757849C91BA2EF2D005490E6 /* Anim-(11).png in Resources */,
 				89D9F78B1B6B5DB4004CBE3D /* preferences@2x.png in Resources */,
+				896A8A2B1BCE3EFB009D2698 /* chatBubble.png in Resources */,
 				7533F6AE1B84AF0A00B83EFD /* show.png in Resources */,
 				896BBFF71B95877D009FD221 /* unpin.png in Resources */,
 				896A8A251BCE2D62009D2698 /* chat.png in Resources */,
@@ -2123,6 +2130,7 @@
 				896BC00F1B95D856009FD221 /* matchCellOption@2x.png in Resources */,
 				89AF50951B9AFF2800E170D2 /* userDefImg.png in Resources */,
 				757D447D1BC6794B004E84AF /* rangeSliderThumb@2x.png in Resources */,
+				898403CA1BCE68FF001FBD9A /* back.png in Resources */,
 				758C8E6D1B87404B00FF634E /* option.png in Resources */,
 				896BBFF81B95877D009FD221 /* unpin@2x.png in Resources */,
 				757849D31BA2EF2D005490E6 /* Anim-(20).png in Resources */,
@@ -2470,7 +2478,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2496,7 +2504,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1f34edc5-2e17-48f4-ae2e-3747deb02a0f";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2519,7 +2527,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2538,7 +2546,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "1f34edc5-2e17-48f4-ae2e-3747deb02a0f";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2551,7 +2559,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "BrandAsset-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2579,7 +2587,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1f34edc5-2e17-48f4-ae2e-3747deb02a0f";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2590,7 +2598,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "BrandAsset-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2618,7 +2626,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1f34edc5-2e17-48f4-ae2e-3747deb02a0f";
+				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

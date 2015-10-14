@@ -34,7 +34,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *btn;
-- (IBAction)testButtonAction:(id)sender;
 @end
 
 @implementation ProfileWorkAndExperienceViewController
@@ -65,9 +64,6 @@
         self.heightConstraint.constant = 281;
         
     }
-    NSLog(@"%@",self.currentProfile);
-    NSLog(@"%@",[self.currentProfile valueForKey:@"name"]);
-    PFObject *currentProfile = self.currentProfile;
     [self updateUserInfo];
     if(self.currentProfile ==nil){
         if([[AppData sharedData]isInternetAvailable]){
@@ -107,7 +103,6 @@
         
     }
 
-    // Do any additional setup after loading the view.
 }
 -(void)updateCurrentProfile{
     if(selectedWorkAfterMarraige){
@@ -449,7 +444,18 @@
     }
         return normalCell;
 }
-
+- (void)formatNumberIfNeeded:(UITextField *)textField{
+    // you'll need to strip the commas for the formatter to work properly
+    NSString * currentTextWithoutCommas = [textField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    NSNumber * numberFromString = [numberFormatter numberFromString:currentTextWithoutCommas];
+    NSString * formattedNumberString = [numberFormatter stringFromNumber:numberFromString];
+    
+    textField.text = formattedNumberString;
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0:
@@ -469,27 +475,6 @@
     }
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    NSString *sectionName;
-//    switch (section)
-//    {
-//        case 0:
-//            sectionName = NSLocalizedString(@"Work", @"Work");
-//            break;
-//        case 1:
-//            sectionName = NSLocalizedString(@"Education", @"Education");
-//            break;
-//            // ...
-//        case 2:
-//            sectionName = NSLocalizedString(@" ", @" ");
-//            break;
-//        default:
-//            sectionName = @"";
-//            break;
-//    }
-//    return sectionName;
-//}
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
