@@ -18,9 +18,10 @@
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
-            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
@@ -660,73 +661,75 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxb-02-Tjg">
-                                <rect key="frame" x="16" y="268" width="288" height="24"/>
+                                <rect key="frame" x="16" y="300" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="5Gf-cC-yaD"/>
+                                    <constraint firstAttribute="height" constant="20" id="5Gf-cC-yaD"/>
                                     <constraint firstAttribute="width" constant="288" id="ohu-ie-1OL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="19"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Epe-tY-Lwq">
-                                <rect key="frame" x="16" y="294" width="288" height="24"/>
+                                <rect key="frame" x="16" y="320" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="qwJ-wq-01O"/>
+                                    <constraint firstAttribute="height" constant="20" id="qwJ-wq-01O"/>
                                     <constraint firstAttribute="width" constant="288" id="xiQ-tH-G0l"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBj-Tc-Klr">
-                                <rect key="frame" x="16" y="320" width="288" height="24"/>
+                                <rect key="frame" x="16" y="340" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="6p0-3m-mni"/>
+                                    <constraint firstAttribute="height" constant="20" id="6p0-3m-mni"/>
                                     <constraint firstAttribute="width" constant="288" id="SDd-di-F0n"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZe-al-uPc">
-                                <rect key="frame" x="16" y="346" width="288" height="24"/>
+                                <rect key="frame" x="16" y="360" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="TJC-UF-coV"/>
+                                    <constraint firstAttribute="height" constant="20" id="TJC-UF-coV"/>
                                     <constraint firstAttribute="width" constant="288" id="qBv-sL-2uo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKS-xu-ofk">
-                                <rect key="frame" x="16" y="372" width="288" height="24"/>
+                                <rect key="frame" x="16" y="380" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Be8-LR-N1z"/>
+                                    <constraint firstAttribute="height" constant="20" id="Be8-LR-N1z"/>
                                     <constraint firstAttribute="width" constant="288" id="uRs-dN-W59"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.72723067434210531" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                <color key="textColor" red="0.20784313725490194" green="0.73333333333333328" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You just got matched with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu0-jE-KDf">
-                                <rect key="frame" x="34" y="30" width="252" height="24"/>
+                                <rect key="frame" x="34" y="61" width="252" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="252" id="FHc-N0-1OX"/>
                                     <constraint firstAttribute="height" constant="24" id="mj0-qY-Iw6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="18"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0E-fy-qNc">
-                                <rect key="frame" x="281" y="5" width="32" height="32"/>
+                                <rect key="frame" x="20" y="530" width="280" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="5d1-We-F3A"/>
+                                    <constraint firstAttribute="width" constant="280" id="5d1-We-F3A"/>
                                     <constraint firstAttribute="height" constant="32" id="ecK-Dg-VNV"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
-                                <state key="normal" image="matchCellOption.png">
+                                <state key="normal" title="Continue viewing other Profiles">
+                                    <color key="titleColor" red="0.94901960784313721" green="0.4392156862745098" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -734,22 +737,40 @@
                                     <action selector="back:" destination="DU5-Rv-5oI" eventType="touchUpInside" id="gyB-cQ-x73"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aib-Am-zat">
-                                <rect key="frame" x="80" y="79" width="160" height="160"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="30c-dA-Ewd">
+                                <rect key="frame" x="72" y="103" width="176" height="176"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="Bw4-Mk-dUm"/>
-                                    <constraint firstAttribute="height" constant="160" id="jNj-t9-ZsN"/>
+                                    <constraint firstAttribute="width" secondItem="30c-dA-Ewd" secondAttribute="height" multiplier="1:1" id="jbi-dq-DlH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.BorderWidth">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                        <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aib-Am-zat">
+                                <rect key="frame" x="75" y="106" width="170" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="Bw4-Mk-dUm"/>
+                                    <constraint firstAttribute="width" secondItem="aib-Am-zat" secondAttribute="height" multiplier="1:1" id="aSH-cA-va8"/>
+                                    <constraint firstAttribute="height" constant="170" id="jNj-t9-ZsN"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kY0-KC-LO9">
-                                <rect key="frame" x="0.0" y="515" width="320" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kY0-KC-LO9">
+                                <rect key="frame" x="0.0" y="473" width="320" height="48"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="NB7-TS-1Xq"/>
-                                    <constraint firstAttribute="height" constant="40" id="PzD-XV-B9q"/>
+                                    <constraint firstAttribute="height" constant="48" id="PzD-XV-B9q"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
-                                <state key="normal" title="Chat">
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="5" minY="4" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="2" maxX="8" maxY="0.0"/>
+                                <state key="normal" title="Chat" image="chatWhite.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -761,22 +782,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZZe-al-uPc" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="1qs-cs-Aww"/>
-                            <constraint firstItem="M0E-fy-qNc" firstAttribute="top" secondItem="HnU-Uo-vFa" secondAttribute="bottom" constant="5" id="2j4-Q5-mnD"/>
+                            <constraint firstItem="M0E-fy-qNc" firstAttribute="top" secondItem="HnU-Uo-vFa" secondAttribute="bottom" constant="530" id="2j4-Q5-mnD"/>
+                            <constraint firstAttribute="trailing" secondItem="kY0-KC-LO9" secondAttribute="trailing" id="5Kg-7b-iBD"/>
+                            <constraint firstItem="aib-Am-zat" firstAttribute="leading" secondItem="ZCB-X3-gsr" secondAttribute="leading" constant="75" id="5yx-E9-Db0"/>
                             <constraint firstItem="Epe-tY-Lwq" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="9AX-2I-Vte"/>
+                            <constraint firstItem="30c-dA-Ewd" firstAttribute="leading" secondItem="ZCB-X3-gsr" secondAttribute="leading" constant="72" id="DHG-Tg-qjW"/>
                             <constraint firstItem="kY0-KC-LO9" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="IMk-1x-9oE"/>
-                            <constraint firstItem="aib-Am-zat" firstAttribute="top" secondItem="Iu0-jE-KDf" secondAttribute="bottom" constant="25" id="KMt-sJ-h8G"/>
+                            <constraint firstItem="aib-Am-zat" firstAttribute="top" secondItem="Iu0-jE-KDf" secondAttribute="bottom" constant="21" id="KMt-sJ-h8G"/>
                             <constraint firstItem="Iu0-jE-KDf" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="Pvs-M0-q9K"/>
-                            <constraint firstItem="Epe-tY-Lwq" firstAttribute="top" secondItem="Dxb-02-Tjg" secondAttribute="bottom" constant="2" id="PyG-A0-ft2"/>
-                            <constraint firstItem="M0E-fy-qNc" firstAttribute="leading" secondItem="ZCB-X3-gsr" secondAttribute="leading" constant="281" id="REp-gP-gzj"/>
-                            <constraint firstItem="PMX-re-7M9" firstAttribute="top" secondItem="kY0-KC-LO9" secondAttribute="bottom" constant="13" id="WOR-a1-6TC"/>
-                            <constraint firstItem="SBj-Tc-Klr" firstAttribute="top" secondItem="Epe-tY-Lwq" secondAttribute="bottom" constant="2" id="XTa-c1-k7g"/>
+                            <constraint firstItem="Epe-tY-Lwq" firstAttribute="top" secondItem="Dxb-02-Tjg" secondAttribute="bottom" id="PyG-A0-ft2"/>
+                            <constraint firstItem="M0E-fy-qNc" firstAttribute="top" secondItem="kY0-KC-LO9" secondAttribute="bottom" constant="9" id="QpQ-2B-uf7"/>
+                            <constraint firstItem="M0E-fy-qNc" firstAttribute="leading" secondItem="ZCB-X3-gsr" secondAttribute="leading" constant="20" id="REp-gP-gzj"/>
+                            <constraint firstItem="PMX-re-7M9" firstAttribute="top" secondItem="M0E-fy-qNc" secondAttribute="bottom" constant="6" id="Urn-nF-qOm"/>
+                            <constraint firstItem="PMX-re-7M9" firstAttribute="top" secondItem="kY0-KC-LO9" secondAttribute="bottom" constant="47" id="WOR-a1-6TC"/>
+                            <constraint firstItem="SBj-Tc-Klr" firstAttribute="top" secondItem="Epe-tY-Lwq" secondAttribute="bottom" id="XTa-c1-k7g"/>
+                            <constraint firstItem="kY0-KC-LO9" firstAttribute="leading" secondItem="ZCB-X3-gsr" secondAttribute="leading" id="XtX-H8-T4a"/>
                             <constraint firstItem="Dxb-02-Tjg" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="Z0v-Fv-aH7"/>
-                            <constraint firstAttribute="trailing" secondItem="M0E-fy-qNc" secondAttribute="trailing" constant="7" id="dsz-Ez-1F3"/>
-                            <constraint firstItem="Iu0-jE-KDf" firstAttribute="top" secondItem="HnU-Uo-vFa" secondAttribute="bottom" constant="30" id="ezO-x7-lwx"/>
-                            <constraint firstItem="Dxb-02-Tjg" firstAttribute="top" secondItem="aib-Am-zat" secondAttribute="bottom" constant="29" id="jdZ-NR-SGk"/>
+                            <constraint firstItem="30c-dA-Ewd" firstAttribute="top" secondItem="Iu0-jE-KDf" secondAttribute="bottom" constant="18" id="Zn6-r0-nQf"/>
+                            <constraint firstAttribute="trailing" secondItem="M0E-fy-qNc" secondAttribute="trailing" constant="20" id="dsz-Ez-1F3"/>
+                            <constraint firstItem="Iu0-jE-KDf" firstAttribute="top" secondItem="HnU-Uo-vFa" secondAttribute="bottom" constant="61" id="ezO-x7-lwx"/>
+                            <constraint firstAttribute="trailing" secondItem="aib-Am-zat" secondAttribute="trailing" constant="75" id="i0R-xN-R0x"/>
+                            <constraint firstItem="Dxb-02-Tjg" firstAttribute="top" secondItem="aib-Am-zat" secondAttribute="bottom" constant="24" id="jdZ-NR-SGk"/>
+                            <constraint firstAttribute="trailing" secondItem="30c-dA-Ewd" secondAttribute="trailing" constant="72" id="kSV-gA-LJf"/>
                             <constraint firstItem="yKS-xu-ofk" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="kjP-Qu-dnt"/>
-                            <constraint firstItem="yKS-xu-ofk" firstAttribute="top" secondItem="ZZe-al-uPc" secondAttribute="bottom" constant="2" id="lne-5G-u98"/>
-                            <constraint firstItem="ZZe-al-uPc" firstAttribute="top" secondItem="SBj-Tc-Klr" secondAttribute="bottom" constant="2" id="mqy-ZH-kyf"/>
+                            <constraint firstItem="aib-Am-zat" firstAttribute="top" secondItem="Iu0-jE-KDf" secondAttribute="bottom" constant="21" id="lDJ-a7-k9h"/>
+                            <constraint firstItem="yKS-xu-ofk" firstAttribute="top" secondItem="ZZe-al-uPc" secondAttribute="bottom" id="lne-5G-u98"/>
+                            <constraint firstItem="ZZe-al-uPc" firstAttribute="top" secondItem="SBj-Tc-Klr" secondAttribute="bottom" id="mqy-ZH-kyf"/>
                             <constraint firstItem="aib-Am-zat" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="wQR-TV-OrF"/>
                             <constraint firstItem="SBj-Tc-Klr" firstAttribute="centerX" secondItem="ZCB-X3-gsr" secondAttribute="centerX" id="wp0-YH-NBn"/>
                         </constraints>
@@ -784,11 +815,13 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="imageViewBackground" destination="30c-dA-Ewd" id="bKt-DM-114"/>
                         <outlet property="lblAgeHeight" destination="Epe-tY-Lwq" id="0WX-Vj-5nk"/>
                         <outlet property="lblDesignation" destination="ZZe-al-uPc" id="5df-eP-EPO"/>
                         <outlet property="lblName" destination="Dxb-02-Tjg" id="fve-IL-zvN"/>
                         <outlet property="lblReligion" destination="SBj-Tc-Klr" id="oXf-vb-stM"/>
                         <outlet property="lblTraits" destination="yKS-xu-ofk" id="MLW-Sb-Fgn"/>
+                        <outlet property="topLabelSpaceConstraint" destination="ezO-x7-lwx" id="ws9-kE-7ma"/>
                         <outlet property="userImageView" destination="aib-Am-zat" id="yVr-fD-EbK"/>
                     </connections>
                 </viewController>
@@ -1730,6 +1763,7 @@
         <image name="backNew.png" width="44" height="44"/>
         <image name="calendar" width="32" height="32"/>
         <image name="call.png" width="64" height="64"/>
+        <image name="chatWhite.png" width="32" height="32"/>
         <image name="dislikeNew.png" width="50" height="50"/>
         <image name="dislikePlain.png" width="40" height="40"/>
         <image name="frame" width="31" height="32"/>
@@ -1738,7 +1772,6 @@
         <image name="height" width="32" height="32"/>
         <image name="likeNew.png" width="50" height="50"/>
         <image name="location" width="32" height="32"/>
-        <image name="matchCellOption.png" width="32" height="32"/>
         <image name="measures" width="32" height="28"/>
         <image name="menu_icon.png" width="32" height="32"/>
         <image name="pinFill.png" width="50" height="50"/>

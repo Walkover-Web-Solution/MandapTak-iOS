@@ -88,6 +88,7 @@
 		757F87691B8EF1DC00C083A4 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 757F875A1B8EF1DC00C083A4 /* SVWebViewControllerActivity.m */; };
 		757F876D1B8F0DDB00C083A4 /* backNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 757F876B1B8F0DDB00C083A4 /* backNew.png */; };
 		757F876E1B8F0DDB00C083A4 /* backNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 757F876C1B8F0DDB00C083A4 /* backNew@2x.png */; };
+		7581C32A1BD103C400E59375 /* chatWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 7581C3291BD103C400E59375 /* chatWhite.png */; settings = {ASSET_TAGS = (); }; };
 		758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */; };
 		75886EBF1B8C50CD008B7F94 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75886EBE1B8C50CD008B7F94 /* Profile.m */; };
 		758914CE1B95BFC200585507 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 758914CD1B95BFC200585507 /* History.m */; };
@@ -399,6 +400,7 @@
 		757F875C1B8EF1DC00C083A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
 		757F876B1B8F0DDB00C083A4 /* backNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backNew.png; sourceTree = "<group>"; };
 		757F876C1B8F0DDB00C083A4 /* backNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backNew@2x.png"; sourceTree = "<group>"; };
+		7581C3291BD103C400E59375 /* chatWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatWhite.png; sourceTree = "<group>"; };
 		758535A91B8B1E34000B480A /* ViewFullProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFullProfileVC.h; sourceTree = "<group>"; };
 		758535AA1B8B1E34000B480A /* ViewFullProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFullProfileVC.m; sourceTree = "<group>"; };
 		75886EBD1B8C50CD008B7F94 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
@@ -1828,6 +1830,7 @@
 		89D9F7631B6B5DB4004CBE3D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				7581C3291BD103C400E59375 /* chatWhite.png */,
 				896A8A2A1BCE3EFB009D2698 /* chatBubble.png */,
 			);
 			path = Chat;
@@ -2187,6 +2190,7 @@
 				896D18301B945D5A001513A5 /* call_Icon.png in Resources */,
 				899170471B70B5D0000CF872 /* next@2x.png in Resources */,
 				896A8A221BCE2287009D2698 /* Default-568h.png in Resources */,
+				7581C32A1BD103C400E59375 /* chatWhite.png in Resources */,
 				896D18231B944DDB001513A5 /* Fake_icon.png in Resources */,
 				757F87611B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				895A6E801B98686E00A9C8BC /* closePopover.png in Resources */,
