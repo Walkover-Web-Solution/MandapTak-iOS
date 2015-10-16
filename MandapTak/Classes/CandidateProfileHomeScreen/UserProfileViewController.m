@@ -85,14 +85,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //hide trait label initially
     lblTraits.hidden = YES;
     
-    imgViewProfilePic.layer.cornerRadius = 80.0f;
-    imgViewProfilePic.layer.borderWidth = 2.0f;
-    imgViewProfilePic.layer.borderColor = [[UIColor whiteColor] CGColor];
-    imgViewProfilePic.clipsToBounds = YES;
-    
-    //apply circular border on user image view
-    userImageView.layer.cornerRadius = 60.0f;
-    userImageView.clipsToBounds = YES;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -177,6 +169,20 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 //    }];
 
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidLayoutSubviews
+{
+    NSLog(@"image view width = %f",imgViewProfilePic.frame.size.width);
+    imgViewProfilePic.layer.cornerRadius = imgViewProfilePic.frame.size.width/2; //80.0f;
+    imgViewProfilePic.layer.borderWidth = 2.0f;
+    imgViewProfilePic.layer.borderColor = [[UIColor whiteColor] CGColor];
+    imgViewProfilePic.clipsToBounds = YES;
+    
+    //apply circular border on user image view
+    userImageView.layer.cornerRadius = userImageView.frame.size.width/2; //60.0f;
+    userImageView.clipsToBounds = YES;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -414,7 +420,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              
          }
          
-         else if (error.code ==100){
+         else if (error.code == 100){
              //[MBProgressHUD hideHUDForView:self.view animated:YES];
              [self hideLoader];
              
