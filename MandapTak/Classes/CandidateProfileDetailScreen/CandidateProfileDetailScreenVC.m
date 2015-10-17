@@ -111,6 +111,16 @@
     
     //add our blurred image to the scrollview
     profileImageView.image = [UIImage imageWithCGImage:cgImage];
+    
+    //CGImageSourceCreateThumbnailAtIndex
+    /*
+    UIImage *originalImage = ...;
+    CGSize destinationSize = ...;
+    UIGraphicsBeginImageContext(destinationSize);
+    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+     */
 }
 
 
