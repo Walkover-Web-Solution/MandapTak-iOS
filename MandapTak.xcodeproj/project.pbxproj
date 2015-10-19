@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		571991487120229D756C60BF /* libPods-MandapTak.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */; };
 		750869721B9F096800022596 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 750869711B9F096800022596 /* UIImageEffects.m */; };
+		7527DA9C1BD51A9900296C90 /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7527DA9A1BD51A9900296C90 /* TTRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
 		7533F6AB1B84AF0A00B83EFD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A51B84AF0A00B83EFD /* add.png */; };
 		7533F6AC1B84AF0A00B83EFD /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A61B84AF0A00B83EFD /* add@2x.png */; };
 		7533F6AD1B84AF0A00B83EFD /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A71B84AF0A00B83EFD /* add@3x.png */; };
@@ -301,6 +302,9 @@
 		7332D6DDB271BE417996C2BD /* Pods-MandapTak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MandapTak.release.xcconfig"; path = "Pods/Target Support Files/Pods-MandapTak/Pods-MandapTak.release.xcconfig"; sourceTree = "<group>"; };
 		750869701B9F096800022596 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
 		750869711B9F096800022596 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		7527DA991BD51A9900296C90 /* TTRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSlider.h; sourceTree = "<group>"; };
+		7527DA9A1BD51A9900296C90 /* TTRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTRangeSlider.m; sourceTree = "<group>"; };
+		7527DA9B1BD51A9900296C90 /* TTRangeSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSliderDelegate.h; sourceTree = "<group>"; };
 		7533F6A51B84AF0A00B83EFD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		7533F6A61B84AF0A00B83EFD /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		7533F6A71B84AF0A00B83EFD /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
@@ -784,6 +788,16 @@
 				750869711B9F096800022596 /* UIImageEffects.m */,
 			);
 			path = LightBlurEffect;
+			sourceTree = "<group>";
+		};
+		7527DA981BD51A9900296C90 /* RangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				7527DA991BD51A9900296C90 /* TTRangeSlider.h */,
+				7527DA9A1BD51A9900296C90 /* TTRangeSlider.m */,
+				7527DA9B1BD51A9900296C90 /* TTRangeSliderDelegate.h */,
+			);
+			path = RangeSlider;
 			sourceTree = "<group>";
 		};
 		75382F061B8CA50D005E03FE /* CustomTableCell */ = {
@@ -1780,6 +1794,7 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7527DA981BD51A9900296C90 /* RangeSlider */,
 				89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */,
 				89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */,
 				893F03401BAACC3C00BB1B59 /* SVProgressHUD */,
@@ -2384,6 +2399,7 @@
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
 				8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */,
 				893F034C1BAACC3C00BB1B59 /* SVRadialGradientLayer.m in Sources */,
+				7527DA9C1BD51A9900296C90 /* TTRangeSlider.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
 				8997CC881BA182C8001B11AA /* SCNetworkReachability.m in Sources */,
