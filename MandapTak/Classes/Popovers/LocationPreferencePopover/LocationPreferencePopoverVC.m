@@ -93,6 +93,7 @@ replacementString:(NSString *)string {
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
     //[query whereKey:@"name" hasPrefix:searchBar.text];
     [query includeKey:@"Parent.Parent"];
+    [query orderByAscending:@"name"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error)
      {
          [MBProgressHUD hideHUDForView:self.view animated:YES];

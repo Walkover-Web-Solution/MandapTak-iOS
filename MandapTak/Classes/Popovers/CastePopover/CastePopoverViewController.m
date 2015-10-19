@@ -66,6 +66,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Caste"];
     [query whereKey:@"religionId" equalTo:self.religionObj];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query orderByAscending:@"name"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -130,7 +131,7 @@
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     if(isSearching)
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
-    
+    [query orderByAscending:@"name"];
     [query whereKey:@"religionId" equalTo:self.religionObj];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {

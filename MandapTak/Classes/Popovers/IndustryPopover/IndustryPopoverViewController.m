@@ -71,6 +71,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Industries"];
     query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     //  [query whereKey:@"casteId" equalTo:self.casteObj];
+    [query orderByAscending:@"name"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -149,7 +150,7 @@
     query.limit = 20;
     if(isSearching)
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
-    
+    [query orderByAscending:@"name"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if(!error){
             [MBProgressHUD hideHUDForView:self.view animated:YES];

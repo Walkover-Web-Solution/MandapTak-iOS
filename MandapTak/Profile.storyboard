@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -445,6 +445,18 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvZ-GS-tRA">
+                                                    <rect key="frame" x="281" y="0.0" width="39" height="39"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="39" id="dVq-LU-hMI"/>
+                                                        <constraint firstAttribute="width" constant="39" id="vtD-ly-u31"/>
+                                                    </constraints>
+                                                    <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                    <state key="normal" image="btn_delete.png">
+                                                        <color key="titleColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="0mL-Mx-IvI" secondAttribute="trailing" constant="37" id="2jZ-y9-bEj"/>
@@ -457,14 +469,17 @@
                                                 <constraint firstAttribute="trailing" secondItem="l39-pj-w5q" secondAttribute="trailing" constant="8" id="ZOW-EJ-ceC"/>
                                                 <constraint firstItem="h81-ve-oAw" firstAttribute="top" secondItem="tek-n0-Trn" secondAttribute="bottom" constant="8" id="Zgo-tK-rGR"/>
                                                 <constraint firstItem="h81-ve-oAw" firstAttribute="leading" secondItem="Edy-OG-Oug" secondAttribute="leading" constant="20" id="ac2-1F-cWM"/>
+                                                <constraint firstItem="LvZ-GS-tRA" firstAttribute="top" secondItem="Edy-OG-Oug" secondAttribute="top" id="buS-SJ-Jck"/>
                                                 <constraint firstAttribute="trailing" secondItem="h81-ve-oAw" secondAttribute="trailing" constant="20" id="d8z-FH-gL3"/>
                                                 <constraint firstItem="tek-n0-Trn" firstAttribute="top" secondItem="Edy-OG-Oug" secondAttribute="topMargin" id="emt-dp-SUM"/>
+                                                <constraint firstAttribute="trailing" secondItem="LvZ-GS-tRA" secondAttribute="trailing" id="khj-UK-9K8"/>
                                                 <constraint firstItem="l39-pj-w5q" firstAttribute="top" secondItem="0mL-Mx-IvI" secondAttribute="bottom" constant="2" id="rSu-q7-mwL"/>
                                                 <constraint firstAttribute="trailing" secondItem="RuC-cs-Nws" secondAttribute="trailing" constant="20" id="wd6-TG-vhN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btnDegree" destination="tek-n0-Trn" id="PK4-dQ-YmO"/>
+                                            <outlet property="btnLess" destination="LvZ-GS-tRA" id="goK-Fm-Oa5"/>
                                             <outlet property="btnMore" destination="l39-pj-w5q" id="PQB-xF-wd1"/>
                                             <outlet property="btnSpecialisation" destination="0mL-Mx-IvI" id="BYB-pb-u50"/>
                                         </connections>
@@ -1854,17 +1869,10 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Byo-z7-Yot">
-                                        <rect key="frame" x="25" y="43" width="270" height="1"/>
+                                        <rect key="frame" x="25" y="43" width="258" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.37" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="sW5-Vu-hkG"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ii4-HT-evj">
-                                        <rect key="frame" x="255" y="2" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="Xyj-y3-zZB"/>
-                                            <constraint firstAttribute="height" constant="40" id="sj3-dB-hgT"/>
                                         </constraints>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DVi-Ld-HNc">
@@ -1936,7 +1944,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHA-kx-XYP">
-                                        <rect key="frame" x="26" y="7" width="228" height="30"/>
+                                        <rect key="frame" x="26" y="7" width="212" height="30"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                         <state key="normal" title="+Upload biodata">
                                             <color key="titleColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1983,16 +1991,39 @@
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ii4-HT-evj">
+                                        <rect key="frame" x="240" y="2" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Xyj-y3-zZB"/>
+                                            <constraint firstAttribute="height" constant="40" id="sj3-dB-hgT"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fh9-Zz-Rwy">
+                                        <rect key="frame" x="282" y="5" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="aoU-Km-7Un"/>
+                                            <constraint firstAttribute="width" constant="32" id="kkY-3x-VRa"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                                        <state key="normal" image="delete">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteButtonAction:" destination="RZ3-DY-SJj" eventType="touchUpInside" id="MAB-h4-3qf"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fh9-Zz-Rwy" secondAttribute="trailing" constant="6" id="01O-MA-HVE"/>
                                     <constraint firstItem="Byo-z7-Yot" firstAttribute="leading" secondItem="hwh-BT-rl7" secondAttribute="leading" constant="25" id="08g-or-8Ha"/>
-                                    <constraint firstAttribute="trailing" secondItem="Byo-z7-Yot" secondAttribute="trailing" constant="25" id="1XF-h7-gsT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Byo-z7-Yot" secondAttribute="trailing" constant="37" id="1XF-h7-gsT"/>
                                     <constraint firstItem="4Ve-sN-CgC" firstAttribute="top" secondItem="hwh-BT-rl7" secondAttribute="top" constant="126" id="3Ie-ZE-Mph"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ii4-HT-evj" secondAttribute="trailing" constant="25" id="4mo-Fu-4GK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ii4-HT-evj" secondAttribute="trailing" constant="40" id="4mo-Fu-4GK"/>
                                     <constraint firstItem="mZg-D8-cg1" firstAttribute="top" secondItem="fiY-sT-ymm" secondAttribute="bottom" constant="8" id="6lr-7d-GJx"/>
                                     <constraint firstItem="2jV-5Z-P4b" firstAttribute="leading" secondItem="hwh-BT-rl7" secondAttribute="leading" constant="26" id="7SF-bx-DBs"/>
                                     <constraint firstItem="9dP-D1-4vy" firstAttribute="top" secondItem="2jV-5Z-P4b" secondAttribute="bottom" constant="8" id="Ccr-e8-Dbc"/>
+                                    <constraint firstItem="fh9-Zz-Rwy" firstAttribute="top" secondItem="hwh-BT-rl7" secondAttribute="top" constant="5" id="FKQ-JO-jvu"/>
                                     <constraint firstItem="DVi-Ld-HNc" firstAttribute="leading" secondItem="hwh-BT-rl7" secondAttribute="leading" constant="17" id="JQg-RF-8CY"/>
                                     <constraint firstItem="hyH-YH-Kq7" firstAttribute="top" secondItem="2jV-5Z-P4b" secondAttribute="bottom" constant="10" id="KFe-4l-jKZ"/>
                                     <constraint firstItem="hyH-YH-Kq7" firstAttribute="leading" secondItem="fiY-sT-ymm" secondAttribute="trailing" constant="17" id="Smt-jp-Abp"/>
@@ -2071,6 +2102,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="4gc-TV-YWb" id="kHH-EF-xTz"/>
                         <outlet property="biodataImgView" destination="Ii4-HT-evj" id="Kab-Xv-F0J"/>
+                        <outlet property="btnDelete" destination="fh9-Zz-Rwy" id="C34-1Q-4fT"/>
                         <outlet property="btnDoneUp" destination="XHa-mA-ce0" id="QSp-pV-h76"/>
                         <outlet property="btnNext" destination="lJW-5b-0ma" id="rst-QS-aNV"/>
                         <outlet property="btnTab1" destination="jwf-CZ-6sG" id="yRI-cm-YfN"/>
@@ -2165,6 +2197,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btn_delete.png" width="32" height="32"/>
         <image name="calendar" width="32" height="32"/>
         <image name="delete" width="32" height="32"/>
         <image name="frame" width="31" height="32"/>

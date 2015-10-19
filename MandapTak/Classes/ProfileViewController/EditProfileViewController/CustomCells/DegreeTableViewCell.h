@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDegree;
 @property (weak, nonatomic) IBOutlet UIButton *btnSpecialisation;
 @property (weak, nonatomic) IBOutlet UIButton *btnMore;
+@property (weak, nonatomic) IBOutlet UIButton *btnLess;
 
 @end

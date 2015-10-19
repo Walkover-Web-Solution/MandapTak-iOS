@@ -50,8 +50,18 @@
 
     [self.txtMobNumber setValue:[UIFont fontWithName: @"MYRIADPRO-BOLD" size: 15] forKeyPath:@"_placeholderLabel.font"];
     [self.txtMobNumber setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:@"UIKeyboardWillShowNotification"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:@"UIKeyboardDidHideNotification"
+                                               object:nil];
+
     self.txtMobNumber.keyboardType = UIKeyboardTypeNumberPad;
 
     // Do any additional setup after loading the view.
@@ -119,7 +129,9 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    isShowingKeyboard = NO;
+    if(isShowingKeyboard== YES){
+        isShowingKeyboard = NO;
+
     // Reset the desired height (keep the duration)
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardRect = [userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
@@ -128,6 +140,7 @@
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + height, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
+    }
     //  [self setNeedsUpdateConstraints];
 }
 

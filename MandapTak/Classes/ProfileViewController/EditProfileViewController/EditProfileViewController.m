@@ -81,6 +81,7 @@
     __weak IBOutlet UIButton *btnDoneUp;
     __weak IBOutlet UITextField *txtMinBudget;
     __weak IBOutlet UITextField *txtMaxBudget;
+    __weak IBOutlet UIButton *btnDelete;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnTab1;
 @property (weak, nonatomic) IBOutlet UIButton *btnTab2;
@@ -102,6 +103,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnUploadBiodata;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *uploadPhotoOrignConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *biodataImgView;
+- (IBAction)deleteButtonAction:(id)sender;
 
 
 @end
@@ -111,6 +113,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     btnDoneUp.hidden = YES;
+    btnDelete.hidden = YES;
 
     sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
@@ -694,6 +697,7 @@
         if (!error) {
             [self.btnUploadBiodata setTitle:@"Updated Biodata" forState:UIControlStateNormal];
             self.btnUploadBiodata.enabled =YES;
+            btnDelete.hidden =NO;
 
             // succesful
             
@@ -724,13 +728,13 @@
         default:
             break;
     }
-    [[AppData sharedData] checkReachablitywithCompletionBlock:^(bool isReachable) {
-        if(isReachable){
-        }
-        else{
-          
-        }
-    }];
+//    [[AppData sharedData] checkReachablitywithCompletionBlock:^(bool isReachable) {
+//        if(isReachable){
+//        }
+//        else{
+//          
+//        }
+//    }];
     if([[AppData sharedData]isInternetAvailable]){
         
         if([txtMinBudget.text integerValue]>0)
@@ -747,65 +751,62 @@
         int package = [strPackage intValue];
         int minBugget =[txtMinBudget.text intValue];
         int maxBudget =[txtMaxBudget.text intValue];
-        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 || weight.length ==0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]]||designation == nil ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||isPrimaryPhoto == NO ||selectedBiodata==nil|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
+        if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 ||[weight integerValue]<=0|| [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]]||designation == nil ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]||isPrimaryPhoto == NO || [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||maxBudget<minBugget||package<1){
             NSMutableArray *arrMsg = [NSMutableArray array];
-            if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound){
+            if(name.length==0 ||  [name rangeOfString:@" "].location == NSNotFound)
                 [arrMsg addObject:@"valid Full Name"];
-            }
-            if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]]){
+             
+            if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]])
                 [arrMsg addObject:@"Current Location"];
-            }
-            if(gender.length==0){
-                [arrMsg addObject:@"gender"];
-            }
-            if([currentProfile valueForKey:@"tob"] ==nil){
-                [arrMsg addObject:@"Time of Birth"];
-            }
-            if([currentProfile valueForKey:@"dob"] ==nil ){
-                [arrMsg addObject:@"Date of Birth"];
-            }
-            if(height.length==0){
-                [arrMsg addObject:@"height"];
-            }
-            if(weight.length==0){
-                [arrMsg addObject:@"weight"];
-            }
-            if(package<1){
-                [arrMsg addObject:@"package"];
-            }
-            if(company.length==0){
-                [arrMsg addObject:@"company"];
-            }
-            if( [designation isKindOfClass:[NSNull class]]|| designation==nil){
-                
-                [arrMsg addObject:@"designation"];
-            }
-            if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]]){
-                [arrMsg addObject:@"Place of Birth"];
-            }
-            if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]]){
-                [arrMsg addObject:@"Religion"];
-            }
-            if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]]){
-                [arrMsg addObject:@"Caste"];
-            }
-            if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]]){
-                [arrMsg addObject:@"Industry"];
-            }
-            if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]]){
-                [arrMsg addObject:@"Degree and its specialization"];
-            }
             
-            if(isPrimaryPhoto ==NO){
+            if(gender.length==0)
+                [arrMsg addObject:@"gender"];
+            
+            if([currentProfile valueForKey:@"tob"] ==nil)
+                [arrMsg addObject:@"Time of Birth"];
+            
+            if([currentProfile valueForKey:@"dob"] ==nil )
+                [arrMsg addObject:@"Date of Birth"];
+            
+            if(height.length==0)
+                [arrMsg addObject:@"height"];
+            
+            if([weight integerValue]<=0)
+                [arrMsg addObject:@"weight"];
+            
+            if(package<1)
+                [arrMsg addObject:@"package"];
+            
+            if(company.length==0)
+                [arrMsg addObject:@"company"];
+            
+            if( [designation isKindOfClass:[NSNull class]]|| designation==nil)
+                [arrMsg addObject:@"designation"];
+            
+            if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]])
+                [arrMsg addObject:@"Place of Birth"];
+            
+            if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]])
+                [arrMsg addObject:@"Religion"];
+            
+            if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]])
+                [arrMsg addObject:@"Caste"];
+            
+            if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]])
+                [arrMsg addObject:@"Industry"];
+            
+            if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]])
+                [arrMsg addObject:@"Degree and its specialization"];
+            
+            if(isPrimaryPhoto ==NO)
                 [arrMsg addObject:@"select a Primary Photo"];
-            }
-            if(selectedBiodata ==nil){
+            
+            if(selectedBiodata ==nil)
                 [arrMsg addObject:@"select a Bio Data"];
-            }
-            if(maxBudget<minBugget){
+            
+            if(maxBudget<minBugget)
                 [arrMsg addObject:@"max marriage budget less then min marriage budget"];
                 
-            }
             NSString *msg =@"Please enter";
         
             for(int i=0; i<arrMsg.count;i++){
@@ -822,16 +823,16 @@
             [currentProfile setObject: @YES  forKey: @"isComplete"];
             [currentProfile setObject: @NO  forKey: @"paid"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UserProfileUpdatedNotification" object:self];
-
+            if(self.isMakingNewProfile){
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+                [self presentViewController:vc animated:YES completion:nil];
+            }
+            else
+                [self dismissViewControllerAnimated:YES completion:nil];
             [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
             [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if(self.isMakingNewProfile){
-                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    SWRevealViewController *vc = [sb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-                    [self presentViewController:vc animated:YES completion:nil];
-                }
-                else
-                    [self dismissViewControllerAnimated:YES completion:nil];
+               
 
                 if (!error) {
                     // succesful
@@ -842,11 +843,8 @@
 //                    }
 //                    else
 //                        [self dismissViewControllerAnimated:YES completion:nil];
-                    
                 }
                 else if (error.code ==100){
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    
                     UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Profile Error" message:@"Connection Failed." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [errorAlertView show];
                 }
@@ -854,7 +852,6 @@
                 }
                 
                 else if (error.code ==209){
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
                     [[AppData sharedData]logOut];
                     UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Profile Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -1003,6 +1000,8 @@
         txtMaxBudget.text = [NSString stringWithFormat:@"%@",[currentProfile valueForKey:@"maxMarriageBudget"] ] ;
     }
     if(![[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]){
+        btnDelete.hidden = NO;
+
         selectedBiodata = [[Photos alloc]init];
         PFFile *image = (PFFile *)[currentProfile valueForKey:@"bioData"];
                 [[currentProfile objectForKey:@"bioData"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -1011,6 +1010,11 @@
                     self.biodataImgView.image =selectedBiodata.image;
                 }];
         [self.btnUploadBiodata setTitle:@"Updated Biodata" forState:UIControlStateNormal];
+    }
+    else{
+        btnDelete.hidden = YES;
+        [self.btnUploadBiodata setTitle:@"+Upload Biodata" forState:UIControlStateNormal];
+
     }
 }
 
@@ -1393,4 +1397,14 @@
     self.btnTab4.enabled = YES;
 }
 
+- (IBAction)deleteButtonAction:(id)sender {
+    [currentProfile setObject:[NSNull null] forKey:@"bioData"];
+    [self.btnUploadBiodata setTitle:@"+Upload biodata" forState:UIControlStateNormal];
+    self.btnUploadBiodata.enabled = YES;
+    btnDelete.hidden = YES;
+    self.biodataImgView.image = nil;
+    [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+           }];
+
+}
 @end

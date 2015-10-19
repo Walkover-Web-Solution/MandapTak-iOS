@@ -65,6 +65,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Gotra"];
     [query whereKey:@"casteId" equalTo:self.casteObj];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query orderByAscending:@"name"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

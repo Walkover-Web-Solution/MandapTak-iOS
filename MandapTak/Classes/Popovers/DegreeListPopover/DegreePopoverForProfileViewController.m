@@ -68,6 +68,7 @@
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"Degree"];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query orderByAscending:@"name"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -149,7 +150,7 @@
     query.skip = self.arrTableData.count;
     query.limit = 20;
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-
+    [query orderByAscending:@"name"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(comments.count<20)

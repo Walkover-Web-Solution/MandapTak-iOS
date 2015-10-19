@@ -106,7 +106,6 @@
     if(mangilk)
         self.currentProfile[@"manglik"] = @(mangilk);
 
-    if(txtWeight.text.length>0)
         self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
     if(selectedHeight)
         self.currentProfile[@"height"] = @(height);
@@ -361,6 +360,7 @@
     [btnHeight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [popoverController dismissPopoverAnimated:YES];
 }
+
 /*
 #pragma mark - Navigation
 
@@ -405,8 +405,8 @@
 -(void)viewWillDisappear:(BOOL)animated{
     
     int height  = [selectedHeightInCms intValue];
-    if(txtWeight.text.length>0)
-        self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
+    //if(txtWeight.text.length>0)
+    self.currentProfile[@"weight"] = @([txtWeight.text floatValue]);
     self.currentProfile[@"manglik"] = @(mangilk);
     if(selectedHeight)
         self.currentProfile[@"height"] = @(height);

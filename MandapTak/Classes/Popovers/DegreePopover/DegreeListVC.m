@@ -83,6 +83,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Degree" ];
     //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchText]];
     //[query whereKey:@"name" hasPrefix:searchBar.text];
+    [query orderByAscending:@"name"];
     [query includeKey:@"degreeTypeId"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {

@@ -25,6 +25,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Specialization"];
     [query whereKey:@"degreeId" equalTo:self.selectedDegree];
     query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [query orderByAscending:@"name"];
     //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -49,6 +50,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Specialization"];
     query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [query orderByAscending:@"name"];
     [query whereKey:@"degreeId" equalTo:self.selectedDegree];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {

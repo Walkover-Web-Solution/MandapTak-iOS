@@ -86,6 +86,7 @@ replacementString:(NSString *)string {
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
     query.limit = 20;
+    [query orderByAscending:@"name"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchBar.text]];
     [query includeKey:@"Parent.Parent"];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
@@ -176,6 +177,7 @@ replacementString:(NSString *)string {
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
     query.skip = self.arrTableData.count;
     query.limit = 20;
+    [query orderByAscending:@"name"];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     if(isSearching){
 

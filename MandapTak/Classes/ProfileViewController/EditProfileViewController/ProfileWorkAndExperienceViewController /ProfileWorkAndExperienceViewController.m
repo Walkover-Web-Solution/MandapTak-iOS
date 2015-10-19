@@ -30,6 +30,7 @@
     NSString *selectedWorkAfterMarraige;
     CGRect industryCellRect;
     CGRect marraigeCellRect;
+    
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -120,18 +121,16 @@
     if(selectedDesignation)
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
     
-    if([selectedIncome intValue]>0)
-        self.currentProfile[@"package"] = @([selectedIncome integerValue]);
+    if(selectedIncome){
+        NSString * currentTextWithoutCommas = [selectedIncome stringByReplacingOccurrencesOfString:@"," withString:@""];
+        //self.currentProfile[@"package"] = @([selectedIncome integerValue]);
+        self.currentProfile[@"package"] =@([currentTextWithoutCommas integerValue]);
+    }
+    
     if(selectedDesignation)
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
     if(selectedCompany)
         [self.currentProfile setObject:selectedCompany forKey:@"placeOfWork"];
-//    for(Education *education in arrEducationData){
-//        if(education.specialisation!=nil){
-//            
-//            [self.currentProfile setObject:education.specialisation forKey:@"education"];
-//        }
-//    }
     for(int i =0;i<arrEducationData.count;i++){
         Education *education = arrEducationData[i];
         if(education.specialisation !=nil){
@@ -147,17 +146,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 -(void)updateUserInfo{
-    PFObject *cur = self.currentProfile;
     if(![[self.currentProfile valueForKey:@"designation"] isKindOfClass: [NSNull class]]){
         selectedDesignation  = [self.currentProfile valueForKey:@"designation"];
     }
@@ -168,7 +157,15 @@
         selectedCompany  = [self.currentProfile valueForKey:@"placeOfWork"];
     }
     if(![[self.currentProfile valueForKey:@"package"] isKindOfClass: [NSNull class]] && [self.currentProfile valueForKey:@"package"] !=nil ){
-        selectedIncome = [NSString stringWithFormat:@"%@",[self.currentProfile valueForKey:@"package"] ] ;
+        NSString *package =[[self.currentProfile valueForKey:@"package"] stringValue];
+        NSString * currentTextWithoutCommas = [package stringByReplacingOccurrencesOfString:@"," withString:@""];
+        NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber * numberFromString = [numberFormatter numberFromString:currentTextWithoutCommas];
+        NSLocale *priceLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_IN"]; // get the locale from your SKProduct
+        [numberFormatter setLocale:priceLocale];
+        NSString * formattedNumberString = [numberFormatter stringFromNumber:numberFromString];
+        selectedIncome = formattedNumberString ;
     }
     if([self.currentProfile valueForKey:@"education1"] !=nil&&![[self.currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]){
         Education *education1 =arrEducationData[0];
@@ -178,7 +175,7 @@
 
         if([self.currentProfile valueForKey:@"education2"] !=nil&&![[self.currentProfile valueForKey:@"education2"] isKindOfClass: [NSNull class]]){
             if(arrEducationData.count==2){
-                Education *education2 =arrEducationData[0];
+                Education *education2 =arrEducationData[1];
                 education2.specialisation= [self.currentProfile valueForKey:@"education2"];
                 PFObject * deg = [education2.specialisation valueForKey:@"degreeId"];
                 education2.degree = deg;
@@ -194,7 +191,7 @@
         }
         if([self.currentProfile valueForKey:@"education3"] !=nil&&![[self.currentProfile valueForKey:@"education3"] isKindOfClass: [NSNull class]]){
             if(arrEducationData.count==3){
-                Education *education3 =arrEducationData[0];
+                Education *education3 =arrEducationData[2];
                 education3.specialisation= [self.currentProfile valueForKey:@"education3"];
                 PFObject * deg = [education3.specialisation valueForKey:@"degreeId"];
                 education3.degree = deg;
@@ -332,6 +329,10 @@
                     if(selectedIncome){
                         txtFldCell.txtField.text = selectedIncome;
                     }
+                    [txtFldCell.txtField addTarget:self
+                                            action:@selector(formatNumberIfNeeded:)
+                                  forControlEvents:UIControlEventEditingChanged];
+
                        txtFldCell.txtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Current Income" attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
                     numberToolbar.barStyle = UIBarStyleDefault;
                     //    numberToolbar.items = [NSArray arrayWithObjects:
@@ -361,10 +362,12 @@
 
                     degCell.btnDegree.tag = indexPath.row;
                     degCell.btnSpecialisation.tag = indexPath.row;
-
+                    degCell.btnLess.tag = indexPath.row;
                     [degCell.btnDegree addTarget:self action:@selector(degreeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [degCell.btnLess addTarget:self action:@selector(lessDegreeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    degCell.btnLess.hidden = YES;
                     [degCell.btnSpecialisation addTarget:self action:@selector(specialisationButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-                     [degCell.btnMore addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [degCell.btnMore addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     education =arrEducationData[indexPath.row];
                     deg= education.degree;
                     if(education.degree!= nil && ![education.degree isKindOfClass:[NSNull class]]){
@@ -385,8 +388,11 @@
                     return degCell;
                     break;
                 default:
-                    degCell.separatorInset = UIEdgeInsetsMake(0.f, degCell.bounds.size.width, 0.f, 0.f);
+                    degCell.btnLess.hidden = NO;
 
+                    degCell.separatorInset = UIEdgeInsetsMake(0.f, degCell.bounds.size.width, 0.f, 0.f);
+                    degCell.btnLess.tag = indexPath.row;
+                    [degCell.btnLess addTarget:self action:@selector(lessDegreeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     degCell.btnDegree.tag = indexPath.row;
                     degCell.btnSpecialisation.tag = indexPath.row;
                     [degCell.btnDegree addTarget:self action:@selector(degreeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -444,16 +450,16 @@
     }
         return normalCell;
 }
+
+
 - (void)formatNumberIfNeeded:(UITextField *)textField{
-    // you'll need to strip the commas for the formatter to work properly
     NSString * currentTextWithoutCommas = [textField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-    
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    
     NSNumber * numberFromString = [numberFormatter numberFromString:currentTextWithoutCommas];
+    NSLocale *priceLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_IN"]; // get the locale from your SKProduct
+    [numberFormatter setLocale:priceLocale];
     NSString * formattedNumberString = [numberFormatter stringFromNumber:numberFromString];
-    
     textField.text = formattedNumberString;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -613,7 +619,12 @@
         [alert show];
     }
    }
+-(void)lessDegreeButtonAction:(id)sender{
+    [arrEducationData removeObjectAtIndex:[sender tag]];
+    numberOfRowsInEducationSection --;
 
+    [self.tableView reloadData];
+}
 #pragma mark PopoverDelegates
 -(void)selectedIndustry:(PFObject *)industry{
     selectedIndustry = industry;
@@ -636,12 +647,15 @@
     [arrEducationData replaceObjectAtIndex:tag withObject:education];
     PFQuery *query = [PFQuery queryWithClassName:@"Specialization"];
     [query whereKey:@"degreeId" equalTo:education.degree];
-   // [query includeKey:@"degreeId"];
+    [query includeKey:@"degreeId"];
     //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if(comments.count ==1){
             PFObject *specialization = [comments objectAtIndex:0];
-            education.specialisation = specialization;
+            Education *education1 = [arrEducationData objectAtIndex:tag];
+            education1.specialisation = specialization;
+            [arrEducationData replaceObjectAtIndex:tag withObject:education];
+
         }
         [self.tableView reloadData];
     }];
@@ -760,8 +774,13 @@
     if(selectedDesignation)
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
 
-    if(selectedIncome)
-         self.currentProfile[@"package"] = @([selectedIncome integerValue]);
+    //if(selectedIncome){
+        NSString * currentTextWithoutCommas = [selectedIncome stringByReplacingOccurrencesOfString:@"," withString:@""];
+        //self.currentProfile[@"package"] = @([selectedIncome integerValue]);
+        self.currentProfile[@"package"] =@([currentTextWithoutCommas integerValue]);
+   // }
+
+    
      if(selectedDesignation)
         [self.currentProfile setObject:selectedDesignation forKey:@"designation"];
      if(selectedCompany)
@@ -777,10 +796,17 @@
         PFObject *spec = education.specialisation;
         if(education.specialisation !=nil){
             [self.currentProfile setObject:education.specialisation forKey:[NSString stringWithFormat:@"education%d",i+1]];
-            NSLog(@"%@",[NSString stringWithFormat:@"education%d",i+1]);
-
         }
     }
+    if(arrEducationData.count ==1){
+        [self.currentProfile setObject:[NSNull null] forKey:[NSString stringWithFormat:@"education%d",2]];
+        [self.currentProfile setObject:[NSNull null] forKey:[NSString stringWithFormat:@"education%d",3]];
+
+    }
+    if(arrEducationData.count ==2){
+        [self.currentProfile setObject:[NSNull null] forKey:[NSString stringWithFormat:@"education%d",3]];
+    }
+
     [self.delegate updatedPfObjectForThirdTab:self.currentProfile];
 
 }

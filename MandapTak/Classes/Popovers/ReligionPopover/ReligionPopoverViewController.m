@@ -69,6 +69,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Religion"];
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchBar.text]];
    [query includeKey:@"Parent.Parent"];
+    [query orderByAscending:@"name"];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -142,6 +143,7 @@
     [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",self.searchBar.text]];
     [query includeKey:@"Parent.Parent"];
     query.skip = arrTableData.count;
+    [query orderByAscending:@"name"];
     query.limit = 20;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if(!error){

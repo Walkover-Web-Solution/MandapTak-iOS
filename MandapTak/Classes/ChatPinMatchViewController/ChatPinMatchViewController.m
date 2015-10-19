@@ -25,6 +25,7 @@
     NSArray *arrPins;
     __weak IBOutlet UIButton *btnBack;
     NSArray *arrChats;
+    __weak IBOutlet UITableView *matchTableView;
     NSMutableArray *arrCachedMatches;
     __weak IBOutlet UILabel *lblUserInfo;
     NSOrderedSet *conversations;

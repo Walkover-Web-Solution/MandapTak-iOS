@@ -323,15 +323,25 @@
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if([textField isEqual:txtFullName]){
-        
-        NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ "] invertedSet];
-        
-        if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
-            return NO;
+        if(textField.text.length<=60){
+            NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ "] invertedSet];
+            if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
+                return NO;
+            }
+            
+            else{
+                return YES;
+            }
         }
-        
         else{
-            return YES;
+            const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
+            int isBackSpace = strcmp(_char, "\b");
+            
+            if (isBackSpace == -8) {
+                return YES;
+            }
+            else
+              return NO;
         }
     }
     return YES;
