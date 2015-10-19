@@ -323,6 +323,7 @@
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I5m-qf-Tje" customClass="TTRangeSlider">
                                                 <rect key="frame" x="8" y="407" width="299" height="54"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                         <real key="value" value="18"/>
