@@ -13,7 +13,7 @@
 @end
 
 @implementation PreferenceVC
-@synthesize rangeSlider,label;
+@synthesize ageSlider,heightSlider,label;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,13 +31,25 @@
                                                                     NSFontAttributeName:[UIFont fontWithName:@"MYRIADPRO-REGULAR" size:17],
                                                                     NSForegroundColorAttributeName: [UIColor whiteColor]
                                                                     };
-    
     //update constraints
     if ([UIScreen mainScreen].bounds.size.height == 480.0f)
     {
         //[self.view removeConstraint:equalHeightConstraint];
     }
     
+    //set Range Slider Delegate
+    ageSlider.delegate = self;
+    heightSlider.delegate = self;
+    NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
+    customFormatter.positiveSuffix = @"ft";
+    customFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    heightSlider.numberFormatterOverride = customFormatter;
+    
+    //hide age text fields
+    txtMinAge.hidden = YES;
+    txtMaxAge.hidden = YES;
+    btnMinHeight.hidden = YES;
+    btnMaxHeight.hidden = YES;
     
     arrSelLocations = [[NSMutableArray alloc]init];
     arrSelDegree = [[NSMutableArray alloc]init];
@@ -50,6 +62,9 @@
     
     arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
     
+    
+    arrHeightInFeet = [NSArray arrayWithObjects:@"4.0",@"4.5",@"5.0",@"5.5",@"6.0",@"6.5",@"7.0", nil];
+    arrHeightInInch = [NSArray arrayWithObjects:@"121",@"137",@"152",@"167",@"182",@"198",@"213", nil];
     //get current user preferences
     [self getUserPreference];
     
@@ -132,7 +147,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"Preference view will appear called");
 }
 
 -(void)cancelNumberPad{
@@ -167,7 +181,7 @@
                      insertFlag = false;
                      for (PFObject *object in objects)
                      {
-                         NSLog(@"%@", object.objectId);
+                         //NSLog(@"%@", object.objectId);
                          
                          //get Degree Preference
                          [self getDegreePrefFromPreferenceId:object.objectId];
@@ -175,18 +189,26 @@
                          //get Location Preference
                          [self getLocationPrefFromPreferenceId:object.objectId];
                          
+                         //set age slider value
                          strObj = object.objectId;
                          txtMinAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageFrom"]];
+                         ageSlider.selectedMinimum = [[object valueForKey:@"ageFrom"] floatValue];
                          if (!([[object valueForKey:@"ageFrom"] intValue] > 0))
                          {
+                             ageSlider.selectedMinimum = 18;
                              txtMinAge.text = nil;
                          }
                          
                          txtMaxAge.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"ageTo"]];
+                         ageSlider.selectedMaximum = [[object valueForKey:@"ageTo"] floatValue];
                          if (!([[object valueForKey:@"ageTo"] intValue] > 0))
                          {
+                             ageSlider.selectedMaximum = 45;
                              txtMaxAge.text = nil;
                          }
+                         
+                         //set age limit title label value
+                         lblAgeLimit.text = [NSString stringWithFormat:@"AGE LIMIT (%.0f - %.0f)",[[object valueForKey:@"ageFrom"] floatValue],[[object valueForKey:@"ageTo"] floatValue]];
                          
                          txtIncome.text = [NSString stringWithFormat:@"%@",[object valueForKey:@"minIncome"]];   //[object valueForKey:@"minIncome"];
                          if (!([[object valueForKey:@"minIncome"] intValue] > 0))
@@ -207,14 +229,28 @@
                          }
                          
                          //find height value from array
+                         /*
                          NSString *strMinHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"minHeight"]]];
                          NSString *strMaxHeight = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[object valueForKey:@"maxHeight"]]];
                          
                          minHeight = [[object valueForKey:@"minHeight"] intValue];
                          maxHeight = [[object valueForKey:@"maxHeight"] intValue];
+                         */
+                         //set height range slider value
+                         NSString *strHeightMin = [[object valueForKey:@"minHeight"] stringValue];
+                         int minHeightInFeet = [arrHeightInInch indexOfObject:strHeightMin];
+                         float sliderMinHeight = [[arrHeightInFeet objectAtIndex:minHeightInFeet] floatValue];
+                         heightSlider.selectedMinimum = sliderMinHeight;
                          
-                         [btnMinHeight setTitle:strMinHeight forState:UIControlStateNormal];
-                         [btnMaxHeight setTitle:strMaxHeight forState:UIControlStateNormal];
+                         NSString *strHeightMax = [[object valueForKey:@"maxHeight"] stringValue];
+                         int maxHeightInFeet = [arrHeightInInch indexOfObject:strHeightMax];
+                         float sliderMaxHeight = [[arrHeightInFeet objectAtIndex:maxHeightInFeet] floatValue];
+                         heightSlider.selectedMaximum = sliderMaxHeight;
+                         
+                         lblHeight.text = [NSString stringWithFormat:@"HEIGHT (%.1f ft - %.1f ft)",sliderMinHeight,sliderMaxHeight];
+                         
+                         //[btnMinHeight setTitle:strMinHeight forState:UIControlStateNormal];
+                         //[btnMaxHeight setTitle:strMaxHeight forState:UIControlStateNormal];
                          roundValue = [[object valueForKey:@"working"] intValue];
                          [sliderWork setValue:roundValue animated:YES];
                          [self sliderChanged:nil];
@@ -431,6 +467,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Range Slider 
+-(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum
+{
+    //NSLog(@"min age = %f and max age = %F",sender.selectedMinimum,sender.selectedMaximum);
+    if (sender == ageSlider)
+    {
+        NSLog(@"Age slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+        lblAgeLimit.text = [NSString stringWithFormat:@"AGE LIMIT (%.0f - %.0f)",selectedMinimum,selectedMaximum];
+    }
+    else if(sender == heightSlider)
+    {
+        NSLog(@"Height slider updated. Min Value: %.1f Max Value: %.1f", selectedMinimum, selectedMaximum);
+        lblHeight.text = [NSString stringWithFormat:@"HEIGHT (%.1f ft - %.1f ft)",selectedMinimum,selectedMaximum];
+        NSString *strMinHeight = [NSString stringWithFormat:@"%.1f",selectedMinimum];
+        
+        minHeight = [[arrHeightInInch objectAtIndex:[arrHeightInFeet indexOfObject:strMinHeight]] floatValue];
+        maxHeight = [[arrHeightInInch objectAtIndex:[arrHeightInFeet indexOfObject:[NSString stringWithFormat:@"%.1f",selectedMaximum]]] floatValue];
+        NSLog(@"DB min = %d and max = %d ",minHeight,maxHeight);
+    }
+}
+
 - (IBAction)back:(id)sender
 {
     [scrollView setContentOffset:CGPointZero animated:YES];
@@ -554,10 +611,12 @@
     
     //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self showLoader];
+    /*
     NSString *strMinHeight = [[btnMinHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
     minHeight = [[self extractNumberFromText:strMinHeight] intValue];
     NSString *strMaxHeight = [[btnMaxHeight.titleLabel.text componentsSeparatedByString:@" "]  lastObject];
     maxHeight = [[self extractNumberFromText:strMaxHeight] intValue];
+    */
     
     if ([[AppData sharedData]isInternetAvailable])
     {
@@ -566,8 +625,8 @@
             //insert preferences
             PFObject *pref = [PFObject objectWithClassName:@"Preference"];
             pref[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
-            pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
-            pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
+            pref[@"ageTo"] = [NSNumber numberWithInt:floorf(ageSlider.selectedMaximum)];//[NSNumber numberWithInt:[txtMaxAge.text intValue]];
+            pref[@"ageFrom"] = [NSNumber numberWithInt:floorf(ageSlider.selectedMinimum)];//[NSNumber numberWithInt:[txtMinAge.text intValue]];
             pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
             pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
             pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
@@ -610,8 +669,8 @@
                  // will get sent to the cloud. playerName hasn't changed.
                  NSLog(@"min age = %@ ,\n max age = %@ ,\n min budget = %@,\n max budget = %@,\n income = %@\n and workStatus = %d ,\n minHeight = %d ,\n max height = %d", txtMinAge.text,txtMaxAge.text,txtminBudget.text,txtMaxBudget.text,txtIncome.text,roundValue,minHeight,maxHeight);
                  
-                 pref[@"ageTo"] = [NSNumber numberWithInt:[txtMaxAge.text intValue]];
-                 pref[@"ageFrom"] = [NSNumber numberWithInt:[txtMinAge.text intValue]];
+                 pref[@"ageTo"] = [NSNumber numberWithInt:floorf(ageSlider.selectedMaximum)];//[NSNumber numberWithInt:[txtMaxAge.text intValue]];
+                 pref[@"ageFrom"] = [NSNumber numberWithInt:floorf(ageSlider.selectedMinimum)];//[NSNumber numberWithInt:[txtMinAge.text intValue]];
                  pref[@"minHeight"] = [NSNumber numberWithInt:minHeight];
                  pref[@"maxHeight"] = [NSNumber numberWithInt:maxHeight];
                  pref[@"minIncome"] = [NSNumber numberWithInt:[txtIncome.text intValue]];
@@ -619,7 +678,7 @@
                  pref[@"minBudget"] = [NSNumber numberWithInt:[txtminBudget.text intValue]];
                  pref[@"maxBudget"] = [NSNumber numberWithInt:[txtMaxBudget.text intValue]];
                  pref[@"minGunMatch"] = @0;
-                 pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];;
+                 pref[@"manglik"] = [NSNumber numberWithInt:roundValueManglik];
                  [pref saveInBackground];
                  
                  //execute further query of degree and location preference
@@ -655,7 +714,7 @@
         if (!error)
         {
             // The find succeeded.
-            NSLog(@"Successfully retrieved %lu degre preferences.", objects.count);
+            //NSLog(@"Successfully retrieved %lu degree preferences.", objects.count);
             // Do something with the found objects
             if (objects.count > 0)
             {
@@ -668,7 +727,7 @@
         }
         else
         {
-            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [av show];
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);

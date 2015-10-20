@@ -22,8 +22,9 @@
 #import "LocationPreferencePopoverVC.h"
 #import "AppData.h"
 #import "MARKRangeSlider.h"
+#import "TTRangeSlider.h"
 
-@interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate,UIAlertViewDelegate>
+@interface PreferenceVC : UIViewController<UITextFieldDelegate,WYPopoverControllerDelegate,SelectedLocationVCDelegate,LocationPreferencePopoverVCDelegate,DegreeListVCDelegate,HeightPopoverViewControllerDelegate,UIAlertViewDelegate,TTRangeSliderDelegate>
 {
     
     IBOutlet UITextField *txtMinAge;
@@ -47,6 +48,8 @@
     IBOutlet UISlider *sliderManglik;
     IBOutlet UILabel *lblWorkStatus;
     IBOutlet UILabel *lblManglik;
+    IBOutlet UILabel *lblAgeLimit;
+    IBOutlet UILabel *lblHeight;
     
     WYPopoverController* popoverController,*popOver2;
     IBOutlet UIButton *btnLocation;
@@ -60,7 +63,7 @@
     //work status
     int roundValue,roundValueManglik;
     int minHeight,maxHeight;
-    NSArray *arrHeight;
+    NSArray *arrHeight,*arrHeightInFeet,*arrHeightInInch;
     
     NSString *strObj;
     
@@ -71,8 +74,9 @@
     IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 //range slider
-@property (nonatomic, strong) MARKRangeSlider *rangeSlider;
 @property (nonatomic, strong) UILabel *label;
+@property (strong, nonatomic) IBOutlet TTRangeSlider *ageSlider;
+@property (strong, nonatomic) IBOutlet TTRangeSlider *heightSlider;
 
 - (IBAction)back:(id)sender;
 - (IBAction)setPreferences:(id)sender;

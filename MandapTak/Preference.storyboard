@@ -101,9 +101,9 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HEIGHT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-2W-gJS">
-                                                <rect key="frame" x="14" y="99" width="83" height="21"/>
+                                                <rect key="frame" x="14" y="99" width="180" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="83" id="J68-EW-Jfp"/>
+                                                    <constraint firstAttribute="width" constant="180" id="J68-EW-Jfp"/>
                                                     <constraint firstAttribute="height" constant="21" id="g8Z-wV-KEJ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
@@ -166,9 +166,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGE LIMIT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNq-cb-LQc">
-                                                <rect key="frame" x="14" y="37" width="83" height="21"/>
+                                                <rect key="frame" x="14" y="31" width="180" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="83" id="NQu-dc-kqC"/>
+                                                    <constraint firstAttribute="width" constant="180" id="NQu-dc-kqC"/>
                                                     <constraint firstAttribute="height" constant="21" id="zLL-sG-t71"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
@@ -321,8 +321,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I5m-qf-Tje" customClass="TTRangeSlider">
-                                                <rect key="frame" x="8" y="407" width="299" height="54"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <rect key="frame" x="8" y="49" width="301" height="61"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="minValue">
@@ -332,11 +332,44 @@
                                                         <real key="value" value="45"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="selectedMinimum">
-                                                        <real key="value" value="20"/>
+                                                        <real key="value" value="18"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="selectedMaximum">
-                                                        <real key="value" value="30"/>
+                                                        <real key="value" value="45"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="minDistance">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableStep" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-OT-pYE" customClass="TTRangeSlider">
+                                                <rect key="frame" x="6" y="113" width="301" height="61"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedMinimum">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedMaximum">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="minDistance">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableStep" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
@@ -347,7 +380,7 @@
                                             <constraint firstAttribute="width" constant="320" id="1jq-ow-TJG"/>
                                             <constraint firstAttribute="trailing" secondItem="gkt-WX-FgA" secondAttribute="trailing" id="24g-Mb-MJn"/>
                                             <constraint firstAttribute="trailing" secondItem="Wgv-kA-pAm" secondAttribute="trailing" constant="37" id="30V-DA-Iv1"/>
-                                            <constraint firstItem="LNq-cb-LQc" firstAttribute="top" secondItem="qDR-g6-Gfb" secondAttribute="bottom" constant="8" id="3WD-dU-GRM"/>
+                                            <constraint firstItem="LNq-cb-LQc" firstAttribute="top" secondItem="qDR-g6-Gfb" secondAttribute="bottom" constant="2" id="3WD-dU-GRM"/>
                                             <constraint firstItem="mOQ-9o-w1l" firstAttribute="top" secondItem="RgP-Z3-nlB" secondAttribute="bottom" constant="18" id="3eY-Gh-omf"/>
                                             <constraint firstItem="86g-nb-SrX" firstAttribute="leading" secondItem="cjU-Wd-BNB" secondAttribute="leading" constant="12" id="4IC-0L-lGF"/>
                                             <constraint firstItem="TaY-oQ-Xv8" firstAttribute="top" secondItem="qDR-g6-Gfb" secondAttribute="bottom" constant="134" id="4RZ-Ub-NWh"/>
@@ -372,7 +405,7 @@
                                             <constraint firstItem="g4a-bH-fMQ" firstAttribute="centerY" secondItem="cjU-Wd-BNB" secondAttribute="centerY" id="O60-Mv-bGu"/>
                                             <constraint firstItem="CJD-JQ-p2U" firstAttribute="top" secondItem="4K3-K3-pLt" secondAttribute="bottom" constant="16" id="Pfr-by-aJp"/>
                                             <constraint firstAttribute="bottom" secondItem="AjM-7w-O1f" secondAttribute="bottom" id="QMl-Wz-edj"/>
-                                            <constraint firstItem="JVF-dj-REU" firstAttribute="top" secondItem="LNq-cb-LQc" secondAttribute="bottom" id="RT3-7h-6KD"/>
+                                            <constraint firstItem="JVF-dj-REU" firstAttribute="top" secondItem="LNq-cb-LQc" secondAttribute="bottom" constant="6" id="RT3-7h-6KD"/>
                                             <constraint firstItem="4K3-K3-pLt" firstAttribute="top" secondItem="d58-JK-I0H" secondAttribute="bottom" constant="8" id="UHI-vC-5pU"/>
                                             <constraint firstAttribute="trailing" secondItem="EH8-nG-2Pk" secondAttribute="trailing" id="VN7-3v-q8W"/>
                                             <constraint firstItem="JQK-l0-hm8" firstAttribute="top" secondItem="CJD-JQ-p2U" secondAttribute="bottom" constant="8" id="Vj5-vU-hch"/>
@@ -441,13 +474,17 @@
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="activityIndicator" destination="g4a-bH-fMQ" id="09Q-qU-gEb"/>
+                        <outlet property="ageSlider" destination="I5m-qf-Tje" id="8Oy-2H-1bn"/>
                         <outlet property="btnAddDegree" destination="TaY-oQ-Xv8" id="6Qx-wm-sHy"/>
                         <outlet property="btnLocation" destination="wof-Sf-Gpo" id="ppd-Ci-M7H"/>
                         <outlet property="btnMaxHeight" destination="vww-4q-QrM" id="isP-3j-gOh"/>
                         <outlet property="btnMinHeight" destination="86g-nb-SrX" id="9QP-Ba-Hez"/>
                         <outlet property="equalHeightConstraint" destination="jMN-0Q-Mij" id="iN4-UF-4rW"/>
+                        <outlet property="heightSlider" destination="RuH-OT-pYE" id="0rm-x0-GTZ"/>
+                        <outlet property="lblAgeLimit" destination="LNq-cb-LQc" id="GuZ-bf-z8T"/>
                         <outlet property="lblBudget" destination="CJD-JQ-p2U" id="pQP-EW-ckZ"/>
                         <outlet property="lblDegree" destination="EJo-IO-vIk" id="7ft-2k-mPb"/>
+                        <outlet property="lblHeight" destination="JUs-2W-gJS" id="51y-6d-LZE"/>
                         <outlet property="lblLocation" destination="ORe-T8-BHS" id="5fs-6o-jQl"/>
                         <outlet property="lblManglik" destination="gkt-WX-FgA" id="lzs-qB-Dim"/>
                         <outlet property="lblWorkStatus" destination="EH8-nG-2Pk" id="FRd-eq-nj1"/>
