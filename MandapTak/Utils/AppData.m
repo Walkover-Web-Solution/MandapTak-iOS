@@ -88,5 +88,48 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
 -(LYRClient*)fetchLayerClient{
     return self.layerClient;
 }
+-(void)loadAllMatches{
+    [PFCloud callFunctionInBackground:@"getMatchedProfile"
+                       withParameters:@{@"profileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]}
+                                block:^(NSArray *results, NSError *error)
+     {
+         
+         if (!error)
+         {
+             self.arrMatches = [NSArray array];
+            self.arrMatches = results;
+             
+         }
+         else{
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [alert show];
+         }
+     }];
 
+}
+-(NSArray*)fetchAllMatches{
+    [self loadAllMatches];
+    return self.arrMatches;
+}
+-(NSArray*)refreshAllMatches{
+        [self loadAllMatches];
+    return self.arrMatches;
+}
+-(void)loadCurrentProfile{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    query.cachePolicy = kPFCachePolicyCacheOnly;
+    [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            PFObject *obj= objects[0];
+            self.currentProfile =obj;
+           // [self loadAllMatches];
+        }
+    }];
+
+}
+-(PFObject*)getCurrentProfile{
+    return self.currentProfile;
+}
 @end

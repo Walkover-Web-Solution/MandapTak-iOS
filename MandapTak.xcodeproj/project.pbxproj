@@ -220,6 +220,8 @@
 		8997CC9A1BA1840A001B11AA /* dispatch_safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC911BA1840A001B11AA /* dispatch_safe.m */; };
 		8997CC9B1BA1840A001B11AA /* ABMultiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC941BA1840A001B11AA /* ABMultiton.m */; };
 		8997CC9C1BA1840A001B11AA /* ABMultiton+SetInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC981BA1840A001B11AA /* ABMultiton+SetInstance.m */; };
+		8998E4CF1BD641450059F839 /* btn_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 8998E4CE1BD641450059F839 /* btn_chat.png */; settings = {ASSET_TAGS = (); }; };
+		8998E4D31BD645870059F839 /* PrimaryImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8998E4D21BD645870059F839 /* PrimaryImagePickerViewController.m */; settings = {ASSET_TAGS = (); }; };
 		899A13281BBD0AB700B41369 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899A13271BBD0AB700B41369 /* CoreTelephony.framework */; };
 		899A132A1BBD0B6500B41369 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 899A13291BBD0B6500B41369 /* libc++.dylib */; };
 		899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C536C1B732B6500C24DA8 /* GenderViewController.m */; };
@@ -619,6 +621,9 @@
 		8997CC971BA1840A001B11AA /* ABMultiton+SetInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ABMultiton+SetInstance.h"; sourceTree = "<group>"; };
 		8997CC981BA1840A001B11AA /* ABMultiton+SetInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ABMultiton+SetInstance.m"; sourceTree = "<group>"; };
 		8997CC9D1BA184D6001B11AA /* macros_blocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros_blocks.h; sourceTree = "<group>"; };
+		8998E4CE1BD641450059F839 /* btn_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_chat.png; sourceTree = "<group>"; };
+		8998E4D11BD645870059F839 /* PrimaryImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimaryImagePickerViewController.h; sourceTree = "<group>"; };
+		8998E4D21BD645870059F839 /* PrimaryImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimaryImagePickerViewController.m; sourceTree = "<group>"; };
 		899A13271BBD0AB700B41369 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		899A13291BBD0B6500B41369 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		899C536B1B732B6500C24DA8 /* GenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderViewController.h; sourceTree = "<group>"; };
@@ -1388,6 +1393,7 @@
 		897EF9671B708FE000F88CEC /* EditProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8998E4D01BD645630059F839 /* PrimaryImagePickerViewController */,
 				8967FADC1B8DCC1400AAC41E /* FacebookProfilePictureViewController */,
 				89E0FA0D1B85914E000BD65A /* UploadDetailsProfileViewController */,
 				897EF96B1B70901400F88CEC /* EditProfileViewController.h */,
@@ -1601,6 +1607,15 @@
 				8997CC981BA1840A001B11AA /* ABMultiton+SetInstance.m */,
 			);
 			path = Subspecs;
+			sourceTree = "<group>";
+		};
+		8998E4D01BD645630059F839 /* PrimaryImagePickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8998E4D11BD645870059F839 /* PrimaryImagePickerViewController.h */,
+				8998E4D21BD645870059F839 /* PrimaryImagePickerViewController.m */,
+			);
+			path = PrimaryImagePickerViewController;
 			sourceTree = "<group>";
 		};
 		899C53681B732B6500C24DA8 /* Popovers */ = {
@@ -1848,6 +1863,7 @@
 		89D9F7631B6B5DB4004CBE3D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				8998E4CE1BD641450059F839 /* btn_chat.png */,
 				7581C3291BD103C400E59375 /* chatWhite.png */,
 				896A8A2A1BCE3EFB009D2698 /* chatBubble.png */,
 			);
@@ -2129,6 +2145,7 @@
 				896BBFF71B95877D009FD221 /* unpin.png in Resources */,
 				896A8A251BCE2D62009D2698 /* chat.png in Resources */,
 				757849DF1BA2EF2D005490E6 /* Anim-(4).png in Resources */,
+				8998E4CF1BD641450059F839 /* btn_chat.png in Resources */,
 				757849D51BA2EF2D005490E6 /* Anim-(22).png in Resources */,
 				89D9F78C1B6B5DB4004CBE3D /* profile.png in Resources */,
 				7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */,
@@ -2354,6 +2371,7 @@
 				8960062C1B9075870007B7AB /* PhotoTweaksViewController.m in Sources */,
 				750869721B9F096800022596 /* UIImageEffects.m in Sources */,
 				8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */,
+				8998E4D31BD645870059F839 /* PrimaryImagePickerViewController.m in Sources */,
 				8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */,
 				758C8E8B1B87546E00FF634E /* CandidateProfileGalleryVC.m in Sources */,
 				899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */,

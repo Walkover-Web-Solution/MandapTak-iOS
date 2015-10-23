@@ -11,11 +11,14 @@
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 #import <LayerKit/LayerKit.h>
+#import <Parse/Parse.h>
 
 @interface AppData : NSObject{
     NSArray *arrMatches;
 }
 @property (nonatomic) LYRClient *layerClient;
+@property (nonatomic) NSArray *arrMatches;
+@property (strong, nonatomic) PFObject *currentProfile;
 
 typedef void (^ReachablityCompletionBlock)(bool isReachable);
 
@@ -26,6 +29,10 @@ typedef void (^ReachablityCompletionBlock)(bool isReachable);
 -(void)checkReachablitywithCompletionBlock:(ReachablityCompletionBlock)completionBlock;
 -(LYRClient*)installLayerClient;
 -(LYRClient*)fetchLayerClient;
+-(void)loadAllMatches;
+-(NSArray*)fetchAllMatches;
+-(NSArray*)refreshAllMatches;
+-(void)loadCurrentProfile;
 //- (BOOL)askContactsPermission ;
 DECLARE_SINGLETON_METHOD(AppData, sharedData)
 @end

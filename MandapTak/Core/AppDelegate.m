@@ -62,6 +62,8 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     if([PFUser currentUser]){
+        [[AppData sharedData]loadAllMatches];
+        [[AppData sharedData]loadCurrentProfile];
         //[[Raygun sharedReporter] identify:[[PFUser currentUser] valueForKey:@"username"]];
 
         self.layerClient = [[AppData sharedData] installLayerClient];

@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblReligion;
 @property (weak, nonatomic) IBOutlet UIButton *btnPinOrMatch;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UIButton *btnChat;
 
 @end

@@ -34,7 +34,8 @@
 #import "Reachability.h"
 #import "SCNetworkReachability.h"
 #import "FacebooKProfilePictureViewController.h"
-@interface EditProfileViewController ()<WYPopoverControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate,FacebooKProfilePictureViewControllerDelegate>
+#import "PrimaryImagePickerViewController.h"
+@interface EditProfileViewController ()<WYPopoverControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate,FacebooKProfilePictureViewControllerDelegate,PrimaryImagePickerViewControllerDelegate>
 {    SCNetworkReachability *_reachability;
     __weak IBOutlet UIView *navBarView;
     WYPopoverController* popoverController;
@@ -102,9 +103,11 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUploadBiodata;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *uploadPhotoOrignConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *choosePrimaryPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView *biodataImgView;
 - (IBAction)deleteButtonAction:(id)sender;
 
+- (IBAction)choosePrimaryPhotoButtonAction:(id)sender;
 
 @end
 
@@ -236,18 +239,18 @@
     [popoverAppearance setBorderWidth:6];
     [popoverAppearance setArrowBase:32];
     [popoverAppearance setArrowHeight:14];
-    
+//    
     [popoverAppearance setGlossShadowColor:[UIColor colorWithWhite:1 alpha:0.5]];
     [popoverAppearance setGlossShadowBlurRadius:1];
     [popoverAppearance setGlossShadowOffset:CGSizeMake(0, 1.5)];
-    
-    [popoverAppearance setOuterShadowColor:[UIColor colorWithRed:16./255. green:50./255. blue:82./255. alpha:1]];
-    [popoverAppearance setOuterShadowBlurRadius:8];
-    [popoverAppearance setOuterShadowOffset:CGSizeMake(0, 2)];
-    
-    [popoverAppearance setInnerShadowColor:[UIColor colorWithWhite:0 alpha:1]];
-    [popoverAppearance setInnerShadowBlurRadius:3];
-    [popoverAppearance setInnerShadowOffset:CGSizeMake(0, 0.5)];
+//
+//    [popoverAppearance setOuterShadowColor:[UIColor colorWithRed:16./255. green:50./255. blue:82./255. alpha:1]];
+//    [popoverAppearance setOuterShadowBlurRadius:8];
+//    [popoverAppearance setOuterShadowOffset:CGSizeMake(0, 2)];
+//    
+//    [popoverAppearance setInnerShadowColor:[UIColor colorWithWhite:0 alpha:1]];
+//    [popoverAppearance setInnerShadowBlurRadius:3];
+//    [popoverAppearance setInnerShadowOffset:CGSizeMake(0, 0.5)];
     
     [popoverAppearance setFillTopColor:whyerColor];
     [popoverAppearance setFillBottomColor:whyerColor];
@@ -270,6 +273,7 @@
 
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
+    choosePhotoBtn.hidden = YES;
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -339,6 +343,7 @@
         if (!error) {
             if(objects.count>0){
                 isPrimaryPhoto = YES;
+                choosePhotoBtn.hidden = NO;
             }
         } else {
             [self makePhotoToPrimary:primaryPhoto.imgObject];
@@ -371,6 +376,7 @@
                     [arrOldImages addObject:photo];
                     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
                     [self.collectionView reloadData];
+                    choosePhotoBtn.hidden = NO;
                     [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
 
                 }];
@@ -1190,7 +1196,7 @@
     
     for (NSDictionary *imageDic in info) {
         Photos *photo = [[Photos alloc]init];
-        photo.image =[imageDic objectForKey:UIImagePickerControllerOriginalImage];
+        photo.image =[self compressImage:[imageDic objectForKey:UIImagePickerControllerOriginalImage]];
         photo.imgObject = nil;
         NSURL *assetURL = [imageDic objectForKey:UIImagePickerControllerReferenceURL];
         __block NSString *fileName = nil;
@@ -1244,7 +1250,7 @@
     UIGraphicsBeginImageContext(rect.size);
     [image drawInRect:rect];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
+    NSData *imageData = UIImageJPEGRepresentation(image, compressionQuality);
     UIGraphicsEndImageContext();
     
     return [UIImage imageWithData:imageData];
@@ -1330,12 +1336,12 @@
             selectedBiodata.name =fileName;
             [self updateBioData];
         } failureBlock:nil];
-        selectedBiodata.image =[info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        selectedBiodata.image =[self compressImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
      
     }
     else{
         Photos *photo = [[Photos alloc]init];
-        photo.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        photo.image =[self compressImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
         photo.imgObject = nil;
         [arrNewImages addObject:photo];
         [self.collectionView reloadData];
@@ -1406,5 +1412,51 @@
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
            }];
 
+}
+
+- (IBAction)choosePrimaryPhotoButtonAction:(id)sender {
+    if(isUploadingPhotos){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Please Wait!!" message:@"Photos are uploading" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else{
+        if(arrImageList.count>0){
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+            PrimaryImagePickerViewController *vc = [sb instantiateViewControllerWithIdentifier:@"PrimaryImagePickerViewController"];
+            vc.delegate = self;
+            vc.arrImageList = arrImageList;
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Upload photos first to make primary." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+
+    }
+
+}
+
+#pragma mark PrimaryImagePickerViewControllerDelegate
+-(void)selectedPrimaryPhoto:(Photos *)primaryImg andCropedPhoto:(UIImage *)cropedPhoto{
+    primaryPhoto = primaryImg;
+    primaryCropedPhoto = cropedPhoto;
+    for(Photos *ph in arrImageList){
+        [ ph.imgObject setObject:[NSNumber numberWithBool:NO] forKey:@"isPrimary"];
+    }
+    [primaryPhoto.imgObject setObject:[NSNumber numberWithBool:YES] forKey:@"isPrimary"];
+    if(arrImageList.count==0)
+        primaryPhoto = nil;
+    [self.collectionView reloadData];
+    NSData *pictureData = UIImagePNGRepresentation(primaryCropedPhoto);
+    PFFile *file = [PFFile fileWithName:@"profilePic" data:pictureData];
+    [currentProfile setObject:file forKey:@"profilePic"];
+    [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(primaryPhoto)
+            isPrimaryPhoto = YES;
+        else
+            isPrimaryPhoto = NO;
+    }];
+    [self updateThePhotoFromPrimary];
 }
 @end

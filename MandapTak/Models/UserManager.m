@@ -1,3 +1,4 @@
+
 //
 //  UserManager.m
 //  Layer-Parse-iOS-Example
@@ -114,13 +115,9 @@
                     if (completion) completion(nil, error);
                 }
             }];
-
         }
-      
     }];
-    
-
-    }
+}
 
 - (PFObject *)cachedUserForUserID:(NSString *)userID
 {

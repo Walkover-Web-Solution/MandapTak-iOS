@@ -18,6 +18,7 @@
 #import "UserManager.h"
 #import "SVProgressHUD.h"
 #import "ConversationListViewController.h"
+#import "ConversationViewController.h"
 //#import "LNBRippleEffect.h"
 @interface ChatPinMatchViewController ()<LYRQueryControllerDelegate>{
     NSInteger currentTab;
@@ -62,7 +63,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchPinnedNotification" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPin) name:@"UpdatePinNotification" object:nil ];
-      self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView =  matchTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
     if(self.currentProfile){
         [self switchToMatches];
     }
@@ -176,8 +178,18 @@
     matchAndPinCell.selectionStyle = UITableViewCellSelectionStyleNone;
     static NSString *cellIdentifier3 = @"ChatTableViewCell";
     ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
+    if([tableView isEqual:matchTableView]){
+        matchAndPinCell.btnChat.hidden = NO;
+        matchAndPinCell.btnPinOrMatch.hidden = YES;
+    }
+    else{
+        matchAndPinCell.btnChat.hidden = YES ;
+        matchAndPinCell.btnPinOrMatch.hidden = NO;
+
+    }
     if(currentTab ==0){
-        
+        matchAndPinCell.btnChat.tag = indexPath.row;
+
         PFObject *profile = arrMatches[indexPath.row];
 
         
@@ -204,7 +216,7 @@
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
        // [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-         
+        [matchAndPinCell.btnChat addTarget:self action:@selector(chatButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         matchAndPinCell.btnPinOrMatch.hidden = YES;
         return matchAndPinCell;
 
@@ -410,46 +422,59 @@
 }
 -(void)switchToMatches{
     chatView.hidden = YES;
-    if([[AppData sharedData]isInternetAvailable]){
-        [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
-        self.lblPageTitle.text = @"MATCHES";
-        [self showLoader];
-        btnBack.enabled =YES;
-        [PFCloud callFunctionInBackground:@"getMatchedProfile"
-                           withParameters:@{@"profileId":[self.currentProfile objectId]}
-                                    block:^(NSArray *results, NSError *error)
-         {
-             [self hideLoader];
+    self.tableView.hidden = YES;
+    matchTableView.hidden = NO;
+    
+    [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
 
-             if (!error)
+    //// chaged logic
+    
+    arrMatches = [[AppData sharedData]fetchAllMatches];
+    [matchTableView reloadData];
+    if(arrMatches.count==0){
+        if([[AppData sharedData]isInternetAvailable]){
+            [self.btnMatch setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
+            self.lblPageTitle.text = @"MATCHES";
+            [self showLoader];
+            btnBack.enabled =YES;
+            [PFCloud callFunctionInBackground:@"getMatchedProfile"
+                               withParameters:@{@"profileId":[self.currentProfile objectId]}
+                                        block:^(NSArray *results, NSError *error)
              {
-                 if(results.count == 0){
-                     lblUserInfo.text = @"No Matches found!!";
-                     lblUserInfo.hidden = NO;
+                 [self hideLoader];
+                 
+                 if (!error)
+                 {
+                     if(results.count == 0){
+                         lblUserInfo.text = @"No Matches found!!";
+                         lblUserInfo.hidden = NO;
+                     }
+                     else
+                         lblUserInfo.hidden = YES;
+                     
+                     arrMatches = results;
+                     [PFObject pinAllInBackground:arrMatches];
+                     [matchTableView reloadData];
+                     
                  }
-                 else
-                     lblUserInfo.hidden = YES;
-                 
-                 arrMatches = results;
-                 [PFObject pinAllInBackground:arrMatches];
-                 [self.tableView reloadData];
-                 
-             }
-             else{
-                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                 [alert show];
-             }
-         }];
-    }
-    else{
-        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+                 else{
+                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                     [alert show];
+                 }
+             }];
+        }
+        else{
+            UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+
     }
 }
 
 -(void)switchToPin{
    // [rippleEffect removeFromSuperview];
-
+    matchTableView.hidden = YES;
+    self.tableView.hidden = NO;
     chatView.hidden = YES;
     if([[AppData sharedData]isInternetAvailable]){
         [self.btnPin setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
@@ -509,6 +534,8 @@
 
 -(void)switchToChat{
     chatView.hidden = NO;
+    matchTableView.hidden = YES;
+    self.tableView.hidden = YES;
     [self.btnChat setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
     self.lblPageTitle.text = @"CHATS";
     [self.tableView reloadData];
@@ -730,4 +757,81 @@
     [self.navigationController presentViewController:vc animated:YES completion:nil];
 
 }
+
+#pragma mark ChatCode
+
+-(void)chatButtonAction:(id)sender {
+    [self getAllUserForAConversationForIndex:[sender tag]];
+}
+#pragma mark Chat
+-(LYRConversation*)getChatConversationIfPossibleWithUsers:(NSMutableArray*)arrUser withProfileObject:(PFObject*)profileObj{
+    NSArray *participants = arrUser;
+    LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+    query.predicate = [LYRPredicate predicateWithProperty:@"participants" predicateOperator:LYRPredicateOperatorIsEqualTo value:participants];
+    [self showLoader];
+    NSError *error = nil;
+    NSOrderedSet *conversations1 = [self.layerClient executeQuery:query error:&error];
+    [self hideLoader];
+    if (!error) {
+        LYRConversation *userConversation;
+
+        if(conversations1.count==0){
+            NSError *error = nil;
+            LYRConversation *conversation1 = [self.layerClient newConversationWithParticipants:[NSSet setWithArray:arrUser] options:nil error:&error];
+            userConversation = conversation1;
+        }
+        else{
+            userConversation = conversations1[0];
+        }
+        ConversationViewController *controller = [ConversationViewController conversationViewControllerWithLayerClient:self.layerClient];
+        controller.conversation = userConversation;
+        controller.displaysAddressBar = NO;
+        UINavigationController *navController  = [[UINavigationController alloc]initWithRootViewController:controller];
+        controller.title = profileObj[@"name"];
+        [self presentViewController:navController animated:YES completion:nil];
+
+        UIButton *chat=[UIButton buttonWithType:UIButtonTypeCustom];
+        [chat setTitle:@"Chat" forState:UIControlStateNormal];
+        
+    } else {
+        NSLog(@"Query failed with error %@", error);
+    }
+    return nil;
+}
+-(void)getAllUserForAConversationForIndex:(NSInteger)index{
+    //get all user corresponding to currentProfile
+   // PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    PFObject *profileObject = arrMatches[index];
+    [self showLoader];
+    PFQuery *query1 = [PFQuery queryWithClassName:@"UserProfile"];
+    [query1 whereKey:@"profileId" equalTo:self.currentProfile];
+    [query1 whereKey:@"relation" equalTo:@"Bachelor"];
+    PFQuery *query2 = [PFQuery queryWithClassName:@"UserProfile"];
+    [query2 whereKey:@"profileId" equalTo:profileObject];
+    [query2 whereKey:@"relation" equalTo:@"Bachelor"];
+    PFQuery *mainQuery = [PFQuery orQueryWithSubqueries:@[query1,query2]];
+    //[query whereKey:@"userId" equalTo:userId];
+//    [query whereKey:@"profileId" equalTo:self.currentProfile];
+//    [query whereKey:@"profileId" equalTo:profileObject];
+//    [query whereKey:@"relation" notEqualTo:@"Agent"];
+    
+    [mainQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self hideLoader];
+
+        if (!error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSMutableArray *arrUserIds = [NSMutableArray array];
+            for(PFObject *obj in objects){
+                PFUser *user = [obj valueForKey:@"userId"];
+                [arrUserIds addObject:user.objectId];
+            }
+            NSLog(@"arrUserIds --  %@",arrUserIds);
+            [self getChatConversationIfPossibleWithUsers:arrUserIds withProfileObject:profileObject];
+            // The find succeeded.
+        }
+    }];
+    
+}
+
 @end

@@ -32,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.txtVerfication.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:@"UIKeyboardDidShowNotification" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
     [self.txtVerfication setValue:[UIFont fontWithName: @"MYRIADPRO-BOLD" size: 15] forKeyPath:@"_placeholderLabel.font"];
     [self.txtVerfication setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     self.txtVerfication.keyboardType = UIKeyboardTypeNumberPad;
@@ -53,6 +53,12 @@
     return YES;
 }
 -(void) textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView beginAnimations:@"moveKeyboard" context:nil];
+    float height = 264-60;
+
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - height, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
+
     
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -72,6 +78,12 @@
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView beginAnimations:@"moveKeyboard" context:nil];
+    float height = 264-60;
+    
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + height, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
+
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -244,7 +256,8 @@
             userProfile = objects[0];
             [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
             [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
-            
+            [[AppData sharedData]loadCurrentProfile];
+
             UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
             AgentViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgentViewController"];
             UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
@@ -305,6 +318,8 @@
                 [[NSUserDefaults standardUserDefaults]setObject:[userProfile valueForKey:@"objectId"] forKey:@"userProfileObjectId"];
                 //  NSArray * arrProfile = [NSArray arrayWithObjects:currentProfile, nil];
                 [[NSUserDefaults standardUserDefaults]setObject:[currentProfile valueForKey:@"objectId"] forKey:@"currentProfileId"];
+                [[AppData sharedData]loadAllMatches];
+
                 if([[currentProfile valueForKey:@"isComplete"] boolValue]){
                     [[NSUserDefaults standardUserDefaults]setObject:@"completed" forKey:@"isProfileComplete"];
                     [self performSegueWithIdentifier:@"Login" sender:self];

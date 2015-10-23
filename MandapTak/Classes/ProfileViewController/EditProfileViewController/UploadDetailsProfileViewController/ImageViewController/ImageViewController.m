@@ -140,46 +140,55 @@
 
 
 - (IBAction)deleteButtonAction:(id)sender {
-    if([[AppData sharedData]isInternetAvailable]){
-        Photos *photo = self.arrImages[self.currentIndex];
-        if(photo.imgObject){
-            MBProgressHUD * hud;
-            hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
-            [photo.imgObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                if (succeeded){
-                    [arrDeletedPhotos addObject:self.arrImages[currentIndex]];
-                    [self.arrImages removeObject:self.arrImages[currentIndex]];
-                    if(self.arrImages.count==0){
-                        [self.delegate selectedPrimaryPhoto:self.primaryPhoto andCropedPhoto:self.primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                        
-                    }
-                    if(self.currentIndex == self.arrImages.count)
-                        self.currentIndex = self.currentIndex-1;
-                    
-                    NSLog(@"deleted"); // this is my function to refresh the data
-                    Photos *photoToShow = self.arrImages[self.currentIndex];
-                    imageView.image = photoToShow.image;
-                } else {
-                    NSLog(@"Try Later");
-                }
-            }];
-        }
-        else{
-            [arrDeletedPhotos addObject:self.arrImages[currentIndex]];
-            [self.arrImages removeObject:self.arrImages[currentIndex]];
-            Photos *photoToShow = self.arrImages[self.currentIndex];
-            imageView.image = photoToShow.image;
-        }
-
+    Photos *photo = self.arrImages[self.currentIndex];
+    if([[photo.imgObject valueForKey:@"isPrimary"] isEqual:[NSNumber numberWithBool:YES]]){
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"You can not delete primary photo." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
     }
     else{
-               UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-    }
+        if([[AppData sharedData]isInternetAvailable]){
+            //Photos *photo = self.arrImages[self.currentIndex];
+            if(photo.imgObject){
+                MBProgressHUD * hud;
+                hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                
+                [photo.imgObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    if (succeeded){
+                        [arrDeletedPhotos addObject:self.arrImages[currentIndex]];
+                        [self.arrImages removeObject:self.arrImages[currentIndex]];
+                        if(self.arrImages.count==0){
+                            [self.delegate selectedPrimaryPhoto:self.primaryPhoto andCropedPhoto:self.primaryCropPhoto andIndex:currentIndex withDeletedPhotos:arrDeletedPhotos];
+                            [self dismissViewControllerAnimated:YES completion:nil];
+                            
+                        }
+                        if(self.currentIndex == self.arrImages.count)
+                            self.currentIndex = self.currentIndex-1;
+                        
+                        NSLog(@"deleted"); // this is my function to refresh the data
+                        Photos *photoToShow = self.arrImages[self.currentIndex];
+                        imageView.image = photoToShow.image;
+                    } else {
+                        NSLog(@"Try Later");
+                    }
+                }];
+            }
+            else{
+                [arrDeletedPhotos addObject:self.arrImages[currentIndex]];
+                [self.arrImages removeObject:self.arrImages[currentIndex]];
+                Photos *photoToShow = self.arrImages[self.currentIndex];
+                imageView.image = photoToShow.image;
+            }
+            
+        }
+        else{
+            UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        
 
+    }
+    
     
 
 }
