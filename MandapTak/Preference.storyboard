@@ -281,10 +281,12 @@
                                             </textField>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="4K3-K3-pLt">
                                                 <rect key="frame" x="177" y="300" width="86" height="31"/>
+                                                <color key="tintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="4K3-K3-pLt" secondAttribute="height" multiplier="41:15" id="ANb-hC-DN5"/>
                                                     <constraint firstAttribute="height" constant="30" id="Yh5-sk-x1u"/>
                                                 </constraints>
+                                                <color key="thumbTintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="sliderChanged:" destination="Akd-nY-hOq" eventType="touchUpInside" id="u4n-QK-Uzw"/>
                                                     <action selector="sliderValueChanged:" destination="Akd-nY-hOq" eventType="valueChanged" id="qDL-91-mcx"/>
@@ -302,10 +304,12 @@
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="d58-JK-I0H">
                                                 <rect key="frame" x="177" y="262" width="86" height="31"/>
+                                                <color key="tintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="dA8-sl-Pu1"/>
                                                     <constraint firstAttribute="width" secondItem="d58-JK-I0H" secondAttribute="height" multiplier="41:15" id="ky7-V6-Ohu"/>
                                                 </constraints>
+                                                <color key="thumbTintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="manglikSliderChanged:" destination="Akd-nY-hOq" eventType="touchUpInside" id="NRL-qq-5jl"/>
                                                 </connections>

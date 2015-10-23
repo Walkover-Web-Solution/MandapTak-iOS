@@ -238,11 +238,13 @@
                          */
                          //set height range slider value
                          NSString *strHeightMin = [[object valueForKey:@"minHeight"] stringValue];
+                         minHeight = [strHeightMin intValue];
                          int minHeightInFeet = [arrHeightInInch indexOfObject:strHeightMin];
                          float sliderMinHeight = [[arrHeightInFeet objectAtIndex:minHeightInFeet] floatValue];
                          heightSlider.selectedMinimum = sliderMinHeight;
                          
                          NSString *strHeightMax = [[object valueForKey:@"maxHeight"] stringValue];
+                         maxHeight = [strHeightMax intValue];
                          int maxHeightInFeet = [arrHeightInInch indexOfObject:strHeightMax];
                          float sliderMaxHeight = [[arrHeightInFeet objectAtIndex:maxHeightInFeet] floatValue];
                          heightSlider.selectedMaximum = sliderMaxHeight;
