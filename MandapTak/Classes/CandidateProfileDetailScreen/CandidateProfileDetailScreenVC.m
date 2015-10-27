@@ -485,7 +485,6 @@
     {
         CandidateProfileGalleryVC *vc = [segue destinationViewController];
         vc.arrImages = arrImages;
-        
         vc.selectedIndex = selectedIndex;
         [self.navigationController pushViewController:vc animated:YES];
     }

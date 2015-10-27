@@ -993,6 +993,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  [arrHistory addObject:historyObj];
                  
                  //remove current object for arrCandidateProfiles array , and add in cache array in case of Undo action
+                 
                  [arrCache addObject:arrCandidateProfiles[profileNumber]];
                  [arrCandidateProfiles removeObjectAtIndex:profileNumber];
                  
