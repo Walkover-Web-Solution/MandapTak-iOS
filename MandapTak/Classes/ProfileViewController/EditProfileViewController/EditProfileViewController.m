@@ -83,6 +83,7 @@
     __weak IBOutlet UITextField *txtMinBudget;
     __weak IBOutlet UITextField *txtMaxBudget;
     __weak IBOutlet UIButton *btnDelete;
+    __weak IBOutlet UILabel *lblOptional;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnTab1;
 @property (weak, nonatomic) IBOutlet UIButton *btnTab2;
@@ -117,6 +118,7 @@
     [super viewDidLoad];
     btnDoneUp.hidden = YES;
     btnDelete.hidden = YES;
+    lblOptional.hidden = NO;
 
     sb2 = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     vc1 = [sb2 instantiateViewControllerWithIdentifier:@"BasicProfileViewController"];
@@ -324,8 +326,8 @@
     txtMaxBudget.inputAccessoryView = numberToolbar;
     txtMinBudget.inputAccessoryView = numberToolbar;
    // [UIFont fontNamesForFamilyName:@"AmericanTypewriter"]
-    [txtMaxBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
-    [txtMinBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 15] forKeyPath:@"_placeholderLabel.font"];
+    [txtMaxBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 13] forKeyPath:@"_placeholderLabel.font"];
+    [txtMinBudget setValue:[UIFont fontWithName: @"MYRIADPRO-REGULAR" size: 13] forKeyPath:@"_placeholderLabel.font"];
 
 }
 -(void)cancelNumberPad{
@@ -368,6 +370,7 @@
                 NSString *strIsPrimary =[NSString stringWithFormat:@"%@",[object valueForKey:@"isPrimary"] ] ;
                 if([strIsPrimary integerValue]){
                     isPrimaryPhoto = YES;
+                    choosePhotoBtn.hidden = NO;
                 }
                 [[object objectForKey:@"file"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     Photos *photo = [[Photos alloc]init];
@@ -424,8 +427,10 @@
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     
     if([identifier isEqualToString:@"BiodataIdentifier"]){
-        if(isUploadingBiodata)
+        if(isUploadingBiodata){
+            lblOptional.hidden = YES;
             return NO;
+        }
         else
             return YES;
     }
@@ -704,7 +709,7 @@
             [self.btnUploadBiodata setTitle:@"Updated Biodata" forState:UIControlStateNormal];
             self.btnUploadBiodata.enabled =YES;
             btnDelete.hidden =NO;
-
+            lblOptional.hidden = YES;
             // succesful
             
         } else {
@@ -764,55 +769,8 @@
              
             if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]])
                 [arrMsg addObject:@"Current Location"];
-            
-            if(gender.length==0)
-                [arrMsg addObject:@"gender"];
-            
-            if([currentProfile valueForKey:@"tob"] ==nil)
-                [arrMsg addObject:@"Time of Birth"];
-            
-            if([currentProfile valueForKey:@"dob"] ==nil )
-                [arrMsg addObject:@"Date of Birth"];
-            
-            if(height.length==0)
-                [arrMsg addObject:@"height"];
-            
-            if([weight integerValue]<=0)
-                [arrMsg addObject:@"weight"];
-            
-            if(package<1)
-                [arrMsg addObject:@"package"];
-            
-            if(company.length==0)
-                [arrMsg addObject:@"company"];
-            
-            if( [designation isKindOfClass:[NSNull class]]|| designation==nil)
-                [arrMsg addObject:@"designation"];
-            
-            if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]])
-                [arrMsg addObject:@"Place of Birth"];
-            
-            if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]])
-                [arrMsg addObject:@"Religion"];
-            
-            if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]])
-                [arrMsg addObject:@"Caste"];
-            
-            if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]])
-                [arrMsg addObject:@"Industry"];
-            
-            if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]])
-                [arrMsg addObject:@"Degree and its specialization"];
-            
-            if(isPrimaryPhoto ==NO)
-                [arrMsg addObject:@"select a Primary Photo"];
-            
-            if(selectedBiodata ==nil)
-                [arrMsg addObject:@"select a Bio Data"];
-            
-            if(maxBudget<minBugget)
-                [arrMsg addObject:@"max marriage budget less then min marriage budget"];
-                
+            // to modify
+            // msg print
             NSString *msg =@"Please enter";
         
             for(int i=0; i<arrMsg.count;i++){
@@ -1007,6 +965,7 @@
     }
     if(![[currentProfile valueForKey:@"bioData"] isKindOfClass: [NSNull class]]){
         btnDelete.hidden = NO;
+        lblOptional.hidden = YES;
 
         selectedBiodata = [[Photos alloc]init];
         PFFile *image = (PFFile *)[currentProfile valueForKey:@"bioData"];
@@ -1019,6 +978,8 @@
     }
     else{
         btnDelete.hidden = YES;
+        lblOptional.hidden = NO;
+
         [self.btnUploadBiodata setTitle:@"+Upload Biodata" forState:UIControlStateNormal];
 
     }
@@ -1408,6 +1369,8 @@
     [self.btnUploadBiodata setTitle:@"+Upload biodata" forState:UIControlStateNormal];
     self.btnUploadBiodata.enabled = YES;
     btnDelete.hidden = YES;
+    lblOptional.hidden = NO;
+
     self.biodataImgView.image = nil;
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
            }];

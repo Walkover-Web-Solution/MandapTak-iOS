@@ -19,6 +19,7 @@
 #import "SVProgressHUD.h"
 #import "ConversationListViewController.h"
 #import "ConversationViewController.h"
+
 //#import "LNBRippleEffect.h"
 @interface ChatPinMatchViewController ()<LYRQueryControllerDelegate>{
     NSInteger currentTab;
@@ -222,6 +223,8 @@
 
     }
     else if(currentTab ==1){
+       
+
         PFObject *pinnedProfile = arrPins[indexPath.row];
         PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
@@ -296,7 +299,6 @@
 
        return chatCell;
 }
-
 - (void)reloadCellForConversation:(LYRConversation *)conversation
 {
     if (!conversation) {

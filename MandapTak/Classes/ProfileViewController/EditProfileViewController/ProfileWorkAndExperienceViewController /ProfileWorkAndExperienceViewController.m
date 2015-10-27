@@ -793,7 +793,7 @@
 //    }
     for(int i =0;i<arrEducationData.count;i++){
         Education *education = arrEducationData[i];
-        PFObject *spec = education.specialisation;
+        //PFObject *spec = education.specialisation;
         if(education.specialisation !=nil){
             [self.currentProfile setObject:education.specialisation forKey:[NSString stringWithFormat:@"education%d",i+1]];
         }
@@ -806,8 +806,6 @@
     if(arrEducationData.count ==2){
         [self.currentProfile setObject:[NSNull null] forKey:[NSString stringWithFormat:@"education%d",3]];
     }
-
     [self.delegate updatedPfObjectForThirdTab:self.currentProfile];
-
 }
 @end

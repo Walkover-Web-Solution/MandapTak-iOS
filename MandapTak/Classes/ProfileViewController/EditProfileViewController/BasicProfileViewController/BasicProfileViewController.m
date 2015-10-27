@@ -293,8 +293,7 @@
     }
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    if(txtFullName.text.length>0)
-        [self.currentProfile setObject:txtFullName.text forKey:@"name"];
+    [self.currentProfile setObject:txtFullName.text forKey:@"name"];
     if(selectedDate)
         [self.currentProfile setObject:selectedDate forKey:@"dob"];
     if(selectedGender)

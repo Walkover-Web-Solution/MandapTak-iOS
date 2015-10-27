@@ -56,7 +56,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentProfile) name:@"UpdateSecondTabObjects" object:nil];
     NSLog(@"%@",self.currentProfile);
     if(self.currentProfile ==nil){
-        NSString *userId = @"m2vi20vsi4";
         PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
         [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
 
@@ -192,7 +191,7 @@
                 strManglikValue = @": Anshik";
                 break;
         }
-        [btnManglik setTitle:[NSString stringWithFormat:@"manglik%@",strManglikValue] forState:UIControlStateNormal];
+        [btnManglik setTitle:[NSString stringWithFormat:@"Manglik%@",strManglikValue] forState:UIControlStateNormal];
         [btnManglik setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
     }
@@ -323,7 +322,7 @@
     
     //reset gotra to nil
     selectedGotra = nil;
-    [btnGotra setTitle:@"Gotra" forState:UIControlStateNormal];
+    [btnGotra setTitle:@"Gotra (Optional)" forState:UIControlStateNormal];
     [btnGotra setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 
     [btnReligion setTitle:[religion valueForKey:@"name"] forState:UIControlStateNormal];
