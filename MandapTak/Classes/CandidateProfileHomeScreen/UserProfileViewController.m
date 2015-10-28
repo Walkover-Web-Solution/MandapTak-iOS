@@ -9,8 +9,11 @@
 #import "UserProfileViewController.h"
 #import "SWRevealViewController.h"
 #import <Atlas/Atlas.h>
+#import "WSCoachMarksView.h"
 #import "AppData.h"
-@interface UserProfileViewController (){
+
+@interface UserProfileViewController ()
+{
     
     __weak IBOutlet UILabel *lblTraits;
     __weak IBOutlet UILabel *lblHeight;
@@ -37,24 +40,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 {
     [super viewDidLoad];
     self.layerClient = [[AppData sharedData]fetchLayerClient];
-//    if(![[[NSUserDefaults standardUserDefaults]valueForKey:@"isNotification"] isEqual:@"yes"]){
-//        if( !self.layerClient.authenticatedUserID){
-//            if([PFUser currentUser]){
-//                NSURL *appID = [NSURL URLWithString:LayerAppIDString];
-//                if(self.layerClient.appID == nil){
-//                    @try {
-//                        self.layerClient = [LYRClient clientWithAppID:appID];
-//                        self.layerClient.autodownloadMIMETypes = [NSSet setWithObjects:ATLMIMETypeImagePNG, ATLMIMETypeImageJPEG, ATLMIMETypeImageJPEGPreview, ATLMIMETypeImageGIF, ATLMIMETypeImageGIFPreview, ATLMIMETypeLocation, nil];
-//                    } @catch(NSException *theException) {
-//                        
-//                    }
-//                   
-//                }
-//                [self loginLayer];
-//            }
-//        }
-//    }
-    
+
     //notification for matched profile
     //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"MatchedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchedNotification" object:nil];
@@ -67,6 +53,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     
     //call method to get current user profile pic
     [self getUserProfilePic];
+    
     
     //set initial load conditions
     currentIndex = 0;
@@ -122,13 +109,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"redirectToPref"]  isEqualToString:@"yes"])
     {
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"redirectToPref"];
-        //open preference screen
-        /*
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Preference" bundle:nil];
-        PreferenceVC *vc = [sb instantiateViewControllerWithIdentifier:@"PreferenceVC"];
-        [self presentViewController:vc animated:YES completion:nil];
-        return;
-         */
     }
     
     /*
@@ -145,30 +125,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     
     //add animation
     [self animateArrayOfImagesForImageCount:30];
-    
-    //
-    /*
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
-    view.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:view];
-    //[self showAnimation:view];
-    [self performSelector:@selector(showAnimation:) withObject:view afterDelay:2.0];
-     */
-    
-//    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (!error) {
-//            //The registration was succesful, go to the wall
-//            [self performSegueWithIdentifier:@"SignupSuccesful" sender:self];
-//            
-//        } else {
-//            //Something bad has ocurred
-//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [errorAlertView show];
-//        }
-//    }];
-
-    // Do any additional setup after loading the view.
 }
 
 -(void)viewDidLayoutSubviews
@@ -182,11 +138,54 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //apply circular border on user image view
     userImageView.layer.cornerRadius = userImageView.frame.size.width/2; //60.0f;
     userImageView.clipsToBounds = YES;
-
+    
+    [btnLike setNeedsLayout];
+    [btnLike layoutIfNeeded];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    //apply coach marks conditions
+    //Setup coach marks
+    
+    coachMarks = @[
+                   @{
+                       @"rect": [NSValue valueWithCGRect:progressBar.frame],//[NSValue valueWithCGRect:(CGRect){{11,51},{68,68}}],
+                       @"caption": @"get traits count here",
+                       @"shape": @"circle"
+                       },
+                   @{
+                       @"rect": [NSValue valueWithCGRect:btnPin.frame],//(CGRect){{254,60},{50,50}}],
+                       @"caption": @"Pin Profile to view it later",
+                       @"shape": @"square"
+                       },
+                   @{
+                       @"rect": [NSValue valueWithCGRect:btnLike.frame],//(CGRect){{135,467},{50,50}}],
+                       @"caption": @"Like a profile??click the heart icon..!!",
+                       @"shape" : @"circle"
+                       },
+                   @{
+                       @"rect": [NSValue valueWithCGRect:btnDislike.frame],//(CGRect){{215,467},{50,50}}],
+                       @"caption": @"Don't like a profile??dislike it...!!",
+                       @"shape" : @"circle"
+                       },
+                   @{
+                       @"rect": [NSValue valueWithCGRect:btnUndo.frame],//(CGRect){{55,467},{50,50}}],
+                       @"caption": @"Want to change your decision??click Undo..!!",
+                       @"shape" : @"circle"
+                       },
+                   @{
+                       @"rect": [NSValue valueWithCGRect:btnDetail.frame],//(CGRect){{120,530},{80,30}}],
+                       @"caption": @"Want to know more??Click the details icon..!!"
+                       }
+                   ];
+    
+    
+    
+    //WSCoachMarksView *coachMarksView = [[WSCoachMarksView alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
+    //[self.view addSubview:coachMarksView];
+    //[coachMarksView start];
+    
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
     {
         //[[[UIAlertView alloc] initWithTitle:@"Test 2" message:@"isnotification = TRUE" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];

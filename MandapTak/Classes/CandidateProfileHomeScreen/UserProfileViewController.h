@@ -22,8 +22,9 @@
 #import "MBCircularProgressBar/MBCircularProgressBarView.h"
 #import <LayerKit/LayerKit.h>
 #import "PreferenceVC.h"
+#import "WSCoachMarksView.h"
 
-@interface UserProfileViewController : UIViewController
+@interface UserProfileViewController : UIViewController <WSCoachMarksViewDelegate>
 {
     NSMutableArray *arrCandidateProfiles,*arrEducation,*arrCache,*arrHistory;
     IBOutlet UIImageView *imgViewProfilePic;
@@ -50,7 +51,8 @@
     IBOutlet UIImageView *userImageView;
     IBOutlet MBCircularProgressBarView *progressBar;
     IBOutlet UILabel *lblTraitMatch;
-
+    
+    NSArray *coachMarks;
     //activity indicator
     IBOutlet UIActivityIndicatorView *activityIndicator;
 }

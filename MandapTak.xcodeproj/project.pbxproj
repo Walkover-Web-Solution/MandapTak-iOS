@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		571991487120229D756C60BF /* libPods-MandapTak.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */; };
 		750869721B9F096800022596 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 750869711B9F096800022596 /* UIImageEffects.m */; };
+		751873181BDF8DD30009F9B8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751873171BDF8DD30009F9B8 /* AVFoundation.framework */; };
+		7518731A1BDF8DE80009F9B8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751873191BDF8DE80009F9B8 /* MediaPlayer.framework */; };
+		7518731D1BDF90FA0009F9B8 /* sampleVideo01.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7518731C1BDF90FA0009F9B8 /* sampleVideo01.mp4 */; settings = {ASSET_TAGS = (); }; };
 		7527DA9C1BD51A9900296C90 /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7527DA9A1BD51A9900296C90 /* TTRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
 		7533F6AB1B84AF0A00B83EFD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A51B84AF0A00B83EFD /* add.png */; };
 		7533F6AC1B84AF0A00B83EFD /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7533F6A61B84AF0A00B83EFD /* add@2x.png */; };
@@ -123,6 +126,7 @@
 		75D5D09D1B9B1CFE001703D8 /* ChatPinMatch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */; };
 		75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
+		75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */; settings = {ASSET_TAGS = (); }; };
 		892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892DAFAB1BB3FC870025094B /* VerficationViewController.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
@@ -304,6 +308,9 @@
 		7332D6DDB271BE417996C2BD /* Pods-MandapTak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MandapTak.release.xcconfig"; path = "Pods/Target Support Files/Pods-MandapTak/Pods-MandapTak.release.xcconfig"; sourceTree = "<group>"; };
 		750869701B9F096800022596 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
 		750869711B9F096800022596 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		751873171BDF8DD30009F9B8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		751873191BDF8DE80009F9B8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		7518731C1BDF90FA0009F9B8 /* sampleVideo01.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sampleVideo01.mp4; sourceTree = "<group>"; };
 		7527DA991BD51A9900296C90 /* TTRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSlider.h; sourceTree = "<group>"; };
 		7527DA9A1BD51A9900296C90 /* TTRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTRangeSlider.m; sourceTree = "<group>"; };
 		7527DA9B1BD51A9900296C90 /* TTRangeSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSliderDelegate.h; sourceTree = "<group>"; };
@@ -457,6 +464,8 @@
 		75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
+		75F8D0F81BE0C4F30034C982 /* WSCoachMarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSCoachMarksView.h; sourceTree = "<group>"; };
+		75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSCoachMarksView.m; sourceTree = "<group>"; };
 		892DAFAA1BB3FC870025094B /* VerficationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerficationViewController.h; sourceTree = "<group>"; };
 		892DAFAB1BB3FC870025094B /* VerficationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerficationViewController.m; sourceTree = "<group>"; };
 		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -729,6 +738,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7518731A1BDF8DE80009F9B8 /* MediaPlayer.framework in Frameworks */,
+				751873181BDF8DD30009F9B8 /* AVFoundation.framework in Frameworks */,
 				899A132A1BBD0B6500B41369 /* libc++.dylib in Frameworks */,
 				899A13281BBD0AB700B41369 /* CoreTelephony.framework in Frameworks */,
 				893F034E1BAACCCB00BB1B59 /* ParseUI.framework in Frameworks */,
@@ -770,6 +781,8 @@
 		20548297EDF85810D4CF6305 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				751873191BDF8DE80009F9B8 /* MediaPlayer.framework */,
+				751873171BDF8DD30009F9B8 /* AVFoundation.framework */,
 				899A13291BBD0B6500B41369 /* libc++.dylib */,
 				899A13271BBD0AB700B41369 /* CoreTelephony.framework */,
 				F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */,
@@ -793,6 +806,14 @@
 				750869711B9F096800022596 /* UIImageEffects.m */,
 			);
 			path = LightBlurEffect;
+			sourceTree = "<group>";
+		};
+		7518731B1BDF90FA0009F9B8 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				7518731C1BDF90FA0009F9B8 /* sampleVideo01.mp4 */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 		7527DA981BD51A9900296C90 /* RangeSlider */ = {
@@ -1119,6 +1140,15 @@
 			path = LocationPreferencePopover;
 			sourceTree = "<group>";
 		};
+		75F8D0F71BE0C4F30034C982 /* WSCoachMarksView */ = {
+			isa = PBXGroup;
+			children = (
+				75F8D0F81BE0C4F30034C982 /* WSCoachMarksView.h */,
+				75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */,
+			);
+			path = WSCoachMarksView;
+			sourceTree = "<group>";
+		};
 		893F03401BAACC3C00BB1B59 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1327,6 +1357,7 @@
 				8967FADA1B8DB0C900AAC41E /* FBSDKCoreKit.framework */,
 				899C53751B73361600C24DA8 /* ServiceManager */,
 				89D9F7621B6B5DB4004CBE3D /* Images */,
+				7518731B1BDF90FA0009F9B8 /* Videos */,
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
@@ -1809,6 +1840,7 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				75F8D0F71BE0C4F30034C982 /* WSCoachMarksView */,
 				7527DA981BD51A9900296C90 /* RangeSlider */,
 				89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */,
 				89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */,
@@ -2131,6 +2163,7 @@
 				757849D91BA2EF2D005490E6 /* Anim-(26).png in Resources */,
 				758C8E7C1B87412800FF634E /* unlike.png in Resources */,
 				757849DD1BA2EF2D005490E6 /* Anim-(3).png in Resources */,
+				7518731D1BDF90FA0009F9B8 /* sampleVideo01.mp4 in Resources */,
 				7533F6AB1B84AF0A00B83EFD /* add.png in Resources */,
 				757849DB1BA2EF2D005490E6 /* Anim-(28).png in Resources */,
 				89E0FA501B85C92A000BD65A /* SelectionOverlay@2x.png in Resources */,
@@ -2438,6 +2471,7 @@
 				89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */,
 				895A6E7A1B9843A200A9C8BC /* DragTableFooterView_ot.m in Sources */,
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,
+				75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */,
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
 				895A6E7D1B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m in Sources */,
 				898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */,

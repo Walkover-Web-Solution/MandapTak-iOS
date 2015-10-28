@@ -7,6 +7,9 @@
 //
 
 #import "SideBarViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
 #import "EditProfileViewController.h"
 #import "SWRevealViewController.h"
 #import "PreferenceVC.h"
@@ -16,7 +19,9 @@
 {
     //activity indicator
     IBOutlet UIActivityIndicatorView *activityIndicator;
+    MPMoviePlayerViewController *moviePlayer;
 }
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @end
@@ -136,7 +141,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,6 +167,10 @@
         case 2:
             cell.textLabel.text = @"Preferences";
             cell.imageView.image = [UIImage imageNamed:@"preferences"];
+            break;
+        case 3:
+            cell.textLabel.text = @"Video Tour";
+            //cell.imageView.image = [UIImage imageNamed:@"preferences"];
             break;
 
         default:
@@ -216,6 +225,12 @@
         [self presentViewController:navController animated:YES completion:nil];
         [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
     }
+    else if(indexPath.row == 3)
+    {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"sampleVideo01" ofType:@"mp4"];
+        moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+        [self presentModalViewController:moviePlayer animated:NO];
+    }
 }
 
 
@@ -233,7 +248,7 @@
             
             UINavigationController* navController = (UINavigationController*)self.revealViewController.frontViewController;
             [navController setViewControllers: @[dvc] animated: NO ];
-            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated:YES];
         };
         
     }
