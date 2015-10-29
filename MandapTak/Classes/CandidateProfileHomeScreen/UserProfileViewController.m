@@ -143,17 +143,11 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     [btnLike layoutIfNeeded];
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
     //apply coach marks conditions
     //Setup coach marks
-    
     coachMarks = @[
-                   @{
-                       @"rect": [NSValue valueWithCGRect:progressBar.frame],//[NSValue valueWithCGRect:(CGRect){{11,51},{68,68}}],
-                       @"caption": @"get traits count here",
-                       @"shape": @"circle"
-                       },
                    @{
                        @"rect": [NSValue valueWithCGRect:btnPin.frame],//(CGRect){{254,60},{50,50}}],
                        @"caption": @"Pin Profile to view it later",
@@ -175,16 +169,21 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                        @"shape" : @"circle"
                        },
                    @{
+                       @"rect": [NSValue valueWithCGRect:progressBar.frame],//[NSValue valueWithCGRect:(CGRect){{11,51},{68,68}}],
+                       @"caption": @"get traits count here",
+                       @"shape": @"circle"
+                       },
+                   @{
                        @"rect": [NSValue valueWithCGRect:btnDetail.frame],//(CGRect){{120,530},{80,30}}],
                        @"caption": @"Want to know more??Click the details icon..!!"
                        }
                    ];
-    
-    
-    
-    //WSCoachMarksView *coachMarksView = [[WSCoachMarksView alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
-    //[self.view addSubview:coachMarksView];
     //[coachMarksView start];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isNotification"] isEqualToString:@"yes"])
     {
@@ -455,28 +454,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 }
 
 #pragma mark Animation Methods
-/*
--(void) animateArrayOfImagesForImageCount:(int) aCount
-{
-    animationImageView.hidden = NO;
-    NSMutableArray *imgListArray = [NSMutableArray array];
-    for (int i=1; i <= aCount; i++) {
-        NSString *strImgeName = [NSString stringWithFormat:@"Anim (%d).png", i];
-        UIImage *image = [UIImage imageNamed:strImgeName];
-        if (!image) {
-            // NSLog(@"Could not load image named: %@", strImgeName);
-        }
-        else {
-            [imgListArray addObject:image];
-        }
-    }
-    animationImageView.animationImages=imgListArray;
-    animationImageView.animationDuration=1;
-    animationImageView.animationRepeatCount=3;
-    [animationImageView startAnimating];
-}
-*/
-
 -(void) animateArrayOfImagesForImageCount:(int) aCount
 {
     animationImageView.hidden = NO;
@@ -578,6 +555,25 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              }
              
          }];
+        //show coach marks after profile load
+        WSCoachMarksView *coachMarksView = [[WSCoachMarksView alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
+        [self.view addSubview:coachMarksView];
+//        WSCoachMarksView *coachMarksView = [[WSCoachMarksView alloc] initWithFrame:self.navigationController.view.bounds coachMarks:coachMarks];
+//        [self.navigationController.view addSubview:coachMarksView];
+//        [coachMarksView start];
+        
+        BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown"];
+        if (coachMarksShown == NO) {
+            // Don't show again
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            // Show coach marks
+            [coachMarksView start];
+            
+            // Or show coach marks after a second delay
+            // [coachMarksView performSelector:@selector(start) withObject:nil afterDelay:1.0f];
+        }
         
         lblName.text = firstProfile.name;
         lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];

@@ -22,6 +22,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "AppData.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 //#import <Raygun4iOS/Raygun.h>
 #import <NewRelicAgent/NewRelic.h>
@@ -213,6 +214,27 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         [navController pushViewController:vc animated:YES];
     }
 }
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)windowx
+{
+    if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
+    {
+        if ([self.window.rootViewController presentedViewController].isBeingDismissed)
+        {
+            return UIInterfaceOrientationMaskPortrait;
+        }
+        else
+        {
+            return UIInterfaceOrientationMaskAllButUpsideDown;
+        }
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
 /*
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {

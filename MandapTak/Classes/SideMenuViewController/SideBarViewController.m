@@ -227,9 +227,10 @@
     }
     else if(indexPath.row == 3)
     {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"sampleVideo01" ofType:@"mp4"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];//MTLowRes
         moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
         [self presentModalViewController:moviePlayer animated:NO];
+        //[self presentViewController:moviePlayer animated:NO completion:nil];
     }
 }
 
