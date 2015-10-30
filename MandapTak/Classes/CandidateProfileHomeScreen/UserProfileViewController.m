@@ -73,8 +73,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     lblTraits.hidden = YES;
     
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
@@ -94,12 +93,14 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     _sidebarButton.target = self.revealViewController;
     _sidebarButton.action = @selector(revealToggle:);
     //_sidebarButton.tintColor = [UIColor colorWithRed:235/255 green:84/255 blue:80/255 alpha:1];
+    /*
     // Set the gesture
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
     [self.view addGestureRecognizer:swipeUp];
-
+     */
+    
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeRight];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeUp];
@@ -563,16 +564,25 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 //        [coachMarksView start];
         
         BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown"];
-        if (coachMarksShown == NO) {
+        BOOL tourFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFromTour"];
+        if (coachMarksShown == NO)
+        {
             // Don't show again
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Show coach marks
             [coachMarksView start];
+        }
+        
+        else if(tourFlag)
+        {
+            // Don't show again
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromTour"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
-            // Or show coach marks after a second delay
-            // [coachMarksView performSelector:@selector(start) withObject:nil afterDelay:1.0f];
+            // Show coach marks
+            [coachMarksView start];
         }
         
         lblName.text = firstProfile.name;

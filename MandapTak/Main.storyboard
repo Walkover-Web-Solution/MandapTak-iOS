@@ -642,11 +642,55 @@
                         <outlet property="imgView" destination="mTN-2j-lRJ" id="dc6-0g-VBs"/>
                         <outlet property="lblUserName" destination="5HQ-Qx-fmT" id="OfF-hX-YCP"/>
                         <outlet property="tableView" destination="4cW-AJ-Jcz" id="bzg-ga-AyY"/>
+                        <segue destination="HEG-yz-Rdj" kind="show" identifier="tourOptionsIdentifier" id="xcA-4G-vWX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gu-Lf-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1152" y="1645"/>
+        </scene>
+        <!--Tour OptionsVC-->
+        <scene sceneID="WA9-XU-KGq">
+            <objects>
+                <viewController id="HEG-yz-Rdj" customClass="TourOptionsVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2uL-ip-oxE"/>
+                        <viewControllerLayoutGuide type="bottom" id="il7-i7-Muc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LB1-ey-VOS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-pI-glR">
+                                <rect key="frame" x="123" y="106" width="75" height="30"/>
+                                <state key="normal" title="Tour Video"/>
+                                <connections>
+                                    <action selector="videoAction:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Sbp-fm-IVr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMZ-iA-YmS">
+                                <rect key="frame" x="129" y="366" width="63" height="30"/>
+                                <state key="normal" title="App Tour"/>
+                                <connections>
+                                    <action selector="coachMarkAction:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Ltb-Y1-ZZT"/>
+                                    <segue destination="fCU-mN-wiz" kind="show" identifier="coachMarkIdentifier" id="fK6-on-CYE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdd-SG-FIO">
+                                <rect key="frame" x="26" y="15" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="back:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Vq3-wa-X1h"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1FB-7w-SMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1611" y="1645"/>
         </scene>
         <!--Match ScreenVC-->
         <scene sceneID="T6n-hr-cfO">
@@ -1789,4 +1833,7 @@
         <image name="verify_Icon.png" width="64" height="64"/>
         <image name="weight" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fK6-on-CYE"/>
+    </inferredMetricsTieBreakers>
 </document>

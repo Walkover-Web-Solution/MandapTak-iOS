@@ -14,6 +14,7 @@
 #import "SWRevealViewController.h"
 #import "PreferenceVC.h"
 #import "SettingsVC.h"
+#import "TourOptionsVC.h"
 
 @interface SideBarViewController ()
 {
@@ -227,9 +228,11 @@
     }
     else if(indexPath.row == 3)
     {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];//MTLowRes
-        moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
-        [self presentModalViewController:moviePlayer animated:NO];
+        [self performSegueWithIdentifier:@"tourOptionsIdentifier" sender:nil];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];//MTLowRes
+//        moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+//        [self presentModalViewController:moviePlayer animated:NO];
+        //[[NSUserDefaults standardUserDefaults ] setValue:@"yes" forKey:@"shouldRotateToLandscape"];
         //[self presentViewController:moviePlayer animated:NO completion:nil];
     }
 }
@@ -252,6 +255,11 @@
             [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated:YES];
         };
         
+    }
+    else if([segue.identifier isEqualToString:@"tourOptionsIdentifier"])
+    {
+        TourOptionsVC *vc = [segue destinationViewController];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     

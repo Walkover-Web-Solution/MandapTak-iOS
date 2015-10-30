@@ -56,6 +56,9 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
     [PFUser enableRevocableSessionInBackground];
     
+    //restrict rotation
+    //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"shouldRotateToLandscape"];
+    
     // Set default ACLs
     PFACL *defaultACL = [PFACL ACL];
     [defaultACL setPublicReadAccess:YES];
@@ -217,6 +220,13 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)windowx
 {
+    /*
+     if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"shouldRotateToLandscape"] isEqualToString:@"yes"])
+     {
+     [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"shouldRotateToLandscape"];
+     return UIInterfaceOrientationMaskAllButUpsideDown;
+     }
+     */
     if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
         [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
     {

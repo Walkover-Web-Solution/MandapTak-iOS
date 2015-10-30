@@ -125,6 +125,7 @@
 		75CB396E1BE1FDA20004ECFE /* MTLowRes.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 75CB396D1BE1FDA20004ECFE /* MTLowRes.mp4 */; settings = {ASSET_TAGS = (); }; };
 		75D5D09D1B9B1CFE001703D8 /* ChatPinMatch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */; };
 		75DBD9EB1B99AAFA00381445 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */; };
+		75DC30C61BE38B4D00AA45E4 /* TourOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC30C51BE38B4D00AA45E4 /* TourOptionsVC.m */; settings = {ASSET_TAGS = (); }; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */; settings = {ASSET_TAGS = (); }; };
 		892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892DAFAB1BB3FC870025094B /* VerficationViewController.m */; };
@@ -467,6 +468,8 @@
 		75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatPinMatch.storyboard; sourceTree = "<group>"; };
 		75DBD9E91B99AAFA00381445 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
 		75DBD9EA1B99AAFA00381445 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
+		75DC30C41BE38B4D00AA45E4 /* TourOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourOptionsVC.h; sourceTree = "<group>"; };
+		75DC30C51BE38B4D00AA45E4 /* TourOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourOptionsVC.m; sourceTree = "<group>"; };
 		75E6028C1B7E288E0061BA39 /* LocationPreferencePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPreferencePopoverVC.h; sourceTree = "<group>"; };
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
 		75F8D0F81BE0C4F30034C982 /* WSCoachMarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSCoachMarksView.h; sourceTree = "<group>"; };
@@ -1144,6 +1147,15 @@
 			path = ALDBlurImageProcessor;
 			sourceTree = "<group>";
 		};
+		75DC30C31BE38B2F00AA45E4 /* TourOptions */ = {
+			isa = PBXGroup;
+			children = (
+				75DC30C41BE38B4D00AA45E4 /* TourOptionsVC.h */,
+				75DC30C51BE38B4D00AA45E4 /* TourOptionsVC.m */,
+			);
+			path = TourOptions;
+			sourceTree = "<group>";
+		};
 		75E6028B1B7E288E0061BA39 /* LocationPreferencePopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -1814,6 +1826,7 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				75DC30C31BE38B2F00AA45E4 /* TourOptions */,
 				89936ACD1B9D5A5800C74E0A /* AgentViewController */,
 				75BA3EDA1B9ACAFF00429C98 /* Settings */,
 				896D18321B9487AD001513A5 /* ChatPinMatchViewController */,
@@ -2507,6 +2520,7 @@
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,
 				75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */,
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
+				75DC30C61BE38B4D00AA45E4 /* TourOptionsVC.m in Sources */,
 				895A6E7D1B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m in Sources */,
 				898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */,
 				757F87631B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome.m in Sources */,
