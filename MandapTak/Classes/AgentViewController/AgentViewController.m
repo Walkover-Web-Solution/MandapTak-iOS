@@ -14,7 +14,7 @@
 #import "WYPopoverController.h"
 #import "AppData.h"
 #import "WYStoryboardPopoverSegue.h"
-
+#import "UITableView+DragLoad.h"
 #import "CreateNewUserPopoverViewController.h"
 @interface AgentViewController ()<WYPopoverControllerDelegate,AgentCellOptionPopoverViewControllerDelegate,CreateNewUserPopoverViewControllerDelegate>{
     NSMutableArray *arrProfiles;
@@ -108,9 +108,12 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier1 = @"AgentCustomTableViewCell";
     AgentCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
+//    if (cell == nil)
+//        cell = [[AgentCustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier1];
     PFObject *userProfile = arrProfiles[indexPath.row];
     PFObject *profile = [userProfile valueForKey:@"profileId"];
     PFUser *user = [profile valueForKey:@"userId"];
+    cell.imgProfile.image = [UIImage imageNamed:@"userDefImg.png"];
 
     if([profile objectForKey:@"profilePic"]!=nil){
         [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -118,11 +121,11 @@
         }];
     }
     NSString *name =[profile valueForKey:@"name"];
-    
+    cell.lblNumber.text = user.username;
     if(name!=nil||name.length!=0)
         cell.lblName.text = [profile valueForKey:@"name"];
     else
-        cell.lblName.text = [NSString stringWithFormat:@"%@",[user valueForKey:@"phoneNo"]];
+        cell.lblName.text = @"No Name";
 
     cell.btnOptions.tag = indexPath.row;
     if([[profile valueForKey:@"isActive"] boolValue]){
@@ -160,6 +163,7 @@
     return cell;
         
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -193,11 +197,12 @@
     if ([segue.identifier isEqualToString:@"NewUserIdentifier"])
     {
         CreateNewUserPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(300, 130);
+        controller.preferredContentSize = CGSizeMake(300, 180);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                                              animated:YES];
+
         popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
         controller.delegate = self;
@@ -282,5 +287,6 @@
     
       return YES;
 }
+
 
 @end

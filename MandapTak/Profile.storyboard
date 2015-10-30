@@ -2242,7 +2242,7 @@
                         <outlet property="btnTab3" destination="nBK-EP-mPu" id="62l-e2-UzG"/>
                         <outlet property="btnTab4" destination="2vb-CL-Kqt" id="FS7-TR-qsQ"/>
                         <outlet property="btnUploadBiodata" destination="NHA-kx-XYP" id="X64-zn-AER"/>
-                        <outlet property="choosePhotoBtn" destination="4Ve-sN-CgC" id="uDE-Xx-p5z"/>
+                        <outlet property="choosePhotoBtn" destination="4Ve-sN-CgC" id="XPj-Vv-UsS"/>
                         <outlet property="choosePrimaryPhoto" destination="w6B-6W-qp4" id="tka-ZS-vsv"/>
                         <outlet property="collectionView" destination="DVi-Ld-HNc" id="UyE-2W-fL7"/>
                         <outlet property="imgLine1" destination="mZg-D8-cg1" id="jMq-50-jAr"/>

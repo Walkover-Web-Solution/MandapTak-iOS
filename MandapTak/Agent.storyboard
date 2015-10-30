@@ -17,6 +17,9 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -77,29 +80,20 @@
                                                         <constraint firstAttribute="height" constant="60" id="V81-kG-HU3"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySu-9E-HKW">
-                                                    <rect key="frame" x="102" y="12" width="176" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="rUm-Xb-iUF"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySu-9E-HKW">
+                                                    <rect key="frame" x="102" y="5" width="176" height="21"/>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-gc-UmZ">
-                                                    <rect key="frame" x="102" y="32" width="176" height="16"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="YN3-tk-qta"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-gc-UmZ">
+                                                    <rect key="frame" x="102" y="39" width="176" height="16"/>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-wk-3pZ">
-                                                    <rect key="frame" x="102" y="46" width="176" height="16"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="iVi-dG-C7B"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-wk-3pZ">
+                                                    <rect key="frame" x="102" y="53" width="176" height="16"/>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -115,19 +109,16 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etE-m9-BDR">
+                                                    <rect key="frame" x="102" y="24" width="176" height="16"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="tKA-wk-3pZ" firstAttribute="top" secondItem="ySu-9E-HKW" secondAttribute="bottom" constant="13" id="3fZ-s0-sMh"/>
-                                                <constraint firstAttribute="trailing" secondItem="tKA-wk-3pZ" secondAttribute="trailing" constant="42" id="879-Uu-3tZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="e7f-Hc-yNR" secondAttribute="trailing" id="9d4-ls-hXg"/>
-                                                <constraint firstItem="ySu-9E-HKW" firstAttribute="top" secondItem="aBJ-0s-XB2" secondAttribute="top" constant="12" id="Ax8-Nv-8N8"/>
                                                 <constraint firstItem="e7f-Hc-yNR" firstAttribute="top" secondItem="aBJ-0s-XB2" secondAttribute="top" constant="7" id="DFl-os-AR1"/>
-                                                <constraint firstItem="tKA-wk-3pZ" firstAttribute="leading" secondItem="eBQ-k6-yTi" secondAttribute="trailing" constant="22" id="Ili-UM-2Ps"/>
-                                                <constraint firstAttribute="trailing" secondItem="pXZ-gc-UmZ" secondAttribute="trailing" constant="42" id="PV8-OO-1n0"/>
-                                                <constraint firstAttribute="trailing" secondItem="ySu-9E-HKW" secondAttribute="trailing" constant="42" id="PY6-zD-lx9"/>
-                                                <constraint firstItem="pXZ-gc-UmZ" firstAttribute="top" secondItem="aBJ-0s-XB2" secondAttribute="top" constant="32" id="YLR-oj-i35"/>
-                                                <constraint firstItem="ySu-9E-HKW" firstAttribute="leading" secondItem="eBQ-k6-yTi" secondAttribute="trailing" constant="22" id="drz-i1-ph6"/>
-                                                <constraint firstItem="pXZ-gc-UmZ" firstAttribute="leading" secondItem="eBQ-k6-yTi" secondAttribute="trailing" constant="22" id="pFL-De-awO"/>
                                                 <constraint firstItem="eBQ-k6-yTi" firstAttribute="leading" secondItem="aBJ-0s-XB2" secondAttribute="leading" constant="20" id="pVc-PU-bQY"/>
                                                 <constraint firstItem="eBQ-k6-yTi" firstAttribute="top" secondItem="aBJ-0s-XB2" secondAttribute="top" constant="7" id="tHd-A3-gfH"/>
                                             </constraints>
@@ -136,6 +127,7 @@
                                             <outlet property="btnOptions" destination="e7f-Hc-yNR" id="55g-G6-aeT"/>
                                             <outlet property="imgProfile" destination="eBQ-k6-yTi" id="yui-lV-qUX"/>
                                             <outlet property="lblName" destination="ySu-9E-HKW" id="g2J-b1-vM7"/>
+                                            <outlet property="lblNumber" destination="etE-m9-BDR" id="F0a-L9-1Gl"/>
                                             <outlet property="lblStatus" destination="tKA-wk-3pZ" id="fcS-cq-Vby"/>
                                             <outlet property="lblUploadedOn" destination="pXZ-gc-UmZ" id="Jtd-sf-E6P"/>
                                         </connections>
@@ -251,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tys-Qc-HrM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1270" y="510"/>
+            <point key="canvasLocation" x="1029" y="394"/>
         </scene>
         <!--Create New User Popover View Controller-->
         <scene sceneID="9c3-sy-Kz6">
@@ -262,15 +254,35 @@
                         <viewControllerLayoutGuide type="bottom" id="xGw-kO-xiD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Wa5-kw-7nq">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="130"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Mob No." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIw-WG-MKe">
+                                <rect key="frame" x="16" y="54" width="268" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="yOG-XE-R6k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68Z-WK-rtx">
+                                <rect key="frame" x="16" y="92" width="268" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="wFS-xz-oGG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
+                                <state key="normal" title="Select Relation">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectRelationAction:" destination="e8t-5S-Xtx" eventType="touchUpInside" id="r5w-8n-6iq"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZl-JF-IbG">
-                                <rect key="frame" x="17" y="59" width="267" height="45"/>
+                                <rect key="frame" x="17" y="127" width="267" height="45"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="267" id="Ehs-yb-cvp"/>
-                                    <constraint firstAttribute="height" constant="45" id="mTe-7y-B28"/>
+                                    <constraint firstAttribute="height" constant="45" id="ErY-UJ-HNQ"/>
                                 </constraints>
                                 <state key="normal" title="Create new user">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -280,34 +292,43 @@
                                     <action selector="createNewUserButtonAction:" destination="e8t-5S-Xtx" eventType="touchUpInside" id="bC1-Fc-C4e"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Mob No." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIw-WG-MKe">
-                                <rect key="frame" x="16" y="25" width="268" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter New User details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8a-gr-ipt">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="35"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="yOG-XE-R6k"/>
+                                    <constraint firstAttribute="height" constant="35" id="9d3-TQ-GcM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xGw-kO-xiD" firstAttribute="top" secondItem="zZl-JF-IbG" secondAttribute="bottom" constant="26" id="8Rf-v9-s15"/>
+                            <constraint firstAttribute="trailing" secondItem="zZl-JF-IbG" secondAttribute="trailing" constant="16" id="29q-83-PBS"/>
+                            <constraint firstItem="H8a-gr-ipt" firstAttribute="leading" secondItem="Wa5-kw-7nq" secondAttribute="leading" id="2qt-52-VZE"/>
+                            <constraint firstAttribute="trailing" secondItem="68Z-WK-rtx" secondAttribute="trailing" constant="16" id="36d-qn-gnT"/>
                             <constraint firstItem="fIw-WG-MKe" firstAttribute="leading" secondItem="Wa5-kw-7nq" secondAttribute="leading" constant="16" id="BpF-gs-UWu"/>
-                            <constraint firstAttribute="trailing" secondItem="zZl-JF-IbG" secondAttribute="trailing" constant="16" id="cld-E3-pAN"/>
-                            <constraint firstItem="zZl-JF-IbG" firstAttribute="leading" secondItem="Wa5-kw-7nq" secondAttribute="leading" constant="17" id="dKg-Tv-sL6"/>
+                            <constraint firstItem="68Z-WK-rtx" firstAttribute="top" secondItem="fIw-WG-MKe" secondAttribute="bottom" constant="8" id="Bs8-XH-mhS"/>
+                            <constraint firstItem="zZl-JF-IbG" firstAttribute="leading" secondItem="Wa5-kw-7nq" secondAttribute="leading" constant="17" id="Nnp-cU-1jp"/>
+                            <constraint firstItem="H8a-gr-ipt" firstAttribute="top" secondItem="Wa5-kw-7nq" secondAttribute="top" id="ayI-ql-uiE"/>
                             <constraint firstAttribute="trailing" secondItem="fIw-WG-MKe" secondAttribute="trailing" constant="16" id="fwB-P0-vGr"/>
-                            <constraint firstItem="fIw-WG-MKe" firstAttribute="top" secondItem="gPo-Dv-fED" secondAttribute="bottom" constant="5" id="muv-Hn-mZ7"/>
+                            <constraint firstAttribute="trailing" secondItem="H8a-gr-ipt" secondAttribute="trailing" id="kxv-qc-jUr"/>
+                            <constraint firstItem="68Z-WK-rtx" firstAttribute="leading" secondItem="Wa5-kw-7nq" secondAttribute="leading" constant="16" id="u0W-1E-n4k"/>
+                            <constraint firstItem="xGw-kO-xiD" firstAttribute="top" secondItem="zZl-JF-IbG" secondAttribute="bottom" constant="8" id="uqV-a8-Enw"/>
+                            <constraint firstItem="fIw-WG-MKe" firstAttribute="top" secondItem="Wa5-kw-7nq" secondAttribute="top" constant="54" id="yIX-c1-qcd"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="130"/>
+                    <size key="freeformSize" width="300" height="180"/>
                     <connections>
+                        <outlet property="btnRelation" destination="68Z-WK-rtx" id="UB3-14-4Wx"/>
                         <outlet property="txtMobNo" destination="fIw-WG-MKe" id="n3O-p4-cYb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fwh-Jd-xzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="973.5"/>
+            <point key="canvasLocation" x="760" y="977"/>
         </scene>
     </scenes>
     <resources>

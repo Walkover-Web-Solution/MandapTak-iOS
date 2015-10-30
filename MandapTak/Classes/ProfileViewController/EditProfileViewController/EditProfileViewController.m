@@ -35,6 +35,8 @@
 #import "SCNetworkReachability.h"
 #import "FacebooKProfilePictureViewController.h"
 #import "PrimaryImagePickerViewController.h"
+#import "DRCellSlideGestureRecognizer.h"
+
 @interface EditProfileViewController ()<WYPopoverControllerDelegate,BasicProfileViewControllerDelegate,DetailProfileViewControllerrDelegate,ProfileWorkAndExperienceViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZCImagePickerControllerDelegate,WYPopoverControllerDelegate,PhotosOptionPopoverViewControllerDelegate,ImageViewControllerDelegate,FacebooKProfilePictureViewControllerDelegate,PrimaryImagePickerViewControllerDelegate>
 {    SCNetworkReachability *_reachability;
     __weak IBOutlet UIView *navBarView;
@@ -275,7 +277,7 @@
 
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
-    choosePhotoBtn.hidden = YES;
+    self.choosePrimaryPhoto.hidden = YES;
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -345,8 +347,12 @@
         if (!error) {
             if(objects.count>0){
                 isPrimaryPhoto = YES;
-                choosePhotoBtn.hidden = NO;
+                self.choosePrimaryPhoto.hidden = YES;
             }
+            if(arrImageList.count == 0){
+                self.choosePrimaryPhoto.hidden = YES;
+            }
+
         } else {
             [self makePhotoToPrimary:primaryPhoto.imgObject];
             
@@ -366,11 +372,12 @@
 
         if (!error) {
             arrOldImages = [NSMutableArray array];
+            
             for(PFObject *object in objects){
                 NSString *strIsPrimary =[NSString stringWithFormat:@"%@",[object valueForKey:@"isPrimary"] ] ;
                 if([strIsPrimary integerValue]){
                     isPrimaryPhoto = YES;
-                    choosePhotoBtn.hidden = NO;
+                    self.choosePrimaryPhoto.hidden = NO;
                 }
                 [[object objectForKey:@"file"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     Photos *photo = [[Photos alloc]init];
@@ -379,12 +386,18 @@
                     [arrOldImages addObject:photo];
                     arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
                     [self.collectionView reloadData];
-                    choosePhotoBtn.hidden = NO;
+                    self.choosePrimaryPhoto.hidden = NO;
                     [self.choosePhotoBtn setTitle:@"+Upload Photos" forState:UIControlStateNormal];
-
+                    if(arrImageList.count == 0){
+                        self.choosePrimaryPhoto.hidden = YES;
+                    }
                 }];
             }
         }
+        if(arrImageList.count == 0){
+            self.choosePrimaryPhoto.hidden = YES;
+        }
+
            }];
 }
 
@@ -696,7 +709,19 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)updateBioData{
-    NSData *pictureData = UIImagePNGRepresentation(selectedBiodata.image);
+    UIImage *compressImg = [self compressImage:selectedBiodata.image];
+    
+    int maxSize = 10485760;
+    NSData *imgData = UIImageJPEGRepresentation(compressImg, 1);
+    while (imgData.length>maxSize)
+    {
+        NSData *nwComp = UIImageJPEGRepresentation(compressImg, .5f);
+        
+        compressImg =  [UIImage imageWithData:nwComp];
+        
+    }
+
+    NSData *pictureData = UIImagePNGRepresentation(compressImg);
     PFFile *file = [PFFile fileWithName:selectedBiodata.name data:pictureData];
     [currentProfile setObject:file forKey:@"bioData"];
     [self.btnUploadBiodata setTitle:@"Uploading...." forState:UIControlStateNormal];
@@ -769,7 +794,55 @@
              
             if([[currentProfile valueForKey:@"currentLocation"] isKindOfClass:[NSNull class]])
                 [arrMsg addObject:@"Current Location"];
-            // to modify
+             //to modify
+                        if(gender.length==0)
+                            [arrMsg addObject:@"gender"];
+            
+                        if([currentProfile valueForKey:@"tob"] ==nil)
+                            [arrMsg addObject:@"Time of Birth"];
+            
+                        if([currentProfile valueForKey:@"dob"] ==nil )
+                            [arrMsg addObject:@"Date of Birth"];
+            
+                        if(height.length==0)
+                            [arrMsg addObject:@"height"];
+            
+                        if([weight integerValue]<=0)
+                            [arrMsg addObject:@"weight"];
+            
+                        if(package<1)
+                            [arrMsg addObject:@"package"];
+            
+                        if(company.length==0)
+                            [arrMsg addObject:@"company"];
+            
+                        if( [designation isKindOfClass:[NSNull class]]|| designation==nil)
+                            [arrMsg addObject:@"designation"];
+            
+                        if( [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass:[NSNull class]])
+                            [arrMsg addObject:@"Place of Birth"];
+            
+                        if( [[currentProfile valueForKey:@"religionId"] isKindOfClass:[NSNull class]])
+                            [arrMsg addObject:@"Religion"];
+            
+                        if([[currentProfile valueForKey:@"casteId"] isKindOfClass:[NSNull class]])
+                            [arrMsg addObject:@"Caste"];
+            
+                        if([[currentProfile valueForKey:@"industryId"] isKindOfClass:[NSNull class]])
+                            [arrMsg addObject:@"Industry"];
+            
+                        if([[currentProfile valueForKey:@"education1"]isKindOfClass:[NSNull class]])
+                            [arrMsg addObject:@"Degree and its specialization"];
+                        
+                        if(isPrimaryPhoto ==NO)
+                            [arrMsg addObject:@"select a Primary Photo"];
+                        
+                        if(selectedBiodata ==nil)
+                            [arrMsg addObject:@"select a Bio Data"];
+                        
+                        if(maxBudget<minBugget)
+                            [arrMsg addObject:@"max marriage budget less then min marriage budget"];
+
             // msg print
             NSString *msg =@"Please enter";
         
@@ -780,6 +853,26 @@
                     msg=  [msg stringByAppendingString:[NSString stringWithFormat:@", %@",arrMsg[i]]];
                 
             }
+            
+            if(name.length==0 || [name rangeOfString:@" "].location == NSNotFound ||gender.length==0|| [[currentProfile valueForKey:@"currentLocation"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"tob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"dob"] isKindOfClass: [NSNull class]] || [[currentProfile valueForKey:@"placeOfBirth"] isKindOfClass: [NSNull class]] ){
+                //switch to tab 1
+                currentTab = 1;
+                [self switchToCurrentTab];
+            }
+            else if ( [[currentProfile valueForKey:@"religionId"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"casteId"] isKindOfClass: [NSNull class]]|| height.length==0 ||[weight integerValue]<=0 ){
+                //switch to tab 2
+                currentTab = 2;
+                [self switchToCurrentTab];
+
+            }
+            else if ( [[currentProfile valueForKey:@"industryId"] isKindOfClass: [NSNull class]]|| [designation isKindOfClass:[NSNull class]]||designation == nil ||company.length==0||[[currentProfile valueForKey:@"workAfterMarriage"] isKindOfClass: [NSNull class]]|| [[currentProfile valueForKey:@"education1"] isKindOfClass: [NSNull class]]||package<1){
+                //switch to tab 3
+                currentTab = 3;
+                [self switchToCurrentTab];
+
+            }
+            
+
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps!!" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show]; 
         }
@@ -983,6 +1076,13 @@
         [self.btnUploadBiodata setTitle:@"+Upload Biodata" forState:UIControlStateNormal];
 
     }
+    if([txtMaxBudget.text isEqual:@"0"]){
+        txtMaxBudget.text =@"";
+    }
+    if([txtMinBudget.text isEqual:@"0"]){
+        txtMinBudget.text =@"";
+
+    }
 }
 
 -(void)openFacebookProfileViewController{
@@ -1030,7 +1130,19 @@
     if(arrImageList.count==0)
         primaryPhoto = nil;
     [self.collectionView reloadData];
-    NSData *pictureData = UIImagePNGRepresentation(primaryCropedPhoto);
+    UIImage *compressImg = [self compressImage:primaryCropedPhoto];
+    
+    int maxSize = 10485760;
+    NSData *imgData = UIImageJPEGRepresentation(compressImg, 1);
+    while (imgData.length>maxSize)
+    {
+        NSData *nwComp = UIImageJPEGRepresentation(compressImg, .5f);
+        
+        compressImg =  [UIImage imageWithData:nwComp];
+        
+    }
+
+    NSData *pictureData = UIImagePNGRepresentation(compressImg);
     PFFile *file = [PFFile fileWithName:@"profilePic" data:pictureData];
     [currentProfile setObject:file forKey:@"profilePic"];
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -1186,7 +1298,7 @@
     float maxWidth = 800.0;
     float imgRatio = actualWidth/actualHeight;
     float maxRatio = maxWidth/maxHeight;
-    float compressionQuality = 0.5;//50 percent compression
+    float compressionQuality = 0.25;//50 percent compression
     
     if (actualHeight > maxHeight || actualWidth > maxWidth){
         if(imgRatio < maxRatio){
@@ -1219,7 +1331,19 @@
 -(void)addPhotosToParse{
     NSMutableArray *arrAllPhotoToBeSaved = [NSMutableArray array];
     for(Photos *photo in arrNewImages){
-        NSData *pictureData = UIImagePNGRepresentation(photo.image);
+        UIImage *compressImg = [self compressImage:photo.image];
+
+        int maxSize = 10485760;
+        NSData *imgData = UIImageJPEGRepresentation(compressImg, 1);
+        while (imgData.length>maxSize)
+        {
+            NSData *nwComp = UIImageJPEGRepresentation(compressImg, .5f);
+
+            compressImg =  [UIImage imageWithData:nwComp];
+
+        }
+        
+        NSData *pictureData = UIImagePNGRepresentation(compressImg);
         PFFile *file = [PFFile fileWithName:photo.name data:pictureData];
         PFObject *photo = [PFObject objectWithClassName:@"Photo"];
         [photo setObject:file forKey:@"file"];
@@ -1301,11 +1425,30 @@
      
     }
     else{
+//        Photos *photo = [[Photos alloc]init];
+//        photo.image =[self compressImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+//        photo.imgObject = nil;
+//        [arrNewImages addObject:photo];
+//        [self.collectionView reloadData];
+        
         Photos *photo = [[Photos alloc]init];
         photo.image =[self compressImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
         photo.imgObject = nil;
-        [arrNewImages addObject:photo];
-        [self.collectionView reloadData];
+        NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+        __block NSString *fileName = nil;
+        
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init] ;
+        [library assetForURL:assetURL resultBlock:^(ALAsset *asset)  {
+            fileName = asset.defaultRepresentation.filename;
+            photo.name = fileName;
+            [arrNewImages addObject:photo];
+                [self addPhotosToParse];
+                arrImageList = [NSMutableArray arrayWithArray:[arrOldImages arrayByAddingObjectsFromArray:arrNewImages]];
+                [self.collectionView reloadData];
+                
+            
+        } failureBlock:nil];
+
     }
     
 }
@@ -1410,7 +1553,19 @@
     if(arrImageList.count==0)
         primaryPhoto = nil;
     [self.collectionView reloadData];
-    NSData *pictureData = UIImagePNGRepresentation(primaryCropedPhoto);
+    UIImage *compressImg = [self compressImage:primaryCropedPhoto];
+    
+    int maxSize = 10485760;
+    NSData *imgData = UIImageJPEGRepresentation(compressImg, 1);
+    while (imgData.length>maxSize)
+    {
+        NSData *nwComp = UIImageJPEGRepresentation(compressImg, .5f);
+        
+        compressImg =  [UIImage imageWithData:nwComp];
+        
+    }
+
+    NSData *pictureData = UIImagePNGRepresentation(compressImg);
     PFFile *file = [PFFile fileWithName:@"profilePic" data:pictureData];
     [currentProfile setObject:file forKey:@"profilePic"];
     [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

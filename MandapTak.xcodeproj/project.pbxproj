@@ -237,9 +237,14 @@
 		899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C53821B7383C200C24DA8 /* HeightPopoverViewController.m */; };
 		899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 899CBDE61B75FF3A00D1778A /* menu_white.png */; };
 		899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */; };
+		89A570E41BE381CB00C0F0FC /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 89A570E31BE381CB00C0F0FC /* dislike.png */; settings = {ASSET_TAGS = (); }; };
+		89A98AA11BDF81F60054D9A2 /* DRCellSlideAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98A9C1BDF81F60054D9A2 /* DRCellSlideAction.m */; settings = {ASSET_TAGS = (); }; };
+		89A98AA21BDF81F60054D9A2 /* DRCellSlideActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98A9E1BDF81F60054D9A2 /* DRCellSlideActionView.m */; settings = {ASSET_TAGS = (); }; };
+		89A98AA31BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98AA01BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m */; settings = {ASSET_TAGS = (); }; };
 		89AD119E1BBA94F400ADC9B9 /* LNBRippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */; };
 		89AF50951B9AFF2800E170D2 /* userDefImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 89AF50941B9AFF2800E170D2 /* userDefImg.png */; };
 		89B4BA5C1BCD2BF500363A4E /* LaunchScreen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B4BA5B1BCD2BF500363A4E /* LaunchScreen.xcassets */; };
+		89C53EAD1BE0C2E1006C4483 /* dislike1.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C53EAC1BE0C2E1006C4483 /* dislike1.png */; settings = {ASSET_TAGS = (); }; };
 		89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9F7221B6B578C004CBE3D /* AppDelegate.m */; };
 		89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9F7291B6B579E004CBE3D /* UserProfileViewController.m */; };
 		89D9F7331B6B579E004CBE3D /* SideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9F72C1B6B579E004CBE3D /* SideBarViewController.m */; };
@@ -653,10 +658,18 @@
 		899CBDE61B75FF3A00D1778A /* menu_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_white.png; sourceTree = "<group>"; };
 		899CBDE91B75FFEE00D1778A /* BirthTimePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthTimePopoverViewController.h; sourceTree = "<group>"; };
 		899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthTimePopoverViewController.m; sourceTree = "<group>"; };
+		89A570E31BE381CB00C0F0FC /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
+		89A98A9B1BDF81F60054D9A2 /* DRCellSlideAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRCellSlideAction.h; sourceTree = "<group>"; };
+		89A98A9C1BDF81F60054D9A2 /* DRCellSlideAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCellSlideAction.m; sourceTree = "<group>"; };
+		89A98A9D1BDF81F60054D9A2 /* DRCellSlideActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRCellSlideActionView.h; sourceTree = "<group>"; };
+		89A98A9E1BDF81F60054D9A2 /* DRCellSlideActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCellSlideActionView.m; sourceTree = "<group>"; };
+		89A98A9F1BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRCellSlideGestureRecognizer.h; sourceTree = "<group>"; };
+		89A98AA01BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCellSlideGestureRecognizer.m; sourceTree = "<group>"; };
 		89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNBRippleEffect.h; sourceTree = "<group>"; };
 		89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNBRippleEffect.m; sourceTree = "<group>"; };
 		89AF50941B9AFF2800E170D2 /* userDefImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userDefImg.png; sourceTree = "<group>"; };
 		89B4BA5B1BCD2BF500363A4E /* LaunchScreen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchScreen.xcassets; sourceTree = "<group>"; };
+		89C53EAC1BE0C2E1006C4483 /* dislike1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike1.png; sourceTree = "<group>"; };
 		89D9F7211B6B578C004CBE3D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		89D9F7221B6B578C004CBE3D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		89D9F7281B6B579E004CBE3D /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
@@ -1731,6 +1744,19 @@
 			path = BirthTimePopover;
 			sourceTree = "<group>";
 		};
+		89A98A9A1BDF81F60054D9A2 /* TableSwipeCellGesture */ = {
+			isa = PBXGroup;
+			children = (
+				89A98A9B1BDF81F60054D9A2 /* DRCellSlideAction.h */,
+				89A98A9C1BDF81F60054D9A2 /* DRCellSlideAction.m */,
+				89A98A9D1BDF81F60054D9A2 /* DRCellSlideActionView.h */,
+				89A98A9E1BDF81F60054D9A2 /* DRCellSlideActionView.m */,
+				89A98A9F1BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.h */,
+				89A98AA01BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m */,
+			);
+			path = TableSwipeCellGesture;
+			sourceTree = "<group>";
+		};
 		89D9F7201B6B578C004CBE3D /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -1841,6 +1867,7 @@
 			isa = PBXGroup;
 			children = (
 				75F8D0F71BE0C4F30034C982 /* WSCoachMarksView */,
+				89A98A9A1BDF81F60054D9A2 /* TableSwipeCellGesture */,
 				7527DA981BD51A9900296C90 /* RangeSlider */,
 				89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */,
 				89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */,
@@ -1946,7 +1973,9 @@
 				758C8E731B87412800FF634E /* like.png */,
 				758C8E741B87412800FF634E /* like@2x.png */,
 				758C8E751B87412800FF634E /* like@3x.png */,
+				89C53EAC1BE0C2E1006C4483 /* dislike1.png */,
 				758C8E761B87412800FF634E /* unlike.png */,
+				89A570E31BE381CB00C0F0FC /* dislike.png */,
 				758C8E771B87412800FF634E /* unlike@2x.png */,
 				758C8E781B87412800FF634E /* unlike@3x.png */,
 				757D44561BC64E17004E84AF /* dislikea.png */,
@@ -2179,6 +2208,7 @@
 				896A8A251BCE2D62009D2698 /* chat.png in Resources */,
 				757849DF1BA2EF2D005490E6 /* Anim-(4).png in Resources */,
 				8998E4CF1BD641450059F839 /* btn_chat.png in Resources */,
+				89C53EAD1BE0C2E1006C4483 /* dislike1.png in Resources */,
 				757849D51BA2EF2D005490E6 /* Anim-(22).png in Resources */,
 				89D9F78C1B6B5DB4004CBE3D /* profile.png in Resources */,
 				7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */,
@@ -2220,6 +2250,7 @@
 				757849D21BA2EF2D005490E6 /* Anim-(2).png in Resources */,
 				89B4BA5C1BCD2BF500363A4E /* LaunchScreen.xcassets in Resources */,
 				89E0FA521B85C92A000BD65A /* SelectionOverlay~iOS7@2x.png in Resources */,
+				89A570E41BE381CB00C0F0FC /* dislike.png in Resources */,
 				896BC00E1B95D856009FD221 /* matchCellOption.png in Resources */,
 				7533F6AD1B84AF0A00B83EFD /* add@3x.png in Resources */,
 				89D9F73F1B6B582C004CBE3D /* Main.storyboard in Resources */,
@@ -2360,6 +2391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				757F87671B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari.m in Sources */,
+				89A98AA11BDF81F60054D9A2 /* DRCellSlideAction.m in Sources */,
 				8997CC8A1BA182C8001B11AA /* SCReachabilityRefBuilder+Compatibility.m in Sources */,
 				895A6E7E1B9843A200A9C8BC /* UITableView+DragLoad.m in Sources */,
 				8997CC8B1BA182C8001B11AA /* SCNetworkReachability+Shared.m in Sources */,
@@ -2397,6 +2429,7 @@
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
 				899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */,
+				89A98AA31BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m in Sources */,
 				893F03491BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m in Sources */,
 				897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */,
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
@@ -2406,6 +2439,7 @@
 				8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */,
 				8998E4D31BD645870059F839 /* PrimaryImagePickerViewController.m in Sources */,
 				8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */,
+				89A98AA21BDF81F60054D9A2 /* DRCellSlideActionView.m in Sources */,
 				758C8E8B1B87546E00FF634E /* CandidateProfileGalleryVC.m in Sources */,
 				899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */,
 				758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */,

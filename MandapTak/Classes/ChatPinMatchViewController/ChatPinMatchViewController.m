@@ -19,12 +19,12 @@
 #import "SVProgressHUD.h"
 #import "ConversationListViewController.h"
 #import "ConversationViewController.h"
-
+#import "DRCellSlideGestureRecognizer.h"
 //#import "LNBRippleEffect.h"
 @interface ChatPinMatchViewController ()<LYRQueryControllerDelegate>{
     NSInteger currentTab;
     NSArray *arrMatches;
-    NSArray *arrPins;
+    NSMutableArray *arrPins;
     __weak IBOutlet UIButton *btnBack;
     NSArray *arrChats;
     __weak IBOutlet UITableView *matchTableView;
@@ -34,8 +34,14 @@
     __weak IBOutlet UIView *chatView;
     __weak IBOutlet UIActivityIndicatorView *activityIndicator;
     // add ripple effect
+    __weak IBOutlet UIView *undoBarView;
+    __weak IBOutlet UILabel *lblUndoTitle;
+    NSString *statusOfUndo;
+    PFObject *profileLiked;
+    PFObject *profileDisliked;
     //LNBRippleEffect *rippleEffect;
 }
+- (IBAction)undoButtonAction:(id)sender;
 @property (nonatomic) LYRQueryController *queryController;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnChat;
@@ -51,13 +57,14 @@
 @implementation ChatPinMatchViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    undoBarView.hidden = YES;
     chatView.hidden = YES;
     [self loginLayer];
     currentTab = 0;
     lblUserInfo.hidden = YES;
     arrCachedMatches = [NSMutableArray array];
     arrMatches = [NSArray array];
-    arrPins = [NSArray array];
+    arrPins = [NSMutableArray array];
     arrChats = [NSArray array];
     
     //notification for matched profile
@@ -100,41 +107,8 @@
 //    [self.view addSubview:rippleEffect];
 }
 
--(void)getAllChat{
-    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
-    
-    NSError *error2 = nil;
-    conversations = [self.layerClient executeQuery:query2 error:&error2];
-    if (conversations) {
-        NSLog(@"%tu conversations", conversations.count);
-    } else {
-        NSLog(@"Query failed with error %@", error2);
-    }
-    [self.tableView reloadData];
-}
-
 - (IBAction)backToHome:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)tabButtonAction:(id)sender {
-    [self resetTab];
-    if(currentTab != [sender tag]){
-        currentTab = [sender tag];
-    switch ([sender tag]) {
-        case 0:
-            [self switchToMatches];
-            break;
-        case 1:
-            [self switchToPin];
-            break;
-        case 2:
-            [self switchToChat];
-            break;
-        default:
-            break;
-    }
-    }
 }
 
 -(void)unPinButtonAction:(id)sender {
@@ -175,7 +149,11 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellIdentifier2 = @"MatchAndPinTableViewCell";
+ //   MatchAndPinTableViewCell *matchAndPinCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
     MatchAndPinTableViewCell *matchAndPinCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
+    if (matchAndPinCell == nil)
+        matchAndPinCell = [[MatchAndPinTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
+
     matchAndPinCell.selectionStyle = UITableViewCellSelectionStyleNone;
     static NSString *cellIdentifier3 = @"ChatTableViewCell";
     ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
@@ -212,6 +190,10 @@
         if(![[profile valueForKey:@"gotraId"] isKindOfClass:[NSNull class]] &&[profile valueForKey:@"gotraId"] !=nil){
             strReligion =[strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"gotraId"] valueForKey:@"name"]]];
         }
+        if([strReligion containsString:@", <null>"]){
+            strReligion = [strReligion stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
+        }
+
         matchAndPinCell.lblReligion.text =strReligion;
         [matchAndPinCell.btnPinOrMatch setImage:[UIImage imageNamed:@"matchCellOption"] forState:UIControlStateNormal];
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
@@ -223,7 +205,37 @@
 
     }
     else if(currentTab ==1){
-       
+        
+        DRCellSlideGestureRecognizer *slideGestureRecognizer = [DRCellSlideGestureRecognizer new];
+        
+        UIColor *greenColor = [UIColor colorWithRed:91/255.0 green:220/255.0 blue:88/255.0 alpha:1];
+        UIColor *redColor = [UIColor colorWithRed:222/255.0 green:61/255.0 blue:14/255.0 alpha:1];
+        
+        DRCellSlideAction *likeAction = [DRCellSlideAction actionForFraction:.25];
+        likeAction.icon = [UIImage imageNamed:@"dislike"];
+        
+        likeAction.activeBackgroundColor = redColor;
+        
+        
+        
+        DRCellSlideAction *dislikeAction = [DRCellSlideAction actionForFraction:-.25];
+        dislikeAction.icon = [UIImage imageNamed:@"like"];
+        dislikeAction.activeBackgroundColor = greenColor;
+        
+
+        likeAction.behavior = DRCellSlideActionPushBehavior;
+        likeAction.didTriggerBlock = [self pushTriggerBlock];
+        likeAction.elasticity = 100;
+
+        [slideGestureRecognizer addActions:@[ likeAction]];
+        
+        [matchAndPinCell addGestureRecognizer:slideGestureRecognizer];
+        dislikeAction.behavior = DRCellSlideActionPushBehavior;
+        dislikeAction.didTriggerBlock = [self pullTriggerBlock];
+        dislikeAction.elasticity = 100;
+
+        [slideGestureRecognizer addActions:@[ dislikeAction]];
+
 
         PFObject *pinnedProfile = arrPins[indexPath.row];
         PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
@@ -248,6 +260,10 @@
         if([profile valueForKey:@"gotraId"] !=nil){
             strReligion =[strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"gotraId"] valueForKey:@"name"]]];
         }
+        if([strReligion containsString:@", <null>"]){
+            strReligion = [strReligion stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
+        }
+
         matchAndPinCell.lblReligion.text =strReligion;
 
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
@@ -299,24 +315,6 @@
 
        return chatCell;
 }
-- (void)reloadCellForConversation:(LYRConversation *)conversation
-{
-    if (!conversation) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"`conversation` cannot be nil." userInfo:nil];
-    }
-    NSIndexPath *indexPath = [self.queryController indexPathForObject:conversation];
-    if (indexPath) {
-        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
-- (NSString *)getFormattedHeightFromValue:(NSString *)value
-{
-    NSArray * arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
-    NSString *strFiltered = [[arrHeight filteredArrayUsingPredicate:predicate] firstObject];
-    return strFiltered;
-}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(currentTab ==0){
@@ -327,9 +325,199 @@
         PFObject *pinnedProfile = arrPins[indexPath.row];
         PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
         [self showFullProfileForProfile:profile];
-
+        
     }
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([tableView isEqual:self.tableView])
+        return 73;
+    
+    return 106;
+}
+#pragma mark LikeOnSwipeAction
+- (DRCellSlideActionBlock) pullTriggerBlock {
+    return ^(UITableView *tableView, NSIndexPath *indexPath) {
+        [self showLoader];
+       
+        PFObject *pinnedProfile = arrPins[indexPath.row];
+        [arrPins removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
+        profileLiked = profile;
+        [PFCloud callFunctionInBackground:@"likeAndFind"
+                           withParameters:@{@"userProfileId":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"],
+                                            @"likeProfileId":profile.objectId,
+                                            @"userName":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]}
+                                    block:^(id results, NSError *error)
+         {
+             //[MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideLoader];
+             
+             if (!error)
+             {
+                 [self refreshPinPage];
+                 statusOfUndo = @"liked";
+                 profileLiked = profile;
+                 lblUndoTitle.text = [NSString stringWithFormat:@"You Liked %@",[profileLiked valueForKey:@"name"]];
+                 [self showUndoBar];
+                 
+
+             }
+             
+         }];
+        
+    };
+}
+#pragma mark DisikeOnSwipeAction
+
+- (DRCellSlideActionBlock)pushTriggerBlock {
+    return ^(UITableView *tableView, NSIndexPath *indexPath) {
+        PFObject *pinnedProfile = arrPins[indexPath.row];
+        [arrPins removeObjectAtIndex:indexPath.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self showLoader];
+        
+        [pinnedProfile deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self hideLoader];
+
+            if (succeeded) {
+                [self showLoader];
+                PFObject *profile = [pinnedProfile valueForKey:@"pinnedProfileId"];
+                NSString *strObjId = profile.objectId;
+                profileDisliked = profile;
+                statusOfUndo = @"disliked";
+
+                //make entry in dislike table
+                PFObject *dislikeObj = [PFObject objectWithClassName:@"DislikeProfile"];
+                dislikeObj[@"profileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
+                dislikeObj[@"dislikeProfileId"] = [PFObject objectWithoutDataWithClassName:@"Profile" objectId:strObjId];
+                
+                [dislikeObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                 {
+                     //[MBProgressHUD hideHUDForView:self.view animated:YES];
+                     [self hideLoader];
+                     [self refreshPinPage];
+                     statusOfUndo = @"disliked";
+                     profileDisliked = profile;
+                     lblUndoTitle.text = [NSString stringWithFormat:@"You Disliked %@",[profileDisliked valueForKey:@"name"]];
+
+                     [self showUndoBar];
+                 }];
+
+                NSLog(@"Woohoo, Success!");
+            }
+        }];
+
+            };
+}
+#pragma mark ShowAndHideActivityIndicator
+
+-(void)showUndoBar{
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionMoveIn;
+    animation.duration = 0.4;
+    [undoBarView.layer addAnimation:animation forKey:nil];
+    undoBarView.hidden = NO;
+    [self performSelector:@selector(hideUndoBar) withObject:nil afterDelay:2.f];
+    [self refreshPinPage];
+    UIEdgeInsets contentInsets;
+
+    contentInsets = UIEdgeInsetsMake(0.0, 0.0, 50, 0.0);
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+}
+
+-(void)hideUndoBar{
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFromTop;
+    animation.duration = 0.4;
+    [undoBarView.layer addAnimation:animation forKey:nil];
+    undoBarView.hidden = YES;
+    UIEdgeInsets contentInsets;
+    
+    contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark RefreshPinProfile
+-(void)refreshPinPage{
+    if([[AppData sharedData]isInternetAvailable]){
+        [self.btnPin setTitleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:1] forState:UIControlStateNormal];
+        self.lblPageTitle.text = @"PINS";
+        PFQuery *query = [PFQuery queryWithClassName:@"PinnedProfile"];
+        [query whereKey:@"profileId" equalTo:self.currentProfile];
+        [query includeKey:@"pinnedProfileId.casteId.religionId"];
+        [query includeKey:@"pinnedProfileId.religionId"];
+        [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
+        [query includeKey:@"pinnedProfileId"];
+        query.cachePolicy = kPFCachePolicyNetworkOnly;
+
+        [query includeKey:@"pinnedProfileId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.currentLocation.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.placeOfBirth.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.casteId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.religionId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.gotraId.Parent.Parent"];
+        [query includeKey:@"pinnedProfileId.education1.degreeId"];
+        [query includeKey:@"pinnedProfileId.education2.degreeId"];
+        [query includeKey:@"pinnedProfileId.education3.degreeId"];
+        [query includeKey:@"pinnedProfileId.industryId"];
+        [self showLoader];
+        btnBack.enabled =YES;
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            [self hideLoader];
+            
+            if (!error) {
+                if(objects.count == 0){
+                    lblUserInfo.text = @"No Profiles Pinned.";
+                    lblUserInfo.hidden = NO;
+                }
+                else
+                    lblUserInfo.hidden = YES;
+                
+                //  [self getUserProfileForUser:objects[0]];
+                arrPins = objects.mutableCopy;
+                [self.tableView reloadData];
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                if(error.code ==100 ){
+                    
+                }
+            }
+        }];
+        
+    }
+    else{
+        UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+
+}
+- (void)reloadCellForConversation:(LYRConversation *)conversation
+{
+    if (!conversation) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"`conversation` cannot be nil." userInfo:nil];
+    }
+    NSIndexPath *indexPath = [self.queryController indexPathForObject:conversation];
+    if (indexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+#pragma mark ShowFullProfile
+- (NSString *)getFormattedHeightFromValue:(NSString *)value
+{
+    NSArray * arrHeight = [NSArray arrayWithObjects:@"4ft 5in - 134cm",@"4ft 6in - 137cm",@"4ft 7in - 139cm",@"4ft 8in - 142cm",@"4ft 9in - 144cm",@"4ft 10in - 147cm",@"4ft 11in - 149cm",@"5ft - 152cm",@"5ft 1in - 154cm",@"5ft 2in - 157cm",@"5ft 3in - 160cm",@"5ft 4in - 162cm",@"5ft 5in - 165cm",@"5ft 6in - 167cm",@"5ft 7in - 170cm",@"5ft 8in - 172cm",@"5ft 9in - 175cm",@"5ft 10in - 177cm",@"5ft 11in - 180cm",@"6ft - 182cm",@"6ft 1in - 185cm",@"6ft 2in - 187cm",@"6ft 3in - 190cm",@"6ft 4in - 193cm",@"6ft 5in - 195cm",@"6ft 6in - 198cm",@"6ft 7in - 200cm",@"6ft 8in - 203cm",@"6ft 9in - 205cm",@"6ft 10in - 208cm",@"6ft 11in - 210cm",@"7ft - 213cm", nil];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", value];
+    NSString *strFiltered = [[arrHeight filteredArrayUsingPredicate:predicate] firstObject];
+    return strFiltered;
+}
+
 -(void)showFullProfileForProfile:(PFObject*)profileObj{
     Profile *profileModel = [[Profile alloc]init];
     profileModel.profilePointer = profileObj;
@@ -414,7 +602,27 @@
     vc.layerClient = self.layerClient;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
-#pragma TabBarAction
+#pragma mark TabBarAction
+
+- (IBAction)tabButtonAction:(id)sender {
+    [self resetTab];
+    if(currentTab != [sender tag]){
+        currentTab = [sender tag];
+        switch ([sender tag]) {
+            case 0:
+                [self switchToMatches];
+                break;
+            case 1:
+                [self switchToPin];
+                break;
+            case 2:
+                [self switchToChat];
+                break;
+            default:
+                break;
+        }
+    }
+}
 
 -(void)resetTab{
     [self.btnMatch setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -474,7 +682,6 @@
 }
 
 -(void)switchToPin{
-   // [rippleEffect removeFromSuperview];
     matchTableView.hidden = YES;
     self.tableView.hidden = NO;
     chatView.hidden = YES;
@@ -513,8 +720,7 @@
                 else
                     lblUserInfo.hidden = YES;
                 
-                //  [self getUserProfileForUser:objects[0]];
-                arrPins = objects;
+                arrPins = objects.mutableCopy;
                 [self.tableView reloadData];
             } else {
                 // Log details of the failure
@@ -542,24 +748,6 @@
     self.lblPageTitle.text = @"CHATS";
     [self.tableView reloadData];
     lblUserInfo.hidden = YES;
-//    NSError *error;
-//    LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
-//    
-//    NSError *error2 = nil;
-//    NSOrderedSet *conversation = [self.layerClient executeQuery:query2 error:&error2];
-//    if (conversation) {
-//        if(conversation.count == 0){
-//            lblUserInfo.text = @"No Chat Available!!";
-//            lblUserInfo.hidden = NO;
-//        }
-//        else
-//            lblUserInfo.hidden = YES;
-//
-//        NSLog(@"%tu conversations", conversation.count);
-//    } else {
-//        NSLog(@"Query failed with error %@", error);
-//    }
-
 }
 #pragma mark - ATLConversationListViewControllerDataSource Methods
 
@@ -612,7 +800,7 @@
                 if (!error){
                     
                     [self presentConversationListViewController];
-                    [self getAllChat];
+                    //[self getAllChat];
                 } else {
                     NSLog(@"Failed Authenticating Layer Client with error:%@", error);
                 }
@@ -718,28 +906,26 @@
     ConversationListViewController *controller = [ConversationListViewController  conversationListViewControllerWithLayerClient:self.layerClient];
     [chatView addSubview:controller.view];
     [self addChildViewController:controller];
-    //[self.navigationController pushViewController:controller animated:YES];
-
 }
 #pragma mark ShowActiviatyIndicator
 
 -(void)showLoader{
-    //activityIndicator.hidden = NO;
     [activityIndicator startAnimating];
     self.btnChat.enabled = NO;
     self.btnPin.enabled = NO;
     self.btnMatch.enabled = NO;
     self.tableView.allowsSelection = NO;
     lblUserInfo.hidden = YES;
+    self.tableView.userInteractionEnabled = NO;
 
 }
 -(void)hideLoader{
-    //activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     self.btnChat.enabled = YES;
     self.btnPin.enabled = YES;
     self.btnMatch.enabled = YES;
     self.tableView.allowsSelection = YES;
+    self.tableView.userInteractionEnabled = YES;
 
 }
 
@@ -748,7 +934,6 @@
 -(void)openMatchScreen:(NSNotification *) notification
 {
     [self switchToPin];
-    
     Profile *pro = [notification object];
     //get traits count
     NSDictionary* userInfo = notification.userInfo;
@@ -801,9 +986,6 @@
     return nil;
 }
 -(void)getAllUserForAConversationForIndex:(NSInteger)index{
-    //get all user corresponding to currentProfile
-   // PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
-    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     PFObject *profileObject = arrMatches[index];
     [self showLoader];
     PFQuery *query1 = [PFQuery queryWithClassName:@"UserProfile"];
@@ -813,11 +995,6 @@
     [query2 whereKey:@"profileId" equalTo:profileObject];
     [query2 whereKey:@"relation" equalTo:@"Bachelor"];
     PFQuery *mainQuery = [PFQuery orQueryWithSubqueries:@[query1,query2]];
-    //[query whereKey:@"userId" equalTo:userId];
-//    [query whereKey:@"profileId" equalTo:self.currentProfile];
-//    [query whereKey:@"profileId" equalTo:profileObject];
-//    [query whereKey:@"relation" notEqualTo:@"Agent"];
-    
     [mainQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [self hideLoader];
 
@@ -834,6 +1011,56 @@
         }
     }];
     
+}
+
+- (IBAction)undoButtonAction:(id)sender {
+    //Insert profile in pin Class
+    [self showLoader];
+    PFObject *pinnedProfile = [PFObject objectWithClassName:@"PinnedProfile"];
+    [pinnedProfile setObject:self.currentProfile forKey:@"profileId"];
+    if([statusOfUndo isEqual:@"liked"])
+        [pinnedProfile setObject:profileLiked forKey:@"pinnedProfileId"];
+    else  if([statusOfUndo isEqual:@"disliked"])
+        [pinnedProfile setObject:profileDisliked forKey:@"pinnedProfileId"];
+
+    [pinnedProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded) {
+            [self hideLoader];
+            [self hideUndoBar];
+            [self refreshPinPage];
+            if([statusOfUndo isEqual:@"liked"]){
+                PFQuery *query = [PFQuery queryWithClassName:@"LikedProfile"];
+               [query whereKey:@"likeProfileId" equalTo:profileLiked];
+                [query whereKey:@"profileId" equalTo:self.currentProfile];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    
+                    if (!error) {
+                        PFObject *likedProfile = objects[0];
+                        [likedProfile deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (succeeded)
+                                NSLog(@"undo liked");
+                        }];
+                    }
+                }];
+            }
+            else  if([statusOfUndo isEqual:@"disliked"]){
+                PFQuery *query = [PFQuery queryWithClassName:@"DislikeProfile"];
+                [query whereKey:@"dislikeProfileId" equalTo:profileDisliked];
+                [query whereKey:@"profileId" equalTo:self.currentProfile];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    
+                    if (!error) {
+                        PFObject *likedProfile = objects[0];
+                        [likedProfile deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (succeeded)
+                                NSLog(@"undo disliked");
+                        }];
+                    }
+                }];
+            }
+        }
+    }];
 }
 
 @end

@@ -14,6 +14,7 @@
 @interface AddContactPopoverVC ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 {
     UIPickerView *picView;
+    
     UIButton *buttonCancel,*buttonDone;
     NSMutableArray *arrPickerData;
     NSString *strRelation;

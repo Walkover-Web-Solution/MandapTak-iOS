@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblStatus;
 @property (weak, nonatomic) IBOutlet UIImageView *imgProfile;
 @property (weak, nonatomic) IBOutlet UIButton *btnOptions;
+@property (weak, nonatomic) IBOutlet UILabel *lblNumber;
 
 @end
