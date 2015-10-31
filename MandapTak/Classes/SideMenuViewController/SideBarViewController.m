@@ -259,7 +259,8 @@
     else if([segue.identifier isEqualToString:@"tourOptionsIdentifier"])
     {
         TourOptionsVC *vc = [segue destinationViewController];
-        [self.navigationController pushViewController:vc animated:YES];
+        //[self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
     }
     
     

@@ -78,9 +78,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.3f];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     // Setting the swipe direction.
 
@@ -126,6 +127,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     
     //add animation
     [self animateArrayOfImagesForImageCount:30];
+    
+    //[self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void)viewDidLayoutSubviews
@@ -578,6 +581,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         else if(tourFlag)
         {
             // Don't show again
+            coachMarksShown = YES;
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromTour"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -958,6 +962,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
     //navController.navigationBarHidden =YES;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
+    //[self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)pinAction:(id)sender
