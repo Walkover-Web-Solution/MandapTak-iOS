@@ -27,6 +27,8 @@
 		7564E2551B972B2800B8D052 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7564E2541B972B2800B8D052 /* Parse.framework */; };
 		7565F7891B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */; };
 		7565F78A1B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */; };
+		756AB5A01BE4F185009A1ADA /* videoNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 756AB59F1BE4F185009A1ADA /* videoNew.png */; settings = {ASSET_TAGS = (); }; };
+		756AB5A21BE4F1E2009A1ADA /* laptopNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 756AB5A11BE4F1E2009A1ADA /* laptopNew.png */; settings = {ASSET_TAGS = (); }; };
 		7577EFD31BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7577EFD01BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m */; };
 		7577EFD41BAC0C4300CE55C6 /* MBCircularProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7577EFD21BAC0C4300CE55C6 /* MBCircularProgressBarView.m */; };
 		757849C71BA2EF2D005490E6 /* Anim-(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 757849AA1BA2EF2D005490E6 /* Anim-(1).png */; };
@@ -336,6 +338,8 @@
 		7564E2541B972B2800B8D052 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		7565F7871B8DDA52003FE061 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
 		7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
+		756AB59F1BE4F185009A1ADA /* videoNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = videoNew.png; sourceTree = "<group>"; };
+		756AB5A11BE4F1E2009A1ADA /* laptopNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laptopNew.png; sourceTree = "<group>"; };
 		7577EFCF1BAC0C4300CE55C6 /* MBCircularProgressBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCircularProgressBarLayer.h; sourceTree = "<group>"; };
 		7577EFD01BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCircularProgressBarLayer.m; sourceTree = "<group>"; };
 		7577EFD11BAC0C4300CE55C6 /* MBCircularProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCircularProgressBarView.h; sourceTree = "<group>"; };
@@ -859,6 +863,15 @@
 				7565F7881B8DDA52003FE061 /* MYRIADPRO-REGULAR.OTF */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		756AB59A1BE4F0AF009A1ADA /* AppTour */ = {
+			isa = PBXGroup;
+			children = (
+				756AB59F1BE4F185009A1ADA /* videoNew.png */,
+				756AB5A11BE4F1E2009A1ADA /* laptopNew.png */,
+			);
+			path = AppTour;
 			sourceTree = "<group>";
 		};
 		7577EFCE1BAC0C4300CE55C6 /* MBCircularProgressBar */ = {
@@ -1917,6 +1930,7 @@
 		89D9F7621B6B5DB4004CBE3D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				756AB59A1BE4F0AF009A1ADA /* AppTour */,
 				757D44601BC678EB004E84AF /* RangeSlider */,
 				757849A91BA2EF2D005490E6 /* Animation */,
 				896BBFF41B95861A009FD221 /* ChatPinMatches */,
@@ -2294,6 +2308,7 @@
 				757F876D1B8F0DDB00C083A4 /* backNew.png in Resources */,
 				757849D41BA2EF2D005490E6 /* Anim-(21).png in Resources */,
 				758C8E721B87404B00FF634E /* slide@3x.png in Resources */,
+				756AB5A21BE4F1E2009A1ADA /* laptopNew.png in Resources */,
 				89D9F7811B6B5DB4004CBE3D /* share_icon.png in Resources */,
 				757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */,
 				757F87651B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
@@ -2311,6 +2326,7 @@
 				757849D61BA2EF2D005490E6 /* Anim-(23).png in Resources */,
 				89D9F7831B6B5DB4004CBE3D /* backgroundImages.png in Resources */,
 				896D18291B944DDB001513A5 /* Weeding_icon.png in Resources */,
+				756AB5A01BE4F185009A1ADA /* videoNew.png in Resources */,
 				75918F6D1B79E9A10082D7EC /* Preference.storyboard in Resources */,
 				7564E22B1B970B3200B8D052 /* dislike.png in Resources */,
 				893F034A1BAACC3C00BB1B59 /* SVProgressHUD.bundle in Resources */,

@@ -662,9 +662,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-pI-glR">
+                                <rect key="frame" x="0.0" y="44" width="320" height="262"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="160" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Tour Video">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="videoAction:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Sbp-fm-IVr"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMZ-iA-YmS">
                                 <rect key="frame" x="0.0" y="305" width="320" height="262"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="130" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="App Tour">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -691,16 +703,12 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-pI-glR">
-                                <rect key="frame" x="0.0" y="44" width="320" height="262"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Tour Video">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="videoAction:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Sbp-fm-IVr"/>
-                                </connections>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="videoNew.png" translatesAutoresizingMaskIntoConstraints="NO" id="XMa-FU-tSQ">
+                                <rect key="frame" x="96" y="111" width="128" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="laptopNew.png" translatesAutoresizingMaskIntoConstraints="NO" id="Csn-NV-miw">
+                                <rect key="frame" x="96" y="372" width="128" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1833,6 +1841,7 @@
         <image name="gender" width="32" height="32"/>
         <image name="heart_icon.png" width="32" height="32"/>
         <image name="height" width="32" height="32"/>
+        <image name="laptopNew.png" width="128" height="128"/>
         <image name="likeNew.png" width="50" height="50"/>
         <image name="location" width="32" height="32"/>
         <image name="measures" width="32" height="28"/>
@@ -1849,6 +1858,7 @@
         <image name="unlike.png" width="40" height="40"/>
         <image name="userProfile" width="25" height="32"/>
         <image name="verify_Icon.png" width="64" height="64"/>
+        <image name="videoNew.png" width="128" height="128"/>
         <image name="weight" width="32" height="32"/>
     </resources>
 </document>
