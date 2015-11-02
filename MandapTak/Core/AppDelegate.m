@@ -27,6 +27,9 @@
 //#import <Raygun4iOS/Raygun.h>
 #import <NewRelicAgent/NewRelic.h>
 @interface AppDelegate ()
+{
+    BOOL allowRotation;
+}
 @property (nonatomic) LYRClient *layerClient;
 
 @end
@@ -116,9 +119,12 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     }
     [[FBSDKApplicationDelegate sharedInstance]application:application didFinishLaunchingWithOptions:launchOptions];
+    
     // Override point for customization after application launch.
     return YES;
 }
+
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -218,25 +224,6 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     }
 }
 
-- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)windowx
-{
-    if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
-        [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
-    {
-        if ([self.window.rootViewController presentedViewController].isBeingDismissed)
-        {
-            return UIInterfaceOrientationMaskPortrait;
-        }
-        else
-        {
-            return UIInterfaceOrientationMaskAllButUpsideDown;
-        }
-    }
-    else
-    {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-}
 
 /*
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -412,6 +399,48 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"app delegate method called");
-    
+}
+
+#pragma mark Movie Player Orientation Methods
+- (void) moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+    allowRotation = YES;
+}
+
+- (void) moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+    allowRotation = NO;
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)windowx
+{
+    if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
+    {
+        if ([self.window.rootViewController presentedViewController].isBeingDismissed)
+        {
+            return UIInterfaceOrientationMaskPortrait;
+        }
+        else
+        {
+            return UIInterfaceOrientationMaskAllButUpsideDown;
+        }
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
+    {
+       return UIInterfaceOrientationLandscapeLeft;
+    }
+    else
+    {
+        return UIInterfaceOrientationPortrait;
+    }
 }
 @end

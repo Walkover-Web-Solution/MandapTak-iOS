@@ -643,80 +643,12 @@
                         <outlet property="imgView" destination="mTN-2j-lRJ" id="dc6-0g-VBs"/>
                         <outlet property="lblUserName" destination="5HQ-Qx-fmT" id="OfF-hX-YCP"/>
                         <outlet property="tableView" destination="4cW-AJ-Jcz" id="bzg-ga-AyY"/>
-                        <segue destination="HEG-yz-Rdj" kind="show" identifier="tourOptionsIdentifier" id="xcA-4G-vWX"/>
+                        <segue destination="fKQ-EL-EYU" kind="show" identifier="tourOptionsIdentifier" id="JUm-YZ-L3C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gu-Lf-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1152" y="1645"/>
-        </scene>
-        <!--Tour OptionsVC-->
-        <scene sceneID="WA9-XU-KGq">
-            <objects>
-                <viewController id="HEG-yz-Rdj" customClass="TourOptionsVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2uL-ip-oxE"/>
-                        <viewControllerLayoutGuide type="bottom" id="il7-i7-Muc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LB1-ey-VOS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-pI-glR">
-                                <rect key="frame" x="0.0" y="44" width="320" height="262"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="160" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Tour Video">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="videoAction:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Sbp-fm-IVr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMZ-iA-YmS">
-                                <rect key="frame" x="0.0" y="305" width="320" height="262"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="130" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="App Tour">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="coachMarkAction:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Ltb-Y1-ZZT"/>
-                                </connections>
-                            </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vh-CJ-TPc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="App Tour" id="WVi-3z-gzV">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="Y0g-WD-atA">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bdd-SG-FIO">
-                                                <rect key="frame" x="16" y="7" width="34" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Back"/>
-                                                <connections>
-                                                    <action selector="back:" destination="HEG-yz-Rdj" eventType="touchUpInside" id="Vq3-wa-X1h"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="videoNew.png" translatesAutoresizingMaskIntoConstraints="NO" id="XMa-FU-tSQ">
-                                <rect key="frame" x="96" y="111" width="128" height="128"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="laptopNew.png" translatesAutoresizingMaskIntoConstraints="NO" id="Csn-NV-miw">
-                                <rect key="frame" x="96" y="372" width="128" height="128"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1FB-7w-SMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1590" y="1645"/>
         </scene>
         <!--Match ScreenVC-->
         <scene sceneID="T6n-hr-cfO">
@@ -1826,6 +1758,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpu-rG-0jQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1152" y="281"/>
+        </scene>
+        <!--Tour OptionsVC-->
+        <scene sceneID="S2x-y3-pQ8">
+            <objects>
+                <viewController storyboardIdentifier="TourOptionsVC" id="fKQ-EL-EYU" customClass="TourOptionsVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CE3-s5-cyo"/>
+                        <viewControllerLayoutGuide type="bottom" id="aWP-il-YJ2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4du-Re-Ug2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0z8-JY-0Dr">
+                                <rect key="frame" x="0.0" y="44" width="320" height="262"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="160" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Tour Video">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="videoAction:" destination="fKQ-EL-EYU" eventType="touchUpInside" id="Dnx-T9-l9Y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBv-O9-6m3">
+                                <rect key="frame" x="0.0" y="305" width="320" height="262"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="130" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="App Tour">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="coachMarkAction:" destination="fKQ-EL-EYU" eventType="touchUpInside" id="aYV-rr-4lB"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5G0-jQ-dTt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="App Tour" id="vRH-dj-mLV">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="PiA-hp-YyX">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W2Y-ZC-VpE">
+                                                <rect key="frame" x="16" y="7" width="34" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Back"/>
+                                                <connections>
+                                                    <action selector="back:" destination="fKQ-EL-EYU" eventType="touchUpInside" id="wad-d2-Rx3"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="videoNew.png" translatesAutoresizingMaskIntoConstraints="NO" id="f2T-3b-pHV">
+                                <rect key="frame" x="96" y="111" width="128" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="laptopNew.png" translatesAutoresizingMaskIntoConstraints="NO" id="VtF-eT-6wr">
+                                <rect key="frame" x="96" y="372" width="128" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Su-bn-OTn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1614" y="1653"/>
         </scene>
     </scenes>
     <resources>

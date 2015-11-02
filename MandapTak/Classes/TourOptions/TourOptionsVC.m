@@ -10,11 +10,9 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "UserProfileViewController.h"
 #import "SWRevealViewController.h"
-
+#import <MediaPlayer/MediaPlayer.h>
+#import <AVKit/AVKit.h>
 @interface TourOptionsVC ()
-{
-    MPMoviePlayerViewController *moviePlayer;
-}
 
 - (IBAction)videoAction:(id)sender;
 - (IBAction)coachMarkAction:(id)sender;
@@ -52,12 +50,11 @@
 
 - (IBAction)videoAction:(id)sender
 {
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
-    moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+    MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
     [self presentModalViewController:moviePlayer animated:NO];
-    //[self.navigationController presentViewController:moviePlayer animated:YES completion:nil];
 }
-
 - (IBAction)coachMarkAction:(id)sender
 {
     

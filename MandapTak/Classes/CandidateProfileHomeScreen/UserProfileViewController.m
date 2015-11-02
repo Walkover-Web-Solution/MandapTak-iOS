@@ -11,6 +11,7 @@
 #import <Atlas/Atlas.h>
 #import "WSCoachMarksView.h"
 #import "AppData.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface UserProfileViewController ()
 {
@@ -128,12 +129,15 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //add animation
     [self animateArrayOfImagesForImageCount:30];
     
-    //[self.navigationController setNavigationBarHidden:NO];
+    //add click event on user image view
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showCandidateProfile:)];
+    singleTap.numberOfTapsRequired = 1;
+    [imgViewProfilePic setUserInteractionEnabled:YES];
+    [imgViewProfilePic addGestureRecognizer:singleTap];
 }
 
 -(void)viewDidLayoutSubviews
 {
-    NSLog(@"image view width = %f",imgViewProfilePic.frame.size.width);
     imgViewProfilePic.layer.cornerRadius = imgViewProfilePic.frame.size.width/2; //80.0f;
     imgViewProfilePic.layer.borderWidth = 2.0f;
     imgViewProfilePic.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -178,8 +182,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                        @"shape": @"circle"
                        },
                    @{
-                       @"rect": [NSValue valueWithCGRect:btnDetail.frame],//(CGRect){{120,530},{80,30}}],
-                       @"caption": @"Want to know more??Click the details icon..!!"
+                       @"rect": [NSValue valueWithCGRect:imgViewProfilePic.frame],//(CGRect){{120,530},{80,30}}],
+                       @"caption": @"Want to know more??Click on the image..!!",
+                       @"shape": @"circle"
                        }
                    ];
     //[coachMarksView start];
@@ -948,6 +953,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 - (IBAction)showCandidateProfile:(id)sender
 {
+    
     //[self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     CandidateProfileDetailScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     Profile *candidateProfile = arrCandidateProfiles[profileNumber];
@@ -963,6 +969,12 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //navController.navigationBarHidden =YES;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
     //[self.navigationController pushViewController:vc animated:YES];
+     
+    /*
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
+    MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+    [self presentModalViewController:moviePlayer animated:NO];
+     */
 }
 
 - (IBAction)pinAction:(id)sender

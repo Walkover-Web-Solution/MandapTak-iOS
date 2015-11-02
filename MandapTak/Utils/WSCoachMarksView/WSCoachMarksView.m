@@ -80,7 +80,7 @@ static const BOOL kEnableSkipButton = YES;
     // Shape layer mask
     mask = [CAShapeLayer layer];
     [mask setFillRule:kCAFillRuleEvenOdd];
-    [mask setFillColor:[[UIColor colorWithHue:0.0f saturation:0.0f brightness:0.0f alpha:0.6f] CGColor]];
+    [mask setFillColor:[[UIColor colorWithHue:0.0f saturation:0.0f brightness:0.0f alpha:0.7f] CGColor]];
     [self.layer addSublayer:mask];
     
     // Capture touches
