@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SideBarViewController : UIViewController
+@interface SideBarViewController : UIViewController<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserName;
 @property (weak, nonatomic) IBOutlet UIImageView *imgUser;
-
+@property (strong, nonatomic) UIWindow *window;
 @end

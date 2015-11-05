@@ -12,6 +12,7 @@
 #import "WSCoachMarksView.h"
 #import "AppData.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface UserProfileViewController ()
 {
@@ -953,7 +954,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 - (IBAction)showCandidateProfile:(id)sender
 {
-    
+    /*
     //[self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     CandidateProfileDetailScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     Profile *candidateProfile = arrCandidateProfiles[profileNumber];
@@ -969,11 +970,21 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //navController.navigationBarHidden =YES;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
     //[self.navigationController pushViewController:vc animated:YES];
-     
-    /*
+     */
+    
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
     MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
     [self presentModalViewController:moviePlayer animated:NO];
+    
+    /*
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
+    NSURL *url=[[NSURL alloc]initFileURLWithPath:path];
+    AVPlayer *av = [[AVPlayer alloc] initWithURL:url];
+    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:av];
+    [layer setFrame:self.view.frame];
+    [self.view.layer addSublayer:layer];
+    [av play];
      */
 }
 

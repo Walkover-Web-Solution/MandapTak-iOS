@@ -8,6 +8,7 @@
 
 #import "CandidateProfileDetailScreenVC.h"
 #import "ConversationViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 @interface CandidateProfileDetailScreenVC (){
     LYRConversation *userConversation;
     BOOL isFetchingConversation;
@@ -506,7 +507,12 @@
 
 - (IBAction)back:(id)sender
 {
-    //[self.navigationController popViewControllerAnimated:YES];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
+    MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+    [self presentModalViewController:moviePlayer animated:NO];
+     
+    
     //set traits to nil
     textTraits = nil;
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -12,6 +12,8 @@
 #import "SWRevealViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 @interface TourOptionsVC ()
 
 - (IBAction)videoAction:(id)sender;
@@ -54,7 +56,39 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
     MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
     [self presentModalViewController:moviePlayer animated:NO];
+     
+    /*
+    //code 02 - AVPlayer
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
+    NSURL *fileURL = [NSURL fileURLWithPath:filepath];
+    AVPlayer *avPlayer = [AVPlayer playerWithURL:fileURL];
+    
+    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
+    avPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    
+    //layer.frame = self.view.frame;
+    
+    layer.frame = [self view].layer.bounds;
+    layer.videoGravity = AVLayerVideoGravityResizeAspect ;//AVLayerVideoGravityResizeAspectFill
+    [self.view.layer addSublayer: layer];
+    
+    [avPlayer play];
+    */
+    /*
+    //code 03
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"]; //SampleVideoLandscape
+    NSURL *url=[[NSURL alloc]initFileURLWithPath:path];
+    AVPlayer *av = [[AVPlayer alloc] initWithURL:url];
+    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:av];
+    [layer setFrame:self.view.frame];
+    layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    [self.view.layer addSublayer:layer];
+    [av play];
+    
+    NSLog(@"error: %@", av.error);
+    */
 }
+
 - (IBAction)coachMarkAction:(id)sender
 {
     

@@ -23,6 +23,9 @@
 #import <Crashlytics/Crashlytics.h>
 #import "AppData.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
+#import "TourOptionsVC.h"
+#import "OptionsListVC.h"
 
 //#import <Raygun4iOS/Raygun.h>
 #import <NewRelicAgent/NewRelic.h>
@@ -413,6 +416,8 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)windowx
 {
     if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:[AVPlayerLayer class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:[AVPlayer class]] ||
         [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
     {
         if ([self.window.rootViewController presentedViewController].isBeingDismissed)
@@ -434,6 +439,8 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     if ([[self.window.rootViewController presentedViewController] isKindOfClass:[MPMoviePlayerViewController class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:[AVPlayerLayer class]] ||
+        [[self.window.rootViewController presentedViewController] isKindOfClass:[AVPlayer class]] ||
         [[self.window.rootViewController presentedViewController] isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")])
     {
        return UIInterfaceOrientationLandscapeLeft;
@@ -443,4 +450,5 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         return UIInterfaceOrientationPortrait;
     }
 }
+
 @end
