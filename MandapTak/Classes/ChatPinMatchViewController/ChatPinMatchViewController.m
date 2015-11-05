@@ -21,7 +21,7 @@
 #import "ConversationViewController.h"
 #import "DRCellSlideGestureRecognizer.h"
 //#import "LNBRippleEffect.h"
-@interface ChatPinMatchViewController ()<LYRQueryControllerDelegate>{
+@interface ChatPinMatchViewController ()<LYRQueryControllerDelegate,UIGestureRecognizerDelegate>{
     NSInteger currentTab;
     NSArray *arrMatches;
     NSMutableArray *arrPins;
@@ -36,6 +36,7 @@
     // add ripple effect
     __weak IBOutlet UIView *undoBarView;
     __weak IBOutlet UILabel *lblUndoTitle;
+    __weak IBOutlet UIButton *btnUndo;
     NSString *statusOfUndo;
     PFObject *profileLiked;
     PFObject *profileDisliked;
@@ -56,6 +57,7 @@
 
 @implementation ChatPinMatchViewController
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     undoBarView.hidden = YES;
     chatView.hidden = YES;
@@ -66,16 +68,18 @@
     arrMatches = [NSArray array];
     arrPins = [NSMutableArray array];
     arrChats = [NSArray array];
-    
+    btnUndo.layer.cornerRadius = 1.0f;
+    btnUndo.layer.borderColor = [UIColor whiteColor].CGColor;
+    btnUndo.layer.borderWidth = 1.0f;
     //notification for matched profile
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchPinnedNotification" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPin) name:@"UpdatePinNotification" object:nil ];
     self.tableView.tableFooterView =  matchTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
-    if(self.currentProfile){
+    if(self.currentProfile)
         [self switchToMatches];
-    }
+    
     else{
         if([[AppData sharedData]isInternetAvailable]){
             [self showLoader];
@@ -105,6 +109,7 @@
 //    [rippleEffect setRippleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9]];
 //    [rippleEffect setRippleTrailColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9]];
 //    [self.view addSubview:rippleEffect];
+    
 }
 
 - (IBAction)backToHome:(id)sender {
@@ -212,7 +217,7 @@
         UIColor *redColor = [UIColor colorWithRed:222/255.0 green:61/255.0 blue:14/255.0 alpha:1];
         
         DRCellSlideAction *likeAction = [DRCellSlideAction actionForFraction:.25];
-        likeAction.icon = [UIImage imageNamed:@"dislike"];
+        likeAction.icon = [UIImage imageNamed:@"dislike2"];
         
         likeAction.activeBackgroundColor = redColor;
         
@@ -317,6 +322,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self hideUndoBar];
+
     if(currentTab ==0){
         PFObject *profile = arrMatches[indexPath.row];
         [self showFullProfileForProfile:profile];
@@ -328,6 +335,11 @@
         
     }
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self hideUndoBar];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if([tableView isEqual:self.tableView])
@@ -369,6 +381,7 @@
         
     };
 }
+
 #pragma mark DisikeOnSwipeAction
 
 - (DRCellSlideActionBlock)pushTriggerBlock {
@@ -417,11 +430,11 @@
 
 -(void)showUndoBar{
     CATransition *animation = [CATransition animation];
-    animation.type = kCATransitionMoveIn;
+    animation.type = kCATransitionFromBottom;
     animation.duration = 0.4;
     [undoBarView.layer addAnimation:animation forKey:nil];
     undoBarView.hidden = NO;
-    [self performSelector:@selector(hideUndoBar) withObject:nil afterDelay:2.f];
+   // [self performSelector:@selector(hideUndoBar) withObject:nil afterDelay:2.f];
     [self refreshPinPage];
     UIEdgeInsets contentInsets;
 
@@ -605,12 +618,17 @@
 #pragma mark TabBarAction
 
 - (IBAction)tabButtonAction:(id)sender {
+    [self hideUndoBar];
+
     [self resetTab];
     if(currentTab != [sender tag]){
         currentTab = [sender tag];
         switch ([sender tag]) {
             case 0:
                 [self switchToMatches];
+                if(arrMatches.count>0)
+                    lblUserInfo.hidden = YES;
+
                 break;
             case 1:
                 [self switchToPin];
@@ -622,6 +640,7 @@
                 break;
         }
     }
+    
 }
 
 -(void)resetTab{
@@ -640,6 +659,9 @@
     //// chaged logic
     
     arrMatches = [[AppData sharedData]fetchAllMatches];
+    if(arrMatches.count>0)
+        lblUserInfo.hidden = YES;
+    
     [matchTableView reloadData];
     if(arrMatches.count==0){
         if([[AppData sharedData]isInternetAvailable]){
@@ -694,9 +716,7 @@
         [query includeKey:@"pinnedProfileId.religionId"];
         [query includeKey:@"pinnedProfileId.gotraId.casteId.religionId"];
         [query includeKey:@"pinnedProfileId"];
-        
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-
         [query includeKey:@"pinnedProfileId.Parent.Parent"];
         [query includeKey:@"pinnedProfileId.currentLocation.Parent.Parent"];
         [query includeKey:@"pinnedProfileId.placeOfBirth.Parent.Parent"];
@@ -720,24 +740,19 @@
                 else
                     lblUserInfo.hidden = YES;
                 
+                if(currentTab!=1)
+                    if(arrMatches.count>0)
+                       lblUserInfo.hidden = YES;
+ 
                 arrPins = objects.mutableCopy;
                 [self.tableView reloadData];
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-                if(error.code ==100 ){
-                    
-                }
             }
         }];
-
     }
     else{
         UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-
-   
 }
 
 -(void)switchToChat{
@@ -749,6 +764,7 @@
     [self.tableView reloadData];
     lblUserInfo.hidden = YES;
 }
+
 #pragma mark - ATLConversationListViewControllerDataSource Methods
 
 - (NSString *)conversationListViewController:(ATLConversationListViewController *)conversationListViewController titleForConversation:(LYRConversation *)conversation
@@ -771,7 +787,6 @@
                 }
             }];
         }
-        
         if ([resolvedNames count] && [unresolvedParticipants count]) {
             return [NSString stringWithFormat:@"%@ and %lu others", [resolvedNames componentsJoinedByString:@", "], (unsigned long)[unresolvedParticipants count]];
         } else if ([resolvedNames count] && [unresolvedParticipants count] == 0) {

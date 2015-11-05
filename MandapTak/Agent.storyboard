@@ -18,8 +18,6 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -35,39 +33,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYB-1F-wwf">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                <subviews>
-                                    <button hidden="YES" opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7x-kQ-o6p">
-                                        <rect key="frame" x="249" y="0.0" width="71" height="50"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="18"/>
-                                        <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
-                                        <state key="normal" image="option.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backButtonAction:" destination="70b-pc-Td2" eventType="touchUpInside" id="hTB-KF-U2b"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Agent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tV2-m2-XqF">
-                                        <rect key="frame" x="17" y="11" width="144" height="27"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsX-ct-fbe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bLw-AD-0hL"/>
+                                    <constraint firstAttribute="height" constant="44" id="CIg-nq-2HS"/>
                                 </constraints>
-                            </view>
+                                <color key="barTintColor" red="0.94117647058823528" green="0.44313725490196076" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Agent" id="WJ2-zB-WM6">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="FvY-2o-XcS">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="e8t-5S-Xtx" kind="custom" identifier="NewUserIdentifier" customClass="WYStoryboardPopoverSegue" id="cvP-lT-bHe"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iNS-qg-IoA">
-                                <rect key="frame" x="0.0" y="100" width="320" height="417"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="482"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="RIr-R3-GCo">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="70b-pc-Td2" id="cOV-52-Sb9"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AgentCustomTableViewCell" rowHeight="74" id="nDI-Gf-PiX" customClass="AgentCustomTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="74"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nDI-Gf-PiX" id="aBJ-0s-XB2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
@@ -134,7 +134,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="70b-pc-Td2" id="Der-SQ-fcD"/>
+                                    <outlet property="dataSource" destination="70b-pc-Td2" id="hN5-lD-zpv"/>
                                     <outlet property="delegate" destination="70b-pc-Td2" id="VnC-T2-T3f"/>
                                 </connections>
                             </tableView>
@@ -145,10 +145,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8k-aE-5yv">
-                                <rect key="frame" x="0.0" y="50" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="42"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAg-gh-NBU">
-                                        <rect key="frame" x="15" y="15" width="141" height="21"/>
+                                        <rect key="frame" x="15" y="10" width="141" height="21"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="17"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -156,10 +156,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="5ij-fs-lPT"/>
+                                    <constraint firstAttribute="height" constant="42" id="5ij-fs-lPT"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pZ-V9-q3d">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pZ-V9-q3d">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUz-8a-WA7">
@@ -169,10 +169,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="uploadMoreProfileAction:" destination="70b-pc-Td2" eventType="touchUpInside" id="PaY-VT-ZQi"/>
-                                            <segue destination="e8t-5S-Xtx" kind="custom" identifier="NewUserIdentifier" customClass="WYStoryboardPopoverSegue" id="iVn-1S-skA"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -180,34 +176,45 @@
                                     <constraint firstAttribute="height" constant="50" id="mNr-NB-XaO"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="GYh-wE-mr2">
+                                <rect key="frame" x="141" y="266" width="37" height="37"/>
+                                <color key="color" red="0.92156862750000001" green="0.3294117647" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9pZ-V9-q3d" firstAttribute="top" secondItem="iNS-qg-IoA" secondAttribute="bottom" constant="1" id="1jb-mh-tBP"/>
+                            <constraint firstItem="9pZ-V9-q3d" firstAttribute="top" secondItem="iNS-qg-IoA" secondAttribute="bottom" constant="-50" id="1jb-mh-tBP"/>
                             <constraint firstItem="9pZ-V9-q3d" firstAttribute="leading" secondItem="Q1M-zI-2S1" secondAttribute="leading" id="53S-9Z-3cT"/>
                             <constraint firstAttribute="trailing" secondItem="9pZ-V9-q3d" secondAttribute="trailing" id="5f9-yM-Ytr"/>
                             <constraint firstAttribute="trailing" secondItem="iNS-qg-IoA" secondAttribute="trailing" id="74T-VZ-UsV"/>
                             <constraint firstItem="JVI-d4-979" firstAttribute="top" secondItem="9pZ-V9-q3d" secondAttribute="bottom" id="8NB-Ip-Ib6"/>
-                            <constraint firstAttribute="trailing" secondItem="fYB-1F-wwf" secondAttribute="trailing" id="EdS-jn-LSb"/>
-                            <constraint firstItem="Y8k-aE-5yv" firstAttribute="top" secondItem="fYB-1F-wwf" secondAttribute="bottom" id="KmL-Db-SJJ"/>
-                            <constraint firstItem="fYB-1F-wwf" firstAttribute="leading" secondItem="Q1M-zI-2S1" secondAttribute="leading" id="ZhX-6O-6eP"/>
+                            <constraint firstItem="jsX-ct-fbe" firstAttribute="leading" secondItem="Q1M-zI-2S1" secondAttribute="leading" id="R2c-cA-hEz"/>
+                            <constraint firstItem="Y8k-aE-5yv" firstAttribute="top" secondItem="jsX-ct-fbe" secondAttribute="bottom" id="S0G-Rb-Ype"/>
                             <constraint firstAttribute="trailing" secondItem="Y8k-aE-5yv" secondAttribute="trailing" id="aLp-FU-9zE"/>
-                            <constraint firstItem="fYB-1F-wwf" firstAttribute="top" secondItem="Q1M-zI-2S1" secondAttribute="top" id="dyC-RX-Z9D"/>
+                            <constraint firstAttribute="centerY" secondItem="GYh-wE-mr2" secondAttribute="centerY" id="e1l-9f-Fsy"/>
                             <constraint firstItem="iNS-qg-IoA" firstAttribute="top" secondItem="Y8k-aE-5yv" secondAttribute="bottom" id="fRn-TO-5LD"/>
+                            <constraint firstAttribute="centerX" secondItem="GYh-wE-mr2" secondAttribute="centerX" id="llX-FZ-H2T"/>
                             <constraint firstItem="Y8k-aE-5yv" firstAttribute="leading" secondItem="Q1M-zI-2S1" secondAttribute="leading" id="tu3-1v-jPg"/>
+                            <constraint firstItem="jsX-ct-fbe" firstAttribute="top" secondItem="Q1M-zI-2S1" secondAttribute="top" id="xxz-FB-Crk"/>
+                            <constraint firstAttribute="trailing" secondItem="jsX-ct-fbe" secondAttribute="trailing" id="zVZ-b7-ykh"/>
                             <constraint firstItem="iNS-qg-IoA" firstAttribute="leading" secondItem="Q1M-zI-2S1" secondAttribute="leading" id="zrs-RJ-oke"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="GYh-wE-mr2" id="yc2-1y-oJs"/>
+                        <outlet property="btnAdd" destination="FvY-2o-XcS" id="680-oi-wgz"/>
+                        <outlet property="btnCreateNewProfile" destination="tUz-8a-WA7" id="AkL-xF-pDh"/>
                         <outlet property="lblUserCredits" destination="oAg-gh-NBU" id="s82-pK-X4S"/>
                         <outlet property="lblUserInfo" destination="n3j-Ei-JXh" id="1BC-bx-cmw"/>
+                        <outlet property="searchBar" destination="RIr-R3-GCo" id="TLV-Wg-GhO"/>
                         <outlet property="tableView" destination="iNS-qg-IoA" id="BUZ-pO-Qk0"/>
+                        <outlet property="viewCredits" destination="Y8k-aE-5yv" id="SeH-xJ-lMQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRX-rU-F3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="520"/>
+            <point key="canvasLocation" x="624" y="341"/>
         </scene>
         <!--Agent Cell Option Popover View Controller-->
         <scene sceneID="mSc-YU-Lkf">
@@ -243,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tys-Qc-HrM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029" y="394"/>
+            <point key="canvasLocation" x="930" y="523"/>
         </scene>
         <!--Create New User Popover View Controller-->
         <scene sceneID="9c3-sy-Kz6">
@@ -328,12 +335,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fwh-Jd-xzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="760" y="977"/>
+            <point key="canvasLocation" x="1026" y="341"/>
         </scene>
     </scenes>
     <resources>
         <image name="matchCellOption.png" width="32" height="32"/>
-        <image name="option.png" width="30" height="30"/>
         <image name="userDefImg.png" width="64" height="64"/>
     </resources>
 </document>

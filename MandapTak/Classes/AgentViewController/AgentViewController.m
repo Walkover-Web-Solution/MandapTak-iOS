@@ -5,7 +5,6 @@
 //  Created by Hussain Chhatriwala on 07/09/15.
 //  Copyright (c) 2015 Walkover. All rights reserved.
 //
-
 #import "AgentViewController.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
@@ -16,19 +15,29 @@
 #import "WYStoryboardPopoverSegue.h"
 #import "UITableView+DragLoad.h"
 #import "CreateNewUserPopoverViewController.h"
-@interface AgentViewController ()<WYPopoverControllerDelegate,AgentCellOptionPopoverViewControllerDelegate,CreateNewUserPopoverViewControllerDelegate>{
+#import "StartMainViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import <AVKit/AVKit.h>
+
+@interface AgentViewController ()<WYPopoverControllerDelegate,AgentCellOptionPopoverViewControllerDelegate,CreateNewUserPopoverViewControllerDelegate,UITableViewDragLoadDelegate>{
     NSMutableArray *arrProfiles;
     WYPopoverController *settingsPopoverController;
     __weak IBOutlet UILabel *lblUserCredits;
     CGRect btnRect;
+    __weak IBOutlet UIView *viewCredits;
     NSMutableArray *arrBtnFrame;
+    BOOL isSearching;
+    NSTimer *timer;
+    NSInteger currentTime;
     NSInteger credit;
     WYPopoverController* popoverController;
+    __weak IBOutlet UIBarButtonItem *btnAdd;
 }
-- (IBAction)uploadMoreProfileAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *btnCreateNewProfile;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserInfo;
-- (IBAction)backButtonAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -36,12 +45,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     self.lblUserInfo.hidden = YES;
     arrProfiles = [NSMutableArray array];
     arrBtnFrame = [NSMutableArray array];
+    [self loadMore];
+    viewCredits.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    viewCredits.layer.shadowOffset = CGSizeMake(1, 1);
+    viewCredits.layer.shadowOpacity = .5f;
+    viewCredits.layer.shadowRadius = .5f;
+    viewCredits.hidden = YES;
     [self getUserCredits];
-    [self getAllAddedProfiles];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+    
 }
 
 -(void)getUserCredits{
@@ -53,18 +70,15 @@
             PFObject *obj = objects[0];
             credit =[[obj valueForKey:@"credits"] integerValue];
             lblUserCredits.text = [NSString stringWithFormat:@"%@ Credits",[obj valueForKey:@"credits"]];
-            }
-        else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 -(void)getAllAddedProfiles{
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
@@ -72,62 +86,93 @@
     [query includeKey:@"profileId"];
     [query includeKey:@"userId"];
     [query includeKey:@"profileId.userId"];
-
-    
     MBProgressHUD * hud;
     hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
         if (!error) {
-            if(objects.count == 0){
+            if(objects.count == 0)
                 self.lblUserInfo.hidden = NO;
-            }
             else
                 self.lblUserInfo.hidden = YES;
-                arrBtnFrame = [NSMutableArray arrayWithCapacity:objects.count];
-            //  [self getUserProfileForUser:objects[0]];
+            
+            arrBtnFrame = [NSMutableArray arrayWithCapacity:objects.count];
             arrProfiles = objects.mutableCopy;
             [self.tableView reloadData];
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
+}
+-(void)timerStart{
+    currentTime=currentTime+1;
+    if(currentTime==2){
+        [timer invalidate];
+        timer = nil;
+        arrBtnFrame = [NSMutableArray  array];
+        arrProfiles = [NSMutableArray array];
+        [self loadMore];
+    }
 }
 
+#pragma mark SearchBarDelagate
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if(searchBar.text.length>0){
+        isSearching = YES;
+        currentTime =0;
+        [timer invalidate];
+        timer = nil;
+        timer = [NSTimer timerWithTimeInterval:.5 target:self selector:@selector(timerStart) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        currentTime =0;
+    }
+    else if(searchText.length==0){
+        isSearching = NO;
+        [self.searchBar resignFirstResponder];
+        [self loadMore];
+    }
+    else{
+        [self.searchBar resignFirstResponder];
+
+        isSearching = NO;
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self loadMore];
+}
 #pragma mark UITableViewDelegate
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        return arrProfiles.count;
+    return arrProfiles.count;
 }
-
-
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier1 = @"AgentCustomTableViewCell";
     AgentCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
-//    if (cell == nil)
-//        cell = [[AgentCustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier1];
+    if (cell == nil)
+           cell = [[AgentCustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier1];
+    
     PFObject *userProfile = arrProfiles[indexPath.row];
     PFObject *profile = [userProfile valueForKey:@"profileId"];
     PFUser *user = [profile valueForKey:@"userId"];
     cell.imgProfile.image = [UIImage imageNamed:@"userDefImg.png"];
-
+    
     if([profile objectForKey:@"profilePic"]!=nil){
         [[profile objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.imgProfile.image = [UIImage imageWithData:data];;
         }];
     }
+    
     NSString *name =[profile valueForKey:@"name"];
+    
     cell.lblNumber.text = user.username;
     if(name!=nil||name.length!=0)
         cell.lblName.text = [profile valueForKey:@"name"];
     else
         cell.lblName.text = @"No Name";
-
+    
     cell.btnOptions.tag = indexPath.row;
+    
     if([[profile valueForKey:@"isActive"] boolValue]){
         cell.lblStatus.text = @"Active";
         cell.lblStatus.textColor = [UIColor greenColor];
@@ -156,59 +201,49 @@
     CGFloat yPos = [UIScreen mainScreen].bounds.size.width-30;
     rect.origin.x=yPos;
     rect.origin.y =indexPath.row* 73;
-  //  [arrBtnFrame replaceObjectAtIndex:indexPath.row withObject:NSStringFromCGRect(rect)];
+    //  [arrBtnFrame replaceObjectAtIndex:indexPath.row withObject:NSStringFromCGRect(rect)];
     arrBtnFrame[indexPath.row] =NSStringFromCGRect(rect);
-    NSLog(@"%@",arrBtnFrame);
     [cell.btnOptions addTarget:self action:@selector(optionButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
-        
+    
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-}
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MBProgressHUD *HUD;
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFObject *userProfile = arrProfiles[indexPath.row];
-    PFObject *profile = [userProfile valueForKey:@"profileId"];
-    
-    [profile setObject:@NO forKey:@"isActive"];
-    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        if (!error) {
-            [self getAllAddedProfiles];
-            
-        } else {
-            //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
-        }
-    }];
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    MBProgressHUD *HUD;
+//    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    PFObject *userProfile = arrProfiles[indexPath.row];
+//    PFObject *profile = [userProfile valueForKey:@"profileId"];
+//    
+//    [profile setObject:@NO forKey:@"isActive"];
+//    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        
+//        if (!error) {
+//            [self getAllAddedProfiles];
+//            
+//        } else {
+//            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+//            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [errorAlertView show];
+//        }
+//    }];
+//}
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"NewUserIdentifier"])
     {
         CreateNewUserPopoverViewController *controller = segue.destinationViewController;
         controller.preferredContentSize = CGSizeMake(300, 180);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
-        popoverController = [popoverSegue popoverControllerWithSender:sender
-                                             permittedArrowDirections:WYPopoverArrowDirectionAny
-                                                             animated:YES];
-
+        popoverController = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
         popoverController.delegate = self;
         controller.delegate = self;
-        
     }
-
 }
 
 -(void)optionButtonAction:(id)sender{
@@ -221,8 +256,6 @@
     viewController.userProfile = arrProfiles[[sender tag] ];
     settingsPopoverController = [[WYPopoverController alloc]initWithContentViewController:viewController];
     settingsPopoverController.delegate = self;
-    // settingsPopoverController.passthroughViews = @[btn];
-    //settingsPopoverController.popoverLayoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     settingsPopoverController.wantsDefaultContentAppearance = NO;
     CGRect frame =CGRectFromString(arrBtnFrame[[sender tag]]) ;
     [settingsPopoverController presentPopoverFromRect:frame
@@ -230,21 +263,15 @@
                              permittedArrowDirections:WYPopoverArrowDirectionAny
                                              animated:YES
                                               options:WYPopoverAnimationOptionFadeWithScale];
-
-}
-- (IBAction)backButtonAction:(id)sender {
-    
-}
-- (IBAction)uploadMoreProfileAction:(id)sender {
     
 }
 -(void)userMobileNumber:(NSString *)mobNo{
     [self getAllAddedProfiles];
     [popoverController dismissPopoverAnimated:YES];
-
 }
+
 -(void)selectedOption:(NSString *)option withTag:(NSInteger)tag{
-  
+    
     MBProgressHUD *HUD;
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFObject *userProfile = arrProfiles[tag];
@@ -253,14 +280,14 @@
         [profile setObject:@NO forKey:@"isActive"];
     else
         [profile setObject:@YES forKey:@"isActive"];
-
+    
     [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
+
         if (!error) {
-            [self getAllAddedProfiles];
-            
+            arrProfiles = [NSMutableArray array];
+            [self loadMore];
         } else {
             //Something bad has ocurred
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
@@ -268,7 +295,7 @@
             [errorAlertView show];
         }
     }];
-
+    
     [settingsPopoverController dismissPopoverAnimated:YES];
 }
 
@@ -282,11 +309,112 @@
             [alert show];
             return false;
         }
-         }
-    
-    
-      return YES;
+    }
+    return YES;
 }
 
+-(void)loadMore{
+    PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
+    [query whereKey:@"userId" equalTo:[PFUser currentUser]];
+    [query whereKey:@"relation" equalTo:@"Agent"];
+    [query includeKey:@"userId"];
+    [query includeKey:@"profileId.userId"];
+    query.skip = arrProfiles.count;
+    query.limit = 15;
+    
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    if(isSearching){
+        NSString *searchText = [NSString stringWithFormat:@"%@",self.searchBar.text];
+        NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        if ([searchText rangeOfCharacterFromSet:notDigits].location == NSNotFound)
+        {
+            PFQuery *innerQueryProfile = [PFQuery queryWithClassName:@"Profile"];
+            PFQuery *innerQueryUser =[PFUser query];
+            [innerQueryUser whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
+            [innerQueryProfile whereKey:@"userId" matchesQuery:innerQueryUser];
+            [query whereKey:@"profileId" matchesQuery:innerQueryProfile];
+        }
+        else{
+            PFQuery *innerQueryProfile = [PFQuery queryWithClassName:@"Profile"];
+            [innerQueryProfile whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
+            [query whereKey:@"profileId" matchesQuery:innerQueryProfile];
+        }
+    }
+    [self showLoader];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self hideLoader];
+        if (!error) {
+            viewCredits.hidden = NO;
+
+            if(objects.count<15)
+                [_tableView setDragDelegate:nil refreshDatePermanentKey:@"FriendList"];
+            else
+                [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
+            
+            NSMutableArray *arrFetchedItems =objects.mutableCopy;
+            
+            for(PFObject *tempObj in arrFetchedItems){
+                for(PFObject *obj in arrProfiles){
+                    PFUser *tempUser  = [tempObj valueForKey:@"userId"];
+                    PFUser *user  = [obj valueForKey:@"userId"];
+                    if([tempUser.username isEqual:user.username]){
+                        [arrFetchedItems removeObject:tempObj];
+                        break;
+                    }
+                }
+            }
+            [arrProfiles addObjectsFromArray:arrFetchedItems];
+            NSInteger count  =arrBtnFrame.count+arrFetchedItems.count;
+            for(int i = 0; i<count; i++) [arrBtnFrame addObject: [NSNull null]];
+
+            if(arrProfiles.count == 0)
+                self.lblUserInfo.hidden = NO;
+            else
+                self.lblUserInfo.hidden = YES;
+            
+            [self.tableView reloadData];
+        }
+        else  if (error.code ==209){
+            [PFUser logOut];
+            PFUser *user = nil;
+            PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+            [currentInstallation setObject:user forKey:@"user"];
+            [currentInstallation saveInBackground];
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+    }];
+    [self.tableView finishLoadMore];
+    
+}
+#pragma mark - Drag delegate methods
+- (void)dragTableLoadMoreCanceled:(UITableView *)tableView
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadMore) object:nil];
+}
+- (void)dragTableDidTriggerLoadMore:(UITableView *)tableView
+{
+    [self performSelector:@selector(loadMore) withObject:nil afterDelay:0];
+}
+
+#pragma mark ShowActivityIndicator
+-(void)showLoader{
+    [self.activityIndicator startAnimating];
+    self.btnCreateNewProfile.enabled = NO;
+    self.tableView.allowsSelection = NO;
+    btnAdd.enabled = NO;
+    self.tableView.userInteractionEnabled = NO;
+}
+
+-(void)hideLoader{
+    [self.activityIndicator stopAnimating];
+    self.btnCreateNewProfile.enabled = YES;
+    self.tableView.allowsSelection = NO;
+    self.tableView.userInteractionEnabled = YES;
+    btnAdd.enabled = YES;
+}
 
 @end

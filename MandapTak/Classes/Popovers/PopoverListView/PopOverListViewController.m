@@ -16,7 +16,7 @@
     BOOL isSearching;
     NSTimer *timer;
     NSInteger currentTime;
-
+    
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -32,14 +32,14 @@
     isSearching = NO;
     self.arrTableData = [NSMutableArray array];
     [self loadMore];
-
+    
     [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
-
+    
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self.searchBar becomeFirstResponder];
-
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -69,7 +69,7 @@
     else{
         isSearching = NO;
     }
-    }
+}
 
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
@@ -108,7 +108,6 @@ replacementString:(NSString *)string {
         }
         self.arrTableData = arrLocData;
         [self.tableView reloadData];
-        
     }];
     
     [searchBar resignFirstResponder];
@@ -168,7 +167,7 @@ replacementString:(NSString *)string {
 //- (void)dragTableRefreshCanceled:(UITableView *)tableView
 //{
 //    //cancel refresh request(generally network request) here
-//    
+//
 //    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(finishRefresh) object:nil];
 //}
 -(void)loadMore{
@@ -177,14 +176,15 @@ replacementString:(NSString *)string {
     PFQuery *query = [PFQuery queryWithClassName:@"City" ];
     query.skip = self.arrTableData.count;
     query.limit = 20;
+    [query includeKey:@"Parent.Parent"];
+
     [query orderByAscending:@"name"];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    if(isSearching){
-
+   // if(isSearching){
+        
         NSString *searchText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
-    }
-    [query includeKey:@"Parent.Parent"];
+   // }
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if(!error){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -217,25 +217,25 @@ replacementString:(NSString *)string {
                 
             }
             [self.tableView reloadData];
-
+            
         }
         
     }];
     [self.tableView finishLoadMore];
-
+    
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)closeButtonAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
