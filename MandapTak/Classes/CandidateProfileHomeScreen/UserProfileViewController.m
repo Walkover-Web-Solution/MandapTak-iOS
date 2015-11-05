@@ -277,6 +277,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                          profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
                          //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
                          profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
+                         if([profileModel.weight containsString:@"<null>"]){
+                             profileModel.weight = [profileModel.weight stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
+                         }
+                         
                          profileModel.gender = profileObj[@"gender"];
                          //caste label
                          PFObject *caste = [profileObj valueForKey:@"casteId"];
@@ -288,6 +292,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                          
                          //Height
                          profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
+                         if([profileModel.height containsString:@"<null>"]){
+                             profileModel.height = [profileModel.height stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
+                         }
                          
                          //ADD data in model for complete profile view screen
                          PFObject *currentLoc = [profileObj valueForKey:@"currentLocation"];
@@ -558,6 +565,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  [progressBar setValue:[traitResult floatValue] animateWithDuration:0.5];
                  lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
                  //NSLog(@"Traits matching at first call  = %@",traitResult);
+                 [[NSUserDefaults standardUserDefaults] setValue:traitResult forKey:@"demoTraits"];
              }
              else
              {
@@ -581,7 +589,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Show coach marks
-            [coachMarksView start];
+            //[coachMarksView start];
         }
         
         else if(tourFlag)
@@ -592,7 +600,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Show coach marks
-            [coachMarksView start];
+            //[coachMarksView start];
         }
         
         lblName.text = firstProfile.name;
@@ -612,8 +620,20 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         
         [self.view.layer addAnimation:trans forKey:nil];
         
-        //[self showBlurredImageForUser:objID];
+        //store object for demo tutorial screen
+        demoProfileObj = firstProfile;
+        [[NSUserDefaults standardUserDefaults] setValue:firstProfile.name forKey:@"demoProfileName"];
+        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height] forKey:@"demoProfileHeight"];
+        [[NSUserDefaults standardUserDefaults] setValue:firstProfile.designation forKey:@"demoProfileDesignation"];
+        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@,%@",firstProfile.religion,firstProfile.caste] forKey:@"demoProfileReligion"];
         
+        [[NSUserDefaults standardUserDefaults] setObject:UIImagePNGRepresentation(firstProfile.profilePic) forKey:@"demoProfileImage"];
+        [[NSUserDefaults standardUserDefaults] setObject:UIImagePNGRepresentation(effectImage) forKey:@"demoProfileBG"];
+        /*
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:demoProfileObj];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"DemoProfileObject"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+         */
     }
     else
     {
@@ -622,7 +642,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         //blankView.hidden = NO;
         //profileView.hidden = YES;
     }
-    
 }
 
 -(void) getUserProfilePicForUser:(NSString *)objectId

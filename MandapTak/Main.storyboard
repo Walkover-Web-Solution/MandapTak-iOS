@@ -67,6 +67,9 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -658,6 +661,7 @@
         <!--Demo ScreenVC-->
         <scene sceneID="2ul-B2-QF7">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4hR-BR-ils" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DemoScreenVC" id="Wdu-cS-Iuf" customClass="DemoScreenVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bcU-Pe-MdU"/>
@@ -667,52 +671,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bq-Tg-j2w">
-                                <rect key="frame" x="145" y="269" width="30" height="30"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <action selector="playAction:" destination="Wdu-cS-Iuf" eventType="touchUpInside" id="rox-6J-U4c"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JYb-lT-Isb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thanks..!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mud-pw-FYV">
+                                        <rect key="frame" x="70" y="263" width="181" height="42"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5mi-0a-mrE">
-                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vS6-eu-GJ2">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                        <rect key="frame" x="0.0" y="-1" width="320" height="569"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alia Chopra" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEe-du-UgQ">
-                                        <rect key="frame" x="16" y="288" width="288" height="24"/>
+                                        <rect key="frame" x="16" y="332" width="288" height="24"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="23 , 5'6&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwj-tQ-jsI">
-                                        <rect key="frame" x="16" y="314" width="288" height="24"/>
+                                        <rect key="frame" x="16" y="358" width="288" height="24"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hindu, Punjabi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9J-nO-65c">
-                                        <rect key="frame" x="16" y="340" width="288" height="24"/>
+                                        <rect key="frame" x="16" y="384" width="288" height="24"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Software Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpk-JH-y43">
-                                        <rect key="frame" x="16" y="366" width="288" height="24"/>
+                                        <rect key="frame" x="16" y="410" width="288" height="24"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXX-YJ-BFd">
-                                        <rect key="frame" x="16" y="392" width="288" height="24"/>
+                                        <rect key="frame" x="16" y="436" width="288" height="24"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEX-uZ-vp6">
-                                        <rect key="frame" x="55" y="423" width="50" height="50"/>
+                                        <rect key="frame" x="55" y="467" width="50" height="50"/>
                                         <state key="normal" image="undoNew.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -721,7 +730,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-0Q-6mZ">
-                                        <rect key="frame" x="215" y="423" width="50" height="50"/>
+                                        <rect key="frame" x="215" y="467" width="50" height="50"/>
                                         <state key="normal" image="dislikeNew.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -730,10 +739,19 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userDefImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="K3K-hq-uET">
-                                        <rect key="frame" x="80" y="93" width="160" height="160"/>
+                                        <rect key="frame" x="80" y="137" width="160" height="160"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WW-rY-0hb">
-                                        <rect key="frame" x="120" y="486" width="80" height="30"/>
+                                        <rect key="frame" x="120" y="530" width="80" height="30"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="slide.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -744,7 +762,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUt-AG-26B">
-                                        <rect key="frame" x="254" y="16" width="50" height="50"/>
+                                        <rect key="frame" x="254" y="60" width="50" height="50"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="pinFill.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -754,7 +772,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeZ-cj-OCB">
-                                        <rect key="frame" x="135" y="423" width="50" height="50"/>
+                                        <rect key="frame" x="135" y="467" width="50" height="50"/>
                                         <state key="normal" image="likeNew.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -762,46 +780,94 @@
                                             <action selector="likeAction:" destination="fCU-mN-wiz" eventType="touchUpInside" id="tZv-FM-t1A"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJa-4i-ziI" customClass="MBCircularProgressBarView">
+                                        <rect key="frame" x="28" y="60" width="68" height="68"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-hv-igI">
+                                                <rect key="frame" x="15" y="15" width="39" height="37"/>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="progressColor">
+                                                <color key="value" red="0.070588235289999995" green="0.74509803919999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="36"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="decimalPlaces">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="valueFontSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="valueDecimalFontSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="progressAngle">
+                                                <real key="value" value="100"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="progressLineWidth">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="progressRotationAngle">
+                                                <real key="value" value="-50"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="emptyLineWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="emptyCapType">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showUnitString" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="progressCapType">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showValueString" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vja-ZF-KyT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="p39-lh-bR9">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="buE-3L-9zR">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qz9-rU-Ru9">
-                                                <rect key="frame" x="16" y="7" width="71" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Back"/>
-                                                <connections>
-                                                    <action selector="back:" destination="Wdu-cS-Iuf" eventType="touchUpInside" id="dJl-Vw-6qP"/>
-                                                </connections>
-                                            </button>
-                                            <connections>
-                                                <action selector="back:" destination="Wdu-cS-Iuf" id="jU7-hd-SlV"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-pr-30w">
+                                <rect key="frame" x="20" y="15" width="34" height="30"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="Wdu-cS-Iuf" eventType="touchUpInside" id="eVb-rt-xF0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="blankView" destination="JYb-lT-Isb" id="FeB-GY-u6E"/>
                         <outlet property="btnDetail" destination="9WW-rY-0hb" id="vjA-Bp-XJX"/>
                         <outlet property="btnDislike" destination="X0L-0Q-6mZ" id="4gA-QA-u8c"/>
                         <outlet property="btnLike" destination="oeZ-cj-OCB" id="uXp-I2-oMc"/>
                         <outlet property="btnPin" destination="sUt-AG-26B" id="rw6-gL-JUy"/>
                         <outlet property="btnUndo" destination="hEX-uZ-vp6" id="MHi-1D-HDN"/>
+                        <outlet property="imgViewBackground" destination="vS6-eu-GJ2" id="Evg-Qw-3U5"/>
+                        <outlet property="imgViewProfilePic" destination="K3K-hq-uET" id="7px-fS-sgy"/>
                         <outlet property="lblHeight" destination="Nwj-tQ-jsI" id="Wyt-ID-PuK"/>
+                        <outlet property="lblMessage" destination="mud-pw-FYV" id="RvX-1s-Jir"/>
                         <outlet property="lblName" destination="XEe-du-UgQ" id="9zB-xc-iuO"/>
                         <outlet property="lblProfession" destination="Zpk-JH-y43" id="0vM-na-XiE"/>
                         <outlet property="lblReligion" destination="r9J-nO-65c" id="ply-tH-EcC"/>
+                        <outlet property="lblTraitMatch" destination="2jD-hv-igI" id="cHb-73-VwV"/>
+                        <outlet property="profileView" destination="5mi-0a-mrE" id="yav-dQ-9J6"/>
+                        <outlet property="progressBar" destination="kJa-4i-ziI" id="YH9-Nt-bxL"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4hR-BR-ils" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1460" y="2284"/>
         </scene>

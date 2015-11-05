@@ -23,6 +23,7 @@
 #import <LayerKit/LayerKit.h>
 #import "PreferenceVC.h"
 #import "WSCoachMarksView.h"
+#import "Profile.h"
 
 @interface UserProfileViewController : UIViewController <WSCoachMarksViewDelegate>
 {
@@ -55,6 +56,9 @@
     NSArray *coachMarks;
     //activity indicator
     IBOutlet UIActivityIndicatorView *activityIndicator;
+    
+    //object for demo profile
+    Profile *demoProfileObj;
 }
 @property (nonatomic) LYRClient *layerClient;
 - (IBAction)showCandidateProfile:(id)sender;
