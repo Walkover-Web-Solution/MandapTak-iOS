@@ -2290,7 +2290,7 @@
 				89B4BA5C1BCD2BF500363A4E /* LaunchScreen.xcassets in Resources */,
 				89E0FA521B85C92A000BD65A /* SelectionOverlay~iOS7@2x.png in Resources */,
 				89A570E41BE381CB00C0F0FC /* dislike2.png in Resources */,
-				89A570E41BE381CB00C0F0FC /* dislike.png in Resources */,
+				89A570E41BE381CB00C0F0FC /* dislike2.png in Resources */,
 				75BBA2921BE8AB4700838A34 /* MTLowRes.mp4 in Resources */,
 				896BC00E1B95D856009FD221 /* matchCellOption.png in Resources */,
 				7533F6AD1B84AF0A00B83EFD /* add@3x.png in Resources */,

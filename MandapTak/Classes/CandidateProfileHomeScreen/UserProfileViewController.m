@@ -277,7 +277,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                          profileModel.age = [NSString stringWithFormat:@"%@",profileObj[@"age"]];
                          //profileModel.height = [NSString stringWithFormat:@"%@",profileObj[@"height"]];
                          profileModel.weight = [NSString stringWithFormat:@"%@",profileObj[@"weight"]];
-                         if([profileModel.weight containsString:@"<null>"]){
+                         if(profileModel.weight.length == 0){
                              profileModel.weight = [profileModel.weight stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
                          }
                          
@@ -292,7 +292,8 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                          
                          //Height
                          profileModel.height = [self getFormattedHeightFromValue:[NSString stringWithFormat:@"%@cm",[profileObj valueForKey:@"height"]]];
-                         if([profileModel.height containsString:@"<null>"]){
+                         if(profileModel.height.length == 0)
+                         {
                              profileModel.height = [profileModel.height stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
                          }
                          
