@@ -719,7 +719,9 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 #pragma mark - Provided acction methods
 
 - (void)revealToggle:(id)sender
-{    
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"menuClicked"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self revealToggleAnimated:YES];
 }
 

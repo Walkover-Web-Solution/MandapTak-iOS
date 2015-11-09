@@ -40,8 +40,8 @@
 {
     if ([segue.identifier isEqualToString:@"coachMarkIdentifier"])
     {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WSCoachMarksShown"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFromTour"];
+        //[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WSCoachMarksShown"];
+        //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFromTour"];
         
         UserProfileViewController *vc = [segue destinationViewController];
         [self.navigationController presentViewController:vc animated:YES completion:nil];

@@ -59,6 +59,7 @@
     
     //object for demo profile
     Profile *demoProfileObj;
+    BOOL tourFlag;
 }
 @property (nonatomic) LYRClient *layerClient;
 - (IBAction)showCandidateProfile:(id)sender;

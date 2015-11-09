@@ -267,8 +267,8 @@
     }
     else if (indexPath.row == 4)
     {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WSCoachMarksShown"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFromTour"];
+        //[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WSCoachMarksShown"];
+        //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFromTour"];
         /*
         SWRevealViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
         [self presentViewController:vc2 animated:YES completion:nil];
@@ -338,13 +338,13 @@
     if (buttonIndex == 1)
     {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
-        MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+        moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
         [self presentModalViewController:moviePlayer animated:NO];
     }
     else if(buttonIndex == 2)
     {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WSCoachMarksShown"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFromTour"];
+        //[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WSCoachMarksShown"];
+        //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFromTour"];
         SWRevealViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
         [self presentViewController:vc2 animated:YES completion:nil];
         //[self.revealViewController setFrontViewPosition:FrontViewPositionLeft];

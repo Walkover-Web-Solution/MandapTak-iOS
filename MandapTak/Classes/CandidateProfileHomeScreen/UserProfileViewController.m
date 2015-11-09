@@ -108,7 +108,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeRight];
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeUp];
     
-    
     //check notification
     if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"redirectToPref"]  isEqualToString:@"yes"])
     {
@@ -238,6 +237,11 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     lblMessage.text = @"Finding matches...";
     [self animateArrayOfImagesForImageCount:30];
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
+    
+    //condition for tour view
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"menuClicked"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     //reload only if reload condition is true or no objects found in candidate profile list
     if ((![[userDefaults valueForKey:@"reloadCandidateList"] isEqualToString:@"no"]) || (arrCandidateProfiles.count == 0) )
     {
@@ -582,17 +586,21 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 //        [coachMarksView start];
         
         BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown"];
-        BOOL tourFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFromTour"];
+        BOOL menuFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"menuClicked"];
         if (coachMarksShown == NO)
         {
-            // Don't show again
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            // Show coach marks
-            //[coachMarksView start];
+            if (!menuFlag)
+            {
+                // Don't show again
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                // Show coach marks
+                [coachMarksView start];
+
+            }
         }
-        
+        /*
         else if(tourFlag)
         {
             // Don't show again
@@ -601,9 +609,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Show coach marks
-            //[coachMarksView start];
+            [coachMarksView start];
         }
-        
+        */
         lblName.text = firstProfile.name;
         lblHeight.text = [NSString stringWithFormat:@"%@,%@",firstProfile.age,firstProfile.height];
         lblProfession.text = firstProfile.designation;
