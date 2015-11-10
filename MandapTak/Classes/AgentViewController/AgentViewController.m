@@ -18,7 +18,6 @@
 #import "StartMainViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
-
 @interface AgentViewController ()<WYPopoverControllerDelegate,AgentCellOptionPopoverViewControllerDelegate,CreateNewUserPopoverViewControllerDelegate,UITableViewDragLoadDelegate>{
     NSMutableArray *arrProfiles;
     WYPopoverController *settingsPopoverController;
@@ -207,9 +206,13 @@
     return cell;
     
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+}
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
+  
 //    MBProgressHUD *HUD;
 //    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //    PFObject *userProfile = arrProfiles[indexPath.row];
@@ -404,7 +407,7 @@
 -(void)showLoader{
     [self.activityIndicator startAnimating];
     self.btnCreateNewProfile.enabled = NO;
-    self.tableView.allowsSelection = NO;
+   // self.tableView.allowsSelection = NO;
     btnAdd.enabled = NO;
     self.tableView.userInteractionEnabled = NO;
 }
@@ -412,7 +415,7 @@
 -(void)hideLoader{
     [self.activityIndicator stopAnimating];
     self.btnCreateNewProfile.enabled = YES;
-    self.tableView.allowsSelection = NO;
+    self.tableView.allowsSelection = YES;
     self.tableView.userInteractionEnabled = YES;
     btnAdd.enabled = YES;
 }

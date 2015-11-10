@@ -50,6 +50,8 @@
 -(void)updateCurrentProfile{
     [self getUserProfilePic];
 }
+
+
 #pragma mark User Profile Pic
 -(void) getUserProfilePic
 {

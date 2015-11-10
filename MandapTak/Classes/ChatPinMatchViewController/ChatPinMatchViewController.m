@@ -21,7 +21,7 @@
 #import "ConversationViewController.h"
 #import "DRCellSlideGestureRecognizer.h"
 //#import "LNBRippleEffect.h"
-@interface ChatPinMatchViewController ()<LYRQueryControllerDelegate,UIGestureRecognizerDelegate>{
+@interface ChatPinMatchViewController ()<LYRQueryControllerDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>{
     NSInteger currentTab;
     NSArray *arrMatches;
     NSMutableArray *arrPins;
@@ -40,6 +40,10 @@
     NSString *statusOfUndo;
     PFObject *profileLiked;
     PFObject *profileDisliked;
+    NSUInteger unmatchIndex;
+    UIView       *snapshot;
+    __weak IBOutlet UILabel *lblMatchUserInfo;
+    __weak IBOutlet UILabel *lblPinUserInfo;
     //LNBRippleEffect *rippleEffect;
 }
 - (IBAction)undoButtonAction:(id)sender;
@@ -75,7 +79,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchPinnedNotification" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPin) name:@"UpdatePinNotification" object:nil ];
-    self.tableView.tableFooterView =  matchTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
     if(self.currentProfile)
         [self switchToMatches];
@@ -109,7 +113,16 @@
 //    [rippleEffect setRippleColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9]];
 //    [rippleEffect setRippleTrailColor:[UIColor colorWithRed:240/255.0f green:113/255.0f blue:116/255.0f alpha:.9]];
 //    [self.view addSubview:rippleEffect];
-    
+    if(arrMatches.count ==0){
+        lblMatchUserInfo.hidden = YES;
+    }
+    else
+        lblMatchUserInfo.hidden = NO;
+    if(arrPins.count ==0){
+        lblPinUserInfo.hidden = YES;
+    }
+    else
+        lblPinUserInfo.hidden = NO;
 }
 
 - (IBAction)backToHome:(id)sender {
@@ -125,11 +138,10 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (succeeded) {
             [self switchToPin];
-            NSLog(@"Woohoo, Success!");
+            //NSLog(@"Woohoo, Success!");
         }
     }];
 }
-
 
 #pragma mark UITableViewDelegate
 
@@ -172,6 +184,14 @@
 
     }
     if(currentTab ==0){
+        
+//        UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+//                                              initWithTarget:self action:@selector(handleLongPress:)];
+//        lpgr.minimumPressDuration = 1.0; //seconds
+//        lpgr.delegate = self;
+//        [matchTableView addGestureRecognizer:lpgr];
+        
+
         matchAndPinCell.btnChat.tag = indexPath.row;
 
         PFObject *profile = arrMatches[indexPath.row];
@@ -347,6 +367,298 @@
     
     return 106;
 }
+#pragma mark HandleLongPressOnMatchCell
+
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    CGPoint p = [gestureRecognizer locationInView:matchTableView];
+    NSIndexPath *indexPath = [matchTableView indexPathForRowAtPoint:p];
+    static NSIndexPath  *sourceIndexPath = nil; ///< Initial index path, where gesture begins.
+    UIGestureRecognizerState state = gestureRecognizer.state;
+    CGPoint location = [gestureRecognizer locationInView:self.tableView];
+    
+    switch (state) {
+        case UIGestureRecognizerStateBegan: {
+            if (indexPath) {
+                sourceIndexPath = indexPath;
+                MatchAndPinTableViewCell *cell = [matchTableView cellForRowAtIndexPath:indexPath];
+                
+                // Take a snapshot of the selected row using helper method.
+                snapshot = nil;
+                snapshot = [self customSnapshoFromView:cell];
+                
+                // Add the snapshot as subview, centered at cell's center...
+                __block CGPoint center = cell.center;
+                snapshot.center = center;
+                snapshot.alpha = 0.0;
+                [matchTableView addSubview:snapshot];
+                [UIView animateWithDuration:0.25 animations:^{
+                    
+                    // Offset for gesture location.
+                    //center.y = location.y;
+                    snapshot.center = center;
+                    snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+                    snapshot.alpha = 0.98;
+                    cell.alpha = 0.0;
+                    
+                } completion:^(BOOL finished) {
+                    
+                    cell.hidden = YES;
+                    
+                }];
+            }
+            break;
+        }
+            
+        case UIGestureRecognizerStateChanged: {
+            CGPoint center = snapshot.center;
+            center.y = location.y;
+            snapshot.center = center;
+            
+            // Is destination valid and is it different from source?
+            if (indexPath && ![indexPath isEqual:sourceIndexPath]) {
+                
+                // ... update data source.
+                
+                // ... move the rows.
+                
+                // ... and update source so it is in sync with UI changes.
+                sourceIndexPath = indexPath;
+            }
+            break;
+        }
+            
+       default: {
+//            // Clean up.
+//            MatchAndPinTableViewCell *cell = [matchTableView cellForRowAtIndexPath:sourceIndexPath];
+//            cell.hidden = NO;
+//            cell.alpha = 0.0;
+//            
+//            [UIView animateWithDuration:0.25 animations:^{
+//                
+//                snapshot.center = cell.center;
+//                snapshot.transform = CGAffineTransformIdentity;
+//                snapshot.alpha = 0.0;
+//                cell.alpha = 1.0;
+//                
+//            } completion:^(BOOL finished) {
+//                
+//                sourceIndexPath = nil;
+//                [snapshot removeFromSuperview];
+//                snapshot = nil;
+//                
+//            }];
+//
+//           MatchAndPinTableViewCell *cell = [matchTableView cellForRowAtIndexPath:indexPath];
+
+//           matchTableView.hidden = YES;
+//           matchTableView.hidden = NO;
+//           [matchTableView reloadData];
+
+           break;
+       }
+    }
+    
+    if (indexPath == nil) {
+       // NSLog(@"long press on table view but not on a row");
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        unmatchIndex = indexPath.row;
+
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:@"Are you sure to unmatch."
+                                      delegate:self
+                                      cancelButtonTitle:@"Cancel"
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles:@"Yes", nil];
+        
+        [actionSheet showInView:self.view];
+        //NSLog(@"long press on table view at row %d", indexPath.row);
+        
+    } else {
+        //NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
+    }
+}
+#pragma mark UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    NSIndexPath *index =[NSIndexPath indexPathForRow:unmatchIndex inSection:0 ];
+                MatchAndPinTableViewCell *cell = [matchTableView cellForRowAtIndexPath:index];
+                cell.hidden = NO;
+                cell.alpha = 0.0;
+
+                [UIView animateWithDuration:0.25 animations:^{
+    
+                    snapshot.center = cell.center;
+                    snapshot.transform = CGAffineTransformIdentity;
+                    snapshot.alpha = 0.0;
+                    cell.alpha = 1.0;
+    
+                } completion:^(BOOL finished) {
+    
+                   // sourceIndexPath = nil;
+                    [snapshot removeFromSuperview];
+                    snapshot = nil;
+    
+                }];
+        
+    if  ([buttonTitle isEqualToString:@"Yes"]) {
+        [self dislikeForMatchAtIndex:unmatchIndex];
+    }
+}
+-(void)dislikeForMatchAtIndex:(NSUInteger)index{
+    PFObject *profile = arrMatches[index];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"LikedProfile"];
+    [query whereKey:@"likeProfileId" equalTo:profile];
+    [query whereKey:@"profileId" equalTo:self.currentProfile];
+    [self showLoader];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (!error) {
+            
+            PFObject *likedProfile = objects[0];
+            [likedProfile deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [self hideLoader];
+                if (succeeded){
+                    [self blockUsersInChatForProfile:profile];
+                    [self showLoader];
+                    btnBack.enabled =YES;
+                    [[AppData sharedData] loadAllMatches];
+                    
+                    [PFCloud callFunctionInBackground:@"getMatchedProfile"
+                                       withParameters:@{@"profileId":[self.currentProfile objectId]}
+                                                block:^(NSArray *results, NSError *error)
+                     {
+                         [self hideLoader];
+                         
+                         if (!error)
+                         {
+                             if(results.count == 0){
+                                 lblUserInfo.text = @"No Matches found!!";
+                                 lblUserInfo.hidden = NO;
+                             }
+                             else
+                                 lblUserInfo.hidden = YES;
+                             
+                             arrMatches = results;
+                             if(arrMatches.count ==0){
+                                 lblMatchUserInfo.hidden = YES;
+                             }
+                             else
+                                 lblMatchUserInfo.hidden = NO;
+
+                             [PFObject pinAllInBackground:arrMatches];
+                             [matchTableView reloadData];
+                             
+                         }
+                         else{
+                             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                             [alert show];
+                         }
+                     }];
+                    
+                }
+                
+            }];
+        }
+    }];
+    
+}
+-(void)blockUsersInChatForProfile:(PFObject*)profile{
+    // get all user for a conversation
+    //Query userProfile for all userId of Current user and opposite user.
+    PFObject *profileObject =profile;
+    [self showLoader];
+    PFQuery *query1 = [PFQuery queryWithClassName:@"UserProfile"];
+    [query1 whereKey:@"profileId" equalTo:self.currentProfile];
+    [query1 whereKey:@"relation" equalTo:@"Bachelor"];
+    PFQuery *query2 = [PFQuery queryWithClassName:@"UserProfile"];
+    [query2 whereKey:@"profileId" equalTo:profileObject];
+    [query2 whereKey:@"relation" equalTo:@"Bachelor"];
+    PFQuery *mainQuery = [PFQuery orQueryWithSubqueries:@[query1,query2]];
+    [mainQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self hideLoader];
+        
+        if (!error) {
+            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSMutableArray *arrUserIds = [NSMutableArray array];
+            for(PFObject *obj in objects){
+                PFUser *user = [obj valueForKey:@"userId"];
+                [arrUserIds addObject:user.objectId];
+            }
+            
+            //All user in coversation
+            NSArray *participants = arrUserIds;
+            LYRQuery *query = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
+            query.predicate = [LYRPredicate predicateWithProperty:@"participants" predicateOperator:LYRPredicateOperatorIsEqualTo value:participants];
+            [self showLoader];
+            NSError *error = nil;
+            NSOrderedSet *conversations1 = [self.layerClient executeQuery:query error:&error];
+            [self hideLoader];
+            if (!error) {
+                
+                if(conversations1.count!=0){
+                    
+                    //A posible conversation
+                    //get all user for the opposite profile.
+                    PFQuery *query3 = [PFQuery queryWithClassName:@"UserProfile"];
+                    [query3 whereKey:@"profileId" equalTo:profile];
+                    [query3 includeKey:@"userId"];
+                    [query3 whereKey:@"relation" notEqualTo:@"Agent"];
+                    [query3 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                        [self hideLoader];
+                        
+                        if (!error) {
+                            // now for each user implement the block policy.
+                            for(PFObject *profile in objects){
+                                PFUser *user = [profile valueForKey:@"userId"];
+                                LYRPolicy *blockPolicy = [LYRPolicy policyWithType:LYRPolicyTypeBlock];
+                                blockPolicy.sentByUserID = user.objectId;
+                                
+                                NSError *error = nil;
+                                BOOL success = [self.layerClient addPolicy:blockPolicy error:&error];
+                                if (!success)
+                                    NSLog(@"Failed adding policy with error %@", error);
+                                }
+                        }
+                    }];
+
+                }
+            }
+        }
+    }];
+
+//    LYRPolicy *blockPolicy = [LYRPolicy policyWithType:LYRPolicyTypeBlock];
+//    blockPolicy.sentByUserID = @"<USER_TO_BLOCK>";
+//    
+//    NSError *error = nil;
+//    BOOL success = [self.layerClient addPolicy:blockPolicy error:&error];
+//    if (!success) {
+//        NSLog(@"Failed adding policy with error %@", error);
+//    }
+}
+- (UIView *)customSnapshoFromView:(UIView *)inputView {
+    
+    // Make an image from the input view.
+    UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, NO, 0);
+    [inputView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Create an image view.
+    UIView *snapshot1 = [[UIImageView alloc] initWithImage:image];
+    snapshot1.layer.masksToBounds = NO;
+    snapshot1.layer.cornerRadius = 0.0;
+    snapshot1.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
+    snapshot1.layer.shadowRadius = 5.0;
+    snapshot1.layer.shadowOpacity = 0.4;
+    
+    return snapshot1;
+}
+
 #pragma mark LikeOnSwipeAction
 - (DRCellSlideActionBlock) pullTriggerBlock {
     return ^(UITableView *tableView, NSIndexPath *indexPath) {
@@ -363,7 +675,6 @@
                                             @"userName":[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileName"]}
                                     block:^(id results, NSError *error)
          {
-             //[MBProgressHUD hideHUDForView:self.view animated:YES];
              [self hideLoader];
              
              if (!error)
@@ -373,8 +684,6 @@
                  profileLiked = profile;
                  lblUndoTitle.text = [NSString stringWithFormat:@"You Liked %@",[profileLiked valueForKey:@"name"]];
                  [self showUndoBar];
-                 
-
              }
              
          }];
@@ -420,7 +729,7 @@
                      [self showUndoBar];
                  }];
 
-                NSLog(@"Woohoo, Success!");
+               // NSLog(@"Woohoo, Success!");
             }
         }];
 
@@ -495,10 +804,16 @@
                 
                 //  [self getUserProfileForUser:objects[0]];
                 arrPins = objects.mutableCopy;
+                if(arrPins.count ==0){
+                    lblPinUserInfo.hidden = YES;
+                }
+                else
+                    lblPinUserInfo.hidden = NO;
+
                 [self.tableView reloadData];
             } else {
                 // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                //NSLog(@"Error: %@ %@", error, [error userInfo]);
                 if(error.code ==100 ){
                     
                 }
@@ -510,8 +825,7 @@
         UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:@"Opps!!" message:@"Please Check your internet connection" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-
-}
+  }
 - (void)reloadCellForConversation:(LYRConversation *)conversation
 {
     if (!conversation) {
@@ -620,8 +934,8 @@
 - (IBAction)tabButtonAction:(id)sender {
     [self hideUndoBar];
 
-    [self resetTab];
     if(currentTab != [sender tag]){
+        [self resetTab];
         currentTab = [sender tag];
         switch ([sender tag]) {
             case 0:
@@ -640,7 +954,6 @@
                 break;
         }
     }
-    
 }
 
 -(void)resetTab{
@@ -685,6 +998,12 @@
                          lblUserInfo.hidden = YES;
                      
                      arrMatches = results;
+                     if(arrMatches.count ==0){
+                         lblMatchUserInfo.hidden = YES;
+                     }
+                     else
+                         lblMatchUserInfo.hidden = NO;
+
                      [PFObject pinAllInBackground:arrMatches];
                      [matchTableView reloadData];
                      
@@ -745,6 +1064,12 @@
                        lblUserInfo.hidden = YES;
  
                 arrPins = objects.mutableCopy;
+                if(arrPins.count ==0){
+                    lblPinUserInfo.hidden = YES;
+                }
+                else
+                    lblPinUserInfo.hidden = NO;
+
                 [self.tableView reloadData];
             }
         }];
@@ -783,7 +1108,7 @@
                       //  [self reloadCellForConversation:conversation];
                     }
                 } else {
-                    NSLog(@"Error querying for Users: %@", error);
+                   // NSLog(@"Error querying for Users: %@", error);
                 }
             }];
         }
@@ -817,7 +1142,7 @@
                     [self presentConversationListViewController];
                     //[self getAllChat];
                 } else {
-                    NSLog(@"Failed Authenticating Layer Client with error:%@", error);
+                    //NSLog(@"Failed Authenticating Layer Client with error:%@", error);
                 }
             }];
         }
@@ -830,7 +1155,7 @@
     if (self.layerClient.authenticatedUserID) {
         // If the layerClient is authenticated with the requested userID, complete the authentication process.
         if ([self.layerClient.authenticatedUserID isEqualToString:userID]){
-            NSLog(@"Layer Authenticated as User %@", self.layerClient.authenticatedUserID);
+            //NSLog(@"Layer Authenticated as User %@", self.layerClient.authenticatedUserID);
             if (completion) completion(YES, nil);
             return;
         } else {
@@ -886,13 +1211,13 @@
                         if (completion) {
                             completion(YES, nil);
                         }
-                        NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
+                        //NSLog(@"Layer Authenticated as User: %@", authenticatedUserID);
                     } else {
                         completion(NO, error);
                     }
                 }];
             } else {
-                NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
+                //NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
             }
         }];
         
@@ -905,18 +1230,18 @@
     NSError *error;
     NSOrderedSet *messages = [self.layerClient executeQuery:query error:&error];
     if (messages) {
-        NSLog(@"%tu messages", messages.count);
+       // NSLog(@"%tu messages", messages.count);
     } else {
-        NSLog(@"Query failed with error %@", error);
+        //NSLog(@"Query failed with error %@", error);
     }
     
     LYRQuery *query2 = [LYRQuery queryWithQueryableClass:[LYRConversation class]];
     NSError *error2 = nil;
     NSOrderedSet *conversation = [self.layerClient executeQuery:query2 error:&error2];
     if (conversation) {
-        NSLog(@"%tu conversations", conversation.count);
+      //  NSLog(@"%tu conversations", conversation.count);
     } else {
-        NSLog(@"Query failed with error %@", error);
+       // NSLog(@"Query failed with error %@", error);
     }
     ConversationListViewController *controller = [ConversationListViewController  conversationListViewControllerWithLayerClient:self.layerClient];
     [chatView addSubview:controller.view];
@@ -957,11 +1282,9 @@
     vc.profileObj = pro;
     vc.txtTraits = userInfo[@"traitsCount"];;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
-
 }
 
 #pragma mark ChatCode
-
 -(void)chatButtonAction:(id)sender {
     [self getAllUserForAConversationForIndex:[sender tag]];
 }
@@ -996,7 +1319,7 @@
         [chat setTitle:@"Chat" forState:UIControlStateNormal];
         
     } else {
-        NSLog(@"Query failed with error %@", error);
+       // NSLog(@"Query failed with error %@", error);
     }
     return nil;
 }
@@ -1020,7 +1343,7 @@
                 PFUser *user = [obj valueForKey:@"userId"];
                 [arrUserIds addObject:user.objectId];
             }
-            NSLog(@"arrUserIds --  %@",arrUserIds);
+           // NSLog(@"arrUserIds --  %@",arrUserIds);
             [self getChatConversationIfPossibleWithUsers:arrUserIds withProfileObject:profileObject];
             // The find succeeded.
         }
