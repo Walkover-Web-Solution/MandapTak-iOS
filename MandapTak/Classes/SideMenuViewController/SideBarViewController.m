@@ -175,11 +175,11 @@
             break;
         case 3:
             cell.textLabel.text = @"Video Tour";
-            //cell.imageView.image = [UIImage imageNamed:@"preferences"];
+            cell.imageView.image = [UIImage imageNamed:@"video"];
             break;
         case 4:
             cell.textLabel.text = @"Tutorial View";
-            //cell.imageView.image = [UIImage imageNamed:@"preferences"];
+            cell.imageView.image = [UIImage imageNamed:@"direction"];
             break;
         default:
             break;
