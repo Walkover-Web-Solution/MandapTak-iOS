@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D131" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="Caste" syncable="YES"/>
+    <entity name="Profile" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="religion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="traits" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="userImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="work" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Religion" syncable="YES">
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="religion" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Caste" positionX="-63" positionY="90" width="128" height="45"/>
         <element name="Religion" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Caste" positionX="-54" positionY="9" width="128" height="45"/>
+        <element name="Profile" positionX="-63" positionY="36" width="128" height="150"/>
     </elements>
 </model>

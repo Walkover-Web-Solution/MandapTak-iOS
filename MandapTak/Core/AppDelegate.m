@@ -124,6 +124,19 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [[FBSDKApplicationDelegate sharedInstance]application:application didFinishLaunchingWithOptions:launchOptions];
     
     // Override point for customization after application launch.
+    
+    //core data code
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *failedBankInfo = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context];
+    [failedBankInfo setValue:@"Profile 01" forKey:@"name"];
+    [failedBankInfo setValue:[NSNumber numberWithInt:24] forKey:@"age"];
+    [failedBankInfo setValue:[NSNumber numberWithInt:150] forKey:@"height"];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
     return YES;
 }
 

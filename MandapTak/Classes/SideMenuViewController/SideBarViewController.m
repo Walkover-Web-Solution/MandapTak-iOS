@@ -237,8 +237,9 @@
     {
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
-        MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
-        [self presentModalViewController:moviePlayer animated:NO];
+        moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+        //[self presentModalViewController:moviePlayer animated:NO];
+        [self presentViewController:moviePlayer animated:YES completion:nil];
         [self.revealViewController setFrontViewPosition:FrontViewPositionLeft];
         
         //[self performSegueWithIdentifier:@"tourOptionsIdentifier" sender:nil];

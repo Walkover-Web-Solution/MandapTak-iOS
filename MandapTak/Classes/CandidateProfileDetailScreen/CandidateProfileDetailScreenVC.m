@@ -507,12 +507,6 @@
 
 - (IBAction)back:(id)sender
 {
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
-    MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
-    [self presentModalViewController:moviePlayer animated:NO];
-     
-    
     //set traits to nil
     textTraits = nil;
     [self dismissViewControllerAnimated:YES completion:nil];

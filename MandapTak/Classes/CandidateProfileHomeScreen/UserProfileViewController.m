@@ -13,6 +13,7 @@
 #import "AppData.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import <CoreData/CoreData.h>
 
 @interface UserProfileViewController ()
 {
@@ -42,7 +43,19 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 {
     [super viewDidLoad];
     self.layerClient = [[AppData sharedData]fetchLayerClient];
-
+    /*
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects)
+    {
+        NSLog(@"Name: %@", [info valueForKey:@"name"]);
+        NSManagedObject *details = [info valueForKey:@"age"];
+        NSLog(@"Zip: %@", [details valueForKey:@"height"]);
+    }
+    */
     //notification for matched profile
     //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"MatchedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMatchScreen:) name:@"MatchedNotification" object:nil];
@@ -982,7 +995,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 
 - (IBAction)showCandidateProfile:(id)sender
 {
-    /*
+    
     //[self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     CandidateProfileDetailScreenVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CandidateProfileDetailScreenVC"];
     Profile *candidateProfile = arrCandidateProfiles[profileNumber];
@@ -998,12 +1011,13 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     //navController.navigationBarHidden =YES;
     [self.navigationController presentViewController:vc animated:YES completion:nil];
     //[self.navigationController pushViewController:vc animated:YES];
-     */
+     
     
-    
+    /*
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
     MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
     [self presentModalViewController:moviePlayer animated:NO];
+    */
     
     /*
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MTLowRes" ofType:@"mp4"];
