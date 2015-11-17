@@ -50,6 +50,7 @@
     IBOutlet UILabel *lblManglik;
     IBOutlet UILabel *lblAgeLimit;
     IBOutlet UILabel *lblHeight;
+    IBOutlet UIButton *btnPreferredLocation;
     
     WYPopoverController* popoverController,*popOver2;
     IBOutlet UIButton *btnLocation;

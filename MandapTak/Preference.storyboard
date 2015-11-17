@@ -521,6 +521,7 @@
                         <outlet property="btnLocation" destination="wof-Sf-Gpo" id="ppd-Ci-M7H"/>
                         <outlet property="btnMaxHeight" destination="vww-4q-QrM" id="isP-3j-gOh"/>
                         <outlet property="btnMinHeight" destination="86g-nb-SrX" id="9QP-Ba-Hez"/>
+                        <outlet property="btnPreferredLocation" destination="tz1-oD-mmv" id="LIq-zq-gJI"/>
                         <outlet property="equalHeightConstraint" destination="jMN-0Q-Mij" id="iN4-UF-4rW"/>
                         <outlet property="heightSlider" destination="RuH-OT-pYE" id="0rm-x0-GTZ"/>
                         <outlet property="lblAgeLimit" destination="LNq-cb-LQc" id="GuZ-bf-z8T"/>

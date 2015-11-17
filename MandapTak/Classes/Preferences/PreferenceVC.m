@@ -123,6 +123,8 @@
     lblDegree.hidden = YES;
     btnAddDegree.hidden = YES;
     
+    //hide preferred loaction button
+    btnPreferredLocation.hidden = YES;
    // [self checkBudgetVisiblity];
     
     /*
