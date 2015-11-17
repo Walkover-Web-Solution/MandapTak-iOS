@@ -219,17 +219,14 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    PFObject *userProfile = arrProfiles[indexPath.row];
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
-//    AgentUserDetailViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentUserDetailViewController"];
-//    vc.userProfile = userProfile;
-//    [self presentViewController:vc animated:YES completion:nil];
-    
-    
-    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agreement" bundle:nil];
-    AgreementViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgreementViewController"];
+    PFObject *userProfile = arrProfiles[indexPath.row];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
+    AgentUserDetailViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentUserDetailViewController"];
+    vc.userProfile = userProfile;
     [self presentViewController:vc animated:YES completion:nil];
-}
+    
+    
+  }
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
   

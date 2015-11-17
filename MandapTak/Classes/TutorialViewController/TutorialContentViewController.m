@@ -12,12 +12,14 @@
 #import <Parse/Parse.h>
 #import "AppData.h"
 #import "VerficationViewController.h"
+#import "AgreementViewController.h"
 #define LOGIN_TEXTFIELD_OFFSET        (IS_IPHONE_5 ? 160 :100)
 
 @interface TutorialContentViewController ()<UITextFieldDelegate>{
     BOOL isShowingKeyboard;
     __weak IBOutlet UIActivityIndicatorView *activityIndicator;
 }
+- (IBAction)agreementButtonAction:(id)sender;
 
 - (IBAction)loginButtonAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtMobNumber;
@@ -161,6 +163,9 @@
     //  [self setNeedsUpdateConstraints];
 }
 
+
+- (IBAction)agreementButtonAction:(id)sender {
+}
 
 - (IBAction)loginButtonAction:(id)sender {
     if([[AppData sharedData]isInternetAvailable]){

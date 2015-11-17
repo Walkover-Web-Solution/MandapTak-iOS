@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -21,6 +21,7 @@
             <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
+            <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
@@ -193,14 +194,14 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFC-4g-qdr">
-                                <rect key="frame" x="80" y="466" width="160" height="35"/>
+                                <rect key="frame" x="80" y="478" width="160" height="35"/>
                                 <color key="backgroundColor" red="0.82745098039215681" green="0.41568627450980389" blue="0.43137254901960786" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="PIm-bf-Avd"/>
                                     <constraint firstAttribute="height" constant="35" id="QXS-DL-T8y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
-                                <state key="normal" title="Login">
+                                <state key="normal" title="Accept &amp; Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -211,6 +212,16 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6xW-lA-tKJ">
                                 <rect key="frame" x="142" y="266" width="37" height="37"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Erq-mJ-yew">
+                                <rect key="frame" x="37" y="447" width="246" height="30"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
+                                <state key="normal" title="Terms and conditions">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="agreementButtonAction:" destination="6CF-4b-L6l" eventType="touchUpInside" id="uqM-FW-kRd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -218,15 +229,18 @@
                             <constraint firstItem="Whp-hq-fD3" firstAttribute="top" secondItem="64n-Tq-w4E" secondAttribute="bottom" constant="46" id="2rH-9t-H3z"/>
                             <constraint firstAttribute="centerX" secondItem="OPJ-pb-LUe" secondAttribute="centerX" id="6Hz-O9-Kvn"/>
                             <constraint firstItem="6pA-4W-lAP" firstAttribute="top" secondItem="s1d-xG-RY2" secondAttribute="bottom" id="Aph-F5-CcJ"/>
+                            <constraint firstItem="Erq-mJ-yew" firstAttribute="leading" secondItem="pAM-QA-kfn" secondAttribute="leading" constant="37" id="EKj-wf-8fk"/>
                             <constraint firstAttribute="centerY" secondItem="6xW-lA-tKJ" secondAttribute="centerY" id="IBV-0U-62Z"/>
                             <constraint firstItem="W5x-63-arG" firstAttribute="top" secondItem="Whp-hq-fD3" secondAttribute="bottom" constant="8" id="OD2-cM-Eai"/>
-                            <constraint firstItem="FFC-4g-qdr" firstAttribute="top" secondItem="9Bo-aO-2o5" secondAttribute="bottom" constant="19" id="Q3z-o8-xb8"/>
+                            <constraint firstItem="FFC-4g-qdr" firstAttribute="top" secondItem="9Bo-aO-2o5" secondAttribute="bottom" constant="31" id="Q3z-o8-xb8"/>
                             <constraint firstAttribute="centerX" secondItem="6xW-lA-tKJ" secondAttribute="centerX" id="Y6k-TK-SGl"/>
+                            <constraint firstItem="FFC-4g-qdr" firstAttribute="top" secondItem="Erq-mJ-yew" secondAttribute="bottom" constant="1" id="bqG-UL-8Ft"/>
+                            <constraint firstItem="Erq-mJ-yew" firstAttribute="top" secondItem="9Bo-aO-2o5" secondAttribute="bottom" id="f9S-yn-8Jf"/>
                             <constraint firstAttribute="centerX" secondItem="G6d-Vn-oaG" secondAttribute="centerX" id="fVS-LM-qhq"/>
                             <constraint firstItem="2lM-Ud-C9S" firstAttribute="top" secondItem="W5x-63-arG" secondAttribute="bottom" constant="8" id="fmn-fS-Z0L"/>
                             <constraint firstItem="s1d-xG-RY2" firstAttribute="leading" secondItem="pAM-QA-kfn" secondAttribute="leading" id="hvt-ty-fzn"/>
                             <constraint firstItem="9Bo-aO-2o5" firstAttribute="top" secondItem="G6d-Vn-oaG" secondAttribute="bottom" constant="18" id="ivK-kJ-YSZ"/>
-                            <constraint firstItem="6pA-4W-lAP" firstAttribute="top" secondItem="FFC-4g-qdr" secondAttribute="bottom" constant="67" id="jpH-my-xq7"/>
+                            <constraint firstItem="6pA-4W-lAP" firstAttribute="top" secondItem="FFC-4g-qdr" secondAttribute="bottom" constant="55" id="jpH-my-xq7"/>
                             <constraint firstAttribute="centerX" secondItem="9Bo-aO-2o5" secondAttribute="centerX" id="lTK-hs-UlJ"/>
                             <constraint firstItem="s1d-xG-RY2" firstAttribute="top" secondItem="pAM-QA-kfn" secondAttribute="top" id="mZa-ux-57j"/>
                             <constraint firstAttribute="centerX" secondItem="W5x-63-arG" secondAttribute="centerX" id="oW8-6g-xPq"/>
@@ -234,6 +248,7 @@
                             <constraint firstAttribute="trailing" secondItem="s1d-xG-RY2" secondAttribute="trailing" id="wRU-oT-8T4"/>
                             <constraint firstAttribute="centerX" secondItem="Whp-hq-fD3" secondAttribute="centerX" id="yVA-8D-vYS"/>
                             <constraint firstAttribute="centerX" secondItem="2lM-Ud-C9S" secondAttribute="centerX" id="yqt-ay-mrW"/>
+                            <constraint firstAttribute="trailing" secondItem="Erq-mJ-yew" secondAttribute="trailing" constant="37" id="zci-Mn-DKp"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -921,7 +936,7 @@
                                     <constraint firstItem="r9J-nO-65c" firstAttribute="centerX" secondItem="5mi-0a-mrE" secondAttribute="centerX" id="wPP-B2-0hd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-pr-30w">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-pr-30w">
                                 <rect key="frame" x="20" y="15" width="33" height="29"/>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
                                 <state key="normal" title="Back">
