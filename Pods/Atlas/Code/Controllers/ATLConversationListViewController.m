@@ -54,7 +54,7 @@ static NSString *const ATLGIFMIMETypePlaceholderText = @"Attachment: GIF";
 NSString *const ATLConversationListViewControllerTitle = @"Messages";
 NSString *const ATLConversationTableViewAccessibilityLabel = @"Conversation Table View";
 NSString *const ATLConversationTableViewAccessibilityIdentifier = @"Conversation Table View Identifier";
-NSString *const ATLConversationListViewControllerDeletionModeLocal = @"Local";
+NSString *const ATLConversationListViewControllerDeletionModeLocal = @"Delete";
 NSString *const ATLConversationListViewControllerDeletionModeGlobal = @"Delete";
 
 + (instancetype)conversationListViewControllerWithLayerClient:(LYRClient *)layerClient
@@ -268,10 +268,10 @@ NSString *const ATLConversationListViewControllerDeletionModeGlobal = @"Delete";
     return conversationCell;
 }
 
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return self.allowsEditing;
-//}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.allowsEditing;
+}
 
 #pragma mark - Cell Configuration
 
@@ -334,8 +334,8 @@ NSString *const ATLConversationListViewControllerDeletionModeGlobal = @"Delete";
 //                case LYRDeletionModeLocal:
 //                    actionString = ATLLocalizedString(@"atl.conversationlist.deletionmode.local.key", ATLConversationListViewControllerDeletionModeLocal, nil);
 //                    break;
-//                case LYRDeletionModeAllParticipants:
-//                    actionString = ATLLocalizedString(@"atl.conversationlist.deletionmode.global.key", ATLConversationListViewControllerDeletionModeGlobal, nil);
+////                case LYRDeletionModeAllParticipants:
+////                    actionString = ATLLocalizedString(@"atl.conversationlist.deletionmode.global.key", ATLConversationListViewControllerDeletionModeGlobal, nil);
 //                    break;
 //                default:
 //                    break;
@@ -348,8 +348,8 @@ NSString *const ATLConversationListViewControllerDeletionModeGlobal = @"Delete";
 //                case LYRDeletionModeLocal:
 //                    actionColor = [UIColor redColor];
 //                    break;
-//                case LYRDeletionModeAllParticipants:
-//                    actionColor = [UIColor grayColor];
+////                case LYRDeletionModeAllParticipants:
+////                    actionColor = [UIColor grayColor];
 //                    break;
 //                default:
 //                    break;
@@ -363,13 +363,14 @@ NSString *const ATLConversationListViewControllerDeletionModeGlobal = @"Delete";
 //    }
 //    return actions;
 //}
-//
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-////    self.conversationToDelete = [self.queryController objectAtIndexPath:indexPath];
-////    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:ATLConversationListViewControllerDeletionModeGlobal otherButtonTitles:ATLConversationListViewControllerDeletionModeLocal, nil];
-////    [actionSheet showInView:self.view];
-//}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    self.conversationToDelete = [self.queryController objectAtIndexPath:indexPath];
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:ATLConversationListViewControllerDeletionModeGlobal otherButtonTitles:ATLConversationListViewControllerDeletionModeLocal, nil];
+//    [actionSheet showInView:self.view];
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

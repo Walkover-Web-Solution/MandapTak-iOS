@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @protocol CreateNewUserPopoverViewControllerDelegate
--(void)userMobileNumber:(NSString*)mobNo;
+-(void)userMobileNumber:(NSString*)mobNo ;
 @end
 
 @interface CreateNewUserPopoverViewController : UIViewController
 @property (weak, nonatomic) id <CreateNewUserPopoverViewControllerDelegate> delegate;
-
+@property (assign, nonatomic) NSInteger agentBal;
 @end

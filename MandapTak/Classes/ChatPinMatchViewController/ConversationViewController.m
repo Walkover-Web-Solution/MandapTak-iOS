@@ -62,6 +62,7 @@
         self.navigationItem.title =  [NSString stringWithFormat:@"%@",self.title];
     }
     [self configureUI];
+    
 }
 -(void)backButton{
     [self dismissViewControllerAnimated:YES completion:nil];

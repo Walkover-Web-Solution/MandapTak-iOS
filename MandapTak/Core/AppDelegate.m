@@ -57,11 +57,15 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     }
     // Raygun Initialisation
     //[Raygun sharedReporterWithApiKey:@"FmwFxRVKP/T932mxk9zzEA=="];
-
+    //dev keys
     [Parse setApplicationId:@"Uj7WryNjRHDQ0O3j8HiyoFfriHV8blt2iUrJkCN0"
                   clientKey:@"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa2e4pBedN"];
+    //Production keys
+//    [Parse setApplicationId:@"XQA3RRfnMim2IyheuTBRkKZNRurkTNhxEiqa8Bs8"
+//                  clientKey:@"fsdwA6pXp3SYXVk27uf3loRUziyrb7Oh0sMluSlo"];
+
     [PFUser enableRevocableSessionInBackground];
-    
+
     //restrict rotation
     //[[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"shouldRotateToLandscape"];
     
@@ -72,6 +76,10 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     if([PFUser currentUser]){
+        [[AppData sharedData]setProfileForCurrentUserwithCompletionBlock:^(PFObject *profile, NSError *error) {
+            //set currentProfile
+        }];
+
         [[AppData sharedData]loadAllMatches];
         [[AppData sharedData]loadCurrentProfile];
         //[[Raygun sharedReporter] identify:[[PFUser currentUser] valueForKey:@"username"]];

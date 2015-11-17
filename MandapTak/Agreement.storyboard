@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--Agreement View Controller-->
+        <scene sceneID="AHj-HJ-w8I">
+            <objects>
+                <viewController storyboardIdentifier="AgreementViewController" id="hWM-qT-DTv" customClass="AgreementViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="God-xC-9qx"/>
+                        <viewControllerLayoutGuide type="bottom" id="kT3-A7-hqM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i61-KI-9nh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4S-ch-bmG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="NlP-cF-VxX"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Agreement" id="9ZH-mO-WGF">
+                                        <barButtonItem key="rightBarButtonItem" title="Agree" id="r6w-ET-97p">
+                                            <connections>
+                                                <action selector="agreeButtonAction:" destination="hWM-qT-DTv" id="QHh-N7-Lc4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="41T-Uv-2Tm">
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">READ CAREFULLY: LICENSOR LICENSES THIS PROGRAM, TOOL, PLUG-IN, ADD-ON, APPLICATION, LIBRARY, CONTENT, DATA, SOLUTION, SERVICE OR OTHER ITEM OR MATERIAL (THE "CONTENT") TO YOU ONLY UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED IN THIS END USER LICENSE AGREEMENT ("AGREEMENT").
+
+Splunk Apps hosts certain content created and published by individuals and entities other than Splunk Inc. or its affiliates ("Splunk"). Such third-party content made available through Splunk Apps are licensed, not sold, to you. Your license to each content that you obtain through Splunk Apps is subject to your prior acceptance of this End User License Agreement, and you agree that the terms of this Agreement will apply to each Content that you license through Splunk Apps.
+
+Responsibility. If you are downloading, accessing or using the Content provided or authored by a third-party developer or provider, this Agreement is solely between the developer or provider of the Content ("Licensor") and you, and not with Splunk. Licensor, and not Splunk, is solely responsible for the Content, including, without limitation, for any warranties, maintenance and support, notices and consents to be given to Users. Notwithstanding the above, you acknowledge that Splunk is a third-party beneficiary of this Agreement and that upon your acceptance of the terms of this Agreement, Splunk will have the right to enforce the Agreement against you as a third-party beneficiary thereof. Questions, complaints or claims with respect to the Content should be directed solely to the Licensor, whose contact information can be found on the Content Download Page from which the Content is downloaded.
+Qualified User. The Content is to be used only in conjunction with the specific Splunk software product or service identified in materials distributed with the Content, with which such Content was designed to operate ("Splunk Software"). Therefore, you may use the Content only if you are an authorized user of the Splunk Software. This Agreement does not modify or alter the terms of the software license agreement delivered with the Splunk Software.
+License. Subject to the terms and conditions of this Agreement, Licensor grants to you a license to download and use the Content in connection with the Splunk Software.
+Warranty. THE CONTENT IS FURNISHED ON AN "AS IS" BASIS, AND LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, WARRANTIES OF NON-INFRINGEMENT OF THIRD-PARTY RIGHTS, OR OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, AND ANY WARRANTIES ARISING BY STATUTE OR OTHERWISE IN LAW, OR FROM A COURSE OF DEALING OR USAGE OF TRADE. LICENSOR SPECIFICALLY DOES NOT WARRANT THAT THE CONTENT WILL MEET YOUR REQUIREMENTS; WILL OPERATE IN ALL THE COMBINATIONS WHICH MAY BE SELECTED FOR USE BY YOU; THAT THE OPERATION OF THE CONTENT WILL BE ERROR-FREE OR UNINTERRUPTED, ACCURATE, USEFUL, RELIABLE, OR COMPLETE; OR THAT ALL ERRORS OR DEFECTS IN THE CONTENT WILL BE CORRECTED. NEITHER SPLUNK NOR LICENSOR SHALL BE LIABLE FOR ANY DAMAGES WHATSOEVER ARISING FROM OR RELATING TO YOUR USE OR INABILITY TO USE THE CONTENT. YOU USE THE CONTENT AT YOUR OWN RISK.
+Limitation of Liability. UNDER NO CIRCUMSTANCES WILL SPLUNK OR LICENSOR BE LIABLE TO YOU FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR EXEMPLARY DAMAGES, FOR LOSS OF PROFITS, USE, REVENUE, OR DATA OR FOR BUSINESS INTERRUPTION (REGARDLESS OF THE LEGAL THEORY FOR SEEKING SUCH DAMAGES OR OTHER LIABILITY) ARISING OUT OF OR IN CONNECTION WITH USE OF THE CONTENT, WHETHER OR NOT SPLUNK OR LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ADDITION, THE LIABILITY OF SPLUNK OR LICENSOR ARISING OUT OF OR RELATING TO THE CONTENT WILL NOT EXCEED THE AMOUNT PAID OR PAYABLE BY YOU (IF ANY) FOR SUCH CONTENT.
+General. This Agreement will be governed by and construed in accordance with the laws of the State of California (and, to the extent controlling, the federal laws of the United States, without reference to the conflicts-of-laws rules thereof). The UN Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act shall not apply to this Agreement. This Agreement constitutes the entire agreement between Licensor and you with respect to the Content and may not be modified except by a written instrument executed by you and an authorized representative of Licensor.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="41T-Uv-2Tm" firstAttribute="leading" secondItem="i61-KI-9nh" secondAttribute="leading" id="Hdb-Nz-ygn"/>
+                            <constraint firstItem="kT3-A7-hqM" firstAttribute="top" secondItem="41T-Uv-2Tm" secondAttribute="bottom" id="M91-lZ-Jxn"/>
+                            <constraint firstAttribute="trailing" secondItem="S4S-ch-bmG" secondAttribute="trailing" id="MsU-bL-c4g"/>
+                            <constraint firstItem="S4S-ch-bmG" firstAttribute="leading" secondItem="i61-KI-9nh" secondAttribute="leading" id="Vnr-ys-PIX"/>
+                            <constraint firstAttribute="trailing" secondItem="41T-Uv-2Tm" secondAttribute="trailing" id="WRM-nx-he4"/>
+                            <constraint firstItem="41T-Uv-2Tm" firstAttribute="top" secondItem="S4S-ch-bmG" secondAttribute="bottom" id="gT0-Sx-rTs"/>
+                            <constraint firstItem="S4S-ch-bmG" firstAttribute="top" secondItem="i61-KI-9nh" secondAttribute="top" id="gxq-fU-MuP"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tCS-tG-d5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="487" y="400"/>
+        </scene>
+    </scenes>
+</document>

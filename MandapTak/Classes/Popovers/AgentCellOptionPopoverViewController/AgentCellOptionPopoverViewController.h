@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 @protocol AgentCellOptionPopoverViewControllerDelegate
 -(void)selectedOption:(NSString*)option withTag:(NSInteger)tag;
+
 @end
 
 @interface AgentCellOptionPopoverViewController : UIViewController

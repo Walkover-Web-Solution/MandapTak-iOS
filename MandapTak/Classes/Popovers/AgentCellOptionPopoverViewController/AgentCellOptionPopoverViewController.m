@@ -14,6 +14,7 @@
     __weak IBOutlet UIButton *btnActivateOrDeactivate;
 }
 - (IBAction)deactivateButtonAction:(id)sender;
+- (IBAction)givePermissionButtonAction:(id)sender;
 
 @end
 
@@ -51,7 +52,9 @@
 
 - (IBAction)deactivateButtonAction:(id)sender {
     [self.delegate selectedOption:@"Deactivated" withTag:self.btnTag];
+}
 
-  
+- (IBAction)givePermissionButtonAction:(id)sender {
+    [self.delegate selectedOption:@"GivePermission" withTag:self.btnTag];
 }
 @end

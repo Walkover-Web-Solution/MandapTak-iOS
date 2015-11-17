@@ -117,7 +117,7 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
 }
 -(void)loadCurrentProfile{
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    query.cachePolicy = kPFCachePolicyCacheOnly;
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query whereKey:@"objectId" equalTo:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -125,6 +125,22 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
             PFObject *obj= objects[0];
             self.currentProfile =obj;
            // [self loadAllMatches];
+        }
+    }];
+
+}
+
+-(void)setProfileForCurrentUserwithCompletionBlock:(GetProfilesCompletionBlock)completionBlock{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"userId" equalTo:[PFUser currentUser]];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            PFObject *obj= objects[0];
+            self.profileId =obj;
+            completionBlock(obj, nil);
+            // [self loadAllMatches];
         }
     }];
 

@@ -207,6 +207,9 @@
                                                     [PFCloud callFunction:@"deleteDuplicateInstallations" withParameters:@{ @"userid" : [[PFUser currentUser] objectId]}];
                                                 }
                                             }];
+                                            [[AppData sharedData]setProfileForCurrentUserwithCompletionBlock:^(PFObject *profile, NSError *error) {
+                                                
+                                            }];
                                             [PFUser currentUser].ACL = acl;
                                             [self checkIfAgentOrUser];
                                             [[AppData sharedData] installLayerClient];

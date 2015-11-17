@@ -223,7 +223,7 @@
         [matchAndPinCell.btnPinOrMatch setImage:[UIImage imageNamed:@"matchCellOption"] forState:UIControlStateNormal];
         matchAndPinCell.lblName.text = [profile valueForKey:@"name"];
         matchAndPinCell.lblDesignation.text = [profile valueForKey:@"designation"];
-       // [matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        //[matchAndPinCell.btnPinOrMatch addTarget:self action:@selector(matchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [matchAndPinCell.btnChat addTarget:self action:@selector(chatButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         matchAndPinCell.btnPinOrMatch.hidden = YES;
         return matchAndPinCell;

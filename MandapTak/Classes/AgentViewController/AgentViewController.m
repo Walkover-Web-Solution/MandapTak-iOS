@@ -18,6 +18,8 @@
 #import "StartMainViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
+#import "AgentUserDetailViewController.h"
+#import "AgreementViewController.h"
 @interface AgentViewController ()<WYPopoverControllerDelegate,AgentCellOptionPopoverViewControllerDelegate,CreateNewUserPopoverViewControllerDelegate,UITableViewDragLoadDelegate>{
     NSMutableArray *arrProfiles;
     WYPopoverController *settingsPopoverController;
@@ -31,6 +33,8 @@
     NSInteger credit;
     WYPopoverController* popoverController;
     __weak IBOutlet UIBarButtonItem *btnAdd;
+    NSInteger agentBal;
+    PFObject *currentProfile;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *btnCreateNewProfile;
@@ -48,7 +52,14 @@
     self.lblUserInfo.hidden = YES;
     arrProfiles = [NSMutableArray array];
     arrBtnFrame = [NSMutableArray array];
-    [self loadMore];
+    if([AppData sharedData].profileId)
+        [self loadMore];
+    else{
+        [self showLoader];
+       [[AppData sharedData] setProfileForCurrentUserwithCompletionBlock:^(PFObject *profile, NSError *error) {
+           [self hideLoader];
+           [self loadMore];
+       }] ;   }
     viewCredits.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     viewCredits.layer.shadowOffset = CGSizeMake(1, 1);
     viewCredits.layer.shadowOpacity = .5f;
@@ -68,6 +79,7 @@
         if (!error) {
             PFObject *obj = objects[0];
             credit =[[obj valueForKey:@"credits"] integerValue];
+            agentBal = credit;
             lblUserCredits.text = [NSString stringWithFormat:@"%@ Credits",[obj valueForKey:@"credits"]];
         }
     }];
@@ -197,18 +209,26 @@
     point = [layer convertPoint:point toLayer:layer.superlayer];
     layer = layer.superlayer;
     CGRect  rect=layer.frame;
-    CGFloat yPos = [UIScreen mainScreen].bounds.size.width-30;
-    rect.origin.x=yPos;
-    rect.origin.y =indexPath.row* 73;
+    CGFloat xPos = [UIScreen mainScreen].bounds.size.width-30;
+    rect.origin.x=xPos;
+    rect.origin.y =indexPath.row * 74+44;
     //  [arrBtnFrame replaceObjectAtIndex:indexPath.row withObject:NSStringFromCGRect(rect)];
     arrBtnFrame[indexPath.row] =NSStringFromCGRect(rect);
     [cell.btnOptions addTarget:self action:@selector(optionButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
-    
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    PFObject *userProfile = arrProfiles[indexPath.row];
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
+//    AgentUserDetailViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentUserDetailViewController"];
+//    vc.userProfile = userProfile;
+//    [self presentViewController:vc animated:YES completion:nil];
     
     
+    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agreement" bundle:nil];
+    AgreementViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgreementViewController"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
@@ -240,7 +260,8 @@
     if ([segue.identifier isEqualToString:@"NewUserIdentifier"])
     {
         CreateNewUserPopoverViewController *controller = segue.destinationViewController;
-        controller.preferredContentSize = CGSizeMake(300, 180);
+        controller.preferredContentSize = CGSizeMake(300, 200);
+        controller.agentBal = agentBal;
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
@@ -251,7 +272,7 @@
 
 -(void)optionButtonAction:(id)sender{
     AgentCellOptionPopoverViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AgentCellOptionPopoverViewController"];
-    viewController.preferredContentSize = CGSizeMake(160, 60);
+    viewController.preferredContentSize = CGSizeMake(160, 40);
     viewController.delegate = self;
     //viewController.title = @"Select Specialization";
     viewController.btnTag = [sender tag];
@@ -270,34 +291,45 @@
 }
 -(void)userMobileNumber:(NSString *)mobNo{
     [self getAllAddedProfiles];
+    [self getUserCredits];
     [popoverController dismissPopoverAnimated:YES];
 }
 
 -(void)selectedOption:(NSString *)option withTag:(NSInteger)tag{
-    
-    MBProgressHUD *HUD;
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFObject *userProfile = arrProfiles[tag];
-    PFObject *profile = [userProfile valueForKey:@"profileId"];
-    if([[profile valueForKey:@"isActive"] boolValue])
-        [profile setObject:@NO forKey:@"isActive"];
-    else
-        [profile setObject:@YES forKey:@"isActive"];
-    
-    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    if(![option isEqual:@"GivePermission"]){
+        MBProgressHUD *HUD;
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        PFObject *userProfile = arrProfiles[tag];
+        PFObject *profile = [userProfile valueForKey:@"profileId"];
+        if([[profile valueForKey:@"isActive"] boolValue])
+            [profile setObject:@NO forKey:@"isActive"];
+        else
+            [profile setObject:@YES forKey:@"isActive"];
         
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-        if (!error) {
-            arrProfiles = [NSMutableArray array];
-            [self loadMore];
-        } else {
-            //Something bad has ocurred
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
-        }
-    }];
+        [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+            if (!error) {
+                arrProfiles = [NSMutableArray array];
+                [self loadMore];
+            } else {
+                //Something bad has ocurred
+                NSString *errorString = [[error userInfo] objectForKey:@"error"];
+                UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [errorAlertView show];
+            }
+        }];
+    }
+    else{
+        // givePermissionOption
+//        PFObject *userProfile = arrProfiles[tag];
+//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
+//        AgentEditDetailsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentEditDetailsViewController"];
+//        vc.userProfile = userProfile;
+//        vc.optionType = @"GivePermission";
+//        [self presentViewController:vc animated:YES completion:nil];
+    }
     
     [settingsPopoverController dismissPopoverAnimated:YES];
 }
@@ -319,6 +351,9 @@
 -(void)loadMore{
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
+    if([AppData sharedData].profileId)
+        [query whereKey:@"profileId" notEqualTo:[AppData sharedData].profileId];
+    [query orderByDescending:@"createdAt"];
     [query whereKey:@"relation" equalTo:@"Agent"];
     [query includeKey:@"userId"];
     [query includeKey:@"profileId.userId"];
@@ -374,7 +409,6 @@
                 self.lblUserInfo.hidden = NO;
             else
                 self.lblUserInfo.hidden = YES;
-            
             [self.tableView reloadData];
         }
         else  if (error.code ==209){

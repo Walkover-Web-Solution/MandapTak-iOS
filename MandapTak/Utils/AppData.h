@@ -19,8 +19,10 @@
 @property (nonatomic) LYRClient *layerClient;
 @property (nonatomic) NSArray *arrMatches;
 @property (strong, nonatomic) PFObject *currentProfile;
+@property (strong, nonatomic) PFObject *profileId;
 
 typedef void (^ReachablityCompletionBlock)(bool isReachable);
+typedef void (^GetProfilesCompletionBlock)(PFObject *profile, NSError *error);
 
 
 @property (strong, nonatomic) MBProgressHUD *hud;
@@ -33,6 +35,7 @@ typedef void (^ReachablityCompletionBlock)(bool isReachable);
 -(NSArray*)fetchAllMatches;
 -(NSArray*)refreshAllMatches;
 -(void)loadCurrentProfile;
+-(void)setProfileForCurrentUserwithCompletionBlock:(GetProfilesCompletionBlock)completionBlock;;
 //- (BOOL)askContactsPermission ;
 DECLARE_SINGLETON_METHOD(AppData, sharedData)
 @end

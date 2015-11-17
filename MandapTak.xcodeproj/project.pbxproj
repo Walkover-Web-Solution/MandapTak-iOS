@@ -221,11 +221,10 @@
 		899170471B70B5D0000CF872 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899170451B70B5D0000CF872 /* next@2x.png */; };
 		8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899170591B70D458000CF872 /* WYPopoverController.m */; };
 		8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991705B1B70D458000CF872 /* WYStoryboardPopoverSegue.m */; };
-		89936ACC1B9D590B00C74E0A /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89936ACB1B9D590B00C74E0A /* Agent.storyboard */; };
-		89936AD11B9D5A7F00C74E0A /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936AD01B9D5A7F00C74E0A /* AgentViewController.m */; };
-		89936AD41B9D5A9200C74E0A /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */; };
 		89936ADB1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */; };
 		89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */; };
+		899557181BFB075000E6A7EF /* Agreement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 899557171BFB075000E6A7EF /* Agreement.storyboard */; };
+		8995571C1BFB08A300E6A7EF /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8995571B1BFB08A300E6A7EF /* AgreementViewController.m */; };
 		8997CC6D1BA18280001B11AA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC6C1BA18280001B11AA /* Reachability.m */; };
 		8997CC851BA182C8001B11AA /* SCReachabilityFlagsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC711BA182C8001B11AA /* SCReachabilityFlagsParser.m */; };
 		8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997CC731BA182C8001B11AA /* SCReachabilityRefBuilder.m */; };
@@ -257,6 +256,11 @@
 		89A98AA31BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98AA01BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m */; };
 		89AD119E1BBA94F400ADC9B9 /* LNBRippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */; };
 		89AF50951B9AFF2800E170D2 /* userDefImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 89AF50941B9AFF2800E170D2 /* userDefImg.png */; };
+		89B046711BF1EAE800A651F2 /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B046661BF1EAE800A651F2 /* Agent.storyboard */; };
+		89B046721BF1EAE800A651F2 /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B046691BF1EAE800A651F2 /* AgentCustomTableViewCell.m */; };
+		89B046731BF1EAE800A651F2 /* AgentUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B0466C1BF1EAE800A651F2 /* AgentUserDetailViewController.m */; };
+		89B046741BF1EAE800A651F2 /* UserDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B0466E1BF1EAE800A651F2 /* UserDetailTableViewCell.m */; };
+		89B046751BF1EAE800A651F2 /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B046701BF1EAE800A651F2 /* AgentViewController.m */; };
 		89B4BA5C1BCD2BF500363A4E /* LaunchScreen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B4BA5B1BCD2BF500363A4E /* LaunchScreen.xcassets */; };
 		89C53EAD1BE0C2E1006C4483 /* dislike1.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C53EAC1BE0C2E1006C4483 /* dislike1.png */; };
 		89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9F7221B6B578C004CBE3D /* AppDelegate.m */; };
@@ -632,15 +636,13 @@
 		899170591B70D458000CF872 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
 		8991705A1B70D458000CF872 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
 		8991705B1B70D458000CF872 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
-		89936ACB1B9D590B00C74E0A /* Agent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Agent.storyboard; sourceTree = "<group>"; };
-		89936ACF1B9D5A7F00C74E0A /* AgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentViewController.h; sourceTree = "<group>"; };
-		89936AD01B9D5A7F00C74E0A /* AgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentViewController.m; sourceTree = "<group>"; };
-		89936AD21B9D5A9200C74E0A /* AgentCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCustomTableViewCell.h; sourceTree = "<group>"; };
-		89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCustomTableViewCell.m; sourceTree = "<group>"; };
 		89936AD91B9D64F900C74E0A /* AgentCellOptionPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCellOptionPopoverViewController.h; sourceTree = "<group>"; };
 		89936ADA1B9D64F900C74E0A /* AgentCellOptionPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCellOptionPopoverViewController.m; sourceTree = "<group>"; };
 		89936ADD1B9D71F500C74E0A /* CreateNewUserPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewUserPopoverViewController.h; sourceTree = "<group>"; };
 		89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewUserPopoverViewController.m; sourceTree = "<group>"; };
+		899557171BFB075000E6A7EF /* Agreement.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Agreement.storyboard; sourceTree = "<group>"; };
+		8995571A1BFB08A300E6A7EF /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
+		8995571B1BFB08A300E6A7EF /* AgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementViewController.m; sourceTree = "<group>"; };
 		8997CC6B1BA18280001B11AA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8997CC6C1BA18280001B11AA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8997CC701BA182C8001B11AA /* SCReachabilityFlagsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCReachabilityFlagsParser.h; sourceTree = "<group>"; };
@@ -702,6 +704,15 @@
 		89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNBRippleEffect.h; sourceTree = "<group>"; };
 		89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNBRippleEffect.m; sourceTree = "<group>"; };
 		89AF50941B9AFF2800E170D2 /* userDefImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userDefImg.png; sourceTree = "<group>"; };
+		89B046661BF1EAE800A651F2 /* Agent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Agent.storyboard; path = Classes/AgentViewController/Agent.storyboard; sourceTree = "<group>"; };
+		89B046681BF1EAE800A651F2 /* AgentCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCustomTableViewCell.h; sourceTree = "<group>"; };
+		89B046691BF1EAE800A651F2 /* AgentCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCustomTableViewCell.m; sourceTree = "<group>"; };
+		89B0466B1BF1EAE800A651F2 /* AgentUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentUserDetailViewController.h; sourceTree = "<group>"; };
+		89B0466C1BF1EAE800A651F2 /* AgentUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentUserDetailViewController.m; sourceTree = "<group>"; };
+		89B0466D1BF1EAE800A651F2 /* UserDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailTableViewCell.h; sourceTree = "<group>"; };
+		89B0466E1BF1EAE800A651F2 /* UserDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailTableViewCell.m; sourceTree = "<group>"; };
+		89B0466F1BF1EAE800A651F2 /* AgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentViewController.h; sourceTree = "<group>"; };
+		89B046701BF1EAE800A651F2 /* AgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentViewController.m; sourceTree = "<group>"; };
 		89B4BA5B1BCD2BF500363A4E /* LaunchScreen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchScreen.xcassets; sourceTree = "<group>"; };
 		89C53EAC1BE0C2E1006C4483 /* dislike1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike1.png; sourceTree = "<group>"; };
 		89D9F7211B6B578C004CBE3D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1445,9 +1456,10 @@
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
+				89B046661BF1EAE800A651F2 /* Agent.storyboard */,
 				75BA3ED81B9AC57C00429C98 /* Settings.storyboard */,
 				75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */,
-				89936ACB1B9D590B00C74E0A /* Agent.storyboard */,
+				899557171BFB075000E6A7EF /* Agreement.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
 				89D9F7251B6B5797004CBE3D /* Models */,
@@ -1574,25 +1586,6 @@
 			path = WYPopoverController;
 			sourceTree = "<group>";
 		};
-		89936ACD1B9D5A5800C74E0A /* AgentViewController */ = {
-			isa = PBXGroup;
-			children = (
-				89936ACE1B9D5A7000C74E0A /* AgentCustomTableCell */,
-				89936ACF1B9D5A7F00C74E0A /* AgentViewController.h */,
-				89936AD01B9D5A7F00C74E0A /* AgentViewController.m */,
-			);
-			path = AgentViewController;
-			sourceTree = "<group>";
-		};
-		89936ACE1B9D5A7000C74E0A /* AgentCustomTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				89936AD21B9D5A9200C74E0A /* AgentCustomTableViewCell.h */,
-				89936AD31B9D5A9200C74E0A /* AgentCustomTableViewCell.m */,
-			);
-			path = AgentCustomTableCell;
-			sourceTree = "<group>";
-		};
 		89936AD81B9D64F900C74E0A /* AgentCellOptionPopoverViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1609,6 +1602,15 @@
 				89936ADE1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m */,
 			);
 			path = CreateNewUserPopover;
+			sourceTree = "<group>";
+		};
+		899557191BFB089000E6A7EF /* AgreementViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8995571A1BFB08A300E6A7EF /* AgreementViewController.h */,
+				8995571B1BFB08A300E6A7EF /* AgreementViewController.m */,
+			);
+			path = AgreementViewController;
 			sourceTree = "<group>";
 		};
 		8997CC6E1BA182C8001B11AA /* Reachablity */ = {
@@ -1828,6 +1830,37 @@
 			path = TableSwipeCellGesture;
 			sourceTree = "<group>";
 		};
+		89B046651BF1EAE800A651F2 /* AgentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89B046671BF1EAE800A651F2 /* AgentCustomTableCell */,
+				89B0466A1BF1EAE800A651F2 /* AgentUserDetailViewController */,
+				89B0466F1BF1EAE800A651F2 /* AgentViewController.h */,
+				89B046701BF1EAE800A651F2 /* AgentViewController.m */,
+			);
+			path = AgentViewController;
+			sourceTree = "<group>";
+		};
+		89B046671BF1EAE800A651F2 /* AgentCustomTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				89B046681BF1EAE800A651F2 /* AgentCustomTableViewCell.h */,
+				89B046691BF1EAE800A651F2 /* AgentCustomTableViewCell.m */,
+			);
+			path = AgentCustomTableCell;
+			sourceTree = "<group>";
+		};
+		89B0466A1BF1EAE800A651F2 /* AgentUserDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89B0466B1BF1EAE800A651F2 /* AgentUserDetailViewController.h */,
+				89B0466C1BF1EAE800A651F2 /* AgentUserDetailViewController.m */,
+				89B0466D1BF1EAE800A651F2 /* UserDetailTableViewCell.h */,
+				89B0466E1BF1EAE800A651F2 /* UserDetailTableViewCell.m */,
+			);
+			path = AgentUserDetailViewController;
+			sourceTree = "<group>";
+		};
 		89D9F7201B6B578C004CBE3D /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -1885,8 +1918,9 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				899557191BFB089000E6A7EF /* AgreementViewController */,
+				89B046651BF1EAE800A651F2 /* AgentViewController */,
 				75DC30C31BE38B2F00AA45E4 /* TourOptions */,
-				89936ACD1B9D5A5800C74E0A /* AgentViewController */,
 				75BA3EDA1B9ACAFF00429C98 /* Settings */,
 				896D18321B9487AD001513A5 /* ChatPinMatchViewController */,
 				896D18101B9430EF001513A5 /* VerificationViewController */,
@@ -2299,6 +2333,7 @@
 				758C8E6E1B87404B00FF634E /* option@2x.png in Resources */,
 				757F87641B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome@2x.png in Resources */,
 				898330E81B84AACA00847B31 /* Info.plist in Resources */,
+				899557181BFB075000E6A7EF /* Agreement.storyboard in Resources */,
 				7564E2531B9720BD00B8D052 /* likeIcon.png in Resources */,
 				89D9F7861B6B5DB4004CBE3D /* Kundli_icon.png in Resources */,
 				896D18251B944DDB001513A5 /* Matches_icon.png in Resources */,
@@ -2314,7 +2349,6 @@
 				896BBFF81B95877D009FD221 /* unpin@2x.png in Resources */,
 				757849D31BA2EF2D005490E6 /* Anim-(20).png in Resources */,
 				899170461B70B5D0000CF872 /* next.png in Resources */,
-				89936ACC1B9D590B00C74E0A /* Agent.storyboard in Resources */,
 				89E0FA4F1B85C92A000BD65A /* SelectionOverlay.png in Resources */,
 				7564E2301B970E6900B8D052 /* pin.png in Resources */,
 				7533F6AF1B84AF0A00B83EFD /* show@2x.png in Resources */,
@@ -2363,6 +2397,7 @@
 				756AB5A21BE4F1E2009A1ADA /* laptopNew.png in Resources */,
 				89D9F7811B6B5DB4004CBE3D /* share_icon.png in Resources */,
 				757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */,
+				89B046711BF1EAE800A651F2 /* Agent.storyboard in Resources */,
 				757F87651B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				75910FC01BF1CAD8007D1325 /* direction.png in Resources */,
 				757CBB141BA6E2F200EFD870 /* undoNew.png in Resources */,
@@ -2508,7 +2543,6 @@
 				89FBCBDB1BA97B3900CF2274 /* UserManager.m in Sources */,
 				8997CC891BA182C8001B11AA /* SCNetworkReachability+Compatibility.m in Sources */,
 				89936ADF1B9D71F500C74E0A /* CreateNewUserPopoverViewController.m in Sources */,
-				89936AD11B9D5A7F00C74E0A /* AgentViewController.m in Sources */,
 				75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */,
 				8997CC9B1BA1840A001B11AA /* ABMultiton.m in Sources */,
 				893E76E51B8871130009F512 /* Photos.m in Sources */,
@@ -2520,11 +2554,13 @@
 				893F03491BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m in Sources */,
 				897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */,
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
+				89B046731BF1EAE800A651F2 /* AgentUserDetailViewController.m in Sources */,
 				89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */,
 				8960062C1B9075870007B7AB /* PhotoTweaksViewController.m in Sources */,
 				750869721B9F096800022596 /* UIImageEffects.m in Sources */,
 				8991705C1B70D458000CF872 /* WYPopoverController.m in Sources */,
 				8998E4D31BD645870059F839 /* PrimaryImagePickerViewController.m in Sources */,
+				8995571C1BFB08A300E6A7EF /* AgreementViewController.m in Sources */,
 				8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */,
 				89A98AA21BDF81F60054D9A2 /* DRCellSlideActionView.m in Sources */,
 				759EA7D51BF9F2A9000E3D0A /* MultiSelectFlowLayout.m in Sources */,
@@ -2539,7 +2575,6 @@
 				89E0FA581B85C92A000BD65A /* ZCAssetTablePicker.m in Sources */,
 				75DD300C1BEA308B00276D68 /* DemoScreenVC.m in Sources */,
 				8967FADF1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m in Sources */,
-				89936AD41B9D5A9200C74E0A /* AgentCustomTableViewCell.m in Sources */,
 				893F033B1BAAC60400BB1B59 /* ConversationViewController.m in Sources */,
 				899C53701B732B6500C24DA8 /* GenderViewController.m in Sources */,
 				897C239C1B6B562C00FC32E9 /* main.m in Sources */,
@@ -2573,11 +2608,13 @@
 				757D445F1BC678A9004E84AF /* MARKRangeSlider.m in Sources */,
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
 				8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */,
+				89B046751BF1EAE800A651F2 /* AgentViewController.m in Sources */,
 				893F034C1BAACC3C00BB1B59 /* SVRadialGradientLayer.m in Sources */,
 				7527DA9C1BD51A9900296C90 /* TTRangeSlider.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
 				8997CC881BA182C8001B11AA /* SCNetworkReachability.m in Sources */,
+				89B046721BF1EAE800A651F2 /* AgentCustomTableViewCell.m in Sources */,
 				75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */,
 				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */,
@@ -2596,6 +2633,7 @@
 				895A6E7A1B9843A200A9C8BC /* DragTableFooterView_ot.m in Sources */,
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,
 				75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */,
+				89B046741BF1EAE800A651F2 /* UserDetailTableViewCell.m in Sources */,
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
 				75DC30C61BE38B4D00AA45E4 /* TourOptionsVC.m in Sources */,
 				759EA7D41BF9F2A9000E3D0A /* MultiSelectController.m in Sources */,
