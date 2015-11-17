@@ -124,6 +124,10 @@
 		75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F7D1B79EBD70082D7EC /* SelectedLocationVC.m */; };
 		75918F861B79EC2C0082D7EC /* DegreeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F851B79EC2C0082D7EC /* DegreeListVC.m */; };
 		75918F891B79ECBD0082D7EC /* Degree.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918F881B79ECBD0082D7EC /* Degree.m */; };
+		759EA7D21BF9F2A9000E3D0A /* cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 759EA7CB1BF9F2A9000E3D0A /* cancel@3x.png */; };
+		759EA7D31BF9F2A9000E3D0A /* MultiSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 759EA7CD1BF9F2A9000E3D0A /* MultiSelectCell.m */; };
+		759EA7D41BF9F2A9000E3D0A /* MultiSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 759EA7CF1BF9F2A9000E3D0A /* MultiSelectController.m */; };
+		759EA7D51BF9F2A9000E3D0A /* MultiSelectFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 759EA7D11BF9F2A9000E3D0A /* MultiSelectFlowLayout.m */; };
 		75B5BC311B9B2F730097C851 /* ManglikPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B5BC301B9B2F730097C851 /* ManglikPopoverViewController.m */; };
 		75BA3ED91B9AC57C00429C98 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BA3ED81B9AC57C00429C98 /* Settings.storyboard */; };
 		75BA3EDD1B9ACB1600429C98 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BA3EDC1B9ACB1600429C98 /* SettingsVC.m */; };
@@ -473,6 +477,13 @@
 		75918F851B79EC2C0082D7EC /* DegreeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DegreeListVC.m; sourceTree = "<group>"; };
 		75918F871B79ECBD0082D7EC /* Degree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Degree.h; sourceTree = "<group>"; };
 		75918F881B79ECBD0082D7EC /* Degree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Degree.m; sourceTree = "<group>"; };
+		759EA7CB1BF9F2A9000E3D0A /* cancel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@3x.png"; sourceTree = "<group>"; };
+		759EA7CC1BF9F2A9000E3D0A /* MultiSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelectCell.h; sourceTree = "<group>"; };
+		759EA7CD1BF9F2A9000E3D0A /* MultiSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSelectCell.m; sourceTree = "<group>"; };
+		759EA7CE1BF9F2A9000E3D0A /* MultiSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelectController.h; sourceTree = "<group>"; };
+		759EA7CF1BF9F2A9000E3D0A /* MultiSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSelectController.m; sourceTree = "<group>"; };
+		759EA7D01BF9F2A9000E3D0A /* MultiSelectFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelectFlowLayout.h; sourceTree = "<group>"; };
+		759EA7D11BF9F2A9000E3D0A /* MultiSelectFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSelectFlowLayout.m; sourceTree = "<group>"; };
 		75B5BC2F1B9B2F730097C851 /* ManglikPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManglikPopoverViewController.h; sourceTree = "<group>"; };
 		75B5BC301B9B2F730097C851 /* ManglikPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManglikPopoverViewController.m; sourceTree = "<group>"; };
 		75BA3ED81B9AC57C00429C98 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -1129,6 +1140,20 @@
 				75918F851B79EC2C0082D7EC /* DegreeListVC.m */,
 			);
 			path = DegreePopover;
+			sourceTree = "<group>";
+		};
+		759EA7CA1BF9F2A9000E3D0A /* MultiSelectController */ = {
+			isa = PBXGroup;
+			children = (
+				759EA7CB1BF9F2A9000E3D0A /* cancel@3x.png */,
+				759EA7CC1BF9F2A9000E3D0A /* MultiSelectCell.h */,
+				759EA7CD1BF9F2A9000E3D0A /* MultiSelectCell.m */,
+				759EA7CE1BF9F2A9000E3D0A /* MultiSelectController.h */,
+				759EA7CF1BF9F2A9000E3D0A /* MultiSelectController.m */,
+				759EA7D01BF9F2A9000E3D0A /* MultiSelectFlowLayout.h */,
+				759EA7D11BF9F2A9000E3D0A /* MultiSelectFlowLayout.m */,
+			);
+			path = MultiSelectController;
 			sourceTree = "<group>";
 		};
 		75B5BC2E1B9B2F730097C851 /* ManglikPopover */ = {
@@ -1913,6 +1938,7 @@
 		89D9F7361B6B57A8004CBE3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				759EA7CA1BF9F2A9000E3D0A /* MultiSelectController */,
 				75F8D0F71BE0C4F30034C982 /* WSCoachMarksView */,
 				89A98A9A1BDF81F60054D9A2 /* TableSwipeCellGesture */,
 				7527DA981BD51A9900296C90 /* RangeSlider */,
@@ -2322,6 +2348,7 @@
 				757849DA1BA2EF2D005490E6 /* Anim-(27).png in Resources */,
 				896A8A231BCE2287009D2698 /* Default-568h@2x.png in Resources */,
 				757D44801BC6794B004E84AF /* rangeSliderTrack@2x.png in Resources */,
+				759EA7D21BF9F2A9000E3D0A /* cancel@3x.png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
 				8975CF001BD26A2E00FFD309 /* btn_delete.png in Resources */,
 				757D447C1BC6794B004E84AF /* rangeSliderThumb.png in Resources */,
@@ -2486,6 +2513,7 @@
 				8997CC9B1BA1840A001B11AA /* ABMultiton.m in Sources */,
 				893E76E51B8871130009F512 /* Photos.m in Sources */,
 				899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */,
+				759EA7D31BF9F2A9000E3D0A /* MultiSelectCell.m in Sources */,
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
 				899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */,
 				89A98AA31BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m in Sources */,
@@ -2499,6 +2527,7 @@
 				8998E4D31BD645870059F839 /* PrimaryImagePickerViewController.m in Sources */,
 				8960062E1B9075870007B7AB /* UIColor+Tweak.m in Sources */,
 				89A98AA21BDF81F60054D9A2 /* DRCellSlideActionView.m in Sources */,
+				759EA7D51BF9F2A9000E3D0A /* MultiSelectFlowLayout.m in Sources */,
 				758C8E8B1B87546E00FF634E /* CandidateProfileGalleryVC.m in Sources */,
 				899C53711B732B6500C24DA8 /* PopOverListViewController.m in Sources */,
 				758535AB1B8B1E34000B480A /* ViewFullProfileVC.m in Sources */,
@@ -2569,6 +2598,7 @@
 				75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */,
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
 				75DC30C61BE38B4D00AA45E4 /* TourOptionsVC.m in Sources */,
+				759EA7D41BF9F2A9000E3D0A /* MultiSelectController.m in Sources */,
 				895A6E7D1B9843A200A9C8BC /* UIScrollView+DragTableSafeAnimation.m in Sources */,
 				898146351B7C6E5900DF30AB /* TextFieldTableViewCell.m in Sources */,
 				757F87631B8EF1DC00C083A4 /* SVWebViewControllerActivityChrome.m in Sources */,

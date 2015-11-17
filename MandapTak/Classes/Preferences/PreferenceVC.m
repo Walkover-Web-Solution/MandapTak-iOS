@@ -7,6 +7,7 @@
 //
 
 #import "PreferenceVC.h"
+#import "MultiSelectController.h"
 
 @interface PreferenceVC ()
 
@@ -1245,6 +1246,32 @@
         popoverController.delegate = self;
         controller.delegate = self;
         
+    }
+    
+    else
+    {
+        //UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"MultiSelectStoryBoard" bundle:nil];
+        
+        MultiSelectController *multiSelect =[self.storyboard instantiateViewControllerWithIdentifier:@"MultiSelectController"];
+        multiSelect.delegate = self;
+        multiSelect.multiSelectCellBackgroundColor =[UIColor colorWithRed:253.0/255.0 green:72.0/255.0 blue:47.0/255.0 alpha:1.0];
+        
+        NSMutableArray *arrOptions =[[NSMutableArray alloc] initWithArray:@[@"India",@"United States",@"Canada",@"Australia",@"United Kingdom",@"Philippines",@"Japan",@"Italy",@"Germany",@"Russia",@"Malaysia",@"France",@"Sweden",@"New Zealand",@"Singapore"]];
+        
+        multiSelect.arrOptions =arrOptions;
+        
+        multiSelect.leftButtonText = @"Cancel";
+        multiSelect.leftButtonTextColor = [UIColor blackColor];
+        
+        multiSelect.rightButtonText = @"Apply";
+        multiSelect.rightButtonTextColor = [UIColor blackColor];
+        
+        UINavigationController *navi =[[UINavigationController alloc] initWithRootViewController:multiSelect];
+        
+        [self.navigationController presentViewController:navi animated:YES completion:^{
+            
+            
+        }];
     }
 }
 
