@@ -165,6 +165,10 @@
 
 
 - (IBAction)agreementButtonAction:(id)sender {
+    UIStoryboard *sb2 = [UIStoryboard storyboardWithName:@"Agreement" bundle:nil];
+    AgreementViewController *vc = [sb2 instantiateViewControllerWithIdentifier:@"AgreementViewController"];
+    [self presentViewController:vc animated:YES completion:nil];
+
 }
 
 - (IBAction)loginButtonAction:(id)sender {

@@ -17,11 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S4S-ch-bmG">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4S-ch-bmG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="LKS-UT-DWW"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Agreement" id="9ZH-mO-WGF">
                                         <barButtonItem key="rightBarButtonItem" title="Agree" id="r6w-ET-97p">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="agreeButtonAction:" destination="hWM-qT-DTv" id="QHh-N7-Lc4"/>
                                             </connections>
@@ -29,24 +37,473 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="41T-Uv-2Tm">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41T-Uv-2Tm">
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">READ CAREFULLY: LICENSOR LICENSES THIS PROGRAM, TOOL, PLUG-IN, ADD-ON, APPLICATION, LIBRARY, CONTENT, DATA, SOLUTION, SERVICE OR OTHER ITEM OR MATERIAL (THE "CONTENT") TO YOU ONLY UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED IN THIS END USER LICENSE AGREEMENT ("AGREEMENT").
-
-Splunk Apps hosts certain content created and published by individuals and entities other than Splunk Inc. or its affiliates ("Splunk"). Such third-party content made available through Splunk Apps are licensed, not sold, to you. Your license to each content that you obtain through Splunk Apps is subject to your prior acceptance of this End User License Agreement, and you agree that the terms of this Agreement will apply to each Content that you license through Splunk Apps.
-
-Responsibility. If you are downloading, accessing or using the Content provided or authored by a third-party developer or provider, this Agreement is solely between the developer or provider of the Content ("Licensor") and you, and not with Splunk. Licensor, and not Splunk, is solely responsible for the Content, including, without limitation, for any warranties, maintenance and support, notices and consents to be given to Users. Notwithstanding the above, you acknowledge that Splunk is a third-party beneficiary of this Agreement and that upon your acceptance of the terms of this Agreement, Splunk will have the right to enforce the Agreement against you as a third-party beneficiary thereof. Questions, complaints or claims with respect to the Content should be directed solely to the Licensor, whose contact information can be found on the Content Download Page from which the Content is downloaded.
-Qualified User. The Content is to be used only in conjunction with the specific Splunk software product or service identified in materials distributed with the Content, with which such Content was designed to operate ("Splunk Software"). Therefore, you may use the Content only if you are an authorized user of the Splunk Software. This Agreement does not modify or alter the terms of the software license agreement delivered with the Splunk Software.
-License. Subject to the terms and conditions of this Agreement, Licensor grants to you a license to download and use the Content in connection with the Splunk Software.
-Warranty. THE CONTENT IS FURNISHED ON AN "AS IS" BASIS, AND LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, WARRANTIES OF NON-INFRINGEMENT OF THIRD-PARTY RIGHTS, OR OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, AND ANY WARRANTIES ARISING BY STATUTE OR OTHERWISE IN LAW, OR FROM A COURSE OF DEALING OR USAGE OF TRADE. LICENSOR SPECIFICALLY DOES NOT WARRANT THAT THE CONTENT WILL MEET YOUR REQUIREMENTS; WILL OPERATE IN ALL THE COMBINATIONS WHICH MAY BE SELECTED FOR USE BY YOU; THAT THE OPERATION OF THE CONTENT WILL BE ERROR-FREE OR UNINTERRUPTED, ACCURATE, USEFUL, RELIABLE, OR COMPLETE; OR THAT ALL ERRORS OR DEFECTS IN THE CONTENT WILL BE CORRECTED. NEITHER SPLUNK NOR LICENSOR SHALL BE LIABLE FOR ANY DAMAGES WHATSOEVER ARISING FROM OR RELATING TO YOUR USE OR INABILITY TO USE THE CONTENT. YOU USE THE CONTENT AT YOUR OWN RISK.
-Limitation of Liability. UNDER NO CIRCUMSTANCES WILL SPLUNK OR LICENSOR BE LIABLE TO YOU FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR EXEMPLARY DAMAGES, FOR LOSS OF PROFITS, USE, REVENUE, OR DATA OR FOR BUSINESS INTERRUPTION (REGARDLESS OF THE LEGAL THEORY FOR SEEKING SUCH DAMAGES OR OTHER LIABILITY) ARISING OUT OF OR IN CONNECTION WITH USE OF THE CONTENT, WHETHER OR NOT SPLUNK OR LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ADDITION, THE LIABILITY OF SPLUNK OR LICENSOR ARISING OUT OF OR RELATING TO THE CONTENT WILL NOT EXCEED THE AMOUNT PAID OR PAYABLE BY YOU (IF ANY) FOR SUCH CONTENT.
-General. This Agreement will be governed by and construed in accordance with the laws of the State of California (and, to the extent controlling, the federal laws of the United States, without reference to the conflicts-of-laws rules thereof). The UN Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act shall not apply to this Agreement. This Agreement constitutes the entire agreement between Licensor and you with respect to the Content and may not be modified except by a written instrument executed by you and an authorized representative of Licensor.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">End User License Agreement 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="16.050000000000001" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="READ CAREFULLY">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">: LICENSOR LICENSES THIS PROGRAM, TOOL, PLUG-IN, ADD-ON, APPLICATION, LIBRARY, CONTENT, DATA, SOLUTION, SERVICE OR OTHER ITEM OR MATERIAL (THE "</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="CONTENT">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="&quot;) TO YOU ONLY UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED IN THIS END USER LICENSE AGREEMENT (&quot;">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="AGREEMENT">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">").
+Walkover Web Solutions Apps hosts certain content created and published by individuals and entities other than Walkover Web Solutions Inc. or its affiliates ("</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Walkover Web Solutions">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">"). Such third-party content made available through Walkover Web Solutions Apps are licensed, not sold, to you. Your license to each content that you obtain through Walkover Web Solutions Apps is subject to your prior acceptance of this End User License Agreement, and you agree that the terms of this Agreement will apply to each Content that you license through Walkover Web Solutions Apps.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">	1.	</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Responsibility">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">. If you are downloading, accessing or using the Content provided or authored by a third-party developer or provider, this Agreement is solely between the developer or provider of the Content ("</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Licensor">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">") and you, and not with Walkover Web Solutions. Licensor, and not Walkover Web Solutions, is solely responsible for the Content, including, without limitation, for any warranties, maintenance and support, notices and consents to be given to Users. Notwithstanding the above, you acknowledge that Walkover Web Solutions is a third-party beneficiary of this Agreement and that upon your acceptance of the terms of this Agreement, Walkover Web Solutions will have the right to enforce the Agreement against you as a third-party beneficiary thereof. Questions, complaints or claims with respect to the Content should be directed solely to the Licensor, whose contact information can be found on the Content Download Page from which the Content is downloaded.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">	2.	</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Qualified User">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">. The Content is to be used only in conjunction with the specific Walkover Web Solutions software product or service identified in materials distributed with the Content, with which such Content was designed to operate ("</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Walkover Web Solutions Software">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">"). Therefore, you may use the Content only if you are an authorized user of the Walkover Web Solutions Software. This Agreement does not modify or alter the terms of the software license agreement delivered with the Walkover Web Solutions Software.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">	3.	</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="License">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">. Subject to the terms and conditions of this Agreement, Licensor grants to you a license to download and use the Content in connection with the Walkover Web Solutions Software.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">	4.	</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Warranty">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=". THE CONTENT IS FURNISHED ON AN &quot;">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="AS IS">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">" BASIS, AND LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, WARRANTIES OF NON-INFRINGEMENT OF THIRD-PARTY RIGHTS, OR OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, AND ANY WARRANTIES ARISING BY STATUTE OR OTHERWISE IN LAW, OR FROM A COURSE OF DEALING OR USAGE OF TRADE. LICENSOR SPECIFICALLY DOES NOT WARRANT THAT THE CONTENT WILL MEET YOUR REQUIREMENTS; WILL OPERATE IN ALL THE COMBINATIONS WHICH MAY BE SELECTED FOR USE BY YOU; THAT THE OPERATION OF THE CONTENT WILL BE ERROR-FREE OR UNINTERRUPTED, ACCURATE, USEFUL, RELIABLE, OR COMPLETE; OR THAT ALL ERRORS OR DEFECTS IN THE CONTENT WILL BE CORRECTED. NEITHER Walkover Web Solutions NOR LICENSOR SHALL BE LIABLE FOR ANY DAMAGES WHATSOEVER ARISING FROM OR RELATING TO YOUR USE OR INABILITY TO USE THE CONTENT. </string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="YOU USE THE CONTENT AT YOUR OWN RISK">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">	5.	</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Limitation of Liability">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">. UNDER NO CIRCUMSTANCES WILL Walkover Web Solutions OR LICENSOR BE LIABLE TO YOU FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR EXEMPLARY DAMAGES, FOR LOSS OF PROFITS, USE, REVENUE, OR DATA OR FOR BUSINESS INTERRUPTION (REGARDLESS OF THE LEGAL THEORY FOR SEEKING SUCH DAMAGES OR OTHER LIABILITY) ARISING OUT OF OR IN CONNECTION WITH USE OF THE CONTENT, WHETHER OR NOT Walkover Web Solutions OR LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ADDITION, THE LIABILITY OF Walkover Web Solutions OR LICENSOR ARISING OUT OF OR RELATING TO THE CONTENT WILL NOT EXCEED THE AMOUNT PAID OR PAYABLE BY YOU (IF ANY) FOR SUCH CONTENT.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">	6.	</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="General">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Arial-BoldMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">. This Agreement will be governed by and construed in accordance with the laws of the State of MP (and, to the extent controlling, the federal laws of the India , without reference to the conflicts-of-laws rules thereof). The India Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act shall not apply to this Agreement. This Agreement constitutes the entire agreement between Licensor and you with respect to the Content and may not be modified except by a written instrument executed by you and an authorized representative of Licens</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="ArialMT"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" headIndent="36" tailIndent="412" defaultTabInterval="36">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="11"/>
+                                                    <textTab alignment="natural" location="36"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="41T-Uv-2Tm" secondAttribute="trailing" id="0x1-LZ-kuK"/>
+                            <constraint firstItem="41T-Uv-2Tm" firstAttribute="leading" secondItem="i61-KI-9nh" secondAttribute="leading" id="6MZ-YP-57r"/>
+                            <constraint firstItem="S4S-ch-bmG" firstAttribute="leading" secondItem="i61-KI-9nh" secondAttribute="leading" id="Zn8-W5-jIB"/>
+                            <constraint firstItem="kT3-A7-hqM" firstAttribute="top" secondItem="41T-Uv-2Tm" secondAttribute="bottom" id="fuG-bT-fcm"/>
+                            <constraint firstItem="41T-Uv-2Tm" firstAttribute="top" secondItem="S4S-ch-bmG" secondAttribute="bottom" id="jbY-Z8-Dc2"/>
+                            <constraint firstAttribute="trailing" secondItem="S4S-ch-bmG" secondAttribute="trailing" id="rlC-X7-N2W"/>
+                            <constraint firstItem="S4S-ch-bmG" firstAttribute="top" secondItem="i61-KI-9nh" secondAttribute="top" id="zeu-OE-t8z"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
