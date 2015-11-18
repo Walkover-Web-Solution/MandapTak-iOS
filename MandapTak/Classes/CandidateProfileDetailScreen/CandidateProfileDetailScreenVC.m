@@ -84,8 +84,20 @@
     if(self.isFromMatches){
         [self loginLayer];
     }
-
+    
+    btnPopover.hidden = YES;
+    
+    //hide button when tapped on screen
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideButton)];
+    
+    [self.view addGestureRecognizer:tapGesture];
+    
 }
+
+-(void)hideButton {
+    btnPopover.hidden = YES;
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -502,6 +514,36 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+    //options tab
+    else if ([segue.identifier isEqualToString:@"actionIdentifier"])
+    {
+        /*
+        //heightFlag = false;
+        HeightPopoverViewController *controller = segue.destinationViewController;
+        controller.contentSizeForViewInPopover = CGSizeMake(300, 190);
+        WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
+        popoverController = [popoverSegue popoverControllerWithSender:sender
+                                             permittedArrowDirections:WYPopoverArrowDirectionAny
+                                                             animated:YES];
+        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
+        popoverController.delegate = self;
+        controller.delegate = self;
+        */
+        
+        ReportAbuseVC *controller = segue.destinationViewController;
+        controller.contentSizeForViewInPopover = CGSizeMake(300, 190);
+        WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
+        popoverController = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
+        popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
+        popoverController.delegate = self;
+        controller.delegate = self;
+        
+        //send candidate profile id
+        Profile *userProfileObj = profileObject;
+        NSString *strObjId = userProfileObj.profilePointer.objectId;
+        controller.reportedProfile = strObjId;
+    }
+    
 }
 
 
@@ -635,6 +677,49 @@
              // There was a problem, check error.description
          }
      }];
+}
+
+#pragma mark Options Button Action
+- (IBAction)optionsAction:(id)sender
+{
+    if (btnPopover.hidden)
+    {
+        btnPopover.hidden = NO;
+    } else {
+        btnPopover.hidden = YES;
+    }
+}
+
+- (IBAction)reportAction:(id)sender {
+    
+}
+
+
+
+#pragma mark - TABLE VIEW
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"menuCell"];
+    }
+    
+//    cell.menuItemLabel.text = [self.mapTypes objectAtIndex:indexPath.row];
+//    cell.selectedMarkView.hidden = (indexPath.row != self.currentMapTypeIndex);
+    
+    cell.textLabel.text = @"Report Abuse";
+    return cell;
 }
 
 #pragma mark ShowActivityIndicator
@@ -827,5 +912,13 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+#pragma mark Popover delegate methods
+-(void)closePopover
+{
+    [popoverController dismissPopoverAnimated:YES];
+    btnPopover.hidden = YES;
+}
+
 
 @end

@@ -15,8 +15,12 @@
 #import "Profile.h"
 #import "Education.h"
 #import "MatchScreenVC.h"
+#import "WYStoryboardPopoverSegue.h"
+#import "WYPopoverController.h"
+#import "ReportAbuseVC.h"
+#import "HeightPopoverViewController.h"
 
-@interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface CandidateProfileDetailScreenVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ReportAbuseVCDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     
     IBOutlet UIImageView *profileImageView;
@@ -42,6 +46,12 @@
     
     //activity indicator
     IBOutlet UIActivityIndicatorView *activityIndicator;
+    WYPopoverController* popoverController;
+    
+    //pickerview
+    UIPickerView *picView;
+    UIButton *buttonCancel,*buttonDone;
+    IBOutlet UIButton *btnPopover;
 }
 @property (strong, nonatomic) PFObject *currentProfile;
 @property (nonatomic) LYRClient *layerClient;
@@ -51,6 +61,11 @@
 - (IBAction)viewFullProfile:(id)sender;
 - (IBAction)likeAction:(id)sender;
 - (IBAction)dislikeAction:(id)sender;
+- (IBAction)optionsAction:(id)sender;
+- (IBAction)reportAction:(id)sender;
 @property (strong,nonatomic) Profile *profileObject;
 @property (strong,nonatomic) NSString *textTraits;
+
+@property (strong, nonatomic) IBOutlet UITableView *menuTableView;
+
 @end

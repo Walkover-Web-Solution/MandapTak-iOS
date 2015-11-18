@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		571991487120229D756C60BF /* libPods-MandapTak.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F35C56A2EB7DD74A37C7524C /* libPods-MandapTak.a */; };
 		750869721B9F096800022596 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 750869711B9F096800022596 /* UIImageEffects.m */; };
+		750D7E711BFB486D00E31332 /* ReportAbuseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 750D7E701BFB486D00E31332 /* ReportAbuseVC.m */; };
 		751873181BDF8DD30009F9B8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751873171BDF8DD30009F9B8 /* AVFoundation.framework */; };
 		7518731A1BDF8DE80009F9B8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751873191BDF8DE80009F9B8 /* MediaPlayer.framework */; };
 		7527DA9C1BD51A9900296C90 /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7527DA9A1BD51A9900296C90 /* TTRangeSlider.m */; };
@@ -331,6 +332,8 @@
 		7332D6DDB271BE417996C2BD /* Pods-MandapTak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MandapTak.release.xcconfig"; path = "Pods/Target Support Files/Pods-MandapTak/Pods-MandapTak.release.xcconfig"; sourceTree = "<group>"; };
 		750869701B9F096800022596 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
 		750869711B9F096800022596 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		750D7E6F1BFB486D00E31332 /* ReportAbuseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportAbuseVC.h; sourceTree = "<group>"; };
+		750D7E701BFB486D00E31332 /* ReportAbuseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportAbuseVC.m; sourceTree = "<group>"; };
 		751873171BDF8DD30009F9B8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		751873191BDF8DE80009F9B8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		7527DA991BD51A9900296C90 /* TTRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSlider.h; sourceTree = "<group>"; };
@@ -864,6 +867,15 @@
 				750869711B9F096800022596 /* UIImageEffects.m */,
 			);
 			path = LightBlurEffect;
+			sourceTree = "<group>";
+		};
+		750D7E6E1BFB484300E31332 /* ReportAbuseVC */ = {
+			isa = PBXGroup;
+			children = (
+				750D7E6F1BFB486D00E31332 /* ReportAbuseVC.h */,
+				750D7E701BFB486D00E31332 /* ReportAbuseVC.m */,
+			);
+			path = ReportAbuseVC;
 			sourceTree = "<group>";
 		};
 		7527DA981BD51A9900296C90 /* RangeSlider */ = {
@@ -1738,6 +1750,7 @@
 		899C53681B732B6500C24DA8 /* Popovers */ = {
 			isa = PBXGroup;
 			children = (
+				750D7E6E1BFB484300E31332 /* ReportAbuseVC */,
 				89936ADC1B9D71E300C74E0A /* CreateNewUserPopover */,
 				89936AD81B9D64F900C74E0A /* AgentCellOptionPopoverViewController */,
 				75B5BC2E1B9B2F730097C851 /* ManglikPopover */,
@@ -2522,6 +2535,7 @@
 				8991705D1B70D458000CF872 /* WYStoryboardPopoverSegue.m in Sources */,
 				7561180A1BA80F03009D19D2 /* MatchScreenVC.m in Sources */,
 				7577EFD31BAC0C4300CE55C6 /* MBCircularProgressBarLayer.m in Sources */,
+				750D7E711BFB486D00E31332 /* ReportAbuseVC.m in Sources */,
 				75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */,
 				758914CE1B95BFC200585507 /* History.m in Sources */,
 				757BDC781B85AA49003B71BD /* CandidateProfileDetailScreenVC.m in Sources */,
