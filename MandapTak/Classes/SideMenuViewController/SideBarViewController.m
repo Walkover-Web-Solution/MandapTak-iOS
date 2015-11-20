@@ -127,7 +127,7 @@
              [currentInstallation setObject:user forKey:@"user"];
              [currentInstallation saveInBackground];
 
-             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Loged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              [errorAlertView show];
              UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
              StartMainViewController *vc = [sb instantiateViewControllerWithIdentifier:@"StartMainViewController"];

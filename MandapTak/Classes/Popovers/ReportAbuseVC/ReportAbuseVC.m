@@ -60,11 +60,11 @@
 
 - (IBAction)submit:(id)sender {
     if (txtReason.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please provide a reason." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please specify the abusive material that you found in this profile. It helps us in taking proper action" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
         return;
     }
     [self showLoader];
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
+    //NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"currentProfileId"]);
     NSString *reason = txtReason.text;
     [PFCloud callFunctionInBackground:@"reportUser"
                        withParameters:@{@"reason":reason,
@@ -78,9 +78,13 @@
              [[[UIAlertView alloc] initWithTitle:nil message:@"Submitted Successfully" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
              [self.delegate closePopover];
          }
+         else  if (error.code ==209){
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
+         }
          else
          {
-             UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Plaese try again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              [av show];
              return;
          }

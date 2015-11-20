@@ -100,6 +100,10 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
             self.arrMatches = results;
              
          }
+         else  if (error.code ==209){
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
+         }
          else{
              UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              [alert show];

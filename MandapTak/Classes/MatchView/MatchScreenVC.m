@@ -254,13 +254,11 @@
                   if (!error)
                   {
                       lblTraits.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
-                      NSLog(@"Traits matching  = %@",traitResult);
                   }
-                  else
-                  {
-                      NSLog(@"Error info -> %@",error.description);
+                  else  if (error.code ==209){
+                      UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                      [errorAlertView show];
                   }
-                  
               }];
              
              //save current obj in profile object

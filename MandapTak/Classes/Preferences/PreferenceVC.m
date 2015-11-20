@@ -654,9 +654,9 @@
                      [self saveDegreePreference];
                      [self saveLocationPreference];
                  }
-                 else
-                 {
-                     // There was a problem, check error.description
+                 else  if (error.code ==209){
+                     UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                     [errorAlertView show];
                  }
              }];
             
@@ -729,6 +729,10 @@
             //[self addNewDegreePreference];
             [self performSelector:@selector(addNewDegreePreference) withObject:nil afterDelay:1.0];
             
+        }
+        else  if (error.code ==209){
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
         }
         else
         {

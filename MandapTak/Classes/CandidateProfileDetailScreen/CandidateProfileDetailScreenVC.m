@@ -75,6 +75,14 @@
         btnLike.hidden = NO;
         btnDislike.hidden = NO;
     }
+    
+    //hide like/dilike buttons
+    btnLike.hidden = YES;
+    btnDislike.hidden = YES;
+    
+    //hide options button
+    btnOptions.hidden = YES;
+    
     headerView.layer.masksToBounds = NO;
     headerView.layer.shadowOffset = CGSizeMake(.5, .5);
     headerView.layer.shadowRadius = 2;
@@ -85,17 +93,30 @@
         [self loginLayer];
     }
     
-    btnPopover.hidden = YES;
-    
     //hide button when tapped on screen
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideButton)];
+    //tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideButton)];
+    //[self.view addGestureRecognizer:tapGesture];
     
-    [self.view addGestureRecognizer:tapGesture];
-    
+    //set underlined text on report abuse button
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Report Abuse"];
+    [titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [titleString length])];
+    [btnPopover setAttributedTitle:titleString forState:UIControlStateNormal];
 }
-
+/*
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    // Disallow recognition of tap gestures in the segmented control.
+    if ((touch.view == btnPopover)) {//change it to your condition
+        return NO;
+    }
+    return YES;
+}
+*/
 -(void)hideButton {
-    btnPopover.hidden = YES;
+    //btnPopover.hidden = YES;
+    //tapGesture.cancelsTouchesInView = false;
+    //[self.view removeGestureRecognizer:tapGesture];
+    
 }
 
 
@@ -271,20 +292,23 @@
     PFObject *obj = profileObject.profilePointer;
     
     //new code
-    lblName.text = profileObject.name;
+//    lblName.text = profileObject.name;
+//    btnBack.titleLabel.text = profileObject.name;
+    [btnBack setTitle:profileObject.name forState:UIControlStateNormal];
     lblAgeHeight.text = [NSString stringWithFormat:@"%@,%@",profileObject.age,profileObject.height];
     lblDesignation.text = profileObject.designation;
     lblOccupation.text = profileObject.designation;
     
     //lblIncome.text = [NSString stringWithFormat:@"%@",[obj valueForKey:@"package"]];
-    lblIndustry.text = [NSString stringWithFormat:@"%@ , %@/annum",[obj valueForKey:@"placeOfWork"],[obj valueForKey:@"package"]];
-    lblWeight.text = [NSString stringWithFormat:@"Weight : %@ Kg",[obj valueForKey:@"weight"]];
+    lblIndustry.text = [NSString stringWithFormat:@"%@",[obj valueForKey:@"placeOfWork"]];
+    lblPackage.text = [NSString stringWithFormat:@"%@",[obj valueForKey:@"package"]];
+    lblWeight.text = [NSString stringWithFormat:@"%@ Kg",[obj valueForKey:@"weight"]];
     
     //caste label
     lblCaste.text = [NSString stringWithFormat:@"%@,%@",profileObject.religion,profileObject.caste];
     
     //current location label
-    lblCurrentLocation.text = [NSString stringWithFormat:@"Current Location : %@,",profileObject.currentLocation];
+    lblCurrentLocation.text = [NSString stringWithFormat:@"%@,",profileObject.currentLocation];
     
     //traits label
     //get traits count
@@ -315,13 +339,11 @@
              {
                  lblTraitMatch.text = [NSString stringWithFormat:@"%@ Traits Match",traitResult];
                  textTraits = lblTraitMatch.text;
-                 NSLog(@"Traits matching on detail screen  = %@",traitResult);
              }
-             else
-             {
-                 NSLog(@"Error info -> %@",error.description);
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
              }
-             
          }];
     }
     else
@@ -531,7 +553,7 @@
         */
         
         ReportAbuseVC *controller = segue.destinationViewController;
-        controller.contentSizeForViewInPopover = CGSizeMake(300, 190);
+        controller.contentSizeForViewInPopover = CGSizeMake(300, 155);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         popoverController.popoverLayoutMargins = UIEdgeInsetsMake(4, 4, 4, 4);
@@ -672,9 +694,9 @@
              }];
              
          }
-         else
-         {
-             // There was a problem, check error.description
+         else  if (error.code ==209){
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
          }
      }];
 }
@@ -682,16 +704,17 @@
 #pragma mark Options Button Action
 - (IBAction)optionsAction:(id)sender
 {
+    
+    /*
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideButton)];
+    [self.view addGestureRecognizer:tapGesture];
     if (btnPopover.hidden)
     {
         btnPopover.hidden = NO;
     } else {
         btnPopover.hidden = YES;
     }
-}
-
-- (IBAction)reportAction:(id)sender {
-    
+     */
 }
 
 
@@ -917,8 +940,11 @@
 -(void)closePopover
 {
     [popoverController dismissPopoverAnimated:YES];
-    btnPopover.hidden = YES;
+    //btnPopover.hidden = YES;
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 22, 0, 0);
+}
 
 @end

@@ -29,6 +29,7 @@
     IBOutlet UILabel *lblCaste;
     IBOutlet UILabel *lblOccupation;
     IBOutlet UILabel *lblTraitMatch;
+    IBOutlet UILabel *lblPackage;
     IBOutlet UICollectionView *ImagesCollectionView;
     
     IBOutlet UILabel *lblCurrentLocation;
@@ -52,6 +53,11 @@
     UIPickerView *picView;
     UIButton *buttonCancel,*buttonDone;
     IBOutlet UIButton *btnPopover;
+    
+    IBOutlet UIButton *btnBack;
+    IBOutlet UIButton *btnOptions;
+    //gesture recognizer
+    UITapGestureRecognizer *tapGesture;
 }
 @property (strong, nonatomic) PFObject *currentProfile;
 @property (nonatomic) LYRClient *layerClient;
@@ -62,7 +68,6 @@
 - (IBAction)likeAction:(id)sender;
 - (IBAction)dislikeAction:(id)sender;
 - (IBAction)optionsAction:(id)sender;
-- (IBAction)reportAction:(id)sender;
 @property (strong,nonatomic) Profile *profileObject;
 @property (strong,nonatomic) NSString *textTraits;
 

@@ -103,7 +103,6 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    //[self.view addGestureRecognizer:swipeRight];
     
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
     _sidebarButton.target = self.revealViewController;
@@ -114,7 +113,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
-    [self.view addGestureRecognizer:swipeUp];
+
      */
     
     [self.revealViewController.panGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
@@ -360,6 +359,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                                       [self showProfileOfCandidateNumber:profileNumber withTransition:nil];
                                   }
                               }
+                              else  if (error.code ==209){
+                                  UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                  [errorAlertView show];
+                              }
                           }];
                      }
                  }
@@ -433,6 +436,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                           userImageView.layer.borderWidth = 2.0f;
                           userImageView.layer.borderColor = [[UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1] CGColor];
                       }
+                      else  if (error.code ==209){
+                          UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                          [errorAlertView show];
+                      }
                       else
                       {
                           NSLog(@"Error = > %@",error);
@@ -440,6 +447,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                       //add our blurred image to the scrollview
                       //profileImageView.image = arrImages[0];
                   }];
+             }
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
              }
              else
              {
@@ -546,6 +557,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
 {
     if (arrCandidateProfiles.count >0)
     {
+        UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        [self.view addGestureRecognizer:swipeUp];
+        
         blankView.hidden = YES;
         profileView.hidden = NO;
         //NSLog(@"profile number to be displayed = %d",profileNumber);
@@ -585,11 +599,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  //NSLog(@"Traits matching at first call  = %@",traitResult);
                  [[NSUserDefaults standardUserDefaults] setValue:traitResult forKey:@"demoTraits"];
              }
-             else
-             {
-                 NSLog(@"Error info -> %@",error.description);
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
              }
-             
          }];
         //show coach marks after profile load
         WSCoachMarksView *coachMarksView = [[WSCoachMarksView alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
@@ -678,6 +691,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              // The find succeeded.
              [self retrieveImagesFromObject:objects[0]];
          }
+         else  if (error.code ==209){
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
+         }
          else
          {
              // Log details of the failure
@@ -707,6 +724,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  UIImage *image = [UIImage imageWithData:imageData];
                  //[arrImages addObject:image];
                  imgViewProfilePic.image = image;
+             }
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
              }
              else
              {
@@ -752,7 +773,11 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
              }
 
          }
-         else
+         else  if (error.code ==209){
+             UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             [errorAlertView show];
+         }
+        else
          {
              // Log details of the failure
              NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -884,6 +909,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  //code 06
                  //UIImage *blurImg = [self blur:image];
              }
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
+             }
              else
              {
                  NSLog(@"Error = > %@",error);
@@ -936,7 +965,7 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         [self performSegueWithIdentifier:@"swipeUpIdentifier" sender:nil];
     }
      */
-    //CATransition *transition = [CATransition animation];
+    CATransition *transition = [CATransition animation];
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft)
     {
@@ -977,6 +1006,12 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
     
     //Photos *photo = self.arrImages[self.currentIndex];
     //[imageView setImage:photo.image];
+    else if (swipe.direction == UISwipeGestureRecognizerDirectionUp)
+    {
+        [transition setType:kCATransitionPush];
+        [transition setSubtype:kCATransitionFromBottom];
+        [self showCandidateProfile:nil];
+    }
 }
 
 - (IBAction)menuButtonAction:(id)sender
@@ -1087,9 +1122,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  [self showProfileOfCandidateNumber:profileNumber withTransition:transition];
                  //[self performSelector:@selector(animateScreenWithTransition:) withObject:transition afterDelay:2.0];
              }
-             else
-             {
-                 //There was a problem, check error.description
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
              }
          }];
     }
@@ -1282,6 +1317,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                       */
                  }
              }
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
+             }
              
          }];
         
@@ -1348,9 +1387,9 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                  //[self.view.layer addAnimation:transition forKey:nil];
                  
              }
-             else
-             {
-                 // There was a problem, check error.description
+             else  if (error.code ==209){
+                 UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 [errorAlertView show];
              }
          }];
     }
@@ -1426,6 +1465,10 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             }
             
             //[self.view.layer addAnimation:transition forKey:nil];
+        }
+        else  if (error.code ==209){
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
         }
         else
         {
@@ -1508,7 +1551,12 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
             [self authenticateLayerWithUserID:userID completion:^(BOOL success, NSError *error) {
                 if (!error){
                     NSLog(@" Authenticated Layer Client ");
-                } else {
+                }
+                else  if (error.code ==209){
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                }
+                else {
                     NSLog(@"Failed Authenticating Layer Client with error:%@", error);
                 }
             }];
@@ -1528,13 +1576,19 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
         } else {
             //If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
             [self.layerClient deauthenticateWithCompletion:^(BOOL success, NSError *error) {
-                if (!error){
+                if (!error)
+                {
                     [self authenticationTokenWithUserId:userID completion:^(BOOL success, NSError *error) {
                         if (completion){
                             completion(success, error);
                         }
                     }];
-                } else {
+                }
+                else  if (error.code ==209){
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                }
+                else {
                     if (completion){
                         completion(NO, error);
                     }
@@ -1583,7 +1637,12 @@ static NSString *const LayerAppIDString = @"layer:///apps/staging/3ffe495e-45e8-
                             completion(NO, error);
                         }
                     }];
-                } else {
+                }
+                else  if (error.code ==209){
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Logged in from another device, Please login again!!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                }
+                else {
                     NSLog(@"Parse Cloud function failed to be called to generate token with error: %@", error);
                 }
             }];

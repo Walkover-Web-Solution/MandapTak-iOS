@@ -26,9 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     isChatAvailable  = NO;
+    btnViewBiodata.hidden = YES;
+    biodataURL = nil;
     // Do any additional setup after loading the view.
     [self loadImages];
     [self setupCollectionView];
+    
+    //check if biodata uploaded
+    [self checkBiodata];
     
     lblName.text = [profileObject.profilePointer valueForKey:@"name"];
     lblGender.text = [profileObject.profilePointer valueForKey:@"gender"];
@@ -85,6 +90,9 @@
     if(self.isFromMatches){
         [self loginLayer];
     }
+    
+    tableViewEducation.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    activityIndicator.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -221,14 +229,42 @@
     button4.backgroundColor = [UIColor colorWithRed:247/255.0f green:157/255.0f blue:160/255.0f alpha:1];
 }
 
-- (IBAction)downloadBiodata:(id)sender
+-(BOOL) checkBiodata
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     //NSLog(@"candidater profile ID -> %@",profileObject.profilePointer.objectId);
     [query whereKey:@"objectId" equalTo:profileObject.profilePointer.objectId];//rvkzhpnLKr //EYKXEM27cu
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        
+        if (!error)
+        {
+            PFFile *userImageFile = [object objectForKey:@"bioData"]; //profileCropedPhoto
+            
+            NSString *fileName = [userImageFile url];
+            biodataURL = [NSURL URLWithString:fileName];
+            if (biodataURL == nil)
+            {
+                btnViewBiodata.hidden = YES;
+            }
+            else
+            {
+                btnViewBiodata.hidden = NO;
+            }
+        }
+    }];
+    return YES;
+}
+
+- (IBAction)downloadBiodata:(id)sender
+{
+    /*
+    [self showLoader];
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    //NSLog(@"candidater profile ID -> %@",profileObject.profilePointer.objectId);
+    [query whereKey:@"objectId" equalTo:profileObject.profilePointer.objectId];//rvkzhpnLKr //EYKXEM27cu
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        [self hideLoader];
         if (!error)
         {
             PFFile *userImageFile = [object objectForKey:@"bioData"]; //profileCropedPhoto
@@ -242,12 +278,14 @@
             }
             else
             {
-                SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
-                webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-                [self presentViewController:webViewController animated:YES completion:NULL];
+                
             }
         }
     }];
+     */
+    SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:biodataURL];
+    webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:webViewController animated:YES completion:NULL];
     
 }
 
@@ -275,14 +313,14 @@
     // Create label with section title
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(20, 0, 284, 23);
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:17];
+    label.textColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    label.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR.OTF" size:15];
     label.text = [self tableView:tableView titleForHeaderInSection:section];
     label.backgroundColor = [UIColor clearColor];
     
     // Create header view and add label as a subview
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 23)];
-    view.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
+    view.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:244.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1];
     [view addSubview:label];
     
     return view;
@@ -541,4 +579,18 @@
     [self presentViewController:navController animated:YES completion:nil];
     //[self.navigationController pushViewController:controller animated:YES];
 }
+
+#pragma mark ShowActivityIndicator
+
+-(void)showLoader{
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+}
+
+-(void)hideLoader
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+}
+
 @end

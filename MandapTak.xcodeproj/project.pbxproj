@@ -142,7 +142,7 @@
 		75DD300C1BEA308B00276D68 /* DemoScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DD300B1BEA308B00276D68 /* DemoScreenVC.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */; };
-		892847ED1BFC49CE00E8F4A8 /* editAentUserDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = 892847EC1BFC49CE00E8F4A8 /* editAentUserDetails.png */; settings = {ASSET_TAGS = (); }; };
+		892847ED1BFC49CE00E8F4A8 /* editAentUserDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = 892847EC1BFC49CE00E8F4A8 /* editAentUserDetails.png */; };
 		892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892DAFAB1BB3FC870025094B /* VerficationViewController.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
@@ -252,12 +252,12 @@
 		899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C53821B7383C200C24DA8 /* HeightPopoverViewController.m */; };
 		899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 899CBDE61B75FF3A00D1778A /* menu_white.png */; };
 		899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */; };
-		89A3F0CA1BFC3785004EC82B /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0BE1BFC3785004EC82B /* AgentCustomTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		89A3F0CB1BFC3785004EC82B /* AgentEditDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C11BFC3785004EC82B /* AgentEditDetailsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		89A3F0CC1BFC3785004EC82B /* AgentUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C41BFC3785004EC82B /* AgentUserDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
-		89A3F0CD1BFC3785004EC82B /* UserDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C61BFC3785004EC82B /* UserDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		89A3F0CE1BFC3785004EC82B /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C81BFC3785004EC82B /* AgentViewController.m */; settings = {ASSET_TAGS = (); }; };
-		89A3F0D01BFC3A7A004EC82B /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A3F0CF1BFC3A7A004EC82B /* Agent.storyboard */; settings = {ASSET_TAGS = (); }; };
+		89A3F0CA1BFC3785004EC82B /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0BE1BFC3785004EC82B /* AgentCustomTableViewCell.m */; };
+		89A3F0CB1BFC3785004EC82B /* AgentEditDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C11BFC3785004EC82B /* AgentEditDetailsViewController.m */; };
+		89A3F0CC1BFC3785004EC82B /* AgentUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C41BFC3785004EC82B /* AgentUserDetailViewController.m */; };
+		89A3F0CD1BFC3785004EC82B /* UserDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C61BFC3785004EC82B /* UserDetailTableViewCell.m */; };
+		89A3F0CE1BFC3785004EC82B /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C81BFC3785004EC82B /* AgentViewController.m */; };
+		89A3F0D01BFC3A7A004EC82B /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A3F0CF1BFC3A7A004EC82B /* Agent.storyboard */; };
 		89A4341E1BECB610000CF019 /* dislike2.png in Resources */ = {isa = PBXBuildFile; fileRef = 89A4341D1BECB610000CF019 /* dislike2.png */; };
 		89A98AA11BDF81F60054D9A2 /* DRCellSlideAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98A9C1BDF81F60054D9A2 /* DRCellSlideAction.m */; };
 		89A98AA21BDF81F60054D9A2 /* DRCellSlideActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98A9E1BDF81F60054D9A2 /* DRCellSlideActionView.m */; };
