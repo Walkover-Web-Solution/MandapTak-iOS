@@ -133,7 +133,7 @@ SYNTHESIZE_SINGLETON_METHOD(AppData, sharedData);
 -(void)setProfileForCurrentUserwithCompletionBlock:(GetProfilesCompletionBlock)completionBlock{
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    query.cachePolicy = kPFCachePolicyNetworkOnly;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.

@@ -11,11 +11,11 @@
 #import "WYPopoverController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "CreateNewUserPopoverViewController.h"
-
+#import "AgentEditDetailsViewController.h"
 @interface AgentUserDetailViewController (){
     NSMutableArray *arrProfiles;
     WYPopoverController* popoverController;
-
+    BOOL containsBachelor;
     __weak IBOutlet UILabel *lblUserInfo;
     __weak IBOutlet UILabel *lblBal;
     PFObject *selectedUserProfile;
@@ -34,6 +34,10 @@
     lblUserInfo.hidden  =YES;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     arrProfiles = [NSMutableArray array];
+   
+    // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated{
     PFObject *profile = [self.userProfile valueForKey:@"profileId"];
     [self showLoader];
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
@@ -44,7 +48,7 @@
     [query whereKey:@"profileId" equalTo:profile];
     //[query whereKey:@"relation" notEqualTo:@"Bachelor"];
     //[query whereKey:@"relation" notEqualTo:@"Agent"];
-    [query whereKey:@"relation" notContainedIn:@[@"Bachelor", @"Agent"]];
+    [query whereKey:@"relation" notContainedIn:@[ @"Agent"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [self hideLoader];
         
@@ -53,21 +57,12 @@
             if(objects.count==0){
                 lblUserInfo.text = @"No Permissons given till now.";
             }
-                     arrProfiles = objects.mutableCopy;
+            arrProfiles = objects.mutableCopy;
             [self.tableView reloadData];
-            //            NSMutableArray *arrUserIds = [NSMutableArray array];
-            //            for(PFObject *obj in objects){
-            //                PFUser *user = [obj valueForKey:@"userId"];
-            //                [arrUserIds addObject:user.objectId];
-            //            }
-            //            NSLog(@"arrUserIds --  %@",arrUserIds);
-            // The find succeeded.
-        }
+                 }
     }];
 
-    // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -108,15 +103,38 @@
     
     cell.lblUserNumber.text = user.username;
     cell.lblRelation.text = [userProfile valueForKey:@"relation"];
-
+    if([[userProfile valueForKey:@"relation"] isEqual:@"Bachelor"]){
+        containsBachelor = YES;
+    }
+    PFObject *mainProfile = [self.userProfile valueForKey:@"profileId"];
+    PFUser *mainUser = [mainProfile valueForKey:@"userId"];
+    NSLog(@"mainUser %@",mainUser.username);
+    NSLog(@"user %@",user.username);
+    
+    if([mainUser.objectId isEqual:user.objectId ]){
+        //cell.contentView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.5f];
+        cell.lblRelation.textColor = [UIColor redColor];
+    }
+   
 //    if(name!=nil||name.length!=0)
 //        cell.lblUserNumber.text = [profile valueForKey:@"name"];
+    NSDate *updatedDate = [user valueForKey:@"createdAt"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateFormat = @"dd/MM/yyyy";
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     
+    NSString *dateString = [dateFormatter stringFromDate: updatedDate];
+    cell.lblCreatedAt.text =[NSString stringWithFormat:@"%@",dateString] ;
     cell.btnEdit.tag = indexPath.row;
     [cell.btnEdit addTarget:self action:@selector(performEditAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    selectedUserProfile = arrProfiles[indexPath.row];
+//    [self performSegueWithIdentifier:@"EditUserIdentifier" sender:self];
+    
+   }
 
 -(void)performEditAction:(id)sender{
     selectedUserProfile = arrProfiles[[sender tag]];
@@ -129,8 +147,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"EditUserIdentifier"])
     {
-        AgentUserDetailViewController *vc = [segue destinationViewController];
+        AgentEditDetailsViewController *vc = [segue destinationViewController];
         vc.userProfile = selectedUserProfile;
+        vc.optionType = @"EditDetails";
+        vc.containBachelor = containsBachelor;
             }
     // Pass the selected object to the new view controller.
 }

@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 #define kSTEPFRACTION 20
 
-@interface CreateNewUserPopoverViewController ()<UIPickerViewDataSource,UIPickerViewDelegate>{
+@interface CreateNewUserPopoverViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>{
     UIPickerView *picView;
     UIButton *buttonCancel,*buttonDone;
     NSString *strRelation;
@@ -45,6 +45,7 @@
     numberToolbar.barStyle = UIBarStyleDefault;
     [numberToolbar sizeToFit];
     self.txtMobNo.inputAccessoryView = numberToolbar;
+    self.txtMobNo.delegate  = self;
     // Do any additional setup after loading the view.
 }
 
@@ -282,6 +283,23 @@
     
     //set button title
     [btnRelation setTitle:strRelation forState:UIControlStateNormal];
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if(textField.text.length>9){
+        const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
+        int isBackSpace = strcmp(_char, "\b");
+        
+        if (isBackSpace == -8) {
+            return YES;
+        }
+        
+        return NO;
+    }
+    if(textField.text.length<=10){
+        return YES;
+    }
+    return YES;
 }
 
 

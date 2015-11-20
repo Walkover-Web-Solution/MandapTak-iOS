@@ -142,6 +142,7 @@
 		75DD300C1BEA308B00276D68 /* DemoScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DD300B1BEA308B00276D68 /* DemoScreenVC.m */; };
 		75E6028E1B7E288E0061BA39 /* LocationPreferencePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */; };
 		75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */; };
+		892847ED1BFC49CE00E8F4A8 /* editAentUserDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = 892847EC1BFC49CE00E8F4A8 /* editAentUserDetails.png */; settings = {ASSET_TAGS = (); }; };
 		892DAFAC1BB3FC870025094B /* VerficationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892DAFAB1BB3FC870025094B /* VerficationViewController.m */; };
 		8936E2261B996A0C0080B6A5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8936E2251B996A0C0080B6A5 /* Profile.storyboard */; };
 		893E76E51B8871130009F512 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 893E76E41B8871130009F512 /* Photos.m */; };
@@ -251,17 +252,18 @@
 		899C53831B7383C200C24DA8 /* HeightPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C53821B7383C200C24DA8 /* HeightPopoverViewController.m */; };
 		899CBDE71B75FF3A00D1778A /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 899CBDE61B75FF3A00D1778A /* menu_white.png */; };
 		899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */; };
+		89A3F0CA1BFC3785004EC82B /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0BE1BFC3785004EC82B /* AgentCustomTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		89A3F0CB1BFC3785004EC82B /* AgentEditDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C11BFC3785004EC82B /* AgentEditDetailsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		89A3F0CC1BFC3785004EC82B /* AgentUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C41BFC3785004EC82B /* AgentUserDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		89A3F0CD1BFC3785004EC82B /* UserDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C61BFC3785004EC82B /* UserDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		89A3F0CE1BFC3785004EC82B /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A3F0C81BFC3785004EC82B /* AgentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		89A3F0D01BFC3A7A004EC82B /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A3F0CF1BFC3A7A004EC82B /* Agent.storyboard */; settings = {ASSET_TAGS = (); }; };
 		89A4341E1BECB610000CF019 /* dislike2.png in Resources */ = {isa = PBXBuildFile; fileRef = 89A4341D1BECB610000CF019 /* dislike2.png */; };
 		89A98AA11BDF81F60054D9A2 /* DRCellSlideAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98A9C1BDF81F60054D9A2 /* DRCellSlideAction.m */; };
 		89A98AA21BDF81F60054D9A2 /* DRCellSlideActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98A9E1BDF81F60054D9A2 /* DRCellSlideActionView.m */; };
 		89A98AA31BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A98AA01BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m */; };
 		89AD119E1BBA94F400ADC9B9 /* LNBRippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */; };
 		89AF50951B9AFF2800E170D2 /* userDefImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 89AF50941B9AFF2800E170D2 /* userDefImg.png */; };
-		89B046711BF1EAE800A651F2 /* Agent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B046661BF1EAE800A651F2 /* Agent.storyboard */; };
-		89B046721BF1EAE800A651F2 /* AgentCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B046691BF1EAE800A651F2 /* AgentCustomTableViewCell.m */; };
-		89B046731BF1EAE800A651F2 /* AgentUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B0466C1BF1EAE800A651F2 /* AgentUserDetailViewController.m */; };
-		89B046741BF1EAE800A651F2 /* UserDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B0466E1BF1EAE800A651F2 /* UserDetailTableViewCell.m */; };
-		89B046751BF1EAE800A651F2 /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B046701BF1EAE800A651F2 /* AgentViewController.m */; };
 		89B4BA5C1BCD2BF500363A4E /* LaunchScreen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B4BA5B1BCD2BF500363A4E /* LaunchScreen.xcassets */; };
 		89C53EAD1BE0C2E1006C4483 /* dislike1.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C53EAC1BE0C2E1006C4483 /* dislike1.png */; };
 		89D9F7231B6B578C004CBE3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9F7221B6B578C004CBE3D /* AppDelegate.m */; };
@@ -512,6 +514,7 @@
 		75E6028D1B7E288E0061BA39 /* LocationPreferencePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPreferencePopoverVC.m; sourceTree = "<group>"; };
 		75F8D0F81BE0C4F30034C982 /* WSCoachMarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSCoachMarksView.h; sourceTree = "<group>"; };
 		75F8D0F91BE0C4F30034C982 /* WSCoachMarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSCoachMarksView.m; sourceTree = "<group>"; };
+		892847EC1BFC49CE00E8F4A8 /* editAentUserDetails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editAentUserDetails.png; sourceTree = "<group>"; };
 		892DAFAA1BB3FC870025094B /* VerficationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerficationViewController.h; sourceTree = "<group>"; };
 		892DAFAB1BB3FC870025094B /* VerficationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerficationViewController.m; sourceTree = "<group>"; };
 		8936E2251B996A0C0080B6A5 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -697,6 +700,17 @@
 		899CBDE61B75FF3A00D1778A /* menu_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_white.png; sourceTree = "<group>"; };
 		899CBDE91B75FFEE00D1778A /* BirthTimePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthTimePopoverViewController.h; sourceTree = "<group>"; };
 		899CBDEA1B75FFEE00D1778A /* BirthTimePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthTimePopoverViewController.m; sourceTree = "<group>"; };
+		89A3F0BD1BFC3785004EC82B /* AgentCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCustomTableViewCell.h; sourceTree = "<group>"; };
+		89A3F0BE1BFC3785004EC82B /* AgentCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCustomTableViewCell.m; sourceTree = "<group>"; };
+		89A3F0C01BFC3785004EC82B /* AgentEditDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentEditDetailsViewController.h; sourceTree = "<group>"; };
+		89A3F0C11BFC3785004EC82B /* AgentEditDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentEditDetailsViewController.m; sourceTree = "<group>"; };
+		89A3F0C31BFC3785004EC82B /* AgentUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentUserDetailViewController.h; sourceTree = "<group>"; };
+		89A3F0C41BFC3785004EC82B /* AgentUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentUserDetailViewController.m; sourceTree = "<group>"; };
+		89A3F0C51BFC3785004EC82B /* UserDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailTableViewCell.h; sourceTree = "<group>"; };
+		89A3F0C61BFC3785004EC82B /* UserDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailTableViewCell.m; sourceTree = "<group>"; };
+		89A3F0C71BFC3785004EC82B /* AgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentViewController.h; sourceTree = "<group>"; };
+		89A3F0C81BFC3785004EC82B /* AgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentViewController.m; sourceTree = "<group>"; };
+		89A3F0CF1BFC3A7A004EC82B /* Agent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Agent.storyboard; sourceTree = "<group>"; };
 		89A4341D1BECB610000CF019 /* dislike2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike2.png; sourceTree = "<group>"; };
 		89A98A9B1BDF81F60054D9A2 /* DRCellSlideAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRCellSlideAction.h; sourceTree = "<group>"; };
 		89A98A9C1BDF81F60054D9A2 /* DRCellSlideAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCellSlideAction.m; sourceTree = "<group>"; };
@@ -707,15 +721,6 @@
 		89AD119C1BBA94F400ADC9B9 /* LNBRippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNBRippleEffect.h; sourceTree = "<group>"; };
 		89AD119D1BBA94F400ADC9B9 /* LNBRippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNBRippleEffect.m; sourceTree = "<group>"; };
 		89AF50941B9AFF2800E170D2 /* userDefImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userDefImg.png; sourceTree = "<group>"; };
-		89B046661BF1EAE800A651F2 /* Agent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Agent.storyboard; path = Classes/AgentViewController/Agent.storyboard; sourceTree = "<group>"; };
-		89B046681BF1EAE800A651F2 /* AgentCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCustomTableViewCell.h; sourceTree = "<group>"; };
-		89B046691BF1EAE800A651F2 /* AgentCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCustomTableViewCell.m; sourceTree = "<group>"; };
-		89B0466B1BF1EAE800A651F2 /* AgentUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentUserDetailViewController.h; sourceTree = "<group>"; };
-		89B0466C1BF1EAE800A651F2 /* AgentUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentUserDetailViewController.m; sourceTree = "<group>"; };
-		89B0466D1BF1EAE800A651F2 /* UserDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailTableViewCell.h; sourceTree = "<group>"; };
-		89B0466E1BF1EAE800A651F2 /* UserDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailTableViewCell.m; sourceTree = "<group>"; };
-		89B0466F1BF1EAE800A651F2 /* AgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentViewController.h; sourceTree = "<group>"; };
-		89B046701BF1EAE800A651F2 /* AgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentViewController.m; sourceTree = "<group>"; };
 		89B4BA5B1BCD2BF500363A4E /* LaunchScreen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchScreen.xcassets; sourceTree = "<group>"; };
 		89C53EAC1BE0C2E1006C4483 /* dislike1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike1.png; sourceTree = "<group>"; };
 		89D9F7211B6B578C004CBE3D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1068,6 +1073,7 @@
 		757F876A1B8F0DDB00C083A4 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				892847EC1BFC49CE00E8F4A8 /* editAentUserDetails.png */,
 				8975CEFF1BD26A2E00FFD309 /* btn_delete.png */,
 				898403C91BCE68FF001FBD9A /* back.png */,
 				896A8A241BCE2D62009D2698 /* chat.png */,
@@ -1468,9 +1474,9 @@
 				89D9F73E1B6B582C004CBE3D /* Main.storyboard */,
 				8936E2251B996A0C0080B6A5 /* Profile.storyboard */,
 				75918F6C1B79E9A10082D7EC /* Preference.storyboard */,
-				89B046661BF1EAE800A651F2 /* Agent.storyboard */,
 				75BA3ED81B9AC57C00429C98 /* Settings.storyboard */,
 				75D5D09C1B9B1CFE001703D8 /* ChatPinMatch.storyboard */,
+				89A3F0CF1BFC3A7A004EC82B /* Agent.storyboard */,
 				899557171BFB075000E6A7EF /* Agreement.storyboard */,
 				89D9F7361B6B57A8004CBE3D /* Utils */,
 				89D9F7261B6B579E004CBE3D /* Classes */,
@@ -1830,6 +1836,47 @@
 			path = BirthTimePopover;
 			sourceTree = "<group>";
 		};
+		89A3F0BA1BFC3785004EC82B /* AgentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89A3F0BC1BFC3785004EC82B /* AgentCustomTableCell */,
+				89A3F0BF1BFC3785004EC82B /* AgentEditDetails */,
+				89A3F0C21BFC3785004EC82B /* AgentUserDetailViewController */,
+				89A3F0C71BFC3785004EC82B /* AgentViewController.h */,
+				89A3F0C81BFC3785004EC82B /* AgentViewController.m */,
+			);
+			path = AgentViewController;
+			sourceTree = "<group>";
+		};
+		89A3F0BC1BFC3785004EC82B /* AgentCustomTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				89A3F0BD1BFC3785004EC82B /* AgentCustomTableViewCell.h */,
+				89A3F0BE1BFC3785004EC82B /* AgentCustomTableViewCell.m */,
+			);
+			path = AgentCustomTableCell;
+			sourceTree = "<group>";
+		};
+		89A3F0BF1BFC3785004EC82B /* AgentEditDetails */ = {
+			isa = PBXGroup;
+			children = (
+				89A3F0C01BFC3785004EC82B /* AgentEditDetailsViewController.h */,
+				89A3F0C11BFC3785004EC82B /* AgentEditDetailsViewController.m */,
+			);
+			path = AgentEditDetails;
+			sourceTree = "<group>";
+		};
+		89A3F0C21BFC3785004EC82B /* AgentUserDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89A3F0C31BFC3785004EC82B /* AgentUserDetailViewController.h */,
+				89A3F0C41BFC3785004EC82B /* AgentUserDetailViewController.m */,
+				89A3F0C51BFC3785004EC82B /* UserDetailTableViewCell.h */,
+				89A3F0C61BFC3785004EC82B /* UserDetailTableViewCell.m */,
+			);
+			path = AgentUserDetailViewController;
+			sourceTree = "<group>";
+		};
 		89A98A9A1BDF81F60054D9A2 /* TableSwipeCellGesture */ = {
 			isa = PBXGroup;
 			children = (
@@ -1841,37 +1888,6 @@
 				89A98AA01BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m */,
 			);
 			path = TableSwipeCellGesture;
-			sourceTree = "<group>";
-		};
-		89B046651BF1EAE800A651F2 /* AgentViewController */ = {
-			isa = PBXGroup;
-			children = (
-				89B046671BF1EAE800A651F2 /* AgentCustomTableCell */,
-				89B0466A1BF1EAE800A651F2 /* AgentUserDetailViewController */,
-				89B0466F1BF1EAE800A651F2 /* AgentViewController.h */,
-				89B046701BF1EAE800A651F2 /* AgentViewController.m */,
-			);
-			path = AgentViewController;
-			sourceTree = "<group>";
-		};
-		89B046671BF1EAE800A651F2 /* AgentCustomTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				89B046681BF1EAE800A651F2 /* AgentCustomTableViewCell.h */,
-				89B046691BF1EAE800A651F2 /* AgentCustomTableViewCell.m */,
-			);
-			path = AgentCustomTableCell;
-			sourceTree = "<group>";
-		};
-		89B0466A1BF1EAE800A651F2 /* AgentUserDetailViewController */ = {
-			isa = PBXGroup;
-			children = (
-				89B0466B1BF1EAE800A651F2 /* AgentUserDetailViewController.h */,
-				89B0466C1BF1EAE800A651F2 /* AgentUserDetailViewController.m */,
-				89B0466D1BF1EAE800A651F2 /* UserDetailTableViewCell.h */,
-				89B0466E1BF1EAE800A651F2 /* UserDetailTableViewCell.m */,
-			);
-			path = AgentUserDetailViewController;
 			sourceTree = "<group>";
 		};
 		89D9F7201B6B578C004CBE3D /* Core */ = {
@@ -1931,8 +1947,8 @@
 		89D9F7261B6B579E004CBE3D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				89A3F0BA1BFC3785004EC82B /* AgentViewController */,
 				899557191BFB089000E6A7EF /* AgreementViewController */,
-				89B046651BF1EAE800A651F2 /* AgentViewController */,
 				75DC30C31BE38B2F00AA45E4 /* TourOptions */,
 				75BA3EDA1B9ACAFF00429C98 /* Settings */,
 				896D18321B9487AD001513A5 /* ChatPinMatchViewController */,
@@ -2395,6 +2411,7 @@
 				757849DA1BA2EF2D005490E6 /* Anim-(27).png in Resources */,
 				896A8A231BCE2287009D2698 /* Default-568h@2x.png in Resources */,
 				757D44801BC6794B004E84AF /* rangeSliderTrack@2x.png in Resources */,
+				89A3F0D01BFC3A7A004EC82B /* Agent.storyboard in Resources */,
 				759EA7D21BF9F2A9000E3D0A /* cancel@3x.png in Resources */,
 				758C8E791B87412800FF634E /* like.png in Resources */,
 				8975CF001BD26A2E00FFD309 /* btn_delete.png in Resources */,
@@ -2410,7 +2427,6 @@
 				756AB5A21BE4F1E2009A1ADA /* laptopNew.png in Resources */,
 				89D9F7811B6B5DB4004CBE3D /* share_icon.png in Resources */,
 				757F875F1B8EF1DC00C083A4 /* SVWebViewController.bundle in Resources */,
-				89B046711BF1EAE800A651F2 /* Agent.storyboard in Resources */,
 				757F87651B8EF1DC00C083A4 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				75910FC01BF1CAD8007D1325 /* direction.png in Resources */,
 				757CBB141BA6E2F200EFD870 /* undoNew.png in Resources */,
@@ -2420,6 +2436,7 @@
 				899170471B70B5D0000CF872 /* next@2x.png in Resources */,
 				896A8A221BCE2287009D2698 /* Default-568h.png in Resources */,
 				89A4341E1BECB610000CF019 /* dislike2.png in Resources */,
+				892847ED1BFC49CE00E8F4A8 /* editAentUserDetails.png in Resources */,
 				7581C32A1BD103C400E59375 /* chatWhite.png in Resources */,
 				75910FBC1BF1C63F007D1325 /* video.png in Resources */,
 				896D18231B944DDB001513A5 /* Fake_icon.png in Resources */,
@@ -2550,6 +2567,7 @@
 				8954804A1B7E1C0B00AB37BF /* DegreeTableViewCell.m in Sources */,
 				8997CC851BA182C8001B11AA /* SCReachabilityFlagsParser.m in Sources */,
 				893F03361BAAA94400BB1B59 /* PFUser+ATLParticipant.m in Sources */,
+				89A3F0CC1BFC3785004EC82B /* AgentUserDetailViewController.m in Sources */,
 				899CBDEB1B75FFEE00D1778A /* BirthTimePopoverViewController.m in Sources */,
 				897C23A21B6B562C00FC32E9 /* MandapTak.xcdatamodeld in Sources */,
 				896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */,
@@ -2565,10 +2583,10 @@
 				89D9F7321B6B579E004CBE3D /* UserProfileViewController.m in Sources */,
 				899C53741B732B9700C24DA8 /* DateOfBirthPopoverViewController.m in Sources */,
 				89A98AA31BDF81F60054D9A2 /* DRCellSlideGestureRecognizer.m in Sources */,
+				89A3F0CA1BFC3785004EC82B /* AgentCustomTableViewCell.m in Sources */,
 				893F03491BAACC3C00BB1B59 /* SVIndefiniteAnimatedView.m in Sources */,
 				897EF96D1B70901400F88CEC /* EditProfileViewController.m in Sources */,
 				75918F731B79E9C50082D7EC /* CustomLabel.m in Sources */,
-				89B046731BF1EAE800A651F2 /* AgentUserDetailViewController.m in Sources */,
 				89E8D9391B78AF3F008A8E2F /* BasicProfileViewController.m in Sources */,
 				8960062C1B9075870007B7AB /* PhotoTweaksViewController.m in Sources */,
 				750869721B9F096800022596 /* UIImageEffects.m in Sources */,
@@ -2587,6 +2605,7 @@
 				89E0FA611B8606D4000BD65A /* ImageViewController.m in Sources */,
 				899C537C1B7339EB00C24DA8 /* MBProgressHUD.m in Sources */,
 				89E0FA581B85C92A000BD65A /* ZCAssetTablePicker.m in Sources */,
+				89A3F0CD1BFC3785004EC82B /* UserDetailTableViewCell.m in Sources */,
 				75DD300C1BEA308B00276D68 /* DemoScreenVC.m in Sources */,
 				8967FADF1B8DCC3400AAC41E /* FacebooKProfilePictureViewController.m in Sources */,
 				893F033B1BAAC60400BB1B59 /* ConversationViewController.m in Sources */,
@@ -2622,20 +2641,20 @@
 				757D445F1BC678A9004E84AF /* MARKRangeSlider.m in Sources */,
 				89E0FA571B85C92A000BD65A /* ZCAssetCell.m in Sources */,
 				8997CC861BA182C8001B11AA /* SCReachabilityRefBuilder.m in Sources */,
-				89B046751BF1EAE800A651F2 /* AgentViewController.m in Sources */,
 				893F034C1BAACC3C00BB1B59 /* SVRadialGradientLayer.m in Sources */,
 				7527DA9C1BD51A9900296C90 /* TTRangeSlider.m in Sources */,
 				75918F891B79ECBD0082D7EC /* Degree.m in Sources */,
 				89D9F7351B6B579E004CBE3D /* TutorialContentViewController.m in Sources */,
 				8997CC881BA182C8001B11AA /* SCNetworkReachability.m in Sources */,
-				89B046721BF1EAE800A651F2 /* AgentCustomTableViewCell.m in Sources */,
 				75794A6B1B9D5F41007A028D /* ContactsListCell.m in Sources */,
 				75382F091B8CA522005E03FE /* WorkEducationCell.m in Sources */,
 				757F875E1B8EF1DC00C083A4 /* SVModalWebViewController.m in Sources */,
 				893F033F1BAACB9A00BB1B59 /* ConversationListViewController.m in Sources */,
+				89A3F0CB1BFC3785004EC82B /* AgentEditDetailsViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
 				8997CC991BA1840A001B11AA /* ABMultitonInjector.m in Sources */,
 				896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */,
+				89A3F0CE1BFC3785004EC82B /* AgentViewController.m in Sources */,
 				896D18351B9487B6001513A5 /* ChatPinMatchViewController.m in Sources */,
 				75B5BC311B9B2F730097C851 /* ManglikPopoverViewController.m in Sources */,
 				893F034B1BAACC3C00BB1B59 /* SVProgressHUD.m in Sources */,
@@ -2647,7 +2666,6 @@
 				895A6E7A1B9843A200A9C8BC /* DragTableFooterView_ot.m in Sources */,
 				75918F7E1B79EBD70082D7EC /* SelectedLocationVC.m in Sources */,
 				75F8D0FA1BE0C4F30034C982 /* WSCoachMarksView.m in Sources */,
-				89B046741BF1EAE800A651F2 /* UserDetailTableViewCell.m in Sources */,
 				89E0FA561B85C92A000BD65A /* ZCAsset.m in Sources */,
 				75DC30C61BE38B4D00AA45E4 /* TourOptionsVC.m in Sources */,
 				759EA7D41BF9F2A9000E3D0A /* MultiSelectController.m in Sources */,

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblUserNumber;
 @property (weak, nonatomic) IBOutlet UILabel *lblRelation;
 @property (weak, nonatomic) IBOutlet UIButton *btnEdit;
+@property (weak, nonatomic) IBOutlet UILabel *lblCreatedAt;
 
 @end

@@ -19,7 +19,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
 #import "AgentUserDetailViewController.h"
-#import "AgreementViewController.h"
+#import "AgentEditDetailsViewController.h"
 @interface AgentViewController ()<WYPopoverControllerDelegate,AgentCellOptionPopoverViewControllerDelegate,CreateNewUserPopoverViewControllerDelegate,UITableViewDragLoadDelegate>{
     NSMutableArray *arrProfiles;
     WYPopoverController *settingsPopoverController;
@@ -59,7 +59,8 @@
        [[AppData sharedData] setProfileForCurrentUserwithCompletionBlock:^(PFObject *profile, NSError *error) {
            [self hideLoader];
            [self loadMore];
-       }] ;   }
+       }] ;
+    }
     viewCredits.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     viewCredits.layer.shadowOffset = CGSizeMake(1, 1);
     viewCredits.layer.shadowOpacity = .5f;
@@ -87,6 +88,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self getUserCredits];
     self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
 
@@ -220,13 +222,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     PFObject *userProfile = arrProfiles[indexPath.row];
+    
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
     AgentUserDetailViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentUserDetailViewController"];
     vc.userProfile = userProfile;
     [self presentViewController:vc animated:YES completion:nil];
-    
-    
-  }
+}
+
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
   
@@ -269,7 +271,7 @@
 
 -(void)optionButtonAction:(id)sender{
     AgentCellOptionPopoverViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AgentCellOptionPopoverViewController"];
-    viewController.preferredContentSize = CGSizeMake(160, 40);
+    viewController.preferredContentSize = CGSizeMake(160, 80);
     viewController.delegate = self;
     //viewController.title = @"Select Specialization";
     viewController.btnTag = [sender tag];
@@ -279,11 +281,7 @@
     settingsPopoverController.delegate = self;
     settingsPopoverController.wantsDefaultContentAppearance = NO;
     CGRect frame =CGRectFromString(arrBtnFrame[[sender tag]]) ;
-    [settingsPopoverController presentPopoverFromRect:frame
-                                               inView:self.tableView
-                             permittedArrowDirections:WYPopoverArrowDirectionAny
-                                             animated:YES
-                                              options:WYPopoverAnimationOptionFadeWithScale];
+    [settingsPopoverController presentPopoverFromRect:frame inView:self.tableView permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES options:WYPopoverAnimationOptionFadeWithScale];
     
 }
 -(void)userMobileNumber:(NSString *)mobNo{
@@ -320,12 +318,12 @@
     }
     else{
         // givePermissionOption
-//        PFObject *userProfile = arrProfiles[tag];
-//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
-//        AgentEditDetailsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentEditDetailsViewController"];
-//        vc.userProfile = userProfile;
-//        vc.optionType = @"GivePermission";
-//        [self presentViewController:vc animated:YES completion:nil];
+        PFObject *userProfile = arrProfiles[tag];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Agent" bundle:nil];
+        AgentEditDetailsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"AgentEditDetailsViewController"];
+        vc.userProfile = userProfile;
+        vc.optionType = @"GivePermission";
+        [self presentViewController:vc animated:YES completion:nil];
     }
     
     [settingsPopoverController dismissPopoverAnimated:YES];
@@ -388,16 +386,16 @@
             
             NSMutableArray *arrFetchedItems =objects.mutableCopy;
             
-            for(PFObject *tempObj in arrFetchedItems){
-                for(PFObject *obj in arrProfiles){
-                    PFUser *tempUser  = [tempObj valueForKey:@"userId"];
-                    PFUser *user  = [obj valueForKey:@"userId"];
-                    if([tempUser.username isEqual:user.username]){
-                        [arrFetchedItems removeObject:tempObj];
-                        break;
-                    }
-                }
-            }
+//            for(PFObject *tempObj in arrFetchedItems){
+//                for(PFObject *obj in arrProfiles){
+//                    PFUser *tempUser  = [tempObj valueForKey:@"userId"];
+//                    PFUser *user  = [obj valueForKey:@"userId"];
+//                    if([tempUser.username isEqual:user.username]){
+//                        [arrFetchedItems removeObject:tempObj];
+//                        break;
+//                    }
+//                }
+//            }
             [arrProfiles addObjectsFromArray:arrFetchedItems];
             NSInteger count  =arrBtnFrame.count+arrFetchedItems.count;
             for(int i = 0; i<count; i++) [arrBtnFrame addObject: [NSNull null]];
