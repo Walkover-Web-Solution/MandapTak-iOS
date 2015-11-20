@@ -81,7 +81,7 @@
     btnDislike.hidden = YES;
     
     //hide options button
-    btnOptions.hidden = YES;
+    //btnOptions.hidden = YES;
     
     headerView.layer.masksToBounds = NO;
     headerView.layer.shadowOffset = CGSizeMake(.5, .5);
@@ -292,9 +292,8 @@
     PFObject *obj = profileObject.profilePointer;
     
     //new code
-//    lblName.text = profileObject.name;
-//    btnBack.titleLabel.text = profileObject.name;
-    [btnBack setTitle:profileObject.name forState:UIControlStateNormal];
+    lblName.text = profileObject.name;
+    //[btnBack setTitle:profileObject.name forState:UIControlStateNormal];
     lblAgeHeight.text = [NSString stringWithFormat:@"%@,%@",profileObject.age,profileObject.height];
     lblDesignation.text = profileObject.designation;
     lblOccupation.text = profileObject.designation;
@@ -943,8 +942,9 @@
     //btnPopover.hidden = YES;
 }
 
+/*
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 22, 0, 0);
+    return UIEdgeInsetsMake(0, 22, 0, 22);
 }
-
+*/
 @end

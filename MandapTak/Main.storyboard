@@ -4,12 +4,9 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="MYRIADPRO-BOLD.OTF">
-            <string>MyriadPro-Bold</string>
-            <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
@@ -1009,7 +1006,7 @@
                                     <constraint firstItem="r9J-nO-65c" firstAttribute="centerX" secondItem="5mi-0a-mrE" secondAttribute="centerX" id="wPP-B2-0hd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-pr-30w">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-pr-30w">
                                 <rect key="frame" x="20" y="15" width="33" height="29"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="17"/>
@@ -1152,7 +1149,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="back:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="Z0G-Ic-OPV"/>
                                     <action selector="back:" destination="DU5-Rv-5oI" eventType="touchUpInside" id="gyB-cQ-x73"/>
                                 </connections>
                             </button>
@@ -1312,24 +1308,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyp-IG-eJ4">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScE-Ll-gdH">
-                                        <rect key="frame" x="-1" y="0.0" width="321" height="46"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHw-2N-rU8">
-                                                <rect key="frame" x="249" y="0.0" width="72" height="46"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Chat">
-                                                    <color key="titleColor" red="0.83529411760000005" green="0.4431372549" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="chatButtonAction:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="jK8-1s-Zr8"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <animations/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebh-mF-A4R">
                                         <rect key="frame" x="228" y="70" width="40" height="40"/>
                                         <animations/>
@@ -1356,31 +1334,36 @@
                                         <animations/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffv-5P-bpf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hindu,Baniya" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffv-5P-bpf">
                                         <rect key="frame" x="22" y="58" width="192" height="21"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="MXt-cd-RBj"/>
+                                            <constraint firstAttribute="width" constant="192" id="uAx-w3-742"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFP-jY-fHc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFP-jY-fHc">
                                         <rect key="frame" x="22" y="81" width="192" height="21"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="FRJ-em-nGr"/>
+                                            <constraint firstAttribute="width" constant="192" id="L0m-jt-7s4"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBp-g8-Ks0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBp-g8-Ks0">
                                         <rect key="frame" x="22" y="105" width="130" height="21"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="FPN-a8-Nt8"/>
+                                            <constraint firstAttribute="width" constant="130" id="ptI-L2-K8J"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jv-3g-sKp">
-                                        <rect key="frame" x="49" y="12" width="212" height="21"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1391,24 +1374,18 @@
                                         <state key="normal" image="option.png">
                                             <color key="titleColor" red="0.83529411760000005" green="0.4431372549" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LjJ-zf-LnG">
-                                        <rect key="frame" x="2" y="7" width="266" height="30"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
-                                        <inset key="titleEdgeInsets" minX="-50" minY="3" maxX="118" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="-3" minY="0.0" maxX="244" maxY="0.0"/>
-                                        <state key="normal" image="backNew.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                         <connections>
-                                            <action selector="back:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="nVl-M6-5UX"/>
+                                            <action selector="back:" destination="Wmi-sT-7fc" eventType="touchUpInside" id="puH-rR-e3x"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uqt-S8-MYv">
-                                        <rect key="frame" x="190" y="98" width="116" height="21"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uqt-S8-MYv">
+                                        <rect key="frame" x="190" y="105" width="116" height="21"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="3gs-Zc-L8S"/>
+                                            <constraint firstAttribute="width" constant="116" id="I2M-Ok-uGA"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Report Abuse">
@@ -1418,10 +1395,25 @@
                                             <segue destination="B95-8x-XqB" kind="custom" identifier="actionIdentifier" customClass="WYStoryboardPopoverSegue" id="9ZZ-7g-PWl"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXG-df-cRI">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29,5ft 6in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXG-df-cRI">
                                         <rect key="frame" x="22" y="35" width="192" height="21"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="192" id="SX9-fO-NoG"/>
+                                            <constraint firstAttribute="height" constant="21" id="YjP-pa-Ub8"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ankita Chadha" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jv-3g-sKp">
+                                        <rect key="frame" x="22" y="11" width="232" height="21"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="232" id="fRq-Wf-PBR"/>
+                                            <constraint firstAttribute="height" constant="21" id="rUQ-rp-3kq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1429,12 +1421,24 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="ffv-5P-bpf" firstAttribute="top" secondItem="uXG-df-cRI" secondAttribute="bottom" constant="2" id="1dW-cG-0DH"/>
                                     <constraint firstItem="NXt-4Q-1vQ" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="top" constant="8" id="2aS-ww-rwU"/>
+                                    <constraint firstItem="0jv-3g-sKp" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" constant="22" id="3XY-Ab-k0T"/>
+                                    <constraint firstItem="gFP-jY-fHc" firstAttribute="top" secondItem="ffv-5P-bpf" secondAttribute="bottom" constant="2" id="5cZ-2b-tHn"/>
+                                    <constraint firstItem="ZBp-g8-Ks0" firstAttribute="top" secondItem="gFP-jY-fHc" secondAttribute="bottom" constant="3" id="7Sc-AN-Dnv"/>
                                     <constraint firstAttribute="trailing" secondItem="Xtl-b9-mUO" secondAttribute="trailing" id="8y7-cK-l32"/>
+                                    <constraint firstItem="Uqt-S8-MYv" firstAttribute="top" secondItem="gFP-jY-fHc" secondAttribute="bottom" constant="3" id="CWw-tF-65R"/>
                                     <constraint firstAttribute="height" constant="140" id="GX7-66-F1y"/>
                                     <constraint firstItem="Xtl-b9-mUO" firstAttribute="height" secondItem="oyp-IG-eJ4" secondAttribute="height" constant="20" id="K8a-G3-Uh9"/>
+                                    <constraint firstItem="ffv-5P-bpf" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" constant="22" id="LaT-n6-QxZ"/>
+                                    <constraint firstItem="uXG-df-cRI" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" constant="22" id="MGk-IP-fFK"/>
                                     <constraint firstItem="Xtl-b9-mUO" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" id="MmP-nS-8wS"/>
+                                    <constraint firstItem="uXG-df-cRI" firstAttribute="top" secondItem="0jv-3g-sKp" secondAttribute="bottom" constant="3" id="NB7-RA-Mg0"/>
+                                    <constraint firstItem="ZBp-g8-Ks0" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" constant="22" id="QUo-Qv-TMt"/>
+                                    <constraint firstItem="gFP-jY-fHc" firstAttribute="leading" secondItem="oyp-IG-eJ4" secondAttribute="leading" constant="22" id="Tc6-oo-gJM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uqt-S8-MYv" secondAttribute="trailing" constant="14" id="VpD-My-aIK"/>
                                     <constraint firstAttribute="trailing" secondItem="NXt-4Q-1vQ" secondAttribute="trailing" constant="8" id="WvK-uz-l0n"/>
+                                    <constraint firstItem="0jv-3g-sKp" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="top" constant="11" id="pzw-Oi-dB5"/>
                                     <constraint firstItem="Xtl-b9-mUO" firstAttribute="width" secondItem="oyp-IG-eJ4" secondAttribute="width" id="q77-ed-zfH"/>
                                     <constraint firstItem="Xtl-b9-mUO" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="top" id="smL-P0-4SI"/>
                                 </constraints>
@@ -1443,7 +1447,7 @@
                                 <rect key="frame" x="0.0" y="140" width="320" height="85"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ox4-2V-3jc">
-                                        <rect key="frame" x="0.0" y="3" width="320" height="85"/>
+                                        <rect key="frame" x="22" y="0.0" width="276" height="85"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1456,7 +1460,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" id="hk0-ez-4CH">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="276" height="85"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                         </activityIndicatorView>
@@ -1489,65 +1493,94 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ox4-2V-3jc" secondAttribute="bottom" constant="-3" id="7rH-je-Ug7"/>
+                                    <constraint firstAttribute="bottom" secondItem="ox4-2V-3jc" secondAttribute="bottom" id="7rH-je-Ug7"/>
                                     <constraint firstAttribute="height" constant="85" id="MB3-LW-6g2"/>
-                                    <constraint firstItem="ox4-2V-3jc" firstAttribute="top" secondItem="uje-uN-1yk" secondAttribute="top" constant="3" id="Ovz-H0-wkR"/>
-                                    <constraint firstAttribute="trailing" secondItem="ox4-2V-3jc" secondAttribute="trailing" id="lJH-KY-caK"/>
-                                    <constraint firstItem="ox4-2V-3jc" firstAttribute="leading" secondItem="uje-uN-1yk" secondAttribute="leading" id="oZd-rh-etq"/>
+                                    <constraint firstItem="ox4-2V-3jc" firstAttribute="top" secondItem="uje-uN-1yk" secondAttribute="top" id="Ovz-H0-wkR"/>
+                                    <constraint firstAttribute="trailing" secondItem="ox4-2V-3jc" secondAttribute="trailing" constant="22" id="lJH-KY-caK"/>
+                                    <constraint firstItem="ox4-2V-3jc" firstAttribute="leading" secondItem="uje-uN-1yk" secondAttribute="leading" constant="22" id="oZd-rh-etq"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Indore,Madhya Pradesh,India" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RgC-ly-LEo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Indore,Madhya Pradesh,India" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RgC-ly-LEo">
                                 <rect key="frame" x="143" y="233" width="171" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="sCG-rF-ZD0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="55 Kg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkL-ax-EYk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55 Kg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkL-ax-EYk">
                                 <rect key="frame" x="143" y="257" width="171" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Urn-Tu-Mwg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slT-f3-qpj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slT-f3-qpj">
                                 <rect key="frame" x="20" y="233" width="120" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="YUb-bb-c9k"/>
+                                    <constraint firstAttribute="width" constant="120" id="dzI-2R-ldZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weight :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEe-pD-LES">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEe-pD-LES">
                                 <rect key="frame" x="20" y="257" width="120" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Bl9-10-dgS"/>
+                                    <constraint firstAttribute="width" constant="120" id="CGJ-ep-Sbs"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WORK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7G-gM-mFF">
-                                <rect key="frame" x="22" y="286" width="162" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WORK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7G-gM-mFF">
+                                <rect key="frame" x="20" y="286" width="162" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Wf1-6Y-DDG"/>
+                                    <constraint firstAttribute="width" constant="162" id="xLy-0b-wRL"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.070588235289999995" green="0.74509803919999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Software Developer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjr-ho-zG7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Software Developer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjr-ho-zG7">
                                 <rect key="frame" x="143" y="328" width="171" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="171" id="E9o-iD-3WJ"/>
+                                    <constraint firstAttribute="height" constant="21" id="Of8-wX-aGa"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BE,MBA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1j-b9-GEp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BE,MBA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1j-b9-GEp">
                                 <rect key="frame" x="143" y="405" width="171" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="hS0-Za-lm8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EDUCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT8-5l-PN1">
-                                <rect key="frame" x="22" y="381" width="162" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EDUCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT8-5l-PN1">
+                                <rect key="frame" x="20" y="381" width="162" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="Fao-2d-gX9"/>
+                                    <constraint firstAttribute="height" constant="21" id="uIx-ez-O2i"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.070588235289999995" green="0.74509803919999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1568,44 +1601,67 @@
                                     <segue destination="fQz-qd-Znf" kind="show" identifier="fullProfileIdentifier" id="PH5-9s-rrU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Google" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-ul-0Lf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-ul-0Lf">
                                 <rect key="frame" x="143" y="304" width="171" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="tUC-VC-8dw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Industry:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtp-XP-WhM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Industry:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtp-XP-WhM">
                                 <rect key="frame" x="20" y="304" width="120" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="BmV-xm-rAI"/>
+                                    <constraint firstAttribute="width" constant="120" id="vft-Bp-Far"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Designation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlr-K6-6NT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Designation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlr-K6-6NT">
                                 <rect key="frame" x="20" y="328" width="120" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="kQx-yr-kTf"/>
+                                    <constraint firstAttribute="height" constant="21" id="xTa-8f-iaM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1,234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-UT-znB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-UT-znB">
                                 <rect key="frame" x="143" y="352" width="171" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="jUN-a5-Jx8"/>
+                                    <constraint firstAttribute="width" constant="171" id="rt7-LC-had"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Package:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsD-9j-JgC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Package:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsD-9j-JgC">
                                 <rect key="frame" x="20" y="352" width="120" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="BDw-mq-Ctm"/>
+                                    <constraint firstAttribute="height" constant="21" id="W77-hL-3PM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Education:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIP-fT-8Ea">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIP-fT-8Ea">
                                 <rect key="frame" x="20" y="405" width="120" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="KyI-JV-ykX"/>
+                                    <constraint firstAttribute="height" constant="21" id="xcy-y8-grq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1614,18 +1670,54 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Jjr-ho-zG7" firstAttribute="top" secondItem="GHe-ul-0Lf" secondAttribute="bottom" constant="3" id="01V-vB-7Jz"/>
                             <constraint firstItem="oyp-IG-eJ4" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" id="0hF-St-3Yy"/>
                             <constraint firstAttribute="centerX" secondItem="3UV-kV-9OY" secondAttribute="centerX" id="21g-wz-Hks"/>
                             <constraint firstItem="oyp-IG-eJ4" firstAttribute="top" secondItem="yi9-CU-DQl" secondAttribute="bottom" id="4ST-zS-0XP"/>
                             <constraint firstItem="oyp-IG-eJ4" firstAttribute="top" secondItem="yi9-CU-DQl" secondAttribute="bottom" id="4xS-EV-ebs"/>
+                            <constraint firstItem="LEe-pD-LES" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="5GU-RK-xnH"/>
+                            <constraint firstItem="xtp-XP-WhM" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="68l-YQ-Xq4"/>
+                            <constraint firstItem="slT-f3-qpj" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="7dN-rQ-wm9"/>
+                            <constraint firstItem="AIP-fT-8Ea" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="8O3-VU-WcK"/>
                             <constraint firstAttribute="width" secondItem="oyp-IG-eJ4" secondAttribute="width" id="AY1-Ir-igE"/>
+                            <constraint firstAttribute="trailing" secondItem="Mcm-UT-znB" secondAttribute="trailing" constant="6" id="Ewa-0v-tEt"/>
+                            <constraint firstItem="AIP-fT-8Ea" firstAttribute="top" secondItem="iT8-5l-PN1" secondAttribute="bottom" constant="3" id="Imy-Ts-zPg"/>
+                            <constraint firstItem="Mcm-UT-znB" firstAttribute="leading" secondItem="hsD-9j-JgC" secondAttribute="trailing" constant="3" id="JvV-oX-DNc"/>
+                            <constraint firstItem="iT8-5l-PN1" firstAttribute="top" secondItem="hsD-9j-JgC" secondAttribute="bottom" constant="8" id="LCY-dr-zwm"/>
                             <constraint firstAttribute="trailing" secondItem="oyp-IG-eJ4" secondAttribute="trailing" id="LJS-UW-Iib"/>
+                            <constraint firstItem="xtp-XP-WhM" firstAttribute="top" secondItem="LEe-pD-LES" secondAttribute="bottom" constant="26" id="MzJ-tp-4jh"/>
+                            <constraint firstItem="Mcm-UT-znB" firstAttribute="top" secondItem="Jjr-ho-zG7" secondAttribute="bottom" constant="3" id="O2p-fp-e0X"/>
+                            <constraint firstItem="LEe-pD-LES" firstAttribute="top" secondItem="slT-f3-qpj" secondAttribute="bottom" constant="3" id="O3r-He-Cb3"/>
+                            <constraint firstItem="hsD-9j-JgC" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="OcR-CA-LB6"/>
+                            <constraint firstItem="RgC-ly-LEo" firstAttribute="top" secondItem="uje-uN-1yk" secondAttribute="bottom" constant="8" id="Q1Y-RD-vJp"/>
+                            <constraint firstItem="GHe-ul-0Lf" firstAttribute="leading" secondItem="xtp-XP-WhM" secondAttribute="trailing" constant="3" id="RCn-eK-qTO"/>
+                            <constraint firstItem="qkL-ax-EYk" firstAttribute="leading" secondItem="LEe-pD-LES" secondAttribute="trailing" constant="3" id="RFA-dW-pkc"/>
                             <constraint firstItem="uje-uN-1yk" firstAttribute="top" secondItem="oyp-IG-eJ4" secondAttribute="bottom" id="RaO-nE-Rvr"/>
+                            <constraint firstItem="Jjr-ho-zG7" firstAttribute="leading" secondItem="zlr-K6-6NT" secondAttribute="trailing" constant="3" id="U5E-zq-hcA"/>
+                            <constraint firstItem="O7G-gM-mFF" firstAttribute="top" secondItem="LEe-pD-LES" secondAttribute="bottom" constant="8" id="VjW-3L-gc4"/>
                             <constraint firstItem="uje-uN-1yk" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" id="XOG-RC-jBf"/>
                             <constraint firstAttribute="trailing" secondItem="uje-uN-1yk" secondAttribute="trailing" id="Xzg-QB-cXu"/>
+                            <constraint firstItem="uje-uN-1yk" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" id="YIy-Ez-TF3"/>
+                            <constraint firstItem="iT8-5l-PN1" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="Yao-Rm-rRz"/>
                             <constraint firstItem="TPY-TN-jGb" firstAttribute="top" secondItem="3UV-kV-9OY" secondAttribute="bottom" constant="20" id="a1g-ts-Nyd"/>
+                            <constraint firstAttribute="trailing" secondItem="Jjr-ho-zG7" secondAttribute="trailing" constant="6" id="bcI-gE-k9v"/>
+                            <constraint firstItem="zlr-K6-6NT" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="e2X-Qi-Zpo"/>
+                            <constraint firstAttribute="trailing" secondItem="N1j-b9-GEp" secondAttribute="trailing" constant="6" id="eQV-mI-jxk"/>
+                            <constraint firstAttribute="trailing" secondItem="qkL-ax-EYk" secondAttribute="trailing" constant="6" id="gpx-er-0c3"/>
                             <constraint firstAttribute="trailing" secondItem="oyp-IG-eJ4" secondAttribute="trailing" id="gtP-sC-OVS"/>
+                            <constraint firstItem="O7G-gM-mFF" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" constant="20" id="h0H-Eh-0NM"/>
+                            <constraint firstItem="slT-f3-qpj" firstAttribute="top" secondItem="uje-uN-1yk" secondAttribute="bottom" constant="8" id="jU3-mq-aNc"/>
+                            <constraint firstItem="zlr-K6-6NT" firstAttribute="top" secondItem="xtp-XP-WhM" secondAttribute="bottom" constant="3" id="kj1-iz-Iin"/>
+                            <constraint firstItem="N1j-b9-GEp" firstAttribute="top" secondItem="iT8-5l-PN1" secondAttribute="bottom" constant="3" id="kyJ-kv-HUl"/>
                             <constraint firstItem="oyp-IG-eJ4" firstAttribute="leading" secondItem="GuJ-z5-ivA" secondAttribute="leading" id="qCd-e9-zZo"/>
+                            <constraint firstItem="qkL-ax-EYk" firstAttribute="top" secondItem="RgC-ly-LEo" secondAttribute="bottom" constant="3" id="qDC-9N-xGm"/>
+                            <constraint firstAttribute="trailing" secondItem="uje-uN-1yk" secondAttribute="trailing" id="rSv-Ze-wXY"/>
+                            <constraint firstItem="RgC-ly-LEo" firstAttribute="leading" secondItem="slT-f3-qpj" secondAttribute="trailing" constant="3" id="siH-C2-e8G"/>
+                            <constraint firstItem="hsD-9j-JgC" firstAttribute="top" secondItem="zlr-K6-6NT" secondAttribute="bottom" constant="3" id="wXl-8a-hLk"/>
+                            <constraint firstAttribute="trailing" secondItem="RgC-ly-LEo" secondAttribute="trailing" constant="6" id="xgb-95-fPt"/>
+                            <constraint firstItem="N1j-b9-GEp" firstAttribute="leading" secondItem="AIP-fT-8Ea" secondAttribute="trailing" constant="3" id="xtx-MR-zZq"/>
+                            <constraint firstItem="GHe-ul-0Lf" firstAttribute="top" secondItem="qkL-ax-EYk" secondAttribute="bottom" constant="26" id="zai-Pn-o0K"/>
+                            <constraint firstAttribute="trailing" secondItem="GHe-ul-0Lf" secondAttribute="trailing" constant="6" id="zdD-sg-mOh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U9g-Do-VOP"/>
@@ -1635,13 +1727,10 @@
                     <connections>
                         <outlet property="ImagesCollectionView" destination="ox4-2V-3jc" id="ipg-9F-rLX"/>
                         <outlet property="activityIndicator" destination="hk0-ez-4CH" id="YEf-Ci-AK7"/>
-                        <outlet property="btnBack" destination="LjJ-zf-LnG" id="JAi-3g-fi7"/>
-                        <outlet property="btnChat" destination="AHw-2N-rU8" id="5gQ-YE-Rqs"/>
                         <outlet property="btnDislike" destination="C52-Gk-PvG" id="TPn-Qq-jAy"/>
                         <outlet property="btnLike" destination="Ebh-mF-A4R" id="uqf-ec-h8u"/>
                         <outlet property="btnOptions" destination="NXt-4Q-1vQ" id="Pfp-ij-83J"/>
                         <outlet property="btnPopover" destination="Uqt-S8-MYv" id="Hxp-qL-Yly"/>
-                        <outlet property="headerView" destination="ScE-Ll-gdH" id="SZt-rP-qLu"/>
                         <outlet property="lblAgeHeight" destination="uXG-df-cRI" id="U4B-MK-524"/>
                         <outlet property="lblCaste" destination="ffv-5P-bpf" id="len-oe-qle"/>
                         <outlet property="lblCurrentLocation" destination="RgC-ly-LEo" id="v0d-dX-H8q"/>
@@ -2131,22 +2220,6 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Reu-ij-CmQ">
-                                <rect key="frame" x="10" y="429" width="300" height="45"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.43921568630000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="fzq-WP-SZb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="20"/>
-                                <state key="normal" title="Chat">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="chatButtonAction:" destination="fQz-qd-Znf" eventType="touchUpInside" id="ryb-4U-iPY"/>
-                                </connections>
-                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vsK-kb-j0k">
                                 <rect key="frame" x="150" y="310" width="20" height="20"/>
                                 <animations/>
@@ -2158,7 +2231,6 @@
                             <constraint firstAttribute="trailing" secondItem="rAC-AT-kQW" secondAttribute="trailing" id="09T-Lu-zsI"/>
                             <constraint firstAttribute="trailing" secondItem="eMb-cc-pX8" secondAttribute="trailing" id="2Hw-3Q-TzX"/>
                             <constraint firstItem="dKZ-Od-KuG" firstAttribute="top" secondItem="eMb-cc-pX8" secondAttribute="bottom" id="4cj-t3-xGH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Reu-ij-CmQ" secondAttribute="trailing" constant="-6" id="5Sz-nr-ReE"/>
                             <constraint firstItem="rAC-AT-kQW" firstAttribute="leading" secondItem="SDe-WK-Ne9" secondAttribute="leading" id="5tX-m1-TYe"/>
                             <constraint firstAttribute="width" secondItem="MQ1-pc-S4v" secondAttribute="width" id="7BB-rb-PAp"/>
                             <constraint firstItem="eMb-cc-pX8" firstAttribute="leading" secondItem="SDe-WK-Ne9" secondAttribute="leading" id="Aex-Py-fum"/>
@@ -2173,8 +2245,6 @@
                             <constraint firstAttribute="trailing" secondItem="MQ1-pc-S4v" secondAttribute="trailing" id="Usr-Pb-h5z"/>
                             <constraint firstItem="MQ1-pc-S4v" firstAttribute="leading" secondItem="SDe-WK-Ne9" secondAttribute="leading" id="YFP-qz-lN3"/>
                             <constraint firstItem="GMO-Ka-RNM" firstAttribute="top" secondItem="5XA-Vh-4x8" secondAttribute="bottom" id="Ys0-n8-7H0"/>
-                            <constraint firstItem="dKZ-Od-KuG" firstAttribute="top" secondItem="Reu-ij-CmQ" secondAttribute="bottom" constant="6" id="ZrI-xt-MBY"/>
-                            <constraint firstItem="Reu-ij-CmQ" firstAttribute="leading" secondItem="SDe-WK-Ne9" secondAttribute="leadingMargin" constant="-6" id="a3c-P3-QKI"/>
                             <constraint firstItem="5XA-Vh-4x8" firstAttribute="top" secondItem="MQ1-pc-S4v" secondAttribute="bottom" id="kb3-Bj-dxX"/>
                             <constraint firstItem="dKZ-Od-KuG" firstAttribute="top" secondItem="GMO-Ka-RNM" secondAttribute="bottom" id="lGX-kP-Qy2"/>
                             <constraint firstItem="QRj-Q4-fos" firstAttribute="leading" secondItem="SDe-WK-Ne9" secondAttribute="leading" id="mWM-SB-dMA"/>
@@ -2188,7 +2258,6 @@
                     <connections>
                         <outlet property="ImagesCollectionView" destination="MQ1-pc-S4v" id="DQr-9v-iSq"/>
                         <outlet property="activityIndicator" destination="vsK-kb-j0k" id="9ZP-34-8Fc"/>
-                        <outlet property="btnChat" destination="Reu-ij-CmQ" id="dUe-Ox-BMV"/>
                         <outlet property="btnViewBiodata" destination="gJw-aw-jUO" id="eCx-j1-mHe"/>
                         <outlet property="button1" destination="IVM-C9-hvD" id="ViN-24-AQx"/>
                         <outlet property="button2" destination="aph-vD-bBh" id="5HH-fJ-l4b"/>

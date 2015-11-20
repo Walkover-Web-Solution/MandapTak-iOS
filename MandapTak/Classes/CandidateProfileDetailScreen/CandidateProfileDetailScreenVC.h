@@ -53,8 +53,6 @@
     UIPickerView *picView;
     UIButton *buttonCancel,*buttonDone;
     IBOutlet UIButton *btnPopover;
-    
-    IBOutlet UIButton *btnBack;
     IBOutlet UIButton *btnOptions;
     //gesture recognizer
     UITapGestureRecognizer *tapGesture;
