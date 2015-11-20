@@ -2776,7 +2776,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "45c57991-fedc-4e0a-a60a-cae0df5515c9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2818,7 +2818,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "45c57991-fedc-4e0a-a60a-cae0df5515c9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2859,7 +2859,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "45c57991-fedc-4e0a-a60a-cae0df5515c9";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2898,7 +2898,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "261dc2ff-15de-4d3f-a5ae-ac5d2dfe163a";
+				PROVISIONING_PROFILE = "45c57991-fedc-4e0a-a60a-cae0df5515c9";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
