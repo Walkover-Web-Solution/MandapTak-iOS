@@ -127,6 +127,8 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         [application registerForRemoteNotificationTypes:
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     }
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+
     [[FBSDKApplicationDelegate sharedInstance]application:application didFinishLaunchingWithOptions:launchOptions];
     
     // Override point for customization after application launch.
@@ -189,11 +191,16 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
         self.window.rootViewController=vc;
     }
 */
+    AudioServicesPlaySystemSound(1002);
+
+    NSString* alertValue = [[userInfo valueForKey:@"aps"] valueForKey:@"badge"];
+    [application setApplicationIconBadgeNumber: [alertValue integerValue]];
+
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"isNotification"];
     //NSLog(@"profile id -> %@",[userInfo valueForKey:@"profileid"]);
     [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"profileid"] forKey:@"notificationProfileId"];
     //[[[UIAlertView alloc] initWithTitle:@"Test" message:@"notification msg" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-    
+
     if (application.applicationState == UIApplicationStateActive )
     {
         /*
@@ -228,7 +235,12 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 //    MatchScreenVC *vc = [sb instantiateViewControllerWithIdentifier:@"MatchScreenVC"];
 //    self.window.rootViewController=vc;
 }
+- (void) applicationWillResignActive:(UIApplication *) application
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"badgeValue"];
 
+    application.applicationIconBadgeNumber = 0;
+}
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     if (application.applicationState == UIApplicationStateActive)
@@ -254,10 +266,6 @@ static NSString *const ParseClientKeyString = @"F8ySjsm3T6Ur4xOnIkgkS2I7aSFyfBsa
 
 }
 */
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
 
 //- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 //    return [FBAppCall handleOpenURL:url

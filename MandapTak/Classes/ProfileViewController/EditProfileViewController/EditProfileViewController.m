@@ -1322,7 +1322,6 @@
     CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
     UIGraphicsBeginImageContext(rect.size);
     [image drawInRect:rect];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     NSData *imageData = UIImageJPEGRepresentation(image, compressionQuality);
     UIGraphicsEndImageContext();
     

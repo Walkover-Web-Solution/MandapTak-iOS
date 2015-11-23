@@ -189,13 +189,13 @@
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] );
 //    NSLog(@"%@",password);
     [self showLoader];
-    NSLog(@"username -> %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"mobNo"]);
+    //NSLog(@"username -> %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"mobNo"]);
     [PFUser logInWithUsernameInBackground:[[NSUserDefaults standardUserDefaults]valueForKey:@"mobNo"] password:password
                                     block:^(PFUser *user, NSError *error) {
                                         //[MBProgressHUD hideHUDForView:self.view animated:YES];
                                         [self hideLoader];
                                         if(!error){
-                                            NSLog(@"Success");
+                                          //  NSLog(@"Success");
                                             
                                             PFACL *acl = [PFACL ACL];
                                             [acl setPublicReadAccess:true];
@@ -242,7 +242,7 @@
 }
 -(void)checkForAgentInUserProfile{
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
-    NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
+   // NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
     [query whereKey:@"relation" equalTo:@"Agent"];
@@ -266,9 +266,6 @@
             UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
             navController.navigationBarHidden =YES;
             [self presentViewController:navController animated:YES completion:nil];
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
 }
@@ -290,7 +287,7 @@
 }
 -(void)checkForUseridInUserProfile{
     PFQuery *query = [PFQuery queryWithClassName:@"UserProfile"];
-    NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
+    //NSLog(@"%@",[[PFUser currentUser] valueForKey:@"objectId"]);
     [query whereKey:@"userId" equalTo:[PFUser currentUser]];
     [query includeKey:@"profileId"];
     [self showLoader];
@@ -345,10 +342,7 @@
                 [alert show];
             }
             
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
+        } 
     }];
     
 }

@@ -493,7 +493,6 @@
     [view addSubview:label];
     [view setBackgroundColor:[UIColor whiteColor]]; //your background color...
     label.textColor = [[UIColor lightGrayColor]colorWithAlphaComponent:.5f];
-    NSString *sectionName;
     switch (section)
     {
         case 0:
@@ -539,7 +538,7 @@
 -(void)degreeButtonAction:(id)sender{
     [self.view endEditing:YES];
    [settingsPopoverController dismissPopoverAnimated:YES];
-    NSLog(@"%ld",(long)[sender tag]);
+   // NSLog(@"%ld",(long)[sender tag]);
     UIView *btn = (UIView *)sender;
     
     DegreePopoverForProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DegreePopoverForProfileViewController"];
@@ -568,7 +567,7 @@
      Education *education = [arrEducationData objectAtIndex:[sender tag]];
     if(education.degree !=nil){
         [settingsPopoverController dismissPopoverAnimated:YES];
-        NSLog(@"%ld",(long)[sender tag]);
+       // NSLog(@"%ld",(long)[sender tag]);
         UIView *btn = (UIView *)sender;
         
         SpecialisationPopoverViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpecialisationPopoverViewController"];
@@ -603,7 +602,7 @@
 -(void)moreButtonAction:(id)sender{
     Education *education = [arrEducationData objectAtIndex:[sender tag]];
     if(education.specialisation !=nil){
-        NSLog(@"%ld",(long)[sender tag]);
+        //NSLog(@"%ld",(long)[sender tag]);
         if(numberOfRowsInEducationSection<3){
             Education *education = [[Education alloc]init];
             [arrEducationData addObject:education];

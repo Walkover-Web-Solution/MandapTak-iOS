@@ -53,6 +53,8 @@
     ConversationViewController *controller = [ConversationViewController conversationViewControllerWithLayerClient:self.layerClient];
     controller.conversation = conversation;
     controller.displaysAddressBar = YES;
+    controller.shouldDisplayAvatarItemForOneOtherParticipant = YES;
+
     UINavigationController *navController  = [[UINavigationController alloc]initWithRootViewController:controller];
 
     [self presentViewController:navController animated:YES completion:nil];

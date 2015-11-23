@@ -188,7 +188,6 @@
 		896A8A2B1BCE3EFB009D2698 /* chatBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 896A8A2A1BCE3EFB009D2698 /* chatBubble.png */; };
 		896BBFF71B95877D009FD221 /* unpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BBFF51B95877D009FD221 /* unpin.png */; };
 		896BBFF81B95877D009FD221 /* unpin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BBFF61B95877D009FD221 /* unpin@2x.png */; };
-		896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BC0011B959577009FD221 /* ChatTableViewCell.m */; };
 		896BC0051B95958A009FD221 /* MatchAndPinTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BC0041B95958A009FD221 /* MatchAndPinTableViewCell.m */; };
 		896BC0091B95B5B1009FD221 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896BC0081B95B5B1009FD221 /* Bolts.framework */; };
 		896BC00E1B95D856009FD221 /* matchCellOption.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BC00C1B95D856009FD221 /* matchCellOption.png */; };
@@ -591,8 +590,6 @@
 		896A8A2A1BCE3EFB009D2698 /* chatBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatBubble.png; sourceTree = "<group>"; };
 		896BBFF51B95877D009FD221 /* unpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unpin.png; sourceTree = "<group>"; };
 		896BBFF61B95877D009FD221 /* unpin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unpin@2x.png"; sourceTree = "<group>"; };
-		896BC0001B959577009FD221 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
-		896BC0011B959577009FD221 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		896BC0031B95958A009FD221 /* MatchAndPinTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAndPinTableViewCell.h; sourceTree = "<group>"; };
 		896BC0041B95958A009FD221 /* MatchAndPinTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAndPinTableViewCell.m; sourceTree = "<group>"; };
 		896BC0081B95B5B1009FD221 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -1391,15 +1388,6 @@
 			path = ChatPinMatches;
 			sourceTree = "<group>";
 		};
-		896BBFFE1B95956B009FD221 /* Chat Cell */ = {
-			isa = PBXGroup;
-			children = (
-				896BC0001B959577009FD221 /* ChatTableViewCell.h */,
-				896BC0011B959577009FD221 /* ChatTableViewCell.m */,
-			);
-			path = "Chat Cell";
-			sourceTree = "<group>";
-		};
 		896BBFFF1B95956B009FD221 /* MatchAndPinCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1427,7 +1415,6 @@
 				893F03381BAAC60400BB1B59 /* ConversationViewController.m */,
 				893F03391BAAC60400BB1B59 /* ParticipantTableViewController.h */,
 				893F033A1BAAC60400BB1B59 /* ParticipantTableViewController.m */,
-				896BBFFE1B95956B009FD221 /* Chat Cell */,
 				896BBFFF1B95956B009FD221 /* MatchAndPinCell */,
 				896D18331B9487B6001513A5 /* ChatPinMatchViewController.h */,
 				896D18341B9487B6001513A5 /* ChatPinMatchViewController.m */,
@@ -2653,7 +2640,6 @@
 				89A3F0CB1BFC3785004EC82B /* AgentEditDetailsViewController.m in Sources */,
 				75918F741B79E9C50082D7EC /* PreferenceVC.m in Sources */,
 				8997CC991BA1840A001B11AA /* ABMultitonInjector.m in Sources */,
-				896BC0021B959577009FD221 /* ChatTableViewCell.m in Sources */,
 				89A3F0CE1BFC3785004EC82B /* AgentViewController.m in Sources */,
 				896D18351B9487B6001513A5 /* ChatPinMatchViewController.m in Sources */,
 				75B5BC311B9B2F730097C851 /* ManglikPopoverViewController.m in Sources */,
@@ -2750,7 +2736,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2799,7 +2785,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2831,7 +2817,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "BrandAsset-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2870,7 +2856,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "BrandAsset-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Walkover Web Solutions Private Limited (F3U6Z5L2EJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shubhendra Agrawal (ERM927T7J4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

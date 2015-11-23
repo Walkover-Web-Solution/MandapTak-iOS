@@ -8,7 +8,6 @@
 
 #import "ChatPinMatchViewController.h"
 #import "MatchAndPinTableViewCell.h"
-#import "ChatTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "AppData.h"
 #import "Profile.h"
@@ -156,7 +155,6 @@
         case 2:
             return conversations.count;
             break;
-       
     }
     return 0;
 }
@@ -166,14 +164,11 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellIdentifier2 = @"MatchAndPinTableViewCell";
- //   MatchAndPinTableViewCell *matchAndPinCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
     MatchAndPinTableViewCell *matchAndPinCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
     if (matchAndPinCell == nil)
         matchAndPinCell = [[MatchAndPinTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
 
     matchAndPinCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    static NSString *cellIdentifier3 = @"ChatTableViewCell";
-    ChatTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
     if([tableView isEqual:matchTableView]){
         matchAndPinCell.btnChat.hidden = NO;
         matchAndPinCell.btnPinOrMatch.hidden = YES;
@@ -184,13 +179,11 @@
 
     }
     if(currentTab ==0){
-        
-//        UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-//                                              initWithTarget:self action:@selector(handleLongPress:)];
-//        lpgr.minimumPressDuration = 1.0; //seconds
-//        lpgr.delegate = self;
-//        [matchTableView addGestureRecognizer:lpgr];
-        
+        //dislike on long press
+        UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        lpgr.minimumPressDuration = 1.0; //seconds
+        lpgr.delegate = self;
+        [matchTableView addGestureRecognizer:lpgr];
 
         matchAndPinCell.btnChat.tag = indexPath.row;
 
@@ -215,9 +208,9 @@
         if(![[profile valueForKey:@"gotraId"] isKindOfClass:[NSNull class]] &&[profile valueForKey:@"gotraId"] !=nil){
             strReligion =[strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"gotraId"] valueForKey:@"name"]]];
         }
-        if([strReligion containsString:@", <null>"]){
+        //if([strReligion containsString:@", <null>"]){
             strReligion = [strReligion stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
-        }
+       // }
 
         matchAndPinCell.lblReligion.text =strReligion;
         [matchAndPinCell.btnPinOrMatch setImage:[UIImage imageNamed:@"matchCellOption"] forState:UIControlStateNormal];
@@ -285,9 +278,9 @@
         if([profile valueForKey:@"gotraId"] !=nil){
             strReligion =[strReligion stringByAppendingString:[NSString stringWithFormat:@", %@",[[profile valueForKey:@"gotraId"] valueForKey:@"name"]]];
         }
-        if([strReligion containsString:@", <null>"]){
+        //if([strReligion containsString:@", <null>"]){
             strReligion = [strReligion stringByReplacingOccurrencesOfString:@", <null>" withString:@""];
-        }
+        //}
 
         matchAndPinCell.lblReligion.text =strReligion;
 
@@ -298,47 +291,9 @@
 
         return matchAndPinCell;
 
-          }
-    else if(currentTab ==2){
-        LYRConversation *conv = conversations[indexPath.row];
-        if ([conv.metadata valueForKey:@"title"]){
-            chatCell.lblName = [conv.metadata valueForKey:@"title"];
-            return chatCell;
-        } else {
-            NSArray *unresolvedParticipants = [[UserManager sharedManager] unCachedUserIDsFromParticipants:[conv.participants allObjects]];
-            NSArray *resolvedNames = [[UserManager sharedManager] resolvedNamesFromParticipants:[conv.participants allObjects]];
-            
-            if ([unresolvedParticipants count]) {
-                [[UserManager sharedManager] queryAndCacheUsersWithIDs:unresolvedParticipants completion:^(NSArray *participants, NSError *error) {
-                    if (!error) {
-                        if (participants.count) {
-                            [self reloadCellForConversation:conv];
-                        }
-                    } else {
-                        NSLog(@"Error querying for Users: %@", error);
-                    }
-                }];
-            }
-            
-            if ([resolvedNames count] && [unresolvedParticipants count]) {
-                chatCell.lblName.text = [NSString stringWithFormat:@"%@ and %lu others", [resolvedNames componentsJoinedByString:@", "], (unsigned long)[unresolvedParticipants count]];
-                
-                return chatCell;
-
-            } else if ([resolvedNames count] && [unresolvedParticipants count] == 0) {
-                chatCell.lblName.text =  [NSString stringWithFormat:@"%@", [resolvedNames componentsJoinedByString:@", "]];
-                return chatCell;
-
-            } else {
-                chatCell.lblName.text =  [NSString stringWithFormat:@"Conversation with %lu users...", (unsigned long)conv.participants.count];
-                return chatCell;
-            }
-        }
-        return chatCell;
-
     }
+    return matchAndPinCell;
 
-       return chatCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -551,7 +506,6 @@
 
                              [PFObject pinAllInBackground:arrMatches];
                              [matchTableView reloadData];
-                             
                          }
                          else{
                              UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:[[error userInfo] objectForKey:@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -631,14 +585,6 @@
         }
     }];
 
-//    LYRPolicy *blockPolicy = [LYRPolicy policyWithType:LYRPolicyTypeBlock];
-//    blockPolicy.sentByUserID = @"<USER_TO_BLOCK>";
-//    
-//    NSError *error = nil;
-//    BOOL success = [self.layerClient addPolicy:blockPolicy error:&error];
-//    if (!success) {
-//        NSLog(@"Failed adding policy with error %@", error);
-//    }
 }
 - (UIView *)customSnapshoFromView:(UIView *)inputView {
     
