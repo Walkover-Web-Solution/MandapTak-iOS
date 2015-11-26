@@ -847,6 +847,7 @@
     //insert fresh data
     if ([[AppData sharedData]isInternetAvailable])
     {
+        //for (int i=0; i< [arrLocationObj count]; i++)
         for (int i=0; i< [arrLocationObj count]; i++)
         {
             Location *objLoc = arrLocationObj[i];
@@ -1037,11 +1038,52 @@
             [arrSelLocations addObject:location.state];
         }
         
-        [arrSelectedLocationId addObject:location.placeId];
+        [arrSelectedLocationId addObject:location];
     }
     NSString *strLocations = [arrSelLocations componentsJoinedByString:@","];
     [popoverController dismissPopoverAnimated:YES];
     lblLocation.text = strLocations;
+}
+
+
+-(void)selectedLocationArray:(NSArray *)locationArray andUpdateFlag:(BOOL)flag
+{
+    [arrSelectedLocationId removeAllObjects];
+    [arrSelLocations removeAllObjects];
+    
+    lblLocation.text = @"";
+    if (locationArray.count > 0)
+    {
+        arrLocationObj = [locationArray mutableCopy];
+        if(flag)
+        {
+            //[arrLocationObj addObject:location];
+        }
+        for (Location *location in locationArray) {
+            PFObject *objLoc  = location.cityPointer;
+            if ([objLoc.parseClassName isEqualToString:@"City"])
+            {
+                [arrSelLocations addObject:location.city];
+            }
+            else
+            {
+                [arrSelLocations addObject:location.state];
+            }
+            
+            [arrSelectedLocationId addObject:location];
+        }
+        NSString *strLocations = [arrSelLocations componentsJoinedByString:@","];
+        lblLocation.text = strLocations;
+    }
+    else
+    {
+        lblLocation.text = @"Select Location";
+        [arrLocationObj removeAllObjects];
+    }
+    
+    
+    //dismiss popover
+    [popoverController dismissPopoverAnimated:YES];
 }
 
 - (void)showSelLocations : (NSArray *)arrLocation
@@ -1178,7 +1220,8 @@
         //isSelectingCurrentLocation = YES;
         LocationPreferencePopoverVC *controller = segue.destinationViewController;
         controller.arrSelectedData = arrSelectedLocationId;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
+        //controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
+        controller.preferredContentSize = CGSizeMake(310,300);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -1194,7 +1237,8 @@
         //isSelectingCurrentLocation = YES;
         SelectedLocationVC *controller = segue.destinationViewController;
         controller.arrTableData = arrLocationObj;
-        controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
+        //controller.contentSizeForViewInPopover = CGSizeMake(310, 300);
+        controller.preferredContentSize = CGSizeMake(310,300);
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         popoverController = [popoverSegue popoverControllerWithSender:sender
                                              permittedArrowDirections:WYPopoverArrowDirectionAny
@@ -1254,11 +1298,10 @@
         
     }
     
-    else
+    else if ([segue.identifier isEqualToString:@"multiLocationIdentifier"])
     {
-        //UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"MultiSelectStoryBoard" bundle:nil];
-        
-        MultiSelectController *multiSelect =[self.storyboard instantiateViewControllerWithIdentifier:@"MultiSelectController"];
+        //MultiSelectController *multiSelect =[self.storyboard instantiateViewControllerWithIdentifier:@"MultiSelectController"];
+        MultiSelectController *multiSelect = [segue destinationViewController];
         multiSelect.delegate = self;
         multiSelect.multiSelectCellBackgroundColor =[UIColor colorWithRed:253.0/255.0 green:72.0/255.0 blue:47.0/255.0 alpha:1.0];
         

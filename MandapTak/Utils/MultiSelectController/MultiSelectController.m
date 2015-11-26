@@ -30,8 +30,13 @@
 #import "MultiSelectController.h"
 #import "MultiSelectCell.h"
 #import "MultiSelectFlowLayout.h"
+#import <Parse/Parse.h>
+#import "Location.h"
 
 @interface MultiSelectController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,MultiSelectDelegate>
+{
+    NSMutableArray *arrLocData;
+}
 @property (nonatomic,strong) NSMutableArray *arrSelected;
 @end
 
@@ -49,7 +54,8 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.arrSelected = [[NSMutableArray alloc] init];
-
+    self.arrTableData = [NSMutableArray array];
+    
     if (!self.multiSelectCellBackgroundColor) {
 
         self.multiSelectCellBackgroundColor = [UIColor colorWithRed:52.0/255.0 green:152.0/255.0 blue:219.0/255.0 alpha:1.0];
@@ -65,8 +71,10 @@
 
         self.multiSelectTextColor = [UIColor whiteColor];
     }
-
-
+    
+    //get parse city list
+    //[self getCityList];
+    [self getLocations];
 
     [self navigationBarSetup];
     [self collectionViewInitializations];
@@ -181,16 +189,168 @@
     }
 
 }
+-(void) getLocations
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"City" ];
+    //query.skip = self.arrTableData.count;
+    query.limit = 10000;
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query includeKey:@"Parent.Parent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        if(!error){
+            NSMutableArray *arrFetchedItems =comments.mutableCopy;
+            for(PFObject *tempObj in arrFetchedItems){
+                for(Location *obj in self.arrTableData){
+                    if([obj.placeId isEqual:[tempObj valueForKey:@"objectId"]]){
+                        [arrFetchedItems removeObject:tempObj];
+                        break;
+                    }
+                }
+            }
+            for(PFObject *obj in arrFetchedItems)
+            {
+                Location *location = [[Location alloc]init];
+                PFObject *parent = [obj valueForKey:@"Parent"];
+                location.city = [obj valueForKey:@"name"];
+                location.cityPointer = obj;
+                location.placeId = [obj valueForKey:@"objectId"];
+                location.state = [parent valueForKey:@"name"];
+                PFObject *subParent = [parent valueForKey:@"Parent"];
+                location.country = [subParent valueForKey:@"name"];
+                location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+                [self.arrTableData addObject:location];
+            }
+            
+            //sort array alphabetically
+            //1
+            /*
+            NSSortDescriptor * frequencyDescriptor = [[NSSortDescriptor alloc] initWithKey:@"descriptions" ascending:YES];
+            
+            id obj;
+            NSEnumerator * enumerator = [self.arrTableData objectEnumerator];
+            while ((obj = [enumerator nextObject])) NSLog(@"%@", obj);
+            
+            NSArray * descriptors = [NSArray arrayWithObjects:frequencyDescriptor, nil];
+            NSArray * sortedArray = [self.arrTableData sortedArrayUsingDescriptors:descriptors];
+            
+            NSLog(@"\nSorted ...");
+            
+            enumerator = [sortedArray objectEnumerator];
+            while ((obj = [enumerator nextObject])) NSLog(@"%@", obj);
+            */
+            
+            //2
+            NSSortDescriptor *lastDescriptor = [[NSSortDescriptor alloc] initWithKey:@"descriptions" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+            
+            NSArray * descriptors = [NSArray arrayWithObjects:lastDescriptor, nil];
+            NSArray * sortedArray = [self.arrTableData sortedArrayUsingDescriptors:descriptors];
+            
+            self.arrTableData = [sortedArray mutableCopy] ;
+            for (Location *obj in self.arrTableData) {
+                NSLog(@"%@",obj.descriptions);
+            }
+            [self.tblOptions reloadData];
+        }
+    }];
+}
+
+#pragma mark City List Query
+- (void) getCityList
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"City" ];
+    //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",searchText]];
+    //[query whereKey:@"name" hasPrefix:searchBar.text];
+    [query includeKey:@"Parent.Parent"];
+    [query orderByAscending:@"name"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error)
+     {
+         //[MBProgressHUD hideHUDForView:self.view animated:YES];
+         
+         //NSMutableArray *arrLocData = [NSMutableArray array];
+         for(PFObject *obj in comments)
+         {
+             Location *location = [[Location alloc]init];
+             NSLog(@"cityName %@",[obj valueForKey:@"name"]);
+             PFObject *parent = [obj valueForKey:@"Parent"];
+             location.city = [obj valueForKey:@"name"];
+             location.cityPointer = obj;
+             NSString *strClass =  obj.parseClassName;
+             NSLog(@"class name = %@",strClass);
+             location.placeId = [obj valueForKey:@"objectId"];
+             NSLog(@"placeId ---- %@",[parent valueForKey:@"objectId"]);
+             NSLog(@"StateName %@",[parent valueForKey:@"name"]);
+             location.state = [parent valueForKey:@"name"];
+             
+             PFObject *subParent = [parent valueForKey:@"Parent"];
+             NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
+             location.country = [subParent valueForKey:@"name"];
+             location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
+             [arrLocData addObject:location];
+             
+         }
+         [self getStateList];
+         self.arrTableData = arrLocData;
+         //[self.tblOptions reloadData];
+         
+     }];
+}
+
+
+#pragma mark State List Query
+- (void) getStateList
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"State" ];
+    //[query whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)^%@",searchText]];
+    //[query whereKey:@"name" hasPrefix:searchBar.text];
+    [query includeKey:@"Parent.Parent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *stateObjects, NSError *error)
+     {
+         //[MBProgressHUD hideHUDForView:self.view animated:YES];
+         
+         //NSMutableArray *arrLocData = [NSMutableArray array];
+         for(PFObject *obj in stateObjects){
+             Location *location = [[Location alloc]init];
+             NSLog(@"2 state name %@",[obj valueForKey:@"name"]);
+             PFObject *parentCountry = [obj valueForKey:@"Parent"];
+             location.state = [obj valueForKey:@"name"];
+             location.cityPointer = obj;
+             NSString *strClass =  obj.parseClassName;
+             NSLog(@"class name = %@",strClass);
+             location.placeId = [obj valueForKey:@"objectId"];
+             NSLog(@"placeId ---- %@",[parentCountry valueForKey:@"objectId"]);
+             NSLog(@"Country Name %@",[parentCountry valueForKey:@"name"]);
+             location.country = [parentCountry valueForKey:@"name"];
+             
+             //PFObject *subParent = [parent valueForKey:@"Parent"];
+             //NSLog(@"CountryName %@",[subParent valueForKey:@"name"]);
+             //location.country = [subParent valueForKey:@"name"];
+             location.descriptions = [NSString stringWithFormat:@"%@, %@",[obj valueForKey:@"name"],[parentCountry valueForKey:@"name"]];
+             [arrLocData addObject:location];
+         }
+         self.arrTableData = arrLocData;
+         [self.tblOptions reloadData];
+     }];
+}
+
+
+#pragma mark UITableView Data Source
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSLog(@"data list = > %lu",self.arrTableData.count);
+    return self.arrTableData.count;
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+/*
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
     return [self.arrOptions count];
 }
-
+*/
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
 
@@ -198,12 +358,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
     }
-
-    cell.textLabel.text = self.arrOptions[indexPath.row];
+    Location *location = self.arrTableData[indexPath.row];
+    cell.textLabel.text = location.descriptions;
     cell.textLabel.textColor = self.tableTextColor;
     cell.backgroundColor = [UIColor clearColor];
     cell.tintColor = self.multiSelectCellBackgroundColor;
-    if ([self.arrSelected containsObject:self.arrOptions[indexPath.row]]) {
+    
+    if ([self.arrSelected containsObject:location.descriptions]) {
 
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
@@ -212,16 +373,70 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
+    
+    /*
+     static NSString *cellIdentifier = @"PinLogsCell";
+     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+     
+     if (!cell) {
+     cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+     [cell setBackgroundColor:[UIColor clearColor]];
+     cell.textLabel.textColor = [UIColor darkGrayColor];
+     }
+     Location *location = self.arrTableData[indexPath.row];
+     cell.textLabel.text = location.descriptions;
+     
+     //disable already selected location
+     if ([arrSelectedData containsObject:location.placeId])
+     {
+     cell.userInteractionEnabled = NO;
+     cell.accessoryType = UITableViewCellAccessoryCheckmark;
+     }
+     else
+     {
+     cell.userInteractionEnabled = YES;
+     cell.accessoryType = UITableViewCellAccessoryNone;
+     }
+     cell.textLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
+     return cell;
+     */
+    
+    /*
+     //new code
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+     if (cell == nil) {
+     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
+     }
+     
+     Location *location = self.arrTableData[indexPath.row];
+     cell.textLabel.text = location.descriptions;
+     cell.textLabel.textColor = self.tableTextColor;
+     cell.backgroundColor = [UIColor clearColor];
+     cell.tintColor = self.multiSelectCellBackgroundColor;
+     cell.textLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
+     
+     if ([self.arrSelected containsObject:self.arrTableData[indexPath.row]]) {
+     
+     cell.accessoryType = UITableViewCellAccessoryCheckmark;
+     
+     }else
+     {
+     cell.accessoryType = UITableViewCellAccessoryNone;
+     }
+     return cell;
+     */
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-
+    Location *location = self.arrTableData[indexPath.row];
+    cell.textLabel.text = location.descriptions;
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
 
         cell.accessoryType = UITableViewCellAccessoryNone;
 
-        [self.arrSelected removeObject:self.arrOptions[indexPath.row]];
+        [self.arrSelected removeObject:location.descriptions];
         [self.multiSelectCollectionView reloadData];
         [self.view setNeedsUpdateConstraints];
 
@@ -230,7 +445,7 @@
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
-        [self.arrSelected addObject:self.arrOptions[indexPath.row]];
+        [self.arrSelected addObject:location.descriptions];
         [self.multiSelectCollectionView reloadData];
 
         [self.view setNeedsUpdateConstraints];

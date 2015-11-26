@@ -13,14 +13,17 @@
 
 @protocol LocationPreferencePopoverVCDelegate
 -(void)selectedLocation:(Location*)location andUpdateFlag:(BOOL)flag;
+-(void)selectedLocationArray:(NSArray *)locationArray andUpdateFlag:(BOOL)flag;
+
 @end
 @interface LocationPreferencePopoverVC : UIViewController<UISearchBarDelegate,UITableViewDragLoadDelegate,UITableViewDelegate>
 {
-    NSMutableArray *arrLocData;
+    NSMutableArray *arrLocData,*arrSelected;
     BOOL isSearching;
     NSTimer *timer;
     NSInteger currentTime;
 }
 @property (weak, nonatomic) id <LocationPreferencePopoverVCDelegate> delegate;
-@property (strong, nonatomic) NSArray *arrSelectedData;
+@property (strong, nonatomic) NSMutableArray *arrSelectedData;
+- (IBAction)doneAction:(id)sender;
 @end

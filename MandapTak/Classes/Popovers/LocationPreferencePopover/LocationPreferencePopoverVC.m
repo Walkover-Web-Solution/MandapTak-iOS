@@ -24,12 +24,17 @@
     
     self.arrTableData = [NSMutableArray array];
     arrLocData = [[NSMutableArray alloc] init];
+    arrSelected = [NSMutableArray array];
+    
     self.searchBar.delegate = self;
     [self loadMore];
     
     [_tableView setDragDelegate:self refreshDatePermanentKey:@"FriendList"];
-    
     // Do any additional setup after loading the view.
+    
+    for (Location *obj in arrSelectedData) {
+        [arrSelected addObject:obj.placeId];
+    }
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self.searchBar becomeFirstResponder];
@@ -186,14 +191,15 @@ replacementString:(NSString *)string {
     cell.textLabel.text = location.descriptions;
     
     //disable already selected location
-    if ([arrSelectedData containsObject:location.placeId])
+    //if ([arrSelectedData containsObject:location.placeId])
+    if ([arrSelected containsObject:location.placeId])
     {
-        cell.userInteractionEnabled = NO;
+        //cell.userInteractionEnabled = NO;
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else
     {
-        cell.userInteractionEnabled = YES;
+        //cell.userInteractionEnabled = YES;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     cell.textLabel.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:16];
@@ -202,7 +208,38 @@ replacementString:(NSString *)string {
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate selectedLocation:self.arrTableData[indexPath.row] andUpdateFlag:YES];
+    //apply multiselect
+    Location *location = self.arrTableData[indexPath.row];
+    
+    //apply checkmark
+    if ([arrSelected containsObject:location.placeId])
+    {
+        //cell.userInteractionEnabled = NO;
+        //cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        //[arrSelectedData removeObject:self.arrTableData[indexPath.row]];
+        
+        for (Location *locObj in arrSelectedData)
+        {
+            NSString *placeId = locObj.placeId;
+            if ([placeId isEqualToString:location.placeId])
+            {
+                [arrSelectedData removeObject:locObj];
+                [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+                return;
+            }
+        }
+    }
+    else
+    {
+        //cell.userInteractionEnabled = YES;
+        //cell.accessoryType = UITableViewCellAccessoryNone;
+        [arrSelectedData addObject:self.arrTableData[indexPath.row]];
+        [arrSelected addObject:location.placeId];
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
+    //[self.delegate selectedLocation:self.arrTableData[indexPath.row] andUpdateFlag:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -253,6 +290,15 @@ replacementString:(NSString *)string {
                 location.descriptions = [NSString stringWithFormat:@"%@, %@, %@",[obj valueForKey:@"name"],[parent valueForKey:@"name"],[subParent valueForKey:@"name"]];
                 [self.arrTableData addObject:location];
             }
+            NSSortDescriptor *lastDescriptor = [[NSSortDescriptor alloc] initWithKey:@"descriptions" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+            
+            NSArray * descriptors = [NSArray arrayWithObjects:lastDescriptor, nil];
+            NSArray * sortedArray = [self.arrTableData sortedArrayUsingDescriptors:descriptors];
+            
+            self.arrTableData = [sortedArray mutableCopy] ;
+            for (Location *obj in self.arrTableData) {
+                NSLog(@"%@",obj.descriptions);
+            }
             [self.tableView reloadData];
         }
     }];
@@ -283,4 +329,9 @@ replacementString:(NSString *)string {
  }
  */
 
+- (IBAction)doneAction:(id)sender
+{
+    NSArray *locationArr = [[NSArray alloc] initWithArray:arrSelectedData];
+    [self.delegate selectedLocationArray:locationArr andUpdateFlag:YES];
+}
 @end

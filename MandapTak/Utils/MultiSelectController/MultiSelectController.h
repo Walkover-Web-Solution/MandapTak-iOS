@@ -37,13 +37,14 @@
 - (void)multiSelectController:(MultiSelectController *)controller didFinishPickingSelections:(NSArray *)selections;
 @end
 
-@interface MultiSelectController : UIViewController
+@interface MultiSelectController : UIViewController<MultiSelectControlDelegate>
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *topLayoutConstraint;
 
 @property (nonatomic,strong) IBOutlet UICollectionView *multiSelectCollectionView;
 @property (nonatomic,strong) IBOutlet UITableView *tblOptions;
 @property (nonatomic,strong) NSMutableArray *arrOptions;
+@property (strong, nonatomic) NSMutableArray *arrTableData;
 
 @property (nonatomic,strong) id<MultiSelectControlDelegate> delegate;
 
